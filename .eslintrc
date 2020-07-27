@@ -1,0 +1,25 @@
+{
+  "extends": "@callstack/eslint-config/node",
+  "env": {
+    "node": false,
+    "browser": false,
+    "es6": true
+  },
+  "globals": {
+    "console": true
+  },
+  "rules": {
+    "import/order": ["error", { "alphabetize": { "order": "asc" } }]
+  },
+  "overrides": [
+    {
+      "files": ["*.config.js"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "import/no-extraneous-dependencies": 0
+      }
+    }
+  ]
+}

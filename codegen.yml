@@ -1,0 +1,22 @@
+overwrite: true
+schema: "https://api.chargetrip.io/graphql"
+documents: null
+generates:
+  src/graphql.ts:
+    plugins:
+      - "typescript"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+config:
+  scalars:
+    DateTime: string
+    JSON: "{ [key: string]: number | string | boolean | null | Scalars['JSON'] }"
+  namingConvention:
+    typeNames: keep
+    enumValues: upper-case#upperCase
+  skipTypename: true
+  enumPrefix: false
