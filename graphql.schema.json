@@ -18,7 +18,7 @@
         "fields": [
           {
             "name": "amenityList",
-            "description": "Get the full list of amenities around a station",
+            "description": "Get a full list of amenities around a station",
             "args": [
               {
                 "name": "stationId",
@@ -49,7 +49,7 @@
           },
           {
             "name": "car",
-            "description": "Get the information about a car by the car ID",
+            "description": "Get information about a car by its ID",
             "args": [
               {
                 "name": "id",
@@ -82,11 +82,11 @@
           },
           {
             "name": "carList",
-            "description": "Get the full list of cars",
+            "description": "Get a full list of cars",
             "args": [
               {
                 "name": "query",
-                "description": "The query object",
+                "description": "Query object",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "CarListQuery",
@@ -96,7 +96,7 @@
               },
               {
                 "name": "size",
-                "description": "The number of elements (count) to return, default: 10",
+                "description": "Number of elements (count) to return, default: 10",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -106,7 +106,7 @@
               },
               {
                 "name": "page",
-                "description": "The page number to return starting with 0, default: 0",
+                "description": "Page number to return, default: 0",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -129,11 +129,11 @@
           },
           {
             "name": "operatorList",
-            "description": "Get the full list of operators",
+            "description": "Get a full list of operators",
             "args": [
               {
                 "name": "query",
-                "description": "The query parameters",
+                "description": "Query parameters",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "OperatorListQuery",
@@ -143,7 +143,7 @@
               },
               {
                 "name": "size",
-                "description": "The number of elements (count) to return, default: 10",
+                "description": "Number of elements (count) to return, default: 10",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -153,7 +153,7 @@
               },
               {
                 "name": "page",
-                "description": "The page number to return starting with 0, default: 0",
+                "description": "Page number to return, default: 0",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -176,7 +176,7 @@
           },
           {
             "name": "operator",
-            "description": "Get the information about an operator by the operator ID",
+            "description": "Get information about an operator by its ID",
             "args": [
               {
                 "name": "id",
@@ -207,7 +207,7 @@
             "args": [
               {
                 "name": "stationId",
-                "description": "The ID of the station",
+                "description": "ID of the station",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -221,7 +221,7 @@
               },
               {
                 "name": "size",
-                "description": "The number of elements (count) to return, default: 10",
+                "description": "Number of elements (count) to return, default: 10",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -231,7 +231,7 @@
               },
               {
                 "name": "page",
-                "description": "The number of page to return starting with 0, default: 0",
+                "description": "Page number to return, default: 0",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -285,11 +285,11 @@
           },
           {
             "name": "routePath",
-            "description": "Retrieve the information about a route path segment",
+            "description": "Retrieve information about a route path segment",
             "args": [
               {
                 "name": "id",
-                "description": "The ID of the route for which you require the route path segment",
+                "description": "ID of a route which you require for a route path segment",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -303,7 +303,7 @@
               },
               {
                 "name": "location",
-                "description": "The GeoJSON Point of the route path segment",
+                "description": "The GeoJSON Point of a route path segment",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -336,7 +336,7 @@
           },
           {
             "name": "stationStats",
-            "description": "Get the station stats for the client",
+            "description": "Get the station statistics",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -348,7 +348,7 @@
           },
           {
             "name": "station",
-            "description": "Get the information about a station by the station ID",
+            "description": "Get information about a station by its ID",
             "args": [
               {
                 "name": "id",
@@ -375,11 +375,11 @@
           },
           {
             "name": "stationList",
-            "description": "Get the full list of stations",
+            "description": "Get a full list of stations",
             "args": [
               {
                 "name": "query",
-                "description": "The query parameters",
+                "description": "Query parameters",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationListQuery",
@@ -389,7 +389,7 @@
               },
               {
                 "name": "size",
-                "description": "The number of elements (count) to return, default: 10",
+                "description": "Number of elements (count) to return, default: 10",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -399,7 +399,7 @@
               },
               {
                 "name": "page",
-                "description": "The page number to return starting with 0, default: 0",
+                "description": "Page number to return, default: 0",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -426,7 +426,7 @@
             "args": [
               {
                 "name": "query",
-                "description": "The query parameters",
+                "description": "Query parameters",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -440,7 +440,7 @@
               },
               {
                 "name": "size",
-                "description": "The number of elements (count) to return, default: 10",
+                "description": "Number of elements (count) to return, default: 10",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -450,7 +450,7 @@
               },
               {
                 "name": "page",
-                "description": "The page number to return starting with 0, default: 0",
+                "description": "Page number to return, default: 0",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -473,7 +473,7 @@
           },
           {
             "name": "tariff",
-            "description": "Get the information about a tariff by the tariff ID",
+            "description": "Get information about a tariff by the tariff ID",
             "args": [
               {
                 "name": "id",
@@ -514,7 +514,7 @@
               },
               {
                 "name": "page",
-                "description": "The number of page to return starting with 0, default: 0",
+                "description": "Page number to return, default: 0",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -568,7 +568,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "The unique amenity ID",
+            "description": "Unique amenity ID",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -580,7 +580,7 @@
           },
           {
             "name": "externalId",
-            "description": "This is the ID provided by the amenity data source as the row ID",
+            "description": "ID provided by an amenity data source as the row ID",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -592,7 +592,7 @@
           },
           {
             "name": "name",
-            "description": "The name of the amenity",
+            "description": "Name of an amenity",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -604,7 +604,7 @@
           },
           {
             "name": "location",
-            "description": "The geo location coordinates. This is a GeoJSON Point",
+            "description": "Geo location coordinates. This is a GeoJSON Point",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -616,7 +616,7 @@
           },
           {
             "name": "address",
-            "description": "The embedded Address",
+            "description": "Embedded Address",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -628,7 +628,7 @@
           },
           {
             "name": "type",
-            "description": "The amenity type keys as array of strings",
+            "description": "Type of amenity. An amenity can belong to multiple categories",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -644,7 +644,7 @@
           },
           {
             "name": "rating",
-            "description": "The rating value provided by the amenity data source. Values between 0.0 and 10.0 or null in case the amenity doesn't have any rating",
+            "description": "Rating of an amenity, the value will be between 0.0 and 10.0. If no rating has been given, the value will be set to null",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -656,7 +656,7 @@
           },
           {
             "name": "distance",
-            "description": "The computed distance between a station and the current amenity",
+            "description": "Computed distance between station and amenity",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -668,7 +668,7 @@
           },
           {
             "name": "foursquareUrl",
-            "description": "The full path URL to amenity foursquare page",
+            "description": "Full path URL to amenity foursquare page",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -680,7 +680,7 @@
           },
           {
             "name": "createdAt",
-            "description": "The date and time when the amenity was created",
+            "description": "Date and time when an amenity was created",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -692,7 +692,7 @@
           },
           {
             "name": "updatedAt",
-            "description": "The date and time when the amenity was updated",
+            "description": "Date and time when an amenity was last updated",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -735,7 +735,7 @@
         "fields": [
           {
             "name": "type",
-            "description": "The type of the point",
+            "description": "Point type",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -799,11 +799,11 @@
       {
         "kind": "OBJECT",
         "name": "Address",
-        "description": "The conplete information about an address",
+        "description": "Information about an address",
         "fields": [
           {
             "name": "continent",
-            "description": "The continent code (2 letters)",
+            "description": "Continent code (2 letters)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -815,7 +815,7 @@
           },
           {
             "name": "country",
-            "description": "The country code (2 letters)",
+            "description": "Country code (2 letters)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -827,7 +827,7 @@
           },
           {
             "name": "county",
-            "description": "The name of the county",
+            "description": "County code (2 letters)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -839,7 +839,7 @@
           },
           {
             "name": "city",
-            "description": "The name of the city",
+            "description": "City",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -851,7 +851,7 @@
           },
           {
             "name": "street",
-            "description": "The street name",
+            "description": "Street name",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -863,7 +863,7 @@
           },
           {
             "name": "number",
-            "description": "The number from the street",
+            "description": "Street number",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -875,7 +875,7 @@
           },
           {
             "name": "postalCode",
-            "description": "The postal code of the location",
+            "description": "Postal code of a location",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -887,7 +887,7 @@
           },
           {
             "name": "what3Words",
-            "description": "The string composed from 3 word which represent the location of the address on the globe. Use like: http://w3w.co/<what3Words>",
+            "description": "String composed of 3 words which represent the location of an address on the globe. More details: http://w3w.co/<what3Words>",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -899,7 +899,7 @@
           },
           {
             "name": "formattedAddress",
-            "description": "The composed address information which should be rendered",
+            "description": "Human-readable address of a location",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -926,7 +926,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "The cars unique ID",
+            "description": "Cars unique ID",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -938,7 +938,7 @@
           },
           {
             "name": "externalId",
-            "description": "This is the ID provided by the car data source as the row ID",
+            "description": "ID provided by the car data source as the row ID",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -950,7 +950,7 @@
           },
           {
             "name": "make",
-            "description": "This is the car manufacturer",
+            "description": "Car manufacturer",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -962,7 +962,7 @@
           },
           {
             "name": "carModel",
-            "description": "This is the car model",
+            "description": "Car model",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -974,7 +974,19 @@
           },
           {
             "name": "edition",
-            "description": "This is the car edition",
+            "description": "Car edition",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "chargetripEdition",
+            "description": "Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -986,7 +998,7 @@
           },
           {
             "name": "version",
-            "description": "This is the car version",
+            "description": "Car version",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -998,7 +1010,7 @@
           },
           {
             "name": "mode",
-            "description": "The current production mode of the car",
+            "description": "Current production mode of a car",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -1010,7 +1022,7 @@
           },
           {
             "name": "power",
-            "description": "This is the car power in Kw",
+            "description": "Power of a car in Kw",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1022,7 +1034,7 @@
           },
           {
             "name": "acceleration",
-            "description": "The acceleration time from zero to 100 km/h",
+            "description": "Acceleration time from 0 to 100 km/h",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1034,7 +1046,7 @@
           },
           {
             "name": "topSpeed",
-            "description": "The maximum speed reached by the car",
+            "description": "Maximum car speed in km/h",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1046,7 +1058,7 @@
           },
           {
             "name": "torque",
-            "description": "The engine torque",
+            "description": "Engine torque",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1058,7 +1070,7 @@
           },
           {
             "name": "batteryUsableKwh",
-            "description": "This is the usable battery capacity in kWh",
+            "description": "Usable battery capacity in kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1070,7 +1082,7 @@
           },
           {
             "name": "batteryFullKwh",
-            "description": "This is the full battery capacity in kWh",
+            "description": "Full battery capacity in kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1082,7 +1094,7 @@
           },
           {
             "name": "batteryEfficiency",
-            "description": "This is the battery efficiency in the city, highway and combined depending on weather conditions",
+            "description": "Battery efficiency in the city, highway and combined depending on weather conditions",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1094,7 +1106,7 @@
           },
           {
             "name": "range",
-            "description": "This is the range in the city, highway and combined depending on weather conditions",
+            "description": "Range in the city, highway and combined depending on weather conditions",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1106,7 +1118,7 @@
           },
           {
             "name": "connectors",
-            "description": "This is the list of connectors available for the car",
+            "description": "Available connectors for a car",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -1122,7 +1134,7 @@
           },
           {
             "name": "adapters",
-            "description": "This is the list of adapters of connectors available on the car",
+            "description": "List of adapters of connectors available for a car",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -1138,7 +1150,7 @@
           },
           {
             "name": "seats",
-            "description": "This is the number of seats",
+            "description": "Number of seats",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1150,7 +1162,7 @@
           },
           {
             "name": "weight",
-            "description": "This is the weight in Kg",
+            "description": "Weight in Kg",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1162,7 +1174,7 @@
           },
           {
             "name": "height",
-            "description": "This is the height in mm",
+            "description": "Height in mm",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1174,7 +1186,7 @@
           },
           {
             "name": "width",
-            "description": "This is the width in mm",
+            "description": "Width in mm",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1186,7 +1198,7 @@
           },
           {
             "name": "consumption",
-            "description": "The extra consumption model",
+            "description": "Extra consumption model",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1198,7 +1210,7 @@
           },
           {
             "name": "petrolConsumption",
-            "description": "This is the amount of petrol a similar petrol car would consume per 100km",
+            "description": "Amount of petrol a similar petrol car would consume per 100km",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1210,7 +1222,7 @@
           },
           {
             "name": "chargingOffset",
-            "description": "A list of offset data for different charging speed",
+            "description": "A list of offset data for different charging speeds",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1306,7 +1318,7 @@
           },
           {
             "name": "images",
-            "description": "The list of images of the car",
+            "description": "Images of a car",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -1322,7 +1334,7 @@
           },
           {
             "name": "imagesData",
-            "description": "The images of the car in structured data",
+            "description": "Images of a car in structured data",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1354,13 +1366,13 @@
           },
           {
             "name": "production",
-            "description": "The car is in the manufacture process",
+            "description": "The car is in production and released",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "concept",
-            "description": "Future releases of car, a concept of the car, spec may change over time",
+            "description": "Future releases of a car, a concept of the car, specs may change over time",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1370,11 +1382,11 @@
       {
         "kind": "OBJECT",
         "name": "CarBatteryEfficiency",
-        "description": "The car battery efficiency",
+        "description": "Car battery efficiency",
         "fields": [
           {
             "name": "average",
-            "description": "The average efficiency measured in kWh/100km",
+            "description": "Average efficiency measured in kWh/100km",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1386,7 +1398,7 @@
           },
           {
             "name": "worst",
-            "description": "Worst conditions: 'worst-case' based on -10°C and use of heating",
+            "description": "Worst conditions are based on -10°C and use of heating, measured in kWh/100km",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1398,7 +1410,7 @@
           },
           {
             "name": "best",
-            "description": "Best conditions: 'best-case' based on 23°C and no use of A/C",
+            "description": "Best conditions are based on 23°C and no use of A/C, measured in kWh/100km",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1421,7 +1433,7 @@
         "fields": [
           {
             "name": "highway",
-            "description": "The estimated value on the highway or express roads",
+            "description": "Estimated battery efficiency on a highway or express roads, in km",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1433,7 +1445,7 @@
           },
           {
             "name": "city",
-            "description": "The estimated value on the cities road",
+            "description": "Estimated battery efficiency on a city road, in km",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1445,7 +1457,7 @@
           },
           {
             "name": "combined",
-            "description": "The estimated combined value",
+            "description": "Estimated battery efficiency on highway and city roads combined, in km",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1464,11 +1476,11 @@
       {
         "kind": "OBJECT",
         "name": "CarRange",
-        "description": "The car range estimations",
+        "description": "Car range estimations",
         "fields": [
           {
             "name": "wltp",
-            "description": "The WLTP estimation",
+            "description": "WLTP estimation",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1480,7 +1492,7 @@
           },
           {
             "name": "worst",
-            "description": "Worst conditions: 'worst-case' based on -10°C and use of heating",
+            "description": "Worst conditions are based on -10°C and use of heating",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1492,7 +1504,7 @@
           },
           {
             "name": "best",
-            "description": "Best conditions: 'best-case' based on 23°C and no use of A/C",
+            "description": "Best conditions are based on 23°C and no use of A/C",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1511,11 +1523,11 @@
       {
         "kind": "OBJECT",
         "name": "CarPlug",
-        "description": "This is the car plug model",
+        "description": "Car plug model",
         "fields": [
           {
             "name": "standard",
-            "description": "This is the plug type, known as connector standard in OCPI",
+            "description": "Plug type, known as connector standard in OCPI",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -1527,7 +1539,7 @@
           },
           {
             "name": "power",
-            "description": "This the maximum power the plug accepts in kW",
+            "description": "This is the maximum power a plug accepts in kW",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1539,7 +1551,7 @@
           },
           {
             "name": "time",
-            "description": "This is the time it takes to charge from 0 to 100% or from 10 to 80% if it's a fast charger in minutes",
+            "description": "Time it takes to charge from 10% to 80%, with a fast charger in minutes",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1551,7 +1563,7 @@
           },
           {
             "name": "speed",
-            "description": "This is the charging speed in km/h",
+            "description": "Charging speed in km/h",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1743,11 +1755,11 @@
       {
         "kind": "OBJECT",
         "name": "CarExtraConsumption",
-        "description": "The extra consumption model of the car",
+        "description": "Extra consumption model of a car",
         "fields": [
           {
             "name": "aux",
-            "description": "The consumption, in kWh, of the auxiliaries",
+            "description": "Consumption, in kWh, of the auxiliaries",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1759,7 +1771,7 @@
           },
           {
             "name": "bms",
-            "description": "The consumption, in kWh, of the auxiliaries",
+            "description": "Consumption, in kWh, of the battery management system",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1771,7 +1783,7 @@
           },
           {
             "name": "idle",
-            "description": "The consumption, in kWh, of the auxiliaries",
+            "description": "Consumption, in kWh, of the car in idle mode",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1790,11 +1802,11 @@
       {
         "kind": "OBJECT",
         "name": "CarConsumption",
-        "description": "The consumption of the auxiliaries",
+        "description": "Consumption of the auxiliaries",
         "fields": [
           {
             "name": "worst",
-            "description": "Worst conditions: 'worst-case' based on -10°C and use of heating",
+            "description": "Worst conditions are based on -10°C and use of heating",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1806,7 +1818,7 @@
           },
           {
             "name": "best",
-            "description": "Best conditions: 'best-case' based on 23°C and no use of A/C",
+            "description": "Best conditions are based on 23°C and no use of A/C",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1839,7 +1851,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "This is the image id",
+            "description": "Image id",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1851,7 +1863,7 @@
           },
           {
             "name": "url",
-            "description": "This is the image url",
+            "description": "Image url",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1863,7 +1875,7 @@
           },
           {
             "name": "width",
-            "description": "This is the image width in pixels",
+            "description": "Image width in pixels",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1875,7 +1887,7 @@
           },
           {
             "name": "height",
-            "description": "This is the image height in pixels",
+            "description": "Image height in pixels",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1887,7 +1899,7 @@
           },
           {
             "name": "type",
-            "description": "This is the image type",
+            "description": "Image type",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -1906,14 +1918,14 @@
       {
         "kind": "ENUM",
         "name": "CarImageType",
-        "description": "This is the available types of images which can be found on a car. Each type have specific image sizes",
+        "description": "Available types of images which can be found for a car. Each type has specific image sizes",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "provider",
-            "description": "Images provided by the Car Datasource",
+            "description": "Images provided by a Car Datasource",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1947,11 +1959,11 @@
       {
         "kind": "OBJECT",
         "name": "CarImageData",
-        "description": "The images of the car in structured data",
+        "description": "Images of a car in structured data",
         "fields": [
           {
             "name": "image",
-            "description": "Full size image of the car",
+            "description": "Full size image of a car",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1963,7 +1975,7 @@
           },
           {
             "name": "image_thumbnail",
-            "description": "Thumbnail of the full size image",
+            "description": "Thumbnail of a full size image",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1975,7 +1987,7 @@
           },
           {
             "name": "brand",
-            "description": "The full size logo of the maker of the car",
+            "description": "Full size logo of the maker of a car",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1987,7 +1999,7 @@
           },
           {
             "name": "brand_thumbnail",
-            "description": "Thumbnail of the full size logo of the maker of the car",
+            "description": "Thumbnail of a full size logo of the maker of a car",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2011,7 +2023,7 @@
         "inputFields": [
           {
             "name": "make",
-            "description": "This is the vehicle manufacturer (maker)",
+            "description": "Vehicle manufacturer (maker)",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -2021,7 +2033,7 @@
           },
           {
             "name": "carModel",
-            "description": "This is the car model",
+            "description": "Car model",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -2031,7 +2043,17 @@
           },
           {
             "name": "edition",
-            "description": "This is the car edition",
+            "description": "Car edition",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "chargetripEdition",
+            "description": "Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -2062,7 +2084,7 @@
         "inputFields": [
           {
             "name": "id",
-            "description": "The unique operator ID",
+            "description": "Unique operator ID",
             "type": {
               "kind": "SCALAR",
               "name": "ID",
@@ -2072,7 +2094,7 @@
           },
           {
             "name": "external_id",
-            "description": "The external id of the operator provided by the operator data source",
+            "description": "External ID of an operator provided by an operator data source",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -2082,7 +2104,7 @@
           },
           {
             "name": "name",
-            "description": "The exact name of the operator",
+            "description": "Exact name",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -2092,7 +2114,7 @@
           },
           {
             "name": "country",
-            "description": "The exact country code",
+            "description": "Exact country code",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -2112,7 +2134,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "The unique operator ID",
+            "description": "Unique operator ID",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2124,7 +2146,7 @@
           },
           {
             "name": "external_id",
-            "description": "The external id of the operator provided by the operator data source",
+            "description": "External ID of an operator provided by the operator data source",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2136,7 +2158,7 @@
           },
           {
             "name": "name",
-            "description": "The name of the operator",
+            "description": "Name of an operator",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2148,7 +2170,7 @@
           },
           {
             "name": "website",
-            "description": "Link to the operator’s website.",
+            "description": "Link to an operator’s website",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2160,7 +2182,7 @@
           },
           {
             "name": "logo",
-            "description": "Image link to the operator’s logo.",
+            "description": "Image link to an operator’s logo",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2184,7 +2206,7 @@
           },
           {
             "name": "contact",
-            "description": "The contact object information",
+            "description": "Contact information",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2231,7 +2253,7 @@
           },
           {
             "name": "category",
-            "description": "Describes what the image is used for.",
+            "description": "Category of an image",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -2243,7 +2265,7 @@
           },
           {
             "name": "type",
-            "description": "Image type like: gif, jpeg, png, svg",
+            "description": "Image type: gif, jpeg, png, svg",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2403,7 +2425,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application and extend the current functionalities which we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2426,7 +2448,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "The ID of the review",
+            "description": "ID of a review",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2442,7 +2464,7 @@
           },
           {
             "name": "station",
-            "description": "The station for which the review was provided",
+            "description": "Station for which a review was provided",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2454,7 +2476,7 @@
           },
           {
             "name": "user",
-            "description": "The user who added the review, in case the review was added by an anonymous user, this will be null",
+            "description": "User who added a review, in case a review was added by an anonymous user, this will be null",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2466,7 +2488,7 @@
           },
           {
             "name": "rating",
-            "description": "The rating of the review",
+            "description": "Rating of a review",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2478,7 +2500,7 @@
           },
           {
             "name": "message",
-            "description": "The message of the review",
+            "description": "Message of a review",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2490,7 +2512,7 @@
           },
           {
             "name": "locale",
-            "description": "The locale of the message",
+            "description": "Locale of a message",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2502,7 +2524,7 @@
           },
           {
             "name": "ev",
-            "description": "The Car which was provided/selected by the user",
+            "description": "Car which was provided/selected by a user",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2514,7 +2536,7 @@
           },
           {
             "name": "plugType",
-            "description": "The plug type which was provided/selected by the user",
+            "description": "Plug type which was provided/selected by a user",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -2526,7 +2548,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application and extend the current functionalities which we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2538,7 +2560,7 @@
           },
           {
             "name": "tags",
-            "description": "Boolean tags for the station review",
+            "description": "Boolean tags for a station review",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2550,7 +2572,7 @@
           },
           {
             "name": "createdAt",
-            "description": "The date and time when the review was created",
+            "description": "Date and time when a review was created",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2562,7 +2584,7 @@
           },
           {
             "name": "updatedAt",
-            "description": "The date and time when the review was updated",
+            "description": "Date and time when a review was updated",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2581,11 +2603,11 @@
       {
         "kind": "OBJECT",
         "name": "Station",
-        "description": "Extending the station model to add review stats property",
+        "description": "Extending a station model to add review stats property",
         "fields": [
           {
             "name": "review",
-            "description": "The review stats for a station",
+            "description": "Review of a station",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2597,7 +2619,7 @@
           },
           {
             "name": "id",
-            "description": "The station unique ID",
+            "description": "Unique ID of a station",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2613,7 +2635,7 @@
           },
           {
             "name": "country_code",
-            "description": "ISO-3166 alpha-2 country code of the CPO that 'owns' this Location.",
+            "description": "ISO-3166 alpha-2 country code of a station",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2625,7 +2647,7 @@
           },
           {
             "name": "party_id",
-            "description": "CPO ID of the CPO that 'owns' this Location (following the ISO-15118 standard).",
+            "description": "CPO ID of a CPO that 'owns' this station (following the ISO-15118 standard)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2637,7 +2659,7 @@
           },
           {
             "name": "publish",
-            "description": "Defines if a Location may be published on an website or app etc.\nWhen this is set to false, only tokens identified in the field: publish_allowed_to are allowed to be shown this Location.\nWhen the same location has EVSEs that may be published and may not be published, two 'Locations' should be created.",
+            "description": "Defines if a Location may be published on an website or app etc.\nWhen this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this Location.\nWhen the same location has EVSEs that may be published and may not be published, two 'Locations' should be created.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2649,7 +2671,7 @@
           },
           {
             "name": "name",
-            "description": "The name of the charging station",
+            "description": "Name of a charging station",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2661,7 +2683,7 @@
           },
           {
             "name": "address",
-            "description": "Street/block name and house number if available.",
+            "description": "Street/block name and house number if available",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2673,7 +2695,7 @@
           },
           {
             "name": "city",
-            "description": "City or town.",
+            "description": "City or town",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2685,7 +2707,7 @@
           },
           {
             "name": "postal_code",
-            "description": "Postal code of the location, may only be omitted when the location has no postal code: in some countries charging locations at highways don’t have postal codes.",
+            "description": "Postal code of a location, may only be omitted when a location has no postal code: in some countries charging locations at highways don’t have postal codes.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2697,7 +2719,7 @@
           },
           {
             "name": "state",
-            "description": "State or province of the location, only to be used when relevant.",
+            "description": "State or province of a location, only to be used when relevant",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2709,7 +2731,7 @@
           },
           {
             "name": "country",
-            "description": "ISO 3166-1 alpha-3 code for the country of this location.",
+            "description": "ISO 3166-1 alpha-3 code for the country of this station",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2721,7 +2743,7 @@
           },
           {
             "name": "coordinates",
-            "description": "Coordinates of the location.",
+            "description": "Coordinates of a location",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2733,7 +2755,7 @@
           },
           {
             "name": "related_locations",
-            "description": "Geographical location of related points relevant to the user.",
+            "description": "Geographical location of related points relevant to a user",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -2749,7 +2771,7 @@
           },
           {
             "name": "parking_type",
-            "description": "The general type of parking at the charge point location.",
+            "description": "Type of parking at a charge point location",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -2761,7 +2783,7 @@
           },
           {
             "name": "evses",
-            "description": "List of EVSEs that belong to this Location.",
+            "description": "EVSEs that belong to a station",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -2777,7 +2799,7 @@
           },
           {
             "name": "directions",
-            "description": "Human-readable directions on how to reach the location.",
+            "description": "Human-readable directions on how to reach a station",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -2793,7 +2815,7 @@
           },
           {
             "name": "operator",
-            "description": "Information of the operator. When not specified, the information retrieved from the Credentials module should be used instead.",
+            "description": "Information about an operator",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2805,7 +2827,7 @@
           },
           {
             "name": "suboperator",
-            "description": "Information of the suboperator if available.",
+            "description": "Information about a suboperator if applicable",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2817,7 +2839,7 @@
           },
           {
             "name": "owner",
-            "description": "Information of the owner if available.",
+            "description": "Information about an owner if available",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2829,7 +2851,7 @@
           },
           {
             "name": "facilities",
-            "description": "Optional list of facilities this charging location directly belongs to.",
+            "description": "Facilities a charging station belongs to",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -2845,7 +2867,7 @@
           },
           {
             "name": "time_zone",
-            "description": "One of IANA tzdata’s TZ-values representing the time zone of the location. Examples: \"Europe/Oslo\", \"Europe/Zurich\". (http://www.iana.org/time-zones)",
+            "description": "Value from the IANA time zone database representing the time zone of a location. Examples: \"Europe/Oslo\", \"Europe/Zurich\". (http://www.iana.org/time-zones)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2857,7 +2879,7 @@
           },
           {
             "name": "opening_times",
-            "description": "The times when the EVSEs at the location can be accessed for charging.",
+            "description": "Times when an EVSEs at a location can be accessed for charging",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2869,7 +2891,7 @@
           },
           {
             "name": "charging_when_closed",
-            "description": "Indicates if the EVSEs are still charging outside the opening hours of the location. E.g. when the parking garage closes its barriers over night, is it allowed to charge till the next morning? Default: true",
+            "description": "Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers over night, is it allowed to charge till the next morning? Default: true",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2881,7 +2903,7 @@
           },
           {
             "name": "images",
-            "description": "Links to images related to the location such as photos or logos.",
+            "description": "Links to images related to a location such as photos or logos",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -2897,7 +2919,7 @@
           },
           {
             "name": "energy_mix",
-            "description": "Details on the energy supplied at this location.",
+            "description": "Details of the energy supplied at a location",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2909,7 +2931,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when this Location or one of its EVSEs or Connectors were last updated (or created).",
+            "description": "Timestamp when a location, or one of its EVSEs or Connectors were last updated (or created)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2921,7 +2943,7 @@
           },
           {
             "name": "external_id",
-            "description": "This is the ID provided by the station data source as the row ID",
+            "description": "ID provided by a station data source",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2933,7 +2955,7 @@
           },
           {
             "name": "location",
-            "description": "GeoJSON location of the charging station",
+            "description": "GeoJSON location of a charging station",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2945,7 +2967,7 @@
           },
           {
             "name": "elevation",
-            "description": "Tƒhe elevation (altitude) level",
+            "description": "Elevation (altitude) level",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2973,7 +2995,7 @@
           },
           {
             "name": "amenities",
-            "description": "An object with amenity types as key and number of amenities as value",
+            "description": "Amenties located at this location",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2985,7 +3007,7 @@
           },
           {
             "name": "physical_address",
-            "description": "Enriched information about the physical address of the station",
+            "description": "Enriched information about the physical address of a station",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2997,7 +3019,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application and extend the current functionalities which we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3009,7 +3031,7 @@
           },
           {
             "name": "realtime",
-            "description": "A flag which indicates if the station has realtime information about the availability of the connectors",
+            "description": "A flag which indicates if a station has realtime information about the availability of its connectors",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3021,7 +3043,7 @@
           },
           {
             "name": "private",
-            "description": "A flag which indicates if the station is on a private property",
+            "description": "A flag which indicates if a station is on a private property",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3033,7 +3055,7 @@
           },
           {
             "name": "power",
-            "description": "The connectors grouped by power",
+            "description": "Connectors grouped by power",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3045,7 +3067,7 @@
           },
           {
             "name": "speed",
-            "description": "The global charging speed type for the station",
+            "description": "Charging speed for a station",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -3057,7 +3079,7 @@
           },
           {
             "name": "status",
-            "description": "The global status for the station",
+            "description": "Global status for a station",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -3086,11 +3108,11 @@
       {
         "kind": "OBJECT",
         "name": "ReviewStats",
-        "description": "Statistical information for the reviews of a station",
+        "description": "Statistical information for reviews of a station",
         "fields": [
           {
             "name": "rating",
-            "description": "The reviews average",
+            "description": "Average of all reviews",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3102,7 +3124,7 @@
           },
           {
             "name": "count",
-            "description": "'The total number of reviews",
+            "description": "'Total number of reviews",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3285,11 +3307,11 @@
       {
         "kind": "OBJECT",
         "name": "EVSE",
-        "description": "The EVSE data which extends OCPI EVSE",
+        "description": "EVSE data which extends OCPI EVSE",
         "fields": [
           {
             "name": "uid",
-            "description": "Uniquely identifies the EVSE within the CPOs platform (and suboperator platforms). For example a database ID or the actual \"EVSE ID\". This field can never be changed, modified or renamed. This is the 'technical' identification of the EVSE, not to be used as 'human readable' identification, use the field evse_id for that.\nThis field is named uid instead of id, because id could be confused with evse_id which is an eMI3 defined field.",
+            "description": "Uniquely identifies an EVSE within the CPOs platform (and suboperator platforms). For example a database ID or the actual \"EVSE ID\". This field can never be changed, modified or renamed. This is the 'technical' identification of the EVSE, not to be used as 'human readable' identification, use the field evse_id for that.\nThis field is named uid instead of id, because id could be confused with evse_id which is an eMI3 defined field.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3313,7 +3335,7 @@
           },
           {
             "name": "status",
-            "description": "Indicates the current status of the EVSE.",
+            "description": "Indicates the current status of an EVSE.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -3325,7 +3347,7 @@
           },
           {
             "name": "status_schedule",
-            "description": "Indicates a planned status update of the EVSE.",
+            "description": "Indicates a planned status update of a nEVSE.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -3341,7 +3363,7 @@
           },
           {
             "name": "capabilities",
-            "description": "List of functionalities that the EVSE is capable of.",
+            "description": "List of functionalities that an EVSE is capable of.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -3357,7 +3379,7 @@
           },
           {
             "name": "connectors",
-            "description": "List of available connectors on the EVSE.",
+            "description": "List of available connectors on an EVSE.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -3373,7 +3395,7 @@
           },
           {
             "name": "floor_level",
-            "description": "Level on which the Charge Point is located (in garage buildings) in the locally displayed numbering scheme.",
+            "description": "Level on which a Charge Point is located (in garage buildings) in the locally displayed numbering scheme.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3385,7 +3407,7 @@
           },
           {
             "name": "coordinates",
-            "description": "Coordinates of the EVSE.",
+            "description": "Coordinates of a EVSE.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -3397,7 +3419,7 @@
           },
           {
             "name": "physical_reference",
-            "description": "A number/string printed on the outside of the EVSE for visual identification.",
+            "description": "A number/string printed on the outside of an EVSE for visual identification.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3409,7 +3431,7 @@
           },
           {
             "name": "parking_restrictions",
-            "description": "The restrictions that apply to the parking spot.",
+            "description": "Restrictions that apply to a parking spot.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -3425,7 +3447,7 @@
           },
           {
             "name": "images",
-            "description": "Links to images related to the EVSE such as photos or logos.",
+            "description": "Links to images related to an EVSE such as photos or logos.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -3453,7 +3475,7 @@
           },
           {
             "name": "parking_cost",
-            "description": "Indicates if the parking is free or paid.",
+            "description": "Indicates if parking is free or paid.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -3465,7 +3487,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application and extend the current functionalities which we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3689,11 +3711,11 @@
       {
         "kind": "OBJECT",
         "name": "Connector",
-        "description": "The connector data which extends OCPI Connector",
+        "description": "Connector data which extends OCPI Connector",
         "fields": [
           {
             "name": "id",
-            "description": "Identifier of the Connector within the EVSE. Two Connectors may have the same id as long as they do not belong to the same EVSE object.",
+            "description": "Identifier of a connector within an EVSE. Two connectors may have the same ID as long as they do not belong to the same EVSE object.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3705,7 +3727,7 @@
           },
           {
             "name": "standard",
-            "description": "The standard of the installed connector.",
+            "description": "Standard of an installed connector.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -3717,7 +3739,7 @@
           },
           {
             "name": "format",
-            "description": "The format (socket/cable) of the installed connector.",
+            "description": "Format (socket/cable) of an installed connector.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -3729,7 +3751,7 @@
           },
           {
             "name": "power_type",
-            "description": "The type of the power of the installed connector. ",
+            "description": "Type of power of an installed connector. ",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -3741,7 +3763,7 @@
           },
           {
             "name": "max_voltage",
-            "description": "Maximum voltage of the connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full.",
+            "description": "Maximum voltage of an connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3753,7 +3775,7 @@
           },
           {
             "name": "max_amperage",
-            "description": "Maximum amperage of the connector, in ampere [A].",
+            "description": "Maximum amperage of a connector, in ampere [A].",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3765,7 +3787,7 @@
           },
           {
             "name": "max_electric_power",
-            "description": "Maximum electric power that can be delivered by this connector, in watt [W]. When the maximum electric power is lower than the calculated value from voltage and amperage, this value should be set.\nFor example: A DC Charge Point which can delivers up to 920V and up to 400A can be limited to a maximum of 150kW. Depending on the car, it may supply maximum voltage or current, but not both at the same time.\nFor AC Charge Points, the amount of phases used can also have influence on the maximum power.",
+            "description": "Maximum electric power that can be delivered by a connector, in watt [W]. When the maximum electric power is lower than the calculated value from voltage and amperage, this value should be set.\nFor example: A DC Charge Point which can deliver up to 920V and up to 400A can be limited to a maximum of 150kW. Depending on the car, it may supply maximum voltage or current, but not both at the same time.\nFor AC Charge Points, the amount of phases used can also have influence on the maximum power.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3789,7 +3811,7 @@
           },
           {
             "name": "tariff_ids",
-            "description": "Identifiers of the currently valid charging tariffs. Multiple tariffs are possible, but only one of each Tariff.type can be active at the same time. Tariffs with the same type are only allowed, if they are not active at the same time: start_date_time and end_date_time period not overlapping.\nWhen preference-based smart charging is supported, one tariff for every possible ProfileType should be provided. These tell the user about the options they have at this Connector, and what the tariff is for every option.\nFor a \"free of charge\" tariff, this field should be set and point to a defined \"free of charge\" tariff.",
+            "description": "Identifiers of the currently valid charging tariffs. Multiple tariffs are possible, but only one of each Tariff.type can be active at the same time. Tariffs with the same type are only allowed, if they are not active at the same time: start_date_time and end_date_time period not overlapping.\nWhen preference-based smart charging is supported, one tariff for every possible ProfileType should be provided. This tells the user about the options they have at this Connector, and what the tariff is for every option.\nFor a \"free of charge\" tariff, this field should be set and point to a defined \"free of charge\" tariff.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -3805,7 +3827,7 @@
           },
           {
             "name": "terms_and_conditions",
-            "description": "URL to the operator’s terms and conditions.",
+            "description": "URL to an operator’s terms and conditions.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3817,7 +3839,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when this Connector was last updated (or created).",
+            "description": "Timestamp when a connector was last updated (or created).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3829,7 +3851,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application and extend the current functionalities which we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3841,7 +3863,7 @@
           },
           {
             "name": "tariff",
-            "description": "The list if valid charging tariffs",
+            "description": "List of valid charging tariffs",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -3980,7 +4002,7 @@
           },
           {
             "name": "tariff_alt_text",
-            "description": "List of multi-language alternative tariff info texts.",
+            "description": "List of alternative tariff information texts, in multiple languages.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -4008,7 +4030,7 @@
           },
           {
             "name": "min_price",
-            "description": "When this field is set, a Charging Session with this tariff will at least cost this amount. This is different from a FLAT fee (Start Tariff, Transaction Fee), as a FLAT fee is a fixed amount that has to be payed for any Charging Session. A minimum price indicates that when the cost of a Charging Session is lower than this amount, the cost of the Session will be equal to this amount. (Also see note below)",
+            "description": "When this field is set, a Charging Session with this tariff will cost at least this amount. This is different from a FLAT fee (Start Tariff, Transaction Fee), as a FLAT fee is a fixed amount that has to be payed for any Charging Session. A minimum price indicates that when the cost of a Charging Session is lower than this amount, the cost of the Session will be equal to this amount. (Also see note below)",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -4020,7 +4042,7 @@
           },
           {
             "name": "max_price",
-            "description": "When this field is set, a Charging Session with this tariff will NOT cost more than this amount. (See note below)",
+            "description": "When this field is set, a Charging Session with this tariff will NOT cost more than this amount",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -4048,7 +4070,7 @@
           },
           {
             "name": "start_date_time",
-            "description": "The time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active. (See note below)",
+            "description": "The time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4060,7 +4082,7 @@
           },
           {
             "name": "end_date_time",
-            "description": "The time after which this tariff is no longer valid, in UTC, time_zone field if the Location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future. (See note below)",
+            "description": "The time after which this tariff is no longer valid, in UTC, time_zone field if the Location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4072,7 +4094,7 @@
           },
           {
             "name": "energy_mix",
-            "description": "Details on the energy supplied with this tariff.",
+            "description": "Details about the energy supplied with this tariff.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -4575,7 +4597,7 @@
         "fields": [
           {
             "name": "is_green_energy",
-            "description": "True if 100% from regenerative sources. (CO2 and nuclear waste is zero)",
+            "description": "True if the power is 100% from regenerative sources",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5154,7 +5176,7 @@
         "fields": [
           {
             "name": "standard",
-            "description": "The type of the charger",
+            "description": "Type of charger",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -5166,7 +5188,7 @@
           },
           {
             "name": "power",
-            "description": "The power of the charger",
+            "description": "Power of a charger",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5178,7 +5200,7 @@
           },
           {
             "name": "price",
-            "description": "The price render string of the charger",
+            "description": "Price of a charger",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5190,7 +5212,7 @@
           },
           {
             "name": "speed",
-            "description": "The charging speed type",
+            "description": "Charging speed",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -5202,7 +5224,7 @@
           },
           {
             "name": "status",
-            "description": "The statuses of all the EVSEs grouped in the charger",
+            "description": "Statuses of all the EVSEs grouped in a charger",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -5214,7 +5236,7 @@
           },
           {
             "name": "total",
-            "description": "The total number of EVSEs grouped in the charger",
+            "description": "Total number of EVSEs grouped in a charger",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5240,13 +5262,13 @@
         "enumValues": [
           {
             "name": "slow",
-            "description": "Slow charging (bellow 40 kWh)",
+            "description": "Slow charging (below 43 kWh)",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "fast",
-            "description": "Fast charging stations (above 40 kWh and bellow 150 kWh)",
+            "description": "Fast charging stations (above 43 kWh and below 150 kWh)",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5262,7 +5284,7 @@
       {
         "kind": "OBJECT",
         "name": "ChargerStatuses",
-        "description": "The groupping by status of the chargers",
+        "description": "Groupping by status of the chargers",
         "fields": [
           {
             "name": "free",
@@ -5360,7 +5382,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "The user ID",
+            "description": "User ID",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -5376,7 +5398,7 @@
           },
           {
             "name": "firstName",
-            "description": "The users first name",
+            "description": "First name",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5388,7 +5410,7 @@
           },
           {
             "name": "lastName",
-            "description": "The users last name",
+            "description": "Last name",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5446,7 +5468,7 @@
         "fields": [
           {
             "name": "route",
-            "description": "The recommended route",
+            "description": "Recommended route",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -5458,7 +5480,7 @@
           },
           {
             "name": "alternatives",
-            "description": "A list of available alternatives",
+            "description": "Available alternatives",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -5474,7 +5496,7 @@
           },
           {
             "name": "ev",
-            "description": "The EV specific data for a route request",
+            "description": "EV specific data for a route request",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -5486,7 +5508,7 @@
           },
           {
             "name": "user",
-            "description": "The user who requested the route",
+            "description": "User who requested the route",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -5498,7 +5520,7 @@
           },
           {
             "name": "routeRequest",
-            "description": "The route request data",
+            "description": "Route request data",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -5510,7 +5532,7 @@
           },
           {
             "name": "status",
-            "description": "The route status",
+            "description": "Route status",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -5533,7 +5555,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "The ID of the route alternative",
+            "description": "ID of a route alternative",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5545,7 +5567,7 @@
           },
           {
             "name": "type",
-            "description": "The type of the alternative",
+            "description": "Type of alternative route",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -5557,7 +5579,7 @@
           },
           {
             "name": "charges",
-            "description": "The number of charges along the route. Usualy {legs} - 1",
+            "description": "Number of charges along a route",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5569,7 +5591,7 @@
           },
           {
             "name": "chargesAvailable",
-            "description": "The number of available charges along the route.",
+            "description": "Number of available charges along a route.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5581,7 +5603,7 @@
           },
           {
             "name": "chargesOccupied",
-            "description": "The number of occupied charges along the route.",
+            "description": "Number of occupied charges along a route.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5593,7 +5615,7 @@
           },
           {
             "name": "chargesUnknown",
-            "description": "The number of unknown charges along the route.",
+            "description": "Number of unknown charges along a route.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5605,7 +5627,7 @@
           },
           {
             "name": "chargesOutOfOrder",
-            "description": "The number of out of order charges along the route.",
+            "description": "Number of out of order charges along a route.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5617,7 +5639,7 @@
           },
           {
             "name": "distance",
-            "description": "The total distance of the route in meters.",
+            "description": "Total distance of a route in meters.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5629,7 +5651,7 @@
           },
           {
             "name": "duration",
-            "description": "The total time of the route, including charge time, in seconds",
+            "description": "Total duration of a route, including charge time, in seconds",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5641,7 +5663,7 @@
           },
           {
             "name": "consumption",
-            "description": "The total energy used for the route in kWh",
+            "description": "Total energy used for a route in kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5653,7 +5675,7 @@
           },
           {
             "name": "chargeTime",
-            "description": "The total time required to charge of the entire route, in seconds",
+            "description": "Total time required to charge for an entire route, in seconds",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5665,7 +5687,7 @@
           },
           {
             "name": "amenityRanking",
-            "description": "The amenity ranking for the alternative",
+            "description": "Amenity ranking for an alternative",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5677,7 +5699,7 @@
           },
           {
             "name": "rangeStart",
-            "description": "The range, in meters, available at the beginning of the trip",
+            "description": "Range, in meters, available at the beginning of a trip",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5689,7 +5711,7 @@
           },
           {
             "name": "rangeStartKwh",
-            "description": "The total energy in the battery at the beginning of the trip, in kWh",
+            "description": "Total energy in a battery at the beginning of a trip, in kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5701,7 +5723,7 @@
           },
           {
             "name": "rangeEnd",
-            "description": "The remaining range, in meters, at the end of the trip",
+            "description": "Remaining range, in meters, at the end of a trip",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5713,7 +5735,7 @@
           },
           {
             "name": "rangeEndKwh",
-            "description": "The remaining range, energy in kWh, at the end of the trip.",
+            "description": "Remaining range, energy in kWh, at the end of a trip.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5725,7 +5747,7 @@
           },
           {
             "name": "via",
-            "description": "Text information about the route direction",
+            "description": "Text information about a route direction",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5737,7 +5759,7 @@
           },
           {
             "name": "polyline",
-            "description": "The polyline encoded route",
+            "description": "Polyline encoded route",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5749,7 +5771,7 @@
           },
           {
             "name": "elevationPlot",
-            "description": "A list of elevation values. Each elevationPlot has a hundred points, independent of the length of the route",
+            "description": "Elevation values. Each elevationPlot has a hundred points, independent of the length of a route",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -5765,7 +5787,7 @@
           },
           {
             "name": "elevationUp",
-            "description": "The total number of meters which are going up on the route",
+            "description": "Total number of meters which are going up on a route",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5777,7 +5799,7 @@
           },
           {
             "name": "elevationDown",
-            "description": "The total number of meters which are going down on the route",
+            "description": "Total number of meters which are going down on a route",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5789,7 +5811,7 @@
           },
           {
             "name": "elevationMax",
-            "description": "The highest value from the elevation array",
+            "description": "Highest value from the elevation array",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5813,7 +5835,7 @@
           },
           {
             "name": "legs",
-            "description": "The list of legs of the route",
+            "description": "Legs of the route",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -5829,7 +5851,7 @@
           },
           {
             "name": "stationsAlongRoute",
-            "description": "The list of alternative stations along the route within specified radius in meters only if it was provided at newRoute request",
+            "description": "Alternative stations along a route within specified radius in meters. Only if it was provided at newRoute mutation",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -5852,14 +5874,14 @@
       {
         "kind": "ENUM",
         "name": "RouteAlternativeType",
-        "description": "The types of the route alternative",
+        "description": "Types of an alternative route",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "fastest",
-            "description": "The fastest route between origin and destination",
+            "description": "Fastest route between origin and destination",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5885,7 +5907,7 @@
         "fields": [
           {
             "name": "co2",
-            "description": "The total amount of CO2, in grams, which were used with a petrol vehicle",
+            "description": "Total amount of CO2, in grams, which would be used with a petrol vehicle",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5897,7 +5919,7 @@
           },
           {
             "name": "money",
-            "description": "The money saved by the user driving this route with the electric vehicle",
+            "description": "Money saved by a user driving this route with the electric vehicle",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5909,7 +5931,7 @@
           },
           {
             "name": "currency",
-            "description": "The money currency",
+            "description": "Currency",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5921,7 +5943,7 @@
           },
           {
             "name": "averageGasPrice",
-            "description": "The avarage gas price with which we made the calculation",
+            "description": "Average gas price with which the calculation was made",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5933,7 +5955,7 @@
           },
           {
             "name": "averageEnergyPrice",
-            "description": "The avarage energy price with which we made the calculation",
+            "description": "Average energy price with which the calculation was made",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5956,7 +5978,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "The ID of the leg",
+            "description": "ID of a leg",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5968,7 +5990,7 @@
           },
           {
             "name": "distance",
-            "description": "The distance until the end of the leg is reached from the start, in meters",
+            "description": "Distance from the start to the end of a leg, in meters",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5980,7 +6002,7 @@
           },
           {
             "name": "duration",
-            "description": "The total drive time from the start to the end of the leg, in seconds",
+            "description": "Total drive time from the start to the end of a leg, in seconds",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5992,7 +6014,7 @@
           },
           {
             "name": "consumption",
-            "description": "The total energy used of the leg in kWh",
+            "description": "Total energy used in a leg in kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6004,7 +6026,7 @@
           },
           {
             "name": "rangeStart",
-            "description": "The range, in meters, available at the beginning of the leg",
+            "description": "Range, in meters, available at the beginning of a leg",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6016,7 +6038,7 @@
           },
           {
             "name": "rangeStartKwh",
-            "description": "The total energy in the battery at the beginning of the leg, in kWh",
+            "description": "Total energy in a battery at the beginning of a leg, in kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6028,7 +6050,7 @@
           },
           {
             "name": "rangeEnd",
-            "description": "The range, in meters, available at the end of the leg",
+            "description": "Range, in meters, available at the end of a leg",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6040,7 +6062,7 @@
           },
           {
             "name": "rangeEndKwh",
-            "description": "The total energy left in the battery at the end of the leg, in kWh",
+            "description": "Total energy left in a battery at the end of a leg, in kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6052,7 +6074,7 @@
           },
           {
             "name": "origin",
-            "description": "The origin point location",
+            "description": "Origin point location",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6064,7 +6086,7 @@
           },
           {
             "name": "destination",
-            "description": "The destination point location",
+            "description": "Destination point location",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6076,7 +6098,7 @@
           },
           {
             "name": "type",
-            "description": "The type of the leg",
+            "description": "Type of a leg",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -6088,7 +6110,7 @@
           },
           {
             "name": "name",
-            "description": "The name of the destination. This is the station name in case the user should charge or the name of the location in case was provided",
+            "description": "Name of a destination. This is the station name in case a user should charge or the name of the location in case this was provided",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6100,7 +6122,7 @@
           },
           {
             "name": "stationId",
-            "description": "The ID of the station, if the user should charge",
+            "description": "ID of a station",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6112,7 +6134,7 @@
           },
           {
             "name": "operatorId",
-            "description": "The ID of the operator, if the user should charge",
+            "description": "ID of the operator",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6124,7 +6146,7 @@
           },
           {
             "name": "chargeTime",
-            "description": "The total time required to charge the battery until 80%, in seconds, if the user should charge",
+            "description": "Total time required to charge a battery until 80%, in seconds",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6136,7 +6158,7 @@
           },
           {
             "name": "evse",
-            "description": "The recommended EVSE where to charge, if the user should charge",
+            "description": "Recommended EVSE where to charge",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6148,7 +6170,7 @@
           },
           {
             "name": "connector",
-            "description": "The recommended connector for charging",
+            "description": "Recommended connector for charging",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6160,7 +6182,7 @@
           },
           {
             "name": "plugsAvailable",
-            "description": "The number of available plugs at the station, if the user should charge",
+            "description": "Number of available plugs at a station",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6172,7 +6194,7 @@
           },
           {
             "name": "plugsOccupied",
-            "description": "The number of occupied plug at the charge station, if the user should charge",
+            "description": "Number of occupied plugs at a charge station",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6184,7 +6206,7 @@
           },
           {
             "name": "plugsUnknown",
-            "description": "The number of unknown plug at the charge station, if the user should charge",
+            "description": "Number of unknown plugs at a charge station",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6196,7 +6218,7 @@
           },
           {
             "name": "plugsOutOfOrder",
-            "description": "The number of out of order plug at the charge station, if the user should charge",
+            "description": "Number of out of order plugs at a charge station",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6208,7 +6230,7 @@
           },
           {
             "name": "plugsCount",
-            "description": "The total number of plugs at the station, if the user should charge",
+            "description": "Total number of plugs at a charge station",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6231,7 +6253,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "The feature ID",
+            "description": "Feature ID",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6243,7 +6265,7 @@
           },
           {
             "name": "type",
-            "description": "The type of the feature",
+            "description": "Feature type",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6259,7 +6281,7 @@
           },
           {
             "name": "geometry",
-            "description": "The geometry of the feature",
+            "description": "Geometry of the feature",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6275,7 +6297,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application and extend the current functionalities which we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6342,7 +6364,7 @@
           },
           {
             "name": "stationFinal",
-            "description": "This leg ends at the destination which is a charging station, and is the last leg of the route.",
+            "description": "This leg ends at the destination which is a charging station, and is the last leg of the route",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6368,7 +6390,7 @@
           },
           {
             "name": "location",
-            "description": "The geojson location of station",
+            "description": "Geojson location of a station",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6380,7 +6402,7 @@
           },
           {
             "name": "speed",
-            "description": "The speed of the station",
+            "description": "Speed of a station. A station along a route can be either fast or turbo",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -6392,7 +6414,7 @@
           },
           {
             "name": "status",
-            "description": "The status of the station",
+            "description": "Status of a station",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -6404,7 +6426,7 @@
           },
           {
             "name": "preferredOperator",
-            "description": "If the station uses preferred opperator",
+            "description": "The station uses a preferred operator",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6416,7 +6438,7 @@
           },
           {
             "name": "distance",
-            "description": "The distance in meters of the station from the route path",
+            "description": "Distance in meters between station and route path",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6435,11 +6457,11 @@
       {
         "kind": "OBJECT",
         "name": "RequestEv",
-        "description": "The EV specific data for a route request",
+        "description": "EV specific data for a route request",
         "fields": [
           {
             "name": "id",
-            "description": "This is internal ID of the Car",
+            "description": "Internal ID of a Car",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6451,7 +6473,7 @@
           },
           {
             "name": "battery",
-            "description": "The EV battery specific data",
+            "description": "EV battery specific data",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6463,7 +6485,7 @@
           },
           {
             "name": "plugs",
-            "description": "The supported plugs of the EV",
+            "description": "Supported plugs for an EV",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6479,7 +6501,7 @@
           },
           {
             "name": "adapters",
-            "description": "The supported adapters of plugs of the EV",
+            "description": "Supported adapters of plugs for an EV",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6495,7 +6517,7 @@
           },
           {
             "name": "minPower",
-            "description": "The minimum desired power of chargers",
+            "description": "Minimum desired power of chargers",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6507,7 +6529,7 @@
           },
           {
             "name": "climate",
-            "description": "Flag which indicates if the climate is on. The default is true",
+            "description": "Climate is on. The default is true",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6531,7 +6553,7 @@
           },
           {
             "name": "consumption",
-            "description": "The consumption specific to the EV or inputed by the request",
+            "description": "Consumption specific to an EV or inputed by a request",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6566,7 +6588,7 @@
           },
           {
             "name": "capacityKwh",
-            "description": "The usable capacity of the battery, in kWh. This value is computed from the provided capacity value.",
+            "description": "Usable capacity of a battery, in kWh. This value is computed from the provided capacity value.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6578,7 +6600,7 @@
           },
           {
             "name": "stateOfCharge",
-            "description": "The current amount of energy in the battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh.",
+            "description": "Current amount of energy in a battery. If this is not filled in, we assume the battery is full and it will be equal to the batteryUsableKwh.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6590,7 +6612,7 @@
           },
           {
             "name": "stateOfChargeKwh",
-            "description": "The current amount of energy in the battery, in kWh. This value is computed from the provided state of charge.",
+            "description": "Current amount of energy in a battery, in kWh. This value is computed from the provided state of charge.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6602,7 +6624,7 @@
           },
           {
             "name": "finalStateOfCharge",
-            "description": "The desired final amount of energy in the battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh.",
+            "description": "Desired final amount of energy in a battery. If this is not filled in, it will be set to 20% of the car batteryUsableKwh.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6614,7 +6636,7 @@
           },
           {
             "name": "finalStateOfChargeKwh",
-            "description": "The desired final amount of energy in the battery, in kWh. This value is computed from the provided final state of charge.",
+            "description": "Desired final amount of energy in a battery, in kWh. This value is computed from the provided final state of charge.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6637,7 +6659,7 @@
         "fields": [
           {
             "name": "value",
-            "description": "The value of the desired final amount of energy in the battery",
+            "description": "Value of the desired final amount of energy in a battery",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6653,7 +6675,7 @@
           },
           {
             "name": "type",
-            "description": "The type of the desired final amount of energy in the battery",
+            "description": "Type of the desired final amount of energy in a battery",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6709,7 +6731,7 @@
         "fields": [
           {
             "name": "standard",
-            "description": "The type of the plug",
+            "description": "Type of the plug",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -6721,7 +6743,7 @@
           },
           {
             "name": "chargingPower",
-            "description": "The maximum charging speed for this plug",
+            "description": "Maximum charging speed for a plug",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6744,7 +6766,7 @@
         "fields": [
           {
             "name": "aux",
-            "description": "The consumption, in kWh, of the auxiliaries",
+            "description": "Consumption, in kWh, of the auxiliaries",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6791,7 +6813,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "The ID of the user",
+            "description": "ID of the user",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6814,7 +6836,7 @@
         "fields": [
           {
             "name": "amenities",
-            "description": "A list of desired amenities on stations",
+            "description": "Desired amenities near the stations, within a 1 km radius",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6830,7 +6852,7 @@
           },
           {
             "name": "operatorIds",
-            "description": "A list of preferred/required operators",
+            "description": "Requested operators",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6846,7 +6868,7 @@
           },
           {
             "name": "operatorRequired",
-            "description": "Flag which indicates if the operators are required or preferred",
+            "description": "Preferred operators are required. In case there are no preferred operators the route cannot be calculated",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6858,7 +6880,7 @@
           },
           {
             "name": "operatorPrefer",
-            "description": "Flag which indicates if the preferred operators should be loaded",
+            "description": "Encourage the route to use preferred operators. In case there are no preferred operators the route can still be calculated",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6870,7 +6892,7 @@
           },
           {
             "name": "season",
-            "description": "Optional season",
+            "description": "Season",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -6882,7 +6904,7 @@
           },
           {
             "name": "safeRiskMargin",
-            "description": "Percentage for the minimum limit of the battery capacity before a recharge. Value between 0 and 60",
+            "description": "Percentage for the minimum limit of the battery capacity before a recharge. The value should be between 0 and 60, with a default of 10%",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6894,7 +6916,7 @@
           },
           {
             "name": "origin",
-            "description": "The origin location for the route",
+            "description": "Origin of a route",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6906,7 +6928,7 @@
           },
           {
             "name": "destination",
-            "description": "The destination location for the route",
+            "description": "Destination of a route",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6918,7 +6940,7 @@
           },
           {
             "name": "via",
-            "description": "An optional list of locations where we should stop",
+            "description": "Locations where a route will stop",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6934,7 +6956,7 @@
           },
           {
             "name": "stationsAlongRouteRadius",
-            "description": "Radius in meters for alternative stations along the route (min 500 - max 5000)",
+            "description": "Radius in meters for alternative stations along a route (min 500 - max 5000)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6982,14 +7004,14 @@
       {
         "kind": "ENUM",
         "name": "RouteStatus",
-        "description": "The statuses of the route",
+        "description": "The status of a route. The status can be pending, processing, done, not_found or error",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "pending",
-            "description": "The route is queued and pending processing. Temporary status",
+            "description": "Route is queued and pending processing. Temporary status",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -7028,7 +7050,7 @@
         "inputFields": [
           {
             "name": "type",
-            "description": "The type of the point",
+            "description": "Point type",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7042,7 +7064,7 @@
           },
           {
             "name": "coordinates",
-            "description": "The coordinates array with longitude as first value and latitude as second one",
+            "description": "Coordinates [longitude, latitude]",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7074,7 +7096,7 @@
         "fields": [
           {
             "name": "location",
-            "description": "The Geo JSON location of the route path segment",
+            "description": "GeoJSON location of a route path segment",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -7086,7 +7108,7 @@
           },
           {
             "name": "elevation",
-            "description": "The elevation (altitude) in meters",
+            "description": "Elevation (altitude) in meters",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7097,8 +7119,8 @@
             "deprecationReason": null
           },
           {
-            "name": "avSpeed",
-            "description": "The average speed, in km/h, for this route path segment",
+            "name": "averageSpeed",
+            "description": "Average speed, in km/h, for this route path segment",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7109,8 +7131,8 @@
             "deprecationReason": null
           },
           {
-            "name": "recommandedSpeed",
-            "description": "The recommended speed of this path segment to optimise the consumption",
+            "name": "recommendedSpeed",
+            "description": "Recommended speed, in km/h for this route path segment to optimise the consumption",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7122,7 +7144,7 @@
           },
           {
             "name": "consumption",
-            "description": "The consumption, in kWh, of this route path segment",
+            "description": "Consumption, in kWh, of a route path segment",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7134,7 +7156,7 @@
           },
           {
             "name": "consumptionPerKm",
-            "description": "The consumption, in kWh per km, of this route path segment",
+            "description": "Consumption, in kWh per km, of a route path segment",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7146,7 +7168,7 @@
           },
           {
             "name": "distance",
-            "description": "The distance, in meters, of this route path segment",
+            "description": "Distance, in meters, of a route path segment",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7158,7 +7180,7 @@
           },
           {
             "name": "duration",
-            "description": "The duration, in seconds, of this route path segment",
+            "description": "Duration, in seconds, of a route path segment",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7385,7 +7407,7 @@
         "inputFields": [
           {
             "name": "id",
-            "description": "The ID of the station",
+            "description": "ID of the station",
             "type": {
               "kind": "SCALAR",
               "name": "ID",
@@ -7395,7 +7417,7 @@
           },
           {
             "name": "external_id",
-            "description": "The external ID of the station provided by the station data source",
+            "description": "External ID of the station provided by the station data source",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -7405,7 +7427,7 @@
           },
           {
             "name": "name",
-            "description": "The exact name",
+            "description": "Exact name",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -7440,7 +7462,7 @@
           },
           {
             "name": "distance",
-            "description": "The distance, in meters, to search around",
+            "description": "Distance, in meters, to search around",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7454,7 +7476,7 @@
           },
           {
             "name": "power",
-            "description": "A list of power in kWh",
+            "description": "Power in kWh",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -7468,7 +7490,7 @@
           },
           {
             "name": "amenities",
-            "description": "A list of amenity keys. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park",
+            "description": "Amentities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -7523,7 +7545,7 @@
           },
           {
             "name": "newRoute",
-            "description": "Create a new route from route input and get the ID",
+            "description": "Create a new route from the route input and its ID",
             "args": [
               {
                 "name": "input",
@@ -7553,12 +7575,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ReviewAdd",
-        "description": "The form input for add a new review",
+        "description": "Form input to add a new review",
         "fields": null,
         "inputFields": [
           {
             "name": "stationId",
-            "description": "The station ID for which the review is provided",
+            "description": "Station ID for which a review is provided",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7572,7 +7594,7 @@
           },
           {
             "name": "rating",
-            "description": "The rating of the review",
+            "description": "Rating of a review",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7586,7 +7608,7 @@
           },
           {
             "name": "message",
-            "description": "The message of the review",
+            "description": "Review message",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -7596,7 +7618,7 @@
           },
           {
             "name": "locale",
-            "description": "The locale of the message",
+            "description": "Locale of a message",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -7606,7 +7628,7 @@
           },
           {
             "name": "ev",
-            "description": "The ID of the Car which was provided/selected by the user",
+            "description": "ID of the Car which was provided/selected by a user",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -7616,7 +7638,7 @@
           },
           {
             "name": "plugType",
-            "description": "The plug type which was provided/selected by the user",
+            "description": "Plug type which was provided/selected by a user",
             "type": {
               "kind": "ENUM",
               "name": "OCPIConnectorType",
@@ -7626,7 +7648,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application and extend the current functionalities which we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
@@ -7636,7 +7658,7 @@
           },
           {
             "name": "tags",
-            "description": "Boolean tags for the station review",
+            "description": "Boolean tags for a station review",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ReviewTagsInput",
@@ -7652,12 +7674,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ReviewTagsInput",
-        "description": "Boolean tags for the station review",
+        "description": "Boolean tags for a station review",
         "fields": null,
         "inputFields": [
           {
             "name": "working",
-            "description": "Flag which indicates if the station was working when the review was added",
+            "description": "Flag which indicates if a station was working when the review was added",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -7667,7 +7689,7 @@
           },
           {
             "name": "recommended",
-            "description": "Flag which indicates if the user recommended the station when the review was added",
+            "description": "Flag which indicates if a user recommended a station when the review was added",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -7688,7 +7710,7 @@
         "inputFields": [
           {
             "name": "ev",
-            "description": "The EV specific data for a route request",
+            "description": "EV specific data for a route request",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7702,7 +7724,7 @@
           },
           {
             "name": "routeRequest",
-            "description": "The route request data",
+            "description": "Route request data",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7727,7 +7749,7 @@
         "inputFields": [
           {
             "name": "id",
-            "description": "This is internal ID of the Car",
+            "description": "Iternal ID of a Car",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7751,7 +7773,7 @@
           },
           {
             "name": "plugs",
-            "description": "The supported plugs of the EV",
+            "description": "Supported plugs of an EV",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -7765,7 +7787,7 @@
           },
           {
             "name": "adapters",
-            "description": "The supported adapters of plugs of the EV",
+            "description": "Supported adapters of plugs of an EV",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -7779,7 +7801,7 @@
           },
           {
             "name": "minPower",
-            "description": "The minimum desired power of chargers",
+            "description": "Minimum desired power of chargers",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -7799,7 +7821,7 @@
           },
           {
             "name": "numberOfPassengers",
-            "description": "The number of passengers on board",
+            "description": "Number of passengers on board",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -7809,7 +7831,7 @@
           },
           {
             "name": "consumption",
-            "description": "The consumption specific to the EV or inputed by the request",
+            "description": "Consumption specific to the EV or inputed by the request",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RequestEvConsumptionInput",
@@ -7850,7 +7872,7 @@
         "inputFields": [
           {
             "name": "capacity",
-            "description": "The usable capacity of the battery used to compute the route. If this in not filled in, we assume it is the same value as the car batteryUsableKwh.",
+            "description": "Usable capacity of a battery used to compute a route. If this in not filled in, we assume it is the same value as the car batteryUsableKwh.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RequestEvBatteryInputValue",
@@ -7860,7 +7882,7 @@
           },
           {
             "name": "stateOfCharge",
-            "description": "The current amount of energy in the battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh.",
+            "description": "Current amount of energy in a battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RequestEvBatteryInputValue",
@@ -7870,7 +7892,7 @@
           },
           {
             "name": "finalStateOfCharge",
-            "description": "The desired final amount of energy in the battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh.",
+            "description": "Desired final amount of energy in a battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RequestEvBatteryInputValue",
@@ -7891,7 +7913,7 @@
         "inputFields": [
           {
             "name": "value",
-            "description": "The value of the desired final amount of energy in the battery",
+            "description": "Value of a desired final amount of energy in a battery",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7905,7 +7927,7 @@
           },
           {
             "name": "type",
-            "description": "The type of the desired final amount of energy in the battery",
+            "description": "Type of a desired final amount of energy in a battery",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7930,7 +7952,7 @@
         "inputFields": [
           {
             "name": "standard",
-            "description": "The type of the plug",
+            "description": "Type of a plug",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7944,7 +7966,7 @@
           },
           {
             "name": "chargingPower",
-            "description": "The maximum charging speed for this plug",
+            "description": "Maximum charging speed for this plug",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -7969,7 +7991,7 @@
         "inputFields": [
           {
             "name": "aux",
-            "description": "The consumption, in kWh, of the auxiliaries",
+            "description": "Consumption, in kWh, of the auxiliaries",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -7979,7 +8001,7 @@
           },
           {
             "name": "bms",
-            "description": "The consumption, in kWh, of the battery management system",
+            "description": "Cnsumption, in kWh, of the battery management system",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -7989,7 +8011,7 @@
           },
           {
             "name": "idle",
-            "description": "The consumption, in kWh, of the car in idle mode",
+            "description": "Consumption, in kWh, of the car in idle mode",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -8010,7 +8032,7 @@
         "inputFields": [
           {
             "name": "worst",
-            "description": "Worst conditions: 'worst-case' based on -10°C and use of heating",
+            "description": "Worst conditions are based on -10°C and use of heating",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -8020,7 +8042,7 @@
           },
           {
             "name": "best",
-            "description": "Best conditions: 'best-case' based on 23°C and no use of A/C",
+            "description": "Best conditions are based on 23°C and no use of A/C",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -8041,7 +8063,7 @@
         "inputFields": [
           {
             "name": "amenities",
-            "description": "A list of desired amenities on stations",
+            "description": "A list of desired amenities near the stations, with a 1 km radius",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -8055,7 +8077,7 @@
           },
           {
             "name": "operatorIds",
-            "description": "A list of preferred/required operators",
+            "description": "A list of requested operators",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -8069,7 +8091,7 @@
           },
           {
             "name": "operatorRequired",
-            "description": "Flag which indicates if the operators are required or preferred",
+            "description": "Flag which indicates if the operators are required",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -8089,7 +8111,7 @@
           },
           {
             "name": "season",
-            "description": "Optional season select",
+            "description": "Optional flag to specify the season",
             "type": {
               "kind": "ENUM",
               "name": "RouteSeason",
@@ -8099,7 +8121,7 @@
           },
           {
             "name": "safeRiskMargin",
-            "description": "Percentage for the minimum limit of the battery capacity before a recharge. Value between 0 and 60. Default is 10%",
+            "description": "Percentage for a minimum limit of a battery capacity before a recharge. The value should be between 0 and 60, with a default of 10%",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -8109,7 +8131,7 @@
           },
           {
             "name": "origin",
-            "description": "The origin location for the route",
+            "description": "Origin of a route",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -8123,7 +8145,7 @@
           },
           {
             "name": "destination",
-            "description": "The destination location for the route",
+            "description": "Destination of a route",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -8151,7 +8173,7 @@
           },
           {
             "name": "stationsAlongRouteRadius",
-            "description": "An optional list of alternative stations along the route within specified radius in meters (min 500, max 5000) also could be null",
+            "description": "Alternative stations along a route within a specified radius in meters (min 500, max 5000)",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -8182,7 +8204,7 @@
           },
           {
             "name": "type",
-            "description": "The type of the feature",
+            "description": "Feature type",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -8196,7 +8218,7 @@
           },
           {
             "name": "geometry",
-            "description": "The geometry of the feature",
+            "description": "Geometry of the feature",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -8210,7 +8232,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application and extend the current functionalities which we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
@@ -8477,12 +8499,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ReviewEdit",
-        "description": "The form input for edit an existing review",
+        "description": "Form input for edit an existing review",
         "fields": null,
         "inputFields": [
           {
             "name": "rating",
-            "description": "The rating of the review",
+            "description": "Rating of a review",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -8496,7 +8518,7 @@
           },
           {
             "name": "message",
-            "description": "The message of the review",
+            "description": "Review message",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -8506,7 +8528,7 @@
           },
           {
             "name": "locale",
-            "description": "The locale of the message",
+            "description": "Locale of a message",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -8516,7 +8538,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application and extend the current functionalities which we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
@@ -8526,7 +8548,7 @@
           },
           {
             "name": "tags",
-            "description": "Boolean tags for the station review",
+            "description": "Boolean tags for a station review",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ReviewTagsInput",
