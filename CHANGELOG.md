@@ -1,3 +1,10 @@
+# 1.0.0 (2020-09-18)
+
+
+### Features
+
+* update descriptions and add chargetripEdition field on Car ([#1](https://github.com/chargetrip/types/issues/1)) ([98cff40](https://github.com/chargetrip/types/commit/98cff40379cf6a9ab2eccee931bbb7c211992d8f))
+
 # [1.4.0](https://github.com/chargetrip/types/compare/v1.3.0...v1.4.0) (2020-07-23)
 
 
