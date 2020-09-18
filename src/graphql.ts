@@ -16,31 +16,31 @@ export type Scalars = {
 };
 
 export type Query = {
-  /** Get the full list of amenities around a station */
+  /** Get a full list of amenities around a station */
   amenityList?: Maybe<Array<Maybe<Amenity>>>;
-  /** Get the information about a car by the car ID */
+  /** Get information about a car by its ID */
   car?: Maybe<Car>;
-  /** Get the full list of cars */
+  /** Get a full list of cars */
   carList?: Maybe<Array<Maybe<Car>>>;
-  /** Get the full list of operators */
+  /** Get a full list of operators */
   operatorList?: Maybe<Array<Maybe<Operator>>>;
-  /** Get the information about an operator by the operator ID */
+  /** Get information about an operator by its ID */
   operator?: Maybe<Operator>;
   /** Get all reviews of a station by the station ID */
   reviewList?: Maybe<Array<Review>>;
   /** Get a route by ID */
   route?: Maybe<Route>;
-  /** Retrieve the information about a route path segment */
+  /** Retrieve information about a route path segment */
   routePath?: Maybe<RoutePath>;
-  /** Get the station stats for the client */
+  /** Get the station statistics */
   stationStats?: Maybe<StationStats>;
-  /** Get the information about a station by the station ID */
+  /** Get information about a station by its ID */
   station?: Maybe<Station>;
-  /** Get the full list of stations */
+  /** Get a full list of stations */
   stationList?: Maybe<Array<Maybe<Station>>>;
   /** Search for stations around a GeoJSON point with a specific distance in meters */
   stationAround?: Maybe<Array<Maybe<Station>>>;
-  /** Get the information about a tariff by the tariff ID */
+  /** Get information about a tariff by the tariff ID */
   tariff?: Maybe<OCPITariff>;
   /** Get the full list of tariffs */
   tariffList?: Maybe<Array<Maybe<OCPITariff>>>;
@@ -114,33 +114,33 @@ export type QuerytariffListArgs = {
 
 /** The amenity model */
 export type Amenity = {
-  /** The unique amenity ID */
+  /** Unique amenity ID */
   id?: Maybe<Scalars["ID"]>;
-  /** This is the ID provided by the amenity data source as the row ID */
+  /** ID provided by an amenity data source as the row ID */
   externalId?: Maybe<Scalars["String"]>;
-  /** The name of the amenity */
+  /** Name of an amenity */
   name?: Maybe<Scalars["String"]>;
-  /** The geo location coordinates. This is a GeoJSON Point */
+  /** Geo location coordinates. This is a GeoJSON Point */
   location?: Maybe<Point>;
-  /** The embedded Address */
+  /** Embedded Address */
   address?: Maybe<Address>;
-  /** The amenity type keys as array of strings */
+  /** Type of amenity. An amenity can belong to multiple categories */
   type?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** The rating value provided by the amenity data source. Values between 0.0 and 10.0 or null in case the amenity doesn't have any rating */
+  /** Rating of an amenity, the value will be between 0.0 and 10.0. If no rating has been given, the value will be set to null */
   rating?: Maybe<Scalars["Float"]>;
-  /** The computed distance between a station and the current amenity */
+  /** Computed distance between station and amenity */
   distance?: Maybe<Scalars["Int"]>;
-  /** The full path URL to amenity foursquare page */
+  /** Full path URL to amenity foursquare page */
   foursquareUrl?: Maybe<Scalars["String"]>;
-  /** The date and time when the amenity was created */
+  /** Date and time when an amenity was created */
   createdAt?: Maybe<Scalars["String"]>;
-  /** The date and time when the amenity was updated */
+  /** Date and time when an amenity was last updated */
   updatedAt?: Maybe<Scalars["String"]>;
 };
 
 /** A GeoJSON Point */
 export type Point = {
-  /** The type of the point */
+  /** Point type */
   type: PointType;
   /** The coordinates array with longitude as first value and latitude as second one */
   coordinates: Array<Scalars["Float"]>;
@@ -151,77 +151,79 @@ export enum PointType {
   POINT = "Point"
 }
 
-/** The conplete information about an address */
+/** Information about an address */
 export type Address = {
-  /** The continent code (2 letters) */
+  /** Continent code (2 letters) */
   continent?: Maybe<Scalars["String"]>;
-  /** The country code (2 letters) */
+  /** Country code (2 letters) */
   country?: Maybe<Scalars["String"]>;
-  /** The name of the county */
+  /** County code (2 letters) */
   county?: Maybe<Scalars["String"]>;
-  /** The name of the city */
+  /** City */
   city?: Maybe<Scalars["String"]>;
-  /** The street name */
+  /** Street name */
   street?: Maybe<Scalars["String"]>;
-  /** The number from the street */
+  /** Street number */
   number?: Maybe<Scalars["String"]>;
-  /** The postal code of the location */
+  /** Postal code of a location */
   postalCode?: Maybe<Scalars["String"]>;
-  /** The string composed from 3 word which represent the location of the address on the globe. Use like: http://w3w.co/<what3Words> */
+  /** String composed of 3 words which represent the location of an address on the globe. More details: http://w3w.co/<what3Words> */
   what3Words?: Maybe<Scalars["String"]>;
-  /** The composed address information which should be rendered */
+  /** Human-readable address of a location */
   formattedAddress?: Maybe<Array<Maybe<Scalars["String"]>>>;
 };
 
 /** The car model */
 export type Car = {
-  /** The cars unique ID */
+  /** Cars unique ID */
   id?: Maybe<Scalars["ID"]>;
-  /** This is the ID provided by the car data source as the row ID */
+  /** ID provided by the car data source as the row ID */
   externalId?: Maybe<Scalars["String"]>;
-  /** This is the car manufacturer */
+  /** Car manufacturer */
   make?: Maybe<Scalars["String"]>;
-  /** This is the car model */
+  /** Car model */
   carModel?: Maybe<Scalars["String"]>;
-  /** This is the car edition */
+  /** Car edition */
   edition?: Maybe<Scalars["String"]>;
-  /** This is the car version */
+  /** Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years */
+  chargetripEdition?: Maybe<Scalars["String"]>;
+  /** Car version */
   version?: Maybe<Scalars["String"]>;
-  /** The current production mode of the car */
+  /** Current production mode of a car */
   mode?: Maybe<CarMode>;
-  /** This is the car power in Kw */
+  /** Power of a car in Kw */
   power?: Maybe<Scalars["Float"]>;
-  /** The acceleration time from zero to 100 km/h */
+  /** Acceleration time from 0 to 100 km/h */
   acceleration?: Maybe<Scalars["Float"]>;
-  /** The maximum speed reached by the car */
+  /** Maximum car speed in km/h */
   topSpeed?: Maybe<Scalars["Float"]>;
-  /** The engine torque */
+  /** Engine torque */
   torque?: Maybe<Scalars["Float"]>;
-  /** This is the usable battery capacity in kWh */
+  /** Usable battery capacity in kWh */
   batteryUsableKwh?: Maybe<Scalars["Float"]>;
-  /** This is the full battery capacity in kWh */
+  /** Full battery capacity in kWh */
   batteryFullKwh?: Maybe<Scalars["Float"]>;
-  /** This is the battery efficiency in the city, highway and combined depending on weather conditions */
+  /** Battery efficiency in the city, highway and combined depending on weather conditions */
   batteryEfficiency?: Maybe<CarBatteryEfficiency>;
-  /** This is the range in the city, highway and combined depending on weather conditions */
+  /** Range in the city, highway and combined depending on weather conditions */
   range?: Maybe<CarRange>;
-  /** This is the list of connectors available for the car */
+  /** Available connectors for a car */
   connectors?: Maybe<Array<Maybe<CarPlug>>>;
-  /** This is the list of adapters of connectors available on the car */
+  /** List of adapters of connectors available for a car */
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
-  /** This is the number of seats */
+  /** Number of seats */
   seats?: Maybe<Scalars["Int"]>;
-  /** This is the weight in Kg */
+  /** Weight in Kg */
   weight?: Maybe<Scalars["Float"]>;
-  /** This is the height in mm */
+  /** Height in mm */
   height?: Maybe<Scalars["Int"]>;
-  /** This is the width in mm */
+  /** Width in mm */
   width?: Maybe<Scalars["Int"]>;
-  /** The extra consumption model */
+  /** Extra consumption model */
   consumption?: Maybe<CarExtraConsumption>;
-  /** This is the amount of petrol a similar petrol car would consume per 100km */
+  /** Amount of petrol a similar petrol car would consume per 100km */
   petrolConsumption?: Maybe<Scalars["Float"]>;
-  /** A list of offset data for different charging speed */
+  /** A list of offset data for different charging speeds */
   chargingOffset?: Maybe<Scalars["JSON"]>;
   /**
    * Deprecated
@@ -258,9 +260,9 @@ export type Car = {
    * @deprecated You will receive null values.
    */
   regenEfficiency?: Maybe<Scalars["Float"]>;
-  /** The list of images of the car */
+  /** Images of a car */
   images?: Maybe<Array<Maybe<CarImage>>>;
-  /** The images of the car in structured data */
+  /** Images of a car in structured data */
   imagesData?: Maybe<CarImageData>;
 };
 
@@ -268,51 +270,51 @@ export type Car = {
 export enum CarMode {
   /** Old car that is no longer manufactured */
   INDEX_ONLY = "index_only",
-  /** The car is in the manufacture process */
+  /** The car is in production and released */
   PRODUCTION = "production",
-  /** Future releases of car, a concept of the car, spec may change over time */
+  /** Future releases of a car, a concept of the car, specs may change over time */
   CONCEPT = "concept"
 }
 
-/** The car battery efficiency */
+/** Car battery efficiency */
 export type CarBatteryEfficiency = {
-  /** The average efficiency measured in kWh/100km */
+  /** Average efficiency measured in kWh/100km */
   average?: Maybe<Scalars["Float"]>;
-  /** Worst conditions: 'worst-case' based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating, measured in kWh/100km */
   worst?: Maybe<CarEstimationData>;
-  /** Best conditions: 'best-case' based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C, measured in kWh/100km */
   best?: Maybe<CarEstimationData>;
 };
 
 /** Car estimated data format */
 export type CarEstimationData = {
-  /** The estimated value on the highway or express roads */
+  /** Estimated battery efficiency on a highway or express roads, in km */
   highway?: Maybe<Scalars["Float"]>;
-  /** The estimated value on the cities road */
+  /** Estimated battery efficiency on a city road, in km */
   city?: Maybe<Scalars["Float"]>;
-  /** The estimated combined value */
+  /** Estimated battery efficiency on highway and city roads combined, in km */
   combined?: Maybe<Scalars["Float"]>;
 };
 
-/** The car range estimations */
+/** Car range estimations */
 export type CarRange = {
-  /** The WLTP estimation */
+  /** WLTP estimation */
   wltp?: Maybe<Scalars["Float"]>;
-  /** Worst conditions: 'worst-case' based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating */
   worst?: Maybe<CarEstimationData>;
-  /** Best conditions: 'best-case' based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C */
   best?: Maybe<CarEstimationData>;
 };
 
-/** This is the car plug model */
+/** Car plug model */
 export type CarPlug = {
-  /** This is the plug type, known as connector standard in OCPI */
+  /** Plug type, known as connector standard in OCPI */
   standard?: Maybe<OCPIConnectorType>;
-  /** This the maximum power the plug accepts in kW */
+  /** This is the maximum power a plug accepts in kW */
   power?: Maybe<Scalars["Float"]>;
-  /** This is the time it takes to charge from 0 to 100% or from 10 to 80% if it's a fast charger in minutes */
+  /** Time it takes to charge from 10% to 80%, with a fast charger in minutes */
   time?: Maybe<Scalars["Int"]>;
-  /** This is the charging speed in km/h */
+  /** Charging speed in km/h */
   speed?: Maybe<Scalars["Int"]>;
 };
 
@@ -374,40 +376,40 @@ export enum OCPIConnectorType {
   TESLA_S = "TESLA_S"
 }
 
-/** The extra consumption model of the car */
+/** Extra consumption model of a car */
 export type CarExtraConsumption = {
-  /** The consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the auxiliaries */
   aux?: Maybe<CarConsumption>;
-  /** The consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the battery management system */
   bms?: Maybe<CarConsumption>;
-  /** The consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the car in idle mode */
   idle?: Maybe<CarConsumption>;
 };
 
-/** The consumption of the auxiliaries */
+/** Consumption of the auxiliaries */
 export type CarConsumption = {
-  /** Worst conditions: 'worst-case' based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating */
   worst?: Maybe<Scalars["Float"]>;
-  /** Best conditions: 'best-case' based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C */
   best?: Maybe<Scalars["Float"]>;
 };
 
 export type CarImage = {
-  /** This is the image id */
+  /** Image id */
   id?: Maybe<Scalars["ID"]>;
-  /** This is the image url */
+  /** Image url */
   url?: Maybe<Scalars["String"]>;
-  /** This is the image width in pixels */
+  /** Image width in pixels */
   width?: Maybe<Scalars["Int"]>;
-  /** This is the image height in pixels */
+  /** Image height in pixels */
   height?: Maybe<Scalars["Int"]>;
-  /** This is the image type */
+  /** Image type */
   type?: Maybe<CarImageType>;
 };
 
-/** This is the available types of images which can be found on a car. Each type have specific image sizes */
+/** Available types of images which can be found for a car. Each type has specific image sizes */
 export enum CarImageType {
-  /** Images provided by the Car Datasource */
+  /** Images provided by a Car Datasource */
   PROVIDER = "provider",
   /** Full size image at 1536x864 px */
   IMAGE = "image",
@@ -419,57 +421,59 @@ export enum CarImageType {
   BRAND_THUMBNAIL = "brand_thumbnail"
 }
 
-/** The images of the car in structured data */
+/** Images of a car in structured data */
 export type CarImageData = {
-  /** Full size image of the car */
+  /** Full size image of a car */
   image?: Maybe<CarImage>;
-  /** Thumbnail of the full size image */
+  /** Thumbnail of a full size image */
   image_thumbnail?: Maybe<CarImage>;
-  /** The full size logo of the maker of the car */
+  /** Full size logo of the maker of a car */
   brand?: Maybe<CarImage>;
-  /** Thumbnail of the full size logo of the maker of the car */
+  /** Thumbnail of a full size logo of the maker of a car */
   brand_thumbnail?: Maybe<CarImage>;
 };
 
 /** Filter which can be applied to retrieve the car list action */
 export type CarListQuery = {
-  /** This is the vehicle manufacturer (maker) */
+  /** Vehicle manufacturer (maker) */
   make?: Maybe<Scalars["String"]>;
-  /** This is the car model */
+  /** Car model */
   carModel?: Maybe<Scalars["String"]>;
-  /** This is the car edition */
+  /** Car edition */
   edition?: Maybe<Scalars["String"]>;
+  /** Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years */
+  chargetripEdition?: Maybe<Scalars["String"]>;
   /** The car current production mode */
   mode?: Maybe<CarMode>;
 };
 
 /** Filter which can be applied to retrieve the operator list action */
 export type OperatorListQuery = {
-  /** The unique operator ID */
+  /** Unique operator ID */
   id?: Maybe<Scalars["ID"]>;
-  /** The external id of the operator provided by the operator data source */
+  /** External ID of an operator provided by an operator data source */
   external_id?: Maybe<Scalars["String"]>;
-  /** The exact name of the operator */
+  /** Exact name */
   name?: Maybe<Scalars["String"]>;
-  /** The exact country code */
+  /** Exact country code */
   country?: Maybe<Scalars["String"]>;
 };
 
 /** The operator data which extends OCPI BusinessDetails */
 export type Operator = {
-  /** The unique operator ID */
+  /** Unique operator ID */
   id?: Maybe<Scalars["ID"]>;
-  /** The external id of the operator provided by the operator data source */
+  /** External ID of an operator provided by the operator data source */
   external_id?: Maybe<Scalars["String"]>;
-  /** The name of the operator */
+  /** Name of an operator */
   name?: Maybe<Scalars["String"]>;
-  /** Link to the operator’s website. */
+  /** Link to an operator’s website */
   website?: Maybe<Scalars["String"]>;
-  /** Image link to the operator’s logo. */
+  /** Image link to an operator’s logo */
   logo?: Maybe<OCPIImage>;
   /** ISO-3166 alpha-2 country code */
   country?: Maybe<Scalars["String"]>;
-  /** The contact object information */
+  /** Contact information */
   contact?: Maybe<Contact>;
 };
 
@@ -478,9 +482,9 @@ export type OCPIImage = {
   url?: Maybe<Scalars["String"]>;
   /** URL from where a thumbnail of the image can be fetched through a webbrowser. */
   thumbnail?: Maybe<Scalars["String"]>;
-  /** Describes what the image is used for. */
+  /** Category of an image */
   category?: Maybe<OCPIImageCategory>;
-  /** Image type like: gif, jpeg, png, svg */
+  /** Image type: gif, jpeg, png, svg */
   type?: Maybe<Scalars["String"]>;
   /** Width of the full scale image */
   width?: Maybe<Scalars["Int"]>;
@@ -518,127 +522,127 @@ export type Contact = {
   facebook?: Maybe<Scalars["String"]>;
   /** The absolute URL of the twitter profile page */
   twitter?: Maybe<Scalars["String"]>;
-  /** Optional object where you can store custom data you need in your application and extend the current functionalities which we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
 };
 
 /** The review model */
 export type Review = {
-  /** The ID of the review */
+  /** ID of a review */
   id: Scalars["ID"];
-  /** The station for which the review was provided */
+  /** Station for which a review was provided */
   station?: Maybe<Station>;
-  /** The user who added the review, in case the review was added by an anonymous user, this will be null */
+  /** User who added a review, in case a review was added by an anonymous user, this will be null */
   user?: Maybe<ReviewUser>;
-  /** The rating of the review */
+  /** Rating of a review */
   rating?: Maybe<Scalars["Int"]>;
-  /** The message of the review */
+  /** Message of a review */
   message?: Maybe<Scalars["String"]>;
-  /** The locale of the message */
+  /** Locale of a message */
   locale?: Maybe<Scalars["String"]>;
-  /** The Car which was provided/selected by the user */
+  /** Car which was provided/selected by a user */
   ev?: Maybe<Car>;
-  /** The plug type which was provided/selected by the user */
+  /** Plug type which was provided/selected by a user */
   plugType?: Maybe<OCPIConnectorType>;
-  /** Optional object where you can store custom data you need in your application and extend the current functionalities which we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
-  /** Boolean tags for the station review */
+  /** Boolean tags for a station review */
   tags?: Maybe<ReviewTags>;
-  /** The date and time when the review was created */
+  /** Date and time when a review was created */
   createdAt?: Maybe<Scalars["String"]>;
-  /** The date and time when the review was updated */
+  /** Date and time when a review was updated */
   updatedAt?: Maybe<Scalars["String"]>;
 };
 
-/** Extending the station model to add review stats property */
+/** Extending a station model to add review stats property */
 export type Station = {
-  /** The review stats for a station */
+  /** Review of a station */
   review?: Maybe<ReviewStats>;
-  /** The station unique ID */
+  /** Unique ID of a station */
   id: Scalars["ID"];
-  /** ISO-3166 alpha-2 country code of the CPO that 'owns' this Location. */
+  /** ISO-3166 alpha-2 country code of a station */
   country_code?: Maybe<Scalars["String"]>;
-  /** CPO ID of the CPO that 'owns' this Location (following the ISO-15118 standard). */
+  /** CPO ID of a CPO that 'owns' this station (following the ISO-15118 standard) */
   party_id?: Maybe<Scalars["String"]>;
   /**
    * Defines if a Location may be published on an website or app etc.
-   * When this is set to false, only tokens identified in the field: publish_allowed_to are allowed to be shown this Location.
+   * When this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this Location.
    * When the same location has EVSEs that may be published and may not be published, two 'Locations' should be created.
    */
   publish?: Maybe<Scalars["Boolean"]>;
-  /** The name of the charging station */
+  /** Name of a charging station */
   name?: Maybe<Scalars["String"]>;
-  /** Street/block name and house number if available. */
+  /** Street/block name and house number if available */
   address?: Maybe<Scalars["String"]>;
-  /** City or town. */
+  /** City or town */
   city?: Maybe<Scalars["String"]>;
-  /** Postal code of the location, may only be omitted when the location has no postal code: in some countries charging locations at highways don’t have postal codes. */
+  /** Postal code of a location, may only be omitted when a location has no postal code: in some countries charging locations at highways don’t have postal codes. */
   postal_code?: Maybe<Scalars["String"]>;
-  /** State or province of the location, only to be used when relevant. */
+  /** State or province of a location, only to be used when relevant */
   state?: Maybe<Scalars["String"]>;
-  /** ISO 3166-1 alpha-3 code for the country of this location. */
+  /** ISO 3166-1 alpha-3 code for the country of this station */
   country?: Maybe<Scalars["String"]>;
-  /** Coordinates of the location. */
+  /** Coordinates of a location */
   coordinates?: Maybe<OCPIGeoLocation>;
-  /** Geographical location of related points relevant to the user. */
+  /** Geographical location of related points relevant to a user */
   related_locations?: Maybe<Array<Maybe<OCPIAdditionalGeoLocation>>>;
-  /** The general type of parking at the charge point location. */
+  /** Type of parking at a charge point location */
   parking_type?: Maybe<OCPIParkingType>;
-  /** List of EVSEs that belong to this Location. */
+  /** EVSEs that belong to a station */
   evses?: Maybe<Array<Maybe<EVSE>>>;
-  /** Human-readable directions on how to reach the location. */
+  /** Human-readable directions on how to reach a station */
   directions?: Maybe<Array<Maybe<OCPIDisplayText>>>;
-  /** Information of the operator. When not specified, the information retrieved from the Credentials module should be used instead. */
+  /** Information about an operator */
   operator?: Maybe<Operator>;
-  /** Information of the suboperator if available. */
+  /** Information about a suboperator if applicable */
   suboperator?: Maybe<Operator>;
-  /** Information of the owner if available. */
+  /** Information about an owner if available */
   owner?: Maybe<Operator>;
-  /** Optional list of facilities this charging location directly belongs to. */
+  /** Facilities a charging station belongs to */
   facilities?: Maybe<Array<Maybe<OCPIFacility>>>;
-  /** One of IANA tzdata’s TZ-values representing the time zone of the location. Examples: "Europe/Oslo", "Europe/Zurich". (http://www.iana.org/time-zones) */
+  /** Value from the IANA time zone database representing the time zone of a location. Examples: "Europe/Oslo", "Europe/Zurich". (http://www.iana.org/time-zones) */
   time_zone?: Maybe<Scalars["String"]>;
-  /** The times when the EVSEs at the location can be accessed for charging. */
+  /** Times when an EVSEs at a location can be accessed for charging */
   opening_times?: Maybe<OCPIHours>;
-  /** Indicates if the EVSEs are still charging outside the opening hours of the location. E.g. when the parking garage closes its barriers over night, is it allowed to charge till the next morning? Default: true */
+  /** Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers over night, is it allowed to charge till the next morning? Default: true */
   charging_when_closed?: Maybe<Scalars["Boolean"]>;
-  /** Links to images related to the location such as photos or logos. */
+  /** Links to images related to a location such as photos or logos */
   images?: Maybe<Array<Maybe<OCPIImage>>>;
-  /** Details on the energy supplied at this location. */
+  /** Details of the energy supplied at a location */
   energy_mix?: Maybe<OCPIEnergyMix>;
-  /** Timestamp when this Location or one of its EVSEs or Connectors were last updated (or created). */
+  /** Timestamp when a location, or one of its EVSEs or Connectors were last updated (or created) */
   last_updated?: Maybe<Scalars["DateTime"]>;
-  /** This is the ID provided by the station data source as the row ID */
+  /** ID provided by a station data source */
   external_id?: Maybe<Scalars["String"]>;
-  /** GeoJSON location of the charging station */
+  /** GeoJSON location of a charging station */
   location?: Maybe<Point>;
-  /** Tƒhe elevation (altitude) level */
+  /** Elevation (altitude) level */
   elevation?: Maybe<Scalars["Int"]>;
   /** Groups of EVSEs by power and type */
   chargers?: Maybe<Array<Maybe<Charger>>>;
-  /** An object with amenity types as key and number of amenities as value */
+  /** Amenties located at this location */
   amenities?: Maybe<Scalars["JSON"]>;
-  /** Enriched information about the physical address of the station */
+  /** Enriched information about the physical address of a station */
   physical_address?: Maybe<Address>;
-  /** Optional object where you can store custom data you need in your application and extend the current functionalities which we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
-  /** A flag which indicates if the station has realtime information about the availability of the connectors */
+  /** A flag which indicates if a station has realtime information about the availability of its connectors */
   realtime?: Maybe<Scalars["Boolean"]>;
-  /** A flag which indicates if the station is on a private property */
+  /** A flag which indicates if a station is on a private property */
   private?: Maybe<Scalars["Boolean"]>;
-  /** The connectors grouped by power */
+  /** Connectors grouped by power */
   power?: Maybe<Scalars["JSON"]>;
-  /** The global charging speed type for the station */
+  /** Charging speed for a station */
   speed?: Maybe<StationSpeedType>;
-  /** The global status for the station */
+  /** Global status for a station */
   status?: Maybe<ChargerStatus>;
 };
 
-/** Statistical information for the reviews of a station */
+/** Statistical information for reviews of a station */
 export type ReviewStats = {
-  /** The reviews average */
+  /** Average of all reviews */
   rating?: Maybe<Scalars["Float"]>;
-  /** 'The total number of reviews */
+  /** 'Total number of reviews */
   count?: Maybe<Scalars["Int"]>;
 };
 
@@ -683,38 +687,38 @@ export enum OCPIParkingType {
   UNDERGROUND_GARAGE = "UNDERGROUND_GARAGE"
 }
 
-/** The EVSE data which extends OCPI EVSE */
+/** EVSE data which extends OCPI EVSE */
 export type EVSE = {
   /**
-   * Uniquely identifies the EVSE within the CPOs platform (and suboperator platforms). For example a database ID or the actual "EVSE ID". This field can never be changed, modified or renamed. This is the 'technical' identification of the EVSE, not to be used as 'human readable' identification, use the field evse_id for that.
+   * Uniquely identifies an EVSE within the CPOs platform (and suboperator platforms). For example a database ID or the actual "EVSE ID". This field can never be changed, modified or renamed. This is the 'technical' identification of the EVSE, not to be used as 'human readable' identification, use the field evse_id for that.
    * This field is named uid instead of id, because id could be confused with evse_id which is an eMI3 defined field.
    */
   uid?: Maybe<Scalars["String"]>;
   /** Compliant with the following specification for EVSE ID from "eMI3 standard version V1.0" (http://emi3group.com/documents-links/) "Part 2: business objects." Optional because: if an evse_id is to be re-used in the real world, the evse_id can be removed from an EVSE object if the status is set to REMOVED. */
   evse_id?: Maybe<Scalars["String"]>;
-  /** Indicates the current status of the EVSE. */
+  /** Indicates the current status of an EVSE. */
   status?: Maybe<OCPIStatus>;
-  /** Indicates a planned status update of the EVSE. */
+  /** Indicates a planned status update of a nEVSE. */
   status_schedule?: Maybe<Array<Maybe<OCPIStatusSchedule>>>;
-  /** List of functionalities that the EVSE is capable of. */
+  /** List of functionalities that an EVSE is capable of. */
   capabilities?: Maybe<Array<Maybe<OCPICapability>>>;
-  /** List of available connectors on the EVSE. */
+  /** List of available connectors on an EVSE. */
   connectors?: Maybe<Array<Maybe<Connector>>>;
-  /** Level on which the Charge Point is located (in garage buildings) in the locally displayed numbering scheme. */
+  /** Level on which a Charge Point is located (in garage buildings) in the locally displayed numbering scheme. */
   floor_level?: Maybe<Scalars["String"]>;
-  /** Coordinates of the EVSE. */
+  /** Coordinates of a EVSE. */
   coordinates?: Maybe<OCPIGeoLocation>;
-  /** A number/string printed on the outside of the EVSE for visual identification. */
+  /** A number/string printed on the outside of an EVSE for visual identification. */
   physical_reference?: Maybe<Scalars["String"]>;
-  /** The restrictions that apply to the parking spot. */
+  /** Restrictions that apply to a parking spot. */
   parking_restrictions?: Maybe<Array<Maybe<OCPIParkingRestriction>>>;
-  /** Links to images related to the EVSE such as photos or logos. */
+  /** Links to images related to an EVSE such as photos or logos. */
   images?: Maybe<Array<Maybe<OCPIImage>>>;
   /** Timestamp when this EVSE or one of its Connectors was last updated (or created). */
   last_updated?: Maybe<Scalars["DateTime"]>;
-  /** Indicates if the parking is free or paid. */
+  /** Indicates if parking is free or paid. */
   parking_cost?: Maybe<ParkingCost>;
-  /** Optional object where you can store custom data you need in your application and extend the current functionalities which we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
 };
 
@@ -778,23 +782,23 @@ export enum OCPICapability {
   UNLOCK_CAPABLE = "UNLOCK_CAPABLE"
 }
 
-/** The connector data which extends OCPI Connector */
+/** Connector data which extends OCPI Connector */
 export type Connector = {
-  /** Identifier of the Connector within the EVSE. Two Connectors may have the same id as long as they do not belong to the same EVSE object. */
+  /** Identifier of a connector within an EVSE. Two connectors may have the same ID as long as they do not belong to the same EVSE object. */
   id?: Maybe<Scalars["String"]>;
-  /** The standard of the installed connector. */
+  /** Standard of an installed connector. */
   standard?: Maybe<OCPIConnectorType>;
-  /** The format (socket/cable) of the installed connector. */
+  /** Format (socket/cable) of an installed connector. */
   format?: Maybe<OCPIConnectorFormat>;
-  /** The type of the power of the installed connector.  */
+  /** Type of power of an installed connector.  */
   power_type?: Maybe<OCPIPowerType>;
-  /** Maximum voltage of the connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full. */
+  /** Maximum voltage of an connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full. */
   max_voltage?: Maybe<Scalars["Int"]>;
-  /** Maximum amperage of the connector, in ampere [A]. */
+  /** Maximum amperage of a connector, in ampere [A]. */
   max_amperage?: Maybe<Scalars["Int"]>;
   /**
-   * Maximum electric power that can be delivered by this connector, in watt [W]. When the maximum electric power is lower than the calculated value from voltage and amperage, this value should be set.
-   * For example: A DC Charge Point which can delivers up to 920V and up to 400A can be limited to a maximum of 150kW. Depending on the car, it may supply maximum voltage or current, but not both at the same time.
+   * Maximum electric power that can be delivered by a connector, in watt [W]. When the maximum electric power is lower than the calculated value from voltage and amperage, this value should be set.
+   * For example: A DC Charge Point which can deliver up to 920V and up to 400A can be limited to a maximum of 150kW. Depending on the car, it may supply maximum voltage or current, but not both at the same time.
    * For AC Charge Points, the amount of phases used can also have influence on the maximum power.
    */
   max_electric_power?: Maybe<Scalars["Int"]>;
@@ -802,17 +806,17 @@ export type Connector = {
   power?: Maybe<Scalars["Float"]>;
   /**
    * Identifiers of the currently valid charging tariffs. Multiple tariffs are possible, but only one of each Tariff.type can be active at the same time. Tariffs with the same type are only allowed, if they are not active at the same time: start_date_time and end_date_time period not overlapping.
-   * When preference-based smart charging is supported, one tariff for every possible ProfileType should be provided. These tell the user about the options they have at this Connector, and what the tariff is for every option.
+   * When preference-based smart charging is supported, one tariff for every possible ProfileType should be provided. This tells the user about the options they have at this Connector, and what the tariff is for every option.
    * For a "free of charge" tariff, this field should be set and point to a defined "free of charge" tariff.
    */
   tariff_ids?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** URL to the operator’s terms and conditions. */
+  /** URL to an operator’s terms and conditions. */
   terms_and_conditions?: Maybe<Scalars["String"]>;
-  /** Timestamp when this Connector was last updated (or created). */
+  /** Timestamp when a connector was last updated (or created). */
   last_updated?: Maybe<Scalars["DateTime"]>;
-  /** Optional object where you can store custom data you need in your application and extend the current functionalities which we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
-  /** The list if valid charging tariffs */
+  /** List of valid charging tariffs */
   tariff?: Maybe<Array<Maybe<OCPITariff>>>;
 };
 
@@ -844,21 +848,21 @@ export type OCPITariff = {
   currency?: Maybe<Scalars["String"]>;
   /** Defines the type of the tariff. This allows for distinction in case of given Charging Preferences. When omitted, this tariff is valid for all sessions. */
   type?: Maybe<OCPITariffType>;
-  /** List of multi-language alternative tariff info texts. */
+  /** List of alternative tariff information texts, in multiple languages. */
   tariff_alt_text?: Maybe<Array<Maybe<OCPIDisplayText>>>;
   /** URL to a web page that contains an explanation of the tariff information in human readable form. */
   tariff_alt_url?: Maybe<Scalars["String"]>;
-  /** When this field is set, a Charging Session with this tariff will at least cost this amount. This is different from a FLAT fee (Start Tariff, Transaction Fee), as a FLAT fee is a fixed amount that has to be payed for any Charging Session. A minimum price indicates that when the cost of a Charging Session is lower than this amount, the cost of the Session will be equal to this amount. (Also see note below) */
+  /** When this field is set, a Charging Session with this tariff will cost at least this amount. This is different from a FLAT fee (Start Tariff, Transaction Fee), as a FLAT fee is a fixed amount that has to be payed for any Charging Session. A minimum price indicates that when the cost of a Charging Session is lower than this amount, the cost of the Session will be equal to this amount. (Also see note below) */
   min_price?: Maybe<OCPIPrice>;
-  /** When this field is set, a Charging Session with this tariff will NOT cost more than this amount. (See note below) */
+  /** When this field is set, a Charging Session with this tariff will NOT cost more than this amount */
   max_price?: Maybe<OCPIPrice>;
   /** List of Tariff Elements. */
   elements?: Maybe<Array<Maybe<OCPITariffElement>>>;
-  /** The time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active. (See note below) */
+  /** The time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active */
   start_date_time?: Maybe<Scalars["DateTime"]>;
-  /** The time after which this tariff is no longer valid, in UTC, time_zone field if the Location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future. (See note below) */
+  /** The time after which this tariff is no longer valid, in UTC, time_zone field if the Location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future */
   end_date_time?: Maybe<Scalars["DateTime"]>;
-  /** Details on the energy supplied with this tariff. */
+  /** Details about the energy supplied with this tariff. */
   energy_mix?: Maybe<OCPIEnergyMix>;
   /** Timestamp when this Tariff was last updated (or created). */
   last_updated?: Maybe<Scalars["DateTime"]>;
@@ -963,7 +967,7 @@ export enum OCPIReservationRestrictionType {
 
 /** This type is used to specify the energy mix and environmental impact of the supplied energy at a location or in a tariff. */
 export type OCPIEnergyMix = {
-  /** True if 100% from regenerative sources. (CO2 and nuclear waste is zero) */
+  /** True if the power is 100% from regenerative sources */
   is_green_energy?: Maybe<Scalars["Boolean"]>;
   /** Key-value pairs (enum + percentage) of energy sources of this location’s tariff. */
   energy_sources?: Maybe<Array<Maybe<OCPIEnergySource>>>;
@@ -1114,31 +1118,31 @@ export type OCPIExceptionalPeriod = {
 
 /** A groupped representation of EVSEs */
 export type Charger = {
-  /** The type of the charger */
+  /** Type of charger */
   standard?: Maybe<OCPIConnectorType>;
-  /** The power of the charger */
+  /** Power of a charger */
   power?: Maybe<Scalars["Float"]>;
-  /** The price render string of the charger */
+  /** Price of a charger */
   price?: Maybe<Scalars["String"]>;
-  /** The charging speed type */
+  /** Charging speed */
   speed?: Maybe<StationSpeedType>;
-  /** The statuses of all the EVSEs grouped in the charger */
+  /** Statuses of all the EVSEs grouped in a charger */
   status?: Maybe<ChargerStatuses>;
-  /** The total number of EVSEs grouped in the charger */
+  /** Total number of EVSEs grouped in a charger */
   total?: Maybe<Scalars["Int"]>;
 };
 
 /** The station speed type */
 export enum StationSpeedType {
-  /** Slow charging (bellow 40 kWh) */
+  /** Slow charging (below 43 kWh) */
   SLOW = "slow",
-  /** Fast charging stations (above 40 kWh and bellow 150 kWh) */
+  /** Fast charging stations (above 43 kWh and below 150 kWh) */
   FAST = "fast",
   /** Ultra fast charging stations (above 150 kWh) */
   TURBO = "turbo"
 }
 
-/** The groupping by status of the chargers */
+/** Groupping by status of the chargers */
 export type ChargerStatuses = {
   /** How many are free */
   free?: Maybe<Scalars["Int"]>;
@@ -1163,11 +1167,11 @@ export enum ChargerStatus {
 
 /** Special format for the user of a review */
 export type ReviewUser = {
-  /** The user ID */
+  /** User ID */
   id: Scalars["ID"];
-  /** The users first name */
+  /** First name */
   firstName?: Maybe<Scalars["String"]>;
-  /** The users last name */
+  /** Last name */
   lastName?: Maybe<Scalars["String"]>;
 };
 
@@ -1180,76 +1184,76 @@ export type ReviewTags = {
 };
 
 export type Route = {
-  /** The recommended route */
+  /** Recommended route */
   route?: Maybe<RouteAlternative>;
-  /** A list of available alternatives */
+  /** Available alternatives */
   alternatives?: Maybe<Array<Maybe<RouteAlternative>>>;
-  /** The EV specific data for a route request */
+  /** EV specific data for a route request */
   ev?: Maybe<RequestEv>;
-  /** The user who requested the route */
+  /** User who requested the route */
   user?: Maybe<RequestUser>;
-  /** The route request data */
+  /** Route request data */
   routeRequest?: Maybe<RequestRoute>;
-  /** The route status */
+  /** Route status */
   status?: Maybe<RouteStatus>;
 };
 
 export type RouteAlternative = {
-  /** The ID of the route alternative */
+  /** ID of a route alternative */
   id?: Maybe<Scalars["ID"]>;
-  /** The type of the alternative */
+  /** Type of alternative route */
   type?: Maybe<RouteAlternativeType>;
-  /** The number of charges along the route. Usualy {legs} - 1 */
+  /** Number of charges along a route */
   charges?: Maybe<Scalars["Int"]>;
-  /** The number of available charges along the route. */
+  /** Number of available charges along a route. */
   chargesAvailable?: Maybe<Scalars["Int"]>;
-  /** The number of occupied charges along the route. */
+  /** Number of occupied charges along a route. */
   chargesOccupied?: Maybe<Scalars["Int"]>;
-  /** The number of unknown charges along the route. */
+  /** Number of unknown charges along a route. */
   chargesUnknown?: Maybe<Scalars["Int"]>;
-  /** The number of out of order charges along the route. */
+  /** Number of out of order charges along a route. */
   chargesOutOfOrder?: Maybe<Scalars["Int"]>;
-  /** The total distance of the route in meters. */
+  /** Total distance of a route in meters. */
   distance?: Maybe<Scalars["Int"]>;
-  /** The total time of the route, including charge time, in seconds */
+  /** Total duration of a route, including charge time, in seconds */
   duration?: Maybe<Scalars["Int"]>;
-  /** The total energy used for the route in kWh */
+  /** Total energy used for a route in kWh */
   consumption?: Maybe<Scalars["Float"]>;
-  /** The total time required to charge of the entire route, in seconds */
+  /** Total time required to charge for an entire route, in seconds */
   chargeTime?: Maybe<Scalars["Float"]>;
-  /** The amenity ranking for the alternative */
+  /** Amenity ranking for an alternative */
   amenityRanking?: Maybe<Scalars["Int"]>;
-  /** The range, in meters, available at the beginning of the trip */
+  /** Range, in meters, available at the beginning of a trip */
   rangeStart?: Maybe<Scalars["Int"]>;
-  /** The total energy in the battery at the beginning of the trip, in kWh */
+  /** Total energy in a battery at the beginning of a trip, in kWh */
   rangeStartKwh?: Maybe<Scalars["Float"]>;
-  /** The remaining range, in meters, at the end of the trip */
+  /** Remaining range, in meters, at the end of a trip */
   rangeEnd?: Maybe<Scalars["Int"]>;
-  /** The remaining range, energy in kWh, at the end of the trip. */
+  /** Remaining range, energy in kWh, at the end of a trip. */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
-  /** Text information about the route direction */
+  /** Text information about a route direction */
   via?: Maybe<Scalars["String"]>;
-  /** The polyline encoded route */
+  /** Polyline encoded route */
   polyline?: Maybe<Scalars["String"]>;
-  /** A list of elevation values. Each elevationPlot has a hundred points, independent of the length of the route */
+  /** Elevation values. Each elevationPlot has a hundred points, independent of the length of a route */
   elevationPlot?: Maybe<Array<Maybe<Scalars["Float"]>>>;
-  /** The total number of meters which are going up on the route */
+  /** Total number of meters which are going up on a route */
   elevationUp?: Maybe<Scalars["Float"]>;
-  /** The total number of meters which are going down on the route */
+  /** Total number of meters which are going down on a route */
   elevationDown?: Maybe<Scalars["Float"]>;
-  /** The highest value from the elevation array */
+  /** Highest value from the elevation array */
   elevationMax?: Maybe<Scalars["Float"]>;
   /** Money and CO2 saving information */
   saving?: Maybe<RouteAlternativeSaving>;
-  /** The list of legs of the route */
+  /** Legs of the route */
   legs?: Maybe<Array<Maybe<RouteLeg>>>;
-  /** The list of alternative stations along the route within specified radius in meters only if it was provided at newRoute request */
+  /** Alternative stations along a route within specified radius in meters. Only if it was provided at newRoute mutation */
   stationsAlongRoute?: Maybe<Array<Maybe<RouteStationsAlong>>>;
 };
 
-/** The types of the route alternative */
+/** Types of an alternative route */
 export enum RouteAlternativeType {
-  /** The fastest route between origin and destination */
+  /** Fastest route between origin and destination */
   FASTEST = "fastest",
   /** Best matching amenities along the route with the requested list */
   BESTMATCHING = "bestMatching",
@@ -1258,74 +1262,74 @@ export enum RouteAlternativeType {
 }
 
 export type RouteAlternativeSaving = {
-  /** The total amount of CO2, in grams, which were used with a petrol vehicle */
+  /** Total amount of CO2, in grams, which would be used with a petrol vehicle */
   co2?: Maybe<Scalars["String"]>;
-  /** The money saved by the user driving this route with the electric vehicle */
+  /** Money saved by a user driving this route with the electric vehicle */
   money?: Maybe<Scalars["String"]>;
-  /** The money currency */
+  /** Currency */
   currency?: Maybe<Scalars["String"]>;
-  /** The avarage gas price with which we made the calculation */
+  /** Average gas price with which the calculation was made */
   averageGasPrice?: Maybe<Scalars["String"]>;
-  /** The avarage energy price with which we made the calculation */
+  /** Average energy price with which the calculation was made */
   averageEnergyPrice?: Maybe<Scalars["String"]>;
 };
 
 export type RouteLeg = {
-  /** The ID of the leg */
+  /** ID of a leg */
   id?: Maybe<Scalars["ID"]>;
-  /** The distance until the end of the leg is reached from the start, in meters */
+  /** Distance from the start to the end of a leg, in meters */
   distance?: Maybe<Scalars["Int"]>;
-  /** The total drive time from the start to the end of the leg, in seconds */
+  /** Total drive time from the start to the end of a leg, in seconds */
   duration?: Maybe<Scalars["Int"]>;
-  /** The total energy used of the leg in kWh */
+  /** Total energy used in a leg in kWh */
   consumption?: Maybe<Scalars["Float"]>;
-  /** The range, in meters, available at the beginning of the leg */
+  /** Range, in meters, available at the beginning of a leg */
   rangeStart?: Maybe<Scalars["Int"]>;
-  /** The total energy in the battery at the beginning of the leg, in kWh */
+  /** Total energy in a battery at the beginning of a leg, in kWh */
   rangeStartKwh?: Maybe<Scalars["Float"]>;
-  /** The range, in meters, available at the end of the leg */
+  /** Range, in meters, available at the end of a leg */
   rangeEnd?: Maybe<Scalars["Int"]>;
-  /** The total energy left in the battery at the end of the leg, in kWh */
+  /** Total energy left in a battery at the end of a leg, in kWh */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
-  /** The origin point location */
+  /** Origin point location */
   origin?: Maybe<FeaturePoint>;
-  /** The destination point location */
+  /** Destination point location */
   destination?: Maybe<FeaturePoint>;
-  /** The type of the leg */
+  /** Type of a leg */
   type?: Maybe<LegType>;
-  /** The name of the destination. This is the station name in case the user should charge or the name of the location in case was provided */
+  /** Name of a destination. This is the station name in case a user should charge or the name of the location in case this was provided */
   name?: Maybe<Scalars["String"]>;
-  /** The ID of the station, if the user should charge */
+  /** ID of a station */
   stationId?: Maybe<Scalars["String"]>;
-  /** The ID of the operator, if the user should charge */
+  /** ID of the operator */
   operatorId?: Maybe<Scalars["String"]>;
-  /** The total time required to charge the battery until 80%, in seconds, if the user should charge */
+  /** Total time required to charge a battery until 80%, in seconds */
   chargeTime?: Maybe<Scalars["Int"]>;
-  /** The recommended EVSE where to charge, if the user should charge */
+  /** Recommended EVSE where to charge */
   evse?: Maybe<EVSE>;
-  /** The recommended connector for charging */
+  /** Recommended connector for charging */
   connector?: Maybe<Connector>;
-  /** The number of available plugs at the station, if the user should charge */
+  /** Number of available plugs at a station */
   plugsAvailable?: Maybe<Scalars["Int"]>;
-  /** The number of occupied plug at the charge station, if the user should charge */
+  /** Number of occupied plugs at a charge station */
   plugsOccupied?: Maybe<Scalars["Int"]>;
-  /** The number of unknown plug at the charge station, if the user should charge */
+  /** Number of unknown plugs at a charge station */
   plugsUnknown?: Maybe<Scalars["Int"]>;
-  /** The number of out of order plug at the charge station, if the user should charge */
+  /** Number of out of order plugs at a charge station */
   plugsOutOfOrder?: Maybe<Scalars["Int"]>;
-  /** The total number of plugs at the station, if the user should charge */
+  /** Total number of plugs at a charge station */
   plugsCount?: Maybe<Scalars["Int"]>;
 };
 
 /** A GeoJSON Feature<Point> */
 export type FeaturePoint = {
-  /** The feature ID */
+  /** Feature ID */
   id?: Maybe<Scalars["String"]>;
-  /** The type of the feature */
+  /** Feature type */
   type: FeatureType;
-  /** The geometry of the feature */
+  /** Geometry of the feature */
   geometry: Point;
-  /** Optional object where you can store custom data you need in your application and extend the current functionalities which we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
 };
 
@@ -1344,64 +1348,64 @@ export enum LegType {
   VIA = "via",
   /** This leg ends at the destination, and is the last leg of the route */
   FINAL = "final",
-  /** This leg ends at the destination which is a charging station, and is the last leg of the route. */
+  /** This leg ends at the destination which is a charging station, and is the last leg of the route */
   STATIONFINAL = "stationFinal"
 }
 
 export type RouteStationsAlong = {
   /** The ID of station */
   id?: Maybe<Scalars["String"]>;
-  /** The geojson location of station */
+  /** Geojson location of a station */
   location?: Maybe<Point>;
-  /** The speed of the station */
+  /** Speed of a station. A station along a route can be either fast or turbo */
   speed?: Maybe<StationSpeedType>;
-  /** The status of the station */
+  /** Status of a station */
   status?: Maybe<ChargerStatus>;
-  /** If the station uses preferred opperator */
+  /** The station uses a preferred operator */
   preferredOperator?: Maybe<Scalars["Boolean"]>;
-  /** The distance in meters of the station from the route path */
+  /** Distance in meters between station and route path */
   distance?: Maybe<Scalars["Int"]>;
 };
 
-/** The EV specific data for a route request */
+/** EV specific data for a route request */
 export type RequestEv = {
-  /** This is internal ID of the Car */
+  /** Internal ID of a Car */
   id?: Maybe<Scalars["ID"]>;
-  /** The EV battery specific data */
+  /** EV battery specific data */
   battery?: Maybe<RequestEvBattery>;
-  /** The supported plugs of the EV */
+  /** Supported plugs for an EV */
   plugs?: Maybe<Array<Maybe<RequestEvPlug>>>;
-  /** The supported adapters of plugs of the EV */
+  /** Supported adapters of plugs for an EV */
   adapters?: Maybe<Array<Maybe<RequestEvPlug>>>;
-  /** The minimum desired power of chargers */
+  /** Minimum desired power of chargers */
   minPower?: Maybe<Scalars["Int"]>;
-  /** Flag which indicates if the climate is on. The default is true */
+  /** Climate is on. The default is true */
   climate?: Maybe<Scalars["Boolean"]>;
   /** The number of passengers on board */
   numberOfPassengers?: Maybe<Scalars["Int"]>;
-  /** The consumption specific to the EV or inputed by the request */
+  /** Consumption specific to an EV or inputed by a request */
   consumption?: Maybe<RequestEvConsumption>;
 };
 
 export type RequestEvBattery = {
   /** The usable capacity of the battery used to compute the route. If this in not filled in,  value as the car batteryUsableKwh. */
   capacity?: Maybe<RequestEvBatteryValue>;
-  /** The usable capacity of the battery, in kWh. This value is computed from the provided capacity value. */
+  /** Usable capacity of a battery, in kWh. This value is computed from the provided capacity value. */
   capacityKwh?: Maybe<Scalars["Float"]>;
-  /** The current amount of energy in the battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh. */
+  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and it will be equal to the batteryUsableKwh. */
   stateOfCharge?: Maybe<RequestEvBatteryValue>;
-  /** The current amount of energy in the battery, in kWh. This value is computed from the provided state of charge. */
+  /** Current amount of energy in a battery, in kWh. This value is computed from the provided state of charge. */
   stateOfChargeKwh?: Maybe<Scalars["Float"]>;
-  /** The desired final amount of energy in the battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh. */
+  /** Desired final amount of energy in a battery. If this is not filled in, it will be set to 20% of the car batteryUsableKwh. */
   finalStateOfCharge?: Maybe<RequestEvBatteryValue>;
-  /** The desired final amount of energy in the battery, in kWh. This value is computed from the provided final state of charge. */
+  /** Desired final amount of energy in a battery, in kWh. This value is computed from the provided final state of charge. */
   finalStateOfChargeKwh?: Maybe<Scalars["Float"]>;
 };
 
 export type RequestEvBatteryValue = {
-  /** The value of the desired final amount of energy in the battery */
+  /** Value of the desired final amount of energy in a battery */
   value: Scalars["Float"];
-  /** The type of the desired final amount of energy in the battery */
+  /** Type of the desired final amount of energy in a battery */
   type: BatteryInputType;
 };
 
@@ -1413,14 +1417,14 @@ export enum BatteryInputType {
 }
 
 export type RequestEvPlug = {
-  /** The type of the plug */
+  /** Type of the plug */
   standard?: Maybe<OCPIConnectorType>;
-  /** The maximum charging speed for this plug */
+  /** Maximum charging speed for a plug */
   chargingPower?: Maybe<Scalars["Float"]>;
 };
 
 export type RequestEvConsumption = {
-  /** The consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the auxiliaries */
   aux?: Maybe<CarConsumption>;
   /** The consumption, in kWh, of the battery management system */
   bms?: Maybe<CarConsumption>;
@@ -1429,30 +1433,30 @@ export type RequestEvConsumption = {
 };
 
 export type RequestUser = {
-  /** The ID of the user */
+  /** ID of the user */
   id?: Maybe<Scalars["ID"]>;
 };
 
 export type RequestRoute = {
-  /** A list of desired amenities on stations */
+  /** Desired amenities near the stations, within a 1 km radius */
   amenities?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** A list of preferred/required operators */
+  /** Requested operators */
   operatorIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** Flag which indicates if the operators are required or preferred */
+  /** Preferred operators are required. In case there are no preferred operators the route cannot be calculated */
   operatorRequired?: Maybe<Scalars["Boolean"]>;
-  /** Flag which indicates if the preferred operators should be loaded */
+  /** Encourage the route to use preferred operators. In case there are no preferred operators the route can still be calculated */
   operatorPrefer?: Maybe<Scalars["Boolean"]>;
-  /** Optional season */
+  /** Season */
   season?: Maybe<RouteSeason>;
-  /** Percentage for the minimum limit of the battery capacity before a recharge. Value between 0 and 60 */
+  /** Percentage for the minimum limit of the battery capacity before a recharge. The value should be between 0 and 60, with a default of 10% */
   safeRiskMargin?: Maybe<Scalars["Int"]>;
-  /** The origin location for the route */
+  /** Origin of a route */
   origin?: Maybe<FeaturePoint>;
-  /** The destination location for the route */
+  /** Destination of a route */
   destination?: Maybe<FeaturePoint>;
-  /** An optional list of locations where we should stop */
+  /** Locations where a route will stop */
   via?: Maybe<Array<Maybe<FeaturePoint>>>;
-  /** Radius in meters for alternative stations along the route (min 500 - max 5000) */
+  /** Radius in meters for alternative stations along a route (min 500 - max 5000) */
   stationsAlongRouteRadius?: Maybe<Scalars["Int"]>;
 };
 
@@ -1466,9 +1470,9 @@ export enum RouteSeason {
   CURRENT = "current"
 }
 
-/** The statuses of the route */
+/** The status of a route. The status can be pending, processing, done, not_found or error */
 export enum RouteStatus {
-  /** The route is queued and pending processing. Temporary status */
+  /** Route is queued and pending processing. Temporary status */
   PENDING = "pending",
   /** We are computing the route for your request. Temporary status */
   PROCESSING = "processing",
@@ -1482,28 +1486,28 @@ export enum RouteStatus {
 
 /** A GeoJSON Point input */
 export type PointInput = {
-  /** The type of the point */
+  /** Point type */
   type: PointType;
-  /** The coordinates array with longitude as first value and latitude as second one */
+  /** Coordinates [longitude, latitude] */
   coordinates: Array<Scalars["Float"]>;
 };
 
 export type RoutePath = {
-  /** The Geo JSON location of the route path segment */
+  /** GeoJSON location of a route path segment */
   location?: Maybe<Point>;
-  /** The elevation (altitude) in meters */
+  /** Elevation (altitude) in meters */
   elevation?: Maybe<Scalars["Int"]>;
-  /** The average speed, in km/h, for this route path segment */
-  avSpeed?: Maybe<Scalars["Float"]>;
-  /** The recommended speed of this path segment to optimise the consumption */
-  recommandedSpeed?: Maybe<Scalars["Float"]>;
-  /** The consumption, in kWh, of this route path segment */
+  /** Average speed, in km/h, for this route path segment */
+  averageSpeed?: Maybe<Scalars["Float"]>;
+  /** Recommended speed, in km/h for this route path segment to optimise the consumption */
+  recommendedSpeed?: Maybe<Scalars["Float"]>;
+  /** Consumption, in kWh, of a route path segment */
   consumption?: Maybe<Scalars["Float"]>;
-  /** The consumption, in kWh per km, of this route path segment */
+  /** Consumption, in kWh per km, of a route path segment */
   consumptionPerKm?: Maybe<Scalars["Float"]>;
-  /** The distance, in meters, of this route path segment */
+  /** Distance, in meters, of a route path segment */
   distance?: Maybe<Scalars["Float"]>;
-  /** The duration, in seconds, of this route path segment */
+  /** Duration, in seconds, of a route path segment */
   duration?: Maybe<Scalars["Float"]>;
 };
 
@@ -1551,11 +1555,11 @@ export type AmenityStats = {
 
 /** Filter which can be applied to retrieve the station list action */
 export type StationListQuery = {
-  /** The ID of the station */
+  /** ID of the station */
   id?: Maybe<Scalars["ID"]>;
-  /** The external ID of the station provided by the station data source */
+  /** External ID of the station provided by the station data source */
   external_id?: Maybe<Scalars["String"]>;
-  /** The exact name */
+  /** Exact name */
   name?: Maybe<Scalars["String"]>;
 };
 
@@ -1563,18 +1567,18 @@ export type StationListQuery = {
 export type StationAroundQuery = {
   /** The GeoJSON Point of the center of the around me circle */
   location: PointInput;
-  /** The distance, in meters, to search around */
+  /** Distance, in meters, to search around */
   distance: Scalars["Int"];
-  /** A list of power in kWh */
+  /** Power in kWh */
   power?: Maybe<Array<Maybe<Scalars["Float"]>>>;
-  /** A list of amenity keys. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park */
+  /** Amentities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park */
   amenities?: Maybe<Array<Maybe<Scalars["String"]>>>;
 };
 
 export type Mutation = {
   /** Add a new review */
   addReview: Review;
-  /** Create a new route from route input and get the ID */
+  /** Create a new route from the route input and its ID */
   newRoute?: Maybe<Scalars["ID"]>;
 };
 
@@ -1586,57 +1590,57 @@ export type MutationnewRouteArgs = {
   input?: Maybe<RequestInput>;
 };
 
-/** The form input for add a new review */
+/** Form input to add a new review */
 export type ReviewAdd = {
-  /** The station ID for which the review is provided */
+  /** Station ID for which a review is provided */
   stationId: Scalars["String"];
-  /** The rating of the review */
+  /** Rating of a review */
   rating: Scalars["Int"];
-  /** The message of the review */
+  /** Review message */
   message?: Maybe<Scalars["String"]>;
-  /** The locale of the message */
+  /** Locale of a message */
   locale?: Maybe<Scalars["String"]>;
-  /** The ID of the Car which was provided/selected by the user */
+  /** ID of the Car which was provided/selected by a user */
   ev?: Maybe<Scalars["String"]>;
-  /** The plug type which was provided/selected by the user */
+  /** Plug type which was provided/selected by a user */
   plugType?: Maybe<OCPIConnectorType>;
-  /** Optional object where you can store custom data you need in your application and extend the current functionalities which we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
-  /** Boolean tags for the station review */
+  /** Boolean tags for a station review */
   tags?: Maybe<ReviewTagsInput>;
 };
 
-/** Boolean tags for the station review */
+/** Boolean tags for a station review */
 export type ReviewTagsInput = {
-  /** Flag which indicates if the station was working when the review was added */
+  /** Flag which indicates if a station was working when the review was added */
   working?: Maybe<Scalars["Boolean"]>;
-  /** Flag which indicates if the user recommended the station when the review was added */
+  /** Flag which indicates if a user recommended a station when the review was added */
   recommended?: Maybe<Scalars["Boolean"]>;
 };
 
 export type RequestInput = {
-  /** The EV specific data for a route request */
+  /** EV specific data for a route request */
   ev: RequestEvInput;
-  /** The route request data */
+  /** Route request data */
   routeRequest: RequestRouteInput;
 };
 
 export type RequestEvInput = {
-  /** This is internal ID of the Car */
+  /** Iternal ID of a Car */
   id: Scalars["ID"];
   /** The EV battery specific data */
   battery?: Maybe<RequestEvBatteryInput>;
-  /** The supported plugs of the EV */
+  /** Supported plugs of an EV */
   plugs?: Maybe<Array<Maybe<RequestEvPlugInput>>>;
-  /** The supported adapters of plugs of the EV */
+  /** Supported adapters of plugs of an EV */
   adapters?: Maybe<Array<Maybe<RequestEvPlugInput>>>;
-  /** The minimum desired power of chargers */
+  /** Minimum desired power of chargers */
   minPower?: Maybe<Scalars["Int"]>;
   /** Flag which indicates if the climate is on. The default is true */
   climate?: Maybe<Scalars["Boolean"]>;
-  /** The number of passengers on board */
+  /** Number of passengers on board */
   numberOfPassengers?: Maybe<Scalars["Int"]>;
-  /** The consumption specific to the EV or inputed by the request */
+  /** Consumption specific to the EV or inputed by the request */
   consumption?: Maybe<RequestEvConsumptionInput>;
   /** Deprecated */
   auxConsumption?: Maybe<Scalars["Float"]>;
@@ -1645,65 +1649,65 @@ export type RequestEvInput = {
 };
 
 export type RequestEvBatteryInput = {
-  /** The usable capacity of the battery used to compute the route. If this in not filled in, we assume it is the same value as the car batteryUsableKwh. */
+  /** Usable capacity of a battery used to compute a route. If this in not filled in, we assume it is the same value as the car batteryUsableKwh. */
   capacity?: Maybe<RequestEvBatteryInputValue>;
-  /** The current amount of energy in the battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh. */
+  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh. */
   stateOfCharge?: Maybe<RequestEvBatteryInputValue>;
-  /** The desired final amount of energy in the battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh. */
+  /** Desired final amount of energy in a battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh. */
   finalStateOfCharge?: Maybe<RequestEvBatteryInputValue>;
 };
 
 export type RequestEvBatteryInputValue = {
-  /** The value of the desired final amount of energy in the battery */
+  /** Value of a desired final amount of energy in a battery */
   value: Scalars["Float"];
-  /** The type of the desired final amount of energy in the battery */
+  /** Type of a desired final amount of energy in a battery */
   type: BatteryInputType;
 };
 
 export type RequestEvPlugInput = {
-  /** The type of the plug */
+  /** Type of a plug */
   standard: OCPIConnectorType;
-  /** The maximum charging speed for this plug */
+  /** Maximum charging speed for this plug */
   chargingPower: Scalars["Float"];
 };
 
 export type RequestEvConsumptionInput = {
-  /** The consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the auxiliaries */
   aux?: Maybe<CarConsumptionInput>;
-  /** The consumption, in kWh, of the battery management system */
+  /** Cnsumption, in kWh, of the battery management system */
   bms?: Maybe<CarConsumptionInput>;
-  /** The consumption, in kWh, of the car in idle mode */
+  /** Consumption, in kWh, of the car in idle mode */
   idle?: Maybe<CarConsumptionInput>;
 };
 
 /** The consumption of the car */
 export type CarConsumptionInput = {
-  /** Worst conditions: 'worst-case' based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating */
   worst?: Maybe<Scalars["Float"]>;
-  /** Best conditions: 'best-case' based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C */
   best?: Maybe<Scalars["Float"]>;
 };
 
 export type RequestRouteInput = {
-  /** A list of desired amenities on stations */
+  /** A list of desired amenities near the stations, with a 1 km radius */
   amenities?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** A list of preferred/required operators */
+  /** A list of requested operators */
   operatorIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** Flag which indicates if the operators are required or preferred */
+  /** Flag which indicates if the operators are required */
   operatorRequired?: Maybe<Scalars["Boolean"]>;
   /** Flag which indicates if the preferred operators should be loaded */
   operatorPrefer?: Maybe<Scalars["Boolean"]>;
-  /** Optional season select */
+  /** Optional flag to specify the season */
   season?: Maybe<RouteSeason>;
-  /** Percentage for the minimum limit of the battery capacity before a recharge. Value between 0 and 60. Default is 10% */
+  /** Percentage for a minimum limit of a battery capacity before a recharge. The value should be between 0 and 60, with a default of 10% */
   safeRiskMargin?: Maybe<Scalars["Int"]>;
-  /** The origin location for the route */
+  /** Origin of a route */
   origin: FeaturePointInput;
-  /** The destination location for the route */
+  /** Destination of a route */
   destination: FeaturePointInput;
   /** An optional list of locations where we should stop */
   via?: Maybe<Array<Maybe<FeaturePointInput>>>;
-  /** An optional list of alternative stations along the route within specified radius in meters (min 500, max 5000) also could be null */
+  /** Alternative stations along a route within a specified radius in meters (min 500, max 5000) */
   stationsAlongRouteRadius?: Maybe<Scalars["Int"]>;
 };
 
@@ -1711,11 +1715,11 @@ export type RequestRouteInput = {
 export type FeaturePointInput = {
   /** The feature ID */
   id?: Maybe<Scalars["String"]>;
-  /** The type of the feature */
+  /** Feature type */
   type: FeatureType;
-  /** The geometry of the feature */
+  /** Geometry of the feature */
   geometry: PointInput;
-  /** Optional object where you can store custom data you need in your application and extend the current functionalities which we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
 };
 
@@ -1772,16 +1776,16 @@ export enum CarImageTypeUploadable {
   BRAND = "brand"
 }
 
-/** The form input for edit an existing review */
+/** Form input for edit an existing review */
 export type ReviewEdit = {
-  /** The rating of the review */
+  /** Rating of a review */
   rating: Scalars["Int"];
-  /** The message of the review */
+  /** Review message */
   message?: Maybe<Scalars["String"]>;
-  /** The locale of the message */
+  /** Locale of a message */
   locale?: Maybe<Scalars["String"]>;
-  /** Optional object where you can store custom data you need in your application and extend the current functionalities which we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
-  /** Boolean tags for the station review */
+  /** Boolean tags for a station review */
   tags?: Maybe<ReviewTagsInput>;
 };
