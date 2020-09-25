@@ -1,4 +1,11 @@
-# 1.0.0 (2020-09-18)
+# 1.5.1 (2020-09-25)
+
+
+### Features
+
+* Version 1.5.0 did not contain the type declaration and did not work properly and is now deprecated.
+
+# 1.5.0 (2020-09-21)
 
 
 ### Features
