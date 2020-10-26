@@ -81,6 +81,29 @@
             "deprecationReason": null
           },
           {
+            "name": "carPremium",
+            "description": "Get premium information about a car by its ID",
+            "args": [
+              {
+                "name": "id",
+                "description": "The car ID",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremium",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "carList",
             "description": "Get a full list of cars",
             "args": [
@@ -120,7 +143,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Car",
+                "name": "CarList",
                 "ofType": null
               }
             },
@@ -1009,60 +1032,36 @@
             "deprecationReason": null
           },
           {
+            "name": "chargetripRange",
+            "description": "Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ChargetripRange",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fastChargingSupport",
+            "description": "EV's that support fast charging have a minimum charging speed of 43 Kwh. EV's without support for fast charging used in a newRoute mutation will return an error",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "mode",
             "description": "Current production mode of a car",
             "args": [],
             "type": {
               "kind": "ENUM",
               "name": "CarMode",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "power",
-            "description": "Power of a car in Kw",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "acceleration",
-            "description": "Acceleration time from 0 to 100 km/h",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "topSpeed",
-            "description": "Maximum car speed in km/h",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "torque",
-            "description": "Engine torque",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -1161,6 +1160,58 @@
             "deprecationReason": null
           },
           {
+            "name": "consumption",
+            "description": "Extra consumption model",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarExtraConsumption",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "petrolConsumption",
+            "description": "Amount of petrol a similar petrol car would consume per 100km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "images",
+            "description": "Images of a car",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarImage",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "imagesData",
+            "description": "Images of a car in structured data",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarImageData",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "weight",
             "description": "Weight in Kg",
             "args": [],
@@ -1197,20 +1248,44 @@
             "deprecationReason": null
           },
           {
-            "name": "consumption",
-            "description": "Extra consumption model",
+            "name": "power",
+            "description": "Power of a car in Kw",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "CarExtraConsumption",
+              "kind": "SCALAR",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "petrolConsumption",
-            "description": "Amount of petrol a similar petrol car would consume per 100km",
+            "name": "acceleration",
+            "description": "Acceleration time from 0 to 100 km/h",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "topSpeed",
+            "description": "Maximum car speed in km/h",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "torque",
+            "description": "Engine torque",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1222,19 +1297,19 @@
           },
           {
             "name": "chargingOffset",
-            "description": "A list of offset data for different charging speeds",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
           },
           {
             "name": "auxConsumption",
-            "description": "Deprecated",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1246,7 +1321,7 @@
           },
           {
             "name": "bmsConsumption",
-            "description": "Deprecated",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1258,7 +1333,7 @@
           },
           {
             "name": "dragCoefficient",
-            "description": "Deprecated",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1270,7 +1345,7 @@
           },
           {
             "name": "tirePressure",
-            "description": "Deprecated",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1282,7 +1357,7 @@
           },
           {
             "name": "motorEfficiency",
-            "description": "Deprecated",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1294,7 +1369,7 @@
           },
           {
             "name": "drivelineEfficiency",
-            "description": "Deprecated",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1306,7 +1381,7 @@
           },
           {
             "name": "regenEfficiency",
-            "description": "Deprecated",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1315,30 +1390,47 @@
             },
             "isDeprecated": true,
             "deprecationReason": "You will receive null values."
-          },
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "description": "The `Boolean` scalar type represents `true` or `false`.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ChargetripRange",
+        "description": "Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data",
+        "fields": [
           {
-            "name": "images",
-            "description": "Images of a car",
+            "name": "worst",
+            "description": "Worst conditions are based on -10°C and use of heating",
             "args": [],
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "CarImage",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "imagesData",
-            "description": "Images of a car in structured data",
+            "name": "best",
+            "description": "Best conditions are based on 23°C and no use of A/C",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "CarImageData",
+              "kind": "SCALAR",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -1835,16 +1927,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "JSON",
-        "description": "Any JSON object or array",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "CarImage",
         "description": null,
@@ -2016,6 +2098,387 @@
         "possibleTypes": null
       },
       {
+        "kind": "SCALAR",
+        "name": "JSON",
+        "description": "Any JSON object or array",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarPremium",
+        "description": "The car premium model",
+        "fields": [
+          {
+            "name": "id",
+            "description": "Cars unique ID",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "externalId",
+            "description": "ID provided by the car data source as the row ID",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "make",
+            "description": "Car manufacturer",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "carModel",
+            "description": "Car model",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "edition",
+            "description": "Car edition",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "chargetripEdition",
+            "description": "Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "version",
+            "description": "Car version",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "chargetripRange",
+            "description": "Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ChargetripRange",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fastChargingSupport",
+            "description": "EV's that support fast charging have a minimum charging speed of 43 Kwh. EV's without support for fast charging used in a newRoute mutation will return an error",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mode",
+            "description": "Current production mode of a car",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "CarMode",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "power",
+            "description": "Power of a car in Kw",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "acceleration",
+            "description": "Acceleration time from 0 to 100 km/h",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "topSpeed",
+            "description": "Maximum car speed in km/h",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "torque",
+            "description": "Engine torque",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batteryUsableKwh",
+            "description": "Usable battery capacity in kWh",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batteryFullKwh",
+            "description": "Full battery capacity in kWh",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batteryEfficiency",
+            "description": "Battery efficiency in the city, highway and combined depending on weather conditions",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarBatteryEfficiency",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "range",
+            "description": "Range in the city, highway and combined depending on weather conditions",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarRange",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectors",
+            "description": "Available connectors for a car",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarPlug",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "adapters",
+            "description": "List of adapters of connectors available for a car",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarPlug",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "seats",
+            "description": "Number of seats",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "weight",
+            "description": "Weight in Kg",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "height",
+            "description": "Height in mm",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "width",
+            "description": "Width in mm",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "consumption",
+            "description": "Extra consumption model",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarExtraConsumption",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "petrolConsumption",
+            "description": "Amount of petrol a similar petrol car would consume per 100km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "chargingOffset",
+            "description": "A list of offset data for different charging speeds",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "images",
+            "description": "Images of a car",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarImage",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "imagesData",
+            "description": "Images of a car in structured data",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarImageData",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "CarListQuery",
         "description": "Filter which can be applied to retrieve the car list action",
@@ -2073,6 +2536,461 @@
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarList",
+        "description": "The car list model",
+        "fields": [
+          {
+            "name": "id",
+            "description": "Cars unique ID",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "externalId",
+            "description": "ID provided by the car data source as the row ID",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "make",
+            "description": "Car manufacturer",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "carModel",
+            "description": "Car model",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "edition",
+            "description": "Car edition",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "chargetripEdition",
+            "description": "Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "version",
+            "description": "Car version",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "chargetripRange",
+            "description": "Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ChargetripRange",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fastChargingSupport",
+            "description": "EV's that support fast charging have a minimum charging speed of 43 Kwh. EV's without support for fast charging used in a newRoute mutation will return an error",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectors",
+            "description": "Available connectors for a car",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarPlug",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "adapters",
+            "description": "List of adapters of connectors available for a car",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarPlug",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mode",
+            "description": "Current production mode of a car",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "CarMode",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "seats",
+            "description": "Number of seats",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batteryUsableKwh",
+            "description": "Usable battery capacity in kWh",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batteryFullKwh",
+            "description": "Full battery capacity in kWh",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "imagesData",
+            "description": "Images of a car in structured data",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarImageData",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "power",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "acceleration",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "topSpeed",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "torque",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "batteryEfficiency",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarBatteryEfficiency",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "range",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarRange",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "weight",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "height",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "width",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "consumption",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarExtraConsumption",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "petrolConsumption",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "chargingOffset",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "auxConsumption",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "bmsConsumption",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "dragCoefficient",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "tirePressure",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "motorEfficiency",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "drivelineEfficiency",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "regenEfficiency",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          },
+          {
+            "name": "images",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarImage",
+                "ofType": null
+              }
+            },
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -3092,16 +4010,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Boolean",
-        "description": "The `Boolean` scalar type represents `true` or `false`.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -5508,15 +6416,15 @@
           },
           {
             "name": "user",
-            "description": "User who requested the route",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
               "name": "RequestUser",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "You will receive null values."
           },
           {
             "name": "routeRequest",

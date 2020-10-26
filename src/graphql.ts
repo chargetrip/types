@@ -20,8 +20,10 @@ export type Query = {
   amenityList?: Maybe<Array<Maybe<Amenity>>>;
   /** Get information about a car by its ID */
   car?: Maybe<Car>;
+  /** Get premium information about a car by its ID */
+  carPremium?: Maybe<CarPremium>;
   /** Get a full list of cars */
-  carList?: Maybe<Array<Maybe<Car>>>;
+  carList?: Maybe<Array<Maybe<CarList>>>;
   /** Get a full list of operators */
   operatorList?: Maybe<Array<Maybe<Operator>>>;
   /** Get information about an operator by its ID */
@@ -53,6 +55,10 @@ export type QueryamenityListArgs = {
 export type QuerycarArgs = {
   id?: Maybe<Scalars["ID"]>;
   externalId?: Maybe<Scalars["Int"]>;
+};
+
+export type QuerycarPremiumArgs = {
+  id?: Maybe<Scalars["ID"]>;
 };
 
 export type QuerycarListArgs = {
@@ -189,16 +195,12 @@ export type Car = {
   chargetripEdition?: Maybe<Scalars["String"]>;
   /** Car version */
   version?: Maybe<Scalars["String"]>;
+  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+  chargetripRange?: Maybe<ChargetripRange>;
+  /** EV's that support fast charging have a minimum charging speed of 43 Kwh. EV's without support for fast charging used in a newRoute mutation will return an error */
+  fastChargingSupport?: Maybe<Scalars["Boolean"]>;
   /** Current production mode of a car */
   mode?: Maybe<CarMode>;
-  /** Power of a car in Kw */
-  power?: Maybe<Scalars["Float"]>;
-  /** Acceleration time from 0 to 100 km/h */
-  acceleration?: Maybe<Scalars["Float"]>;
-  /** Maximum car speed in km/h */
-  topSpeed?: Maybe<Scalars["Float"]>;
-  /** Engine torque */
-  torque?: Maybe<Scalars["Float"]>;
   /** Usable battery capacity in kWh */
   batteryUsableKwh?: Maybe<Scalars["Float"]>;
   /** Full battery capacity in kWh */
@@ -213,57 +215,52 @@ export type Car = {
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
   /** Number of seats */
   seats?: Maybe<Scalars["Int"]>;
+  /** Extra consumption model */
+  consumption?: Maybe<CarExtraConsumption>;
+  /** Amount of petrol a similar petrol car would consume per 100km */
+  petrolConsumption?: Maybe<Scalars["Float"]>;
+  /** Images of a car */
+  images?: Maybe<Array<Maybe<CarImage>>>;
+  /** Images of a car in structured data */
+  imagesData?: Maybe<CarImageData>;
   /** Weight in Kg */
   weight?: Maybe<Scalars["Float"]>;
   /** Height in mm */
   height?: Maybe<Scalars["Int"]>;
   /** Width in mm */
   width?: Maybe<Scalars["Int"]>;
-  /** Extra consumption model */
-  consumption?: Maybe<CarExtraConsumption>;
-  /** Amount of petrol a similar petrol car would consume per 100km */
-  petrolConsumption?: Maybe<Scalars["Float"]>;
-  /** A list of offset data for different charging speeds */
+  /** Power of a car in Kw */
+  power?: Maybe<Scalars["Float"]>;
+  /** Acceleration time from 0 to 100 km/h */
+  acceleration?: Maybe<Scalars["Float"]>;
+  /** Maximum car speed in km/h */
+  topSpeed?: Maybe<Scalars["Float"]>;
+  /** Engine torque */
+  torque?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
   chargingOffset?: Maybe<Scalars["JSON"]>;
-  /**
-   * Deprecated
-   * @deprecated You will receive null values.
-   */
+  /** @deprecated You will receive null values. */
   auxConsumption?: Maybe<Scalars["Float"]>;
-  /**
-   * Deprecated
-   * @deprecated You will receive null values.
-   */
+  /** @deprecated You will receive null values. */
   bmsConsumption?: Maybe<Scalars["Float"]>;
-  /**
-   * Deprecated
-   * @deprecated You will receive null values.
-   */
+  /** @deprecated You will receive null values. */
   dragCoefficient?: Maybe<Scalars["Float"]>;
-  /**
-   * Deprecated
-   * @deprecated You will receive null values.
-   */
+  /** @deprecated You will receive null values. */
   tirePressure?: Maybe<Scalars["Float"]>;
-  /**
-   * Deprecated
-   * @deprecated You will receive null values.
-   */
+  /** @deprecated You will receive null values. */
   motorEfficiency?: Maybe<Scalars["Float"]>;
-  /**
-   * Deprecated
-   * @deprecated You will receive null values.
-   */
+  /** @deprecated You will receive null values. */
   drivelineEfficiency?: Maybe<Scalars["Float"]>;
-  /**
-   * Deprecated
-   * @deprecated You will receive null values.
-   */
+  /** @deprecated You will receive null values. */
   regenEfficiency?: Maybe<Scalars["Float"]>;
-  /** Images of a car */
-  images?: Maybe<Array<Maybe<CarImage>>>;
-  /** Images of a car in structured data */
-  imagesData?: Maybe<CarImageData>;
+};
+
+/** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+export type ChargetripRange = {
+  /** Worst conditions are based on -10°C and use of heating */
+  worst?: Maybe<Scalars["Float"]>;
+  /** Best conditions are based on 23°C and no use of A/C */
+  best?: Maybe<Scalars["Float"]>;
 };
 
 /** Mode (state) of the current production */
@@ -433,6 +430,68 @@ export type CarImageData = {
   brand_thumbnail?: Maybe<CarImage>;
 };
 
+/** The car premium model */
+export type CarPremium = {
+  /** Cars unique ID */
+  id?: Maybe<Scalars["ID"]>;
+  /** ID provided by the car data source as the row ID */
+  externalId?: Maybe<Scalars["String"]>;
+  /** Car manufacturer */
+  make?: Maybe<Scalars["String"]>;
+  /** Car model */
+  carModel?: Maybe<Scalars["String"]>;
+  /** Car edition */
+  edition?: Maybe<Scalars["String"]>;
+  /** Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years */
+  chargetripEdition?: Maybe<Scalars["String"]>;
+  /** Car version */
+  version?: Maybe<Scalars["String"]>;
+  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+  chargetripRange?: Maybe<ChargetripRange>;
+  /** EV's that support fast charging have a minimum charging speed of 43 Kwh. EV's without support for fast charging used in a newRoute mutation will return an error */
+  fastChargingSupport?: Maybe<Scalars["Boolean"]>;
+  /** Current production mode of a car */
+  mode?: Maybe<CarMode>;
+  /** Power of a car in Kw */
+  power?: Maybe<Scalars["Float"]>;
+  /** Acceleration time from 0 to 100 km/h */
+  acceleration?: Maybe<Scalars["Float"]>;
+  /** Maximum car speed in km/h */
+  topSpeed?: Maybe<Scalars["Float"]>;
+  /** Engine torque */
+  torque?: Maybe<Scalars["Float"]>;
+  /** Usable battery capacity in kWh */
+  batteryUsableKwh?: Maybe<Scalars["Float"]>;
+  /** Full battery capacity in kWh */
+  batteryFullKwh?: Maybe<Scalars["Float"]>;
+  /** Battery efficiency in the city, highway and combined depending on weather conditions */
+  batteryEfficiency?: Maybe<CarBatteryEfficiency>;
+  /** Range in the city, highway and combined depending on weather conditions */
+  range?: Maybe<CarRange>;
+  /** Available connectors for a car */
+  connectors?: Maybe<Array<Maybe<CarPlug>>>;
+  /** List of adapters of connectors available for a car */
+  adapters?: Maybe<Array<Maybe<CarPlug>>>;
+  /** Number of seats */
+  seats?: Maybe<Scalars["Int"]>;
+  /** Weight in Kg */
+  weight?: Maybe<Scalars["Float"]>;
+  /** Height in mm */
+  height?: Maybe<Scalars["Int"]>;
+  /** Width in mm */
+  width?: Maybe<Scalars["Int"]>;
+  /** Extra consumption model */
+  consumption?: Maybe<CarExtraConsumption>;
+  /** Amount of petrol a similar petrol car would consume per 100km */
+  petrolConsumption?: Maybe<Scalars["Float"]>;
+  /** A list of offset data for different charging speeds */
+  chargingOffset?: Maybe<Scalars["JSON"]>;
+  /** Images of a car */
+  images?: Maybe<Array<Maybe<CarImage>>>;
+  /** Images of a car in structured data */
+  imagesData?: Maybe<CarImageData>;
+};
+
 /** Filter which can be applied to retrieve the car list action */
 export type CarListQuery = {
   /** Vehicle manufacturer (maker) */
@@ -445,6 +504,82 @@ export type CarListQuery = {
   chargetripEdition?: Maybe<Scalars["String"]>;
   /** The car current production mode */
   mode?: Maybe<CarMode>;
+};
+
+/** The car list model */
+export type CarList = {
+  /** Cars unique ID */
+  id?: Maybe<Scalars["ID"]>;
+  /** ID provided by the car data source as the row ID */
+  externalId?: Maybe<Scalars["String"]>;
+  /** Car manufacturer */
+  make?: Maybe<Scalars["String"]>;
+  /** Car model */
+  carModel?: Maybe<Scalars["String"]>;
+  /** Car edition */
+  edition?: Maybe<Scalars["String"]>;
+  /** Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years */
+  chargetripEdition?: Maybe<Scalars["String"]>;
+  /** Car version */
+  version?: Maybe<Scalars["String"]>;
+  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+  chargetripRange?: Maybe<ChargetripRange>;
+  /** EV's that support fast charging have a minimum charging speed of 43 Kwh. EV's without support for fast charging used in a newRoute mutation will return an error */
+  fastChargingSupport?: Maybe<Scalars["Boolean"]>;
+  /** Available connectors for a car */
+  connectors?: Maybe<Array<Maybe<CarPlug>>>;
+  /** List of adapters of connectors available for a car */
+  adapters?: Maybe<Array<Maybe<CarPlug>>>;
+  /** Current production mode of a car */
+  mode?: Maybe<CarMode>;
+  /** Number of seats */
+  seats?: Maybe<Scalars["Int"]>;
+  /** Usable battery capacity in kWh */
+  batteryUsableKwh?: Maybe<Scalars["Float"]>;
+  /** Full battery capacity in kWh */
+  batteryFullKwh?: Maybe<Scalars["Float"]>;
+  /** Images of a car in structured data */
+  imagesData?: Maybe<CarImageData>;
+  /** @deprecated You will receive null values. */
+  power?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  acceleration?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  topSpeed?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  torque?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  batteryEfficiency?: Maybe<CarBatteryEfficiency>;
+  /** @deprecated You will receive null values. */
+  range?: Maybe<CarRange>;
+  /** @deprecated You will receive null values. */
+  weight?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  height?: Maybe<Scalars["Int"]>;
+  /** @deprecated You will receive null values. */
+  width?: Maybe<Scalars["Int"]>;
+  /** @deprecated You will receive null values. */
+  consumption?: Maybe<CarExtraConsumption>;
+  /** @deprecated You will receive null values. */
+  petrolConsumption?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  chargingOffset?: Maybe<Scalars["JSON"]>;
+  /** @deprecated You will receive null values. */
+  auxConsumption?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  bmsConsumption?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  dragCoefficient?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  tirePressure?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  motorEfficiency?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  drivelineEfficiency?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  regenEfficiency?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  images?: Maybe<Array<Maybe<CarImage>>>;
 };
 
 /** Filter which can be applied to retrieve the operator list action */
@@ -1190,7 +1325,7 @@ export type Route = {
   alternatives?: Maybe<Array<Maybe<RouteAlternative>>>;
   /** EV specific data for a route request */
   ev?: Maybe<RequestEv>;
-  /** User who requested the route */
+  /** @deprecated You will receive null values. */
   user?: Maybe<RequestUser>;
   /** Route request data */
   routeRequest?: Maybe<RequestRoute>;
