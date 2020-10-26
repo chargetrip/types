@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/chargetrip/types/compare/v1.6.0...v1.7.0) (2020-10-26)
+
+
+### Features
+
+* version bump to 1.7.0 ([#3](https://github.com/chargetrip/types/issues/3)) ([e2dec14](https://github.com/chargetrip/types/commit/e2dec1441d1c8e411979f18d8605c79195c5e606))
+
 # [1.1.0](https://github.com/chargetrip/types/compare/v1.0.0...v1.1.0) (2020-10-26)
 
 
