@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/chargetrip/types/compare/v1.0.0...v1.1.0) (2020-10-26)
+
+
+### Features
+
+* car schema updates ([#2](https://github.com/chargetrip/types/issues/2)) ([3a4e84f](https://github.com/chargetrip/types/commit/3a4e84f28a98a6cd9cfb7bbeaf52a539a3163562))
+
 # 1.5.1 (2020-09-25)
 
 
