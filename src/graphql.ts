@@ -767,6 +767,8 @@ export type Station = {
   private?: Maybe<Scalars["Boolean"]>;
   /** Connectors grouped by power */
   power?: Maybe<Scalars["JSON"]>;
+  /** Station availability */
+  availability?: Maybe<Array<Maybe<StationAvailability>>>;
   /** Charging speed for a station */
   speed?: Maybe<StationSpeedType>;
   /** Global status for a station */
@@ -1287,6 +1289,14 @@ export type ChargerStatuses = {
   unknown?: Maybe<Scalars["Int"]>;
   /** How many are not available */
   error?: Maybe<Scalars["Int"]>;
+};
+
+/** Station availability for each weekday and hour */
+export type StationAvailability = {
+  /** Number of weekday from 1 (monday) to 7 (sunday) */
+  weekday?: Maybe<Scalars["Int"]>;
+  /** The prediction for each hour 0-23 from 1 to 5 (1 - very busy ... 5 very quiet (free)) */
+  prediction?: Maybe<Array<Maybe<Scalars["Int"]>>>;
 };
 
 export enum ChargerStatus {
