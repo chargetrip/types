@@ -3984,6 +3984,22 @@
             "deprecationReason": null
           },
           {
+            "name": "availability",
+            "description": "Station availability",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "StationAvailability",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "speed",
             "description": "Charging speed for a station",
             "args": [],
@@ -6238,6 +6254,45 @@
               "kind": "SCALAR",
               "name": "Int",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationAvailability",
+        "description": "Station availability for each weekday and hour",
+        "fields": [
+          {
+            "name": "weekday",
+            "description": "Number of weekday from 1 (monday) to 7 (sunday)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "prediction",
+            "description": "The prediction for each hour 0-23 from 1 to 5 (1 - very busy ... 5 very quiet (free))",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
