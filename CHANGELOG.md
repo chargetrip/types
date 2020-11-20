@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/chargetrip/types/compare/v1.8.0...v1.9.0) (2020-11-20)
+
+
+### Features
+
+* version bump to 1.9.0 add "predicted_availability stations ([#5](https://github.com/chargetrip/types/issues/5)) ([e768efc](https://github.com/chargetrip/types/commit/e768efcb4b147158b69177c4f47c02c31c87c5c9))
+
 # [1.8.0](https://github.com/chargetrip/types/compare/v1.7.0...v1.8.0) (2020-11-18)
 
 
