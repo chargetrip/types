@@ -3984,7 +3984,7 @@
             "deprecationReason": null
           },
           {
-            "name": "availability",
+            "name": "predicted_availability",
             "description": "Station availability",
             "args": [],
             "type": {
@@ -3992,7 +3992,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "StationAvailability",
+                "name": "StationPredictedAvailability",
                 "ofType": null
               }
             },
@@ -6266,7 +6266,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "StationAvailability",
+        "name": "StationPredictedAvailability",
         "description": "Station availability for each weekday and hour",
         "fields": [
           {
