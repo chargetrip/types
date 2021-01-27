@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/chargetrip/types/compare/v1.9.0...v1.10.0) (2021-01-27)
+
+
+### Features
+
+* update to version 2.0.0 (car improvements) ([#6](https://github.com/chargetrip/types/issues/6)) ([8c007eb](https://github.com/chargetrip/types/commit/8c007eb2fcd50200e52850b0d2bd59cf5e69f8d4))
+
 # [1.9.0](https://github.com/chargetrip/types/compare/v1.8.0...v1.9.0) (2020-11-20)
 
 
