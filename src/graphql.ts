@@ -179,128 +179,168 @@ export type Address = {
   formattedAddress?: Maybe<Array<Maybe<Scalars["String"]>>>;
 };
 
-/** The car model */
+/** Output of a car query */
 export type Car = {
   /** Cars unique ID */
   id?: Maybe<Scalars["ID"]>;
-  /** ID provided by the car data source as the row ID */
-  externalId?: Maybe<Scalars["String"]>;
-  /** Car manufacturer */
-  make?: Maybe<Scalars["String"]>;
-  /** Car model */
-  carModel?: Maybe<Scalars["String"]>;
-  /** Car edition */
-  edition?: Maybe<Scalars["String"]>;
-  /** Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years */
-  chargetripEdition?: Maybe<Scalars["String"]>;
-  /** Car version */
-  version?: Maybe<Scalars["String"]>;
-  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
-  chargetripRange?: Maybe<ChargetripRange>;
-  /** EV's that support fast charging have a minimum charging speed of 43 Kwh. EV's without support for fast charging used in a newRoute mutation will return an error */
-  fastChargingSupport?: Maybe<Scalars["Boolean"]>;
-  /** Current production mode of a car */
-  mode?: Maybe<CarMode>;
-  /** Usable battery capacity in kWh */
-  batteryUsableKwh?: Maybe<Scalars["Float"]>;
-  /** Full battery capacity in kWh */
-  batteryFullKwh?: Maybe<Scalars["Float"]>;
-  /** Battery efficiency in the city, highway and combined depending on weather conditions */
-  batteryEfficiency?: Maybe<CarBatteryEfficiency>;
-  /** Range in the city, highway and combined depending on weather conditions */
-  range?: Maybe<CarRange>;
+  /** Naming of a car */
+  naming?: Maybe<CarNaming>;
   /** Available connectors for a car */
   connectors?: Maybe<Array<Maybe<CarPlug>>>;
   /** List of adapters of connectors available for a car */
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
-  /** Number of seats */
+  /** Battery of a car */
+  battery?: Maybe<CarBattery>;
+  /** Body of a car */
+  body?: Maybe<CarBody>;
+  /** Availability of a car */
+  availability?: Maybe<CarAvailability>;
+  /** Performance of a car */
+  performance?: Maybe<CarPerformance>;
+  /** Range of a car */
+  range?: Maybe<CarRange>;
+  /** Media of a car */
+  media?: Maybe<CarMedia>;
+  /** Routing of a car */
+  routing?: Maybe<CarRouting>;
+  /**
+   * ID provided by a car data source as the row ID
+   * @deprecated Will be removed in the future
+   */
+  externalId?: Maybe<Scalars["String"]>;
+  /**
+   * Car manufacturer
+   * @deprecated in favour to naming.make
+   */
+  make?: Maybe<Scalars["String"]>;
+  /**
+   * Car model
+   * @deprecated in favour to naming.model
+   */
+  carModel?: Maybe<Scalars["String"]>;
+  /**
+   * Car edition
+   * @deprecated in favour to naming.version
+   */
+  edition?: Maybe<Scalars["String"]>;
+  /**
+   * Car model edition. Added by Chargetrip as an alternative for when a car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years
+   * @deprecated in favour to naming.chargetrip_version
+   */
+  chargetripEdition?: Maybe<Scalars["String"]>;
+  /**
+   * Car version
+   * @deprecated in favour to naming.edition
+   */
+  version?: Maybe<Scalars["String"]>;
+  /**
+   * Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data
+   * @deprecated in favour to range.chargetrip_range
+   */
+  chargetripRange?: Maybe<ChargetripRange>;
+  /**
+   * Cars that support fast charging have a minimum charging speed of 43 Kwh. Cars without support for fast charging used in a newRoute mutation will return an error
+   * @deprecated in favour to routing.fast_charging_support
+   */
+  fastChargingSupport?: Maybe<Scalars["Boolean"]>;
+  /**
+   * Current production mode of a car
+   * @deprecated in favour to availability.status
+   */
+  mode?: Maybe<CarMode>;
+  /**
+   * Number of seats
+   * @deprecated in favour to body.seats
+   */
   seats?: Maybe<Scalars["Int"]>;
-  /** Extra consumption model */
-  consumption?: Maybe<CarExtraConsumption>;
-  /** Amount of petrol a similar petrol car would consume per 100km */
-  petrolConsumption?: Maybe<Scalars["Float"]>;
-  /** Images of a car */
-  images?: Maybe<Array<Maybe<CarImage>>>;
-  /** Images of a car in structured data */
-  imagesData?: Maybe<CarImageData>;
-  /** Weight in Kg */
+  /**
+   * Weight in Kg
+   * @deprecated in favour to body.weight
+   */
   weight?: Maybe<Scalars["Float"]>;
-  /** Height in mm */
+  /**
+   * Height in mm
+   * @deprecated in favour to body.height
+   */
   height?: Maybe<Scalars["Int"]>;
-  /** Width in mm */
+  /**
+   * Width in mm
+   * @deprecated in favour to body.width
+   */
   width?: Maybe<Scalars["Int"]>;
-  /** Power of a car in Kw */
-  power?: Maybe<Scalars["Float"]>;
-  /** Acceleration time from 0 to 100 km/h */
+  /**
+   * Usable battery capacity in kWh
+   * @deprecated in favour to battery.usable_kwh
+   */
+  batteryUsableKwh?: Maybe<Scalars["Float"]>;
+  /**
+   * Full battery capacity in kWh
+   * @deprecated in favour to battery.full_kwh
+   */
+  batteryFullKwh?: Maybe<Scalars["Float"]>;
+  /**
+   * Battery efficiency in the city, highway and combined depending on weather conditions
+   * @deprecated in favour to efficiency
+   */
+  batteryEfficiency?: Maybe<CarBatteryEfficiency>;
+  /**
+   * Acceleration time from 0 to 100 km/h
+   * @deprecated in favour to performance.acceleration
+   */
   acceleration?: Maybe<Scalars["Float"]>;
-  /** Maximum car speed in km/h */
+  /**
+   * Maximum car speed in km/h
+   * @deprecated in favour to performance.top_speed
+   */
   topSpeed?: Maybe<Scalars["Float"]>;
-  /** Engine torque */
+  /**
+   * Power of a car in Kw
+   * @deprecated in favour to drivetrain.power
+   */
+  power?: Maybe<Scalars["Float"]>;
+  /**
+   * Engine torque
+   * @deprecated in favour to drivetrain.torque
+   */
   torque?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /**
+   * Extra consumption model
+   * @deprecated in favour to routing.consumption
+   */
+  consumption?: Maybe<CarExtraConsumption>;
+  /**
+   * Amount of petrol a similar petrol car would consume per 100 km
+   * @deprecated in favour to routing.petrol_consumption
+   */
+  petrolConsumption?: Maybe<Scalars["Float"]>;
+  /**
+   * A list of offset data for different charging speeds
+   * @deprecated You will receive null values
+   */
   chargingOffset?: Maybe<Scalars["JSON"]>;
-  /** @deprecated You will receive null values. */
-  auxConsumption?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
-  bmsConsumption?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
-  dragCoefficient?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
-  tirePressure?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
-  motorEfficiency?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
-  drivelineEfficiency?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
-  regenEfficiency?: Maybe<Scalars["Float"]>;
+  /**
+   * Images of a car
+   * @deprecated in favour to media.image_list
+   */
+  images?: Maybe<Array<Maybe<CarImage>>>;
+  /**
+   * Images of a car in structured data
+   * @deprecated in favour to media.image or media.brand
+   */
+  imagesData?: Maybe<CarImageData>;
 };
 
-/** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
-export type ChargetripRange = {
-  /** Worst conditions are based on -10°C and use of heating */
-  worst?: Maybe<Scalars["Float"]>;
-  /** Best conditions are based on 23°C and no use of A/C */
-  best?: Maybe<Scalars["Float"]>;
-};
-
-/** Mode (state) of the current production */
-export enum CarMode {
-  /** Old car that is no longer manufactured */
-  INDEX_ONLY = "index_only",
-  /** The car is in production and released */
-  PRODUCTION = "production",
-  /** Future releases of a car, a concept of the car, specs may change over time */
-  CONCEPT = "concept"
-}
-
-/** Car battery efficiency */
-export type CarBatteryEfficiency = {
-  /** Average efficiency measured in kWh/100km */
-  average?: Maybe<Scalars["Float"]>;
-  /** Worst conditions are based on -10°C and use of heating, measured in kWh/100km */
-  worst?: Maybe<CarEstimationData>;
-  /** Best conditions are based on 23°C and no use of A/C, measured in kWh/100km */
-  best?: Maybe<CarEstimationData>;
-};
-
-/** Car estimated data format */
-export type CarEstimationData = {
-  /** Estimated battery efficiency on a highway or express roads, in km */
-  highway?: Maybe<Scalars["Float"]>;
-  /** Estimated battery efficiency on a city road, in km */
-  city?: Maybe<Scalars["Float"]>;
-  /** Estimated battery efficiency on highway and city roads combined, in km */
-  combined?: Maybe<Scalars["Float"]>;
-};
-
-/** Car range estimations */
-export type CarRange = {
-  /** WLTP estimation */
-  wltp?: Maybe<Scalars["Float"]>;
-  /** Worst conditions are based on -10°C and use of heating */
-  worst?: Maybe<CarEstimationData>;
-  /** Best conditions are based on 23°C and no use of A/C */
-  best?: Maybe<CarEstimationData>;
+export type CarNaming = {
+  /** Car manufacturer name */
+  make?: Maybe<Scalars["String"]>;
+  /** Car model name */
+  model?: Maybe<Scalars["String"]>;
+  /** Version, edition or submodel of car */
+  version?: Maybe<Scalars["String"]>;
+  /** Another submodel level of car */
+  edition?: Maybe<Scalars["String"]>;
+  /** Car model version. Added by Chargetrip as an alternative for when a car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
+  chargetrip_version?: Maybe<Scalars["String"]>;
 };
 
 /** Car plug model */
@@ -373,35 +413,113 @@ export enum OCPIConnectorType {
   TESLA_S = "TESLA_S"
 }
 
-/** Extra consumption model of a car */
-export type CarExtraConsumption = {
-  /** Consumption, in kWh, of the auxiliaries */
-  aux?: Maybe<CarConsumption>;
-  /** Consumption, in kWh, of the battery management system */
-  bms?: Maybe<CarConsumption>;
-  /** Consumption, in kWh, of the car in idle mode */
-  idle?: Maybe<CarConsumption>;
+export type CarBattery = {
+  /** Usable battery capacity in kWh */
+  usable_kwh?: Maybe<Scalars["Float"]>;
+  /** Full battery capacity in kWh */
+  full_kwh?: Maybe<Scalars["Float"]>;
 };
 
-/** Consumption of the auxiliaries */
-export type CarConsumption = {
+export type CarBody = {
+  /** Width with folded mirrors in mm */
+  width?: Maybe<Scalars["Int"]>;
+  /** Height (average height for adjustable suspensions) in mm */
+  height?: Maybe<Scalars["Int"]>;
+  /** Weight Unladen EU) in kg */
+  weight?: Maybe<Scalars["Int"]>;
+  /** Number of seats */
+  seats?: Maybe<Scalars["Int"]>;
+};
+
+export type CarAvailability = {
+  /**
+   * Availability of car
+   *
+   * Values:
+   *    - 0 = Car no longer for sale in any market / region
+   *    - 1 = Car currently for sale in at least one market / region
+   *    - 2 = Car expected in market from Date_From (estimated), pre-order open
+   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open
+   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open
+   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open
+   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open
+   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown
+   *    - 91 = Status uncertain, introduction date and/or pricing unclear
+   */
+  status?: Maybe<Scalars["Int"]>;
+};
+
+export type CarPerformance = {
+  /** Acceleration 0-100 km/h in seconds */
+  acceleration?: Maybe<Scalars["Float"]>;
+  /** Top speed of car in km/h */
+  top_speed?: Maybe<Scalars["Int"]>;
+};
+
+export type CarRange = {
+  /** Index range in EV Database RealRange model in km */
+  real?: Maybe<Scalars["Int"]>;
+  /** Indicates what RealRange mode the model is has calculated figures */
+  real_is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Worst conditions are based on -10°C and use of heating */
+  worst?: Maybe<CarRangeValue>;
+  /** Best conditions are based on 23°C and no use of A/C */
+  best?: Maybe<CarRangeValue>;
+  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+  chargetrip_range?: Maybe<ChargetripRange>;
+  /** @deprecated You will receive null values */
+  wltp?: Maybe<Scalars["Float"]>;
+};
+
+export type CarRangeValue = {
+  /** Estimated value on the highway or express roads */
+  highway?: Maybe<Scalars["Int"]>;
+  /** Estimated value on the cities road */
+  city?: Maybe<Scalars["Int"]>;
+  /** Estimated combined value */
+  combined?: Maybe<Scalars["Int"]>;
+};
+
+/** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+export type ChargetripRange = {
   /** Worst conditions are based on -10°C and use of heating */
   worst?: Maybe<Scalars["Float"]>;
   /** Best conditions are based on 23°C and no use of A/C */
   best?: Maybe<Scalars["Float"]>;
 };
 
+export type CarMedia = {
+  /** URL to detail page on EV Database */
+  evdb_detail_url?: Maybe<Scalars["String"]>;
+  /** Latest image */
+  image?: Maybe<CarImage>;
+  /** Latest maker logo */
+  brand?: Maybe<CarImage>;
+  /** All images */
+  image_list?: Maybe<Array<Maybe<CarImage>>>;
+  /** Latest video */
+  video?: Maybe<CarVideo>;
+  /** All videos */
+  video_list?: Maybe<Array<Maybe<CarVideo>>>;
+};
+
 export type CarImage = {
   /** Image id */
   id?: Maybe<Scalars["ID"]>;
-  /** Image url */
-  url?: Maybe<Scalars["String"]>;
-  /** Image width in pixels */
-  width?: Maybe<Scalars["Int"]>;
-  /** Image height in pixels */
-  height?: Maybe<Scalars["Int"]>;
   /** Image type */
   type?: Maybe<CarImageType>;
+  /** Full path URL of a large image */
+  url?: Maybe<Scalars["String"]>;
+  /** Height of a large image in pixels */
+  height?: Maybe<Scalars["Int"]>;
+  /** Width of a large image in pixels */
+  width?: Maybe<Scalars["Int"]>;
+  /** Full path URL of a thumbnail image */
+  thumbnail_url?: Maybe<Scalars["String"]>;
+  /** Height of a thumbnail image in pixels */
+  thumbnail_height?: Maybe<Scalars["Int"]>;
+  /** Width of a thumbnail image in pixels */
+  thumbnail_width?: Maybe<Scalars["Int"]>;
 };
 
 /** Available types of images which can be found for a car. Each type has specific image sizes */
@@ -410,15 +528,78 @@ export enum CarImageType {
   PROVIDER = "provider",
   /** Full size image at 1536x864 px */
   IMAGE = "image",
-  /** The thumbnail of the full size image at 131x72 px */
+  /** Thumbnail of a full size image at 131x72 px */
   IMAGE_THUMBNAIL = "image_thumbnail",
   /** Full size brand (maker) logo at 768x432 px */
   BRAND = "brand",
-  /** The thumbnail of the full size brand logo at 56x24 px */
+  /** Thumbnail of a full size brand logo at 56x24 px */
   BRAND_THUMBNAIL = "brand_thumbnail"
 }
 
-/** Images of a car in structured data */
+export type CarVideo = {
+  /** Video id */
+  id?: Maybe<Scalars["ID"]>;
+  /** Full path URL of a video */
+  url?: Maybe<Scalars["String"]>;
+};
+
+export type CarRouting = {
+  /**
+   * Cars that support fast charging have a minimum charging speed of 43 Kwh.
+   * Cars without support for fast charging used in a newRoute mutation will return an error.
+   */
+  fast_charging_support?: Maybe<Scalars["Boolean"]>;
+};
+
+/** Mode (state) of the current production */
+export enum CarMode {
+  /** Old car that is no longer manufactured */
+  INDEX_ONLY = "index_only",
+  /** Car is in production and has been released */
+  PRODUCTION = "production",
+  /** Future releases of a car, a concept of the car, specs may change over time */
+  CONCEPT = "concept"
+}
+
+/** Deprecated */
+export type CarBatteryEfficiency = {
+  /** Average efficiency measured in kWh/100 km */
+  average?: Maybe<Scalars["Float"]>;
+  /** Worst conditions are based on -10°C and use of heating, measured in kWh/100 km */
+  worst?: Maybe<CarEstimationData>;
+  /** Best conditions are based on 23°C and no use of A/C, measured in kWh/100 km */
+  best?: Maybe<CarEstimationData>;
+};
+
+/** Deprecated */
+export type CarEstimationData = {
+  /** Estimated battery efficiency on a highway or express roads, in km */
+  highway?: Maybe<Scalars["Float"]>;
+  /** Estimated battery efficiency on city roads, in km */
+  city?: Maybe<Scalars["Float"]>;
+  /** Estimated battery efficiency on highway and city roads combined, in km */
+  combined?: Maybe<Scalars["Float"]>;
+};
+
+/** Deprecated */
+export type CarExtraConsumption = {
+  /** Consumption, in kWh, of the auxiliaries */
+  aux?: Maybe<CarConsumption>;
+  /** Consumption, in kWh, of the battery management system */
+  bms?: Maybe<CarConsumption>;
+  /** Consumption, in kWh, of a car in idle mode */
+  idle?: Maybe<CarConsumption>;
+};
+
+/** Deprecated */
+export type CarConsumption = {
+  /** Worst conditions are based on -10°C and use of heating */
+  worst?: Maybe<Scalars["Float"]>;
+  /** Best conditions are based on 23°C and no use of A/C */
+  best?: Maybe<Scalars["Float"]>;
+};
+
+/** Deprecated */
 export type CarImageData = {
   /** Full size image of a car */
   image?: Maybe<CarImage>;
@@ -430,66 +611,323 @@ export type CarImageData = {
   brand_thumbnail?: Maybe<CarImage>;
 };
 
-/** The car premium model */
+/** The output element of the carPremium query */
 export type CarPremium = {
   /** Cars unique ID */
   id?: Maybe<Scalars["ID"]>;
-  /** ID provided by the car data source as the row ID */
-  externalId?: Maybe<Scalars["String"]>;
-  /** Car manufacturer */
-  make?: Maybe<Scalars["String"]>;
-  /** Car model */
-  carModel?: Maybe<Scalars["String"]>;
-  /** Car edition */
-  edition?: Maybe<Scalars["String"]>;
-  /** Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years */
-  chargetripEdition?: Maybe<Scalars["String"]>;
-  /** Car version */
-  version?: Maybe<Scalars["String"]>;
-  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
-  chargetripRange?: Maybe<ChargetripRange>;
-  /** EV's that support fast charging have a minimum charging speed of 43 Kwh. EV's without support for fast charging used in a newRoute mutation will return an error */
-  fastChargingSupport?: Maybe<Scalars["Boolean"]>;
-  /** Current production mode of a car */
-  mode?: Maybe<CarMode>;
-  /** Power of a car in Kw */
-  power?: Maybe<Scalars["Float"]>;
-  /** Acceleration time from 0 to 100 km/h */
-  acceleration?: Maybe<Scalars["Float"]>;
-  /** Maximum car speed in km/h */
-  topSpeed?: Maybe<Scalars["Float"]>;
-  /** Engine torque */
-  torque?: Maybe<Scalars["Float"]>;
-  /** Usable battery capacity in kWh */
-  batteryUsableKwh?: Maybe<Scalars["Float"]>;
-  /** Full battery capacity in kWh */
-  batteryFullKwh?: Maybe<Scalars["Float"]>;
-  /** Battery efficiency in the city, highway and combined depending on weather conditions */
-  batteryEfficiency?: Maybe<CarBatteryEfficiency>;
-  /** Range in the city, highway and combined depending on weather conditions */
-  range?: Maybe<CarRange>;
-  /** Available connectors for a car */
+  /** Internal ID of the succesor car trim */
+  succesor_id?: Maybe<Scalars["String"]>;
+  /** Naming of a car */
+  naming?: Maybe<CarPremiumNaming>;
+  /** Connectors available for a car */
   connectors?: Maybe<Array<Maybe<CarPlug>>>;
-  /** List of adapters of connectors available for a car */
+  /** Adapters of connectors available for a car */
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
+  /** Battery of a car */
+  battery?: Maybe<CarPremiumBattery>;
+  /** Body of a car */
+  body?: Maybe<CarPremiumBody>;
+  /** Availability of a car */
+  availability?: Maybe<CarPremiumAvailability>;
+  /** Pricing of a car */
+  price?: Maybe<CarPremiumPrice>;
+  /** Drivetrain of a car */
+  drivetrain?: Maybe<CarPremiumDrivetrain>;
+  /** Performance of a car */
+  performance?: Maybe<CarPremiumPerformance>;
+  /** Range of a car */
+  range?: Maybe<CarPremiumRange>;
+  /** Efficiency of a car */
+  efficiency?: Maybe<CarPremiumEfficiency>;
+  /** Safety of a car */
+  safety?: Maybe<CarPremiumSafety>;
+  /** Media of a car */
+  media?: Maybe<CarPremiumMedia>;
+  /** Routing of a car */
+  routing?: Maybe<CarPremiumRouting>;
+};
+
+export type CarPremiumNaming = {
+  /** Car manufacturer name */
+  make?: Maybe<Scalars["String"]>;
+  /** Car model name */
+  model?: Maybe<Scalars["String"]>;
+  /** Version, edition or submodel of car */
+  version?: Maybe<Scalars["String"]>;
+  /** Another submodel level of car */
+  edition?: Maybe<Scalars["String"]>;
+  /** Car model version. Added by Chargetrip as an alternative for when a car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
+  chargetrip_version?: Maybe<Scalars["String"]>;
+};
+
+export type CarPremiumBattery = {
+  /** Usable battery capacity in kWh */
+  usable_kwh?: Maybe<Scalars["Float"]>;
+  /** Full battery capacity in kWh */
+  full_kwh?: Maybe<Scalars["Float"]>;
+};
+
+export type CarPremiumBody = {
+  /** Length in mm */
+  length?: Maybe<Scalars["Int"]>;
+  /** Width with folded mirrors in mm */
+  width?: Maybe<Scalars["Int"]>;
+  /** Height (average height for adjustable suspensions) in mm */
+  height?: Maybe<Scalars["Int"]>;
+  /** Wheelbase in mm */
+  wheelbase?: Maybe<Scalars["Int"]>;
+  /** Weight (Unladen EU) in kg */
+  weight?: Maybe<Scalars["Int"]>;
+  /** Standard luggage capacity in l */
+  boot_capacity?: Maybe<Scalars["Int"]>;
+  /** Maximum luggage capacity in l */
+  boot_capacity_max?: Maybe<Scalars["Int"]>;
+  /** Maximum unbraked towing weight in kg */
+  tow_weight_unbraked?: Maybe<Scalars["Int"]>;
+  /** Maximum braked towing weight in kg */
+  tow_weight_braked?: Maybe<Scalars["Int"]>;
+  /** Maximum load on roof of car in kg */
+  roof_load_max?: Maybe<Scalars["Int"]>;
+  /** Body type, listed in local naming convention where applicable */
+  body_type?: Maybe<Scalars["String"]>;
+  /** Segment, listed in local naming convention where applicable */
+  segment?: Maybe<Scalars["String"]>;
   /** Number of seats */
   seats?: Maybe<Scalars["Int"]>;
-  /** Weight in Kg */
-  weight?: Maybe<Scalars["Float"]>;
-  /** Height in mm */
-  height?: Maybe<Scalars["Int"]>;
-  /** Width in mm */
-  width?: Maybe<Scalars["Int"]>;
+  /** Indicates wheter a car has roofrails as a standard */
+  rooftrails?: Maybe<Scalars["Boolean"]>;
+};
+
+export type CarPremiumAvailability = {
+  /**
+   * Availability of car
+   *
+   * Values:
+   *    - 0 = Car no longer for sale in any market / region
+   *    - 1 = Car currently for sale in at least one market / region
+   *    - 2 = Car expected in market from Date_From (estimated), pre-order open
+   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open
+   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open
+   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open
+   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open
+   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown
+   *    - 91 = Status uncertain, introduction date and/or pricing unclear
+   */
+  status?: Maybe<Scalars["Int"]>;
+  /** Date of introduction, mm-yyyy */
+  date_from?: Maybe<Scalars["String"]>;
+  /** Date last available, mm-yyyy */
+  date_to?: Maybe<Scalars["String"]>;
+};
+
+export type CarPremiumPrice = {
+  /** Starting price for german market */
+  de?: Maybe<CarPremiumPriceValue>;
+  /** Starting price for dutch market */
+  nl?: Maybe<CarPremiumPriceValue>;
+  /** Starting price for british market */
+  uk?: Maybe<CarPremiumPriceValue>;
+};
+
+export type CarPremiumPriceValue = {
+  /** Starting price for local market */
+  value?: Maybe<Scalars["Int"]>;
+  /** Currency name for local market */
+  currency?: Maybe<Scalars["String"]>;
+  /** Indicates if priv=ce value is based on estimates */
+  estimated?: Maybe<Scalars["Boolean"]>;
+};
+
+export type CarPremiumDrivetrain = {
+  /**
+   * Type of drivetrain
+   *
+   * Values:
+   *   - BEV = Battery Electric Car
+   *   - EREV = Extended Range Electric Car
+   *   - PHEV = Plugin Hybrid Electric Car
+   */
+  type?: Maybe<Scalars["String"]>;
+  /**
+   * Fuel type
+   *
+   * Values:
+   *   - D = ICE engine available, uses diesel
+   *   - E = Electricity only, full electric car
+   *   - P = ICE engine available, uses petrol
+   */
+  fuel?: Maybe<Scalars["String"]>;
+  /**
+   * Propulsion type
+   *
+   * Values:
+   *   - AWD = All wheel drive car
+   *   - Front = Front wheel drive car
+   *   - Rear = Rear wheel drive car
+   */
+  propulsion?: Maybe<Scalars["String"]>;
+  /** Maximum (combined) power output in kw */
+  power?: Maybe<Scalars["Int"]>;
+  /** Maximum (combined) power output in horsepower (PS) */
+  power_hp?: Maybe<Scalars["Int"]>;
+  /** Maximum (combined) torque output in newtonmeter */
+  torque?: Maybe<Scalars["Int"]>;
+};
+
+export type CarPremiumPerformance = {
+  /** Acceleration 0-100 km/h in seconds */
+  acceleration?: Maybe<Scalars["Float"]>;
+  /** Top speed of car in km/h */
+  top_speed?: Maybe<Scalars["Int"]>;
+};
+
+export type CarPremiumRange = {
+  /** Rated range in WLTP combined cycle (NULL if not WLTP rated) in km */
+  wltp?: Maybe<Scalars["Int"]>;
+  /** Indicates if WLTP range is estimated (NULL if not WLTP rated) */
+  wltp_is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Rated range in NEDC combined cycle (NULL if not NEDC rated) in km */
+  nedc?: Maybe<Scalars["Int"]>;
+  /** Indicates if NEDC range is estimated (NULL if not NEDC rated) */
+  nedc_is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Index range in EV Database RealRange model in km */
+  real?: Maybe<Scalars["Int"]>;
+  /** Indicates what RealRange mode the model is has calculated figures */
+  real_is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Worst conditions are based on -10°C and use of heating */
+  worst?: Maybe<CarPremiumRangeValue>;
+  /** Best conditions are based on 23°C and no use of A/C */
+  best?: Maybe<CarPremiumRangeValue>;
+  /**
+   *  Is an index value of what we consider to be the real-world range.
+   * (Comparable to Range_Real from EV Database.) It is essentially a normalized range to display in the front-end.
+   */
+  chargetrip_range?: Maybe<ChargetripRange>;
+};
+
+export type CarPremiumRangeValue = {
+  /** Estimated value on highway or express roads */
+  highway?: Maybe<Scalars["Int"]>;
+  /** Estimated value on city roads */
+  city?: Maybe<Scalars["Int"]>;
+  /** Estimated combined value */
+  combined?: Maybe<Scalars["Int"]>;
+};
+
+export type CarPremiumEfficiency = {
+  /** Rated efficiency in WLTP combined cycle */
+  wltp?: Maybe<CarPremiumEfficiencyWLTP>;
+  /** Rated efficiency in NEDC combined cycle */
+  nedc?: Maybe<CarPremiumEfficiencyNEDC>;
+  /** Calculated car efficiency based on RealRange */
+  real?: Maybe<CarPremiumEfficiencyReal>;
+};
+
+export type CarPremiumEfficiencyWLTP = {
+  /** Rated efficiency in WLTP combined cycle in kWh/100 km */
+  value?: Maybe<Scalars["Float"]>;
+  /** Rated efficiency in WLTP combined cycle presented in fuel (petrol) equivalent in l/100 km */
+  fuel_equivalent?: Maybe<Scalars["Float"]>;
+  /** Rated CO2 emissions in WLTP combined cycle in battery only mode (NULL if not WLTP rated) in gr/km */
+  co2?: Maybe<Scalars["Int"]>;
+};
+
+export type CarPremiumEfficiencyNEDC = {
+  /** Rated efficiency in NEDC combined cycle in kWh/100 km */
+  value?: Maybe<Scalars["Float"]>;
+  /** Rated efficiency in NEDC combined cycle presented in fuel (petrol) equivalent in l/100 km */
+  fuel_equivalent?: Maybe<Scalars["Float"]>;
+  /** Rated CO2 emissions in NEDC combined cycle in battery only mode (NULL if not NEDC rated) in gr/km */
+  co2?: Maybe<Scalars["Int"]>;
+};
+
+export type CarPremiumEfficiencyReal = {
+  /** Calculated car efficiency based on RealRange (useable battery / range) in kWh/100 km */
+  value?: Maybe<Scalars["Float"]>;
+  /** Car efficiency based on RealRange presented in fuel (petrol) equivalent in l/100 km */
+  fuel_equivalent?: Maybe<Scalars["Float"]>;
+  /** Worst conditions are based on -10°C and use of heating */
+  worst?: Maybe<CarPremiumEfficiencyRealValue>;
+  /** Best conditions are based on 23°C and no use of A/C */
+  best?: Maybe<CarPremiumEfficiencyRealValue>;
+};
+
+export type CarPremiumEfficiencyRealValue = {
+  /** Estimated value on highway or express roads */
+  highway?: Maybe<Scalars["Float"]>;
+  /** Estimated value on city roads */
+  city?: Maybe<Scalars["Float"]>;
+  /** Estimated combined value */
+  combined?: Maybe<Scalars["Float"]>;
+};
+
+export type CarPremiumSafety = {
+  /** Number of seats equipped with ISOFIX */
+  isofix_seats?: Maybe<Scalars["Int"]>;
+  /** EuroNCAP results */
+  euro_ncap?: Maybe<CarPremiumSafetyEuroNcap>;
+};
+
+export type CarPremiumSafetyEuroNcap = {
+  /** EuroNCAP rating (out of 5 stars) */
+  rating?: Maybe<Scalars["Int"]>;
+  /** EuroNCAP year of rating */
+  year?: Maybe<Scalars["Int"]>;
+  /** EuroNCAP rating of adult protection (out of 100%) */
+  adult?: Maybe<Scalars["Int"]>;
+  /** EuroNCAP rating of child protection (out of 100%) */
+  child?: Maybe<Scalars["Int"]>;
+  /** EuroNCAP rating of vulnerable road users (out of 100%) */
+  vru?: Maybe<Scalars["Int"]>;
+  /** EuroNCAP rating of safety assists (out of 100%) */
+  sa?: Maybe<Scalars["Int"]>;
+};
+
+export type CarPremiumMedia = {
+  /** URL to detail page on EV Database */
+  evdb_detail_url?: Maybe<Scalars["String"]>;
+  /** Latest image */
+  image?: Maybe<CarImage>;
+  /** Latest maker logo */
+  brand?: Maybe<CarImage>;
+  /** All images */
+  image_list?: Maybe<Array<Maybe<CarImage>>>;
+  /** Latest video */
+  video?: Maybe<CarVideo>;
+  /** All videos */
+  video_list?: Maybe<Array<Maybe<CarVideo>>>;
+};
+
+export type CarPremiumRouting = {
+  /**
+   * Cars that support fast charging have a minimum charging speed of 43 Kwh.
+   * Cars without support for fast charging used in a newRoute mutation will return an error.
+   */
+  fast_charging_support?: Maybe<Scalars["Boolean"]>;
+  /** Drag coefficient */
+  drag_coefficient?: Maybe<Scalars["Float"]>;
+  /** Manufacturer recommended tire pressure */
+  tire_pressure?: Maybe<Scalars["Float"]>;
   /** Extra consumption model */
-  consumption?: Maybe<CarExtraConsumption>;
-  /** Amount of petrol a similar petrol car would consume per 100km */
-  petrolConsumption?: Maybe<Scalars["Float"]>;
-  /** A list of offset data for different charging speeds */
-  chargingOffset?: Maybe<Scalars["JSON"]>;
-  /** Images of a car */
-  images?: Maybe<Array<Maybe<CarImage>>>;
-  /** Images of a car in structured data */
-  imagesData?: Maybe<CarImageData>;
+  consumption?: Maybe<CarPremiumRoutingConsumption>;
+  /** Amount of petrol that an equivalent petrol car would consume in l/100 km */
+  petrol_consumption?: Maybe<Scalars["Float"]>;
+};
+
+export type CarPremiumRoutingConsumption = {
+  /** Consumption, in kWh, of the auxiliaries */
+  aux?: Maybe<CarPremiumRoutingConsumptionValue>;
+  /** Consumption, in kWh, of the battery management system */
+  bms?: Maybe<CarPremiumRoutingConsumptionValue>;
+  /** Consumption, in kWh, of the car in idle mode */
+  idle?: Maybe<CarPremiumRoutingConsumptionValue>;
+};
+
+export type CarPremiumRoutingConsumptionValue = {
+  /** Best (minium) consumption, in the summer */
+  best?: Maybe<Scalars["Float"]>;
+  /** Best (minimum) consumption, in the winter */
+  worst?: Maybe<Scalars["Float"]>;
 };
 
 /** Filter which can be applied to retrieve the car list action */
@@ -497,89 +935,214 @@ export type CarListQuery = {
   /** Vehicle manufacturer (maker) */
   make?: Maybe<Scalars["String"]>;
   /** Car model */
-  carModel?: Maybe<Scalars["String"]>;
-  /** Car edition */
-  edition?: Maybe<Scalars["String"]>;
-  /** Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years */
-  chargetripEdition?: Maybe<Scalars["String"]>;
-  /** The car current production mode */
+  model?: Maybe<Scalars["String"]>;
+  /** Car model version */
+  version?: Maybe<Scalars["String"]>;
+  /** Car model version. Added by Chargetrip as an alternative for when the car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
+  chargetrip_version?: Maybe<Scalars["String"]>;
+  /** Deprecated. We will ignore this */
   mode?: Maybe<CarMode>;
 };
 
-/** The car list model */
+/** The output element of the carList query */
 export type CarList = {
   /** Cars unique ID */
   id?: Maybe<Scalars["ID"]>;
-  /** ID provided by the car data source as the row ID */
-  externalId?: Maybe<Scalars["String"]>;
-  /** Car manufacturer */
-  make?: Maybe<Scalars["String"]>;
-  /** Car model */
-  carModel?: Maybe<Scalars["String"]>;
-  /** Car edition */
-  edition?: Maybe<Scalars["String"]>;
-  /** Car model edition. Added by Chargetrip as an alternative for when the car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years */
-  chargetripEdition?: Maybe<Scalars["String"]>;
-  /** Car version */
-  version?: Maybe<Scalars["String"]>;
-  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
-  chargetripRange?: Maybe<ChargetripRange>;
-  /** EV's that support fast charging have a minimum charging speed of 43 Kwh. EV's without support for fast charging used in a newRoute mutation will return an error */
-  fastChargingSupport?: Maybe<Scalars["Boolean"]>;
-  /** Available connectors for a car */
+  /** Naming of a car */
+  naming?: Maybe<CarListNaming>;
+  /** Connectors available for a car */
   connectors?: Maybe<Array<Maybe<CarPlug>>>;
-  /** List of adapters of connectors available for a car */
+  /** Adapters of connectors available for a car */
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
-  /** Current production mode of a car */
+  /** Battery of a car */
+  battery?: Maybe<CarListBattery>;
+  /** Body of a car */
+  body?: Maybe<CarListBody>;
+  /** Availability of a car */
+  availability?: Maybe<CarListAvailability>;
+  /** Range of a car */
+  range?: Maybe<CarListRange>;
+  /** Media of a car */
+  media?: Maybe<CarListMedia>;
+  /** Routing of a car */
+  routing?: Maybe<CarListRouting>;
+  /**
+   * ID provided by a car data source as the row ID
+   * @deprecated Will be removed in the future
+   */
+  externalId?: Maybe<Scalars["String"]>;
+  /**
+   * Car manufacturer
+   * @deprecated in favour to naming.make
+   */
+  make?: Maybe<Scalars["String"]>;
+  /**
+   * Car model
+   * @deprecated in favour to naming.model
+   */
+  carModel?: Maybe<Scalars["String"]>;
+  /**
+   * Car edition
+   * @deprecated in favour to naming.version
+   */
+  edition?: Maybe<Scalars["String"]>;
+  /**
+   * Car model edition. Added by Chargetrip as an alternative for when a car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years
+   * @deprecated in favour to naming.chargetrip_version
+   */
+  chargetripEdition?: Maybe<Scalars["String"]>;
+  /**
+   * Car version
+   * @deprecated in favour to naming.edition
+   */
+  version?: Maybe<Scalars["String"]>;
+  /**
+   * Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data
+   * @deprecated in favour to range.chargetrip_range
+   */
+  chargetripRange?: Maybe<ChargetripRange>;
+  /**
+   * Cars that support fast charging have a minimum charging speed of 43 Kwh. Cars without support for fast charging used in a newRoute mutation will return an error
+   * @deprecated in favour to routing.fast_charging_support
+   */
+  fastChargingSupport?: Maybe<Scalars["Boolean"]>;
+  /**
+   * Current production mode of a car
+   * @deprecated in favour to availability.status
+   */
   mode?: Maybe<CarMode>;
-  /** Number of seats */
+  /**
+   * Number of seats
+   * @deprecated in favour to body.seats
+   */
   seats?: Maybe<Scalars["Int"]>;
-  /** Usable battery capacity in kWh */
+  /**
+   * Usable battery capacity in kWh
+   * @deprecated in favour to battery.usable_kwh
+   */
   batteryUsableKwh?: Maybe<Scalars["Float"]>;
-  /** Full battery capacity in kWh */
+  /**
+   * Full battery capacity in kWh
+   * @deprecated in favour to battery.full_kwh
+   */
   batteryFullKwh?: Maybe<Scalars["Float"]>;
-  /** Images of a car in structured data */
+  /**
+   * Images of a car in structured data
+   * @deprecated in favour to media.image and media.brand
+   */
   imagesData?: Maybe<CarImageData>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   power?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   acceleration?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   topSpeed?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   torque?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   batteryEfficiency?: Maybe<CarBatteryEfficiency>;
-  /** @deprecated You will receive null values. */
-  range?: Maybe<CarRange>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   weight?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   height?: Maybe<Scalars["Int"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   width?: Maybe<Scalars["Int"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   consumption?: Maybe<CarExtraConsumption>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   petrolConsumption?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   chargingOffset?: Maybe<Scalars["JSON"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   auxConsumption?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   bmsConsumption?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   dragCoefficient?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   tirePressure?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   motorEfficiency?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   drivelineEfficiency?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   regenEfficiency?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   images?: Maybe<Array<Maybe<CarImage>>>;
+};
+
+export type CarListNaming = {
+  /** Car manufacturer name */
+  make?: Maybe<Scalars["String"]>;
+  /** Car model name */
+  model?: Maybe<Scalars["String"]>;
+  /** Version, edition or submodel of car */
+  version?: Maybe<Scalars["String"]>;
+  /** Another submodel level of car */
+  edition?: Maybe<Scalars["String"]>;
+  /** Car model version. Added by Chargetrip as an alternative for when a car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
+  chargetrip_version?: Maybe<Scalars["String"]>;
+};
+
+export type CarListBattery = {
+  /** Usable battery capacity in kWh */
+  usable_kwh?: Maybe<Scalars["Float"]>;
+  /** Full battery capacity in kWh */
+  full_kwh?: Maybe<Scalars["Float"]>;
+};
+
+export type CarListBody = {
+  /** Number of seats in car */
+  seats?: Maybe<Scalars["Int"]>;
+};
+
+export type CarListAvailability = {
+  /**
+   * Availability of car
+   *
+   * Values:
+   *    - 0 = Car no longer for sale in any market / region
+   *    - 1 = Car currently for sale in at least one market / region
+   *    - 2 = Car expected in market from Date_From (estimated), pre-order open
+   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open
+   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open
+   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open
+   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open
+   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown
+   *    - 91 = Status uncertain, introduction date and/or pricing unclear
+   */
+  status?: Maybe<Scalars["Int"]>;
+};
+
+export type CarListRange = {
+  /**
+   *  Is an index value of what we consider to be the real-world range.
+   * (Comparable to Range_Real from EV Database.) It is essentially a normalized range to display in the front-end.
+   */
+  chargetrip_range?: Maybe<ChargetripRange>;
+  /** @deprecated You will receive null values. */
+  wltp?: Maybe<Scalars["Float"]>;
+  /** @deprecated You will receive null values. */
+  worst?: Maybe<CarEstimationData>;
+  /** @deprecated You will receive null values. */
+  best?: Maybe<CarEstimationData>;
+};
+
+export type CarListMedia = {
+  /** Latest image of the car */
+  image?: Maybe<CarImage>;
+  /** Latest maker logo of the car */
+  brand?: Maybe<CarImage>;
+  /** Latest video of the car */
+  video?: Maybe<CarVideo>;
+};
+
+export type CarListRouting = {
+  /**
+   * EV's that support fast charging have a minimum charging speed of 43 Kwh.
+   * EV's without support for fast charging used in a newRoute mutation will return an error.
+   */
+  fast_charging_support?: Maybe<Scalars["Boolean"]>;
 };
 
 /** Filter which can be applied to retrieve the operator list action */
@@ -1919,6 +2482,16 @@ export enum CarImageTypeUploadable {
   IMAGE = "image",
   /** Full size brand (maker) logo with a resolution at least 768x432 px */
   BRAND = "brand"
+}
+
+/** Status of a car */
+export enum CarStatus {
+  /** Was just imported */
+  NEW = "new",
+  /** Is being reviewed by a human operator */
+  REVIEW = "review",
+  /** Is public and can be used by a customer */
+  PUBLIC = "public"
 }
 
 /** Form input for edit an existing review */
