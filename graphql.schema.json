@@ -109,10 +109,30 @@
             "args": [
               {
                 "name": "query",
-                "description": "Query object",
+                "description": "Deprecated: Not used anymore",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "CarListQuery",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "search",
+                "description": "Search for cars by make, model, version and chargetrip version",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "filter",
+                "description": "Filter car result",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CarListFilter",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -312,7 +332,7 @@
             "args": [
               {
                 "name": "id",
-                "description": "ID of a route which you require for a route path segment",
+                "description": "ID of a route that you require for a route path segment",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -585,6 +605,16 @@
         "possibleTypes": null
       },
       {
+        "kind": "SCALAR",
+        "name": "String",
+        "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Amenity",
         "description": "The amenity model",
@@ -728,16 +758,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "String",
-        "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -1109,7 +1129,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.make"
+            "deprecationReason": "In favor of naming.make"
           },
           {
             "name": "carModel",
@@ -1121,7 +1141,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.model"
+            "deprecationReason": "In favor of naming.model"
           },
           {
             "name": "edition",
@@ -1133,7 +1153,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.version"
+            "deprecationReason": "In favor of naming.version"
           },
           {
             "name": "chargetripEdition",
@@ -1145,7 +1165,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.chargetrip_version"
+            "deprecationReason": "In favor of naming.chargetrip_version"
           },
           {
             "name": "version",
@@ -1157,7 +1177,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.edition"
+            "deprecationReason": "In favor of naming.edition"
           },
           {
             "name": "chargetripRange",
@@ -1169,7 +1189,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to range.chargetrip_range"
+            "deprecationReason": "In favor of range.chargetrip_range"
           },
           {
             "name": "fastChargingSupport",
@@ -1181,7 +1201,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to routing.fast_charging_support"
+            "deprecationReason": "In favor of routing.fast_charging_is_supported"
           },
           {
             "name": "mode",
@@ -1193,7 +1213,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to availability.status"
+            "deprecationReason": "In favor of availability.status"
           },
           {
             "name": "seats",
@@ -1205,11 +1225,11 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to body.seats"
+            "deprecationReason": "In favor of body.seats"
           },
           {
             "name": "weight",
-            "description": "Weight in Kg",
+            "description": "Weight in kg",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1217,7 +1237,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to body.weight"
+            "deprecationReason": "In favor of body.weight"
           },
           {
             "name": "height",
@@ -1229,7 +1249,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to body.height"
+            "deprecationReason": "In favor of body.height"
           },
           {
             "name": "width",
@@ -1241,7 +1261,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to body.width"
+            "deprecationReason": "In favor of body.width"
           },
           {
             "name": "batteryUsableKwh",
@@ -1253,7 +1273,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to battery.usable_kwh"
+            "deprecationReason": "In favor of battery.usable_kwh"
           },
           {
             "name": "batteryFullKwh",
@@ -1265,7 +1285,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to battery.full_kwh"
+            "deprecationReason": "In favor of battery.full_kwh"
           },
           {
             "name": "batteryEfficiency",
@@ -1277,7 +1297,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to efficiency"
+            "deprecationReason": "In favor of efficiency"
           },
           {
             "name": "acceleration",
@@ -1289,7 +1309,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to performance.acceleration"
+            "deprecationReason": "In favor of performance.acceleration"
           },
           {
             "name": "topSpeed",
@@ -1301,7 +1321,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to performance.top_speed"
+            "deprecationReason": "In favor of performance.top_speed"
           },
           {
             "name": "power",
@@ -1313,7 +1333,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to drivetrain.power"
+            "deprecationReason": "In favor of drivetrain.power"
           },
           {
             "name": "torque",
@@ -1325,7 +1345,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to drivetrain.torque"
+            "deprecationReason": "In favor of drivetrain.torque"
           },
           {
             "name": "consumption",
@@ -1337,7 +1357,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to routing.consumption"
+            "deprecationReason": "In favor of routing.consumption"
           },
           {
             "name": "petrolConsumption",
@@ -1349,7 +1369,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to routing.petrol_consumption"
+            "deprecationReason": "In favor of routing.petrol_consumption"
           },
           {
             "name": "chargingOffset",
@@ -1377,7 +1397,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to media.image_list"
+            "deprecationReason": "In favor of media.image_list"
           },
           {
             "name": "imagesData",
@@ -1389,7 +1409,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to media.image or media.brand"
+            "deprecationReason": "In favor of media.image or media.brand"
           }
         ],
         "inputFields": null,
@@ -2033,7 +2053,7 @@
         "description": null,
         "fields": [
           {
-            "name": "evdb_detail_url",
+            "name": "evdb_details_url",
             "description": "URL to detail page on EV Database",
             "args": [],
             "type": {
@@ -2111,6 +2131,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "evdb_detail_url",
+            "description": "URL to detail page on EV Database",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future. Please use evdb_details_url"
           }
         ],
         "inputFields": null,
@@ -2307,8 +2339,8 @@
         "description": null,
         "fields": [
           {
-            "name": "fast_charging_support",
-            "description": "Cars that support fast charging have a minimum charging speed of 43 Kwh.\nCars without support for fast charging used in a newRoute mutation will return an error.",
+            "name": "fast_charging_is_supported",
+            "description": "EVs that support fast charging have a minimum charging speed of 43 Kwh.\nEVs without support for fast charging used in a newRoute mutation will return an error.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2317,6 +2349,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "fast_charging_support",
+            "description": "EVs that support fast charging have a minimum charging speed of 43 Kwh.\nEVs without support for fast charging used in a newRoute mutation will return an error.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future"
           }
         ],
         "inputFields": null,
@@ -2616,6 +2660,18 @@
             "deprecationReason": null
           },
           {
+            "name": "external_id",
+            "description": "Temporary external id",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "succesor_id",
             "description": "Internal ID of the succesor car trim",
             "args": [],
@@ -2651,6 +2707,30 @@
                 "name": "CarPlug",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge",
+            "description": "Charge details",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumCharge",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fast_charge",
+            "description": "Fast charge details",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumFastCharge",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2882,6 +2962,571 @@
       },
       {
         "kind": "OBJECT",
+        "name": "CarPremiumCharge",
+        "description": null,
+        "fields": [
+          {
+            "name": "plug",
+            "description": "Location of charge port",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumChargePlug",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "second_plug",
+            "description": "Location of second charge port",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumChargePlug",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "standard",
+            "description": "The car standard charge",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumChargeOBC",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "alternative",
+            "description": "The car alternative charge",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumChargeOBC",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "option",
+            "description": "The car option charge",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumChargeOBC",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarPremiumChargePlug",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Type of charge port on vehicle",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "OCPIConnectorType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_estimated",
+            "description": "Indicates if value is an estimate",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "location",
+            "description": "Location of charge port",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_optional",
+            "description": "Indicates if second charge port is optional",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarPremiumChargeOBC",
+        "description": null,
+        "fields": [
+          {
+            "name": "power",
+            "description": "Maximum power OBC can accept to charge a battery (standard OBC)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "phases",
+            "description": "Number of phases the OBC accepts to achieve maximum power (standard OBC)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "phase_amperage",
+            "description": "Maximum current the OBC accepts per phase to achieve maximum power (standard OBC)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_time",
+            "description": "Minutes needed to charge from 0% to 100% SoC (standard OBC)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_speed",
+            "description": "Charging speed when charging at maximum power (standard OBC)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_estimated",
+            "description": "Indicates if Charge_Standard fields are estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "table",
+            "description": "Charging details for the standard OBC on several charging points",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarPremiumChargeOBCTable",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarPremiumChargeOBCTable",
+        "description": null,
+        "fields": [
+          {
+            "name": "evse_phase_voltage",
+            "description": "Voltage between phase and neutral for this EVSE (phase voltage)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "evse_phase_amperage",
+            "description": "Current per phase for this EVSE (phase current)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "evse_phases",
+            "description": "Number of phases for this EVSE",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_phase_voltage",
+            "description": "Voltage between phase and neutral used by standard OBC (phase voltage)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_phase_amperage",
+            "description": "Current per phase used by standard OBC (phase current)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_phases",
+            "description": "Number of phases used by standard OBC",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_power",
+            "description": "Power used by standard OBC (before OBC losses)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_time",
+            "description": "Minutes needed to charge from 0% to 100% SoC (standard OBC with this EVSE)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_speed",
+            "description": "Charging speed when charging at maximum power (standard OBC with this EVSE)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarPremiumFastCharge",
+        "description": null,
+        "fields": [
+          {
+            "name": "plug",
+            "description": "Location of charge port",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumChargePlug",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "power",
+            "description": "Power during fastcharging from 10% to 80% SoC (optimal conditions, fastest charger)",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumChargePower",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_time",
+            "description": "Minutes needed to charge from 10% to 80% SoC with average charing power (optimal conditions, fastest charger)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_speed",
+            "description": "Charging speed during fastcharging from 10% to 80% SoC (optimal conditions, fastest charger)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_optional",
+            "description": "Indicates if fastcharge is optional in some markets/regions",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_estimated",
+            "description": "Indicates what fields are estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "table",
+            "description": "Charging details for fastcharging",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarPremiumFastChargeTable",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarPremiumChargePower",
+        "description": null,
+        "fields": [
+          {
+            "name": "max",
+            "description": "Maximum value",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "average",
+            "description": "Average value",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarPremiumFastChargeTable",
+        "description": null,
+        "fields": [
+          {
+            "name": "format",
+            "description": "Charging details for fastcharging (format: ChargerPlug-ChargerPower-AC/DC)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "power",
+            "description": "Fast charge power",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumChargePower",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_time",
+            "description": "Minutes needed to charge from 10% to 80% SoC (optimal conditions)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_speed",
+            "description": "Charging speed during fastcharging from 10% to 80% SoC (optimal conditions)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_imited",
+            "description": "Inidicates if the maximum power during fastcharging is limited by the vehicle",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "average_is_limited",
+            "description": "Inidicates if the average power during fastcharging is limited by the vehicle",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "CarPremiumBattery",
         "description": null,
         "fields": [
@@ -2908,11 +3553,94 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "estimated_fields",
+            "description": "Indicates if and what battery fields are estimated",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "CarBatteryFieldEstimations",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "thermal_management_system",
+            "description": "Battery thermal management system (active/passive, air/liquid)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "warranty_period",
+            "description": "Duration of battery warranty",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "warranty_mileage",
+            "description": "Mileage of battery warranty",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "CarBatteryFieldEstimations",
+        "description": "Battery field estimated",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "B",
+            "description": "Both of the battery kwh fields are estimations",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "F",
+            "description": "full_kwh field is estimated",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "N",
+            "description": "None of the battery kwh fields are estimations",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "U",
+            "description": "useable_kwh field is estimated",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -2945,12 +3673,36 @@
             "deprecationReason": null
           },
           {
+            "name": "full_width",
+            "description": "Width of vehicle, including mirrors in mm",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "height",
             "description": "Height (average height for adjustable suspensions) in mm",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "size_is_estimated",
+            "description": "Indicates if length / width / height fields are estimations",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -2969,8 +3721,56 @@
             "deprecationReason": null
           },
           {
+            "name": "wheelbase_is_estimated",
+            "description": "Indicates if wheelbase field is estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "weight",
             "description": "Weight (Unladen EU) in kg",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "weight_is_estimated",
+            "description": "Indicates if weight field is estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "weight_max_payload",
+            "description": "Maximum payload allowed for vehicle in kg",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "max_gross_vehicle_weight",
+            "description": "Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload) in kg",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2993,12 +3793,36 @@
             "deprecationReason": null
           },
           {
+            "name": "boot_front_capacity",
+            "description": "Storage capacity of front trunk / under the hood (frunk)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "boot_capacity_max",
             "description": "Maximum luggage capacity in l",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tow_hitch_compatible",
+            "description": "Indicates if a tow hitch / towbar can be fitted according to vehicle homologation",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3019,6 +3843,30 @@
           {
             "name": "tow_weight_braked",
             "description": "Maximum braked towing weight in kg",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tow_weight_is_estimated",
+            "description": "Indicates if tow weight fields are estimations",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tow_weight_vertical_load",
+            "description": "Maximum vertical load / noseweight on tow hitch according to vehicle homologation",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3077,8 +3925,44 @@
             "deprecationReason": null
           },
           {
-            "name": "rooftrails",
+            "name": "has_roofrails",
             "description": "Indicates wheter a car has roofrails as a standard",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "turning_circle",
+            "description": "Turning circle of vehicle kerb-to-kerb",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle_platform",
+            "description": "Name of vehicle platform used for vehicle (often abbreviated to indicate group platforms)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle_platform_is_dedicated",
+            "description": "Indicates if the vehicle platform used for vehicle is a dedicated battery electric vehicle platform",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3118,6 +4002,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "date_from_is_estimated",
+            "description": "Indicates if date from field is estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3218,8 +4114,20 @@
             "deprecationReason": null
           },
           {
-            "name": "estimated",
+            "name": "is_estimated",
             "description": "Indicates if priv=ce value is based on estimates",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "grant_is_applied",
+            "description": "Grant is applied to value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3242,7 +4150,7 @@
         "fields": [
           {
             "name": "type",
-            "description": "Type of drivetrain\n\nValues:\n  - BEV = Battery Electric Car\n  - EREV = Extended Range Electric Car\n  - PHEV = Plugin Hybrid Electric Car",
+            "description": "Type of drivetrain\n\nValues:\n  - BEV = Battery Electric Car\n  - EREV = Extended Range Electric Car",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3254,7 +4162,7 @@
           },
           {
             "name": "fuel",
-            "description": "Fuel type\n\nValues:\n  - D = ICE engine available, uses diesel\n  - E = Electricity only, full electric car\n  - P = ICE engine available, uses petrol",
+            "description": "Fuel type\n\nValues:\n  - E = Electricity only, full electric car",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3277,12 +4185,36 @@
             "deprecationReason": null
           },
           {
+            "name": "propulsion_is_estimated",
+            "description": "Indicates if propulsion field is estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "power",
             "description": "Maximum (combined) power output in kw",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "power_is_estimated",
+            "description": "Indicates if power field is estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3307,6 +4239,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "torque_is_estimated",
+            "description": "Indicates if torque field is estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3336,12 +4280,36 @@
             "deprecationReason": null
           },
           {
+            "name": "acceleration_is_estimated",
+            "description": "Indicates if acceleration field is estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "top_speed",
             "description": "Top speed of car in km/h",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "top_speed_is_estimated",
+            "description": "Indicates if top_speed field is estimated",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3377,6 +4345,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wltp_teh",
+            "description": "Rated range in WLTP (TEH / least efficient trim) combined cycle (NULL if not WLTP rated)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3537,6 +4517,18 @@
             "deprecationReason": null
           },
           {
+            "name": "wltp_teh",
+            "description": "Rated efficiency in WLTP combined cycle (TEH / least efficient trim)",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarPremiumEfficiencyWLTPTEH",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "nedc",
             "description": "Rated efficiency in NEDC combined cycle",
             "args": [],
@@ -3596,8 +4588,103 @@
             "deprecationReason": null
           },
           {
+            "name": "vehicle",
+            "description": "Rated vehicle efficiency in WLTP combined cycle (based on value) in kWh/100 km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle_fuel_equivalent",
+            "description": "Rated vehicle efficiency in WLTP combined cycle presented in fuel (petrol) equivalent in l/100 km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "co2",
             "description": "Rated CO2 emissions in WLTP combined cycle in battery only mode (NULL if not WLTP rated) in gr/km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarPremiumEfficiencyWLTPTEH",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Rated efficiency in WLTP TEH combined cycle in kWh/100 km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fuel_equivalent",
+            "description": "Rated efficiency in WLTP TEH combined cycle presented in fuel (petrol) equivalent in l/100 km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle",
+            "description": "Rated vehicle efficiency in WLTP TEH combined cycle (based on value) in kWh/100 km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle_fuel_equivalent",
+            "description": "Rated vehicle efficiency in WLTP TEH combined cycle presented in fuel (petrol) equivalent in l/100 km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "co2",
+            "description": "Rated CO2 emissions in WLTP TEH combined cycle in battery only mode (NULL if not WLTP TEH rated) in gr/km",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3633,6 +4720,30 @@
           {
             "name": "fuel_equivalent",
             "description": "Rated efficiency in NEDC combined cycle presented in fuel (petrol) equivalent in l/100 km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle",
+            "description": "Rated vehicle efficiency in NEDC combined cycle (based on value) in kWh/100 km",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle_fuel_equivalent",
+            "description": "Rated vehicle efficiency in NEDC combined cycle presented in fuel (petrol) equivalent in l/100 km",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3890,7 +5001,7 @@
         "description": null,
         "fields": [
           {
-            "name": "evdb_detail_url",
+            "name": "evdb_details_url",
             "description": "URL to detail page on EV Database",
             "args": [],
             "type": {
@@ -3968,6 +5079,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "evdb_detail_url",
+            "description": "URL to detail page on EV Database",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future. Please use evdb_details_url"
           }
         ],
         "inputFields": null,
@@ -3981,8 +5104,8 @@
         "description": null,
         "fields": [
           {
-            "name": "fast_charging_support",
-            "description": "Cars that support fast charging have a minimum charging speed of 43 Kwh.\nCars without support for fast charging used in a newRoute mutation will return an error.",
+            "name": "fast_charging_is_supported",
+            "description": "EVs that support fast charging have a minimum charging speed of 43 Kwh.\nEVs without support for fast charging used in a newRoute mutation will return an error.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4131,12 +5254,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "CarListQuery",
-        "description": "Filter which can be applied to retrieve the car list action",
+        "description": "Deprecated",
         "fields": null,
         "inputFields": [
           {
             "name": "make",
-            "description": "Vehicle manufacturer (maker)",
+            "description": "Deprecated: Not used anymore",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -4146,7 +5269,7 @@
           },
           {
             "name": "model",
-            "description": "Car model",
+            "description": "Deprecated: Not used anymore",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -4156,7 +5279,7 @@
           },
           {
             "name": "version",
-            "description": "Car model version",
+            "description": "Deprecated: Not used anymore",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -4166,7 +5289,7 @@
           },
           {
             "name": "chargetrip_version",
-            "description": "Car model version. Added by Chargetrip as an alternative for when the car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years",
+            "description": "Deprecated: Not used anymore",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -4176,11 +5299,36 @@
           },
           {
             "name": "mode",
-            "description": "Deprecated. We will ignore this",
+            "description": "Deprecated: Not used anymore",
             "type": {
               "kind": "ENUM",
               "name": "CarMode",
               "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CarListFilter",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "availability",
+            "description": "Availability of car\n\nValues:\n   - 0 = Car no longer for sale in any market / region\n   - 1 = Car currently for sale in at least one market / region\n   - 2 = Car expected in market from Date_From (estimated), pre-order open\n   - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open\n   - 12 = Concept car, nearing production and/or confirmed, pre-order open\n   - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open\n   - 22 = Concept car, not close to production and/or unconfirmed, pre-order open\n   - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown\n   - 91 = Status uncertain, introduction date and/or pricing unclear",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }
@@ -4344,7 +5492,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.make"
+            "deprecationReason": "In favor of naming.make"
           },
           {
             "name": "carModel",
@@ -4356,7 +5504,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.model"
+            "deprecationReason": "In favor of naming.model"
           },
           {
             "name": "edition",
@@ -4368,7 +5516,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.version"
+            "deprecationReason": "In favor of naming.version"
           },
           {
             "name": "chargetripEdition",
@@ -4380,7 +5528,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.chargetrip_version"
+            "deprecationReason": "In favor of naming.chargetrip_version"
           },
           {
             "name": "version",
@@ -4392,7 +5540,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to naming.edition"
+            "deprecationReason": "In favor of naming.edition"
           },
           {
             "name": "chargetripRange",
@@ -4404,7 +5552,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to range.chargetrip_range"
+            "deprecationReason": "In favor of range.chargetrip_range"
           },
           {
             "name": "fastChargingSupport",
@@ -4416,7 +5564,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to routing.fast_charging_support"
+            "deprecationReason": "In favor of routing.fast_charging_is_supported"
           },
           {
             "name": "mode",
@@ -4428,7 +5576,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to availability.status"
+            "deprecationReason": "In favor of availability.status"
           },
           {
             "name": "seats",
@@ -4440,7 +5588,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to body.seats"
+            "deprecationReason": "In favor of body.seats"
           },
           {
             "name": "batteryUsableKwh",
@@ -4452,7 +5600,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to battery.usable_kwh"
+            "deprecationReason": "In favor of battery.usable_kwh"
           },
           {
             "name": "batteryFullKwh",
@@ -4464,7 +5612,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to battery.full_kwh"
+            "deprecationReason": "In favor of battery.full_kwh"
           },
           {
             "name": "imagesData",
@@ -4476,7 +5624,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "in favour to media.image and media.brand"
+            "deprecationReason": "In favor of media.image and media.brand"
           },
           {
             "name": "power",
@@ -4895,7 +6043,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "You will receive null values."
+            "deprecationReason": "You will receive null values"
           },
           {
             "name": "worst",
@@ -4907,7 +6055,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "You will receive null values."
+            "deprecationReason": "You will receive null values"
           },
           {
             "name": "best",
@@ -4919,7 +6067,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "You will receive null values."
+            "deprecationReason": "You will receive null values"
           }
         ],
         "inputFields": null,
@@ -4980,8 +6128,8 @@
         "description": null,
         "fields": [
           {
-            "name": "fast_charging_support",
-            "description": "EV's that support fast charging have a minimum charging speed of 43 Kwh.\nEV's without support for fast charging used in a newRoute mutation will return an error.",
+            "name": "fast_charging_is_supported",
+            "description": "EVs that support fast charging have a minimum charging speed of 43 Kwh.\nEVs without support for fast charging used in a newRoute mutation will return an error.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4990,6 +6138,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "fast_charging_support",
+            "description": "EVs that support fast charging have a minimum charging speed of 43 Kwh.\nEVs without support for fast charging used in a newRoute mutation will return an error.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future"
           }
         ],
         "inputFields": null,
@@ -5397,7 +6557,7 @@
           },
           {
             "name": "user",
-            "description": "User who added a review, in case a review was added by an anonymous user, this will be null",
+            "description": "User who added a review. If a review was added by an anonymous user, this will be null",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -5445,7 +6605,7 @@
           },
           {
             "name": "ev",
-            "description": "Car which was provided/selected by a user",
+            "description": "Car that was provided/selected by a user",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -5457,7 +6617,7 @@
           },
           {
             "name": "plugType",
-            "description": "Plug type which was provided/selected by a user",
+            "description": "Plug type that was provided/selected by a user",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -5580,7 +6740,7 @@
           },
           {
             "name": "publish",
-            "description": "Defines if a Location may be published on an website or app etc.\nWhen this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this Location.\nWhen the same location has EVSEs that may be published and may not be published, two 'Locations' should be created.",
+            "description": "Defines if a location may be published on a website or app etc.\nWhen this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this location.\nWhen the same location has EVSEs that may be published and may not be published, two 'locations' should be created",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5812,7 +6972,7 @@
           },
           {
             "name": "charging_when_closed",
-            "description": "Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers over night, is it allowed to charge till the next morning? Default: true",
+            "description": "Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers overnight, is it allowed to charge till the next morning? Default: true",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5952,7 +7112,7 @@
           },
           {
             "name": "realtime",
-            "description": "A flag which indicates if a station has realtime information about the availability of its connectors",
+            "description": "A flag that indicates if a station has real-time information about the availability of its connectors",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5964,7 +7124,7 @@
           },
           {
             "name": "private",
-            "description": "A flag which indicates if a station is on a private property",
+            "description": "A flag that indicates if a station is on private property",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6869,7 +8029,7 @@
         "fields": [
           {
             "name": "country_code",
-            "description": "ISO-3166 alpha-2 country code of the CPO that owns this Tariff.",
+            "description": "ISO-3166 alpha-2 country code of the CPO that owns this tariff",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6881,7 +8041,7 @@
           },
           {
             "name": "party_id",
-            "description": "CPO ID of the CPO that owns this Tariff (following the ISO-15118 standard).",
+            "description": "CPO ID of the CPO that owns this tariff (following the ISO-15118 standard)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6893,7 +8053,7 @@
           },
           {
             "name": "id",
-            "description": "Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms).",
+            "description": "Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6917,7 +8077,7 @@
           },
           {
             "name": "type",
-            "description": "Defines the type of the tariff. This allows for distinction in case of given Charging Preferences. When omitted, this tariff is valid for all sessions.",
+            "description": "Defines the type of the tariff. This allows for distinction in case of given charging preferences. When omitted, this tariff is valid for all sessions",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -6929,7 +8089,7 @@
           },
           {
             "name": "tariff_alt_text",
-            "description": "List of alternative tariff information texts, in multiple languages.",
+            "description": "List of alternative tariff information texts, in multiple languages",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6945,7 +8105,7 @@
           },
           {
             "name": "tariff_alt_url",
-            "description": "URL to a web page that contains an explanation of the tariff information in human readable form.",
+            "description": "URL to a web page that contains an explanation of the tariff information in human readable form",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6957,7 +8117,7 @@
           },
           {
             "name": "min_price",
-            "description": "When this field is set, a Charging Session with this tariff will cost at least this amount. This is different from a FLAT fee (Start Tariff, Transaction Fee), as a FLAT fee is a fixed amount that has to be payed for any Charging Session. A minimum price indicates that when the cost of a Charging Session is lower than this amount, the cost of the Session will be equal to this amount. (Also see note below)",
+            "description": "When this field is set, a charging session with this tariff will cost at least the amount shown. This is different from a FLAT fee (start tariff, transaction fee), as a FLAT fee is a fixed amount that must be paid for any charging session. A minimum price indicates that when the cost of a charging session is lower than this amount, the cost of the session will be equal to this amount",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6969,7 +8129,7 @@
           },
           {
             "name": "max_price",
-            "description": "When this field is set, a Charging Session with this tariff will NOT cost more than this amount",
+            "description": "When this field is set, a charging session with this tariff will NOT cost more than this amount",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6981,7 +8141,7 @@
           },
           {
             "name": "elements",
-            "description": "List of Tariff Elements.",
+            "description": "List of tariff elements",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6997,7 +8157,7 @@
           },
           {
             "name": "start_date_time",
-            "description": "The time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active",
+            "description": "Time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7009,7 +8169,7 @@
           },
           {
             "name": "end_date_time",
-            "description": "The time after which this tariff is no longer valid, in UTC, time_zone field if the Location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future",
+            "description": "Time after which this tariff is no longer valid, in UTC, time_zone field if the location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7021,7 +8181,7 @@
           },
           {
             "name": "energy_mix",
-            "description": "Details about the energy supplied with this tariff.",
+            "description": "Details about the energy supplied with this tariff",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -7033,7 +8193,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when this Tariff was last updated (or created).",
+            "description": "Timestamp when this tariff was last updated (or created)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7059,31 +8219,31 @@
         "enumValues": [
           {
             "name": "AD_HOC_PAYMENT",
-            "description": "Used to describe that a Tariff is valid when ad-hoc payment is used at the Charge Point (for example: Debit or Credit card payment terminal).",
+            "description": "Used to describe that a tariff is valid when ad-hoc payment is used at the charge point (for example: Debit or Credit card payment terminal)",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "PROFILE_CHEAP",
-            "description": "Used to describe that a Tariff is valid when Charging Preference: CHEAP is set for the session.",
+            "description": "Used to describe that a tariff is valid when charging preference: CHEAP is set for the session",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "PROFILE_FAST",
-            "description": "Used to describe that a Tariff is valid when Charging Preference: FAST is set for the session.",
+            "description": "Used to describe that a tariff is valid when charging preference: FAST is set for the session",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "PROFILE_GREEN",
-            "description": "Used to describe that a Tariff is valid when Charging Preference: GREEN is set for the session.",
+            "description": "Used to describe that a tariff is valid when charging preference: GREEN is set for the session",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "REGULAR",
-            "description": "Used to describe that a Tariff is valid when using an RFID, without any Charging Preference, or when Charging Preference: REGULAR is set for the session.",
+            "description": "Used to describe that a tariff is valid when using an RFID, without any charging preference, or when charging preference: REGULAR is set for the session",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -7305,7 +8465,7 @@
           },
           {
             "name": "end_date",
-            "description": "End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date.",
+            "description": "End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7317,7 +8477,7 @@
           },
           {
             "name": "min_kwh",
-            "description": "Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used.",
+            "description": "Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7329,7 +8489,7 @@
           },
           {
             "name": "max_kwh",
-            "description": "Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used.",
+            "description": "Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7341,7 +8501,7 @@
           },
           {
             "name": "min_current",
-            "description": "Sum of the minimum current in A over all phases, for example 5. When the EV is charging with more than the defined amount of current, this TariffElement is/becomes active. If the charging current is or becomes lower, this TariffElement is not or no longer valid and becomes inactive. This describes NOT the minimum current over the entire Charging Session. This restriction can make a TariffElement become active when the charging current is above the defined value, but the TariffElement MUST no longer be active when the charging current drops below the defined value.",
+            "description": "Sum of the minimum current in over all phases, for example 5. When the EV is charging with more than the defined amount of current, this tariff element is/becomes active. If the charging current is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum current over the entire charging session. This restriction can make a tariff element become active when the charging current is above the defined value, but the tariff element MUST no longer be active when the charging current drops below the defined value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7353,7 +8513,7 @@
           },
           {
             "name": "max_current",
-            "description": "Sum of the maximum current in A over all phases, for example 20. When the EV is charging with less than the defined amount of current, this TariffElement becomes/is active. If the charging current is or becomes higher, this TariffElement is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a TariffElement become active when the charging current is below this value, but the TariffElement MUST  no longer be active when the charging current raises above the defined value.",
+            "description": "Sum of the maximum current in over all phases, for example 20. When the EV is charging with less than the defined amount of current, this tariff element becomes/is active. If the charging current is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a tariff element become active when the charging current is below this value, but the tariff element MUST  no longer be active when the charging current raises above the defined value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7365,7 +8525,7 @@
           },
           {
             "name": "min_power",
-            "description": "Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this TariffElement is/becomes active. If the charging power is or becomes lower, this TariffElement is not or no longer valid and becomes inactive. This describes NOT the minimum power over the entire Charging Session. This restriction can make a TariffElement become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value.",
+            "description": "Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this tariff element is/becomes active. If the charging power is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum power over the entire charging session. This restriction can make a tariff element become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7377,7 +8537,7 @@
           },
           {
             "name": "max_power",
-            "description": "Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this TariffElement becomes/is active. If the charging power is or becomes higher, this TariffElement is not or no longer valid and becomes inactive. This describes NOT the maximum power over the entire Charging Session. This restriction can make a TariffElement become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value.",
+            "description": "Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this tariff element becomes/is active. If the charging power is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This does not describe the maximum power over the entire charging session. This restriction can make a tariff element become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7389,7 +8549,7 @@
           },
           {
             "name": "min_duration",
-            "description": "Minimum duration in seconds the Charging Session MUST last (inclusive). When the duration of a Charging Session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this TariffElement is not yet active.",
+            "description": "Minimum duration in seconds the charging session MUST last (inclusive). When the duration of a charging session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this tariff element is not yet active",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7401,7 +8561,7 @@
           },
           {
             "name": "max_duration",
-            "description": "Maximum duration in seconds the Charging Session MUST last (exclusive). When the duration of a Charging Session is shorter than the defined value, this TariffElement is or becomes active. After that moment, this TariffElement is no longer active.",
+            "description": "Maximum duration in seconds the charging session MUST last (exclusive). When the duration of a charging session is shorter than the defined value, this tariff element is or becomes active. After that moment, this tariff element is no longer active",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7413,7 +8573,7 @@
           },
           {
             "name": "day_of_week",
-            "description": "Which day(s) of the week this TariffElement is active.",
+            "description": "Which day(s) of the week this tariff element is active.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -7425,7 +8585,7 @@
           },
           {
             "name": "reservation",
-            "description": "When this field is present, the TariffElement describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation.",
+            "description": "When this field is present, the tariff element describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -8482,7 +9642,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "You will receive null values."
+            "deprecationReason": "You will receive null values"
           },
           {
             "name": "routeRequest",
@@ -10594,7 +11754,7 @@
           },
           {
             "name": "ev",
-            "description": "ID of the Car which was provided/selected by a user",
+            "description": "ID of the Car that was provided/selected by a user",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -10604,7 +11764,7 @@
           },
           {
             "name": "plugType",
-            "description": "Plug type which was provided/selected by a user",
+            "description": "Plug type that was provided/selected by a user",
             "type": {
               "kind": "ENUM",
               "name": "OCPIConnectorType",

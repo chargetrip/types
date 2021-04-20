@@ -63,6 +63,8 @@ export type QuerycarPremiumArgs = {
 
 export type QuerycarListArgs = {
   query?: Maybe<CarListQuery>;
+  search?: Maybe<Scalars["String"]>;
+  filter?: Maybe<CarListFilter>;
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
 };
@@ -210,107 +212,107 @@ export type Car = {
   externalId?: Maybe<Scalars["String"]>;
   /**
    * Car manufacturer
-   * @deprecated in favour to naming.make
+   * @deprecated In favor of naming.make
    */
   make?: Maybe<Scalars["String"]>;
   /**
    * Car model
-   * @deprecated in favour to naming.model
+   * @deprecated In favor of naming.model
    */
   carModel?: Maybe<Scalars["String"]>;
   /**
    * Car edition
-   * @deprecated in favour to naming.version
+   * @deprecated In favor of naming.version
    */
   edition?: Maybe<Scalars["String"]>;
   /**
    * Car model edition. Added by Chargetrip as an alternative for when a car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years
-   * @deprecated in favour to naming.chargetrip_version
+   * @deprecated In favor of naming.chargetrip_version
    */
   chargetripEdition?: Maybe<Scalars["String"]>;
   /**
    * Car version
-   * @deprecated in favour to naming.edition
+   * @deprecated In favor of naming.edition
    */
   version?: Maybe<Scalars["String"]>;
   /**
    * Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data
-   * @deprecated in favour to range.chargetrip_range
+   * @deprecated In favor of range.chargetrip_range
    */
   chargetripRange?: Maybe<ChargetripRange>;
   /**
    * Cars that support fast charging have a minimum charging speed of 43 Kwh. Cars without support for fast charging used in a newRoute mutation will return an error
-   * @deprecated in favour to routing.fast_charging_support
+   * @deprecated In favor of routing.fast_charging_is_supported
    */
   fastChargingSupport?: Maybe<Scalars["Boolean"]>;
   /**
    * Current production mode of a car
-   * @deprecated in favour to availability.status
+   * @deprecated In favor of availability.status
    */
   mode?: Maybe<CarMode>;
   /**
    * Number of seats
-   * @deprecated in favour to body.seats
+   * @deprecated In favor of body.seats
    */
   seats?: Maybe<Scalars["Int"]>;
   /**
-   * Weight in Kg
-   * @deprecated in favour to body.weight
+   * Weight in kg
+   * @deprecated In favor of body.weight
    */
   weight?: Maybe<Scalars["Float"]>;
   /**
    * Height in mm
-   * @deprecated in favour to body.height
+   * @deprecated In favor of body.height
    */
   height?: Maybe<Scalars["Int"]>;
   /**
    * Width in mm
-   * @deprecated in favour to body.width
+   * @deprecated In favor of body.width
    */
   width?: Maybe<Scalars["Int"]>;
   /**
    * Usable battery capacity in kWh
-   * @deprecated in favour to battery.usable_kwh
+   * @deprecated In favor of battery.usable_kwh
    */
   batteryUsableKwh?: Maybe<Scalars["Float"]>;
   /**
    * Full battery capacity in kWh
-   * @deprecated in favour to battery.full_kwh
+   * @deprecated In favor of battery.full_kwh
    */
   batteryFullKwh?: Maybe<Scalars["Float"]>;
   /**
    * Battery efficiency in the city, highway and combined depending on weather conditions
-   * @deprecated in favour to efficiency
+   * @deprecated In favor of efficiency
    */
   batteryEfficiency?: Maybe<CarBatteryEfficiency>;
   /**
    * Acceleration time from 0 to 100 km/h
-   * @deprecated in favour to performance.acceleration
+   * @deprecated In favor of performance.acceleration
    */
   acceleration?: Maybe<Scalars["Float"]>;
   /**
    * Maximum car speed in km/h
-   * @deprecated in favour to performance.top_speed
+   * @deprecated In favor of performance.top_speed
    */
   topSpeed?: Maybe<Scalars["Float"]>;
   /**
    * Power of a car in Kw
-   * @deprecated in favour to drivetrain.power
+   * @deprecated In favor of drivetrain.power
    */
   power?: Maybe<Scalars["Float"]>;
   /**
    * Engine torque
-   * @deprecated in favour to drivetrain.torque
+   * @deprecated In favor of drivetrain.torque
    */
   torque?: Maybe<Scalars["Float"]>;
   /**
    * Extra consumption model
-   * @deprecated in favour to routing.consumption
+   * @deprecated In favor of routing.consumption
    */
   consumption?: Maybe<CarExtraConsumption>;
   /**
    * Amount of petrol a similar petrol car would consume per 100 km
-   * @deprecated in favour to routing.petrol_consumption
+   * @deprecated In favor of routing.petrol_consumption
    */
   petrolConsumption?: Maybe<Scalars["Float"]>;
   /**
@@ -320,12 +322,12 @@ export type Car = {
   chargingOffset?: Maybe<Scalars["JSON"]>;
   /**
    * Images of a car
-   * @deprecated in favour to media.image_list
+   * @deprecated In favor of media.image_list
    */
   images?: Maybe<Array<Maybe<CarImage>>>;
   /**
    * Images of a car in structured data
-   * @deprecated in favour to media.image or media.brand
+   * @deprecated In favor of media.image or media.brand
    */
   imagesData?: Maybe<CarImageData>;
 };
@@ -490,7 +492,7 @@ export type ChargetripRange = {
 
 export type CarMedia = {
   /** URL to detail page on EV Database */
-  evdb_detail_url?: Maybe<Scalars["String"]>;
+  evdb_details_url?: Maybe<Scalars["String"]>;
   /** Latest image */
   image?: Maybe<CarImage>;
   /** Latest maker logo */
@@ -501,6 +503,11 @@ export type CarMedia = {
   video?: Maybe<CarVideo>;
   /** All videos */
   video_list?: Maybe<Array<Maybe<CarVideo>>>;
+  /**
+   * URL to detail page on EV Database
+   * @deprecated Will be removed in the future. Please use evdb_details_url
+   */
+  evdb_detail_url?: Maybe<Scalars["String"]>;
 };
 
 export type CarImage = {
@@ -545,8 +552,14 @@ export type CarVideo = {
 
 export type CarRouting = {
   /**
-   * Cars that support fast charging have a minimum charging speed of 43 Kwh.
-   * Cars without support for fast charging used in a newRoute mutation will return an error.
+   * EVs that support fast charging have a minimum charging speed of 43 Kwh.
+   * EVs without support for fast charging used in a newRoute mutation will return an error.
+   */
+  fast_charging_is_supported?: Maybe<Scalars["Boolean"]>;
+  /**
+   * EVs that support fast charging have a minimum charging speed of 43 Kwh.
+   * EVs without support for fast charging used in a newRoute mutation will return an error.
+   * @deprecated Will be removed in the future
    */
   fast_charging_support?: Maybe<Scalars["Boolean"]>;
 };
@@ -615,12 +628,18 @@ export type CarImageData = {
 export type CarPremium = {
   /** Cars unique ID */
   id?: Maybe<Scalars["ID"]>;
+  /** Temporary external id */
+  external_id?: Maybe<Scalars["Int"]>;
   /** Internal ID of the succesor car trim */
   succesor_id?: Maybe<Scalars["String"]>;
   /** Naming of a car */
   naming?: Maybe<CarPremiumNaming>;
   /** Connectors available for a car */
   connectors?: Maybe<Array<Maybe<CarPlug>>>;
+  /** Charge details */
+  charge?: Maybe<CarPremiumCharge>;
+  /** Fast charge details */
+  fast_charge?: Maybe<CarPremiumFastCharge>;
   /** Adapters of connectors available for a car */
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
   /** Battery of a car */
@@ -660,32 +679,173 @@ export type CarPremiumNaming = {
   chargetrip_version?: Maybe<Scalars["String"]>;
 };
 
+export type CarPremiumCharge = {
+  /** Location of charge port */
+  plug?: Maybe<CarPremiumChargePlug>;
+  /** Location of second charge port */
+  second_plug?: Maybe<CarPremiumChargePlug>;
+  /** The car standard charge */
+  standard?: Maybe<CarPremiumChargeOBC>;
+  /** The car alternative charge */
+  alternative?: Maybe<CarPremiumChargeOBC>;
+  /** The car option charge */
+  option?: Maybe<CarPremiumChargeOBC>;
+};
+
+export type CarPremiumChargePlug = {
+  /** Type of charge port on vehicle */
+  value?: Maybe<OCPIConnectorType>;
+  /** Indicates if value is an estimate */
+  is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Location of charge port */
+  location?: Maybe<Scalars["String"]>;
+  /** Indicates if second charge port is optional */
+  is_optional?: Maybe<Scalars["Boolean"]>;
+};
+
+export type CarPremiumChargeOBC = {
+  /** Maximum power OBC can accept to charge a battery (standard OBC) */
+  power?: Maybe<Scalars["Float"]>;
+  /** Number of phases the OBC accepts to achieve maximum power (standard OBC) */
+  phases?: Maybe<Scalars["Int"]>;
+  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC) */
+  phase_amperage?: Maybe<Scalars["Float"]>;
+  /** Minutes needed to charge from 0% to 100% SoC (standard OBC) */
+  charge_time?: Maybe<Scalars["Int"]>;
+  /** Charging speed when charging at maximum power (standard OBC) */
+  charge_speed?: Maybe<Scalars["Int"]>;
+  /** Indicates if Charge_Standard fields are estimated */
+  is_estimated?: Maybe<Scalars["Int"]>;
+  /** Charging details for the standard OBC on several charging points */
+  table?: Maybe<Array<Maybe<CarPremiumChargeOBCTable>>>;
+};
+
+export type CarPremiumChargeOBCTable = {
+  /** Voltage between phase and neutral for this EVSE (phase voltage) */
+  evse_phase_voltage?: Maybe<Scalars["Int"]>;
+  /** Current per phase for this EVSE (phase current) */
+  evse_phase_amperage?: Maybe<Scalars["Int"]>;
+  /** Number of phases for this EVSE */
+  evse_phases?: Maybe<Scalars["Int"]>;
+  /** Voltage between phase and neutral used by standard OBC (phase voltage) */
+  charge_phase_voltage?: Maybe<Scalars["Int"]>;
+  /** Current per phase used by standard OBC (phase current) */
+  charge_phase_amperage?: Maybe<Scalars["Float"]>;
+  /** Number of phases used by standard OBC */
+  charge_phases?: Maybe<Scalars["Int"]>;
+  /** Power used by standard OBC (before OBC losses) */
+  charge_power?: Maybe<Scalars["Float"]>;
+  /** Minutes needed to charge from 0% to 100% SoC (standard OBC with this EVSE) */
+  charge_time?: Maybe<Scalars["Int"]>;
+  /** Charging speed when charging at maximum power (standard OBC with this EVSE) */
+  charge_speed?: Maybe<Scalars["Int"]>;
+};
+
+export type CarPremiumFastCharge = {
+  /** Location of charge port */
+  plug?: Maybe<CarPremiumChargePlug>;
+  /** Power during fastcharging from 10% to 80% SoC (optimal conditions, fastest charger) */
+  power?: Maybe<CarPremiumChargePower>;
+  /** Minutes needed to charge from 10% to 80% SoC with average charing power (optimal conditions, fastest charger) */
+  charge_time?: Maybe<Scalars["Float"]>;
+  /** Charging speed during fastcharging from 10% to 80% SoC (optimal conditions, fastest charger) */
+  charge_speed?: Maybe<Scalars["Float"]>;
+  /** Indicates if fastcharge is optional in some markets/regions */
+  is_optional?: Maybe<Scalars["Boolean"]>;
+  /** Indicates what fields are estimated */
+  is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Charging details for fastcharging */
+  table?: Maybe<Array<Maybe<CarPremiumFastChargeTable>>>;
+};
+
+export type CarPremiumChargePower = {
+  /** Maximum value */
+  max?: Maybe<Scalars["Float"]>;
+  /** Average value */
+  average?: Maybe<Scalars["Float"]>;
+};
+
+export type CarPremiumFastChargeTable = {
+  /** Charging details for fastcharging (format: ChargerPlug-ChargerPower-AC/DC) */
+  format?: Maybe<Scalars["String"]>;
+  /** Fast charge power */
+  power?: Maybe<CarPremiumChargePower>;
+  /** Minutes needed to charge from 10% to 80% SoC (optimal conditions) */
+  charge_time?: Maybe<Scalars["Int"]>;
+  /** Charging speed during fastcharging from 10% to 80% SoC (optimal conditions) */
+  charge_speed?: Maybe<Scalars["Int"]>;
+  /** Inidicates if the maximum power during fastcharging is limited by the vehicle */
+  is_imited?: Maybe<Scalars["Boolean"]>;
+  /** Inidicates if the average power during fastcharging is limited by the vehicle */
+  average_is_limited?: Maybe<Scalars["Boolean"]>;
+};
+
 export type CarPremiumBattery = {
   /** Usable battery capacity in kWh */
   usable_kwh?: Maybe<Scalars["Float"]>;
   /** Full battery capacity in kWh */
   full_kwh?: Maybe<Scalars["Float"]>;
+  /** Indicates if and what battery fields are estimated */
+  estimated_fields?: Maybe<CarBatteryFieldEstimations>;
+  /** Battery thermal management system (active/passive, air/liquid) */
+  thermal_management_system?: Maybe<Scalars["String"]>;
+  /** Duration of battery warranty */
+  warranty_period?: Maybe<Scalars["Float"]>;
+  /** Mileage of battery warranty */
+  warranty_mileage?: Maybe<Scalars["Float"]>;
 };
+
+/** Battery field estimated */
+export enum CarBatteryFieldEstimations {
+  /** Both of the battery kwh fields are estimations */
+  B = "B",
+  /** full_kwh field is estimated */
+  F = "F",
+  /** None of the battery kwh fields are estimations */
+  N = "N",
+  /** useable_kwh field is estimated */
+  U = "U"
+}
 
 export type CarPremiumBody = {
   /** Length in mm */
   length?: Maybe<Scalars["Int"]>;
   /** Width with folded mirrors in mm */
   width?: Maybe<Scalars["Int"]>;
+  /** Width of vehicle, including mirrors in mm */
+  full_width?: Maybe<Scalars["Int"]>;
   /** Height (average height for adjustable suspensions) in mm */
   height?: Maybe<Scalars["Int"]>;
+  /** Indicates if length / width / height fields are estimations */
+  size_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Wheelbase in mm */
   wheelbase?: Maybe<Scalars["Int"]>;
+  /** Indicates if wheelbase field is estimated */
+  wheelbase_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Weight (Unladen EU) in kg */
   weight?: Maybe<Scalars["Int"]>;
+  /** Indicates if weight field is estimated */
+  weight_is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Maximum payload allowed for vehicle in kg */
+  weight_max_payload?: Maybe<Scalars["Int"]>;
+  /** Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload) in kg */
+  max_gross_vehicle_weight?: Maybe<Scalars["Int"]>;
   /** Standard luggage capacity in l */
   boot_capacity?: Maybe<Scalars["Int"]>;
+  /** Storage capacity of front trunk / under the hood (frunk) */
+  boot_front_capacity?: Maybe<Scalars["Int"]>;
   /** Maximum luggage capacity in l */
   boot_capacity_max?: Maybe<Scalars["Int"]>;
+  /** Indicates if a tow hitch / towbar can be fitted according to vehicle homologation */
+  tow_hitch_compatible?: Maybe<Scalars["Boolean"]>;
   /** Maximum unbraked towing weight in kg */
   tow_weight_unbraked?: Maybe<Scalars["Int"]>;
   /** Maximum braked towing weight in kg */
   tow_weight_braked?: Maybe<Scalars["Int"]>;
+  /** Indicates if tow weight fields are estimations */
+  tow_weight_is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Maximum vertical load / noseweight on tow hitch according to vehicle homologation */
+  tow_weight_vertical_load?: Maybe<Scalars["Int"]>;
   /** Maximum load on roof of car in kg */
   roof_load_max?: Maybe<Scalars["Int"]>;
   /** Body type, listed in local naming convention where applicable */
@@ -695,7 +855,13 @@ export type CarPremiumBody = {
   /** Number of seats */
   seats?: Maybe<Scalars["Int"]>;
   /** Indicates wheter a car has roofrails as a standard */
-  rooftrails?: Maybe<Scalars["Boolean"]>;
+  has_roofrails?: Maybe<Scalars["Boolean"]>;
+  /** Turning circle of vehicle kerb-to-kerb */
+  turning_circle?: Maybe<Scalars["Int"]>;
+  /** Name of vehicle platform used for vehicle (often abbreviated to indicate group platforms) */
+  vehicle_platform?: Maybe<Scalars["String"]>;
+  /** Indicates if the vehicle platform used for vehicle is a dedicated battery electric vehicle platform */
+  vehicle_platform_is_dedicated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumAvailability = {
@@ -716,6 +882,8 @@ export type CarPremiumAvailability = {
   status?: Maybe<Scalars["Int"]>;
   /** Date of introduction, mm-yyyy */
   date_from?: Maybe<Scalars["String"]>;
+  /** Indicates if date from field is estimated */
+  date_from_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Date last available, mm-yyyy */
   date_to?: Maybe<Scalars["String"]>;
 };
@@ -735,7 +903,9 @@ export type CarPremiumPriceValue = {
   /** Currency name for local market */
   currency?: Maybe<Scalars["String"]>;
   /** Indicates if priv=ce value is based on estimates */
-  estimated?: Maybe<Scalars["Boolean"]>;
+  is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Grant is applied to value */
+  grant_is_applied?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumDrivetrain = {
@@ -745,16 +915,13 @@ export type CarPremiumDrivetrain = {
    * Values:
    *   - BEV = Battery Electric Car
    *   - EREV = Extended Range Electric Car
-   *   - PHEV = Plugin Hybrid Electric Car
    */
   type?: Maybe<Scalars["String"]>;
   /**
    * Fuel type
    *
    * Values:
-   *   - D = ICE engine available, uses diesel
    *   - E = Electricity only, full electric car
-   *   - P = ICE engine available, uses petrol
    */
   fuel?: Maybe<Scalars["String"]>;
   /**
@@ -766,19 +933,29 @@ export type CarPremiumDrivetrain = {
    *   - Rear = Rear wheel drive car
    */
   propulsion?: Maybe<Scalars["String"]>;
+  /** Indicates if propulsion field is estimated */
+  propulsion_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Maximum (combined) power output in kw */
   power?: Maybe<Scalars["Int"]>;
+  /** Indicates if power field is estimated */
+  power_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Maximum (combined) power output in horsepower (PS) */
   power_hp?: Maybe<Scalars["Int"]>;
   /** Maximum (combined) torque output in newtonmeter */
   torque?: Maybe<Scalars["Int"]>;
+  /** Indicates if torque field is estimated */
+  torque_is_estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumPerformance = {
   /** Acceleration 0-100 km/h in seconds */
   acceleration?: Maybe<Scalars["Float"]>;
+  /** Indicates if acceleration field is estimated */
+  acceleration_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Top speed of car in km/h */
   top_speed?: Maybe<Scalars["Int"]>;
+  /** Indicates if top_speed field is estimated */
+  top_speed_is_estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumRange = {
@@ -786,6 +963,8 @@ export type CarPremiumRange = {
   wltp?: Maybe<Scalars["Int"]>;
   /** Indicates if WLTP range is estimated (NULL if not WLTP rated) */
   wltp_is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Rated range in WLTP (TEH / least efficient trim) combined cycle (NULL if not WLTP rated) */
+  wltp_teh?: Maybe<Scalars["Int"]>;
   /** Rated range in NEDC combined cycle (NULL if not NEDC rated) in km */
   nedc?: Maybe<Scalars["Int"]>;
   /** Indicates if NEDC range is estimated (NULL if not NEDC rated) */
@@ -817,6 +996,8 @@ export type CarPremiumRangeValue = {
 export type CarPremiumEfficiency = {
   /** Rated efficiency in WLTP combined cycle */
   wltp?: Maybe<CarPremiumEfficiencyWLTP>;
+  /** Rated efficiency in WLTP combined cycle (TEH / least efficient trim) */
+  wltp_teh?: Maybe<CarPremiumEfficiencyWLTPTEH>;
   /** Rated efficiency in NEDC combined cycle */
   nedc?: Maybe<CarPremiumEfficiencyNEDC>;
   /** Calculated car efficiency based on RealRange */
@@ -828,7 +1009,24 @@ export type CarPremiumEfficiencyWLTP = {
   value?: Maybe<Scalars["Float"]>;
   /** Rated efficiency in WLTP combined cycle presented in fuel (petrol) equivalent in l/100 km */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
+  /** Rated vehicle efficiency in WLTP combined cycle (based on value) in kWh/100 km */
+  vehicle?: Maybe<Scalars["Float"]>;
+  /** Rated vehicle efficiency in WLTP combined cycle presented in fuel (petrol) equivalent in l/100 km */
+  vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
   /** Rated CO2 emissions in WLTP combined cycle in battery only mode (NULL if not WLTP rated) in gr/km */
+  co2?: Maybe<Scalars["Int"]>;
+};
+
+export type CarPremiumEfficiencyWLTPTEH = {
+  /** Rated efficiency in WLTP TEH combined cycle in kWh/100 km */
+  value?: Maybe<Scalars["Float"]>;
+  /** Rated efficiency in WLTP TEH combined cycle presented in fuel (petrol) equivalent in l/100 km */
+  fuel_equivalent?: Maybe<Scalars["Float"]>;
+  /** Rated vehicle efficiency in WLTP TEH combined cycle (based on value) in kWh/100 km */
+  vehicle?: Maybe<Scalars["Float"]>;
+  /** Rated vehicle efficiency in WLTP TEH combined cycle presented in fuel (petrol) equivalent in l/100 km */
+  vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
+  /** Rated CO2 emissions in WLTP TEH combined cycle in battery only mode (NULL if not WLTP TEH rated) in gr/km */
   co2?: Maybe<Scalars["Int"]>;
 };
 
@@ -837,6 +1035,10 @@ export type CarPremiumEfficiencyNEDC = {
   value?: Maybe<Scalars["Float"]>;
   /** Rated efficiency in NEDC combined cycle presented in fuel (petrol) equivalent in l/100 km */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
+  /** Rated vehicle efficiency in NEDC combined cycle (based on value) in kWh/100 km */
+  vehicle?: Maybe<Scalars["Float"]>;
+  /** Rated vehicle efficiency in NEDC combined cycle presented in fuel (petrol) equivalent in l/100 km */
+  vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
   /** Rated CO2 emissions in NEDC combined cycle in battery only mode (NULL if not NEDC rated) in gr/km */
   co2?: Maybe<Scalars["Int"]>;
 };
@@ -885,7 +1087,7 @@ export type CarPremiumSafetyEuroNcap = {
 
 export type CarPremiumMedia = {
   /** URL to detail page on EV Database */
-  evdb_detail_url?: Maybe<Scalars["String"]>;
+  evdb_details_url?: Maybe<Scalars["String"]>;
   /** Latest image */
   image?: Maybe<CarImage>;
   /** Latest maker logo */
@@ -896,14 +1098,19 @@ export type CarPremiumMedia = {
   video?: Maybe<CarVideo>;
   /** All videos */
   video_list?: Maybe<Array<Maybe<CarVideo>>>;
+  /**
+   * URL to detail page on EV Database
+   * @deprecated Will be removed in the future. Please use evdb_details_url
+   */
+  evdb_detail_url?: Maybe<Scalars["String"]>;
 };
 
 export type CarPremiumRouting = {
   /**
-   * Cars that support fast charging have a minimum charging speed of 43 Kwh.
-   * Cars without support for fast charging used in a newRoute mutation will return an error.
+   * EVs that support fast charging have a minimum charging speed of 43 Kwh.
+   * EVs without support for fast charging used in a newRoute mutation will return an error.
    */
-  fast_charging_support?: Maybe<Scalars["Boolean"]>;
+  fast_charging_is_supported?: Maybe<Scalars["Boolean"]>;
   /** Drag coefficient */
   drag_coefficient?: Maybe<Scalars["Float"]>;
   /** Manufacturer recommended tire pressure */
@@ -930,18 +1137,36 @@ export type CarPremiumRoutingConsumptionValue = {
   worst?: Maybe<Scalars["Float"]>;
 };
 
-/** Filter which can be applied to retrieve the car list action */
+/** Deprecated */
 export type CarListQuery = {
-  /** Vehicle manufacturer (maker) */
+  /** Deprecated: Not used anymore */
   make?: Maybe<Scalars["String"]>;
-  /** Car model */
+  /** Deprecated: Not used anymore */
   model?: Maybe<Scalars["String"]>;
-  /** Car model version */
+  /** Deprecated: Not used anymore */
   version?: Maybe<Scalars["String"]>;
-  /** Car model version. Added by Chargetrip as an alternative for when the car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
+  /** Deprecated: Not used anymore */
   chargetrip_version?: Maybe<Scalars["String"]>;
-  /** Deprecated. We will ignore this */
+  /** Deprecated: Not used anymore */
   mode?: Maybe<CarMode>;
+};
+
+export type CarListFilter = {
+  /**
+   * Availability of car
+   *
+   * Values:
+   *    - 0 = Car no longer for sale in any market / region
+   *    - 1 = Car currently for sale in at least one market / region
+   *    - 2 = Car expected in market from Date_From (estimated), pre-order open
+   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open
+   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open
+   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open
+   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open
+   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown
+   *    - 91 = Status uncertain, introduction date and/or pricing unclear
+   */
+  availability?: Maybe<Array<Maybe<Scalars["Int"]>>>;
 };
 
 /** The output element of the carList query */
@@ -973,62 +1198,62 @@ export type CarList = {
   externalId?: Maybe<Scalars["String"]>;
   /**
    * Car manufacturer
-   * @deprecated in favour to naming.make
+   * @deprecated In favor of naming.make
    */
   make?: Maybe<Scalars["String"]>;
   /**
    * Car model
-   * @deprecated in favour to naming.model
+   * @deprecated In favor of naming.model
    */
   carModel?: Maybe<Scalars["String"]>;
   /**
    * Car edition
-   * @deprecated in favour to naming.version
+   * @deprecated In favor of naming.version
    */
   edition?: Maybe<Scalars["String"]>;
   /**
    * Car model edition. Added by Chargetrip as an alternative for when a car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years
-   * @deprecated in favour to naming.chargetrip_version
+   * @deprecated In favor of naming.chargetrip_version
    */
   chargetripEdition?: Maybe<Scalars["String"]>;
   /**
    * Car version
-   * @deprecated in favour to naming.edition
+   * @deprecated In favor of naming.edition
    */
   version?: Maybe<Scalars["String"]>;
   /**
    * Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data
-   * @deprecated in favour to range.chargetrip_range
+   * @deprecated In favor of range.chargetrip_range
    */
   chargetripRange?: Maybe<ChargetripRange>;
   /**
    * Cars that support fast charging have a minimum charging speed of 43 Kwh. Cars without support for fast charging used in a newRoute mutation will return an error
-   * @deprecated in favour to routing.fast_charging_support
+   * @deprecated In favor of routing.fast_charging_is_supported
    */
   fastChargingSupport?: Maybe<Scalars["Boolean"]>;
   /**
    * Current production mode of a car
-   * @deprecated in favour to availability.status
+   * @deprecated In favor of availability.status
    */
   mode?: Maybe<CarMode>;
   /**
    * Number of seats
-   * @deprecated in favour to body.seats
+   * @deprecated In favor of body.seats
    */
   seats?: Maybe<Scalars["Int"]>;
   /**
    * Usable battery capacity in kWh
-   * @deprecated in favour to battery.usable_kwh
+   * @deprecated In favor of battery.usable_kwh
    */
   batteryUsableKwh?: Maybe<Scalars["Float"]>;
   /**
    * Full battery capacity in kWh
-   * @deprecated in favour to battery.full_kwh
+   * @deprecated In favor of battery.full_kwh
    */
   batteryFullKwh?: Maybe<Scalars["Float"]>;
   /**
    * Images of a car in structured data
-   * @deprecated in favour to media.image and media.brand
+   * @deprecated In favor of media.image and media.brand
    */
   imagesData?: Maybe<CarImageData>;
   /** @deprecated You will receive null values */
@@ -1120,11 +1345,11 @@ export type CarListRange = {
    * (Comparable to Range_Real from EV Database.) It is essentially a normalized range to display in the front-end.
    */
   chargetrip_range?: Maybe<ChargetripRange>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   wltp?: Maybe<Scalars["Float"]>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   worst?: Maybe<CarEstimationData>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   best?: Maybe<CarEstimationData>;
 };
 
@@ -1139,8 +1364,14 @@ export type CarListMedia = {
 
 export type CarListRouting = {
   /**
-   * EV's that support fast charging have a minimum charging speed of 43 Kwh.
-   * EV's without support for fast charging used in a newRoute mutation will return an error.
+   * EVs that support fast charging have a minimum charging speed of 43 Kwh.
+   * EVs without support for fast charging used in a newRoute mutation will return an error.
+   */
+  fast_charging_is_supported?: Maybe<Scalars["Boolean"]>;
+  /**
+   * EVs that support fast charging have a minimum charging speed of 43 Kwh.
+   * EVs without support for fast charging used in a newRoute mutation will return an error.
+   * @deprecated Will be removed in the future
    */
   fast_charging_support?: Maybe<Scalars["Boolean"]>;
 };
@@ -1230,7 +1461,7 @@ export type Review = {
   id: Scalars["ID"];
   /** Station for which a review was provided */
   station?: Maybe<Station>;
-  /** User who added a review, in case a review was added by an anonymous user, this will be null */
+  /** User who added a review. If a review was added by an anonymous user, this will be null */
   user?: Maybe<ReviewUser>;
   /** Rating of a review */
   rating?: Maybe<Scalars["Int"]>;
@@ -1238,9 +1469,9 @@ export type Review = {
   message?: Maybe<Scalars["String"]>;
   /** Locale of a message */
   locale?: Maybe<Scalars["String"]>;
-  /** Car which was provided/selected by a user */
+  /** Car that was provided/selected by a user */
   ev?: Maybe<Car>;
-  /** Plug type which was provided/selected by a user */
+  /** Plug type that was provided/selected by a user */
   plugType?: Maybe<OCPIConnectorType>;
   /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
@@ -1263,9 +1494,9 @@ export type Station = {
   /** CPO ID of a CPO that 'owns' this station (following the ISO-15118 standard) */
   party_id?: Maybe<Scalars["String"]>;
   /**
-   * Defines if a Location may be published on an website or app etc.
-   * When this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this Location.
-   * When the same location has EVSEs that may be published and may not be published, two 'Locations' should be created.
+   * Defines if a location may be published on a website or app etc.
+   * When this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this location.
+   * When the same location has EVSEs that may be published and may not be published, two 'locations' should be created
    */
   publish?: Maybe<Scalars["Boolean"]>;
   /** Name of a charging station */
@@ -1302,7 +1533,7 @@ export type Station = {
   time_zone?: Maybe<Scalars["String"]>;
   /** Times when an EVSEs at a location can be accessed for charging */
   opening_times?: Maybe<OCPIHours>;
-  /** Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers over night, is it allowed to charge till the next morning? Default: true */
+  /** Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers overnight, is it allowed to charge till the next morning? Default: true */
   charging_when_closed?: Maybe<Scalars["Boolean"]>;
   /** Links to images related to a location such as photos or logos */
   images?: Maybe<Array<Maybe<OCPIImage>>>;
@@ -1324,9 +1555,9 @@ export type Station = {
   physical_address?: Maybe<Address>;
   /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
-  /** A flag which indicates if a station has realtime information about the availability of its connectors */
+  /** A flag that indicates if a station has real-time information about the availability of its connectors */
   realtime?: Maybe<Scalars["Boolean"]>;
-  /** A flag which indicates if a station is on a private property */
+  /** A flag that indicates if a station is on private property */
   private?: Maybe<Scalars["Boolean"]>;
   /** Connectors grouped by power */
   power?: Maybe<Scalars["JSON"]>;
@@ -1538,46 +1769,46 @@ export enum OCPIPowerType {
 }
 
 export type OCPITariff = {
-  /** ISO-3166 alpha-2 country code of the CPO that owns this Tariff. */
+  /** ISO-3166 alpha-2 country code of the CPO that owns this tariff */
   country_code?: Maybe<Scalars["String"]>;
-  /** CPO ID of the CPO that owns this Tariff (following the ISO-15118 standard). */
+  /** CPO ID of the CPO that owns this tariff (following the ISO-15118 standard) */
   party_id?: Maybe<Scalars["String"]>;
-  /** Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms). */
+  /** Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms) */
   id?: Maybe<Scalars["String"]>;
   /** ISO-4217 code of the currency of this tariff. */
   currency?: Maybe<Scalars["String"]>;
-  /** Defines the type of the tariff. This allows for distinction in case of given Charging Preferences. When omitted, this tariff is valid for all sessions. */
+  /** Defines the type of the tariff. This allows for distinction in case of given charging preferences. When omitted, this tariff is valid for all sessions */
   type?: Maybe<OCPITariffType>;
-  /** List of alternative tariff information texts, in multiple languages. */
+  /** List of alternative tariff information texts, in multiple languages */
   tariff_alt_text?: Maybe<Array<Maybe<OCPIDisplayText>>>;
-  /** URL to a web page that contains an explanation of the tariff information in human readable form. */
+  /** URL to a web page that contains an explanation of the tariff information in human readable form */
   tariff_alt_url?: Maybe<Scalars["String"]>;
-  /** When this field is set, a Charging Session with this tariff will cost at least this amount. This is different from a FLAT fee (Start Tariff, Transaction Fee), as a FLAT fee is a fixed amount that has to be payed for any Charging Session. A minimum price indicates that when the cost of a Charging Session is lower than this amount, the cost of the Session will be equal to this amount. (Also see note below) */
+  /** When this field is set, a charging session with this tariff will cost at least the amount shown. This is different from a FLAT fee (start tariff, transaction fee), as a FLAT fee is a fixed amount that must be paid for any charging session. A minimum price indicates that when the cost of a charging session is lower than this amount, the cost of the session will be equal to this amount */
   min_price?: Maybe<OCPIPrice>;
-  /** When this field is set, a Charging Session with this tariff will NOT cost more than this amount */
+  /** When this field is set, a charging session with this tariff will NOT cost more than this amount */
   max_price?: Maybe<OCPIPrice>;
-  /** List of Tariff Elements. */
+  /** List of tariff elements */
   elements?: Maybe<Array<Maybe<OCPITariffElement>>>;
-  /** The time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active */
+  /** Time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active */
   start_date_time?: Maybe<Scalars["DateTime"]>;
-  /** The time after which this tariff is no longer valid, in UTC, time_zone field if the Location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future */
+  /** Time after which this tariff is no longer valid, in UTC, time_zone field if the location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future */
   end_date_time?: Maybe<Scalars["DateTime"]>;
-  /** Details about the energy supplied with this tariff. */
+  /** Details about the energy supplied with this tariff */
   energy_mix?: Maybe<OCPIEnergyMix>;
-  /** Timestamp when this Tariff was last updated (or created). */
+  /** Timestamp when this tariff was last updated (or created) */
   last_updated?: Maybe<Scalars["DateTime"]>;
 };
 
 export enum OCPITariffType {
-  /** Used to describe that a Tariff is valid when ad-hoc payment is used at the Charge Point (for example: Debit or Credit card payment terminal). */
+  /** Used to describe that a tariff is valid when ad-hoc payment is used at the charge point (for example: Debit or Credit card payment terminal) */
   AD_HOC_PAYMENT = "AD_HOC_PAYMENT",
-  /** Used to describe that a Tariff is valid when Charging Preference: CHEAP is set for the session. */
+  /** Used to describe that a tariff is valid when charging preference: CHEAP is set for the session */
   PROFILE_CHEAP = "PROFILE_CHEAP",
-  /** Used to describe that a Tariff is valid when Charging Preference: FAST is set for the session. */
+  /** Used to describe that a tariff is valid when charging preference: FAST is set for the session */
   PROFILE_FAST = "PROFILE_FAST",
-  /** Used to describe that a Tariff is valid when Charging Preference: GREEN is set for the session. */
+  /** Used to describe that a tariff is valid when charging preference: GREEN is set for the session */
   PROFILE_GREEN = "PROFILE_GREEN",
-  /** Used to describe that a Tariff is valid when using an RFID, without any Charging Preference, or when Charging Preference: REGULAR is set for the session. */
+  /** Used to describe that a tariff is valid when using an RFID, without any charging preference, or when charging preference: REGULAR is set for the session */
   REGULAR = "REGULAR"
 }
 
@@ -1624,27 +1855,27 @@ export type OCPITariffRestrictions = {
   end_time?: Maybe<Scalars["String"]>;
   /** Start date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-24, valid from this day. Regex: ([12][0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) */
   start_date?: Maybe<Scalars["String"]>;
-  /** End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date. */
+  /** End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date */
   end_date?: Maybe<Scalars["String"]>;
-  /** Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used. */
+  /** Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used */
   min_kwh?: Maybe<Scalars["Float"]>;
-  /** Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used. */
+  /** Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used */
   max_kwh?: Maybe<Scalars["Float"]>;
-  /** Sum of the minimum current in A over all phases, for example 5. When the EV is charging with more than the defined amount of current, this TariffElement is/becomes active. If the charging current is or becomes lower, this TariffElement is not or no longer valid and becomes inactive. This describes NOT the minimum current over the entire Charging Session. This restriction can make a TariffElement become active when the charging current is above the defined value, but the TariffElement MUST no longer be active when the charging current drops below the defined value. */
+  /** Sum of the minimum current in over all phases, for example 5. When the EV is charging with more than the defined amount of current, this tariff element is/becomes active. If the charging current is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum current over the entire charging session. This restriction can make a tariff element become active when the charging current is above the defined value, but the tariff element MUST no longer be active when the charging current drops below the defined value */
   min_current?: Maybe<Scalars["Float"]>;
-  /** Sum of the maximum current in A over all phases, for example 20. When the EV is charging with less than the defined amount of current, this TariffElement becomes/is active. If the charging current is or becomes higher, this TariffElement is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a TariffElement become active when the charging current is below this value, but the TariffElement MUST  no longer be active when the charging current raises above the defined value. */
+  /** Sum of the maximum current in over all phases, for example 20. When the EV is charging with less than the defined amount of current, this tariff element becomes/is active. If the charging current is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a tariff element become active when the charging current is below this value, but the tariff element MUST  no longer be active when the charging current raises above the defined value */
   max_current?: Maybe<Scalars["Float"]>;
-  /** Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this TariffElement is/becomes active. If the charging power is or becomes lower, this TariffElement is not or no longer valid and becomes inactive. This describes NOT the minimum power over the entire Charging Session. This restriction can make a TariffElement become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value. */
+  /** Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this tariff element is/becomes active. If the charging power is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum power over the entire charging session. This restriction can make a tariff element become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value */
   min_power?: Maybe<Scalars["Float"]>;
-  /** Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this TariffElement becomes/is active. If the charging power is or becomes higher, this TariffElement is not or no longer valid and becomes inactive. This describes NOT the maximum power over the entire Charging Session. This restriction can make a TariffElement become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value. */
+  /** Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this tariff element becomes/is active. If the charging power is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This does not describe the maximum power over the entire charging session. This restriction can make a tariff element become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value */
   max_power?: Maybe<Scalars["Float"]>;
-  /** Minimum duration in seconds the Charging Session MUST last (inclusive). When the duration of a Charging Session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this TariffElement is not yet active. */
+  /** Minimum duration in seconds the charging session MUST last (inclusive). When the duration of a charging session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this tariff element is not yet active */
   min_duration?: Maybe<Scalars["Float"]>;
-  /** Maximum duration in seconds the Charging Session MUST last (exclusive). When the duration of a Charging Session is shorter than the defined value, this TariffElement is or becomes active. After that moment, this TariffElement is no longer active. */
+  /** Maximum duration in seconds the charging session MUST last (exclusive). When the duration of a charging session is shorter than the defined value, this tariff element is or becomes active. After that moment, this tariff element is no longer active */
   max_duration?: Maybe<Scalars["Float"]>;
-  /** Which day(s) of the week this TariffElement is active. */
+  /** Which day(s) of the week this tariff element is active. */
   day_of_week?: Maybe<OCPIDayOfWeek>;
-  /** When this field is present, the TariffElement describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation. */
+  /** When this field is present, the tariff element describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation */
   reservation?: Maybe<OCPIReservationRestrictionType>;
 };
 
@@ -1898,7 +2129,7 @@ export type Route = {
   alternatives?: Maybe<Array<Maybe<RouteAlternative>>>;
   /** EV specific data for a route request */
   ev?: Maybe<RequestEv>;
-  /** @deprecated You will receive null values. */
+  /** @deprecated You will receive null values */
   user?: Maybe<RequestUser>;
   /** Route request data */
   routeRequest?: Maybe<RequestRoute>;
@@ -2308,9 +2539,9 @@ export type ReviewAdd = {
   message?: Maybe<Scalars["String"]>;
   /** Locale of a message */
   locale?: Maybe<Scalars["String"]>;
-  /** ID of the Car which was provided/selected by a user */
+  /** ID of the Car that was provided/selected by a user */
   ev?: Maybe<Scalars["String"]>;
-  /** Plug type which was provided/selected by a user */
+  /** Plug type that was provided/selected by a user */
   plugType?: Maybe<OCPIConnectorType>;
   /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
