@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://staging-api.chargetrip.io/graphql"
+schema: "https://api-2.chargetrip.io/graphql"
 documents: null
 generates:
   src/graphql.ts:

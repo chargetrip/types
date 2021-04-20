@@ -63,8 +63,6 @@ export type QuerycarPremiumArgs = {
 
 export type QuerycarListArgs = {
   query?: Maybe<CarListQuery>;
-  search?: Maybe<Scalars["String"]>;
-  filter?: Maybe<CarListFilter>;
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
 };
@@ -242,7 +240,7 @@ export type Car = {
   chargetripRange?: Maybe<ChargetripRange>;
   /**
    * Cars that support fast charging have a minimum charging speed of 43 Kwh. Cars without support for fast charging used in a newRoute mutation will return an error
-   * @deprecated In favor of routing.fast_charging_is_supported
+   * @deprecated In favor of routing.fast_charging_support
    */
   fastChargingSupport?: Maybe<Scalars["Boolean"]>;
   /**
@@ -552,14 +550,8 @@ export type CarVideo = {
 
 export type CarRouting = {
   /**
-   * EVs that support fast charging have a minimum charging speed of 43 Kwh.
-   * EVs without support for fast charging used in a newRoute mutation will return an error.
-   */
-  fast_charging_is_supported?: Maybe<Scalars["Boolean"]>;
-  /**
-   * EVs that support fast charging have a minimum charging speed of 43 Kwh.
-   * EVs without support for fast charging used in a newRoute mutation will return an error.
-   * @deprecated Will be removed in the future
+   * Cars that support fast charging have a minimum charging speed of 43 Kwh.
+   * Cars without support for fast charging used in a newRoute mutation will return an error.
    */
   fast_charging_support?: Maybe<Scalars["Boolean"]>;
 };
@@ -628,18 +620,12 @@ export type CarImageData = {
 export type CarPremium = {
   /** Cars unique ID */
   id?: Maybe<Scalars["ID"]>;
-  /** Temporary external id */
-  external_id?: Maybe<Scalars["Int"]>;
   /** Internal ID of the succesor car trim */
   succesor_id?: Maybe<Scalars["String"]>;
   /** Naming of a car */
   naming?: Maybe<CarPremiumNaming>;
   /** Connectors available for a car */
   connectors?: Maybe<Array<Maybe<CarPlug>>>;
-  /** Charge details */
-  charge?: Maybe<CarPremiumCharge>;
-  /** Fast charge details */
-  fast_charge?: Maybe<CarPremiumFastCharge>;
   /** Adapters of connectors available for a car */
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
   /** Battery of a car */
@@ -679,173 +665,32 @@ export type CarPremiumNaming = {
   chargetrip_version?: Maybe<Scalars["String"]>;
 };
 
-export type CarPremiumCharge = {
-  /** Location of charge port */
-  plug?: Maybe<CarPremiumChargePlug>;
-  /** Location of second charge port */
-  second_plug?: Maybe<CarPremiumChargePlug>;
-  /** The car standard charge */
-  standard?: Maybe<CarPremiumChargeOBC>;
-  /** The car alternative charge */
-  alternative?: Maybe<CarPremiumChargeOBC>;
-  /** The car option charge */
-  option?: Maybe<CarPremiumChargeOBC>;
-};
-
-export type CarPremiumChargePlug = {
-  /** Type of charge port on vehicle */
-  value?: Maybe<OCPIConnectorType>;
-  /** Indicates if value is an estimate */
-  is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Location of charge port */
-  location?: Maybe<Scalars["String"]>;
-  /** Indicates if second charge port is optional */
-  is_optional?: Maybe<Scalars["Boolean"]>;
-};
-
-export type CarPremiumChargeOBC = {
-  /** Maximum power OBC can accept to charge a battery (standard OBC) */
-  power?: Maybe<Scalars["Float"]>;
-  /** Number of phases the OBC accepts to achieve maximum power (standard OBC) */
-  phases?: Maybe<Scalars["Int"]>;
-  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC) */
-  phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% SoC (standard OBC) */
-  charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC) */
-  charge_speed?: Maybe<Scalars["Int"]>;
-  /** Indicates if Charge_Standard fields are estimated */
-  is_estimated?: Maybe<Scalars["Int"]>;
-  /** Charging details for the standard OBC on several charging points */
-  table?: Maybe<Array<Maybe<CarPremiumChargeOBCTable>>>;
-};
-
-export type CarPremiumChargeOBCTable = {
-  /** Voltage between phase and neutral for this EVSE (phase voltage) */
-  evse_phase_voltage?: Maybe<Scalars["Int"]>;
-  /** Current per phase for this EVSE (phase current) */
-  evse_phase_amperage?: Maybe<Scalars["Int"]>;
-  /** Number of phases for this EVSE */
-  evse_phases?: Maybe<Scalars["Int"]>;
-  /** Voltage between phase and neutral used by standard OBC (phase voltage) */
-  charge_phase_voltage?: Maybe<Scalars["Int"]>;
-  /** Current per phase used by standard OBC (phase current) */
-  charge_phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Number of phases used by standard OBC */
-  charge_phases?: Maybe<Scalars["Int"]>;
-  /** Power used by standard OBC (before OBC losses) */
-  charge_power?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% SoC (standard OBC with this EVSE) */
-  charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC with this EVSE) */
-  charge_speed?: Maybe<Scalars["Int"]>;
-};
-
-export type CarPremiumFastCharge = {
-  /** Location of charge port */
-  plug?: Maybe<CarPremiumChargePlug>;
-  /** Power during fastcharging from 10% to 80% SoC (optimal conditions, fastest charger) */
-  power?: Maybe<CarPremiumChargePower>;
-  /** Minutes needed to charge from 10% to 80% SoC with average charing power (optimal conditions, fastest charger) */
-  charge_time?: Maybe<Scalars["Float"]>;
-  /** Charging speed during fastcharging from 10% to 80% SoC (optimal conditions, fastest charger) */
-  charge_speed?: Maybe<Scalars["Float"]>;
-  /** Indicates if fastcharge is optional in some markets/regions */
-  is_optional?: Maybe<Scalars["Boolean"]>;
-  /** Indicates what fields are estimated */
-  is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Charging details for fastcharging */
-  table?: Maybe<Array<Maybe<CarPremiumFastChargeTable>>>;
-};
-
-export type CarPremiumChargePower = {
-  /** Maximum value */
-  max?: Maybe<Scalars["Float"]>;
-  /** Average value */
-  average?: Maybe<Scalars["Float"]>;
-};
-
-export type CarPremiumFastChargeTable = {
-  /** Charging details for fastcharging (format: ChargerPlug-ChargerPower-AC/DC) */
-  format?: Maybe<Scalars["String"]>;
-  /** Fast charge power */
-  power?: Maybe<CarPremiumChargePower>;
-  /** Minutes needed to charge from 10% to 80% SoC (optimal conditions) */
-  charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed during fastcharging from 10% to 80% SoC (optimal conditions) */
-  charge_speed?: Maybe<Scalars["Int"]>;
-  /** Inidicates if the maximum power during fastcharging is limited by the vehicle */
-  is_imited?: Maybe<Scalars["Boolean"]>;
-  /** Inidicates if the average power during fastcharging is limited by the vehicle */
-  average_is_limited?: Maybe<Scalars["Boolean"]>;
-};
-
 export type CarPremiumBattery = {
   /** Usable battery capacity in kWh */
   usable_kwh?: Maybe<Scalars["Float"]>;
   /** Full battery capacity in kWh */
   full_kwh?: Maybe<Scalars["Float"]>;
-  /** Indicates if and what battery fields are estimated */
-  estimated_fields?: Maybe<CarBatteryFieldEstimations>;
-  /** Battery thermal management system (active/passive, air/liquid) */
-  thermal_management_system?: Maybe<Scalars["String"]>;
-  /** Duration of battery warranty */
-  warranty_period?: Maybe<Scalars["Float"]>;
-  /** Mileage of battery warranty */
-  warranty_mileage?: Maybe<Scalars["Float"]>;
 };
-
-/** Battery field estimated */
-export enum CarBatteryFieldEstimations {
-  /** Both of the battery kwh fields are estimations */
-  B = "B",
-  /** full_kwh field is estimated */
-  F = "F",
-  /** None of the battery kwh fields are estimations */
-  N = "N",
-  /** useable_kwh field is estimated */
-  U = "U"
-}
 
 export type CarPremiumBody = {
   /** Length in mm */
   length?: Maybe<Scalars["Int"]>;
   /** Width with folded mirrors in mm */
   width?: Maybe<Scalars["Int"]>;
-  /** Width of vehicle, including mirrors in mm */
-  full_width?: Maybe<Scalars["Int"]>;
   /** Height (average height for adjustable suspensions) in mm */
   height?: Maybe<Scalars["Int"]>;
-  /** Indicates if length / width / height fields are estimations */
-  size_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Wheelbase in mm */
   wheelbase?: Maybe<Scalars["Int"]>;
-  /** Indicates if wheelbase field is estimated */
-  wheelbase_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Weight (Unladen EU) in kg */
   weight?: Maybe<Scalars["Int"]>;
-  /** Indicates if weight field is estimated */
-  weight_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum payload allowed for vehicle in kg */
-  weight_max_payload?: Maybe<Scalars["Int"]>;
-  /** Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload) in kg */
-  max_gross_vehicle_weight?: Maybe<Scalars["Int"]>;
   /** Standard luggage capacity in l */
   boot_capacity?: Maybe<Scalars["Int"]>;
-  /** Storage capacity of front trunk / under the hood (frunk) */
-  boot_front_capacity?: Maybe<Scalars["Int"]>;
   /** Maximum luggage capacity in l */
   boot_capacity_max?: Maybe<Scalars["Int"]>;
-  /** Indicates if a tow hitch / towbar can be fitted according to vehicle homologation */
-  tow_hitch_compatible?: Maybe<Scalars["Boolean"]>;
   /** Maximum unbraked towing weight in kg */
   tow_weight_unbraked?: Maybe<Scalars["Int"]>;
   /** Maximum braked towing weight in kg */
   tow_weight_braked?: Maybe<Scalars["Int"]>;
-  /** Indicates if tow weight fields are estimations */
-  tow_weight_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum vertical load / noseweight on tow hitch according to vehicle homologation */
-  tow_weight_vertical_load?: Maybe<Scalars["Int"]>;
   /** Maximum load on roof of car in kg */
   roof_load_max?: Maybe<Scalars["Int"]>;
   /** Body type, listed in local naming convention where applicable */
@@ -855,13 +700,7 @@ export type CarPremiumBody = {
   /** Number of seats */
   seats?: Maybe<Scalars["Int"]>;
   /** Indicates wheter a car has roofrails as a standard */
-  has_roofrails?: Maybe<Scalars["Boolean"]>;
-  /** Turning circle of vehicle kerb-to-kerb */
-  turning_circle?: Maybe<Scalars["Int"]>;
-  /** Name of vehicle platform used for vehicle (often abbreviated to indicate group platforms) */
-  vehicle_platform?: Maybe<Scalars["String"]>;
-  /** Indicates if the vehicle platform used for vehicle is a dedicated battery electric vehicle platform */
-  vehicle_platform_is_dedicated?: Maybe<Scalars["Boolean"]>;
+  roofrails?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumAvailability = {
@@ -882,8 +721,6 @@ export type CarPremiumAvailability = {
   status?: Maybe<Scalars["Int"]>;
   /** Date of introduction, mm-yyyy */
   date_from?: Maybe<Scalars["String"]>;
-  /** Indicates if date from field is estimated */
-  date_from_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Date last available, mm-yyyy */
   date_to?: Maybe<Scalars["String"]>;
 };
@@ -903,9 +740,7 @@ export type CarPremiumPriceValue = {
   /** Currency name for local market */
   currency?: Maybe<Scalars["String"]>;
   /** Indicates if priv=ce value is based on estimates */
-  is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Grant is applied to value */
-  grant_is_applied?: Maybe<Scalars["Boolean"]>;
+  estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumDrivetrain = {
@@ -933,29 +768,19 @@ export type CarPremiumDrivetrain = {
    *   - Rear = Rear wheel drive car
    */
   propulsion?: Maybe<Scalars["String"]>;
-  /** Indicates if propulsion field is estimated */
-  propulsion_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Maximum (combined) power output in kw */
   power?: Maybe<Scalars["Int"]>;
-  /** Indicates if power field is estimated */
-  power_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Maximum (combined) power output in horsepower (PS) */
   power_hp?: Maybe<Scalars["Int"]>;
   /** Maximum (combined) torque output in newtonmeter */
   torque?: Maybe<Scalars["Int"]>;
-  /** Indicates if torque field is estimated */
-  torque_is_estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumPerformance = {
   /** Acceleration 0-100 km/h in seconds */
   acceleration?: Maybe<Scalars["Float"]>;
-  /** Indicates if acceleration field is estimated */
-  acceleration_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Top speed of car in km/h */
   top_speed?: Maybe<Scalars["Int"]>;
-  /** Indicates if top_speed field is estimated */
-  top_speed_is_estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumRange = {
@@ -963,8 +788,6 @@ export type CarPremiumRange = {
   wltp?: Maybe<Scalars["Int"]>;
   /** Indicates if WLTP range is estimated (NULL if not WLTP rated) */
   wltp_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Rated range in WLTP (TEH / least efficient trim) combined cycle (NULL if not WLTP rated) */
-  wltp_teh?: Maybe<Scalars["Int"]>;
   /** Rated range in NEDC combined cycle (NULL if not NEDC rated) in km */
   nedc?: Maybe<Scalars["Int"]>;
   /** Indicates if NEDC range is estimated (NULL if not NEDC rated) */
@@ -996,8 +819,6 @@ export type CarPremiumRangeValue = {
 export type CarPremiumEfficiency = {
   /** Rated efficiency in WLTP combined cycle */
   wltp?: Maybe<CarPremiumEfficiencyWLTP>;
-  /** Rated efficiency in WLTP combined cycle (TEH / least efficient trim) */
-  wltp_teh?: Maybe<CarPremiumEfficiencyWLTPTEH>;
   /** Rated efficiency in NEDC combined cycle */
   nedc?: Maybe<CarPremiumEfficiencyNEDC>;
   /** Calculated car efficiency based on RealRange */
@@ -1009,24 +830,7 @@ export type CarPremiumEfficiencyWLTP = {
   value?: Maybe<Scalars["Float"]>;
   /** Rated efficiency in WLTP combined cycle presented in fuel (petrol) equivalent in l/100 km */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP combined cycle (based on value) in kWh/100 km */
-  vehicle?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP combined cycle presented in fuel (petrol) equivalent in l/100 km */
-  vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
   /** Rated CO2 emissions in WLTP combined cycle in battery only mode (NULL if not WLTP rated) in gr/km */
-  co2?: Maybe<Scalars["Int"]>;
-};
-
-export type CarPremiumEfficiencyWLTPTEH = {
-  /** Rated efficiency in WLTP TEH combined cycle in kWh/100 km */
-  value?: Maybe<Scalars["Float"]>;
-  /** Rated efficiency in WLTP TEH combined cycle presented in fuel (petrol) equivalent in l/100 km */
-  fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP TEH combined cycle (based on value) in kWh/100 km */
-  vehicle?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP TEH combined cycle presented in fuel (petrol) equivalent in l/100 km */
-  vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated CO2 emissions in WLTP TEH combined cycle in battery only mode (NULL if not WLTP TEH rated) in gr/km */
   co2?: Maybe<Scalars["Int"]>;
 };
 
@@ -1035,10 +839,6 @@ export type CarPremiumEfficiencyNEDC = {
   value?: Maybe<Scalars["Float"]>;
   /** Rated efficiency in NEDC combined cycle presented in fuel (petrol) equivalent in l/100 km */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in NEDC combined cycle (based on value) in kWh/100 km */
-  vehicle?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in NEDC combined cycle presented in fuel (petrol) equivalent in l/100 km */
-  vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
   /** Rated CO2 emissions in NEDC combined cycle in battery only mode (NULL if not NEDC rated) in gr/km */
   co2?: Maybe<Scalars["Int"]>;
 };
@@ -1107,10 +907,10 @@ export type CarPremiumMedia = {
 
 export type CarPremiumRouting = {
   /**
-   * EVs that support fast charging have a minimum charging speed of 43 Kwh.
-   * EVs without support for fast charging used in a newRoute mutation will return an error.
+   * Cars that support fast charging have a minimum charging speed of 43 Kwh.
+   * Cars without support for fast charging used in a newRoute mutation will return an error.
    */
-  fast_charging_is_supported?: Maybe<Scalars["Boolean"]>;
+  fast_charging_support?: Maybe<Scalars["Boolean"]>;
   /** Drag coefficient */
   drag_coefficient?: Maybe<Scalars["Float"]>;
   /** Manufacturer recommended tire pressure */
@@ -1137,36 +937,18 @@ export type CarPremiumRoutingConsumptionValue = {
   worst?: Maybe<Scalars["Float"]>;
 };
 
-/** Deprecated */
+/** Filter which can be applied to retrieve the car list action */
 export type CarListQuery = {
-  /** Deprecated: Not used anymore */
+  /** Vehicle manufacturer (maker) */
   make?: Maybe<Scalars["String"]>;
-  /** Deprecated: Not used anymore */
+  /** Car model */
   model?: Maybe<Scalars["String"]>;
-  /** Deprecated: Not used anymore */
+  /** Car model version */
   version?: Maybe<Scalars["String"]>;
-  /** Deprecated: Not used anymore */
+  /** Car model version. Added by Chargetrip as an alternative for when the car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
   chargetrip_version?: Maybe<Scalars["String"]>;
-  /** Deprecated: Not used anymore */
+  /** Deprecated. We will ignore this */
   mode?: Maybe<CarMode>;
-};
-
-export type CarListFilter = {
-  /**
-   * Availability of car
-   *
-   * Values:
-   *    - 0 = Car no longer for sale in any market / region
-   *    - 1 = Car currently for sale in at least one market / region
-   *    - 2 = Car expected in market from Date_From (estimated), pre-order open
-   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open
-   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open
-   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open
-   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open
-   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown
-   *    - 91 = Status uncertain, introduction date and/or pricing unclear
-   */
-  availability?: Maybe<Array<Maybe<Scalars["Int"]>>>;
 };
 
 /** The output element of the carList query */
@@ -1228,7 +1010,7 @@ export type CarList = {
   chargetripRange?: Maybe<ChargetripRange>;
   /**
    * Cars that support fast charging have a minimum charging speed of 43 Kwh. Cars without support for fast charging used in a newRoute mutation will return an error
-   * @deprecated In favor of routing.fast_charging_is_supported
+   * @deprecated In favor of routing.fast_charging_support
    */
   fastChargingSupport?: Maybe<Scalars["Boolean"]>;
   /**
@@ -1366,12 +1148,6 @@ export type CarListRouting = {
   /**
    * EVs that support fast charging have a minimum charging speed of 43 Kwh.
    * EVs without support for fast charging used in a newRoute mutation will return an error.
-   */
-  fast_charging_is_supported?: Maybe<Scalars["Boolean"]>;
-  /**
-   * EVs that support fast charging have a minimum charging speed of 43 Kwh.
-   * EVs without support for fast charging used in a newRoute mutation will return an error.
-   * @deprecated Will be removed in the future
    */
   fast_charging_support?: Maybe<Scalars["Boolean"]>;
 };
