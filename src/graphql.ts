@@ -473,6 +473,7 @@ export type CarRange = {
   wltp?: Maybe<Scalars["Float"]>;
 };
 
+
 export type CarRangeValue = {
   /** Estimated value on the highway or express roads */
   highway?: Maybe<Scalars["Int"]>;
