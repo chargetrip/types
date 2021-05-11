@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/chargetrip/types/compare/v1.11.0...v1.12.0) (2021-05-11)
+
+
+### Features
+
+* release new version 1.13.0 ([#10](https://github.com/chargetrip/types/issues/10)) ([2f02ac9](https://github.com/chargetrip/types/commit/2f02ac97868578b1449eae93139a2a5b48eed34d))
+
 # [1.11.0](https://github.com/chargetrip/types/compare/v1.10.0...v1.11.0) (2021-01-27)
 
 
