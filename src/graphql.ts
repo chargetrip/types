@@ -30,6 +30,12 @@ export type Query = {
   operator?: Maybe<Operator>;
   /** Get all reviews of a station by the station ID */
   reviewList?: Maybe<Array<Review>>;
+  /**
+   * Get all reviews of stations that were added by an authenticated user.
+   * The `x-token` header is mandatory in order to authorize the user who wants to retrieve all the reviews added by him/her.
+   * This is a premium feature, contact Chargetrip for more information.
+   */
+  userReviewList?: Maybe<Array<Review>>;
   /** Get a route by ID */
   route?: Maybe<Route>;
   /** Retrieve information about a route path segment */
@@ -81,6 +87,11 @@ export type QueryoperatorArgs = {
 
 export type QueryreviewListArgs = {
   stationId: Scalars["ID"];
+  size?: Maybe<Scalars["Int"]>;
+  page?: Maybe<Scalars["Int"]>;
+};
+
+export type QueryuserReviewListArgs = {
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
 };
@@ -472,7 +483,6 @@ export type CarRange = {
   /** @deprecated You will receive null values */
   wltp?: Maybe<Scalars["Float"]>;
 };
-
 
 export type CarRangeValue = {
   /** Estimated value on the highway or express roads */
@@ -2140,11 +2150,22 @@ export enum ChargerStatus {
 
 /** Special format for the user of a review */
 export type ReviewUser = {
-  /** User ID */
-  id: Scalars["ID"];
-  /** First name */
+  /** User full name. If a review was added by an anonymous user, this will be null */
+  name?: Maybe<Scalars["String"]>;
+  /**
+   * User ID
+   * @deprecated Not sent back anymore, will be null
+   */
+  id?: Maybe<Scalars["ID"]>;
+  /**
+   * First name
+   * @deprecated Please use name instead
+   */
   firstName?: Maybe<Scalars["String"]>;
-  /** Last name */
+  /**
+   * Last name
+   * @deprecated Please use name instead
+   */
   lastName?: Maybe<Scalars["String"]>;
 };
 
@@ -2549,14 +2570,29 @@ export type StationAroundQuery = {
 };
 
 export type Mutation = {
-  /** Add a new review */
+  /**
+   * Add a new review.
+   * If the `x-token` header is send for a valid user, the review will belong to it, otherwise will be added for an anonymouse user
+   */
   addReview: Review;
+  /**
+   * Remove a review added by an authenticated user.
+   * The `x-token` header is mandatory in order to authorize the user who wants to remove a review.
+   * In case it is not sent, an error will occur.
+   * In case the review was not found or belongs to another user an error will occur.
+   * This is a premium feature, contact Chargetrip for more information.
+   */
+  deleteUserReview: Review;
   /** Create a new route from the route input and its ID */
   newRoute?: Maybe<Scalars["ID"]>;
 };
 
 export type MutationaddReviewArgs = {
   review: ReviewAdd;
+};
+
+export type MutationdeleteUserReviewArgs = {
+  id: Scalars["ID"];
 };
 
 export type MutationnewRouteArgs = {
@@ -2758,6 +2794,18 @@ export enum CarStatus {
   /** Is public and can be used by a customer */
   PUBLIC = "public"
 }
+
+/** The price model */
+export type Price = {
+  /** The value of the price */
+  value?: Maybe<Scalars["String"]>;
+  /** The currency of the price */
+  currency?: Maybe<Scalars["String"]>;
+  /** The pricing model */
+  model?: Maybe<Scalars["String"]>;
+  /** The value of the price which should be deplay by the frontend */
+  displayValue?: Maybe<Scalars["String"]>;
+};
 
 /** Form input for edit an existing review */
 export type ReviewEdit = {
