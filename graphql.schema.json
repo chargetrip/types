@@ -300,6 +300,47 @@
             "deprecationReason": null
           },
           {
+            "name": "userReviewList",
+            "description": "Get all reviews of stations that were added by an authenticated user.\nThe `x-token` header is mandatory in order to authorize the user who wants to retrieve all the reviews added by him/her.\nThis is a premium feature, contact Chargetrip for more information.",
+            "args": [
+              {
+                "name": "size",
+                "description": "Number of elements (count) to return, default: 10",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "page",
+                "description": "Page number to return, default: 0",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Review",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "route",
             "description": "Get a route by ID",
             "args": [
@@ -9784,20 +9825,28 @@
         "description": "Special format for the user of a review",
         "fields": [
           {
+            "name": "name",
+            "description": "User full name. If a review was added by an anonymous user, this will be null",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": "User ID",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Not sent back anymore, will be null"
           },
           {
             "name": "firstName",
@@ -9808,8 +9857,8 @@
               "name": "String",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Please use name instead"
           },
           {
             "name": "lastName",
@@ -9820,8 +9869,8 @@
               "name": "String",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Please use name instead"
           }
         ],
         "inputFields": null,
@@ -11917,7 +11966,7 @@
         "fields": [
           {
             "name": "addReview",
-            "description": "Add a new review",
+            "description": "Add a new review.\nIf the `x-token` header is send for a valid user, the review will belong to it, otherwise will be added for an anonymouse user",
             "args": [
               {
                 "name": "review",
@@ -11928,6 +11977,37 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "ReviewAdd",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Review",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteUserReview",
+            "description": "Remove a review added by an authenticated user.\nThe `x-token` header is mandatory in order to authorize the user who wants to remove a review.\nIn case it is not sent, an error will occur.\nIn case the review was not found or belongs to another user an error will occur.\nThis is a premium feature, contact Chargetrip for more information.",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
                     "ofType": null
                   }
                 },
@@ -12925,6 +13005,65 @@
         "fields": null,
         "inputFields": null,
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Price",
+        "description": "The price model",
+        "fields": [
+          {
+            "name": "value",
+            "description": "The value of the price",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "currency",
+            "description": "The currency of the price",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "model",
+            "description": "The pricing model",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "displayValue",
+            "description": "The value of the price which should be deplay by the frontend",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
