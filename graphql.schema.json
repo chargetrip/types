@@ -10222,6 +10222,22 @@
             "deprecationReason": null
           },
           {
+            "name": "pathPlot",
+            "description": "Path elevation, distance, duration, consumption and speed values, grouped into 100 segments",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PathSegment",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "elevationPlot",
             "description": "Elevation values. Each elevationPlot has a hundred points, independent of the length of a route",
             "args": [],
@@ -10234,8 +10250,8 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future; Use the pathPlot property"
           },
           {
             "name": "elevationUp",
@@ -10350,6 +10366,89 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PathSegment",
+        "description": null,
+        "fields": [
+          {
+            "name": "elevation",
+            "description": "Elevation (altitude) in meters",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "averageSpeed",
+            "description": "Average speed, in km/h, for this route path segment",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "consumption",
+            "description": "Consumption, in kWh, of a route path segment",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "consumptionPerKm",
+            "description": "Consumption, in kWh per km, of a route path segment",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "distance",
+            "description": "Distance, in meters, of a route path segment",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "duration",
+            "description": "Duration, in seconds, of a route path segment",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -12742,8 +12841,8 @@
               "name": "Operator",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "operatorAdded has been removed, no value will be sent."
           },
           {
             "name": "operatorUpdated",
@@ -12754,8 +12853,8 @@
               "name": "Operator",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "operatorUpdated has been removed, no value will be sent."
           },
           {
             "name": "operatorDeleted",
@@ -12766,8 +12865,8 @@
               "name": "Operator",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "operatorDeleted has been removed, no value will be sent."
           },
           {
             "name": "operatorUpdatedById",
@@ -12793,8 +12892,8 @@
               "name": "Operator",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "operatorUpdatedById has been removed, no value will be sent."
           },
           {
             "name": "operatorDeletedById",
@@ -12820,8 +12919,8 @@
               "name": "Operator",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "operatorDeletedById has been removed, no value will be sent."
           },
           {
             "name": "routeUpdatedById",
@@ -12859,8 +12958,8 @@
               "name": "Station",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "stationAdded has been removed, no value will be sent."
           },
           {
             "name": "stationUpdated",
@@ -12871,8 +12970,8 @@
               "name": "Station",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "stationUpdated has been removed, no value will be sent."
           },
           {
             "name": "stationDeleted",
@@ -12883,8 +12982,8 @@
               "name": "Station",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "stationDeleted has been removed, no value will be sent."
           },
           {
             "name": "stationUpdatedById",
@@ -12910,8 +13009,8 @@
               "name": "Station",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "stationUpdatedById has been removed, no value will be sent."
           },
           {
             "name": "stationDeletedById",
@@ -12937,8 +13036,8 @@
               "name": "Station",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "stationDeletedById has been removed, no value will be sent."
           }
         ],
         "inputFields": null,
