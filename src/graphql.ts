@@ -2229,7 +2229,12 @@ export type RouteAlternative = {
   via?: Maybe<Scalars["String"]>;
   /** Polyline encoded route */
   polyline?: Maybe<Scalars["String"]>;
-  /** Elevation values. Each elevationPlot has a hundred points, independent of the length of a route */
+  /** Path elevation, distance, duration, consumption and speed values, grouped into 100 segments */
+  pathPlot?: Maybe<Array<Maybe<PathSegment>>>;
+  /**
+   * Elevation values. Each elevationPlot has a hundred points, independent of the length of a route
+   * @deprecated Will be removed in the future; Use the pathPlot property
+   */
   elevationPlot?: Maybe<Array<Maybe<Scalars["Float"]>>>;
   /** Total number of meters which are going up on a route */
   elevationUp?: Maybe<Scalars["Float"]>;
@@ -2254,6 +2259,21 @@ export enum RouteAlternativeType {
   /** An alternative to the fastest route */
   ALTERNATIVE = "alternative"
 }
+
+export type PathSegment = {
+  /** Elevation (altitude) in meters */
+  elevation?: Maybe<Scalars["Int"]>;
+  /** Average speed, in km/h, for this route path segment */
+  averageSpeed?: Maybe<Scalars["Float"]>;
+  /** Consumption, in kWh, of a route path segment */
+  consumption?: Maybe<Scalars["Float"]>;
+  /** Consumption, in kWh per km, of a route path segment */
+  consumptionPerKm?: Maybe<Scalars["Float"]>;
+  /** Distance, in meters, of a route path segment */
+  distance?: Maybe<Scalars["Float"]>;
+  /** Duration, in seconds, of a route path segment */
+  duration?: Maybe<Scalars["Float"]>;
+};
 
 export type RouteAlternativeSaving = {
   /** Total amount of CO2, in grams, which would be used with a petrol vehicle */
@@ -2733,27 +2753,57 @@ export type FeaturePointInput = {
 };
 
 export type Subscription = {
-  /** Subscription for a new operator was added in the system event */
+  /**
+   * Subscription for a new operator was added in the system event
+   * @deprecated operatorAdded has been removed, no value will be sent.
+   */
   operatorAdded?: Maybe<Operator>;
-  /** Subscription for an operator was updated in the system event, any operator */
+  /**
+   * Subscription for an operator was updated in the system event, any operator
+   * @deprecated operatorUpdated has been removed, no value will be sent.
+   */
   operatorUpdated?: Maybe<Operator>;
-  /** Subscription for an operator was removed from the system event, any operator */
+  /**
+   * Subscription for an operator was removed from the system event, any operator
+   * @deprecated operatorDeleted has been removed, no value will be sent.
+   */
   operatorDeleted?: Maybe<Operator>;
-  /** Subscription for a specific operator was updated in the system event */
+  /**
+   * Subscription for a specific operator was updated in the system event
+   * @deprecated operatorUpdatedById has been removed, no value will be sent.
+   */
   operatorUpdatedById?: Maybe<Operator>;
-  /** Subscription for a specific operator was removed from the system event */
+  /**
+   * Subscription for a specific operator was removed from the system event
+   * @deprecated operatorDeletedById has been removed, no value will be sent.
+   */
   operatorDeletedById?: Maybe<Operator>;
   /** Subscription for a specific route was updated in the system event */
   routeUpdatedById?: Maybe<Route>;
-  /** Subscription for a new station was added in the system event */
+  /**
+   * Subscription for a new station was added in the system event
+   * @deprecated stationAdded has been removed, no value will be sent.
+   */
   stationAdded?: Maybe<Station>;
-  /** Subscription for a station was updated in the system event, any station */
+  /**
+   * Subscription for a station was updated in the system event, any station
+   * @deprecated stationUpdated has been removed, no value will be sent.
+   */
   stationUpdated?: Maybe<Station>;
-  /** Subscription for a station was removed from the system event, any station */
+  /**
+   * Subscription for a station was removed from the system event, any station
+   * @deprecated stationDeleted has been removed, no value will be sent.
+   */
   stationDeleted?: Maybe<Station>;
-  /** Subscription for a specific station was updated in the system event */
+  /**
+   * Subscription for a specific station was updated in the system event
+   * @deprecated stationUpdatedById has been removed, no value will be sent.
+   */
   stationUpdatedById?: Maybe<Station>;
-  /** Subscription for a specific station was removed from the system event */
+  /**
+   * Subscription for a specific station was removed from the system event
+   * @deprecated stationDeletedById has been removed, no value will be sent.
+   */
   stationDeletedById?: Maybe<Station>;
 };
 
