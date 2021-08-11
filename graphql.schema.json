@@ -1558,7 +1558,19 @@
           },
           {
             "name": "power",
-            "description": "The maximum power a plug accepts in kW",
+            "description": "Usable electric power in kW",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "max_electric_power",
+            "description": "Maximum electric power in kW",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7477,6 +7489,22 @@
                 "ofType": null
               }
             },
+            "isDeprecated": true,
+            "deprecationReason": "predicted_availability, no value will be sent. Deprecated in favor of predicted_occupancy"
+          },
+          {
+            "name": "predicted_occupancy",
+            "description": "Predicted station occupancy",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "StationPredictedOccupancy",
+                "ofType": null
+              }
+            },
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -9785,6 +9813,65 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "StationPredictedOccupancy",
+        "description": "Station occupancy for each weekday and hour",
+        "fields": [
+          {
+            "name": "weekday",
+            "description": "Number of weekday from 1 (monday) to 7 (sunday)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "occupancy",
+            "description": "Occupancy on a scale from 1 to 10, where 1 means free for charging and 10 means fully occupied",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "period_begin",
+            "description": "Start of the period of the occupancy prediction (string of 'hh-mmZ' format)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "period_end",
+            "description": "End of the period of the occupancy prediction (string of 'hh-mmZ' format)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "ChargerStatus",
         "description": null,
@@ -10211,8 +10298,19 @@
           },
           {
             "name": "polyline",
-            "description": "Polyline encoded route",
-            "args": [],
+            "description": "Polyline containing encoded coordinates",
+            "args": [
+              {
+                "name": "decimals",
+                "description": "Number of decimals used for Google Polyline encoding Algorithm. Allowed values are 5 or 6, default is 5",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -10311,6 +10409,22 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "RouteLeg",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "instructions",
+            "description": "List of raw turn-by-turn navigation instructions",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteInstruction",
                 "ofType": null
               }
             },
@@ -10924,6 +11038,283 @@
       },
       {
         "kind": "OBJECT",
+        "name": "RouteInstruction",
+        "description": null,
+        "fields": [
+          {
+            "name": "points",
+            "description": "Information about the points on the polyline",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteInstructionPoints",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sign",
+            "description": "Sign of the instruction. See `RouteInstructionSign`",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "RouteInstructionSign",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": "Name of the street on which the instruction is",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "distance",
+            "description": "Distance, in meters, of the current route instruction",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "time",
+            "description": "Duration, in seconds, of the current route instruction",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "exit_number",
+            "description": "Exit number on a roundabout. This field exists only on sign `USE_ROUNDABOUT` (6), otherwise is null",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "turn_angle",
+            "description": "Curvature angle between the roundabout and street you exit the roundabout. This field exists only on sign USE_ROUNDABOUT (6), otherwise is null",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteInstructionPoints",
+        "description": null,
+        "fields": [
+          {
+            "name": "size",
+            "description": "Number of polyline points which are included in this instruction",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "interval",
+            "description": "The interval of points that are included in this instruction, an array with 2 values, where the first value is the index of the polyline where the interval starts. The second value is where it ends",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "RouteInstructionSign",
+        "description": "Sign belonging to the instruction indicating the main maneuver",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "UNKNOWN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "U_TURN_UNKNOWN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "U_TURN_LEFT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KEEP_LEFT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LEAVE_ROUNDABOUT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TURN_SHARP_LEFT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TURN_LEFT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TURN_SLIGHT_LEFT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CONTINUE_ON_STREET",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TURN_SLIGHT_RIGHT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TURN_RIGHT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TURN_SHARP_RIGHT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FINISH",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "REACHED_VIA",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "REACHED_CHARGING_STATION",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "USE_ROUNDABOUT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KEEP_RIGHT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "U_TURN_RIGHT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PT_START_TRIP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PT_TRANSFER",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PT_END_TRIP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IGNORE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "RouteStationsAlong",
         "description": null,
         "fields": [
@@ -11512,6 +11903,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "instructions",
+            "description": "Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -12755,10 +13158,20 @@
           },
           {
             "name": "stationsAlongRouteRadius",
-            "description": "Alternative stations along a route within a specified radius in meters (min 500, max 5000)",
+            "description": "Alternative stations along a route within a specified radius in meters (minimum 500, maximum 5000)",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "instructions",
+            "description": "Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -13058,12 +13471,6 @@
             "description": "Full size image with a resolution at least 1536x864 px",
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "brand",
-            "description": "Full size brand (maker) logo with a resolution at least 768x432 px",
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -13093,8 +13500,132 @@
             "description": "Is public and can be used by a customer",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "removed",
+            "description": "Is removed and can not be used",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarMakerImage",
+        "description": null,
+        "fields": [
+          {
+            "name": "url",
+            "description": "The full path URL of the large image",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "height",
+            "description": "The height of the large image",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "width",
+            "description": "The width of the large image",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "thumbnail_url",
+            "description": "The full path URL of the thumbnail image",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "thumbnail_height",
+            "description": "The height of the thumbnail image",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "thumbnail_width",
+            "description": "The width of the thumbnail image",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarMaker",
+        "description": null,
+        "fields": [
+          {
+            "name": "maker",
+            "description": "The name of the car maker",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "image",
+            "description": "The media image of the car maker",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarMakerImage",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
         "possibleTypes": null
       },
       {
