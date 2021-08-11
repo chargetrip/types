@@ -360,8 +360,10 @@ export type CarNaming = {
 export type CarPlug = {
   /** Plug type, known as connector standard in OCPI */
   standard?: Maybe<OCPIConnectorType>;
-  /** The maximum power a plug accepts in kW */
+  /** Usable electric power in kW */
   power?: Maybe<Scalars["Float"]>;
+  /** Maximum electric power in kW */
+  max_electric_power?: Maybe<Scalars["Float"]>;
   /** Time it takes to charge from 10 to 80% with a fast charger, shown in minutes */
   time?: Maybe<Scalars["Int"]>;
   /** Charging speed in km/h */
@@ -1605,8 +1607,13 @@ export type Station = {
   private?: Maybe<Scalars["Boolean"]>;
   /** Connectors grouped by power */
   power?: Maybe<Scalars["JSON"]>;
-  /** Station availability */
+  /**
+   * Station availability
+   * @deprecated predicted_availability, no value will be sent. Deprecated in favor of predicted_occupancy
+   */
   predicted_availability?: Maybe<Array<Maybe<StationPredictedAvailability>>>;
+  /** Predicted station occupancy */
+  predicted_occupancy?: Maybe<Array<Maybe<StationPredictedOccupancy>>>;
   /** Charging speed for a station */
   speed?: Maybe<StationSpeedType>;
   /** Global status for a station */
@@ -2137,6 +2144,18 @@ export type StationPredictedAvailability = {
   prediction?: Maybe<Array<Maybe<Scalars["Int"]>>>;
 };
 
+/** Station occupancy for each weekday and hour */
+export type StationPredictedOccupancy = {
+  /** Number of weekday from 1 (monday) to 7 (sunday) */
+  weekday?: Maybe<Scalars["Int"]>;
+  /** Occupancy on a scale from 1 to 10, where 1 means free for charging and 10 means fully occupied */
+  occupancy?: Maybe<Scalars["Int"]>;
+  /** Start of the period of the occupancy prediction (string of 'hh-mmZ' format) */
+  period_begin?: Maybe<Scalars["String"]>;
+  /** End of the period of the occupancy prediction (string of 'hh-mmZ' format) */
+  period_end?: Maybe<Scalars["String"]>;
+};
+
 export enum ChargerStatus {
   /** The charger is free */
   FREE = "free",
@@ -2227,7 +2246,7 @@ export type RouteAlternative = {
   rangeEndKwh?: Maybe<Scalars["Float"]>;
   /** Text information about a route direction */
   via?: Maybe<Scalars["String"]>;
-  /** Polyline encoded route */
+  /** Polyline containing encoded coordinates */
   polyline?: Maybe<Scalars["String"]>;
   /** Path elevation, distance, duration, consumption and speed values, grouped into 100 segments */
   pathPlot?: Maybe<Array<Maybe<PathSegment>>>;
@@ -2246,8 +2265,14 @@ export type RouteAlternative = {
   saving?: Maybe<RouteAlternativeSaving>;
   /** Legs of the route */
   legs?: Maybe<Array<Maybe<RouteLeg>>>;
+  /** List of raw turn-by-turn navigation instructions */
+  instructions?: Maybe<Array<Maybe<RouteInstruction>>>;
   /** Alternative stations along a route within specified radius in meters. Only if it was provided at newRoute mutation */
   stationsAlongRoute?: Maybe<Array<Maybe<RouteStationsAlong>>>;
+};
+
+export type RouteAlternativepolylineArgs = {
+  decimals?: Maybe<Scalars["Int"]>;
 };
 
 /** Types of an alternative route */
@@ -2366,6 +2391,56 @@ export enum LegType {
   STATIONFINAL = "stationFinal"
 }
 
+export type RouteInstruction = {
+  /** Information about the points on the polyline */
+  points?: Maybe<RouteInstructionPoints>;
+  /** Sign of the instruction. See `RouteInstructionSign` */
+  sign?: Maybe<RouteInstructionSign>;
+  /** Name of the street on which the instruction is */
+  name?: Maybe<Scalars["String"]>;
+  /** Distance, in meters, of the current route instruction */
+  distance?: Maybe<Scalars["Int"]>;
+  /** Duration, in seconds, of the current route instruction */
+  time?: Maybe<Scalars["Int"]>;
+  /** Exit number on a roundabout. This field exists only on sign `USE_ROUNDABOUT` (6), otherwise is null */
+  exit_number?: Maybe<Scalars["Int"]>;
+  /** Curvature angle between the roundabout and street you exit the roundabout. This field exists only on sign USE_ROUNDABOUT (6), otherwise is null */
+  turn_angle?: Maybe<Scalars["Float"]>;
+};
+
+export type RouteInstructionPoints = {
+  /** Number of polyline points which are included in this instruction */
+  size?: Maybe<Scalars["Int"]>;
+  /** The interval of points that are included in this instruction, an array with 2 values, where the first value is the index of the polyline where the interval starts. The second value is where it ends */
+  interval?: Maybe<Array<Maybe<Scalars["Int"]>>>;
+};
+
+/** Sign belonging to the instruction indicating the main maneuver */
+export enum RouteInstructionSign {
+  UNKNOWN = "UNKNOWN",
+  U_TURN_UNKNOWN = "U_TURN_UNKNOWN",
+  U_TURN_LEFT = "U_TURN_LEFT",
+  KEEP_LEFT = "KEEP_LEFT",
+  LEAVE_ROUNDABOUT = "LEAVE_ROUNDABOUT",
+  TURN_SHARP_LEFT = "TURN_SHARP_LEFT",
+  TURN_LEFT = "TURN_LEFT",
+  TURN_SLIGHT_LEFT = "TURN_SLIGHT_LEFT",
+  CONTINUE_ON_STREET = "CONTINUE_ON_STREET",
+  TURN_SLIGHT_RIGHT = "TURN_SLIGHT_RIGHT",
+  TURN_RIGHT = "TURN_RIGHT",
+  TURN_SHARP_RIGHT = "TURN_SHARP_RIGHT",
+  FINISH = "FINISH",
+  REACHED_VIA = "REACHED_VIA",
+  REACHED_CHARGING_STATION = "REACHED_CHARGING_STATION",
+  USE_ROUNDABOUT = "USE_ROUNDABOUT",
+  KEEP_RIGHT = "KEEP_RIGHT",
+  U_TURN_RIGHT = "U_TURN_RIGHT",
+  PT_START_TRIP = "PT_START_TRIP",
+  PT_TRANSFER = "PT_TRANSFER",
+  PT_END_TRIP = "PT_END_TRIP",
+  IGNORE = "IGNORE"
+}
+
 export type RouteStationsAlong = {
   /** The ID of station */
   id?: Maybe<Scalars["String"]>;
@@ -2472,6 +2547,8 @@ export type RequestRoute = {
   via?: Maybe<Array<Maybe<FeaturePoint>>>;
   /** Radius in meters for alternative stations along a route (min 500 - max 5000) */
   stationsAlongRouteRadius?: Maybe<Scalars["Int"]>;
+  /** Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production */
+  instructions?: Maybe<Scalars["Boolean"]>;
 };
 
 /** The season of the route */
@@ -2736,8 +2813,10 @@ export type RequestRouteInput = {
   destination: FeaturePointInput;
   /** An optional list of locations where we should stop */
   via?: Maybe<Array<Maybe<FeaturePointInput>>>;
-  /** Alternative stations along a route within a specified radius in meters (min 500, max 5000) */
+  /** Alternative stations along a route within a specified radius in meters (minimum 500, maximum 5000) */
   stationsAlongRouteRadius?: Maybe<Scalars["Int"]>;
+  /** Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production */
+  instructions?: Maybe<Scalars["Boolean"]>;
 };
 
 /** A GeoJSON Feature<Point> input */
@@ -2830,9 +2909,7 @@ export type SubscriptionstationDeletedByIdArgs = {
 /** When uploading images to a car, you can select one of this types. The rest of the types are automatically generated by the system */
 export enum CarImageTypeUploadable {
   /** Full size image with a resolution at least 1536x864 px */
-  IMAGE = "image",
-  /** Full size brand (maker) logo with a resolution at least 768x432 px */
-  BRAND = "brand"
+  IMAGE = "image"
 }
 
 /** Status of a car */
@@ -2842,8 +2919,32 @@ export enum CarStatus {
   /** Is being reviewed by a human operator */
   REVIEW = "review",
   /** Is public and can be used by a customer */
-  PUBLIC = "public"
+  PUBLIC = "public",
+  /** Is removed and can not be used */
+  REMOVED = "removed"
 }
+
+export type CarMakerImage = {
+  /** The full path URL of the large image */
+  url?: Maybe<Scalars["String"]>;
+  /** The height of the large image */
+  height?: Maybe<Scalars["Int"]>;
+  /** The width of the large image */
+  width?: Maybe<Scalars["Int"]>;
+  /** The full path URL of the thumbnail image */
+  thumbnail_url?: Maybe<Scalars["String"]>;
+  /** The height of the thumbnail image */
+  thumbnail_height?: Maybe<Scalars["Int"]>;
+  /** The width of the thumbnail image */
+  thumbnail_width?: Maybe<Scalars["Int"]>;
+};
+
+export type CarMaker = {
+  /** The name of the car maker */
+  maker?: Maybe<Scalars["String"]>;
+  /** The media image of the car maker */
+  image?: Maybe<CarMakerImage>;
+};
 
 /** The price model */
 export type Price = {
