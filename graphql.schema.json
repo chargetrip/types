@@ -11919,6 +11919,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "chargeMode",
+            "description": "Mode that indicates if we optimize the charging time or always charge to the maximum capacity",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ChargeMode",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -11949,6 +11961,29 @@
           {
             "name": "current",
             "description": "We fetch the current weather conditions",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ChargeMode",
+        "description": "Charging mode used at charging stations",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "OPTIMIZE_TRAVEL_TIME",
+            "description": "Optimizes the charging time at each station, in order to decrease the total travel time. You will only charge up until the SOC you need in order to reach the next stop",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ALWAYS_TO_MAX_CHARGE",
+            "description": "Charge to the maximum capacity at every charging stop. The default maximum charging capacity is 80%",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -13110,6 +13145,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "chargeMode",
+            "description": "Mode that indicates if we optimize the charging time or always charge to the maximum capacity",
+            "type": {
+              "kind": "ENUM",
+              "name": "ChargeMode",
               "ofType": null
             },
             "defaultValue": null
