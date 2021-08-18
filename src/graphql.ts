@@ -2549,6 +2549,8 @@ export type RequestRoute = {
   stationsAlongRouteRadius?: Maybe<Scalars["Int"]>;
   /** Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production */
   instructions?: Maybe<Scalars["Boolean"]>;
+  /** Mode that indicates if we optimize the charging time or always charge to the maximum capacity */
+  chargeMode?: Maybe<ChargeMode>;
 };
 
 /** The season of the route */
@@ -2559,6 +2561,14 @@ export enum RouteSeason {
   WINTER = "winter",
   /** We fetch the current weather conditions */
   CURRENT = "current"
+}
+
+/** Charging mode used at charging stations */
+export enum ChargeMode {
+  /** Optimizes the charging time at each station, in order to decrease the total travel time. You will only charge up until the SOC you need in order to reach the next stop */
+  OPTIMIZE_TRAVEL_TIME = "OPTIMIZE_TRAVEL_TIME",
+  /** Charge to the maximum capacity at every charging stop. The default maximum charging capacity is 80% */
+  ALWAYS_TO_MAX_CHARGE = "ALWAYS_TO_MAX_CHARGE"
 }
 
 /** The status of a route. The status can be pending, processing, done, not_found or error */
@@ -2807,6 +2817,8 @@ export type RequestRouteInput = {
   season?: Maybe<RouteSeason>;
   /** Percentage for a minimum limit of a battery capacity before a recharge. The value should be between 0 and 60, with a default of 10% */
   safeRiskMargin?: Maybe<Scalars["Int"]>;
+  /** Mode that indicates if we optimize the charging time or always charge to the maximum capacity */
+  chargeMode?: Maybe<ChargeMode>;
   /** Origin of a route */
   origin: FeaturePointInput;
   /** Destination of a route */
