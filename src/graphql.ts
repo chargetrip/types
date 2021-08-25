@@ -2936,28 +2936,6 @@ export enum CarStatus {
   REMOVED = "removed"
 }
 
-export type CarMakerImage = {
-  /** The full path URL of the large image */
-  url?: Maybe<Scalars["String"]>;
-  /** The height of the large image */
-  height?: Maybe<Scalars["Int"]>;
-  /** The width of the large image */
-  width?: Maybe<Scalars["Int"]>;
-  /** The full path URL of the thumbnail image */
-  thumbnail_url?: Maybe<Scalars["String"]>;
-  /** The height of the thumbnail image */
-  thumbnail_height?: Maybe<Scalars["Int"]>;
-  /** The width of the thumbnail image */
-  thumbnail_width?: Maybe<Scalars["Int"]>;
-};
-
-export type CarMaker = {
-  /** The name of the car maker */
-  maker?: Maybe<Scalars["String"]>;
-  /** The media image of the car maker */
-  image?: Maybe<CarMakerImage>;
-};
-
 /** The price model */
 export type Price = {
   /** The value of the price */
