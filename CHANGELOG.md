@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/chargetrip/types/compare/v1.18.0...v1.19.0) (2021-10-28)
+
+
+### Features
+
+* bump to version 1.19.0 ([#17](https://github.com/chargetrip/types/issues/17)) ([1c3f78b](https://github.com/chargetrip/types/commit/1c3f78b23fac3d826a53f422a0ff9e5e31bf7557))
+
 # [1.18.0](https://github.com/chargetrip/types/compare/v1.17.0...v1.18.0) (2021-09-16)
 
 
