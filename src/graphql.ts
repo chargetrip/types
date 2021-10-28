@@ -825,6 +825,11 @@ export type CarPremiumBody = {
   vehicle_platform?: Maybe<Scalars["String"]>;
   /** Indicates if the vehicle platform used for vehicle is a dedicated battery electric vehicle platform */
   vehicle_platform_is_dedicated?: Maybe<Scalars["Boolean"]>;
+  /**
+   * Indicates whether a car has roof rails as a standard
+   * @deprecated In favor of has_roofrails
+   */
+  rooftrails?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumCharge = {
@@ -1114,6 +1119,11 @@ export type CarPremiumPriceValue = {
   currency?: Maybe<Scalars["String"]>;
   /** Indicates if price value is based on estimates */
   is_estimated?: Maybe<Scalars["Boolean"]>;
+  /**
+   * Indicates if price value is based on estimates
+   * @deprecated In favor of is_estimated
+   */
+  estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumPriceValueWithGrant = {
@@ -1125,6 +1135,11 @@ export type CarPremiumPriceValueWithGrant = {
   is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Grant is applied to value */
   grant_applied?: Maybe<Scalars["Int"]>;
+  /**
+   * Indicates if price value is based on estimates
+   * @deprecated In favor of is_estimated
+   */
+  estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumRange = {
@@ -1592,7 +1607,9 @@ export enum OCPIConnectorType {
   /** Tesla connector "Roadster"-type (round, 4 pins) */
   TESLA_R = "TESLA_R",
   /** Tesla connector "Model-S"-type (oval, 5 pins) */
-  TESLA_S = "TESLA_S"
+  TESLA_S = "TESLA_S",
+  /** All electric vehicles manufactured in China, DC */
+  GB_T = "GB_T"
 }
 
 export enum OCPIDayOfWeek {
@@ -2225,7 +2242,7 @@ export type RequestEvBattery = {
 };
 
 export type RequestEvBatteryInput = {
-  /** Usable capacity of a battery used to compute a route. If this in not filled in, we assume it is the same value as the car batteryUsableKwh. */
+  /** Usable capacity of a battery used to compute a route. Allowed value is between -50% and 50% of the car usable battery capacity. If this in not filled in, we assume it is the same value as the car batteryUsableKwh. */
   capacity?: Maybe<RequestEvBatteryInputValue>;
   /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh. */
   stateOfCharge?: Maybe<RequestEvBatteryInputValue>;
@@ -2259,14 +2276,14 @@ export type RequestEvConsumption = {
 export type RequestEvConsumptionInput = {
   /** Consumption, in kWh, of the auxiliaries */
   aux?: Maybe<CarConsumptionInput>;
-  /** Cnsumption, in kWh, of the battery management system */
+  /** Consumption, in kWh, of the battery management system */
   bms?: Maybe<CarConsumptionInput>;
   /** Consumption, in kWh, of the car in idle mode */
   idle?: Maybe<CarConsumptionInput>;
 };
 
 export type RequestEvInput = {
-  /** Iternal ID of a Car */
+  /** Internal ID of a Car */
   id: Scalars["ID"];
   /** The EV battery specific data */
   battery?: Maybe<RequestEvBatteryInput>;
@@ -2280,7 +2297,7 @@ export type RequestEvInput = {
   climate?: Maybe<Scalars["Boolean"]>;
   /** Number of passengers on board */
   numberOfPassengers?: Maybe<Scalars["Int"]>;
-  /** Consumption specific to the EV or inputed by the request */
+  /** Consumption specific to the EV or inputted by the request */
   consumption?: Maybe<RequestEvConsumptionInput>;
   /** Deprecated */
   auxConsumption?: Maybe<Scalars["Float"]>;
@@ -2350,11 +2367,11 @@ export type RequestRoute = {
 export type RequestRouteInput = {
   /** A list of desired amenities near the stations, with a 1 km radius */
   amenities?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** A list of requested operators (deprecated in favor of operators) */
+  /** Deprecated: in favor of operators. A list of requested operators */
   operatorIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** Flag which indicates if the operators are required (deprecated in favor of operators) */
+  /** Deprecated: in favor of operators. Flag which indicates if the operators are required */
   operatorRequired?: Maybe<Scalars["Boolean"]>;
-  /** Flag which indicates if the preferred operators should be loaded (deprecated in favor of operators) */
+  /** Deprecated: in favor of operators. Flag which indicates if the preferred operators should be loaded */
   operatorPrefer?: Maybe<Scalars["Boolean"]>;
   /** Operator preferences for a route */
   operators?: Maybe<RouteOperatorsInput>;
@@ -2830,7 +2847,7 @@ export type StandardStats = {
   total?: Maybe<Scalars["Int"]>;
 };
 
-/** Extending a station model to add review stats property */
+/** Station data which extends OCPI Location */
 export type Station = {
   /** Review of a station */
   review?: Maybe<ReviewStats>;
