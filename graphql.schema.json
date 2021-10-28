@@ -3396,6 +3396,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "rooftrails",
+            "description": "Indicates whether a car has roof rails as a standard",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of has_roofrails"
           }
         ],
         "inputFields": null,
@@ -4982,6 +4994,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "estimated",
+            "description": "Indicates if price value is based on estimates",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of is_estimated"
           }
         ],
         "inputFields": null,
@@ -5041,6 +5065,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "estimated",
+            "description": "Indicates if price value is based on estimates",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of is_estimated"
           }
         ],
         "inputFields": null,
@@ -7075,6 +7111,12 @@
           {
             "name": "TESLA_S",
             "description": "Tesla connector \"Model-S\"-type (oval, 5 pins)",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GB_T",
+            "description": "All electric vehicles manufactured in China, DC",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -10082,7 +10124,7 @@
         "inputFields": [
           {
             "name": "capacity",
-            "description": "Usable capacity of a battery used to compute a route. If this in not filled in, we assume it is the same value as the car batteryUsableKwh.",
+            "description": "Usable capacity of a battery used to compute a route. Allowed value is between -50% and 50% of the car usable battery capacity. If this in not filled in, we assume it is the same value as the car batteryUsableKwh.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RequestEvBatteryInputValue",
@@ -10274,7 +10316,7 @@
           },
           {
             "name": "bms",
-            "description": "Cnsumption, in kWh, of the battery management system",
+            "description": "Consumption, in kWh, of the battery management system",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -10309,7 +10351,7 @@
         "inputFields": [
           {
             "name": "id",
-            "description": "Iternal ID of a Car",
+            "description": "Internal ID of a Car",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -10405,7 +10447,7 @@
           },
           {
             "name": "consumption",
-            "description": "Consumption specific to the EV or inputed by the request",
+            "description": "Consumption specific to the EV or inputted by the request",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RequestEvConsumptionInput",
@@ -10768,7 +10810,7 @@
           },
           {
             "name": "operatorIds",
-            "description": "A list of requested operators (deprecated in favor of operators)",
+            "description": "Deprecated: in favor of operators. A list of requested operators",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -10784,7 +10826,7 @@
           },
           {
             "name": "operatorRequired",
-            "description": "Flag which indicates if the operators are required (deprecated in favor of operators)",
+            "description": "Deprecated: in favor of operators. Flag which indicates if the operators are required",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -10796,7 +10838,7 @@
           },
           {
             "name": "operatorPrefer",
-            "description": "Flag which indicates if the preferred operators should be loaded (deprecated in favor of operators)",
+            "description": "Deprecated: in favor of operators. Flag which indicates if the preferred operators should be loaded",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -13345,7 +13387,7 @@
       {
         "kind": "OBJECT",
         "name": "Station",
-        "description": "Extending a station model to add review stats property",
+        "description": "Station data which extends OCPI Location",
         "fields": [
           {
             "name": "review",
