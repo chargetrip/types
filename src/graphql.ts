@@ -81,7 +81,8 @@ export type AmenityStats = {
 export enum BatteryInputType {
   KWH = "kwh",
   KM = "km",
-  MILES = "miles"
+  MILES = "miles",
+  PERCENTAGE = "percentage"
 }
 
 /** Output of a car query */
@@ -1398,6 +1399,243 @@ export type Contact = {
   properties?: Maybe<Scalars["JSON"]>;
 };
 
+/** ISO-3166 alpha-2 country codes */
+export enum CountryCodeAlpha2 {
+  AD = "AD",
+  AE = "AE",
+  AF = "AF",
+  AG = "AG",
+  AI = "AI",
+  AL = "AL",
+  AM = "AM",
+  AN = "AN",
+  AO = "AO",
+  AQ = "AQ",
+  AR = "AR",
+  AS = "AS",
+  AT = "AT",
+  AU = "AU",
+  AW = "AW",
+  AX = "AX",
+  AZ = "AZ",
+  BA = "BA",
+  BB = "BB",
+  BD = "BD",
+  BE = "BE",
+  BF = "BF",
+  BG = "BG",
+  BH = "BH",
+  BI = "BI",
+  BJ = "BJ",
+  BM = "BM",
+  BN = "BN",
+  BO = "BO",
+  BR = "BR",
+  BS = "BS",
+  BT = "BT",
+  BV = "BV",
+  BW = "BW",
+  BY = "BY",
+  BZ = "BZ",
+  CA = "CA",
+  CC = "CC",
+  CD = "CD",
+  CF = "CF",
+  CG = "CG",
+  CH = "CH",
+  CI = "CI",
+  CK = "CK",
+  CL = "CL",
+  CM = "CM",
+  CN = "CN",
+  CO = "CO",
+  CR = "CR",
+  CS = "CS",
+  CU = "CU",
+  CV = "CV",
+  CX = "CX",
+  CY = "CY",
+  CZ = "CZ",
+  DE = "DE",
+  DJ = "DJ",
+  DK = "DK",
+  DM = "DM",
+  DO = "DO",
+  DZ = "DZ",
+  EC = "EC",
+  EE = "EE",
+  EG = "EG",
+  EH = "EH",
+  ER = "ER",
+  ES = "ES",
+  ET = "ET",
+  FI = "FI",
+  FJ = "FJ",
+  FK = "FK",
+  FM = "FM",
+  FO = "FO",
+  FR = "FR",
+  GA = "GA",
+  GB = "GB",
+  GD = "GD",
+  GE = "GE",
+  GF = "GF",
+  GH = "GH",
+  GI = "GI",
+  GL = "GL",
+  GM = "GM",
+  GN = "GN",
+  GP = "GP",
+  GQ = "GQ",
+  GR = "GR",
+  GS = "GS",
+  GT = "GT",
+  GU = "GU",
+  GW = "GW",
+  GY = "GY",
+  HK = "HK",
+  HM = "HM",
+  HN = "HN",
+  HR = "HR",
+  HT = "HT",
+  HU = "HU",
+  ID = "ID",
+  IE = "IE",
+  IL = "IL",
+  IN = "IN",
+  IO = "IO",
+  IQ = "IQ",
+  IR = "IR",
+  IS = "IS",
+  IT = "IT",
+  JM = "JM",
+  JO = "JO",
+  JP = "JP",
+  KE = "KE",
+  KG = "KG",
+  KH = "KH",
+  KI = "KI",
+  KM = "KM",
+  KN = "KN",
+  KP = "KP",
+  KR = "KR",
+  KW = "KW",
+  KY = "KY",
+  KZ = "KZ",
+  LA = "LA",
+  LB = "LB",
+  LC = "LC",
+  LI = "LI",
+  LK = "LK",
+  LR = "LR",
+  LS = "LS",
+  LT = "LT",
+  LU = "LU",
+  LV = "LV",
+  LY = "LY",
+  MA = "MA",
+  MC = "MC",
+  MD = "MD",
+  ME = "ME",
+  MF = "MF",
+  MG = "MG",
+  MH = "MH",
+  MK = "MK",
+  ML = "ML",
+  MM = "MM",
+  MN = "MN",
+  MO = "MO",
+  MP = "MP",
+  MQ = "MQ",
+  MR = "MR",
+  MS = "MS",
+  MT = "MT",
+  MU = "MU",
+  MV = "MV",
+  MW = "MW",
+  MX = "MX",
+  MY = "MY",
+  MZ = "MZ",
+  NA = "NA",
+  NC = "NC",
+  NE = "NE",
+  NF = "NF",
+  NG = "NG",
+  NI = "NI",
+  NL = "NL",
+  NO = "NO",
+  NP = "NP",
+  NR = "NR",
+  NU = "NU",
+  NZ = "NZ",
+  OM = "OM",
+  PA = "PA",
+  PE = "PE",
+  PF = "PF",
+  PG = "PG",
+  PH = "PH",
+  PK = "PK",
+  PL = "PL",
+  PM = "PM",
+  PN = "PN",
+  PR = "PR",
+  PS = "PS",
+  PT = "PT",
+  PW = "PW",
+  PY = "PY",
+  QA = "QA",
+  RE = "RE",
+  RKS = "RKS",
+  RO = "RO",
+  RS = "RS",
+  RU = "RU",
+  RW = "RW",
+  SA = "SA",
+  SB = "SB",
+  SC = "SC",
+  SD = "SD",
+  SE = "SE",
+  SG = "SG",
+  SH = "SH",
+  SI = "SI",
+  SJ = "SJ",
+  SK = "SK",
+  SL = "SL",
+  SM = "SM",
+  SN = "SN",
+  SO = "SO",
+  SR = "SR",
+  ST = "ST",
+  SV = "SV",
+  SX = "SX",
+  SY = "SY",
+  SZ = "SZ",
+  TC = "TC",
+  TD = "TD",
+  TF = "TF",
+  TG = "TG",
+  TH = "TH",
+  TJ = "TJ",
+  TK = "TK",
+  TL = "TL",
+  TM = "TM",
+  TN = "TN",
+  TO = "TO",
+  TR = "TR",
+  TT = "TT",
+  TV = "TV",
+  TW = "TW",
+  TZ = "TZ",
+  UA = "UA",
+  UG = "UG",
+  UM = "UM",
+  US = "US",
+  UY = "UY",
+  UZ = "UZ",
+  VA = "VA",
+  VC = "VC"
+}
+
 /** EVSE data which extends OCPI EVSE */
 export type EVSE = {
   /**
@@ -1608,7 +1846,7 @@ export enum OCPIConnectorType {
   TESLA_R = "TESLA_R",
   /** Tesla connector "Model-S"-type (oval, 5 pins) */
   TESLA_S = "TESLA_S",
-  /** All electric vehicles manufactured in China, DC */
+  /** The connector type is GB_T (Chinese standard), DC */
   GB_T = "GB_T"
 }
 
@@ -2001,10 +2239,18 @@ export type Operator = {
   website?: Maybe<Scalars["String"]>;
   /** Image link to an operator’s logo */
   logo?: Maybe<OCPIImage>;
-  /** ISO-3166 alpha-2 country code */
+  /** Deprecated: Not used anymore, please use countries property instead */
   country?: Maybe<Scalars["String"]>;
+  /** ISO-3166 alpha-2 country codes an operator is active in. */
+  countries?: Maybe<Array<CountryCodeAlpha2>>;
   /** Contact information */
   contact?: Maybe<Contact>;
+};
+
+/** Filter which can be applied to retrieve the operator list action */
+export type OperatorListFilter = {
+  /** ISO-3166 alpha-2 country codes an operator is active in. */
+  countries?: Maybe<Array<CountryCodeAlpha2>>;
 };
 
 /** Filter which can be applied to retrieve the operator list action */
@@ -2152,6 +2398,8 @@ export type QuerycarListArgs = {
 
 export type QueryoperatorListArgs = {
   query?: Maybe<OperatorListQuery>;
+  search?: Maybe<Scalars["String"]>;
+  filter?: Maybe<OperatorListFilter>;
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
 };
@@ -2549,10 +2797,14 @@ export type RouteAlternative = {
   rangeStart?: Maybe<Scalars["Int"]>;
   /** Total energy in a battery at the beginning of a trip, in kWh */
   rangeStartKwh?: Maybe<Scalars["Float"]>;
+  /** Total energy in a battery at the beginning of a trip, in percentage */
+  rangeStartPercentage?: Maybe<Scalars["Int"]>;
   /** Remaining range, in meters, at the end of a trip */
   rangeEnd?: Maybe<Scalars["Int"]>;
   /** Remaining range, energy in kWh, at the end of a trip. */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
+  /** Remaining range, energy in percentage, at the end of a trip. */
+  rangeEndPercentage?: Maybe<Scalars["Int"]>;
   /** Text information about a route direction */
   via?: Maybe<Scalars["String"]>;
   /** Polyline containing encoded coordinates */
@@ -2670,10 +2922,14 @@ export type RouteLeg = {
   rangeStart?: Maybe<Scalars["Int"]>;
   /** Total energy in a battery at the beginning of a leg, in kWh */
   rangeStartKwh?: Maybe<Scalars["Float"]>;
+  /** Total energy in a battery at the beginning of a trip, in percentage */
+  rangeStartPercentage?: Maybe<Scalars["Int"]>;
   /** Range, in meters, available at the end of a leg */
   rangeEnd?: Maybe<Scalars["Int"]>;
   /** Total energy left in a battery at the end of a leg, in kWh */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
+  /** Remaining range, energy in percentage, at the end of a trip. */
+  rangeEndPercentage?: Maybe<Scalars["Int"]>;
   /** Origin point location */
   origin?: Maybe<FeaturePoint>;
   /** Destination point location */
