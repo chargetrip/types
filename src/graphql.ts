@@ -681,7 +681,7 @@ export type CarPerformance = {
 /** Car plug model */
 export type CarPlug = {
   /** Plug type, known as connector standard in OCPI */
-  standard?: Maybe<OCPIConnectorType>;
+  standard?: Maybe<ConnectorType>;
   /** Usable electric power in kW */
   power?: Maybe<Scalars["Float"]>;
   /** Maximum electric power in kW */
@@ -899,7 +899,7 @@ export type CarPremiumChargeOptionOBC = {
 
 export type CarPremiumChargePlug = {
   /** Type of charge port on vehicle */
-  value?: Maybe<OCPIConnectorType>;
+  value?: Maybe<ConnectorType>;
   /** Indicates if value is an estimate */
   is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Location of charge port */
@@ -1301,7 +1301,7 @@ export enum ChargeMode {
 /** A groupped representation of EVSEs */
 export type Charger = {
   /** Type of charger */
-  standard?: Maybe<OCPIConnectorType>;
+  standard?: Maybe<ConnectorType>;
   /** Power of a charger */
   power?: Maybe<Scalars["Float"]>;
   /** Price of a charger */
@@ -1350,7 +1350,7 @@ export type Connector = {
   /** Identifier of a connector within an EVSE. Two connectors may have the same ID as long as they do not belong to the same EVSE object. */
   id?: Maybe<Scalars["String"]>;
   /** Standard of an installed connector. */
-  standard?: Maybe<OCPIConnectorType>;
+  standard?: Maybe<ConnectorType>;
   /** Format (socket/cable) of an installed connector. */
   format?: Maybe<OCPIConnectorFormat>;
   /** Type of power of an installed connector.  */
@@ -1382,6 +1382,66 @@ export type Connector = {
   /** List of valid charging tariffs */
   tariff?: Maybe<Array<Maybe<OCPITariff>>>;
 };
+
+/** The socket or plug standard of the charging point. */
+export enum ConnectorType {
+  /** The connector type is CHAdeMO, DC */
+  CHADEMO = "CHADEMO",
+  /** Standard/domestic household, type "A", NEMA 1-15, 2 pins */
+  DOMESTIC_A = "DOMESTIC_A",
+  /** Standard/domestic household, type "B", NEMA 5-15, 3 pins */
+  DOMESTIC_B = "DOMESTIC_B",
+  /** Standard/domestic household, type "C", CEE 7/17, 2 pins */
+  DOMESTIC_C = "DOMESTIC_C",
+  /** Standard/domestic household, type "D", 3 pins */
+  DOMESTIC_D = "DOMESTIC_D",
+  /** Standard/domestic household, type "E", CEE 7/5 3 pins */
+  DOMESTIC_E = "DOMESTIC_E",
+  /** Standard/domestic household, type "F", CEE 7/4, Schuko, 3 pins */
+  DOMESTIC_F = "DOMESTIC_F",
+  /** Standard/domestic household, type "G", BS 1363, Commonwealth, 3 pins */
+  DOMESTIC_G = "DOMESTIC_G",
+  /** Standard/domestic household, type "H", SI-32, 3 pins */
+  DOMESTIC_H = "DOMESTIC_H",
+  /** Standard/domestic household, type "I", AS 3112, 3 pins */
+  DOMESTIC_I = "DOMESTIC_I",
+  /** Standard/domestic household, type "J", SEV 1011, 3 pins */
+  DOMESTIC_J = "DOMESTIC_J",
+  /** Standard/domestic household, type "K", DS 60884-2-D1, 3 pins */
+  DOMESTIC_K = "DOMESTIC_K",
+  /** Standard/domestic household, type "L", CEI 23-16-VII, 3 pins */
+  DOMESTIC_L = "DOMESTIC_L",
+  /** IEC 60309-2 Industrial connector single phase 16 amperes (usually blue) */
+  IEC_60309_2_SINGLE_16 = "IEC_60309_2_single_16",
+  /** IEC 60309-2 Industrial connector three phase 16 amperes (usually red) */
+  IEC_60309_2_THREE_16 = "IEC_60309_2_three_16",
+  /** IEC 60309-2 Industrial connector three phase 32 amperes (usually red) */
+  IEC_60309_2_THREE_32 = "IEC_60309_2_three_32",
+  /** IEC 60309-2 Industrial connector three phase 64 amperes (usually red) */
+  IEC_60309_2_THREE_64 = "IEC_60309_2_three_64",
+  /** IEC 62196 Type 1 "SAE J1772" */
+  IEC_62196_T1 = "IEC_62196_T1",
+  /** Combo Type 1 based, DC */
+  IEC_62196_T1_COMBO = "IEC_62196_T1_COMBO",
+  /** IEC 62196 Type 2 "Mennekes" */
+  IEC_62196_T2 = "IEC_62196_T2",
+  /** Combo Type 2 based, DC */
+  IEC_62196_T2_COMBO = "IEC_62196_T2_COMBO",
+  /** IEC 62196 Type 3A */
+  IEC_62196_T3A = "IEC_62196_T3A",
+  /** IEC 62196 Type 3C "Scame" */
+  IEC_62196_T3C = "IEC_62196_T3C",
+  /** On-board bottom-up-pantograph typically for bus charging */
+  PANTOGRAPH_BOTTOM_UP = "PANTOGRAPH_BOTTOM_UP",
+  /** Off-board top-down-pantograph typically for bus charging */
+  PANTOGRAPH_TOP_DOWN = "PANTOGRAPH_TOP_DOWN",
+  /** Tesla connector "Roadster"-type (round, 4 pins) */
+  TESLA_R = "TESLA_R",
+  /** Tesla connector "Model-S"-type (oval, 5 pins) */
+  TESLA_S = "TESLA_S",
+  /** The connector type is GB_T (Chinese standard), DC */
+  GB_T = "GB_T"
+}
 
 /** The complete contact information */
 export type Contact = {
@@ -1790,7 +1850,7 @@ export enum OCPIConnectorFormat {
   CABLE = "CABLE"
 }
 
-/** The socket or plug standard of the charging point. */
+/** Deprecated: Please use ConnectorType instead */
 export enum OCPIConnectorType {
   /** The connector type is CHAdeMO, DC */
   CHADEMO = "CHADEMO",
@@ -2245,12 +2305,20 @@ export type Operator = {
   countries?: Maybe<Array<CountryCodeAlpha2>>;
   /** Contact information */
   contact?: Maybe<Contact>;
+  /** Ranking level on which the operator is placed or null in case the operator is not on any ranking level */
+  ranking?: Maybe<Scalars["Int"]>;
+  /** Flag which indicates if the operator is in the excluded list */
+  excluded?: Maybe<Scalars["Boolean"]>;
 };
 
 /** Filter which can be applied to retrieve the operator list action */
 export type OperatorListFilter = {
   /** ISO-3166 alpha-2 country codes an operator is active in. */
   countries?: Maybe<Array<CountryCodeAlpha2>>;
+  /** List of ranking level(s) to be retrieved. Valid values are 1 to 10 */
+  ranking?: Maybe<Array<Scalars["Int"]>>;
+  /** Only retrieve operators that are in the excluded list */
+  excluded?: Maybe<Scalars["Boolean"]>;
 };
 
 /** Filter which can be applied to retrieve the operator list action */
@@ -2332,7 +2400,7 @@ export type Price = {
   currency?: Maybe<Scalars["String"]>;
   /** The pricing model */
   model?: Maybe<Scalars["String"]>;
-  /** The value of the price which should be deplay by the frontend */
+  /** The value of the price which should be display by the frontend */
   displayValue?: Maybe<Scalars["String"]>;
 };
 
@@ -2468,8 +2536,13 @@ export type RequestEv = {
   minPower?: Maybe<Scalars["Int"]>;
   /** Climate is on. The default is true */
   climate?: Maybe<Scalars["Boolean"]>;
-  /** The number of passengers on board */
+  /**
+   * The number of passengers on board
+   * @deprecated In favor of occupants
+   */
   numberOfPassengers?: Maybe<Scalars["Int"]>;
+  /** Number of occupants */
+  occupants?: Maybe<Scalars["Int"]>;
   /** Consumption specific to an EV or inputed by a request */
   consumption?: Maybe<RequestEvConsumption>;
 };
@@ -2543,8 +2616,8 @@ export type RequestEvInput = {
   minPower?: Maybe<Scalars["Int"]>;
   /** Flag which indicates if the climate is on. The default is true */
   climate?: Maybe<Scalars["Boolean"]>;
-  /** Number of passengers on board */
-  numberOfPassengers?: Maybe<Scalars["Int"]>;
+  /** Number of occupants */
+  occupants?: Maybe<Scalars["Int"]>;
   /** Consumption specific to the EV or inputted by the request */
   consumption?: Maybe<RequestEvConsumptionInput>;
   /** Deprecated */
@@ -2555,14 +2628,14 @@ export type RequestEvInput = {
 
 export type RequestEvPlug = {
   /** Type of the plug */
-  standard?: Maybe<OCPIConnectorType>;
+  standard?: Maybe<ConnectorType>;
   /** Maximum charging speed for a plug */
   chargingPower?: Maybe<Scalars["Float"]>;
 };
 
 export type RequestEvPlugInput = {
   /** Type of a plug */
-  standard: OCPIConnectorType;
+  standard: ConnectorType;
   /** Maximum charging speed for this plug */
   chargingPower: Scalars["Float"];
 };
@@ -2592,7 +2665,7 @@ export type RequestRoute = {
    * @deprecated Will be removed. Use the operators property instead
    */
   operatorPrefer?: Maybe<Scalars["Boolean"]>;
-  /** Operator preferences for a route */
+  /** Operator prioritization for a route */
   operators?: Maybe<RouteOperators>;
   /** Season */
   season?: Maybe<RouteSeason>;
@@ -2621,7 +2694,7 @@ export type RequestRouteInput = {
   operatorRequired?: Maybe<Scalars["Boolean"]>;
   /** Deprecated: in favor of operators. Flag which indicates if the preferred operators should be loaded */
   operatorPrefer?: Maybe<Scalars["Boolean"]>;
-  /** Operator preferences for a route */
+  /** Operator prioritization for a route */
   operators?: Maybe<RouteOperatorsInput>;
   /** Optional flag to specify the season */
   season?: Maybe<RouteSeason>;
@@ -2663,7 +2736,7 @@ export type Review = {
   /** Car that was provided/selected by a user */
   ev?: Maybe<Car>;
   /** Plug type that was provided/selected by a user */
-  plugType?: Maybe<OCPIConnectorType>;
+  plugType?: Maybe<ConnectorType>;
   /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
   /** Boolean tags for a station review */
@@ -2687,7 +2760,7 @@ export type ReviewAdd = {
   /** ID of the Car that was provided/selected by a user */
   ev?: Maybe<Scalars["String"]>;
   /** Plug type that was provided/selected by a user */
-  plugType?: Maybe<OCPIConnectorType>;
+  plugType?: Maybe<ConnectorType>;
   /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
   /** Boolean tags for a station review */
@@ -2960,6 +3033,7 @@ export type RouteLeg = {
   plugsCount?: Maybe<Scalars["Int"]>;
 };
 
+/** Prioritized operators for a route calculation */
 export type RouteOperators = {
   /** Flag indicating if the operators ranking should be preferred or required */
   type?: Maybe<RouteOperatorsType>;
@@ -2969,7 +3043,7 @@ export type RouteOperators = {
   exclude?: Maybe<Array<Maybe<Scalars["ID"]>>>;
 };
 
-/** Preferred operators for a route calculation */
+/** Prioritized operators for a route calculation */
 export type RouteOperatorsInput = {
   /** Flag indicating if the operators ranking should be preferred or required */
   type?: Maybe<RouteOperatorsType>;
@@ -2979,7 +3053,7 @@ export type RouteOperatorsInput = {
   exclude?: Maybe<Array<Maybe<Scalars["ID"]>>>;
 };
 
-/** Ranking configuration for preferred operators */
+/** Ranking configuration for prioritized operators */
 export type RouteOperatorsRanking = {
   /** Level 1 (most significant) for operator ranking */
   level1?: Maybe<Array<Maybe<Scalars["ID"]>>>;
@@ -3003,7 +3077,7 @@ export type RouteOperatorsRanking = {
   level10?: Maybe<Array<Maybe<Scalars["ID"]>>>;
 };
 
-/** Ranking configuration for preferred operators */
+/** Ranking configuration for prioritized operators */
 export type RouteOperatorsRankingInput = {
   /** Level 1 (most significant) for operator ranking */
   level1?: Maybe<Array<Maybe<Scalars["ID"]>>>;
@@ -3027,13 +3101,13 @@ export type RouteOperatorsRankingInput = {
   level10?: Maybe<Array<Maybe<Scalars["ID"]>>>;
 };
 
-/** Type of operator preference for a route */
+/** Type of operator prioritization for a route */
 export enum RouteOperatorsType {
   /** Default option. Operators ranking will not be taken into account if no type is given */
   NONE = "none",
   /** Operators given in the operators ranking will be preferred when calculating routes */
   PREFERRED = "preferred",
-  /** Operators given in the operators ranking will be required when calculating routes,excluded operators will be ignored */
+  /** Operators given in the operators ranking will be required when calculating routes, all other operators will be ignored */
   REQUIRED = "required"
 }
 
@@ -3098,7 +3172,7 @@ export enum RouteStatus {
 /** Standards(plug type) stats model */
 export type StandardStats = {
   /** The plug type */
-  type?: Maybe<OCPIConnectorType>;
+  type?: Maybe<ConnectorType>;
   /** The total number of stations with the specified plug */
   total?: Maybe<Scalars["Int"]>;
 };

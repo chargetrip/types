@@ -2637,7 +2637,7 @@
             "args": [],
             "type": {
               "kind": "ENUM",
-              "name": "OCPIConnectorType",
+              "name": "ConnectorType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3796,7 +3796,7 @@
             "args": [],
             "type": {
               "kind": "ENUM",
-              "name": "OCPIConnectorType",
+              "name": "ConnectorType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -5825,7 +5825,7 @@
             "args": [],
             "type": {
               "kind": "ENUM",
-              "name": "OCPIConnectorType",
+              "name": "ConnectorType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6049,7 +6049,7 @@
             "args": [],
             "type": {
               "kind": "ENUM",
-              "name": "OCPIConnectorType",
+              "name": "ConnectorType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6199,6 +6199,185 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ConnectorType",
+        "description": "The socket or plug standard of the charging point.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "CHADEMO",
+            "description": "The connector type is CHAdeMO, DC",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_A",
+            "description": "Standard/domestic household, type \"A\", NEMA 1-15, 2 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_B",
+            "description": "Standard/domestic household, type \"B\", NEMA 5-15, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_C",
+            "description": "Standard/domestic household, type \"C\", CEE 7/17, 2 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_D",
+            "description": "Standard/domestic household, type \"D\", 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_E",
+            "description": "Standard/domestic household, type \"E\", CEE 7/5 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_F",
+            "description": "Standard/domestic household, type \"F\", CEE 7/4, Schuko, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_G",
+            "description": "Standard/domestic household, type \"G\", BS 1363, Commonwealth, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_H",
+            "description": "Standard/domestic household, type \"H\", SI-32, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_I",
+            "description": "Standard/domestic household, type \"I\", AS 3112, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_J",
+            "description": "Standard/domestic household, type \"J\", SEV 1011, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_K",
+            "description": "Standard/domestic household, type \"K\", DS 60884-2-D1, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_L",
+            "description": "Standard/domestic household, type \"L\", CEI 23-16-VII, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_60309_2_single_16",
+            "description": "IEC 60309-2 Industrial connector single phase 16 amperes (usually blue)",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_60309_2_three_16",
+            "description": "IEC 60309-2 Industrial connector three phase 16 amperes (usually red)",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_60309_2_three_32",
+            "description": "IEC 60309-2 Industrial connector three phase 32 amperes (usually red)",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_60309_2_three_64",
+            "description": "IEC 60309-2 Industrial connector three phase 64 amperes (usually red)",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_62196_T1",
+            "description": "IEC 62196 Type 1 \"SAE J1772\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_62196_T1_COMBO",
+            "description": "Combo Type 1 based, DC",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_62196_T2",
+            "description": "IEC 62196 Type 2 \"Mennekes\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_62196_T2_COMBO",
+            "description": "Combo Type 2 based, DC",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_62196_T3A",
+            "description": "IEC 62196 Type 3A",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IEC_62196_T3C",
+            "description": "IEC 62196 Type 3C \"Scame\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PANTOGRAPH_BOTTOM_UP",
+            "description": "On-board bottom-up-pantograph typically for bus charging",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PANTOGRAPH_TOP_DOWN",
+            "description": "Off-board top-down-pantograph typically for bus charging",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TESLA_R",
+            "description": "Tesla connector \"Roadster\"-type (round, 4 pins)",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TESLA_S",
+            "description": "Tesla connector \"Model-S\"-type (oval, 5 pins)",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GB_T",
+            "description": "The connector type is GB_T (Chinese standard), DC",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -8362,7 +8541,7 @@
       {
         "kind": "ENUM",
         "name": "OCPIConnectorType",
-        "description": "The socket or plug standard of the charging point.",
+        "description": "Deprecated: Please use ConnectorType instead",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -10251,6 +10430,30 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "ranking",
+            "description": "Ranking level on which the operator is placed or null in case the operator is not on any ranking level",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "excluded",
+            "description": "Flag which indicates if the operator is in the excluded list",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -10279,6 +10482,38 @@
                   "ofType": null
                 }
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ranking",
+            "description": "List of ranking level(s) to be retrieved. Valid values are 1 to 10",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "excluded",
+            "description": "Only retrieve operators that are in the excluded list",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -10690,7 +10925,7 @@
           },
           {
             "name": "displayValue",
-            "description": "The value of the price which should be deplay by the frontend",
+            "description": "The value of the price which should be display by the frontend",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -11502,6 +11737,18 @@
               "name": "Int",
               "ofType": null
             },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of occupants"
+          },
+          {
+            "name": "occupants",
+            "description": "Number of occupants",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -11924,8 +12171,8 @@
             "deprecationReason": null
           },
           {
-            "name": "numberOfPassengers",
-            "description": "Number of passengers on board",
+            "name": "occupants",
+            "description": "Number of occupants",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -11987,7 +12234,7 @@
             "args": [],
             "type": {
               "kind": "ENUM",
-              "name": "OCPIConnectorType",
+              "name": "ConnectorType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -12025,7 +12272,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "OCPIConnectorType",
+                "name": "ConnectorType",
                 "ofType": null
               }
             },
@@ -12160,7 +12407,7 @@
           },
           {
             "name": "operators",
-            "description": "Operator preferences for a route",
+            "description": "Operator prioritization for a route",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -12340,7 +12587,7 @@
           },
           {
             "name": "operators",
-            "description": "Operator preferences for a route",
+            "description": "Operator prioritization for a route",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RouteOperatorsInput",
@@ -12585,7 +12832,7 @@
             "args": [],
             "type": {
               "kind": "ENUM",
-              "name": "OCPIConnectorType",
+              "name": "ConnectorType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -12724,7 +12971,7 @@
             "description": "Plug type that was provided/selected by a user",
             "type": {
               "kind": "ENUM",
-              "name": "OCPIConnectorType",
+              "name": "ConnectorType",
               "ofType": null
             },
             "defaultValue": null,
@@ -14157,7 +14404,7 @@
       {
         "kind": "OBJECT",
         "name": "RouteOperators",
-        "description": null,
+        "description": "Prioritized operators for a route calculation",
         "fields": [
           {
             "name": "type",
@@ -14208,7 +14455,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "RouteOperatorsInput",
-        "description": "Preferred operators for a route calculation",
+        "description": "Prioritized operators for a route calculation",
         "fields": null,
         "inputFields": [
           {
@@ -14259,7 +14506,7 @@
       {
         "kind": "OBJECT",
         "name": "RouteOperatorsRanking",
-        "description": "Ranking configuration for preferred operators",
+        "description": "Ranking configuration for prioritized operators",
         "fields": [
           {
             "name": "level1",
@@ -14430,7 +14677,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "RouteOperatorsRankingInput",
-        "description": "Ranking configuration for preferred operators",
+        "description": "Ranking configuration for prioritized operators",
         "fields": null,
         "inputFields": [
           {
@@ -14601,7 +14848,7 @@
       {
         "kind": "ENUM",
         "name": "RouteOperatorsType",
-        "description": "Type of operator preference for a route",
+        "description": "Type of operator prioritization for a route",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -14620,7 +14867,7 @@
           },
           {
             "name": "required",
-            "description": "Operators given in the operators ranking will be required when calculating routes,excluded operators will be ignored",
+            "description": "Operators given in the operators ranking will be required when calculating routes, all other operators will be ignored",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -14898,7 +15145,7 @@
             "args": [],
             "type": {
               "kind": "ENUM",
-              "name": "OCPIConnectorType",
+              "name": "ConnectorType",
               "ofType": null
             },
             "isDeprecated": false,
