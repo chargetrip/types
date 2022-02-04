@@ -8284,6 +8284,40 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "MappingLanguage",
+        "description": "Preferred language for the mapping",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "en",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "MappingProvider",
+        "description": "Navigation service providers available",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "MapboxV5",
+            "description": "Mapbox Navigation",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Mutation",
         "description": null,
@@ -11636,6 +11670,75 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "navigationMapping",
+            "description": "Convert a route to navigation instructions for a specified mapping provider",
+            "args": [
+              {
+                "name": "id",
+                "description": "ID of a route",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "provider",
+                "description": "Navigation service provider",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "MappingProvider",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "precision",
+                "description": "Number of decimals used for the Google Polyline encoding Algorithm. Allowed values are 5 or 6, the default is 5",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "language",
+                "description": "Preferred language, the default is English",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "MappingLanguage",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -13479,8 +13582,8 @@
               "name": "Int",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future"
           },
           {
             "name": "rangeStart",
@@ -13812,7 +13915,7 @@
           },
           {
             "name": "bestMatching",
-            "description": "Best matching amenities along the route with the requested list",
+            "description": "Best matching route based on operator and amenities preferences",
             "isDeprecated": false,
             "deprecationReason": null
           },
