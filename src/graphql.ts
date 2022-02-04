@@ -1774,6 +1774,17 @@ export enum LegType {
   STATIONFINAL = "stationFinal"
 }
 
+/** Preferred language for the mapping */
+export enum MappingLanguage {
+  EN = "en"
+}
+
+/** Navigation service providers available */
+export enum MappingProvider {
+  /** Mapbox Navigation */
+  MAPBOXV5 = "MapboxV5"
+}
+
 export type Mutation = {
   /**
    * Add a new review.
@@ -2441,6 +2452,8 @@ export type Query = {
   tariff?: Maybe<OCPITariff>;
   /** Get the full list of tariffs */
   tariffList?: Maybe<Array<Maybe<OCPITariff>>>;
+  /** Convert a route to navigation instructions for a specified mapping provider */
+  navigationMapping?: Maybe<Scalars["JSON"]>;
 };
 
 export type QueryamenityListArgs = {
@@ -2520,6 +2533,13 @@ export type QuerytariffArgs = {
 export type QuerytariffListArgs = {
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
+};
+
+export type QuerynavigationMappingArgs = {
+  id: Scalars["ID"];
+  provider: MappingProvider;
+  precision?: Maybe<Scalars["Int"]>;
+  language?: Maybe<MappingLanguage>;
 };
 
 /** EV specific data for a route request */
@@ -2864,7 +2884,10 @@ export type RouteAlternative = {
   consumption?: Maybe<Scalars["Float"]>;
   /** Total time required to charge for an entire route, in seconds */
   chargeTime?: Maybe<Scalars["Float"]>;
-  /** Amenity ranking for an alternative */
+  /**
+   * Amenity ranking for an alternative
+   * @deprecated Will be removed in the future
+   */
   amenityRanking?: Maybe<Scalars["Int"]>;
   /** Range, in meters, available at the beginning of a trip */
   rangeStart?: Maybe<Scalars["Int"]>;
@@ -2926,7 +2949,7 @@ export type RouteAlternativeSaving = {
 export enum RouteAlternativeType {
   /** Fastest route between origin and destination */
   FASTEST = "fastest",
-  /** Best matching amenities along the route with the requested list */
+  /** Best matching route based on operator and amenities preferences */
   BESTMATCHING = "bestMatching",
   /** An alternative to the fastest route */
   ALTERNATIVE = "alternative"
