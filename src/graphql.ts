@@ -732,7 +732,6 @@ export type CarPremium = {
   routing?: Maybe<CarPremiumRouting>;
 };
 
-//
 export type CarPremiumAvailability = {
   /**
    * Availability of car
