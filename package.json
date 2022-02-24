@@ -14,7 +14,8 @@
     "charging",
     "charge",
     "station",
-    "plug"
+    "plug",
+    "turn-by-turn"
   ],
   "author": {
     "name": "Tim Kuilman",
