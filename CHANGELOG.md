@@ -1,4 +1,4 @@
-# [1.21.0](https://github.com/chargetrip/types/compare/v1.20.0...v1.21.0) (2022-02-24).
+# [1.21.0](https://github.com/chargetrip/types/compare/v1.20.0...v1.21.0) (2022-02-24)
 
 ### Features
 
