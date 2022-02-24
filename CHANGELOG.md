@@ -1,3 +1,11 @@
+# [1.21.0](https://github.com/chargetrip/types/compare/v1.20.0...v1.21.0) (2022-02-24)
+
+
+### Features
+
+* bump version ([#19](https://github.com/chargetrip/types/issues/19)) ([d15773a](https://github.com/chargetrip/types/commit/d15773a60bb875e17830788ff3489f592ffa6728))
+* release 1.22.0 ([#21](https://github.com/chargetrip/types/issues/21)) ([25ef7e0](https://github.com/chargetrip/types/commit/25ef7e0dbb3cdf1c8c082fc3605c54545b6e9ecf))
+
 # [1.20.0](https://github.com/chargetrip/types/compare/v1.19.0...v1.20.0) (2021-11-17)
 
 
