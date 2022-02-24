@@ -1381,6 +1381,8 @@ export type Connector = {
   properties?: Maybe<Scalars["JSON"]>;
   /** List of valid charging tariffs */
   tariff?: Maybe<Array<Maybe<OCPITariff>>>;
+  /** Charging prices, only available when using the EcoMovement database */
+  pricing?: Maybe<Pricing>;
 };
 
 /** The socket or plug standard of the charging point. */
@@ -1411,6 +1413,12 @@ export enum ConnectorType {
   DOMESTIC_K = "DOMESTIC_K",
   /** Standard/domestic household, type "L", CEI 23-16-VII, 3 pins */
   DOMESTIC_L = "DOMESTIC_L",
+  /** Standard/Domestic household, type "M", BS 546, 3 pins */
+  DOMESTIC_M = "DOMESTIC_M",
+  /** Standard/Domestic household, type "N", NBR 14136, 3 pins */
+  DOMESTIC_N = "DOMESTIC_N",
+  /** Standard/Domestic household, type "O", TIS 166-2549, 3 pins */
+  DOMESTIC_O = "DOMESTIC_O",
   /** IEC 60309-2 Industrial connector single phase 16 amperes (usually blue) */
   IEC_60309_2_SINGLE_16 = "IEC_60309_2_single_16",
   /** IEC 60309-2 Industrial connector three phase 16 amperes (usually red) */
@@ -1440,7 +1448,23 @@ export enum ConnectorType {
   /** Tesla connector "Model-S"-type (oval, 5 pins) */
   TESLA_S = "TESLA_S",
   /** The connector type is GB_T (Chinese standard), DC */
-  GB_T = "GB_T"
+  GB_T = "GB_T",
+  /** The ChaoJi connector. The new generation charging connector, harmonized between CHAdeMO and GB/T. DC. */
+  CHAOJI = "CHAOJI",
+  /** The connector type is NEMA 5-20, 3 pins */
+  NEMA_5_20 = "NEMA_5_20",
+  /** The connector type is NEMA 6-30, 3 pins */
+  NEMA_6_30 = "NEMA_6_30",
+  /** The connector type is NEMA 6-50, 3 pins */
+  NEMA_6_50 = "NEMA_6_50",
+  /** The connector type is NEMA 10-30, 3 pins */
+  NEMA_10_30 = "NEMA_10_30",
+  /** The connector type is NEMA 10-50, 3 pins */
+  NEMA_10_50 = "NEMA_10_50",
+  /** The connector type is NEMA 14-30, 3 pins, rating of 30 A */
+  NEMA_14_30 = "NEMA_14_30",
+  /** The connector type is NEMA 14-50, 3 pins, rating of 50 A */
+  NEMA_14_50 = "NEMA_14_50"
 }
 
 /** The complete contact information */
@@ -1760,7 +1784,7 @@ export enum FeatureType {
   FEATURE = "Feature"
 }
 
-/** The types of the leg */
+/** Types of a leg */
 export enum LegType {
   /** This leg ends at a charging station and the car must recharge */
   STATION = "station",
@@ -1850,7 +1874,9 @@ export enum OCPICapability {
   /** This EVSE supports token groups, two or more tokens work as one, so that a session can be started with one token and stopped with another (handy when a card and key-fob are given to the EV-driver). */
   TOKEN_GROUP_CAPABLE = "TOKEN_GROUP_CAPABLE",
   /** Connectors have a mechanical lock that can be requested by the eMSP to be unlocked. */
-  UNLOCK_CAPABLE = "UNLOCK_CAPABLE"
+  UNLOCK_CAPABLE = "UNLOCK_CAPABLE",
+  /** When a StartSession is sent to this EVSE, the MSP is required to add the optional connector_id field in the StartSession object. */
+  START_SESSION_CONNECTOR_REQUIRED = "START_SESSION_CONNECTOR_REQUIRED"
 }
 
 /** The format of the connector, whether it is a socket or a plug. */
@@ -1889,6 +1915,12 @@ export enum OCPIConnectorType {
   DOMESTIC_K = "DOMESTIC_K",
   /** Standard/domestic household, type "L", CEI 23-16-VII, 3 pins */
   DOMESTIC_L = "DOMESTIC_L",
+  /** Standard/Domestic household, type "M", BS 546, 3 pins */
+  DOMESTIC_M = "DOMESTIC_M",
+  /** Standard/Domestic household, type "N", NBR 14136, 3 pins */
+  DOMESTIC_N = "DOMESTIC_N",
+  /** Standard/Domestic household, type "O", TIS 166-2549, 3 pins */
+  DOMESTIC_O = "DOMESTIC_O",
   /** IEC 60309-2 Industrial connector single phase 16 amperes (usually blue) */
   IEC_60309_2_SINGLE_16 = "IEC_60309_2_single_16",
   /** IEC 60309-2 Industrial connector three phase 16 amperes (usually red) */
@@ -1918,7 +1950,23 @@ export enum OCPIConnectorType {
   /** Tesla connector "Model-S"-type (oval, 5 pins) */
   TESLA_S = "TESLA_S",
   /** The connector type is GB_T (Chinese standard), DC */
-  GB_T = "GB_T"
+  GB_T = "GB_T",
+  /** The ChaoJi connector. The new generation charging connector, harmonized between CHAdeMO and GB/T. DC. */
+  CHAOJI = "CHAOJI",
+  /** The connector type is NEMA 5-20, 3 pins */
+  NEMA_5_20 = "NEMA_5_20",
+  /** The connector type is NEMA 6-30, 3 pins */
+  NEMA_6_30 = "NEMA_6_30",
+  /** The connector type is NEMA 6-50, 3 pins */
+  NEMA_6_50 = "NEMA_6_50",
+  /** The connector type is NEMA 10-30, 3 pins */
+  NEMA_10_30 = "NEMA_10_30",
+  /** The connector type is NEMA 10-50, 3 pins */
+  NEMA_10_50 = "NEMA_10_50",
+  /** The connector type is NEMA 14-30, 3 pins, rating of 30 A */
+  NEMA_14_30 = "NEMA_14_30",
+  /** The connector type is NEMA 14-50, 3 pins, rating of 50 A */
+  NEMA_14_50 = "NEMA_14_50"
 }
 
 export enum OCPIDayOfWeek {
@@ -2134,6 +2182,10 @@ export enum OCPIPowerType {
   AC_1_PHASE = "AC_1_PHASE",
   /** AC three phase. */
   AC_3_PHASE = "AC_3_PHASE",
+  /** AC two phases, only two of the three available phases connected. */
+  AC_2_PHASE = "AC_2_PHASE",
+  /** AC two phases using split phase system. */
+  AC_2_PHASE_SPLIT = "AC_2_PHASE_SPLIT",
   /** Direct Current. */
   DC = "DC"
 }
@@ -2413,6 +2465,55 @@ export type Price = {
   model?: Maybe<Scalars["String"]>;
   /** The value of the price which should be display by the frontend */
   displayValue?: Maybe<Scalars["String"]>;
+};
+
+export type Pricing = {
+  /** Unique ID of a price */
+  id?: Maybe<Scalars["String"]>;
+  /** Price details */
+  price_list?: Maybe<Array<Maybe<PricingList>>>;
+};
+
+export type PricingList = {
+  /** (MSP) Mobility Service Provider */
+  partner?: Maybe<Scalars["String"]>;
+  /** Product details */
+  product?: Maybe<PricingListProduct>;
+  /** Price product elements */
+  elements?: Maybe<Array<Maybe<PricingListElement>>>;
+};
+
+export type PricingListElement = {
+  /** Price element type. */
+  type?: Maybe<PricingListElementType>;
+  /** Price of the element type without VAT. */
+  price_excl_vat?: Maybe<Scalars["Float"]>;
+  /** VAT percentage to apply */
+  vat?: Maybe<Scalars["Float"]>;
+};
+
+export enum PricingListElementType {
+  /** Price per kWh */
+  ENERGY = "ENERGY",
+  /** Starting price, fixed fee per charge session */
+  FLAT = "FLAT",
+  /** Fixed price per hour */
+  TIME = "TIME",
+  /** Parking price per hour */
+  PARKING_TIME = "PARKING_TIME"
+}
+
+export type PricingListProduct = {
+  /** Name of the payment card or subscription. If name is 'Adhoc price' the price is the CPO price */
+  name?: Maybe<Scalars["String"]>;
+  /** Description of the product */
+  description?: Maybe<Scalars["String"]>;
+  /** Subscription type */
+  subscription_type?: Maybe<Scalars["String"]>;
+  /** Subscription fee without VAT */
+  subscription_fee_excl_vat?: Maybe<Scalars["Float"]>;
+  /** Currency */
+  currency?: Maybe<Scalars["String"]>;
 };
 
 export type Query = {
@@ -2926,6 +3027,8 @@ export type RouteAlternative = {
   instructions?: Maybe<Array<Maybe<RouteInstruction>>>;
   /** Alternative stations along a route within specified radius in meters. Only if it was provided at newRoute mutation */
   stationsAlongRoute?: Maybe<Array<Maybe<RouteStationsAlong>>>;
+  /** Tags of a route alternative. Values: road, highway, toll, ferry, etc. */
+  tags?: Maybe<Array<Maybe<RouteTagType>>>;
 };
 
 export type RouteAlternativepolylineArgs = {
@@ -3036,8 +3139,12 @@ export type RouteLeg = {
   name?: Maybe<Scalars["String"]>;
   /** ID of a station */
   stationId?: Maybe<Scalars["String"]>;
-  /** ID of the operator */
+  /** ID of an operator */
   operatorId?: Maybe<Scalars["String"]>;
+  /** Name of an operator */
+  operatorName?: Maybe<Scalars["String"]>;
+  /** Ranking of an operator */
+  operatorRanking?: Maybe<Scalars["Int"]>;
   /** Total time required to charge a battery until 80%, in seconds */
   chargeTime?: Maybe<Scalars["Int"]>;
   /** Recommended EVSE where to charge */
@@ -3054,6 +3161,16 @@ export type RouteLeg = {
   plugsOutOfOrder?: Maybe<Scalars["Int"]>;
   /** Total number of plugs at a charge station */
   plugsCount?: Maybe<Scalars["Int"]>;
+  /** Polyline containing encoded coordinates */
+  polyline?: Maybe<Scalars["String"]>;
+  /** Steps of a leg */
+  steps?: Maybe<Array<Maybe<RouteStep>>>;
+  /** Tags of a leg. Values: road, highway, toll, ferry */
+  tags?: Maybe<Array<Maybe<RouteTagType>>>;
+};
+
+export type RouteLegpolylineArgs = {
+  decimals?: Maybe<Scalars["Int"]>;
 };
 
 /** Prioritized operators for a route calculation */
@@ -3192,6 +3309,33 @@ export enum RouteStatus {
   ERROR = "error"
 }
 
+export type RouteStep = {
+  /** ID of a step */
+  id?: Maybe<Scalars["ID"]>;
+  /** Type of a step */
+  type?: Maybe<StepType>;
+  /** Polyline containing encoded coordinates */
+  polyline?: Maybe<Scalars["String"]>;
+  /** Distance from the start to the end of a step, in meters */
+  distance?: Maybe<Scalars["Int"]>;
+  /** Total drive time from the start to the end of a step, in seconds */
+  duration?: Maybe<Scalars["Int"]>;
+  /** Total enery used in a step in kWh */
+  consumption?: Maybe<Scalars["Float"]>;
+};
+
+export type RouteSteppolylineArgs = {
+  decimals?: Maybe<Scalars["Int"]>;
+};
+
+/** Tags of a route */
+export enum RouteTagType {
+  ROAD = "road",
+  HIGHWAY = "highway",
+  TOLL = "toll",
+  FERRY = "ferry"
+}
+
 /** Standards(plug type) stats model */
 export type StandardStats = {
   /** The plug type */
@@ -3266,7 +3410,7 @@ export type Station = {
   elevation?: Maybe<Scalars["Int"]>;
   /** Groups of EVSEs by power and type */
   chargers?: Maybe<Array<Maybe<Charger>>>;
-  /** Amenties located at this location */
+  /** Amenities located at this location */
   amenities?: Maybe<Scalars["JSON"]>;
   /** Enriched information about the physical address of a station */
   physical_address?: Maybe<Address>;
@@ -3352,6 +3496,18 @@ export type StationStats = {
   /** Stations count grouped by amenities */
   amenities?: Maybe<Array<Maybe<AmenityStats>>>;
 };
+
+/** Types of a route step */
+export enum StepType {
+  /** This step is a road */
+  ROAD = "road",
+  /** This step is a highway */
+  HIGHWAY = "highway",
+  /** This step is a toll road */
+  TOLL = "toll",
+  /** This step is a ferry */
+  FERRY = "ferry"
+}
 
 export type Subscription = {
   /**
