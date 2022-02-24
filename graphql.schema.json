@@ -6194,6 +6194,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "pricing",
+            "description": "Charging prices, only available when using the EcoMovement database",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Pricing",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -6288,6 +6300,24 @@
             "deprecationReason": null
           },
           {
+            "name": "DOMESTIC_M",
+            "description": "Standard/Domestic household, type \"M\", BS 546, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_N",
+            "description": "Standard/Domestic household, type \"N\", NBR 14136, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_O",
+            "description": "Standard/Domestic household, type \"O\", TIS 166-2549, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "IEC_60309_2_single_16",
             "description": "IEC 60309-2 Industrial connector single phase 16 amperes (usually blue)",
             "isDeprecated": false,
@@ -6374,6 +6404,54 @@
           {
             "name": "GB_T",
             "description": "The connector type is GB_T (Chinese standard), DC",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CHAOJI",
+            "description": "The ChaoJi connector. The new generation charging connector, harmonized between CHAdeMO and GB/T. DC.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_5_20",
+            "description": "The connector type is NEMA 5-20, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_6_30",
+            "description": "The connector type is NEMA 6-30, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_6_50",
+            "description": "The connector type is NEMA 6-50, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_10_30",
+            "description": "The connector type is NEMA 10-30, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_10_50",
+            "description": "The connector type is NEMA 10-50, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_14_30",
+            "description": "The connector type is NEMA 14-30, 3 pins, rating of 30 A",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_14_50",
+            "description": "The connector type is NEMA 14-50, 3 pins, rating of 50 A",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -8245,7 +8323,7 @@
       {
         "kind": "ENUM",
         "name": "LegType",
-        "description": "The types of the leg",
+        "description": "Types of a leg",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -8545,6 +8623,12 @@
             "description": "Connectors have a mechanical lock that can be requested by the eMSP to be unlocked.",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "START_SESSION_CONNECTOR_REQUIRED",
+            "description": "When a StartSession is sent to this EVSE, the MSP is required to add the optional connector_id field in the StartSession object.",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -8659,6 +8743,24 @@
             "deprecationReason": null
           },
           {
+            "name": "DOMESTIC_M",
+            "description": "Standard/Domestic household, type \"M\", BS 546, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_N",
+            "description": "Standard/Domestic household, type \"N\", NBR 14136, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOMESTIC_O",
+            "description": "Standard/Domestic household, type \"O\", TIS 166-2549, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "IEC_60309_2_single_16",
             "description": "IEC 60309-2 Industrial connector single phase 16 amperes (usually blue)",
             "isDeprecated": false,
@@ -8745,6 +8847,54 @@
           {
             "name": "GB_T",
             "description": "The connector type is GB_T (Chinese standard), DC",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CHAOJI",
+            "description": "The ChaoJi connector. The new generation charging connector, harmonized between CHAdeMO and GB/T. DC.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_5_20",
+            "description": "The connector type is NEMA 5-20, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_6_30",
+            "description": "The connector type is NEMA 6-30, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_6_50",
+            "description": "The connector type is NEMA 6-50, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_10_30",
+            "description": "The connector type is NEMA 10-30, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_10_50",
+            "description": "The connector type is NEMA 10-50, 3 pins",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_14_30",
+            "description": "The connector type is NEMA 14-30, 3 pins, rating of 30 A",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NEMA_14_50",
+            "description": "The connector type is NEMA 14-50, 3 pins, rating of 50 A",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -9583,6 +9733,18 @@
           {
             "name": "AC_3_PHASE",
             "description": "AC three phase.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AC_2_PHASE",
+            "description": "AC two phases, only two of the three available phases connected.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AC_2_PHASE_SPLIT",
+            "description": "AC two phases using split phase system.",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -10960,6 +11122,249 @@
           {
             "name": "displayValue",
             "description": "The value of the price which should be display by the frontend",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Pricing",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "Unique ID of a price",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_list",
+            "description": "Price details",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PricingList",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PricingList",
+        "description": null,
+        "fields": [
+          {
+            "name": "partner",
+            "description": "(MSP) Mobility Service Provider",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "product",
+            "description": "Product details",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PricingListProduct",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "elements",
+            "description": "Price product elements",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PricingListElement",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PricingListElement",
+        "description": null,
+        "fields": [
+          {
+            "name": "type",
+            "description": "Price element type.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "PricingListElementType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_excl_vat",
+            "description": "Price of the element type without VAT.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vat",
+            "description": "VAT percentage to apply",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "PricingListElementType",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ENERGY",
+            "description": "Price per kWh",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FLAT",
+            "description": "Starting price, fixed fee per charge session",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TIME",
+            "description": "Fixed price per hour",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PARKING_TIME",
+            "description": "Parking price per hour",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PricingListProduct",
+        "description": null,
+        "fields": [
+          {
+            "name": "name",
+            "description": "Name of the payment card or subscription. If name is 'Adhoc price' the price is the CPO price",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": "Description of the product",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "subscription_type",
+            "description": "Subscription type",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "subscription_fee_excl_vat",
+            "description": "Subscription fee without VAT",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "currency",
+            "description": "Currency",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13675,7 +14080,7 @@
             "args": [
               {
                 "name": "decimals",
-                "description": "Number of decimals used for Google Polyline encoding Algorithm. Allowed values are 5 or 6, default is 5",
+                "description": "Number of decimals used by the algorithm to encode [long, lat] pairs. Allowed values are 5 or 6, default is 5",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -13816,6 +14221,22 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "RouteStationsAlong",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tags",
+            "description": "Tags of a route alternative. Values: road, highway, toll, ferry, etc.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteTagType",
                 "ofType": null
               }
             },
@@ -14392,11 +14813,35 @@
           },
           {
             "name": "operatorId",
-            "description": "ID of the operator",
+            "description": "ID of an operator",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operatorName",
+            "description": "Name of an operator",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operatorRanking",
+            "description": "Ranking of an operator",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -14494,6 +14939,63 @@
               "kind": "SCALAR",
               "name": "Int",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "polyline",
+            "description": "Polyline containing encoded coordinates",
+            "args": [
+              {
+                "name": "decimals",
+                "description": "Number of decimals used by the algorithm to encode [long, lat] pairs. Allowed values are 5 or 6, default is 5",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "steps",
+            "description": "Steps of a leg",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteStep",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tags",
+            "description": "Tags of a leg. Values: road, highway, toll, ferry",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteTagType",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -15239,6 +15741,137 @@
       },
       {
         "kind": "OBJECT",
+        "name": "RouteStep",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of a step",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of a step",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "StepType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "polyline",
+            "description": "Polyline containing encoded coordinates",
+            "args": [
+              {
+                "name": "decimals",
+                "description": "Number of decimals used by the algorithm to encode [long, lat] pairs. Allowed values are 5 or 6, default is 5",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "distance",
+            "description": "Distance from the start to the end of a step, in meters",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "duration",
+            "description": "Total drive time from the start to the end of a step, in seconds",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "consumption",
+            "description": "Total enery used in a step in kWh",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "RouteTagType",
+        "description": "Tags of a route",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "road",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "highway",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "toll",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ferry",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "StandardStats",
         "description": "Standards(plug type) stats model",
         "fields": [
@@ -15667,7 +16300,7 @@
           },
           {
             "name": "amenities",
-            "description": "Amenties located at this location",
+            "description": "Amenities located at this location",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16105,6 +16738,41 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "StepType",
+        "description": "Types of a route step",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "road",
+            "description": "This step is a road",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "highway",
+            "description": "This step is a highway",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "toll",
+            "description": "This step is a toll road",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ferry",
+            "description": "This step is a ferry",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
