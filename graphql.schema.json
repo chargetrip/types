@@ -621,7 +621,7 @@
           },
           {
             "name": "fastChargingSupport",
-            "description": "Cars that support fast charging have a minimum charging speed of 43 Kwh. Cars without support for fast charging used in a newRoute mutation will return an error",
+            "description": "Cars that support fast charging have a minimum charging speed of 43 kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1701,7 +1701,7 @@
           },
           {
             "name": "fastChargingSupport",
-            "description": "Cars that support fast charging have a minimum charging speed of 43 Kwh. Cars without support for fast charging used in a newRoute mutation will return an error",
+            "description": "Cars that support fast charging have a minimum charging speed of 43 kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2372,7 +2372,7 @@
         "fields": [
           {
             "name": "fast_charging_support",
-            "description": "EVs that support fast charging have a minimum charging speed of 43 Kwh.\nEVs without support for fast charging used in a newRoute mutation will return an error.",
+            "description": "Cars that support fast charging have a minimum charging speed of 43 kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5275,7 +5275,7 @@
         "fields": [
           {
             "name": "fast_charging_support",
-            "description": "EVs that support fast charging have a minimum charging speed of 43 Kwh.\nEVs without support for fast charging used in a newRoute mutation will return an error.",
+            "description": "Cars that support fast charging have a minimum charging speed of 43 kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5705,7 +5705,7 @@
         "fields": [
           {
             "name": "fast_charging_support",
-            "description": "EVs that support fast charging have a minimum charging speed of 43 Kwh.\nEVs without support for fast charging used in a newRoute mutation will return an error.",
+            "description": "Cars that support fast charging have a minimum charging speed of 43 kWh",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8311,6 +8311,29 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "InstructionsFormat",
+        "description": "Navigation service providers available",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "Chargetrip",
+            "description": "Chargetrip raw instructions",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MapboxV5",
+            "description": "Mapbox instructions mapping",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "JSON",
         "description": "Any JSON object or array",
@@ -8371,7 +8394,7 @@
         "enumValues": [
           {
             "name": "en",
-            "description": null,
+            "description": "English(US)",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -8387,8 +8410,14 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "Chargetrip",
+            "description": "Chargetrip raw instructions",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "MapboxV5",
-            "description": "Mapbox Navigation",
+            "description": "Mapbox instructions mapping",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -8400,6 +8429,122 @@
         "name": "Mutation",
         "description": null,
         "fields": [
+          {
+            "name": "startNavigation",
+            "description": "[BETA] Start a new navigation session on top of an existing route",
+            "args": [
+              {
+                "name": "input",
+                "description": "Navigation start input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "NavigationStartInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateNavigation",
+            "description": "[BETA] Update the navigation session",
+            "args": [
+              {
+                "name": "input",
+                "description": "Navigation update input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "NavigationUpdateInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Void",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recalculateNavigation",
+            "description": "[BETA] Recalculate the current navigation route",
+            "args": [
+              {
+                "name": "input",
+                "description": "Navigation recalculate input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "NavigationReacalculateInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Void",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "finishNavigation",
+            "description": "[BETA] End a navigation session",
+            "args": [
+              {
+                "name": "input",
+                "description": "Navigation finish input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "NavigationFinishInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Void",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "addReview",
             "description": "Add a new review.\nIf the `x-token` header is send for a valid user, the review will belong to it, otherwise will be added for an anonymouse user",
@@ -8494,6 +8639,713 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Navigation",
+        "description": "The navigation session data",
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of the navigation session",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "route_id",
+            "description": "The current route used for navigation",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "route_alternative_id",
+            "description": "The current route alternative used for navigation",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "state",
+            "description": "The state of a navigation session. The status can be driving, charging, finished, or error",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "NavigationState",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "state_of_charge",
+            "description": "State of charge at the last known location",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "last_known_location",
+            "description": "Last known location",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Point",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "next_station",
+            "description": "Next charging station",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationStation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "alternative_stations",
+            "description": "A set of alternative charging stations to next station",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "NavigationStation",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "instructions",
+            "description": "Navigation instructions",
+            "args": [
+              {
+                "name": "instructions_format",
+                "description": "Turn by turn instructions format for a route",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "InstructionsFormat",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "language",
+                "description": "Preferred navigation instructions language. Default: en",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "MappingLanguage",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "precision",
+                "description": "Number of decimals used for the Google Polyline encoding Algorithm. Allowed values are 5 or 6, the default is 5",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationFinishInput",
+        "description": "Input for the navigation recalculate",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "ID of the navigation session",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_location",
+            "description": "Current coordinates",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PointInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationReacalculateInput",
+        "description": "Input for the navigation recalculate",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "ID of the navigation session",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "state_of_charge",
+            "description": "State of charge at origin",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_location",
+            "description": "Origin location of a new route",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PointInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "via",
+            "description": "Via points of a new route. If this field is not sent, the original via points will be used",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "FeaturePointInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "heading",
+            "description": "Heading of a vehicle, in degrees",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationStartInput",
+        "description": "Input for the navigation start",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "route_id",
+            "description": "ID of the route of the navigation session",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "route_alternative_id",
+            "description": "ID of the route alternative of the navigation session",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_location",
+            "description": "Current coordinates",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PointInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "NavigationState",
+        "description": "State of navigation session",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "Driving",
+            "description": "Vehicle is driving",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Charging",
+            "description": "Vehicle is charging",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Finished",
+            "description": "Navigation session is completed (either manually or automatically 48 hours after the last update)",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Error",
+            "description": "Failed to update navigation session due to route error or not found",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationStation",
+        "description": "Navigation session station type",
+        "fields": [
+          {
+            "name": "station_id",
+            "description": "The ID as string of the charging station",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_location",
+            "description": "GPS location of the charging station",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Point",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "via",
+            "description": "An array with all GPS locations of via points until the next charging station",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Point",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "estimated_state_of_charge",
+            "description": "Estimated state of charge, in kWh, at arrival on the next charging station",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "estimated_consumption",
+            "description": "Estimated consumption, in kWh, from last the known location until the next charging station",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "estimated_duration",
+            "description": "Estimated duration, in seconds, from the last known location until the next charging station",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationTelemetryUpdateInput",
+        "description": "Input for the navigation session update telemetry data",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "state_of_charge",
+            "description": "State of charge at the last known location",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_charging",
+            "description": "Indicates if a vehicle is charging",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tire_pressure",
+            "description": "Tire pressure. This information should come from telemetry",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationUpdateInput",
+        "description": "Input for the navigation update",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "ID of the navigation session",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "heading",
+            "description": "Heading of a vehicle, in degrees",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "locations_data",
+            "description": "A list of locations that were collected since the last update",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "NavigationUpdateLocationsInput",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "telemetry",
+            "description": "Telemetry data input",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NavigationTelemetryUpdateInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationUpdateLocationPropertiesInput",
+        "description": "Properties of the location",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "route_leg",
+            "description": "Current route leg index corresponding to a location",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "speed",
+            "description": "Speed at a location",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timestamp",
+            "description": "UNIX timestamp at location",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "altitude",
+            "description": "Altitude information. This is optional",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationUpdateLocationsInput",
+        "description": "Input for the navigation update locations",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "geometry",
+            "description": "GPS location",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PointInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "properties",
+            "description": "Extra information about the location",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NavigationUpdateLocationPropertiesInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -11558,6 +12410,35 @@
             "deprecationReason": null
           },
           {
+            "name": "navigation",
+            "description": "[BETA] Get a navigation session by ID",
+            "args": [
+              {
+                "name": "id",
+                "description": "ID of the navigation session to retrieve",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Navigation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "operatorList",
             "description": "Get a full list of operators",
             "args": [
@@ -12078,11 +12959,11 @@
           },
           {
             "name": "navigationMapping",
-            "description": "Convert a route to navigation instructions for a specified mapping provider",
+            "description": "Deprecated: This query will be removed in favor of navigation query and subscription. Mapping can be retrieved via the instructions field.",
             "args": [
               {
                 "name": "id",
-                "description": "ID of a route",
+                "description": "ID of a route that needs to be mapped to navigation service provider specific format",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -12114,7 +12995,7 @@
               },
               {
                 "name": "precision",
-                "description": "Number of decimals used for the Google Polyline encoding Algorithm. Allowed values are 5 or 6, the default is 5",
+                "description": "Number of decimals used for Google Polyline encoding Algorithm. Allowed values are 5 or 6, default is 5",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -12126,7 +13007,7 @@
               },
               {
                 "name": "language",
-                "description": "Preferred language, the default is English",
+                "description": "Preferred language (defaults to 'en')",
                 "type": {
                   "kind": "ENUM",
                   "name": "MappingLanguage",
@@ -13203,7 +14084,7 @@
           },
           {
             "name": "instructions",
-            "description": "Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production",
+            "description": "Deprecated: all routes will have turn-by-turn instructions prepared. Boolean will be ignored",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -13824,6 +14705,18 @@
             "deprecationReason": null
           },
           {
+            "name": "app",
+            "description": "Application who requested a route",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteApp",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "status",
             "description": "Route status",
             "args": [],
@@ -14347,6 +15240,29 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteApp",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of the app who requested a route",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -16781,6 +17697,35 @@
         "description": null,
         "fields": [
           {
+            "name": "navigationUpdatedById",
+            "description": "[BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Navigation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "operatorAdded",
             "description": "Subscription for a new operator was added in the system event",
             "args": [],
@@ -17007,6 +17952,16 @@
         "kind": "SCALAR",
         "name": "Upload",
         "description": "The File Upload scalar",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Void",
+        "description": "Void custom scalar",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
