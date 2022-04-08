@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/chargetrip/types/compare/v1.24.0...v1.25.0) (2022-04-08)
+
+
+### Features
+
+* release 1.25.0 ([17cb284](https://github.com/chargetrip/types/commit/17cb284aed39a79dc6432e258099e4ee361482fb))
+
 # [1.24.0](https://github.com/chargetrip/types/compare/v1.23.0...v1.24.0) (2022-02-24)
 
 
