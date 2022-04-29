@@ -45,6 +45,20 @@ export type Address = {
   formattedAddress?: Maybe<Array<Maybe<Scalars["String"]>>>;
 };
 
+/** Amenities available near a station */
+export enum Amenities {
+  PARK = "park",
+  RESTAURANT = "restaurant",
+  MUSEUM = "museum",
+  COFFEE = "coffee",
+  HOTEL = "hotel",
+  SHOPPING = "shopping",
+  BATHROOM = "bathroom",
+  SUPERMARKET = "supermarket",
+  PLAYGROUND = "playground",
+  PHARMACY = "pharmacy"
+}
+
 /** The amenity model */
 export type Amenity = {
   /** Unique amenity ID */
@@ -1848,7 +1862,7 @@ export type MutationupdateNavigationArgs = {
 };
 
 export type MutationrecalculateNavigationArgs = {
-  input: NavigationReacalculateInput;
+  input: NavigationRecalculateInput;
 };
 
 export type MutationfinishNavigationArgs = {
@@ -1905,7 +1919,7 @@ export type NavigationFinishInput = {
 };
 
 /** Input for the navigation recalculate */
-export type NavigationReacalculateInput = {
+export type NavigationRecalculateInput = {
   /** ID of the navigation session */
   id: Scalars["ID"];
   /** State of charge at origin */
@@ -1931,13 +1945,13 @@ export type NavigationStartInput = {
 /** State of navigation session */
 export enum NavigationState {
   /** Vehicle is driving */
-  DRIVING = "Driving",
+  DRIVING = "driving",
   /** Vehicle is charging */
-  CHARGING = "Charging",
+  CHARGING = "charging",
   /** Navigation session is completed (either manually or automatically 48 hours after the last update) */
-  FINISHED = "Finished",
+  FINISHED = "finished",
   /** Failed to update navigation session due to route error or not found */
-  ERROR = "Error"
+  ERROR = "error"
 }
 
 /** Navigation session station type */
@@ -1982,11 +1996,11 @@ export type NavigationUpdateInput = {
 export type NavigationUpdateLocationPropertiesInput = {
   /** Current route leg index corresponding to a location */
   route_leg: Scalars["Int"];
-  /** Speed at a location */
+  /** Speed at a location, in km/h */
   speed: Scalars["Float"];
-  /** UNIX timestamp at location */
+  /** UNIX timestamp at location, in seconds */
   timestamp: Scalars["Int"];
-  /** Altitude information. This is optional */
+  /** Altitude information, in meters. This is optional */
   altitude?: Maybe<Scalars["Int"]>;
 };
 
@@ -2782,12 +2796,16 @@ export type QuerystationArgs = {
 
 export type QuerystationListArgs = {
   query?: Maybe<StationListQuery>;
+  filter?: Maybe<StationListFilter>;
+  search?: Maybe<Scalars["String"]>;
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
 };
 
 export type QuerystationAroundArgs = {
-  query: StationAroundQuery;
+  query?: Maybe<StationAroundQuery>;
+  filter?: Maybe<StationAroundFilter>;
+  search?: Maybe<Scalars["String"]>;
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
 };
@@ -2834,26 +2852,26 @@ export type RequestEv = {
 };
 
 export type RequestEvBattery = {
-  /** The usable capacity of the battery used to compute the route. If this in not filled in,  value as the car batteryUsableKwh. */
+  /** Usable capacity of the battery used to compute the route. If this in not filled in, value as the car batteryUsableKwh */
   capacity?: Maybe<RequestEvBatteryValue>;
-  /** Usable capacity of a battery, in kWh. This value is computed from the provided capacity value. */
+  /** Usable capacity of a battery, in kWh. This value is computed from the provided capacity value */
   capacityKwh?: Maybe<Scalars["Float"]>;
-  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and it will be equal to the batteryUsableKwh. */
+  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and it will be equal to the batteryUsableKwh */
   stateOfCharge?: Maybe<RequestEvBatteryValue>;
-  /** Current amount of energy in a battery, in kWh. This value is computed from the provided state of charge. */
+  /** Current amount of energy in a battery, in kWh. This value is computed from the provided state of charge */
   stateOfChargeKwh?: Maybe<Scalars["Float"]>;
-  /** Desired final amount of energy in a battery. If this is not filled in, it will be set to 20% of the car batteryUsableKwh. */
+  /** Desired final amount of energy in a battery. If this is not filled in, it will be set to 20% of the car batteryUsableKwh */
   finalStateOfCharge?: Maybe<RequestEvBatteryValue>;
-  /** Desired final amount of energy in a battery, in kWh. This value is computed from the provided final state of charge. */
+  /** Desired final amount of energy in a battery, in kWh. This value is computed from the provided final state of charge */
   finalStateOfChargeKwh?: Maybe<Scalars["Float"]>;
 };
 
 export type RequestEvBatteryInput = {
-  /** Usable capacity of a battery used to compute a route. Allowed value is between -50% and 50% of the car usable battery capacity. If this in not filled in, we assume it is the same value as the car batteryUsableKwh. */
+  /** Usable capacity of a battery used to compute a route. We recommend you stay between 50% and 150%. If this in not filled in, we assume it is the same value as the car batteryUsableKwh */
   capacity?: Maybe<RequestEvBatteryInputValue>;
-  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh. */
+  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh */
   stateOfCharge?: Maybe<RequestEvBatteryInputValue>;
-  /** Desired final amount of energy in a battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh. */
+  /** Desired final amount of energy in a battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh */
   finalStateOfCharge?: Maybe<RequestEvBatteryInputValue>;
 };
 
@@ -3136,15 +3154,15 @@ export type RouteAlternative = {
   type?: Maybe<RouteAlternativeType>;
   /** Number of charges along a route */
   charges?: Maybe<Scalars["Int"]>;
-  /** Number of available charges along a route. */
+  /** Number of available charges along a route */
   chargesAvailable?: Maybe<Scalars["Int"]>;
-  /** Number of occupied charges along a route. */
+  /** Number of occupied charges along a route */
   chargesOccupied?: Maybe<Scalars["Int"]>;
-  /** Number of unknown charges along a route. */
+  /** Number of unknown charges along a route */
   chargesUnknown?: Maybe<Scalars["Int"]>;
-  /** Number of out of order charges along a route. */
+  /** Number of out of order charges along a route */
   chargesOutOfOrder?: Maybe<Scalars["Int"]>;
-  /** Total distance of a route in meters. */
+  /** Total distance of a route in meters */
   distance?: Maybe<Scalars["Int"]>;
   /** Total duration of a route, including charge time, in seconds */
   duration?: Maybe<Scalars["Int"]>;
@@ -3165,9 +3183,9 @@ export type RouteAlternative = {
   rangeStartPercentage?: Maybe<Scalars["Int"]>;
   /** Remaining range, in meters, at the end of a trip */
   rangeEnd?: Maybe<Scalars["Int"]>;
-  /** Remaining range, energy in kWh, at the end of a trip. */
+  /** Remaining range, energy in kWh, at the end of a trip */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
-  /** Remaining range, energy in percentage, at the end of a trip. */
+  /** Remaining range, energy in percentage, at the end of a trip */
   rangeEndPercentage?: Maybe<Scalars["Int"]>;
   /** Text information about a route direction */
   via?: Maybe<Scalars["String"]>;
@@ -3299,7 +3317,7 @@ export type RouteLeg = {
   rangeEnd?: Maybe<Scalars["Int"]>;
   /** Total energy left in a battery at the end of a leg, in kWh */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
-  /** Remaining range, energy in percentage, at the end of a trip. */
+  /** Remaining range, energy in percentage, at the end of a trip */
   rangeEndPercentage?: Maybe<Scalars["Int"]>;
   /** Origin point location */
   origin?: Maybe<FeaturePoint>;
@@ -3505,7 +3523,8 @@ export enum RouteTagType {
   ROAD = "road",
   HIGHWAY = "highway",
   TOLL = "toll",
-  FERRY = "ferry"
+  FERRY = "ferry",
+  WALKING = "walking"
 }
 
 /** Standards(plug type) stats model */
@@ -3608,18 +3627,54 @@ export type Station = {
 };
 
 /** Filter which can be applied to retrieve the station around list action */
+export type StationAroundFilter = {
+  /** The GeoJSON Point of the center of the around me circle */
+  location?: Maybe<PointInput>;
+  /** Distance, in meters, to search around */
+  distance?: Maybe<Scalars["Int"]>;
+  /** Powers in kWh */
+  powers?: Maybe<Array<Maybe<Scalars["Float"]>>>;
+  /** Amenities available near a station */
+  amenities?: Maybe<Array<Maybe<Amenities>>>;
+  /** Station speed */
+  power_groups?: Maybe<Array<Maybe<StationSpeedType>>>;
+  /** Station socket or plug standards */
+  connectors?: Maybe<Array<Maybe<ConnectorType>>>;
+  /** Flag that allows you to return only available stations */
+  available_only?: Maybe<Scalars["Boolean"]>;
+  /** Flag indicating if only stations that are owned by an operator from a clients ranking list are returned */
+  preferred_operator?: Maybe<Scalars["Boolean"]>;
+};
+
+/** Deprecated: Replaced by filter & search params */
 export type StationAroundQuery = {
   /** The GeoJSON Point of the center of the around me circle */
-  location: PointInput;
+  location?: Maybe<PointInput>;
   /** Distance, in meters, to search around */
-  distance: Scalars["Int"];
+  distance?: Maybe<Scalars["Int"]>;
   /** Power in kWh */
   power?: Maybe<Array<Maybe<Scalars["Float"]>>>;
-  /** Amentities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park */
+  /** Amenities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park */
   amenities?: Maybe<Array<Maybe<Scalars["String"]>>>;
 };
 
 /** Filter which can be applied to retrieve the station list action */
+export type StationListFilter = {
+  /** Powers in kWh */
+  powers?: Maybe<Array<Maybe<Scalars["Float"]>>>;
+  /** Amenities available near a station */
+  amenities?: Maybe<Array<Maybe<Amenities>>>;
+  /** Station speed */
+  power_groups?: Maybe<Array<Maybe<StationSpeedType>>>;
+  /** Station socket or plug standards */
+  connectors?: Maybe<Array<Maybe<ConnectorType>>>;
+  /** Flag that allows you to return only available stations */
+  available_only?: Maybe<Scalars["Boolean"]>;
+  /** Flag indicating if only stations that are owned by an operator from a clients ranking list are returned */
+  preferred_operator?: Maybe<Scalars["Boolean"]>;
+};
+
+/** Deprecated: Replaced by filter & search params */
 export type StationListQuery = {
   /** ID of the station */
   id?: Maybe<Scalars["ID"]>;
@@ -3678,7 +3733,9 @@ export enum StepType {
   /** This step is a toll road */
   TOLL = "toll",
   /** This step is a ferry */
-  FERRY = "ferry"
+  FERRY = "ferry",
+  /** This step is reachable by walking */
+  WALKING = "walking"
 }
 
 export type Subscription = {

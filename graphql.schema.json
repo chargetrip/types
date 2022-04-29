@@ -144,6 +144,77 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "Amenities",
+        "description": "Amenities available near a station",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "park",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "restaurant",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "museum",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "coffee",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hotel",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "shopping",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "bathroom",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "supermarket",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "playground",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pharmacy",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Amenity",
         "description": "The amenity model",
@@ -8499,7 +8570,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "NavigationReacalculateInput",
+                    "name": "NavigationRecalculateInput",
                     "ofType": null
                   }
                 },
@@ -8855,7 +8926,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "NavigationReacalculateInput",
+        "name": "NavigationRecalculateInput",
         "description": "Input for the navigation recalculate",
         "fields": null,
         "inputFields": [
@@ -9000,25 +9071,25 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "Driving",
+            "name": "driving",
             "description": "Vehicle is driving",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "Charging",
+            "name": "charging",
             "description": "Vehicle is charging",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "Finished",
+            "name": "finished",
             "description": "Navigation session is completed (either manually or automatically 48 hours after the last update)",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "Error",
+            "name": "error",
             "description": "Failed to update navigation session due to route error or not found",
             "isDeprecated": false,
             "deprecationReason": null
@@ -9259,7 +9330,7 @@
           },
           {
             "name": "speed",
-            "description": "Speed at a location",
+            "description": "Speed at a location, in km/h",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -9275,7 +9346,7 @@
           },
           {
             "name": "timestamp",
-            "description": "UNIX timestamp at location",
+            "description": "UNIX timestamp at location, in seconds",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -9291,7 +9362,7 @@
           },
           {
             "name": "altitude",
-            "description": "Altitude information. This is optional",
+            "description": "Altitude information, in meters. This is optional",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -12783,10 +12854,34 @@
             "args": [
               {
                 "name": "query",
-                "description": "Query parameters",
+                "description": "Deprecated: Replaced by filter & search params",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationListQuery",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "filter",
+                "description": "Filter station result",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "StationListFilter",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "search",
+                "description": "Search for stations by name, id and external id",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -12836,15 +12931,35 @@
             "args": [
               {
                 "name": "query",
-                "description": "Query parameters",
+                "description": "Deprecated: Replaced by filter and search params",
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "StationAroundQuery",
-                    "ofType": null
-                  }
+                  "kind": "INPUT_OBJECT",
+                  "name": "StationAroundQuery",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "filter",
+                "description": "Filter station around result",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "StationAroundFilter",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "search",
+                "description": "Search for stations around by name, id and external id",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
@@ -13166,7 +13281,7 @@
         "fields": [
           {
             "name": "capacity",
-            "description": "The usable capacity of the battery used to compute the route. If this in not filled in,  value as the car batteryUsableKwh.",
+            "description": "Usable capacity of the battery used to compute the route. If this in not filled in, value as the car batteryUsableKwh",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -13178,7 +13293,7 @@
           },
           {
             "name": "capacityKwh",
-            "description": "Usable capacity of a battery, in kWh. This value is computed from the provided capacity value.",
+            "description": "Usable capacity of a battery, in kWh. This value is computed from the provided capacity value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13190,7 +13305,7 @@
           },
           {
             "name": "stateOfCharge",
-            "description": "Current amount of energy in a battery. If this is not filled in, we assume the battery is full and it will be equal to the batteryUsableKwh.",
+            "description": "Current amount of energy in a battery. If this is not filled in, we assume the battery is full and it will be equal to the batteryUsableKwh",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -13202,7 +13317,7 @@
           },
           {
             "name": "stateOfChargeKwh",
-            "description": "Current amount of energy in a battery, in kWh. This value is computed from the provided state of charge.",
+            "description": "Current amount of energy in a battery, in kWh. This value is computed from the provided state of charge",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13214,7 +13329,7 @@
           },
           {
             "name": "finalStateOfCharge",
-            "description": "Desired final amount of energy in a battery. If this is not filled in, it will be set to 20% of the car batteryUsableKwh.",
+            "description": "Desired final amount of energy in a battery. If this is not filled in, it will be set to 20% of the car batteryUsableKwh",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -13226,7 +13341,7 @@
           },
           {
             "name": "finalStateOfChargeKwh",
-            "description": "Desired final amount of energy in a battery, in kWh. This value is computed from the provided final state of charge.",
+            "description": "Desired final amount of energy in a battery, in kWh. This value is computed from the provided final state of charge",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13250,7 +13365,7 @@
         "inputFields": [
           {
             "name": "capacity",
-            "description": "Usable capacity of a battery used to compute a route. Allowed value is between -50% and 50% of the car usable battery capacity. If this in not filled in, we assume it is the same value as the car batteryUsableKwh.",
+            "description": "Usable capacity of a battery used to compute a route. We recommend you stay between 50% and 150%. If this in not filled in, we assume it is the same value as the car batteryUsableKwh",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RequestEvBatteryInputValue",
@@ -13262,7 +13377,7 @@
           },
           {
             "name": "stateOfCharge",
-            "description": "Current amount of energy in a battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh.",
+            "description": "Current amount of energy in a battery. If this is not filled in, we assume the battery is full and we fill it in with car batteryUsableKwh",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RequestEvBatteryInputValue",
@@ -13274,7 +13389,7 @@
           },
           {
             "name": "finalStateOfCharge",
-            "description": "Desired final amount of energy in a battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh.",
+            "description": "Desired final amount of energy in a battery. If this is not filled in, we assume it is 20% of the car batteryUsableKwh",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RequestEvBatteryInputValue",
@@ -14777,7 +14892,7 @@
           },
           {
             "name": "chargesAvailable",
-            "description": "Number of available charges along a route.",
+            "description": "Number of available charges along a route",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14789,7 +14904,7 @@
           },
           {
             "name": "chargesOccupied",
-            "description": "Number of occupied charges along a route.",
+            "description": "Number of occupied charges along a route",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14801,7 +14916,7 @@
           },
           {
             "name": "chargesUnknown",
-            "description": "Number of unknown charges along a route.",
+            "description": "Number of unknown charges along a route",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14813,7 +14928,7 @@
           },
           {
             "name": "chargesOutOfOrder",
-            "description": "Number of out of order charges along a route.",
+            "description": "Number of out of order charges along a route",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14825,7 +14940,7 @@
           },
           {
             "name": "distance",
-            "description": "Total distance of a route in meters.",
+            "description": "Total distance of a route in meters",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14933,7 +15048,7 @@
           },
           {
             "name": "rangeEndKwh",
-            "description": "Remaining range, energy in kWh, at the end of a trip.",
+            "description": "Remaining range, energy in kWh, at the end of a trip",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14945,7 +15060,7 @@
           },
           {
             "name": "rangeEndPercentage",
-            "description": "Remaining range, energy in percentage, at the end of a trip.",
+            "description": "Remaining range, energy in percentage, at the end of a trip",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15657,7 +15772,7 @@
           },
           {
             "name": "rangeEndPercentage",
-            "description": "Remaining range, energy in percentage, at the end of a trip.",
+            "description": "Remaining range, energy in percentage, at the end of a trip",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16782,6 +16897,12 @@
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "walking",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -17350,7 +17471,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "StationAroundQuery",
+        "name": "StationAroundFilter",
         "description": "Filter which can be applied to retrieve the station around list action",
         "fields": null,
         "inputFields": [
@@ -17358,13 +17479,9 @@
             "name": "location",
             "description": "The GeoJSON Point of the center of the around me circle",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PointInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "PointInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -17374,13 +17491,132 @@
             "name": "distance",
             "description": "Distance, in meters, to search around",
             "type": {
-              "kind": "NON_NULL",
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "powers",
+            "description": "Powers in kWh",
+            "type": {
+              "kind": "LIST",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "Float",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "amenities",
+            "description": "Amenities available near a station",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Amenities",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "power_groups",
+            "description": "Station speed",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "StationSpeedType",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectors",
+            "description": "Station socket or plug standards",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ConnectorType",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "available_only",
+            "description": "Flag that allows you to return only available stations",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "preferred_operator",
+            "description": "Flag indicating if only stations that are owned by an operator from a clients ranking list are returned",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "StationAroundQuery",
+        "description": "Deprecated: Replaced by filter & search params",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "location",
+            "description": "The GeoJSON Point of the center of the around me circle",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "PointInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "distance",
+            "description": "Distance, in meters, to search around",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -17404,7 +17640,7 @@
           },
           {
             "name": "amenities",
-            "description": "Amentities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park",
+            "description": "Amenities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -17425,8 +17661,107 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "StationListQuery",
+        "name": "StationListFilter",
         "description": "Filter which can be applied to retrieve the station list action",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "powers",
+            "description": "Powers in kWh",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "amenities",
+            "description": "Amenities available near a station",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Amenities",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "power_groups",
+            "description": "Station speed",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "StationSpeedType",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectors",
+            "description": "Station socket or plug standards",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ConnectorType",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "available_only",
+            "description": "Flag that allows you to return only available stations",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "preferred_operator",
+            "description": "Flag indicating if only stations that are owned by an operator from a clients ranking list are returned",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "StationListQuery",
+        "description": "Deprecated: Replaced by filter & search params",
         "fields": null,
         "inputFields": [
           {
@@ -17685,6 +18020,12 @@
           {
             "name": "ferry",
             "description": "This step is a ferry",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "walking",
+            "description": "This step is reachable by walking",
             "isDeprecated": false,
             "deprecationReason": null
           }
