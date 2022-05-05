@@ -21,3 +21,14 @@ Install the package in your project:
 ```bash
 yarn add @chargetrip/types -D
 ```
+
+## Release a new version
+
+1. Make sure your local main branch is up to date
+2. Create a new branch release/v1.x.x
+3. Update the version code in `package.json`
+4. Run `npm run generate:types`
+5. Make a new commit like `feat: bump version number for release`
+6. Create a PR and merge back to master.
+
+CI will build a new version and push it to the NPMjs registry.
