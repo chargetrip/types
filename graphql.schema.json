@@ -11801,6 +11801,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "stateOfCharge",
+            "description": "State of charge, in kWh, of a route path segment",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -16602,6 +16614,18 @@
           {
             "name": "duration",
             "description": "Duration, in seconds, of a route path segment",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stateOfCharge",
+            "description": "State of charge, in kWh, of a route path segment",
             "args": [],
             "type": {
               "kind": "SCALAR",

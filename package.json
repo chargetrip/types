@@ -1,6 +1,6 @@
 {
   "name": "@chargetrip/types",
-  "version": "1.26.0",
+  "version": "1.27.0",
   "description": "Typescript types for the Chargetrip EV-routing GraphQL API",
   "license": "MIT",
   "keywords": [
@@ -70,7 +70,7 @@
     "watch:rollup": "yarn build:rollup -w",
     "watch:ts": "yarn build:ts --watch",
     "watch": "yarn clean && concurrently \"yarn:watch:babel\" \"yarn:watch:rollup\" \"yarn:watch:ts\"",
-    "generate-types": "graphql-codegen --config codegen.yml"
+    "generate:types": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.4",
