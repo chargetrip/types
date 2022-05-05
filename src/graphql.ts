@@ -2589,6 +2589,8 @@ export type PathSegment = {
   distance?: Maybe<Scalars["Float"]>;
   /** Duration, in seconds, of a route path segment */
   duration?: Maybe<Scalars["Float"]>;
+  /** State of charge, in kWh, of a route path segment */
+  stateOfCharge?: Maybe<Scalars["Float"]>;
 };
 
 /** A GeoJSON Point */
@@ -3458,6 +3460,8 @@ export type RoutePath = {
   distance?: Maybe<Scalars["Float"]>;
   /** Duration, in seconds, of a route path segment */
   duration?: Maybe<Scalars["Float"]>;
+  /** State of charge, in kWh, of a route path segment */
+  stateOfCharge?: Maybe<Scalars["Float"]>;
 };
 
 /** The season of the route */
