@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/chargetrip/types/compare/v1.27.0...v1.28.0) (2022-07-06)
+
+
+### Features
+
+* release 1.29.0 ([96c653d](https://github.com/chargetrip/types/commit/96c653dfb088533401b1b12691c9df38fcd5e74c))
+
 # [1.27.0](https://github.com/chargetrip/types/compare/v1.26.0...v1.27.0) (2022-05-05)
 
 
