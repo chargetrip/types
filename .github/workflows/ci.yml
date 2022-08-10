@@ -17,6 +17,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+      with:
+        ref: refs/pull/${{ github.event.number }}/head
     - name: Install dependencies
       run: yarn install --frozen-lockfile
     - name: Lint
