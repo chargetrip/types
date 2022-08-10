@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/chargetrip/types/compare/v1.29.0...v1.30.0) (2022-08-10)
+
+
+### Features
+
+* fix build ([52b0e8b](https://github.com/chargetrip/types/commit/52b0e8bad89bdde50df6429a3fe05ef748c0ee54))
+
 # [1.29.0](https://github.com/chargetrip/types/compare/v1.28.0...v1.29.0) (2022-08-08)
 
 
