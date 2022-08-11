@@ -1,3 +1,10 @@
+## [1.30.1](https://github.com/chargetrip/types/compare/v1.30.0...v1.30.1) (2022-08-11)
+
+
+### Bug Fixes
+
+* added script to fetch subscriptions in graphql schema ([7fc6ef9](https://github.com/chargetrip/types/commit/7fc6ef9e96fe8fa746cb986d8e08d4ecf35f4a77))
+
 # [1.30.0](https://github.com/chargetrip/types/compare/v1.29.0...v1.30.0) (2022-08-10)
 
 
