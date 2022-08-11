@@ -1087,6 +1087,14 @@
     "eslint-restricted-globals" "^0.2.0"
     "prettier" "^2.0.4"
 
+"@chargetrip/codegen-chargetrip-fetch@^1.0.0":
+  "integrity" "sha512-ny73j/GaymMaeeqhTcTDVY199qGc75OmvvtzWHo8FzMytwSYqExYjvovdZ8NsmfJqDCAYsBKXRChoJf6zbc3YA=="
+  "resolved" "https://registry.npmjs.org/@chargetrip/codegen-chargetrip-fetch/-/codegen-chargetrip-fetch-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "graphql" "^16.5.0"
+    "node-fetch" "^2.0.0"
+
 "@endemolshinegroup/cosmiconfig-typescript-loader@3.0.2":
   "integrity" "sha512-QRVtqJuS1mcT56oHpVegkKBlgtWjXw/gHNWO3eL9oyB5Sc7HBoc2OLG/nYpVfT/Jejvo3NUrD0Udk7XgoyDKkA=="
   "resolved" "https://registry.npmjs.org/@endemolshinegroup/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-3.0.2.tgz"
@@ -4932,6 +4940,11 @@
   "resolved" "https://registry.npmjs.org/graphql/-/graphql-15.5.3.tgz"
   "version" "15.5.3"
 
+"graphql@^16.5.0":
+  "integrity" "sha512-qbHgh8Ix+j/qY+a/ZcJnFQ+j8ezakqPiHwPiZhV/3PgGlgf96QMBB5/f2rkiC9sgLoy/xvT6TSiaf2nTHJh5iA=="
+  "resolved" "https://registry.npmjs.org/graphql/-/graphql-16.5.0.tgz"
+  "version" "16.5.0"
+
 "handlebars@^4.7.6":
   "integrity" "sha512-1f2BACcBfiwAfStCKZNrUCgqNZkGsAT7UM3kkYtXuLo0KnaVfjKOyf7PRzB6++aK9STyT1Pd2ZCPe3EGOXleXA=="
   "resolved" "https://registry.npmjs.org/handlebars/-/handlebars-4.7.6.tgz"
@@ -6933,7 +6946,7 @@
     "json-parse-better-errors" "^1.0.0"
     "safe-buffer" "^5.1.1"
 
-"node-fetch@^2.3.0":
+"node-fetch@^2.0.0", "node-fetch@^2.3.0":
   "integrity" "sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA=="
   "resolved" "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.0.tgz"
   "version" "2.6.0"
