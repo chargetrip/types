@@ -15,7 +15,7 @@ export type Scalars = {
   Float: number;
   /** The date and time scalar */
   DateTime: string;
-  /** Any JSON object or array */
+  /** Any JSON object */
   JSON: { [key: string]: number | string | boolean | null | Scalars["JSON"] };
   /**
    * The `PlainString` scalar type represents textual data, represented as UTF-8 character sequences.
@@ -24,7 +24,7 @@ export type Scalars = {
   PlainString: any;
   /** The File Upload scalar */
   Upload: any;
-  /** Void scalar. Returns null */
+  /** Returns null */
   Void: any;
 };
 
@@ -113,6 +113,18 @@ export type AmenityStats = {
   type?: Maybe<Scalars["String"]>;
   /** The total number of stations with the specified amenity */
   total?: Maybe<Scalars["Int"]>;
+};
+
+export type AuthorizeConnectedVehicleInput = {
+  /** Id from the connected vehicle */
+  id: Scalars["ID"];
+  /** Provider specific options. See the developer portal for more details */
+  options: AuthorizeConnectedVehicleOptions;
+};
+
+export type AuthorizeConnectedVehicleOptions = {
+  /** OAuth code returned as a query parameter on the OAuth callback */
+  code?: Maybe<Scalars["PlainString"]>;
 };
 
 /** The type of the batter value */
@@ -333,6 +345,10 @@ export type CarBody = {
   /** Number of seats */
   seats?: Maybe<Scalars["Int"]>;
 };
+
+export enum CarConnectivityProvider {
+  ENODE = "Enode"
+}
 
 /** Deprecated */
 export type CarConsumption = {
@@ -1409,6 +1425,11 @@ export type Connect = {
   providers?: Maybe<Array<Maybe<ConnectProvider>>>;
 };
 
+export type ConnectBattery = {
+  percentage?: Maybe<Scalars["Int"]>;
+  date?: Maybe<Scalars["String"]>;
+};
+
 export type ConnectFilter = {
   /** List of connectivity providers to which a vehicle can connect */
   providers?: Maybe<Array<Maybe<ConnectProvider>>>;
@@ -1416,6 +1437,43 @@ export type ConnectFilter = {
 
 export enum ConnectProvider {
   ENODE = "Enode"
+}
+
+export type ConnectedVehicle = {
+  /** Unique ID of the connected vehicle */
+  id: Scalars["ID"];
+  /** ID of the user */
+  user_id: Scalars["ID"];
+  /** Unique ID of the vehicle */
+  vehicle_id: Scalars["ID"];
+  /** Status of the connected vehicle */
+  status: ConnectedVehicleStatus;
+  /** URL to connect the vehicle to the connectivity provider */
+  authorization_url?: Maybe<Scalars["String"]>;
+  /** Connectivity provider */
+  provider: CarConnectivityProvider;
+  /** Permissions for data retrieval from the connected vehicle */
+  permissions?: Maybe<Array<Maybe<ConnectedVehiclePermission>>>;
+  /** Custom label for a connected vehicle that can be assigned by a user */
+  label?: Maybe<Scalars["String"]>;
+  /** Vehicle identification number, unique identifier for a vehicle */
+  vin?: Maybe<Scalars["String"]>;
+};
+
+export enum ConnectedVehiclePermission {
+  /** Permission to retrieve the location of the vehicle */
+  LOCATION = "location",
+  /** Permission to retrieve the state of the battery */
+  BATTERY = "battery"
+}
+
+export enum ConnectedVehicleStatus {
+  /** Vehicle was added to the Chargetrip platform but not yet authorized */
+  PENDING = "pending",
+  /** Vehicle was authorized. Chargetrip can retrieve data on behave of the user */
+  AUTHORIZED = "authorized",
+  /** User did revoke permissions to retrieve data from the vehicle */
+  DEAUTHORIZED = "deauthorized"
 }
 
 /** Connector data which extends OCPI Connector */
@@ -1822,6 +1880,17 @@ export enum CountryCodeAlpha2 {
   ZW = "ZW"
 }
 
+export type CreateConnectedVehicleInput = {
+  /** Id from the vehicle */
+  vehicle_id: Scalars["ID"];
+  /** Connectivity provider used to retrieve data from the vehicle */
+  provider: CarConnectivityProvider;
+  /** Label for a connected vehicle */
+  label?: Maybe<Scalars["PlainString"]>;
+  /** Provider specific options. See the developer portal for more details */
+  options: NewConnectedVehicleOptions;
+};
+
 /** EVSE data which extends OCPI EVSE */
 export type EVSE = {
   /**
@@ -1865,7 +1934,7 @@ export type FeaturePoint = {
   type: FeatureType;
   /** Geometry of the feature */
   geometry: Point;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Additional data */
   properties?: Maybe<Scalars["JSON"]>;
 };
 
@@ -1927,6 +1996,12 @@ export type FeaturePolygonPoint = {
 export enum FeatureType {
   FEATURE = "Feature"
 }
+
+/** Geometry point with GPS coordinates */
+export type GeometryPoint = {
+  type: PointType;
+  coordinates: Array<Scalars["Float"]>;
+};
 
 /** Navigation service providers available */
 export enum InstructionsFormat {
@@ -2003,6 +2078,14 @@ export enum MappingProvider {
 }
 
 export type Mutation = {
+  /** [BETA] Create a connected vehicle for a given vehicle id and a connectivity provider */
+  createConnectedVehicle?: Maybe<ConnectedVehicle>;
+  /** [BETA] Authorize a vehicle by providing the callback url from the connectivity provider which will be exchanged for access tokens */
+  authorizeConnectedVehicle?: Maybe<ConnectedVehicle>;
+  /** [BETA] Update a connected vehicle */
+  updateConnectedVehicle?: Maybe<ConnectedVehicle>;
+  /** [BETA] Revoke access for a connected vehicle */
+  removeConnectedVehicle?: Maybe<Scalars["Void"]>;
   /** [BETA] Generate a set of consumption based Isolines */
   createIsoline?: Maybe<Scalars["ID"]>;
   /** [BETA] Start a new navigation session on top of an existing route */
@@ -2028,6 +2111,22 @@ export type Mutation = {
   deleteUserReview: Review;
   /** Create a new route from the route input and its ID */
   newRoute?: Maybe<Scalars["ID"]>;
+};
+
+export type MutationcreateConnectedVehicleArgs = {
+  input?: Maybe<CreateConnectedVehicleInput>;
+};
+
+export type MutationauthorizeConnectedVehicleArgs = {
+  input?: Maybe<AuthorizeConnectedVehicleInput>;
+};
+
+export type MutationupdateConnectedVehicleArgs = {
+  input: UpdateConnectedVehicleInput;
+};
+
+export type MutationremoveConnectedVehicleArgs = {
+  input: RemoveConnectedVehicleInput;
 };
 
 export type MutationcreateIsolineArgs = {
@@ -2191,6 +2290,11 @@ export type NavigationUpdateLocationsInput = {
   geometry: PointInput;
   /** Extra information about the location */
   properties: NavigationUpdateLocationPropertiesInput;
+};
+
+export type NewConnectedVehicleOptions = {
+  /** Redirect uri */
+  redirect_uri?: Maybe<Scalars["PlainString"]>;
 };
 
 /** This class defines an additional geo location that is relevant for the Charge Point. The geodetic system to be used is WGS 84. */
@@ -2900,6 +3004,12 @@ export type Query = {
   carPremium?: Maybe<CarPremium>;
   /** Get a full list of cars */
   carList?: Maybe<Array<Maybe<CarList>>>;
+  /** [BETA] Get connected vehicles for the current user */
+  connectedVehicle?: Maybe<ConnectedVehicle>;
+  /** [BETA] Get a connected vehicle by id */
+  connectedVehicleList?: Maybe<Array<Maybe<ConnectedVehicle>>>;
+  /** [BETA] Retrieve live vehicle data by connected vehicle id */
+  connectedVehicleData?: Maybe<VehicleData>;
   /** [BETA] Get an isoline by ID */
   isoline?: Maybe<Isoline>;
   /** [BETA] Get a navigation session by ID */
@@ -2955,6 +3065,14 @@ export type QuerycarListArgs = {
   filter?: Maybe<CarListFilter>;
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
+};
+
+export type QueryconnectedVehicleArgs = {
+  id: Scalars["ID"];
+};
+
+export type QueryconnectedVehicleDataArgs = {
+  id: Scalars["ID"];
 };
 
 export type QueryisolineArgs = {
@@ -3032,6 +3150,11 @@ export type QuerynavigationMappingArgs = {
   provider: MappingProvider;
   precision?: Maybe<Scalars["Int"]>;
   language?: Maybe<MappingLanguage>;
+};
+
+export type RemoveConnectedVehicleInput = {
+  /** Id from the connected vehicle */
+  id: Scalars["ID"];
 };
 
 /** EV specific data for a route request */
@@ -3993,12 +4116,18 @@ export enum StepType {
 }
 
 export type Subscription = {
+  /** [BETA] Subscribe to a connected vehicle. */
+  connectedVehicle?: Maybe<ConnectedVehicle>;
   /** [BETA] Subscribe to an isoline label in order to receive updates */
   isoline?: Maybe<Isoline>;
   /** [BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates */
   navigationUpdatedById?: Maybe<Navigation>;
   /** Subscription for a specific route was updated in the system event */
   routeUpdatedById?: Maybe<Route>;
+};
+
+export type SubscriptionconnectedVehicleArgs = {
+  id: Scalars["ID"];
 };
 
 export type SubscriptionisolineArgs = {
@@ -4011,4 +4140,28 @@ export type SubscriptionnavigationUpdatedByIdArgs = {
 
 export type SubscriptionrouteUpdatedByIdArgs = {
   id: Scalars["ID"];
+};
+
+export type UpdateConnectedVehicleInput = {
+  /** Id from the connected vehicle */
+  id: Scalars["ID"];
+  /** New label for a connected vehicle */
+  label?: Maybe<Scalars["PlainString"]>;
+};
+
+export type VehicleData = {
+  battery?: Maybe<ConnectBattery>;
+  location?: Maybe<VehicleLocation>;
+};
+
+/** Location of the vehicle */
+export type VehicleLocation = {
+  type: FeatureType;
+  geometry: GeometryPoint;
+  properties?: Maybe<VehicleLocationProperties>;
+};
+
+/** Properties of a vehicle location */
+export type VehicleLocationProperties = {
+  date: Scalars["String"];
 };
