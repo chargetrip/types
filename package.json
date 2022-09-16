@@ -1,7 +1,6 @@
 {
   "name": "@chargetrip/types",
-  "version": "1.32.1",
-  "description": "Typescript types for the Chargetrip EV-routing GraphQL API",
+  "version": "1.33.0",
   "license": "MIT",
   "keywords": [
     "chargetrip",

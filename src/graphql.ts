@@ -127,7 +127,7 @@ export type AuthorizeConnectedVehicleOptions = {
   code?: Maybe<Scalars["PlainString"]>;
 };
 
-/** The type of the batter value */
+/** The type of the battery value */
 export enum BatteryInputType {
   KWH = "kwh",
   KM = "km",
@@ -1426,8 +1426,33 @@ export type Connect = {
 };
 
 export type ConnectBattery = {
+  /** Estimated range by OEM */
+  range?: Maybe<Scalars["Int"]>;
+  /** Percentage of the battery remaining */
   percentage?: Maybe<Scalars["Int"]>;
-  date?: Maybe<Scalars["String"]>;
+  /** Capacity of the battery, in kwh */
+  capacity?: Maybe<Scalars["Int"]>;
+  /** Date when the battery data was retrieved, as ISO-8601 date */
+  date?: Maybe<Scalars["DateTime"]>;
+};
+
+export type ConnectCharge = {
+  /** Vehicle is plugged in */
+  is_plugged_in?: Maybe<Scalars["Boolean"]>;
+  /** Vehicle is charging */
+  is_charging?: Maybe<Scalars["Boolean"]>;
+  /** Battery is fully charged */
+  is_fully_charged?: Maybe<Scalars["Boolean"]>;
+  /** Charge limit defined by vehicle owner */
+  limit?: Maybe<Scalars["Int"]>;
+  /** Charge speed, in kwh */
+  charge_speed?: Maybe<Scalars["Float"]>;
+  /** Estimation when charging is completed, as ISO-8601 date */
+  fully_charged_at?: Maybe<Scalars["DateTime"]>;
+  /** Estimated minutes till charged */
+  minutes_till_charged?: Maybe<Scalars["Int"]>;
+  /** Date when the charge data was retrieved, as ISO-8601 date */
+  date?: Maybe<Scalars["DateTime"]>;
 };
 
 export type ConnectFilter = {
@@ -1435,15 +1460,45 @@ export type ConnectFilter = {
   providers?: Maybe<Array<Maybe<ConnectProvider>>>;
 };
 
+/** Location of the vehicle */
+export type ConnectLocation = {
+  /** Feature type */
+  type: FeatureType;
+  /** Geometry of the feature */
+  geometry: GeometryPoint;
+  /** Properties object containing meta data about the feature point */
+  properties?: Maybe<ConnectLocationProperties>;
+};
+
+/** Properties of a vehicle location */
+export type ConnectLocationProperties = {
+  /** Date when the location was retrieved, as ISO-8601 date */
+  date: Scalars["DateTime"];
+};
+
+export type ConnectOdometer = {
+  /** Odometer value, distance driven, default in km */
+  distance?: Maybe<Scalars["Int"]>;
+  /** Date when the odometer data was retrieved, as ISO-8601 date */
+  date?: Maybe<Scalars["DateTime"]>;
+};
+
 export enum ConnectProvider {
   ENODE = "Enode"
+}
+
+export enum ConnectScope {
+  /** Vehicle location, applicable for: Enode */
+  LOCATION = "location",
+  /** Charge state, applicable for: Enode */
+  CHARGE_STATE = "charge_state",
+  /** Odometer reading, applicable for: Enode */
+  ODOMETER = "odometer"
 }
 
 export type ConnectedVehicle = {
   /** Unique ID of the connected vehicle */
   id: Scalars["ID"];
-  /** ID of the user */
-  user_id: Scalars["ID"];
   /** Unique ID of the vehicle */
   vehicle_id: Scalars["ID"];
   /** Status of the connected vehicle */
@@ -1452,20 +1507,13 @@ export type ConnectedVehicle = {
   authorization_url?: Maybe<Scalars["String"]>;
   /** Connectivity provider */
   provider: CarConnectivityProvider;
-  /** Permissions for data retrieval from the connected vehicle */
-  permissions?: Maybe<Array<Maybe<ConnectedVehiclePermission>>>;
+  /** Scope for accessing the vehicle */
+  scope?: Maybe<Array<Maybe<ConnectScope>>>;
   /** Custom label for a connected vehicle that can be assigned by a user */
   label?: Maybe<Scalars["String"]>;
   /** Vehicle identification number, unique identifier for a vehicle */
   vin?: Maybe<Scalars["String"]>;
 };
-
-export enum ConnectedVehiclePermission {
-  /** Permission to retrieve the location of the vehicle */
-  LOCATION = "location",
-  /** Permission to retrieve the state of the battery */
-  BATTERY = "battery"
-}
 
 export enum ConnectedVehicleStatus {
   /** Vehicle was added to the Chargetrip platform but not yet authorized */
@@ -1891,6 +1939,17 @@ export type CreateConnectedVehicleInput = {
   options: NewConnectedVehicleOptions;
 };
 
+export enum DistanceUnit {
+  /** Return the distance in meters */
+  METER = "meter",
+  /** Return the distance in feet */
+  FOOT = "foot",
+  /** Return the distance in kilometers */
+  KILOMETER = "kilometer",
+  /** Return the distance in miles */
+  MILE = "mile"
+}
+
 /** EVSE data which extends OCPI EVSE */
 export type EVSE = {
   /**
@@ -1934,7 +1993,7 @@ export type FeaturePoint = {
   type: FeatureType;
   /** Geometry of the feature */
   geometry: Point;
-  /** Additional data */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
   properties?: Maybe<Scalars["JSON"]>;
 };
 
@@ -2080,7 +2139,7 @@ export enum MappingProvider {
 export type Mutation = {
   /** [BETA] Create a connected vehicle for a given vehicle id and a connectivity provider */
   createConnectedVehicle?: Maybe<ConnectedVehicle>;
-  /** [BETA] Authorize a vehicle by providing the callback url from the connectivity provider which will be exchanged for access tokens */
+  /** [BETA] Authorize a connected vehicle */
   authorizeConnectedVehicle?: Maybe<ConnectedVehicle>;
   /** [BETA] Update a connected vehicle */
   updateConnectedVehicle?: Maybe<ConnectedVehicle>;
@@ -2295,6 +2354,8 @@ export type NavigationUpdateLocationsInput = {
 export type NewConnectedVehicleOptions = {
   /** Redirect uri */
   redirect_uri?: Maybe<Scalars["PlainString"]>;
+  /** Scope */
+  scope?: Maybe<Array<Maybe<ConnectScope>>>;
 };
 
 /** This class defines an additional geo location that is relevant for the Charge Point. The geodetic system to be used is WGS 84. */
@@ -3284,6 +3345,8 @@ export type RequestInput = {
   ev: RequestEvInput;
   /** Route request data */
   routeRequest: RequestRouteInput;
+  /** Telemetry data used to overwrite routing parameters */
+  telemetry?: Maybe<Scalars["JSON"]>;
 };
 
 export type RequestRoute = {
@@ -3472,6 +3535,8 @@ export type Route = {
   alternatives?: Maybe<Array<Maybe<RouteAlternative>>>;
   /** EV specific data for a route request */
   ev?: Maybe<RequestEv>;
+  /** Route telemetry data */
+  telemetry?: Maybe<Scalars["JSON"]>;
   /** @deprecated You will receive null values */
   user?: Maybe<RequestUser>;
   /** Route request data */
@@ -3851,7 +3916,7 @@ export type RouteStep = {
   distance?: Maybe<Scalars["Int"]>;
   /** Total drive time from the start to the end of a step, in seconds */
   duration?: Maybe<Scalars["Int"]>;
-  /** Total enery used in a step in kWh */
+  /** Total energy used in a step in kWh */
   consumption?: Maybe<Scalars["Float"]>;
 };
 
@@ -4150,18 +4215,12 @@ export type UpdateConnectedVehicleInput = {
 };
 
 export type VehicleData = {
+  /** Battery data */
   battery?: Maybe<ConnectBattery>;
-  location?: Maybe<VehicleLocation>;
-};
-
-/** Location of the vehicle */
-export type VehicleLocation = {
-  type: FeatureType;
-  geometry: GeometryPoint;
-  properties?: Maybe<VehicleLocationProperties>;
-};
-
-/** Properties of a vehicle location */
-export type VehicleLocationProperties = {
-  date: Scalars["String"];
+  /** Charge data */
+  charge?: Maybe<ConnectCharge>;
+  /** Location data */
+  location?: Maybe<ConnectLocation>;
+  /** Odometer data */
+  odometer?: Maybe<ConnectOdometer>;
 };
