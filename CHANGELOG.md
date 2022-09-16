@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/chargetrip/types/compare/v1.32.1...v1.33.0) (2022-09-16)
+
+
+### Features
+
+* release 1.33.0 ([4d69e5a](https://github.com/chargetrip/types/commit/4d69e5ad9665ff6c55fcf5fd041a48d54c04c1a9))
+
 # [1.31.0](https://github.com/chargetrip/types/compare/v1.30.1...v1.31.0) (2022-08-30)
 
 
