@@ -398,6 +398,10 @@ export type CarBody = {
   seats?: Maybe<Scalars["Int"]>;
 };
 
+export enum CarConnectivityProvider {
+  ENODE = "Enode"
+}
+
 /** Deprecated */
 export type CarConsumption = {
   /** Worst conditions are based on -10°C and use of heating */
@@ -1591,7 +1595,7 @@ export type ConnectedVehicle = {
   /** URL to connect the vehicle to the connectivity provider */
   authorization_url?: Maybe<Scalars["String"]>;
   /** Connectivity provider */
-  provider: VehicleConnectivityProvider;
+  provider: CarConnectivityProvider;
   /** Scope for accessing the vehicle */
   scope?: Maybe<Array<Maybe<ConnectScope>>>;
   /** Custom label for a connected vehicle that can be assigned by a user */
@@ -2046,7 +2050,7 @@ export type CreateConnectedVehicleInput = {
   /** Id from the vehicle */
   vehicle_id: Scalars["ID"];
   /** Connectivity provider used to retrieve data from the vehicle */
-  provider: VehicleConnectivityProvider;
+  provider: CarConnectivityProvider;
   /** Label for a connected vehicle */
   label?: Maybe<Scalars["PlainString"]>;
   /** Provider specific options. See the developer portal for more details */
@@ -4969,10 +4973,6 @@ export type VehicleBodyWeightnominalArgs = {
 export type VehicleBodyWeightmaximalArgs = {
   unit?: Maybe<WeightUnit>;
 };
-
-export enum VehicleConnectivityProvider {
-  ENODE = "Enode"
-}
 
 /** Vehicle plug model */
 export type VehicleConnector = {
