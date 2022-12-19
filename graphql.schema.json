@@ -1564,6 +1564,23 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "CarConnectivityProvider",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "Enode",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "CarConsumption",
         "description": "Deprecated",
@@ -7283,7 +7300,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "VehicleConnectivityProvider",
+                "name": "CarConnectivityProvider",
                 "ofType": null
               }
             },
@@ -9576,7 +9593,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "VehicleConnectivityProvider",
+                "name": "CarConnectivityProvider",
                 "ofType": null
               }
             },
@@ -24240,23 +24257,6 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "VehicleConnectivityProvider",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "Enode",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
         "possibleTypes": null
       },
       {
