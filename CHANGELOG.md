@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/chargetrip/types/compare/v1.35.1...v1.36.0) (2023-04-03)
+
+
+### Features
+
+* added new types by generating ([11e0467](https://github.com/chargetrip/types/commit/11e046727bcc2e2ed0b842ce145250ec15f1b73d))
+
 ## [1.35.1](https://github.com/chargetrip/types/compare/v1.35.0...v1.35.1) (2023-04-03)
 
 
