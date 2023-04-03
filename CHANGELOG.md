@@ -1,3 +1,12 @@
+## [1.35.1](https://github.com/chargetrip/types/compare/v1.35.0...v1.35.1) (2023-04-03)
+
+
+### Bug Fixes
+
+* move master to main ([1443a2f](https://github.com/chargetrip/types/commit/1443a2f51b1131e03789cd43941ad65ee8903233))
+* new release yml ([1820a3e](https://github.com/chargetrip/types/commit/1820a3e0dfaa3db88265b284af2ea0f01dc513f5))
+* patched semantic release ([939ea85](https://github.com/chargetrip/types/commit/939ea85e54ff54c6555ed776ce33ac014c2e6544))
+
 # [1.35.0](https://github.com/chargetrip/types/compare/v1.34.0...v1.35.0) (2022-12-19)
 
 
