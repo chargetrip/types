@@ -63,6 +63,16 @@
         "possibleTypes": null
       },
       {
+        "kind": "SCALAR",
+        "name": "Acknowledgement",
+        "description": "Returns 'OK'",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Address",
         "description": "Information about an address",
@@ -1985,6 +1995,12 @@
           {
             "name": "brand_thumbnail",
             "description": "Thumbnail of a full-sized brand logo at 56x24 px",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "placeholder",
+            "description": "Placeholder image at 1536x864 px",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6490,7 +6506,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "BatteryInputType",
+                "name": "StateOfChargeUnit",
                 "ofType": null
               }
             },
@@ -7907,32 +7923,26 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "kilometer",
-            "description": "Return the consumption in kilometers",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "kilowatt_hour",
-            "description": "Return the consumption in kilowatt hours",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "kilowatt_hours_per_100_kilometers",
             "description": "Return the consumption in kilowatt hours per 100 kilometers",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "kilowatt_hours_per_100_miles",
-            "description": "Return the consumption in kilowatt hours per 100 miles",
+            "name": "watt_hours_per_kilometer",
+            "description": "Return the consumption in watt hours per kilometer",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "watt_hours_per_kilometer",
-            "description": "Return the consumption in watt hours per kilometer",
+            "name": "kilometers_per_kilowatt_hour",
+            "description": "Return the consumption in kilometers per kilowatt hour",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "kilowatt_hours_per_100_miles",
+            "description": "Return the consumption in kilowatt hours per 100 miles",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -7945,12 +7955,6 @@
           {
             "name": "miles_per_kilowatt_hour",
             "description": "Return the consumption in miles per kilowatt hour",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "kilometers_per_kilowatt_hour",
-            "description": "Return the consumption in kilometers per kilowatt hour",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -9696,6 +9700,12 @@
             "description": "Return the currency in USD",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "GBP",
+            "description": "Return the currency in GBP",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -10032,6 +10042,16 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Email",
+        "description": "Email address scalar, email regex with HTML sanitization",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -11392,7 +11412,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "Void",
+              "name": "Acknowledgement",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11421,7 +11441,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "Void",
+              "name": "Acknowledgement",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11450,7 +11470,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "Void",
+              "name": "Acknowledgement",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11579,9 +11599,13 @@
             "description": "The current route used for navigation",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11591,9 +11615,13 @@
             "description": "The current route alternative used for navigation",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11603,9 +11631,13 @@
             "description": "The state of a navigation session. The status can be driving, charging, finished, or error",
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "NavigationState",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "NavigationState",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11613,11 +11645,28 @@
           {
             "name": "state_of_charge",
             "description": "State of charge at the last known location",
-            "args": [],
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11627,9 +11676,13 @@
             "description": "Last known location",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Point",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Point",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11651,12 +11704,20 @@
             "description": "A set of alternative charging stations to next station",
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "NavigationStation",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "NavigationStation",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,
@@ -11665,48 +11726,7 @@
           {
             "name": "instructions",
             "description": "Navigation instructions",
-            "args": [
-              {
-                "name": "instructions_format",
-                "description": "Turn by turn instructions format for a route",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "InstructionsFormat",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "language",
-                "description": "Preferred navigation instructions language. Default: en",
-                "type": {
-                  "kind": "ENUM",
-                  "name": "MappingLanguage",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "precision",
-                "description": "Number of decimals used for the Google Polyline encoding Algorithm. Allowed values are 5 or 6, the default is 5",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
+            "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
@@ -11766,6 +11786,57 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "NavigationInstructionsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "instructions_format",
+            "description": "Turn by turn instructions format for a route",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "InstructionsFormat",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "language",
+            "description": "Preferred navigation instructions language. Default: en",
+            "type": {
+              "kind": "ENUM",
+              "name": "MappingLanguage",
+              "ofType": null
+            },
+            "defaultValue": "en",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "precision",
+            "description": "Number of decimals used for the Google Polyline encoding Algorithm. Allowed values are 5 or 6, the default is 5",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": "5",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "NavigationRecalculateInput",
         "description": "Input for the navigation recalculate",
         "fields": null,
@@ -11790,8 +11861,8 @@
             "name": "state_of_charge",
             "description": "State of charge at origin",
             "type": {
-              "kind": "SCALAR",
-              "name": "Float",
+              "kind": "INPUT_OBJECT",
+              "name": "StateOfChargeInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11821,9 +11892,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "FeaturePointInput",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "FeaturePointInput",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -11896,6 +11971,22 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "instructions",
+            "description": "Instruction input format",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NavigationInstructionsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -11947,9 +12038,13 @@
             "description": "The ID as string of the charging station",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11959,19 +12054,7 @@
             "description": "GPS location of the charging station",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Point",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "via",
-            "description": "An array with all GPS locations of via points until the next charging station",
-            "args": [],
-            "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
@@ -11983,13 +12066,54 @@
             "deprecationReason": null
           },
           {
-            "name": "estimated_state_of_charge",
-            "description": "Estimated state of charge, in kWh, at arrival on the next charging station",
+            "name": "via",
+            "description": "An array with all GPS locations of via points until the next charging station",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Point",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "estimated_state_of_charge",
+            "description": "Estimated state of charge, at arrival on the next charging station",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11999,9 +12123,13 @@
             "description": "Estimated consumption, in kWh, from last the known location until the next charging station",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -12011,9 +12139,13 @@
             "description": "Estimated duration, in seconds, from the last known location until the next charging station",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -12111,10 +12243,10 @@
           },
           {
             "name": "speed",
-            "description": "Speed at a location, in km/h",
+            "description": "Speed at a location",
             "type": {
-              "kind": "SCALAR",
-              "name": "Float",
+              "kind": "INPUT_OBJECT",
+              "name": "VehicleSpeedInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -12138,11 +12270,11 @@
             "deprecationReason": null
           },
           {
-            "name": "altitude",
-            "description": "Altitude information, in meters. This is optional",
+            "name": "elevation",
+            "description": "Elevation information",
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "INPUT_OBJECT",
+              "name": "ElevationInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -12885,7 +13017,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -21153,7 +21285,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "BatteryInputType",
+                "name": "StateOfChargeUnit",
                 "ofType": null
               }
             },
@@ -21194,19 +21326,19 @@
           },
           {
             "name": "mile",
-            "description": "Return the speed of charge in miles",
+            "description": "Return the state of charge in miles",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "kilowatt_hour",
-            "description": "Return the speed of charge in kilowatt hours",
+            "description": "Return the state of charge in kilowatt hours",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "percentage",
-            "description": "Return the speed of charge in a percentage",
+            "description": "Return the state of charge as a percentage",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -22748,13 +22880,13 @@
             "args": [
               {
                 "name": "unit",
-                "description": "Type of total charge amount, defaults to 'kwh'",
+                "description": "Type of total charge amount, defaults to 'kilowatt_hour'",
                 "type": {
                   "kind": "ENUM",
-                  "name": "BatteryInputType",
+                  "name": "StateOfChargeUnit",
                   "ofType": null
                 },
-                "defaultValue": "kwh",
+                "defaultValue": "kilowatt_hour",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -22971,13 +23103,13 @@
             "args": [
               {
                 "name": "unit",
-                "description": "Type of the state of charge of the vehicle, defaults to 'kwh'",
+                "description": "Type of the state of charge of the vehicle, defaults to 'kilowatt_hour'",
                 "type": {
                   "kind": "ENUM",
-                  "name": "BatteryInputType",
+                  "name": "StateOfChargeUnit",
                   "ofType": null
                 },
-                "defaultValue": "kwh",
+                "defaultValue": "kilowatt_hour",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -24217,13 +24349,9 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -24743,6 +24871,12 @@
             "description": "Thumbnail of a full-sized brand logo at 56x24 px",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "placeholder",
+            "description": "Placeholder image at 1536x864 px",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -25093,9 +25227,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "ENUM",
-                "name": "VehicleAvailabilityStatus",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "VehicleAvailabilityStatus",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -25106,9 +25244,17 @@
             "name": "drivetrain",
             "description": "Drivetrain type of a vehicle",
             "type": {
-              "kind": "ENUM",
-              "name": "VehicleDrivetrainType",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "VehicleDrivetrainType",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -26631,9 +26777,13 @@
             "description": "Number of seats",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -26716,7 +26866,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "VehiclePremiumChargeConnector",
+              "name": "VehiclePremiumChargePlug",
               "ofType": null
             },
             "isDeprecated": false,
@@ -26728,7 +26878,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "VehiclePremiumChargeSecondConnector",
+              "name": "VehiclePremiumChargeSecondPlug",
               "ofType": null
             },
             "isDeprecated": false,
@@ -26757,6 +26907,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "alternative",
+            "description": "Alternative upgrade for the standard onboard charger when available",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehiclePremiumChargeAlternativeOBC",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -26766,41 +26928,94 @@
       },
       {
         "kind": "OBJECT",
-        "name": "VehiclePremiumChargeConnector",
+        "name": "VehiclePremiumChargeAlternativeOBC",
         "description": null,
         "fields": [
           {
-            "name": "value",
-            "description": "Type of charge port on vehicle",
+            "name": "power",
+            "description": "Maximum power OBC can accept to charge a battery (standard OBC)",
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "ConnectorType",
+              "kind": "SCALAR",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "is_estimated",
-            "description": "Indicates if value is an estimate",
+            "name": "phases",
+            "description": "Number of phases the OBC accepts to achieve maximum power (standard OBC)",
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "Boolean",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "location",
-            "description": "Location of charge port",
+            "name": "phase_amperage",
+            "description": "Maximum current the OBC accepts per phase to achieve maximum power (standard OBC)",
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "Float",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_time",
+            "description": "Minutes needed to charge from 0% to 100% (standard OBC)",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_speed",
+            "description": "Charging speed when charging at maximum power (standard OBC), default in kmph",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "ChargeSpeedUnit",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "table",
+            "description": "Charging details for the standard OBC at several charging points",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "VehiclePremiumChargeOBCTable",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -27045,6 +27260,53 @@
       },
       {
         "kind": "OBJECT",
+        "name": "VehiclePremiumChargePlug",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Type of charge port on vehicle",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ConnectorType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_estimated",
+            "description": "Indicates if value is an estimate",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "location",
+            "description": "Location of charge port",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "VehiclePremiumChargePower",
         "description": null,
         "fields": [
@@ -27080,7 +27342,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "VehiclePremiumChargeSecondConnector",
+        "name": "VehiclePremiumChargeSecondPlug",
         "description": null,
         "fields": [
           {
@@ -28031,12 +28293,12 @@
         "description": null,
         "fields": [
           {
-            "name": "charge_port",
-            "description": "Location of charge port",
+            "name": "plug",
+            "description": "Details about the connector",
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "VehiclePremiumChargeConnector",
+              "name": "VehiclePremiumChargePlug",
               "ofType": null
             },
             "isDeprecated": false,
@@ -28602,7 +28864,7 @@
         "fields": [
           {
             "name": "value",
-            "description": "Starting price for local market, default in EUR",
+            "description": "Starting price for local market expressed in the currency in the field currency",
             "args": [
               {
                 "name": "unit",
@@ -28620,6 +28882,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "currency",
+            "description": "Currency in which the value without optional field conversion is expressed",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "CurrencyUnit",
               "ofType": null
             },
             "isDeprecated": false,
@@ -29639,16 +29913,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Void",
-        "description": "Returns null",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
