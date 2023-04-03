@@ -4,7 +4,7 @@ on:
   # Run this workflow on master always
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          ref: master
+          ref: main
           fetch-depth: 0
       - name: Setup git
         run: |
@@ -22,7 +22,7 @@ jobs:
           git config --local user.name "ci-chargetrip"
           git remote set-url origin https://ci-chargetrip:$GH_TOKEN@github.com/chargetrip/types.git
           git fetch
-          git checkout master
+          git checkout main
           git pull
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
