@@ -4,11 +4,11 @@ on:
   # Run this workflow on master always
   push:
     branches:
-      - master
+      - main
   # Run this workflow on PRs that target master,
   pull_request:
     branches: 
-      - master
+      - main
 
 jobs:
   build:
