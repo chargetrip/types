@@ -21,6 +21,8 @@ export type Scalars = {
   Email: any;
   /** Any JSON object */
   JSON: { [key: string]: number | string | boolean | null | Scalars["JSON"] };
+  /** The non empty string scalar */
+  NonEmptyString: any;
   /**
    * The `PlainString` scalar type represents textual data, represented as UTF-8 character sequences.
    * The PlainString type represents free-form human-readable text with HTML sanitization.
@@ -1473,7 +1475,11 @@ export type ChargerStatuses = {
   error?: Maybe<Scalars["Int"]>;
 };
 
-/** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+/**
+ * Chargetrip's custom real-world range provides a carefully calculated display range for all electric vehicle models based on our own research and driving data.
+ * CT range is based on the theoretical distance driven using only the electric engine.
+ * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges
+ */
 export type ChargetripRange = {
   /** Worst conditions are based on -10°C and use of heating */
   worst?: Maybe<Scalars["Float"]>;
@@ -1481,12 +1487,20 @@ export type ChargetripRange = {
   best?: Maybe<Scalars["Float"]>;
 };
 
-/** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+/**
+ * Chargetrip's custom real-world range provides a carefully calculated display range for all electric vehicle models based on our own research and driving data.
+ * CT range is based on the theoretical distance driven using only the electric engine.
+ * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges
+ */
 export type ChargetripRangeworstArgs = {
   unit?: Maybe<DistanceUnit>;
 };
 
-/** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+/**
+ * Chargetrip's custom real-world range provides a carefully calculated display range for all electric vehicle models based on our own research and driving data.
+ * CT range is based on the theoretical distance driven using only the electric engine.
+ * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges
+ */
 export type ChargetripRangebestArgs = {
   unit?: Maybe<DistanceUnit>;
 };
@@ -1514,8 +1528,8 @@ export enum ChargingBehaviourCode {
 }
 
 export type Connect = {
-  /** List of connectivity providers to which a vehicle can connect */
-  providers: Array<ConnectProvider>;
+  /** List of connectivity providers to which the vehicle can connect. This field returns null for free users. Please contact customer success for more information. */
+  providers?: Maybe<Array<ConnectProvider>>;
 };
 
 export type ConnectBattery = {
@@ -3461,11 +3475,11 @@ export type Query = {
   tariffList?: Maybe<Array<Maybe<OCPITariff>>>;
   /** Deprecated: This query will be removed in favor of navigation query and subscription. Mapping can be retrieved via the instructions field. */
   navigationMapping?: Maybe<Scalars["JSON"]>;
-  /** [BETA] Get information about a vehicle by its ID */
+  /** [BETA] Get information about a vehicle by its ID. */
   vehicle?: Maybe<Vehicle>;
   /** [BETA] Vehicle premium data provides even more information about your vehicle: tire pressure, prices, drivetrain data, and more. Please contact us for access to premium data. */
   vehiclePremium?: Maybe<VehiclePremium>;
-  /** [BETA] Get a full list of vehicles */
+  /** [BETA] Get a full list of vehicles. */
   vehicleList?: Maybe<Array<Maybe<VehicleList>>>;
 };
 
@@ -4874,90 +4888,96 @@ export type UpdateConnectedVehicleInput = {
   label?: Maybe<Scalars["PlainString"]>;
 };
 
-/** Output of a vehicle query */
+/** Output of a vehicle query. */
 export type Vehicle = {
-  /** Vehicles unique ID */
+  /** Vehicles unique ID. */
   id: Scalars["ID"];
-  /** Naming of the vehicle */
+  /** Naming of the vehicle. */
   naming: VehicleNaming;
-  /** Drivetrain of the vehicle */
+  /** Drivetrain of the vehicle. */
   drivetrain: VehicleDrivetrain;
-  /** Available connectors for the vehicle */
+  /** Available connectors for the vehicle. */
   connectors: Array<VehicleConnector>;
-  /** Adapters for the connectors of the vehicle */
+  /** Adapters for the connectors of the vehicle. */
   adapters: Array<VehicleConnector>;
-  /** Battery of the vehicle */
+  /** Battery of the vehicle. */
   battery: VehicleBattery;
-  /** Body of the vehicle */
+  /** Body of the vehicle. */
   body: VehicleBody;
-  /** Availability of the vehicle */
+  /** Availability of the vehicle. */
   availability: VehicleAvailability;
-  /** Performance of the vehicle */
+  /** Performance of the vehicle. */
   performance?: Maybe<VehiclePerformance>;
-  /** Range of the vehicle */
+  /** Range of the vehicle. */
   range: VehicleRange;
-  /** Media of the vehicle */
+  /** Media of the vehicle. */
   media: VehicleMedia;
-  /** Routing of the vehicle */
+  /** Routing of the vehicle. */
   routing: VehicleRouting;
-  /** Information about vehicle connectivity */
+  /** Information about vehicle connectivity. */
   connect: Connect;
+  /** Regions in which the vehicle is available. Based on the continent code (CC) standard. */
+  region: Array<VehicleRegion>;
+  /** Vehicle intended use. Can be passenger, cargo, or utility. */
+  purpose: VehiclePurpose;
+  /** Type of vehicle. */
+  type: VehicleType;
 };
 
 export type VehicleAvailability = {
-  /** Availability of the vehicle */
+  /** Availability of the vehicle. */
   status: VehicleAvailabilityStatus;
 };
 
-/** Availability status of a vehicle */
+/** Availability status of a vehicle. */
 export enum VehicleAvailabilityStatus {
-  /** Vehicle no longer for sale in any market / region */
+  /** Vehicle no longer for sale in any market / region. */
   NO_LONGER_AVAILABLE = "no_longer_available",
-  /** Vehicle currently for sale in at least one market / region */
+  /** Vehicle currently for sale in at least one market / region. */
   AVAILABLE = "available",
-  /** Vehicle expected in market from Date_From (estimated), pre-order open */
+  /** Vehicle expected in market from Date_From (estimated), pre-order open. */
   RELEASE_DATE_ANNOUNCED_PREORDERABLE = "release_date_announced_preorderable",
-  /** Vehicle expected in market from Date_From (estimated), pre-order unknown or not open */
+  /** Vehicle expected in market from Date_From (estimated), pre-order unknown or not open. */
   RELEASE_DATE_ANNOUNCED = "release_date_announced",
-  /** Concept vehicle, nearing production and/or confirmed, pre-order open */
+  /** Concept vehicle, nearing production and/or confirmed, pre-order open. */
   CONCEPT_VEHICLE_PREORDERABLE = "concept_vehicle_preorderable",
-  /** Concept vehicle, nearing production and/or confirmed, pre-order unknown or not open */
+  /** Concept vehicle, nearing production and/or confirmed, pre-order unknown or not open. */
   CONCEPT_VEHICLE = "concept_vehicle",
-  /** Concept vehicle, not close to production and/or unconfirmed, pre-order open */
+  /** Concept vehicle, not close to production and/or unconfirmed, pre-order open. */
   CONCEPT_VEHICLE_RELEASE_DATE_TBA_PREORDERABLE = "concept_vehicle_release_date_tba_preorderable",
-  /** Concept vehicle, not close to production and/or unconfirmed, pre-order unknown */
+  /** Concept vehicle, not close to production and/or unconfirmed, pre-order unknown. */
   CONCEPT_VEHICLE_RELEASE_DATE_TBA = "concept_vehicle_release_date_tba",
-  /** Status uncertain, introduction date and/or pricing unclear */
+  /** Status uncertain, introduction date and/or pricing unclear. */
   UNCERTAIN = "uncertain"
 }
 
 export type VehicleBattery = {
-  /** Full battery capacity in kWh */
+  /** Full battery capacity in kWh. */
   full_kwh: Scalars["Float"];
-  /** Usable battery capacity in kWh */
+  /** Usable battery capacity in kWh. */
   usable_kwh: Scalars["Float"];
 };
 
-/** Battery field estimated */
+/** Battery field estimated. */
 export enum VehicleBatteryFieldEstimations {
-  /** Both of the battery kWh fields are estimations */
+  /** Both of the battery kWh fields are estimations. */
   B = "B",
-  /** full_kwh field is estimated */
+  /** full_kwh field is estimated. */
   F = "F",
-  /** None of the battery kWh fields are estimations */
+  /** None of the battery kWh fields are estimations. */
   N = "N",
-  /** usable_kwh field is estimated */
+  /** usable_kwh field is estimated. */
   U = "U"
 }
 
 export type VehicleBody = {
-  /** Width with folded mirrors, default in mm */
+  /** Width with folded mirrors, default in mm. */
   width: Scalars["Float"];
-  /** Height (average height for adjustable suspensions), default in mm */
+  /** Height (average height for adjustable suspensions), default in mm. */
   height: Scalars["Float"];
-  /** Weight (unladen), default in kg */
+  /** Weight (unladen), default in kg. */
   weight: VehicleBodyWeight;
-  /** Number of seats */
+  /** Number of seats. */
   seats: Scalars["Int"];
 };
 
@@ -4970,11 +4990,11 @@ export type VehicleBodyheightArgs = {
 };
 
 export type VehicleBodyWeight = {
-  /** Minimum weight, default in kg */
+  /** Minimum weight, default in kg. */
   minimum?: Maybe<Scalars["Float"]>;
-  /** Nominal weight, default in kg */
+  /** Nominal weight, default in kg. */
   nominal?: Maybe<Scalars["Float"]>;
-  /** Maximal weight, default in kg */
+  /** Maximal weight, default in kg. */
   maximal?: Maybe<Scalars["Float"]>;
 };
 
@@ -4990,30 +5010,30 @@ export type VehicleBodyWeightmaximalArgs = {
   unit?: Maybe<WeightUnit>;
 };
 
-/** Vehicle plug model */
+/** Vehicle plug model. */
 export type VehicleConnector = {
-  /** Connector type, known as connector standard in OCPI */
+  /** Connector type, known as connector standard in OCPI. */
   standard: ConnectorType;
-  /** Usable electric power in kW */
+  /** Usable electric power in kW. */
   power: Scalars["Float"];
-  /** Maximum electric power in kW */
+  /** Maximum electric power in kW. */
   max_electric_power: Scalars["Float"];
-  /** Time it takes to charge from 10 to 80% with a fast charger, shown in minutes */
+  /** Time it takes to charge from 10 to 80% with a fast charger, shown in minutes. */
   time: Scalars["Int"];
-  /** Charging speed, default in kmph */
+  /** Charging speed, default in kmph. */
   speed: Scalars["Float"];
 };
 
-/** Vehicle plug model */
+/** Vehicle plug model. */
 export type VehicleConnectorspeedArgs = {
   unit?: Maybe<SpeedUnit>;
 };
 
-/** The consumption of the vehicle */
+/** The consumption of the vehicle. */
 export type VehicleConsumptionInput = {
-  /** Worst conditions are based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating. */
   worst?: Maybe<Scalars["Float"]>;
-  /** Best conditions are based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C. */
   best?: Maybe<Scalars["Float"]>;
 };
 
@@ -5029,209 +5049,228 @@ export type VehicleData = {
 };
 
 export enum VehicleDataProvider {
-  /** Internal data provider */
+  /** Internal data provider. */
   CHARGETRIP = "chargetrip",
-  /** EV database data provider */
+  /** EV database data provider. */
   EVDATABASE = "evdatabase"
 }
 
 export type VehicleDrivetrain = {
-  /** Type of drivetrain */
+  /** Type of drivetrain. */
   type: VehicleDrivetrainType;
 };
 
-/** Drivetrain */
+/** Drivetrain. */
 export enum VehicleDrivetrainType {
-  /** Battery Electric Vehicle */
+  /** Battery Electric Vehicle. */
   BEV = "BEV",
-  /** Extended Range Electric Vehicle */
+  /** Extended Range Electric Vehicle. */
   EREV = "EREV",
-  /** Hybrid Electric Vehicle */
+  /** Hybrid Electric Vehicle. */
   HEV = "HEV",
-  /** Plug-in Hybrid Electric Vehicle */
+  /** Plug-in Hybrid Electric Vehicle. */
   PHEV = "PHEV"
 }
 
-/** Fuel type */
+/** Fuel type. */
 export enum VehicleFuel {
-  /** ICE engine available. Uses diesel */
+  /** ICE engine available. Uses diesel. */
   D = "D",
-  /** Electricity only. Full electric vehicle */
+  /** Electricity only. Full electric vehicle. */
   E = "E",
-  /** ICE engine available. Uses petrol */
+  /** ICE engine available. Uses petrol. */
   P = "P"
 }
 
 export type VehicleImage = {
-  /** Image id */
+  /** Image id. */
   id?: Maybe<Scalars["ID"]>;
-  /** Image type */
+  /** Image type. */
   type: VehicleImageType;
-  /** Full path URL of a large image */
+  /** Full path URL of a large image. */
   url: Scalars["String"];
-  /** Height of a large image in pixels */
+  /** Height of a large image in pixels. */
   height: Scalars["Int"];
-  /** Width of a large image in pixels */
+  /** Width of a large image in pixels. */
   width: Scalars["Int"];
-  /** Full path URL of a thumbnail image */
+  /** Full path URL of a thumbnail image. */
   thumbnail_url: Scalars["String"];
-  /** Height of a thumbnail image in pixels */
+  /** Height of a thumbnail image in pixels. */
   thumbnail_height: Scalars["Int"];
-  /** Width of a thumbnail image in pixels */
+  /** Width of a thumbnail image in pixels. */
   thumbnail_width: Scalars["Int"];
 };
 
-/** Available types of images which can be found for a vehicle. Each type has specific image sizes */
+/** Available types of images which can be found for a vehicle. Each type has specific image sizes. */
 export enum VehicleImageType {
-  /** Images provided by a Vehicle Datasource */
+  /** Images provided by a Vehicle Datasource. */
   PROVIDER = "provider",
-  /** Full-sized image at 1536x864 px */
+  /** Full-sized image at 1536x864 px. */
   IMAGE = "image",
-  /** Thumbnail of a full-sized image at 131x72 px */
+  /** Thumbnail of a full-sized image at 131x72 px. */
   IMAGE_THUMBNAIL = "image_thumbnail",
-  /** Full-sized brand (maker) logo at 768x432 px */
+  /** Premium image. */
+  IMAGE_PREMIUM = "image_premium",
+  /** Thumbnail of a premium image. */
+  PREMIUM_IMAGE_THUMBNAIL = "premium_image_thumbnail",
+  /** Full-sized brand (maker) logo at 768x432 px. */
   BRAND = "brand",
-  /** Thumbnail of a full-sized brand logo at 56x24 px */
+  /** Thumbnail of a full-sized brand logo at 56x24 px. */
   BRAND_THUMBNAIL = "brand_thumbnail",
-  /** Placeholder image at 1536x864 px */
+  /** Placeholder image at 1536x864 px. */
   PLACEHOLDER = "placeholder"
 }
 
-/** When uploading images to a vehicle, you can select one of this types. The rest of the types are automatically generated by the system */
+/** When uploading images to a vehicle, you can select one of this types. The rest of the types are automatically generated by the system. */
 export enum VehicleImageTypeUploadable {
-  /** Full size image with a resolution at least 1536x864 px */
-  IMAGE = "image"
+  /** Freemium vehicle image. */
+  IMAGE = "image",
+  /** Premium vehicle image. */
+  IMAGE_PREMIUM = "image_premium"
 }
 
-/** The output element of the vehicleList query */
+/** The output element of the vehicleList query. */
 export type VehicleList = {
-  /** Vehicles unique ID */
+  /** Vehicles unique ID. */
   id: Scalars["ID"];
-  /** Naming of the vehicle */
+  /** Naming of the vehicle. */
   naming: VehicleListNaming;
-  /** Drivetrain of the vehicle */
+  /** Drivetrain of the vehicle. */
   drivetrain: VehicleDrivetrain;
-  /** Connectors available for the vehicle */
+  /** Connectors available for the vehicle. */
   connectors: Array<VehicleConnector>;
-  /** Adapters available for the vehicle */
+  /** Adapters available for the vehicle. */
   adapters: Array<VehicleConnector>;
-  /** Battery of the vehicle */
+  /** Battery of the vehicle. */
   battery: VehicleListBattery;
-  /** Body of the vehicle */
+  /** Body of the vehicle. */
   body: VehicleListBody;
-  /** Availability of the vehicle */
+  /** Availability of the vehicle. */
   availability: VehicleListAvailability;
-  /** Range of the vehicle */
+  /** Range of the vehicle. */
   range: VehicleListRange;
-  /** Media of the vehicle */
+  /** Media of the vehicle. */
   media: VehicleListMedia;
-  /** Routing of the vehicle */
+  /** Routing of the vehicle. */
   routing: VehicleListRouting;
-  /** Information about vehicle connectivity */
+  /** Information about vehicle connectivity. */
   connect: Connect;
+  /** Regions in which the vehicle is available. Based on the continent code (CC) standard. */
+  region: Array<VehicleRegion>;
+  /** Vehicle intended use. Can be passenger, cargo, or utility. */
+  purpose: VehiclePurpose;
+  /** Type of vehicle. */
+  type: VehicleType;
 };
 
 export type VehicleListAvailability = {
-  /** Availability of the vehicle */
+  /** Availability of the vehicle. */
   status: VehicleAvailabilityStatus;
 };
 
 export type VehicleListBattery = {
-  /** Full battery capacity in kWh */
+  /** Full battery capacity in kWh. */
   full_kwh: Scalars["Float"];
-  /** Usable battery capacity in kWh */
+  /** Usable battery capacity in kWh. */
   usable_kwh: Scalars["Float"];
 };
 
 export type VehicleListBody = {
-  /** Number of seats in a vehicle */
+  /** Number of seats in a vehicle. */
   seats: Scalars["Int"];
 };
 
 export type VehicleListFilter = {
-  /** Availability of a vehicle */
+  /** Availability of a vehicle. */
   availability?: Maybe<Array<VehicleAvailabilityStatus>>;
-  /** Drivetrain type of a vehicle */
+  /** Drivetrain type of a vehicle. */
   drivetrain?: Maybe<Array<VehicleDrivetrainType>>;
-  /** Information about vehicle connectivity */
+  /** Information about vehicle connectivity. */
   connect?: Maybe<ConnectFilter>;
+  /** Regions in which the vehicle is available. Based on the continent code (CC) standard. */
+  region?: Maybe<Array<VehicleRegion>>;
+  /** Vehicle intended use. Can be passenger, cargo, or utility. */
+  purpose?: Maybe<Array<VehiclePurpose>>;
+  /** Type of vehicle. */
+  type?: Maybe<Array<VehicleType>>;
 };
 
 export type VehicleListMedia = {
-  /** Latest image of the vehicle */
+  /** Featured image of the vehicle from a 45-degree angle. */
   image: VehicleImage;
-  /** Latest maker logo of the vehicle */
+  /** Latest maker logo of the vehicle. */
   brand: VehicleImage;
-  /** Latest video of the vehicle */
+  /** Latest video of the vehicle. */
   video?: Maybe<VehicleVideo>;
 };
 
 export type VehicleListNaming = {
-  /** Vehicle manufacturer name */
+  /** Vehicle manufacturer name. */
   make: Scalars["String"];
-  /** Vehicle model name */
+  /** Vehicle model name. */
   model: Scalars["String"];
-  /** Version, edition or submodel of the vehicle */
+  /** Version, edition or submodel of the vehicle. */
   version?: Maybe<Scalars["String"]>;
-  /** Another submodel level of the vehicle */
+  /** Another submodel level of the vehicle. */
   edition?: Maybe<Scalars["String"]>;
-  /** Vehicle model version. Added by Chargetrip as an alternative for when a vehicle manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
+  /** Vehicle model version. Added by Chargetrip as an alternative for when a vehicle manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years. */
   chargetrip_version: Scalars["String"];
 };
 
 export type VehicleListRange = {
   /**
-   * Is an index value of what we consider to be the real-world range.
-   * (Comparable to Range_Real from EV Database.) It is essentially a normalized range to display in the front-end.
+   * Chargetrip's custom real-world range provides a carefully calculated display range for all electric vehicle models based on our own research and driving data.
+   * CT range is based on the theoretical distance driven using only the electric engine.
+   * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges.
    */
   chargetrip_range: ChargetripRange;
 };
 
 export type VehicleListRouting = {
-  /** Vehicles that support fast charging have a minimum charging speed of 43 kWh */
+  /** Vehicles that support fast charging have a minimum charging speed of 43 kWh. */
   fast_charging_support: Scalars["Boolean"];
 };
 
 export type VehicleMedia = {
-  /** Latest image */
+  /** Featured image of the vehicle from a 45-degree angle. */
   image: VehicleImage;
-  /** Latest maker logo */
+  /** Latest maker logo. */
   brand: VehicleImage;
-  /** All images */
+  /** All images of the vehicle. */
   image_list: Array<VehicleImage>;
-  /** Latest video */
+  /** Latest video. */
   video?: Maybe<VehicleVideo>;
-  /** All videos */
+  /** All videos of the vehicle. */
   video_list?: Maybe<Array<VehicleVideo>>;
 };
 
-/** Mode (state) of the current production */
+/** Mode (state) of the current production. */
 export enum VehicleMode {
-  /** Old vehicle that is no longer manufactured */
+  /** Old vehicle that is no longer manufactured. */
   INDEX_ONLY = "index_only",
-  /** Vehicle is in production and has been released */
+  /** Vehicle is in production and has been released. */
   PRODUCTION = "production",
-  /** Future releases of a vehicle, a concept of the vehicle, specs may change over time */
+  /** Future releases of a vehicle, a concept of the vehicle, specs may change over time. */
   CONCEPT = "concept"
 }
 
 export type VehicleNaming = {
-  /** Vehicle manufacturer name */
+  /** Vehicle manufacturer name. */
   make: Scalars["String"];
-  /** Vehicle model name */
+  /** Vehicle model name. */
   model: Scalars["String"];
-  /** Version, edition or submodel of the vehicle */
+  /** Version, edition or submodel of the vehicle. */
   version?: Maybe<Scalars["String"]>;
-  /** Another submodel level of the vehicle */
+  /** Another submodel level of the vehicle. */
   edition?: Maybe<Scalars["String"]>;
-  /** Vehicle model version. Added by Chargetrip as an alternative for when a vehicle manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
+  /** Vehicle model version. Added by Chargetrip as an alternative for when a vehicle manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years. */
   chargetrip_version: Scalars["String"];
 };
 
 export type VehiclePerformance = {
-  /** Acceleration in seconds, default in kmph to 100 */
+  /** Acceleration in seconds, default in kmph to 100. */
   acceleration?: Maybe<Scalars["Float"]>;
-  /** Top speed of the vehicle, default in kmph */
+  /** Top speed of the vehicle, default in kmph. */
   top_speed?: Maybe<Scalars["Float"]>;
 };
 
@@ -5243,146 +5282,152 @@ export type VehiclePerformancetop_speedArgs = {
   unit?: Maybe<SpeedUnit>;
 };
 
-/** The output element of the vehiclePremium query */
+/** The output element of the vehiclePremium query. */
 export type VehiclePremium = {
-  /** Vehicles unique ID */
+  /** Vehicles unique ID. */
   id: Scalars["ID"];
-  /** Internal ID of the successor vehicle trim */
+  /** Internal ID of the successor vehicle trim. */
   succesor_id?: Maybe<Scalars["String"]>;
-  /** Naming of the vehicle */
+  /** Naming of the vehicle. */
   naming: VehiclePremiumNaming;
-  /** Connectors available for the vehicle */
+  /** Connectors available for the vehicle. */
   connectors: Array<VehicleConnector>;
-  /** Charge details */
+  /** Charge details. */
   charge: VehiclePremiumCharge;
-  /** Fast charge details */
+  /** Fast charge details. */
   fast_charge: VehiclePremiumFastCharge;
-  /** Adapters of connectors available for a connectors of the vehicle */
+  /** Adapters of connectors available for a connectors of the vehicle. */
   adapters: Array<VehicleConnector>;
-  /** Battery of the vehicle */
+  /** Battery of the vehicle. */
   battery: VehiclePremiumBattery;
-  /** Body of the vehicle */
+  /** Body of the vehicle. */
   body: VehiclePremiumBody;
-  /** Availability of the vehicle */
+  /** Availability of the vehicle. */
   availability: VehiclePremiumAvailability;
-  /** Pricing of the vehicle */
+  /** Pricing of the vehicle. */
   price: VehiclePremiumPrice;
-  /** Drivetrain of the vehicle */
+  /** Drivetrain of the vehicle. */
   drivetrain: VehiclePremiumDrivetrain;
-  /** Performance of the vehicle */
+  /** Performance of the vehicle. */
   performance?: Maybe<VehiclePremiumPerformance>;
-  /** Range of the vehicle */
+  /** Range of the vehicle. */
   range: VehiclePremiumRange;
-  /** Efficiency of the vehicle */
+  /** Efficiency of the vehicle. */
   efficiency: VehiclePremiumEfficiency;
-  /** Safety of the vehicle */
+  /** Safety of the vehicle. */
   safety?: Maybe<VehiclePremiumSafety>;
-  /** Media of the vehicle */
+  /** Media of the vehicle. */
   media: VehiclePremiumMedia;
-  /** Routing of the vehicle */
+  /** Routing of the vehicle. */
   routing: VehiclePremiumRouting;
-  /** Information about vehicle connectivity */
+  /** Information about vehicle connectivity. */
   connect: Connect;
+  /** Regions in which the vehicle is available. Based on the continent code (CC) standard. */
+  region: Array<VehicleRegion>;
+  /** Vehicle intended use. Can be passenger, cargo, or utility. */
+  purpose: VehiclePurpose;
+  /** Type of vehicle. */
+  type: VehicleType;
 };
 
 export type VehiclePremiumAvailability = {
-  /** Availability of the vehicle */
+  /** Availability of the vehicle. */
   status: VehicleAvailabilityStatus;
-  /** Date of introduction, mm-yyyy */
+  /** Date of introduction, mm-yyyy. */
   date_from?: Maybe<Scalars["String"]>;
-  /** Indicates if date from field is estimated */
+  /** Indicates if date from field is estimated. */
   date_from_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Date last available, mm-yyyy */
+  /** Date last available, mm-yyyy. */
   date_to?: Maybe<Scalars["String"]>;
 };
 
 export type VehiclePremiumBattery = {
-  /** Usable battery capacity in kWh */
+  /** Usable battery capacity in kWh. */
   usable_kwh: Scalars["Float"];
-  /** Full battery capacity in kWh */
+  /** Full battery capacity in kWh. */
   full_kwh: Scalars["Float"];
-  /** Indicates which battery fields are estimated */
+  /** Indicates which battery fields are estimated. */
   estimated_fields?: Maybe<VehicleBatteryFieldEstimations>;
-  /** Battery thermal management system (active/passive, air/liquid) */
+  /** Battery thermal management system (active/passive, air/liquid). */
   thermal_management_system?: Maybe<Scalars["String"]>;
-  /** Duration of battery warranty */
+  /** Duration of battery warranty. */
   warranty_period?: Maybe<Scalars["Float"]>;
-  /** Mileage of battery warranty */
+  /** Mileage of battery warranty. */
   warranty_mileage?: Maybe<Scalars["Float"]>;
-  /** Chemistry of the battery */
+  /** Chemistry of the battery. */
   chemistry?: Maybe<Scalars["String"]>;
-  /** Manufacturer of the battery */
+  /** Manufacturer of the battery. */
   manufacturer?: Maybe<Scalars["String"]>;
-  /** Number of battery modules */
+  /** Number of battery modules. */
   modules?: Maybe<Scalars["Float"]>;
-  /** Number of cells in the battery pack, can include configuration (s = serial, p = parallel) */
+  /** Number of cells in the battery pack, can include configuration (s = serial, p = parallel). */
   cells?: Maybe<Scalars["String"]>;
-  /** Weight of the battery pack */
+  /** Weight of the battery pack. */
   weight?: Maybe<Scalars["Float"]>;
-  /** Nominal voltage of battery */
+  /** Nominal voltage of battery. */
   nominal_voltage?: Maybe<Scalars["Float"]>;
 };
 
 export type VehiclePremiumBody = {
-  /** Length, default in mm */
+  /** Length, default in mm. */
   length?: Maybe<Scalars["Float"]>;
-  /** Width with folded mirrors, default in mm */
+  /** Width with folded mirrors, default in mm. */
   width: Scalars["Float"];
-  /** Width of vehicle including mirrors, default in mm */
+  /** Width of vehicle including mirrors, default in mm. */
   full_width?: Maybe<Scalars["Float"]>;
-  /** Height (average height for adjustable suspensions), default in mm */
+  /** Height (average height for adjustable suspensions), default in mm. */
   height: Scalars["Float"];
-  /** Indicates if length/width/height fields are estimations */
+  /** Indicates if length/width/height fields are estimations. */
   size_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Wheelbase, default in mm */
+  /** Wheelbase, default in mm. */
   wheelbase?: Maybe<Scalars["Float"]>;
-  /** Indicates if wheelbase field is estimated */
+  /** Indicates if wheelbase field is estimated. */
   wheelbase_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Weight (unladen EU) */
+  /** Weight (unladen EU). */
   weight: VehicleBodyWeight;
-  /** Maximum allowed vehicle weight with payload */
+  /** Maximum allowed vehicle weight with payload. */
   weight_gvwr?: Maybe<VehicleBodyWeight>;
-  /** Maximum allowed vehicle and trailer weight with payload */
+  /** Maximum allowed vehicle and trailer weight with payload. */
   weight_gtw?: Maybe<VehicleBodyWeight>;
-  /** Allowed payload weight */
+  /** Allowed payload weight. */
   weight_payload?: Maybe<VehicleBodyWeight>;
-  /** Indicates if weight field is estimated */
+  /** Indicates if weight field is estimated. */
   weight_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum payload allowed for the vehicle, default in kg */
+  /** Maximum payload allowed for the vehicle, default in kg. */
   weight_max_payload?: Maybe<Scalars["Float"]>;
-  /** Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload), default in kg */
+  /** Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload), default in kg. */
   max_gross_vehicle_weight?: Maybe<Scalars["Float"]>;
-  /** Standard luggage capacity, default in l */
+  /** Standard luggage capacity, default in l. */
   boot_capacity?: Maybe<Scalars["Float"]>;
-  /** Storage capacity of front trunk/under the hood (frunk), default in l */
+  /** Storage capacity of front trunk/under the hood (frunk), default in l. */
   boot_front_capacity?: Maybe<Scalars["Float"]>;
-  /** Maximum luggage capacity, default in l */
+  /** Maximum luggage capacity, default in l. */
   boot_capacity_max?: Maybe<Scalars["Float"]>;
-  /** Indicates if a tow hitch/towbar can be fitted according to vehicle homologation */
+  /** Indicates if a tow hitch/towbar can be fitted according to vehicle homologation. */
   tow_hitch_compatible?: Maybe<Scalars["Boolean"]>;
-  /** Maximum unbraked towing weight, default in kg */
+  /** Maximum unbraked towing weight, default in kg. */
   tow_weight_unbraked?: Maybe<Scalars["Float"]>;
-  /** Maximum braked towing weight, default in kg */
+  /** Maximum braked towing weight, default in kg. */
   tow_weight_braked?: Maybe<Scalars["Float"]>;
-  /** Indicates if tow weight fields are estimations */
+  /** Indicates if tow weight fields are estimations. */
   tow_weight_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum vertical load / noseweight on tow hitch according to vehicle homologation, default in kg */
+  /** Maximum vertical load / noseweight on tow hitch according to vehicle homologation, default in kg. */
   tow_weight_vertical_load?: Maybe<Scalars["Float"]>;
-  /** Maximum load on roof of the vehicle, default in kg */
+  /** Maximum load on roof of the vehicle, default in kg. */
   roof_load_max?: Maybe<Scalars["Float"]>;
-  /** Body type, listed in local naming convention where applicable */
+  /** Body type, listed in local naming convention where applicable. */
   body_type?: Maybe<Scalars["String"]>;
-  /** Segment, listed in local naming convention where applicable */
+  /** Segment, listed in local naming convention where applicable. */
   segment?: Maybe<Scalars["String"]>;
-  /** Number of seats */
+  /** Number of seats. */
   seats: Scalars["Int"];
-  /** Indicates whether a vehicle has roof rails as a standard */
+  /** Indicates whether a vehicle has roof rails as a standard. */
   has_roofrails?: Maybe<Scalars["Boolean"]>;
-  /** Turning circle of the vehicle kerb-to-kerb, default in meters */
+  /** Turning circle of the vehicle kerb-to-kerb, default in meters. */
   turning_circle?: Maybe<Scalars["Float"]>;
-  /** Name of the vehicle platform used for vehicle (often abbreviated to indicate group platforms) */
+  /** Name of the vehicle platform used for vehicle (often abbreviated to indicate group platforms). */
   vehicle_platform?: Maybe<Scalars["String"]>;
-  /** Indicates if the vehicle platform used for vehicle is a dedicated battery electric vehicle platform */
+  /** Indicates if the vehicle platform used for vehicle is a dedicated battery electric vehicle platform. */
   vehicle_platform_is_dedicated?: Maybe<Scalars["Boolean"]>;
 };
 
@@ -5443,30 +5488,30 @@ export type VehiclePremiumBodyturning_circleArgs = {
 };
 
 export type VehiclePremiumCharge = {
-  /** Information about the main connector */
+  /** Information about the main connector. */
   plug?: Maybe<VehiclePremiumChargePlug>;
-  /** Information about vehicles secondary onboard charger */
+  /** Information about vehicles secondary onboard charger. */
   second_plug?: Maybe<VehiclePremiumChargeSecondPlug>;
-  /** Information about the vehicle standard onboard charger */
+  /** Information about the vehicle standard onboard charger. */
   standard?: Maybe<VehiclePremiumChargeStandardOBC>;
-  /** Optional upgrade for the standard onboard charger when available */
+  /** Optional upgrade for the standard onboard charger when available. */
   option?: Maybe<VehiclePremiumChargeOptionOBC>;
-  /** Alternative upgrade for the standard onboard charger when available */
+  /** Alternative upgrade for the standard onboard charger when available. */
   alternative?: Maybe<VehiclePremiumChargeAlternativeOBC>;
 };
 
 export type VehiclePremiumChargeAlternativeOBC = {
-  /** Maximum power OBC can accept to charge a battery (standard OBC) */
+  /** Maximum power OBC can accept to charge a battery (standard OBC). */
   power?: Maybe<Scalars["Float"]>;
-  /** Number of phases the OBC accepts to achieve maximum power (standard OBC) */
+  /** Number of phases the OBC accepts to achieve maximum power (standard OBC). */
   phases?: Maybe<Scalars["Int"]>;
-  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC) */
+  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC). */
   phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% (standard OBC) */
+  /** Minutes needed to charge from 0% to 100% (standard OBC). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC), default in kmph */
+  /** Charging speed when charging at maximum power (standard OBC), default in kmph. */
   charge_speed?: Maybe<Scalars["Float"]>;
-  /** Charging details for the standard OBC at several charging points */
+  /** Charging details for the standard OBC at several charging points. */
   table?: Maybe<Array<Maybe<VehiclePremiumChargeOBCTable>>>;
 };
 
@@ -5475,23 +5520,23 @@ export type VehiclePremiumChargeAlternativeOBCcharge_speedArgs = {
 };
 
 export type VehiclePremiumChargeOBCTable = {
-  /** Voltage between phase and neutral for this EVSE (phase voltage) */
+  /** Voltage between phase and neutral for this EVSE (phase voltage). */
   evse_phase_voltage?: Maybe<Scalars["Int"]>;
-  /** Current per phase for this EVSE (phase current) */
+  /** Current per phase for this EVSE (phase current). */
   evse_phase_amperage?: Maybe<Scalars["Int"]>;
-  /** Number of phases for this EVSE */
+  /** Number of phases for this EVSE. */
   evse_phases?: Maybe<Scalars["Int"]>;
-  /** Voltage between phase and neutral used by standard OBC (phase voltage) */
+  /** Voltage between phase and neutral used by standard OBC (phase voltage). */
   charge_phase_voltage?: Maybe<Scalars["Int"]>;
-  /** Current per phase used by standard OBC (phase current) */
+  /** Current per phase used by standard OBC (phase current). */
   charge_phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Number of phases used by standard OBC */
+  /** Number of phases used by standard OBC. */
   charge_phases?: Maybe<Scalars["Int"]>;
-  /** Power used by standard OBC (before OBC losses) */
+  /** Power used by standard OBC (before OBC losses). */
   charge_power?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% (standard OBC with this EVSE) */
+  /** Minutes needed to charge from 0% to 100% (standard OBC with this EVSE). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC with this EVSE), default in kmph */
+  /** Charging speed when charging at maximum power (standard OBC with this EVSE), default in kmph. */
   charge_speed?: Maybe<Scalars["Float"]>;
 };
 
@@ -5500,17 +5545,17 @@ export type VehiclePremiumChargeOBCTablecharge_speedArgs = {
 };
 
 export type VehiclePremiumChargeOptionOBC = {
-  /** Maximum power OBC can accept to charge a battery (standard OBC) */
+  /** Maximum power OBC can accept to charge a battery (standard OBC). */
   power?: Maybe<Scalars["Float"]>;
-  /** Number of phases the OBC accepts to achieve maximum power (standard OBC) */
+  /** Number of phases the OBC accepts to achieve maximum power (standard OBC). */
   phases?: Maybe<Scalars["Int"]>;
-  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC) */
+  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC). */
   phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% (standard OBC) */
+  /** Minutes needed to charge from 0% to 100% (standard OBC). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC), default in kmph */
+  /** Charging speed when charging at maximum power (standard OBC), default in kmph. */
   charge_speed?: Maybe<Scalars["Float"]>;
-  /** Charging details for the standard OBC at several charging points */
+  /** Charging details for the standard OBC at several charging points. */
   table?: Maybe<Array<Maybe<VehiclePremiumChargeOBCTable>>>;
 };
 
@@ -5519,42 +5564,42 @@ export type VehiclePremiumChargeOptionOBCcharge_speedArgs = {
 };
 
 export type VehiclePremiumChargePlug = {
-  /** Type of charge port on vehicle */
+  /** Type of charge port on vehicle. */
   value?: Maybe<ConnectorType>;
-  /** Indicates if value is an estimate */
+  /** Indicates if value is an estimate. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Location of charge port */
+  /** Location of charge port. */
   location?: Maybe<Scalars["String"]>;
 };
 
 export type VehiclePremiumChargePower = {
-  /** Maximum value */
+  /** Maximum value. */
   max?: Maybe<Scalars["Float"]>;
-  /** Average value */
+  /** Average value. */
   average?: Maybe<Scalars["Float"]>;
 };
 
 export type VehiclePremiumChargeSecondPlug = {
-  /** Location of charge port */
+  /** Location of charge port. */
   location?: Maybe<Scalars["String"]>;
-  /** Indicates if second charge port is optional */
+  /** Indicates if second charge port is optional. */
   is_optional?: Maybe<Scalars["Boolean"]>;
 };
 
 export type VehiclePremiumChargeStandardOBC = {
-  /** Maximum power OBC can accept to charge a battery (standard OBC) */
+  /** Maximum power OBC can accept to charge a battery (standard OBC). */
   power?: Maybe<Scalars["Float"]>;
-  /** Number of phases the OBC accepts to achieve maximum power (standard OBC) */
+  /** Number of phases the OBC accepts to achieve maximum power (standard OBC). */
   phases?: Maybe<Scalars["Int"]>;
-  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC) */
+  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC). */
   phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% (standard OBC) */
+  /** Minutes needed to charge from 0% to 100% (standard OBC). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC), default in kmph */
+  /** Charging speed when charging at maximum power (standard OBC), default in kmph. */
   charge_speed?: Maybe<Scalars["Float"]>;
-  /** Indicates if Charge_Standard fields are estimated */
+  /** Indicates if Charge_Standard fields are estimated. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Charging details for the standard OBC at several charging points */
+  /** Charging details for the standard OBC at several charging points. */
   table?: Maybe<Array<Maybe<VehiclePremiumChargeOBCTable>>>;
 };
 
@@ -5563,23 +5608,23 @@ export type VehiclePremiumChargeStandardOBCcharge_speedArgs = {
 };
 
 export type VehiclePremiumDrivetrain = {
-  /** Type of drivetrain */
+  /** Type of drivetrain. */
   type: VehicleDrivetrainType;
-  /** Fuel type */
+  /** Fuel type. */
   fuel?: Maybe<VehicleFuel>;
-  /** Propulsion type */
+  /** Propulsion type. */
   propulsion?: Maybe<VehiclePropulsion>;
-  /** Indicates if propulsion field is estimated */
+  /** Indicates if propulsion field is estimated. */
   propulsion_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum (combined) power output, default in kw */
+  /** Maximum (combined) power output, default in kw. */
   power?: Maybe<Scalars["Float"]>;
-  /** Indicates if power field is estimated */
+  /** Indicates if power field is estimated. */
   power_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum (combine) power output, default in horsepower (PS) */
+  /** Maximum (combine) power output, default in horsepower (PS). */
   power_hp?: Maybe<Scalars["Float"]>;
-  /** Maximum (combine) torque output, default in newton meter */
+  /** Maximum (combine) torque output, default in newton meter. */
   torque?: Maybe<Scalars["Float"]>;
-  /** Indicates if torque field is estimated */
+  /** Indicates if torque field is estimated. */
   torque_is_estimated?: Maybe<Scalars["Boolean"]>;
 };
 
@@ -5596,26 +5641,26 @@ export type VehiclePremiumDrivetraintorqueArgs = {
 };
 
 export type VehiclePremiumEfficiency = {
-  /** Rated efficiency in WLTP combined cycle */
+  /** Rated efficiency in WLTP combined cycle. */
   wltp?: Maybe<VehiclePremiumEfficiencyWLTP>;
-  /** Rated efficiency in WLTP combined cycle (TEH / least efficient trim) */
+  /** Rated efficiency in WLTP combined cycle (TEH / least efficient trim). */
   wltp_teh?: Maybe<VehiclePremiumEfficiencyWLTPTEH>;
-  /** Rated efficiency in NEDC combined cycle */
+  /** Rated efficiency in NEDC combined cycle. */
   nedc?: Maybe<VehiclePremiumEfficiencyNEDC>;
-  /** Vehicle efficiency based on provider range */
+  /** Vehicle efficiency based on provider range. */
   provider?: Maybe<VehiclePremiumEfficiencyProvider>;
 };
 
 export type VehiclePremiumEfficiencyNEDC = {
-  /** Rated efficiency in NEDC combined cycle, default in kWh/100 km */
+  /** Rated efficiency in NEDC combined cycle, default in kWh/100 km. */
   value?: Maybe<Scalars["Float"]>;
-  /** Rated efficiency in NEDC combined cycle presented in gas equivalent, default in l/100 km */
+  /** Rated efficiency in NEDC combined cycle presented in gas equivalent, default in l/100 km. */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in NEDC combined cycle (based on value), default in kWh/100 km */
+  /** Rated vehicle efficiency in NEDC combined cycle (based on value), default in kWh/100 km. */
   vehicle?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in NEDC combined cycle presented in gas equivalent, default in l/100 km */
+  /** Rated vehicle efficiency in NEDC combined cycle presented in gas equivalent, default in l/100 km. */
   vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated CO2 emissions in NEDC combined cycle in battery-only mode (NULL if not NEDC rated), default in gr/km */
+  /** Rated CO2 emissions in NEDC combined cycle in battery-only mode (NULL if not NEDC rated), default in gr/km. */
   co2?: Maybe<Scalars["Float"]>;
 };
 
@@ -5640,13 +5685,13 @@ export type VehiclePremiumEfficiencyNEDCco2Args = {
 };
 
 export type VehiclePremiumEfficiencyProvider = {
-  /** Vehicle efficiency based on RealRange (usable battery/range), default in kWh/100 km */
+  /** Vehicle efficiency based on RealRange (usable battery/range), default in kWh/100 km. */
   value?: Maybe<Scalars["Float"]>;
-  /** Vehicle efficiency based on RealRange presented in gas equivalent, default in l/100 km */
+  /** Vehicle efficiency based on RealRange presented in gas equivalent, default in l/100 km. */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Worst conditions are based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating. */
   worst?: Maybe<VehiclePremiumEfficiencyProviderValue>;
-  /** Best conditions are based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C. */
   best?: Maybe<VehiclePremiumEfficiencyProviderValue>;
 };
 
@@ -5659,11 +5704,11 @@ export type VehiclePremiumEfficiencyProviderfuel_equivalentArgs = {
 };
 
 export type VehiclePremiumEfficiencyProviderValue = {
-  /** Estimated value on highway or express roads, default in km */
+  /** Estimated value on highway or express roads, default in km. */
   highway?: Maybe<Scalars["Float"]>;
-  /** Estimated value on city roads, default in km */
+  /** Estimated value on city roads, default in km. */
   city?: Maybe<Scalars["Float"]>;
-  /** Estimated combined value, default in km */
+  /** Estimated combined value, default in km. */
   combined?: Maybe<Scalars["Float"]>;
 };
 
@@ -5680,15 +5725,15 @@ export type VehiclePremiumEfficiencyProviderValuecombinedArgs = {
 };
 
 export type VehiclePremiumEfficiencyWLTP = {
-  /** Rated efficiency in WLTP combined cycle, default in kWh/100 km */
+  /** Rated efficiency in WLTP combined cycle, default in kWh/100 km. */
   value?: Maybe<Scalars["Float"]>;
-  /** Rated efficiency in WLTP combined cycle presented in gas equivalent, default in l/100 km */
+  /** Rated efficiency in WLTP combined cycle presented in gas equivalent, default in l/100 km. */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP combined cycle (based on value), default in kWh/100 km */
+  /** Rated vehicle efficiency in WLTP combined cycle (based on value), default in kWh/100 km. */
   vehicle?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP combined cycle presented in gas equivalent, default in l/100 km */
+  /** Rated vehicle efficiency in WLTP combined cycle presented in gas equivalent, default in l/100 km. */
   vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated CO2 emissions in WLTP combined cycle in battery-only mode (NULL if not WLTP rated), default in gr/km */
+  /** Rated CO2 emissions in WLTP combined cycle in battery-only mode (NULL if not WLTP rated), default in gr/km. */
   co2?: Maybe<Scalars["Float"]>;
 };
 
@@ -5713,15 +5758,15 @@ export type VehiclePremiumEfficiencyWLTPco2Args = {
 };
 
 export type VehiclePremiumEfficiencyWLTPTEH = {
-  /** Rated efficiency in WLTP TEH combined cycle (TEH/least efficient trim) */
+  /** Rated efficiency in WLTP TEH combined cycle (TEH/least efficient trim). */
   value?: Maybe<Scalars["Float"]>;
-  /** Rated efficiency in WLTP TEH combined cycle presented in gas equivalent, default in l/100 km */
+  /** Rated efficiency in WLTP TEH combined cycle presented in gas equivalent, default in l/100 km. */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP TEH combined cycle (based on value), default in kWh/100 km */
+  /** Rated vehicle efficiency in WLTP TEH combined cycle (based on value), default in kWh/100 km. */
   vehicle?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP TEH combined cycle presented in gas equivalent, default in l/100 km */
+  /** Rated vehicle efficiency in WLTP TEH combined cycle presented in gas equivalent, default in l/100 km. */
   vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated CO2 emissions in WLTP TEH combined cycle in battery-only mode (NULL if not WLTP TEH rated), default in gr/km */
+  /** Rated CO2 emissions in WLTP TEH combined cycle in battery-only mode (NULL if not WLTP TEH rated), default in gr/km. */
   co2?: Maybe<Scalars["Float"]>;
 };
 
@@ -5746,19 +5791,19 @@ export type VehiclePremiumEfficiencyWLTPTEHco2Args = {
 };
 
 export type VehiclePremiumFastCharge = {
-  /** Details about the connector */
+  /** Details about the connector. */
   plug?: Maybe<VehiclePremiumChargePlug>;
-  /** Power during fast charging from 10% to 80% SoC (optimal conditions, fastest charger) */
+  /** Power during fast charging from 10% to 80% SoC (optimal conditions, fastest charger). */
   power?: Maybe<VehiclePremiumChargePower>;
-  /** Minutes needed to charge from 10% to 80%, with average charging power (optimal conditions, fastest charger) */
+  /** Minutes needed to charge from 10% to 80%, with average charging power (optimal conditions, fastest charger). */
   charge_time?: Maybe<Scalars["Float"]>;
-  /** Charging speed during fast charging from 10% to 80% (optimal conditions, fastest charger), default is kmph */
+  /** Charging speed during fast charging from 10% to 80% (optimal conditions, fastest charger), default is kmph. */
   charge_speed?: Maybe<Scalars["Float"]>;
-  /** Indicates if fast charge is optional in some markets/regions */
+  /** Indicates if fast charge is optional in some markets/regions. */
   is_optional?: Maybe<Scalars["Boolean"]>;
-  /** Indicates what fields are estimated */
+  /** Indicates what fields are estimated. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Charging details for fast charging */
+  /** Charging details for fast charging. */
   table?: Maybe<Array<Maybe<VehiclePremiumFastChargeTable>>>;
 };
 
@@ -5767,17 +5812,17 @@ export type VehiclePremiumFastChargecharge_speedArgs = {
 };
 
 export type VehiclePremiumFastChargeTable = {
-  /** Charging details for fast charging (format: ChargerConnector-ChargerPower-AC/DC) */
+  /** Charging details for fast charging (format: ChargerConnector-ChargerPower-AC/DC). */
   format?: Maybe<Scalars["String"]>;
-  /** Fast charge power */
+  /** Fast charge power. */
   power?: Maybe<VehiclePremiumChargePower>;
-  /** Minutes needed to charge from 10% to 80% (optimal conditions) */
+  /** Minutes needed to charge from 10% to 80% (optimal conditions). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed during fast charging from 10% to 80% (optimal conditions), default is kmph */
+  /** Charging speed during fast charging from 10% to 80% (optimal conditions), default is kmph. */
   charge_speed?: Maybe<Scalars["Float"]>;
-  /** Indicates if maximum power during fast charging is limited by the vehicle */
+  /** Indicates if maximum power during fast charging is limited by the vehicle. */
   is_limited?: Maybe<Scalars["Boolean"]>;
-  /** Indicates if average power during fast charging is limited by the vehicle */
+  /** Indicates if average power during fast charging is limited by the vehicle. */
   average_is_limited?: Maybe<Scalars["Boolean"]>;
 };
 
@@ -5786,47 +5831,47 @@ export type VehiclePremiumFastChargeTablecharge_speedArgs = {
 };
 
 export type VehiclePremiumMedia = {
-  /** URL for more details */
+  /** URL for more details. */
   provider_details_url?: Maybe<Scalars["String"]>;
-  /** Latest image */
+  /** Featured image of the vehicle from a 45-degree angle. */
   image: VehicleImage;
-  /** Latest maker logo */
+  /** Latest maker logo. */
   brand: VehicleImage;
-  /** All images */
+  /** All images of the vehicle. */
   image_list: Array<VehicleImage>;
-  /** Latest video */
+  /** Latest video. */
   video?: Maybe<VehicleVideo>;
-  /** All videos */
+  /** All videos of the vehicle. */
   video_list?: Maybe<Array<VehicleVideo>>;
-  /** URL of the OEM page for this vehicle */
+  /** URL of the OEM page for this vehicle. */
   oem_details_url?: Maybe<Scalars["String"]>;
 };
 
 export type VehiclePremiumNaming = {
-  /** Vehicle manufacturer name */
+  /** Vehicle manufacturer name. */
   make: Scalars["String"];
-  /** Vehicle model name */
+  /** Vehicle model name. */
   model: Scalars["String"];
-  /** Version, edition or submodel of the vehicle */
+  /** Version, edition or submodel of the vehicle. */
   version?: Maybe<Scalars["String"]>;
-  /** Another submodel level of the vehicle */
+  /** Another submodel level of the vehicle. */
   edition?: Maybe<Scalars["String"]>;
-  /** Vehicle model version. Added by Chargetrip as an alternative for when a vehicle manufacturer does not provide a version name, or uses the same version name across all trims or consecutive years */
+  /** Vehicle model version. Added by Chargetrip as an alternative for when a vehicle manufacturer does not provide a version name, or uses the same version name across all trims or consecutive years. */
   chargetrip_version: Scalars["String"];
-  /** Vehicle model length version */
+  /** Vehicle model length version. */
   length_version?: Maybe<Scalars["String"]>;
-  /** Vehicle model height version */
+  /** Vehicle model height version. */
   height_version?: Maybe<Scalars["String"]>;
 };
 
 export type VehiclePremiumPerformance = {
-  /** Acceleration 0-100 km/h, default in seconds */
+  /** Acceleration 0-100 km/h, default in seconds. */
   acceleration?: Maybe<Scalars["Float"]>;
-  /** Indicates if acceleration field is estimated */
+  /** Indicates if acceleration field is estimated. */
   acceleration_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Top speed of the vehicle, default in km/h */
+  /** Top speed of the vehicle, default in km/h. */
   top_speed?: Maybe<Scalars["Float"]>;
-  /** Indicates if top_speed field is estimated */
+  /** Indicates if top_speed field is estimated. */
   top_speed_is_estimated?: Maybe<Scalars["Boolean"]>;
 };
 
@@ -5839,22 +5884,22 @@ export type VehiclePremiumPerformancetop_speedArgs = {
 };
 
 export type VehiclePremiumPrice = {
-  /** Starting price for German market */
+  /** Starting price for German market. */
   DE?: Maybe<VehiclePremiumPriceValueWithGrant>;
-  /** Starting price for Dutch market */
+  /** Starting price for Dutch market. */
   NL?: Maybe<VehiclePremiumPriceValueWithGrant>;
-  /** Starting price for British market */
+  /** Starting price for British market. */
   GB?: Maybe<VehiclePremiumPriceValueWithGrant>;
 };
 
 export type VehiclePremiumPriceValueWithGrant = {
-  /** Starting price for local market expressed in the currency in the field currency */
+  /** Starting price for local market expressed in the currency in the field currency. */
   value?: Maybe<Scalars["Float"]>;
-  /** Currency in which the value without optional field conversion is expressed */
+  /** Currency in which the value without optional field conversion is expressed. */
   currency?: Maybe<CurrencyUnit>;
-  /** Indicates if price value is based on estimates */
+  /** Indicates if price value is based on estimates. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Grant is applied to value */
+  /** Grant is applied to value. */
   grant_applied?: Maybe<Scalars["Int"]>;
 };
 
@@ -5863,25 +5908,29 @@ export type VehiclePremiumPriceValueWithGrantvalueArgs = {
 };
 
 export type VehiclePremiumRange = {
-  /** Rated range in WLTP combined cycle (NULL if not WLTP rated), default in km */
+  /** Rated range in WLTP combined cycle (NULL if not WLTP rated), default in km. */
   wltp?: Maybe<Scalars["Float"]>;
-  /** Indicates if WLTP range is estimated (NULL if not WLTP rated) */
+  /** Indicates if WLTP range is estimated (NULL if not WLTP rated). */
   wltp_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Rated range in WLTP (TEH/least efficient trim) combined cycle (NULL if not WLTP rated) */
+  /** Rated range in WLTP (TEH/least efficient trim) combined cycle (NULL if not WLTP rated). */
   wltp_teh?: Maybe<Scalars["Int"]>;
-  /** Rated range in NEDC combined cycle (NULL if not NEDC rated), default in km */
+  /** Rated range in NEDC combined cycle (NULL if not NEDC rated), default in km. */
   nedc?: Maybe<Scalars["Float"]>;
-  /** Indicates if NEDC range is estimated (NULL if not NEDC rated) */
+  /** Indicates if NEDC range is estimated (NULL if not NEDC rated). */
   nedc_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Index range, default in km */
+  /** Index range, default in km. */
   provider?: Maybe<Scalars["Float"]>;
-  /** Indicates if index range is estimated */
+  /** Indicates if index range is estimated. */
   provider_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Worst conditions are based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating. */
   worst: VehiclePremiumRangeValue;
-  /** Best conditions are based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C. */
   best: VehiclePremiumRangeValue;
-  /** Is an index value of what we consider to be the real-world range. (Comparable to Range_Real from EV Database.) It is essentially a normalized range to display on the front-end. */
+  /**
+   * Chargetrip's custom real-world range provides a carefully calculated display range for all electric vehicle models based on our own research and driving data.
+   * CT range is based on the theoretical distance driven using only the electric engine.
+   * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges.
+   */
   chargetrip_range: ChargetripRange;
 };
 
@@ -5898,12 +5947,12 @@ export type VehiclePremiumRangeproviderArgs = {
 };
 
 export type VehiclePremiumRangeValue = {
-  /** Estimated value on highway or express roads, default in km */
-  highway?: Maybe<Scalars["Float"]>;
-  /** Estimated value on city roads, default in km */
-  city?: Maybe<Scalars["Float"]>;
-  /** Estimated combined value, default in km */
-  combined?: Maybe<Scalars["Float"]>;
+  /** Estimated value on highway or express roads, default in km. */
+  highway: Scalars["Float"];
+  /** Estimated value on city roads, default in km. */
+  city: Scalars["Float"];
+  /** Estimated combined value, default in km. */
+  combined: Scalars["Float"];
 };
 
 export type VehiclePremiumRangeValuehighwayArgs = {
@@ -5919,15 +5968,15 @@ export type VehiclePremiumRangeValuecombinedArgs = {
 };
 
 export type VehiclePremiumRouting = {
-  /** Vehicles that support fast charging have a minimum charging speed of 43 kWh */
+  /** Vehicles that support fast charging have a minimum charging speed of 43 kWh. */
   fast_charging_support: Scalars["Boolean"];
-  /** Drag coefficient */
+  /** Drag coefficient. */
   drag_coefficient: Scalars["Float"];
-  /** Tire pressure recommended by manufacturer, default in bar */
+  /** Tire pressure recommended by manufacturer, default in bar. */
   tire_pressure: Scalars["Float"];
-  /** Extra consumption model */
+  /** Extra consumption model. */
   consumption?: Maybe<VehiclePremiumRoutingConsumption>;
-  /** Amount of petrol that an equivalent petrol vehicle would consume, default in l/100 km */
+  /** Amount of petrol that an equivalent petrol vehicle would consume, default in l/100 km. */
   fuel_consumption?: Maybe<Scalars["Float"]>;
 };
 
@@ -5940,75 +5989,88 @@ export type VehiclePremiumRoutingfuel_consumptionArgs = {
 };
 
 export type VehiclePremiumRoutingConsumption = {
-  /** Consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the auxiliaries. */
   aux?: Maybe<VehiclePremiumRoutingConsumptionValue>;
-  /** Consumption, in kWh, of the battery management system */
+  /** Consumption, in kWh, of the battery management system. */
   bms?: Maybe<VehiclePremiumRoutingConsumptionValue>;
-  /** Consumption, in kWh, of the vehicle in idle mode */
+  /** Consumption, in kWh, of the vehicle in idle mode. */
   idle?: Maybe<VehiclePremiumRoutingConsumptionValue>;
 };
 
 export type VehiclePremiumRoutingConsumptionValue = {
-  /** Best (lowest) consumption in summer */
+  /** Best (lowest) consumption in summer. */
   best?: Maybe<Scalars["Float"]>;
-  /** Best (lowest) consumption in winter */
+  /** Best (lowest) consumption in winter. */
   worst?: Maybe<Scalars["Float"]>;
 };
 
 export type VehiclePremiumSafety = {
-  /** Number of seats equipped with ISOFIX */
+  /** Number of seats equipped with ISOFIX. */
   isofix_seats?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP results */
+  /** EuroNCAP results. */
   euro_ncap?: Maybe<VehiclePremiumSafetyEuroNcap>;
 };
 
 export type VehiclePremiumSafetyEuroNcap = {
-  /** EuroNCAP rating (out of 5 stars) */
+  /** EuroNCAP rating (out of 5 stars). */
   rating?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP year of rating */
+  /** EuroNCAP year of rating. */
   year?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP rating of adult protection (out of 100%) */
+  /** EuroNCAP rating of adult protection (out of 100%). */
   adult?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP rating of child protection (out of 100%) */
+  /** EuroNCAP rating of child protection (out of 100%). */
   child?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP rating of vulnerable road users (out of 100%) */
+  /** EuroNCAP rating of vulnerable road users (out of 100%). */
   vru?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP rating of safety assists (out of 100%) */
+  /** EuroNCAP rating of safety assists (out of 100%). */
   sa?: Maybe<Scalars["Int"]>;
 };
 
-/** Propulsion */
+/** Propulsion. */
 export enum VehiclePropulsion {
-  /** All-wheel drive vehicle */
+  /** All-wheel drive vehicle. */
   AWD = "AWD",
-  /** Front-wheel drive vehicle */
+  /** Front-wheel drive vehicle. */
   FRONT = "Front",
-  /** Rear-wheel drive vehicle */
+  /** Rear-wheel drive vehicle. */
   REAR = "Rear"
 }
 
-/** Status of a vehicle provider */
+/** Status of a vehicle provider. */
 export enum VehicleProviderStatus {
-  /** Is imported from any of the data providers */
+  /** Is imported from any of the data providers. */
   NEW = "new",
-  /** Has been attached to core vehicle */
+  /** Has been attached to core vehicle. */
   ATTACHED = "attached",
-  /** Has been detached from a core vehicle */
+  /** Has been detached from a core vehicle. */
   DETACHED = "detached",
-  /** Has been archived by database maintainer */
+  /** Has been archived by database maintainer. */
   ARCHIVED = "archived"
 }
 
+export enum VehiclePurpose {
+  /** Vehicle intended for the transportation of passengers. */
+  PASSENGER = "passenger",
+  /** Vehicle intended for the transportation of cargo. */
+  CARGO = "cargo",
+  /** Vehicle intended for the transportation of everything except cargo or passengers. Eg: ambulances, agricultural vehicles, etcetera. */
+  UTILITY = "utility"
+}
+
 export type VehicleRange = {
-  /** Index range, default in km */
+  /** Index range, default in km. */
   provider?: Maybe<Scalars["Float"]>;
-  /** Indicates if index range is estimated */
+  /** Indicates if index range is estimated. */
   provider_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Worst conditions are based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating. */
   worst: VehicleRangeValue;
-  /** Best conditions are based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C. */
   best: VehicleRangeValue;
-  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+  /**
+   * Chargetrip's custom real-world range provides a carefully calculated display range for all electric vehicle models based on our own research and driving data.
+   * CT range is based on the theoretical distance driven using only the electric engine.
+   * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges.
+   */
   chargetrip_range: ChargetripRange;
 };
 
@@ -6017,11 +6079,11 @@ export type VehicleRangeproviderArgs = {
 };
 
 export type VehicleRangeValue = {
-  /** Estimated value on the highway or express roads, default in km */
+  /** Estimated value on the highway or express roads, default in km. */
   highway: Scalars["Float"];
-  /** Estimated value on the cities road, default in km */
+  /** Estimated value on the cities road, default in km. */
   city: Scalars["Float"];
-  /** Estimated combined value, default in km */
+  /** Estimated combined value, default in km. */
   combined: Scalars["Float"];
 };
 
@@ -6037,8 +6099,23 @@ export type VehicleRangeValuecombinedArgs = {
   unit?: Maybe<DistanceUnit>;
 };
 
+export enum VehicleRegion {
+  /** Africa. */
+  AF = "AF",
+  /** Asia. */
+  AS = "AS",
+  /** Europe. */
+  EU = "EU",
+  /** North America. */
+  NA = "NA",
+  /** Oceania. */
+  OC = "OC",
+  /** South America. */
+  SA = "SA"
+}
+
 export type VehicleRouting = {
-  /** Vehicles that support fast charging have a minimum charging speed of 43 kWh */
+  /** Vehicles that support fast charging have a minimum charging speed of 43 kWh. */
   fast_charging_support: Scalars["Boolean"];
 };
 
@@ -6051,22 +6128,53 @@ export type VehicleSpeedInput = {
   source?: Maybe<TelemetryInputSource>;
 };
 
-/** Status of a vehicle */
+/** Status of a vehicle. */
 export enum VehicleStatus {
-  /** Is being reviewed by a human operator */
+  /** Is being reviewed by a human operator. */
   DRAFT = "draft",
-  /** Is public and can be used by a customer */
+  /** Is public and can be used by a customer. */
   PUBLIC = "public",
-  /** Is private and can be used by a human operator */
+  /** Is private and can be used by a human operator. */
   PRIVATE = "private",
-  /** Is archived and can not be used */
+  /** Is archived and can not be used. */
   ARCHIVED = "archived"
 }
 
+export enum VehicleType {
+  /** Any motor vehicle with two wheels or a motor vehicle with no more than four wheels, does not have parallel seating, and is controlled by means of handlebars. */
+  MOTORCYCLE = "motorcycle",
+  /** A motor vehicle with three or four wheels that is not a Motorcycle, Pickup, Van, Truck, or Utility vehicle and either has a top speed of less than 60kph or an unladen weight of less than 400kg. */
+  MICROCAR = "microcar",
+  /** A motor vehicle that does not have an enclosed cab, is not a microcar or utility vehicle, is capable of carrying eight or fewer people, and that has less than one third of its internal volume dedicated to cargo, living, or sleeping space in its default configuration. */
+  CAR = "car",
+  /** A motor vehicle that has an enclosed cab, is not a utility vehicle, and has a fixed, non-articulated, open-top back cargo bed that is enclosed on at least three sides. */
+  PICKUP = "pickup",
+  /**
+   * A motor vehicle that does not have an enclosed cab, is not a utility vehicle, that fulfills exactly one of the following conditions:
+   * 1) It is capable of carrying more than eight but less than twenty people.
+   * 2) At least one third of its internal volume is dedicated to cargo space in its default configuration.
+   * 3) It is the passenger variant of a vehicle that meets criterion 2.
+   */
+  VAN = "van",
+  /** A motor vehicle that does not have an enclosed cab, is not a Utility vehicle, and is capable of carrying 20 or more people in its default configuration. */
+  BUS = "bus",
+  /** A motor vehicle that has an enclosed cab and is not a Pickup or Utility vehicle. */
+  TRUCK = "truck",
+  /**
+   * A motor vehicle that fulfills at least one of the following conditions:
+   * 1) It does not have wheels.
+   * 2) It has some mode of locomotion other than wheels in its default configuration such as treads, skis, or floats.
+   * 3) It is capable of air or water travel in its default configuration.
+   * 4) It was manufactured primarily for some purpose other than transporting cargo or passengers.
+   * 5) It does not conform to any of the criteria for the other vehicle categories.
+   */
+  UTILITY = "utility"
+}
+
 export type VehicleVideo = {
-  /** Video id */
+  /** Video id. */
   id?: Maybe<Scalars["ID"]>;
-  /** Full path URL of a video */
+  /** Full path URL of a video. */
   url?: Maybe<Scalars["String"]>;
 };
 
