@@ -1,3 +1,11 @@
+## [1.37.1](https://github.com/chargetrip/types/compare/v1.37.0...v1.37.1) (2023-07-06)
+
+
+### Bug Fixes
+
+* add cronjob for automatic deployment on release days ([c575f8f](https://github.com/chargetrip/types/commit/c575f8f1e50dd52304a96d99158136d905ec273d))
+* added manual trigger for package deployment ([2091ca2](https://github.com/chargetrip/types/commit/2091ca25df315d0a8730fa8bc65d153ec50c35a2))
+
 # [1.37.0](https://github.com/chargetrip/types/compare/v1.36.0...v1.37.0) (2023-04-26)
 
 
