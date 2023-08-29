@@ -2307,6 +2307,12 @@ export type IsolineInput = {
   polygon_count?: Maybe<Scalars["Int"]>;
   /** Vehicle should be able to return to the origin point from any point */
   round_trip?: Maybe<Scalars["Boolean"]>;
+  /** Number of occupants */
+  occupants?: Maybe<Scalars["Int"]>;
+  /** Cumulated weight of the occupants */
+  total_occupant_weight?: Maybe<TotalOccupantWeightInput>;
+  /** Cargo weight, in kg */
+  total_cargo_weight?: Maybe<TotalCargoWeightInput>;
   /** Climate is on */
   climate_control?: Maybe<Scalars["Boolean"]>;
   /** Season to be taken into account when generating the isoline */
@@ -2315,6 +2321,10 @@ export type IsolineInput = {
   quality?: Maybe<IsolineQuality>;
   /** Include ferry connections. Single and multiple ferry connections increase the calculation time and the number of polygons. */
   ferry_connections?: Maybe<IsolineFerryConnectionsType>;
+  /** Battery state of charge. When omitted the default value is 100 percent. */
+  state_of_charge?: Maybe<StateOfChargeInput>;
+  /** Minimum final battery state of charge. When omitted the default value is 0 percent. */
+  final_state_of_charge?: Maybe<StateOfChargeInput>;
 };
 
 /** Granularity of the isoline */
@@ -3429,11 +3439,11 @@ export type PricingListProduct = {
 export type Query = {
   /** Get a full list of amenities around a station */
   amenityList?: Maybe<Array<Maybe<Amenity>>>;
-  /** Get information about a car by its ID */
+  /** Get information about a car by its ID. */
   car?: Maybe<Car>;
   /** Car premium data provides even more information about your car: tire pressure, prices, drivetrain data, and more. Please contact us for access to premium data. */
   carPremium?: Maybe<CarPremium>;
-  /** Get a full list of cars */
+  /** Get a full list of cars. */
   carList?: Maybe<Array<Maybe<CarList>>>;
   /** [BETA] Get a connected vehicles by id */
   connectedVehicle?: Maybe<ConnectedVehicle>;
@@ -3989,9 +3999,9 @@ export type RouteAlternative = {
   rangeStartKwh?: Maybe<Scalars["Float"]>;
   /** Total energy in a battery at the beginning of a trip, in percentage */
   rangeStartPercentage?: Maybe<Scalars["Int"]>;
-  /** Remaining range, in meters, at the end of a trip */
+  /** Remaining range, in meters, at the end of a trip. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEnd?: Maybe<Scalars["Int"]>;
-  /** Remaining range, energy in kWh, at the end of a trip */
+  /** Remaining range, energy in kWh, at the end of a trip. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
   /** Remaining range, energy in percentage, at the end of a trip */
   rangeEndPercentage?: Maybe<Scalars["Int"]>;
@@ -4129,9 +4139,9 @@ export type RouteLeg = {
   rangeStartKwh?: Maybe<Scalars["Float"]>;
   /** Total energy in a battery at the beginning of a trip, in percentage */
   rangeStartPercentage?: Maybe<Scalars["Int"]>;
-  /** Range, in meters, available at the end of a leg */
+  /** Range, in meters, available at the end of a leg. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEnd?: Maybe<Scalars["Int"]>;
-  /** Total energy left in a battery at the end of a leg, in kWh */
+  /** Total energy left in a battery at the end of a leg, in kWh. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
   /** Remaining range, energy in percentage, at the end of a trip */
   rangeEndPercentage?: Maybe<Scalars["Int"]>;
@@ -4181,6 +4191,25 @@ export type RouteLeg = {
 
 export type RouteLegpolylineArgs = {
   decimals?: Maybe<Scalars["Int"]>;
+};
+
+export type RouteLegMeta = {
+  /** Warnings that certain conditions specified in a route mutation are not respected. */
+  warnings: Array<RouteMetaWarning>;
+};
+
+export type RouteMeta = {
+  /** Warnings that certain conditions specified in a route mutation are not respected. */
+  warnings: Array<RouteMetaWarning>;
+};
+
+export type RouteMetaWarning = {
+  /** Static identifier, can be used for production purposes such as i18n. */
+  code: Scalars["String"];
+  /** Human readable explanation of the warning, for development purposes. */
+  message: Scalars["String"];
+  /** Optional JSON object containing data explaining the warning, for development purposes. */
+  data?: Maybe<Scalars["JSON"]>;
 };
 
 /** Prioritized operators for a route calculation */

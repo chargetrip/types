@@ -10838,6 +10838,42 @@
             "deprecationReason": null
           },
           {
+            "name": "occupants",
+            "description": "Number of occupants",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": "1",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_occupant_weight",
+            "description": "Cumulated weight of the occupants",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TotalOccupantWeightInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "Cargo weight, in kg",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TotalCargoWeightInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "climate_control",
             "description": "Climate is on",
             "type": {
@@ -10882,6 +10918,30 @@
               "ofType": null
             },
             "defaultValue": "none",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "state_of_charge",
+            "description": "Battery state of charge. When omitted the default value is 100 percent.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StateOfChargeInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "final_state_of_charge",
+            "description": "Minimum final battery state of charge. When omitted the default value is 0 percent.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StateOfChargeInput",
+              "ofType": null
+            },
+            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -15974,11 +16034,11 @@
           },
           {
             "name": "car",
-            "description": "Get information about a car by its ID",
+            "description": "Get information about a car by its ID.",
             "args": [
               {
                 "name": "id",
-                "description": "Car ID",
+                "description": "Car ID.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "ID",
@@ -16036,11 +16096,11 @@
           },
           {
             "name": "carList",
-            "description": "Get a full list of cars",
+            "description": "Get a full list of cars.",
             "args": [
               {
                 "name": "query",
-                "description": "Deprecated: Not used anymore",
+                "description": "Deprecated: Not used anymore.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "CarListQuery",
@@ -16052,7 +16112,7 @@
               },
               {
                 "name": "search",
-                "description": "Search for cars by make, model, version and chargetrip version",
+                "description": "Search for cars by make, model, version and chargetrip version.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -16064,7 +16124,7 @@
               },
               {
                 "name": "filter",
-                "description": "Filter car result",
+                "description": "Filter car result.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "CarListFilter",
@@ -16076,25 +16136,25 @@
               },
               {
                 "name": "size",
-                "description": "Number of elements (count) to return, default: 10",
+                "description": "Number of elements (count) to return.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": null,
+                "defaultValue": "10",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
               {
                 "name": "page",
-                "description": "Page number to return, default: 0",
+                "description": "Page number to return.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": null,
+                "defaultValue": "0",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -19073,7 +19133,7 @@
           },
           {
             "name": "rangeEnd",
-            "description": "Remaining range, in meters, at the end of a trip",
+            "description": "Remaining range, in meters, at the end of a trip. In the case of a non BEV where the range end is negative, the value will be 0.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19085,7 +19145,7 @@
           },
           {
             "name": "rangeEndKwh",
-            "description": "Remaining range, energy in kWh, at the end of a trip",
+            "description": "Remaining range, energy in kWh, at the end of a trip. In the case of a non BEV where the range end is negative, the value will be 0.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19836,7 +19896,7 @@
           },
           {
             "name": "rangeEnd",
-            "description": "Range, in meters, available at the end of a leg",
+            "description": "Range, in meters, available at the end of a leg. In the case of a non BEV where the range end is negative, the value will be 0.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19848,7 +19908,7 @@
           },
           {
             "name": "rangeEndKwh",
-            "description": "Total energy left in a battery at the end of a leg, in kWh",
+            "description": "Total energy left in a battery at the end of a leg, in kWh. In the case of a non BEV where the range end is negative, the value will be 0.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -20138,6 +20198,131 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteLegMeta",
+        "description": null,
+        "fields": [
+          {
+            "name": "warnings",
+            "description": "Warnings that certain conditions specified in a route mutation are not respected.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "RouteMetaWarning",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteMeta",
+        "description": null,
+        "fields": [
+          {
+            "name": "warnings",
+            "description": "Warnings that certain conditions specified in a route mutation are not respected.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "RouteMetaWarning",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteMetaWarning",
+        "description": null,
+        "fields": [
+          {
+            "name": "code",
+            "description": "Static identifier, can be used for production purposes such as i18n.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "message",
+            "description": "Human readable explanation of the warning, for development purposes.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "data",
+            "description": "Optional JSON object containing data explaining the warning, for development purposes.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
               "ofType": null
             },
             "isDeprecated": false,
