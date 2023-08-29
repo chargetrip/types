@@ -1,3 +1,10 @@
+## [1.37.4](https://github.com/chargetrip/types/compare/v1.37.3...v1.37.4) (2023-08-29)
+
+
+### Bug Fixes
+
+* add regeneration into the build script ([6dddce5](https://github.com/chargetrip/types/commit/6dddce5d91f46134adf01d7d35657581005c1d3d))
+
 ## [1.37.3](https://github.com/chargetrip/types/compare/v1.37.2...v1.37.3) (2023-08-29)
 
 
