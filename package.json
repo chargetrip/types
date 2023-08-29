@@ -67,7 +67,7 @@
     "build:babel": "babel src --out-dir dist/react-native --extensions .ts,.tsx --source-maps --ignore \"**/__tests__/**\",\"**/*.d.ts\"",
     "build:rollup": "rollup -c",
     "build:ts": " tsc -p ./tsconfig.release.json --outDir dist/ts --emitDeclarationOnly",
-    "build": "yarn clean && yarn build:babel && yarn build:rollup && yarn build:ts",
+    "build": "yarn clean && yarn generate:types && yarn build:babel && yarn build:rollup && yarn build:ts",
     "watch:babel": "yarn build:babel --watch",
     "watch:rollup": "yarn build:rollup -w",
     "watch:ts": "yarn build:ts --watch",
