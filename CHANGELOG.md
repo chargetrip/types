@@ -1,3 +1,10 @@
+## [1.37.3](https://github.com/chargetrip/types/compare/v1.37.2...v1.37.3) (2023-08-29)
+
+
+### Bug Fixes
+
+* regenerated types ([d5d1650](https://github.com/chargetrip/types/commit/d5d1650ed09bab48e96f2911c152cab4404fa06a))
+
 ## [1.37.2](https://github.com/chargetrip/types/compare/v1.37.1...v1.37.2) (2023-08-29)
 
 
