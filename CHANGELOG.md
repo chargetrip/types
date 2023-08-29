@@ -1,3 +1,10 @@
+## [1.37.2](https://github.com/chargetrip/types/compare/v1.37.1...v1.37.2) (2023-08-29)
+
+
+### Bug Fixes
+
+* trigger deploy ([9731bd2](https://github.com/chargetrip/types/commit/9731bd293d9d465c8c03746247aa56b66d033de1))
+
 ## [1.37.1](https://github.com/chargetrip/types/compare/v1.37.0...v1.37.1) (2023-07-06)
 
 
