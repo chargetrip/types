@@ -1,6 +1,6 @@
 overwrite: true
 schema: 
-  - https://api.chargetrip.io/graphql:
+  - https://api.chargetrip.dev/graphql:
       customFetch: '@chargetrip/codegen-chargetrip-fetch'
 documents: null
 generates:
