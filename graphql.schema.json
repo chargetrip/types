@@ -6715,7 +6715,7 @@
         "fields": [
           {
             "name": "worst",
-            "description": "Worst conditions are based on -10°C and use of heating",
+            "description": "Range in kilometers. Worst conditions are based on -10°C and use of heating",
             "args": [
               {
                 "name": "unit",
@@ -6732,7 +6732,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "Float",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6740,7 +6740,7 @@
           },
           {
             "name": "best",
-            "description": "Best conditions are based on 23°C and no use of A/C",
+            "description": "Range in kilometers. Best conditions are based on 23°C and no use of A/C",
             "args": [
               {
                 "name": "unit",
@@ -6757,7 +6757,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "Float",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10122,11 +10122,11 @@
       {
         "kind": "OBJECT",
         "name": "FeatureLineString",
-        "description": "A GeoJSON Feature<LineString>",
+        "description": "A GeoJSON Feature<LineString>.",
         "fields": [
           {
             "name": "type",
-            "description": "Feature type",
+            "description": "Feature type.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -10142,7 +10142,7 @@
           },
           {
             "name": "geometry",
-            "description": "Geometry of the feature",
+            "description": "Geometry of the feature.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -10165,11 +10165,11 @@
       {
         "kind": "OBJECT",
         "name": "FeatureMultiPolygon",
-        "description": "A GeoJSON Feature<MultiPolygon>",
+        "description": "A GeoJSON Feature<MultiPolygon>.",
         "fields": [
           {
             "name": "type",
-            "description": "Feature type",
+            "description": "Feature type.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -10185,7 +10185,7 @@
           },
           {
             "name": "geometry",
-            "description": "Geometry of the feature",
+            "description": "Geometry of the feature.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -10201,7 +10201,7 @@
           },
           {
             "name": "properties",
-            "description": "Properties of the MultiPolygon Feature",
+            "description": "Properties of the MultiPolygon Feature.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -10220,11 +10220,11 @@
       {
         "kind": "OBJECT",
         "name": "FeatureMultiPolygonPoint",
-        "description": "A GeoJSON Feature<Point>",
+        "description": "A GeoJSON Feature<Point>.",
         "fields": [
           {
             "name": "type",
-            "description": "Feature type",
+            "description": "Feature type.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -10240,7 +10240,7 @@
           },
           {
             "name": "geometry",
-            "description": "Geometry of the feature",
+            "description": "Geometry of the feature.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -10409,12 +10409,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "FeaturePointPolygonInput",
-        "description": "A GeoJSON Feature<Point> input",
+        "description": "A GeoJSON Feature<Point> input.",
         "fields": null,
         "inputFields": [
           {
             "name": "type",
-            "description": "Feature type",
+            "description": "Feature type.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -10430,7 +10430,7 @@
           },
           {
             "name": "geometry",
-            "description": "Geometry of the feature",
+            "description": "Geometry of the feature.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -10464,11 +10464,11 @@
       {
         "kind": "OBJECT",
         "name": "FeaturePointPolygonProperties",
-        "description": "Properties for Feature<Point> input",
+        "description": "Properties for Feature<Point> input.",
         "fields": [
           {
             "name": "name",
-            "description": "Name of the location",
+            "description": "Name of the location.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -10487,12 +10487,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "FeaturePointPolygonPropertiesInput",
-        "description": "Properties for Feature<Point> input",
+        "description": "Properties for Feature<Point> input.",
         "fields": null,
         "inputFields": [
           {
             "name": "name",
-            "description": "Name of the location",
+            "description": "Name of the location.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -10628,7 +10628,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "Isoline id",
+            "description": "Isoline id.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -10644,7 +10644,7 @@
           },
           {
             "name": "status",
-            "description": "Isoline status",
+            "description": "Isoline status.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -10660,7 +10660,7 @@
           },
           {
             "name": "polygons",
-            "description": "Shape of the isoline consisting in a list of multipolygons",
+            "description": "Shape of the isoline consisting in a list of multipolygons.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -10676,7 +10676,7 @@
           },
           {
             "name": "ferries",
-            "description": "List of the ferries uniting islands formed by the isoline",
+            "description": "List of the ferries uniting islands formed by the isoline.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -10691,56 +10691,12 @@
             "deprecationReason": null
           },
           {
-            "name": "origin",
-            "description": "Origin point of the request",
+            "name": "request_input",
+            "description": "The inputted request data for the isoline used to compute it.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "FeatureMultiPolygonPoint",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "vehicle_id",
-            "description": "Vehicle id",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "polygon_count",
-            "description": "Number of Isolines to be generated representing SoC (default: 1, maximum: 20)",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "season",
-            "description": "Season to be taken into account when generating the isoline. Default: current",
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "RouteSeason",
+              "kind": "OBJECT",
+              "name": "IsolineRequestInput",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10762,7 +10718,7 @@
         "enumValues": [
           {
             "name": "none",
-            "description": "Ferry connections should not be included",
+            "description": "Ferry connections should not be included.",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -10783,7 +10739,7 @@
         "inputFields": [
           {
             "name": "vehicle_id",
-            "description": "Vehicle id",
+            "description": "Vehicle id.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -10799,7 +10755,7 @@
           },
           {
             "name": "origin",
-            "description": "Origin point of the request",
+            "description": "Origin point of the request.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -10815,7 +10771,7 @@
           },
           {
             "name": "polygon_count",
-            "description": "Numbers of polygons to be generated (default: 1, maximum: 20)",
+            "description": "Numbers of polygons to be generated (maximum: 20).",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -10827,7 +10783,7 @@
           },
           {
             "name": "round_trip",
-            "description": "Vehicle should be able to return to the origin point from any point",
+            "description": "Vehicle should be able to return to the origin point from any point.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -10839,7 +10795,7 @@
           },
           {
             "name": "occupants",
-            "description": "Number of occupants",
+            "description": "Number of occupants.",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -10851,7 +10807,7 @@
           },
           {
             "name": "total_occupant_weight",
-            "description": "Cumulated weight of the occupants",
+            "description": "Cumulated weight of the occupants.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TotalOccupantWeightInput",
@@ -10863,7 +10819,7 @@
           },
           {
             "name": "total_cargo_weight",
-            "description": "Cargo weight, in kg",
+            "description": "Cargo weight.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TotalCargoWeightInput",
@@ -10875,7 +10831,7 @@
           },
           {
             "name": "climate_control",
-            "description": "Climate is on",
+            "description": "Climate is on.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -10887,7 +10843,7 @@
           },
           {
             "name": "season",
-            "description": "Season to be taken into account when generating the isoline",
+            "description": "Season to be taken into account when generating the isoline.",
             "type": {
               "kind": "ENUM",
               "name": "RouteSeason",
@@ -10899,7 +10855,7 @@
           },
           {
             "name": "quality",
-            "description": "Polygons precision quality",
+            "description": "Polygons precision quality.",
             "type": {
               "kind": "ENUM",
               "name": "IsolineQuality",
@@ -10953,20 +10909,20 @@
       {
         "kind": "ENUM",
         "name": "IsolineQuality",
-        "description": "Granularity of the isoline",
+        "description": "Granularity of the isoline.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "high",
-            "description": "High polygons precisions",
+            "description": "High polygons precisions.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "low",
-            "description": "Low polygons precisions",
+            "description": "Low polygons precisions.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -10974,28 +10930,263 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "IsolineRequestInput",
+        "description": null,
+        "fields": [
+          {
+            "name": "vehicle_id",
+            "description": "Vehicle id.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "origin",
+            "description": "Origin point of the request.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "FeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "polygon_count",
+            "description": "Numbers of polygons that were generated.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "round_trip",
+            "description": "Vehicle should be able to return to the origin point from any point.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "occupants",
+            "description": "Number of occupants.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_occupant_weight",
+            "description": "Cumulated weight of the occupants.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "WeightUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilogram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "Cargo weight.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "WeightUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilogram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "climate_control",
+            "description": "Climate is on.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "season",
+            "description": "Season taken into account when isoline was generated.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "RouteSeason",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "quality",
+            "description": "Polygons precision quality.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "IsolineQuality",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ferry_connections",
+            "description": "Ferry connections.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "IsolineFerryConnectionsType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "state_of_charge",
+            "description": "Battery state of charge.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "final_state_of_charge",
+            "description": "Minimum final battery state of charge.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "IsolineStatus",
-        "description": "Status of the isoline label",
+        "description": "Status of the isoline label.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "done",
-            "description": "Isoline label has been successfully generated",
+            "description": "Isoline label has been successfully generated.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "pending",
-            "description": "Isoline label is under processing",
+            "description": "Isoline label is under processing.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "error",
-            "description": "There was an error while generating the isoline label",
+            "description": "There was an error while generating the isoline label.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -11197,11 +11388,11 @@
       {
         "kind": "OBJECT",
         "name": "MultiPolygon",
-        "description": "A GeoJSON Polygon",
+        "description": "A GeoJSON Polygon.",
         "fields": [
           {
             "name": "type",
-            "description": "MultiPolygon type",
+            "description": "MultiPolygon type.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11217,7 +11408,7 @@
           },
           {
             "name": "coordinates",
-            "description": "List of coordinates representing a polygon",
+            "description": "List of coordinates representing a polygon.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11389,7 +11580,7 @@
           },
           {
             "name": "createIsoline",
-            "description": "[BETA] Generate a set of consumption based Isolines",
+            "description": "Create a consumption based isoline.",
             "args": [
               {
                 "name": "input",
@@ -15497,11 +15688,11 @@
       {
         "kind": "OBJECT",
         "name": "PolygonProperties",
-        "description": "Polygon properties",
+        "description": "Polygon properties.",
         "fields": [
           {
             "name": "index",
-            "description": "Index of the feature inside the list",
+            "description": "Index of the feature inside the list.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16284,7 +16475,7 @@
           },
           {
             "name": "isoline",
-            "description": "[BETA] Get an isoline by ID",
+            "description": "Get an isoline by ID.",
             "args": [
               {
                 "name": "id",
@@ -22858,7 +23049,7 @@
           },
           {
             "name": "isoline",
-            "description": "[BETA] Subscribe to an isoline label in order to receive updates",
+            "description": "Subscribe to an isoline in order to receive updates.",
             "args": [
               {
                 "name": "id",

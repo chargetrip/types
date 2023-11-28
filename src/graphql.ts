@@ -1481,10 +1481,10 @@ export type ChargerStatuses = {
  * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges
  */
 export type ChargetripRange = {
-  /** Worst conditions are based on -10°C and use of heating */
-  worst?: Maybe<Scalars["Float"]>;
-  /** Best conditions are based on 23°C and no use of A/C */
-  best?: Maybe<Scalars["Float"]>;
+  /** Range in kilometers. Worst conditions are based on -10°C and use of heating */
+  worst?: Maybe<Scalars["Int"]>;
+  /** Range in kilometers. Best conditions are based on 23°C and no use of A/C */
+  best?: Maybe<Scalars["Int"]>;
 };
 
 /**
@@ -2172,29 +2172,29 @@ export type EvseCustomProperties = {
   oicp?: Maybe<OICPEvseCustomProperties>;
 };
 
-/** A GeoJSON Feature<LineString> */
+/** A GeoJSON Feature<LineString>. */
 export type FeatureLineString = {
-  /** Feature type */
+  /** Feature type. */
   type: FeatureType;
-  /** Geometry of the feature */
+  /** Geometry of the feature. */
   geometry: LineString;
 };
 
-/** A GeoJSON Feature<MultiPolygon> */
+/** A GeoJSON Feature<MultiPolygon>. */
 export type FeatureMultiPolygon = {
-  /** Feature type */
+  /** Feature type. */
   type: FeatureType;
-  /** Geometry of the feature */
+  /** Geometry of the feature. */
   geometry: MultiPolygon;
-  /** Properties of the MultiPolygon Feature */
+  /** Properties of the MultiPolygon Feature. */
   properties?: Maybe<PolygonProperties>;
 };
 
-/** A GeoJSON Feature<Point> */
+/** A GeoJSON Feature<Point>. */
 export type FeatureMultiPolygonPoint = {
-  /** Feature type */
+  /** Feature type. */
   type: FeatureType;
-  /** Geometry of the feature */
+  /** Geometry of the feature. */
   geometry: Point;
   /** Optional object where you can store custom data you need in your application. */
   properties?: Maybe<Scalars["JSON"]>;
@@ -2224,25 +2224,25 @@ export type FeaturePointInput = {
   properties?: Maybe<Scalars["JSON"]>;
 };
 
-/** A GeoJSON Feature<Point> input */
+/** A GeoJSON Feature<Point> input. */
 export type FeaturePointPolygonInput = {
-  /** Feature type */
+  /** Feature type. */
   type: FeatureType;
-  /** Geometry of the feature */
+  /** Geometry of the feature. */
   geometry: PointInput;
   /** Optional object where you can store custom data you need in your application. */
   properties?: Maybe<FeaturePointPolygonPropertiesInput>;
 };
 
-/** Properties for Feature<Point> input */
+/** Properties for Feature<Point> input. */
 export type FeaturePointPolygonProperties = {
-  /** Name of the location */
+  /** Name of the location. */
   name?: Maybe<Scalars["String"]>;
 };
 
-/** Properties for Feature<Point> input */
+/** Properties for Feature<Point> input. */
 export type FeaturePointPolygonPropertiesInput = {
-  /** Name of the location */
+  /** Name of the location. */
   name?: Maybe<Scalars["String"]>;
 };
 
@@ -2273,51 +2273,45 @@ export enum InstructionsFormat {
 }
 
 export type Isoline = {
-  /** Isoline id */
+  /** Isoline id. */
   id: Scalars["ID"];
-  /** Isoline status */
+  /** Isoline status. */
   status: IsolineStatus;
-  /** Shape of the isoline consisting in a list of multipolygons */
+  /** Shape of the isoline consisting in a list of multipolygons. */
   polygons?: Maybe<Array<Maybe<FeatureMultiPolygon>>>;
-  /** List of the ferries uniting islands formed by the isoline */
+  /** List of the ferries uniting islands formed by the isoline. */
   ferries?: Maybe<Array<Maybe<FeatureLineString>>>;
-  /** Origin point of the request */
-  origin: FeatureMultiPolygonPoint;
-  /** Vehicle id */
-  vehicle_id: Scalars["ID"];
-  /** Number of Isolines to be generated representing SoC (default: 1, maximum: 20) */
-  polygon_count?: Maybe<Scalars["Int"]>;
-  /** Season to be taken into account when generating the isoline. Default: current */
-  season?: Maybe<RouteSeason>;
+  /** The inputted request data for the isoline used to compute it. */
+  request_input?: Maybe<IsolineRequestInput>;
 };
 
 export enum IsolineFerryConnectionsType {
-  /** Ferry connections should not be included */
+  /** Ferry connections should not be included. */
   NONE = "none",
   /** Ferry connections should be taken into account but only one level deep. For example: from the European mainland to England and no other connecting ferries departing from England. */
   SINGLE = "single"
 }
 
 export type IsolineInput = {
-  /** Vehicle id */
+  /** Vehicle id. */
   vehicle_id: Scalars["ID"];
-  /** Origin point of the request */
+  /** Origin point of the request. */
   origin: FeaturePointPolygonInput;
-  /** Numbers of polygons to be generated (default: 1, maximum: 20) */
+  /** Numbers of polygons to be generated (maximum: 20). */
   polygon_count?: Maybe<Scalars["Int"]>;
-  /** Vehicle should be able to return to the origin point from any point */
+  /** Vehicle should be able to return to the origin point from any point. */
   round_trip?: Maybe<Scalars["Boolean"]>;
-  /** Number of occupants */
+  /** Number of occupants. */
   occupants?: Maybe<Scalars["Int"]>;
-  /** Cumulated weight of the occupants */
+  /** Cumulated weight of the occupants. */
   total_occupant_weight?: Maybe<TotalOccupantWeightInput>;
-  /** Cargo weight, in kg */
+  /** Cargo weight. */
   total_cargo_weight?: Maybe<TotalCargoWeightInput>;
-  /** Climate is on */
+  /** Climate is on. */
   climate_control?: Maybe<Scalars["Boolean"]>;
-  /** Season to be taken into account when generating the isoline */
+  /** Season to be taken into account when generating the isoline. */
   season?: Maybe<RouteSeason>;
-  /** Polygons precision quality */
+  /** Polygons precision quality. */
   quality?: Maybe<IsolineQuality>;
   /** Include ferry connections. Single and multiple ferry connections increase the calculation time and the number of polygons. */
   ferry_connections?: Maybe<IsolineFerryConnectionsType>;
@@ -2327,21 +2321,66 @@ export type IsolineInput = {
   final_state_of_charge?: Maybe<StateOfChargeInput>;
 };
 
-/** Granularity of the isoline */
+/** Granularity of the isoline. */
 export enum IsolineQuality {
-  /** High polygons precisions */
+  /** High polygons precisions. */
   HIGH = "high",
-  /** Low polygons precisions */
+  /** Low polygons precisions. */
   LOW = "low"
 }
 
-/** Status of the isoline label */
+export type IsolineRequestInput = {
+  /** Vehicle id. */
+  vehicle_id: Scalars["ID"];
+  /** Origin point of the request. */
+  origin: FeaturePoint;
+  /** Numbers of polygons that were generated. */
+  polygon_count?: Maybe<Scalars["Int"]>;
+  /** Vehicle should be able to return to the origin point from any point. */
+  round_trip?: Maybe<Scalars["Boolean"]>;
+  /** Number of occupants. */
+  occupants?: Maybe<Scalars["Int"]>;
+  /** Cumulated weight of the occupants. */
+  total_occupant_weight?: Maybe<Scalars["Float"]>;
+  /** Cargo weight. */
+  total_cargo_weight?: Maybe<Scalars["Float"]>;
+  /** Climate is on. */
+  climate_control?: Maybe<Scalars["Boolean"]>;
+  /** Season taken into account when isoline was generated. */
+  season?: Maybe<RouteSeason>;
+  /** Polygons precision quality. */
+  quality?: Maybe<IsolineQuality>;
+  /** Ferry connections. */
+  ferry_connections?: Maybe<IsolineFerryConnectionsType>;
+  /** Battery state of charge. */
+  state_of_charge: Scalars["Float"];
+  /** Minimum final battery state of charge. */
+  final_state_of_charge: Scalars["Float"];
+};
+
+export type IsolineRequestInputtotal_occupant_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type IsolineRequestInputtotal_cargo_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type IsolineRequestInputstate_of_chargeArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+export type IsolineRequestInputfinal_state_of_chargeArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+/** Status of the isoline label. */
 export enum IsolineStatus {
-  /** Isoline label has been successfully generated */
+  /** Isoline label has been successfully generated. */
   DONE = "done",
-  /** Isoline label is under processing */
+  /** Isoline label is under processing. */
   PENDING = "pending",
-  /** There was an error while generating the isoline label */
+  /** There was an error while generating the isoline label. */
   ERROR = "error"
 }
 
@@ -2395,11 +2434,11 @@ export enum MeasurementUnit {
   INCH = "inch"
 }
 
-/** A GeoJSON Polygon */
+/** A GeoJSON Polygon. */
 export type MultiPolygon = {
-  /** MultiPolygon type */
+  /** MultiPolygon type. */
   type: MultiPolygonType;
-  /** List of coordinates representing a polygon */
+  /** List of coordinates representing a polygon. */
   coordinates: Array<
     Maybe<Array<Maybe<Array<Maybe<Array<Scalars["Float"]>>>>>>
   >;
@@ -2419,7 +2458,7 @@ export type Mutation = {
   updateConnectedVehicle?: Maybe<ConnectedVehicle>;
   /** [BETA] Remove a connected vehicle and revoke access */
   removeConnectedVehicle?: Maybe<ConnectedVehicle>;
-  /** [BETA] Generate a set of consumption based Isolines */
+  /** Create a consumption based isoline. */
   createIsoline?: Maybe<Scalars["ID"]>;
   /** [BETA] Start a new navigation session on top of an existing route */
   startNavigation?: Maybe<Scalars["ID"]>;
@@ -3330,9 +3369,9 @@ export enum PointType {
   POINT = "Point"
 }
 
-/** Polygon properties */
+/** Polygon properties. */
 export type PolygonProperties = {
-  /** Index of the feature inside the list */
+  /** Index of the feature inside the list. */
   index?: Maybe<Scalars["Int"]>;
 };
 
@@ -3451,7 +3490,7 @@ export type Query = {
   connectedVehicleList?: Maybe<Array<Maybe<ConnectedVehicle>>>;
   /** [BETA] Retrieve live vehicle data by connected vehicle id */
   connectedVehicleData?: Maybe<VehicleData>;
-  /** [BETA] Get an isoline by ID */
+  /** Get an isoline by ID. */
   isoline?: Maybe<Isoline>;
   /** [BETA] Get a navigation session by ID */
   navigation?: Maybe<Navigation>;
@@ -4685,7 +4724,7 @@ export enum StepType {
 export type Subscription = {
   /** [BETA] Subscribe to a connected vehicle. */
   connectedVehicle?: Maybe<ConnectedVehicle>;
-  /** [BETA] Subscribe to an isoline label in order to receive updates */
+  /** Subscribe to an isoline in order to receive updates. */
   isoline?: Maybe<Isoline>;
   /** [BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates */
   navigationUpdatedById?: Maybe<Navigation>;
