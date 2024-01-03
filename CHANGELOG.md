@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/chargetrip/types/compare/v1.38.0...v1.39.0) (2024-01-03)
+
+
+### Features
+
+* Emissions API ([d6aaf0f](https://github.com/chargetrip/types/commit/d6aaf0f7a27450a0f4c81b6ed1e7f71068c0cfa2))
+
 # [1.38.0](https://github.com/chargetrip/types/compare/v1.37.4...v1.38.0) (2023-11-28)
 
 
