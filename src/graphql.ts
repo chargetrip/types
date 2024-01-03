@@ -17,25 +17,25 @@ export type Scalars = {
   Acknowledgement: any;
   /** The date and time scalar */
   DateTime: string;
-  /** Email address scalar, email regex with HTML sanitization */
+  /** Email address scalar, email regex with HTML sanitization. */
   Email: any;
   /** Any JSON object */
   JSON: { [key: string]: number | string | boolean | null | Scalars["JSON"] };
-  /** The non empty string scalar */
+  /** The non empty string scalar. */
   NonEmptyString: any;
   /**
    * The `PlainString` scalar type represents textual data, represented as UTF-8 character sequences.
    * The PlainString type represents free-form human-readable text with HTML sanitization.
    */
   PlainString: any;
-  /** The File Upload scalar */
+  /** The File Upload scalar. */
   Upload: any;
 };
 
 export enum AccelerationUnit {
-  /** Return the acceleration in seconds to 100 kilometers per hour */
+  /** Return the acceleration in seconds to 100 kilometers per hour. */
   SECONDS_TO_100_KILOMETERS_PER_HOUR = "seconds_to_100_kilometers_per_hour",
-  /** Return the acceleration in seconds to 60 miles per hour */
+  /** Return the acceleration in seconds to 60 miles per hour. */
   SECONDS_TO_60_MILES_PER_HOUR = "seconds_to_60_miles_per_hour"
 }
 
@@ -45,25 +45,25 @@ export enum AccessType {
   PRIVATE = "Private"
 }
 
-/** Information about an address */
+/** Information about an address. */
 export type Address = {
-  /** Continent code (2 letters) */
+  /** Continent code (2 letters). */
   continent?: Maybe<Scalars["String"]>;
-  /** Country code (2 letters) */
+  /** Country code (2 letters). */
   country?: Maybe<Scalars["String"]>;
-  /** County code (2 letters) */
+  /** County code (2 letters). */
   county?: Maybe<Scalars["String"]>;
-  /** City */
+  /** City. */
   city?: Maybe<Scalars["String"]>;
-  /** Street name */
+  /** Street name. */
   street?: Maybe<Scalars["String"]>;
-  /** Street number */
+  /** Street number. */
   number?: Maybe<Scalars["String"]>;
-  /** Postal code of a location */
+  /** Postal code of a location. */
   postalCode?: Maybe<Scalars["String"]>;
-  /** String composed of 3 words which represent the location of an address on the globe. More details: http://w3w.co/<what3Words> */
+  /** String composed of 3 words which represent the location of an address on the globe. More details: http://w3w.co/<what3Words>. */
   what3Words?: Maybe<Scalars["String"]>;
-  /** Human-readable address of a location */
+  /** Human-readable address of a location. */
   formattedAddress?: Maybe<Array<Maybe<Scalars["String"]>>>;
 };
 
@@ -118,11 +118,11 @@ export type Amenity = {
   updatedAt?: Maybe<Scalars["String"]>;
 };
 
-/** Amenity preferences for a route */
+/** Amenity preferences for a route. */
 export type AmenityPreferencesInput = {
-  /** Desired amenities near all charge-stops along a route, with a 1 kilometer radius */
+  /** Desired amenities near all charge-stops along a route, with a 1 kilometer radius. */
   all_charge_stops?: Maybe<Array<AmenityType>>;
-  /** Scheduled charge stops, with a specified amenity and timeline */
+  /** Scheduled charge stops, with a specified amenity and timeline. */
   scheduled_charge_stops?: Maybe<Array<ScheduledChargeStopInput>>;
 };
 
@@ -134,7 +134,7 @@ export type AmenityStats = {
   total?: Maybe<Scalars["Int"]>;
 };
 
-/** A list of amenity types */
+/** A list of amenity types. */
 export enum AmenityType {
   PARK = "park",
   RESTAURANT = "restaurant",
@@ -161,20 +161,20 @@ export type AuthorizeConnectedVehicleOptions = {
 };
 
 export type AuxiliaryConsumptionInput = {
-  /** Value of the auxiliary power consumption of the vehicle */
+  /** Value of the auxiliary power consumption of the vehicle. */
   value: Scalars["Float"];
-  /** Type of auxiliary power consumption of the vehicle */
+  /** Type of auxiliary power consumption of the vehicle. */
   type: AuxiliaryConsumptionUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
 export enum AuxiliaryConsumptionUnit {
-  /** Return the auxiliary consumption in kilowatt hours */
+  /** Return the auxiliary consumption in kilowatt hours. */
   KILOWATT_HOUR = "kilowatt_hour"
 }
 
-/** The type of the battery value */
+/** The type of the battery value. */
 export enum BatteryInputType {
   KWH = "kwh",
   KM = "km",
@@ -183,162 +183,162 @@ export enum BatteryInputType {
 }
 
 export type BatteryTemperatureInput = {
-  /** Value of the temperature of the battery */
+  /** Value of the temperature of the battery. */
   value: Scalars["Float"];
-  /** Type of temperature of the battery */
+  /** Type of temperature of the battery. */
   type: TemperatureUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
-/** Output of a car query */
+/** Output of a car query. */
 export type Car = {
-  /** Cars unique ID */
+  /** Cars unique ID. */
   id?: Maybe<Scalars["ID"]>;
-  /** Naming of a car */
+  /** Naming of a car. */
   naming?: Maybe<CarNaming>;
-  /** Available connectors for a car */
+  /** Available connectors for a car. */
   connectors?: Maybe<Array<Maybe<CarPlug>>>;
-  /** List of adapters of connectors available for a car */
+  /** List of adapters of connectors available for a car. */
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
-  /** Battery of a car */
+  /** Battery of a car. */
   battery?: Maybe<CarBattery>;
-  /** Body of a car */
+  /** Body of a car. */
   body?: Maybe<CarBody>;
-  /** Availability of a car */
+  /** Availability of a car. */
   availability?: Maybe<CarAvailability>;
-  /** Performance of a car */
+  /** Performance of a car. */
   performance?: Maybe<CarPerformance>;
-  /** Range of a car */
+  /** Range of a car. */
   range?: Maybe<CarRange>;
-  /** Media of a car */
+  /** Media of a car. */
   media?: Maybe<CarMedia>;
-  /** Routing of a car */
+  /** Routing of a car. */
   routing?: Maybe<CarRouting>;
-  /** Information about vehicle connectivity */
+  /** Information about vehicle connectivity. */
   connect?: Maybe<Connect>;
   /**
-   * ID provided by a car data source as the row ID
+   * ID provided by a car data source as the row ID.
    * @deprecated Will be removed in the future
    */
   externalId?: Maybe<Scalars["String"]>;
   /**
-   * Car manufacturer
+   * Car manufacturer.
    * @deprecated In favor of naming.make
    */
   make?: Maybe<Scalars["String"]>;
   /**
-   * Car model
+   * Car model.
    * @deprecated In favor of naming.model
    */
   carModel?: Maybe<Scalars["String"]>;
   /**
-   * Car edition
+   * Car edition.
    * @deprecated In favor of naming.version
    */
   edition?: Maybe<Scalars["String"]>;
   /**
-   * Car model edition. Added by Chargetrip as an alternative for when a car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years
+   * Car model edition. Added by Chargetrip as an alternative for when a car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years.
    * @deprecated In favor of naming.chargetrip_version
    */
   chargetripEdition?: Maybe<Scalars["String"]>;
   /**
-   * Car version
+   * Car version.
    * @deprecated In favor of naming.edition
    */
   version?: Maybe<Scalars["String"]>;
   /**
-   * Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data
+   * Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data.
    * @deprecated In favor of range.chargetrip_range
    */
   chargetripRange?: Maybe<ChargetripRange>;
   /**
-   * Cars that support fast charging have a minimum charging speed of 43 kWh
+   * Cars that support fast charging have a minimum charging speed of 43 kWh.
    * @deprecated In favor of routing.fast_charging_support
    */
   fastChargingSupport?: Maybe<Scalars["Boolean"]>;
   /**
-   * Current production mode of a car
+   * Current production mode of a car.
    * @deprecated In favor of availability.status
    */
   mode?: Maybe<CarMode>;
   /**
-   * Number of seats
+   * Number of seats.
    * @deprecated In favor of body.seats
    */
   seats?: Maybe<Scalars["Int"]>;
   /**
-   * Weight in kg
+   * Weight in kg.
    * @deprecated In favor of body.weight
    */
   weight?: Maybe<Scalars["Float"]>;
   /**
-   * Height in mm
+   * Height in mm.
    * @deprecated In favor of body.height
    */
   height?: Maybe<Scalars["Int"]>;
   /**
-   * Width in mm
+   * Width in mm.
    * @deprecated In favor of body.width
    */
   width?: Maybe<Scalars["Int"]>;
   /**
-   * Usable battery capacity in kWh
+   * Usable battery capacity in kWh.
    * @deprecated In favor of battery.usable_kwh
    */
   batteryUsableKwh?: Maybe<Scalars["Float"]>;
   /**
-   * Full battery capacity in kWh
+   * Full battery capacity in kWh.
    * @deprecated In favor of battery.full_kwh
    */
   batteryFullKwh?: Maybe<Scalars["Float"]>;
   /**
-   * Battery efficiency in the city, highway and combined depending on weather conditions
+   * Battery efficiency in the city, highway and combined depending on weather conditions.
    * @deprecated In favor of efficiency
    */
   batteryEfficiency?: Maybe<CarBatteryEfficiency>;
   /**
-   * Acceleration time from 0 to 100 km/h
+   * Acceleration time from 0 to 100 km/h.
    * @deprecated In favor of performance.acceleration
    */
   acceleration?: Maybe<Scalars["Float"]>;
   /**
-   * Maximum car speed in km/h
+   * Maximum car speed in km/h.
    * @deprecated In favor of performance.top_speed
    */
   topSpeed?: Maybe<Scalars["Float"]>;
   /**
-   * Power of a car in Kw
+   * Power of a car in Kw.
    * @deprecated In favor of drivetrain.power
    */
   power?: Maybe<Scalars["Float"]>;
   /**
-   * Engine torque
+   * Engine torque.
    * @deprecated In favor of drivetrain.torque
    */
   torque?: Maybe<Scalars["Float"]>;
   /**
-   * Extra consumption model
+   * Extra consumption model.
    * @deprecated In favor of routing.consumption
    */
   consumption?: Maybe<CarExtraConsumption>;
   /**
-   * Amount of petrol a similar petrol car would consume per 100 km
+   * Amount of petrol a similar petrol car would consume per 100 km.
    * @deprecated In favor of routing.petrol_consumption
    */
   petrolConsumption?: Maybe<Scalars["Float"]>;
   /**
-   * A list of offset data for different charging speeds
+   * A list of offset data for different charging speeds.
    * @deprecated You will receive null values
    */
   chargingOffset?: Maybe<Scalars["JSON"]>;
   /**
-   * Images of a car
+   * Images of a car.
    * @deprecated In favor of media.image_list
    */
   images?: Maybe<Array<Maybe<CarImage>>>;
   /**
-   * Images of a car in structured data
+   * Images of a car in structured data.
    * @deprecated In favor of media.image or media.brand
    */
   imagesData?: Maybe<CarImageData>;
@@ -346,59 +346,59 @@ export type Car = {
 
 export type CarAvailability = {
   /**
-   * Availability of car
+   * Availability of car.
    *
    * Values:
-   *    - 0 = Car no longer for sale in any market / region
-   *    - 1 = Car currently for sale in at least one market / region
-   *    - 2 = Car expected in market from Date_From (estimated), pre-order open
-   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open
-   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open
-   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open
-   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open
-   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown
-   *    - 91 = Status uncertain, introduction date and/or pricing unclear
+   *    - 0 = Car no longer for sale in any market / region.
+   *    - 1 = Car currently for sale in at least one market / region.
+   *    - 2 = Car expected in market from Date_From (estimated), pre-order open.
+   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open.
+   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open.
+   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open.
+   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open.
+   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown.
+   *    - 91 = Status uncertain, introduction date and/or pricing unclear.
    */
   status?: Maybe<Scalars["Int"]>;
 };
 
 export type CarBattery = {
-  /** Usable battery capacity in kWh */
+  /** Usable battery capacity in kWh. */
   usable_kwh?: Maybe<Scalars["Float"]>;
-  /** Full battery capacity in kWh */
+  /** Full battery capacity in kWh. */
   full_kwh?: Maybe<Scalars["Float"]>;
 };
 
-/** Deprecated */
+/** Deprecated. */
 export type CarBatteryEfficiency = {
-  /** Average efficiency measured in kWh/100 km */
+  /** Average efficiency measured in kWh/100 km. */
   average?: Maybe<Scalars["Float"]>;
-  /** Worst conditions are based on -10°C and use of heating, measured in kWh/100 km */
+  /** Worst conditions are based on -10°C and use of heating, measured in kWh/100 km. */
   worst?: Maybe<CarEstimationData>;
-  /** Best conditions are based on 23°C and no use of A/C, measured in kWh/100 km */
+  /** Best conditions are based on 23°C and no use of A/C, measured in kWh/100 km. */
   best?: Maybe<CarEstimationData>;
 };
 
-/** Battery field estimated */
+/** Battery field estimated. */
 export enum CarBatteryFieldEstimations {
-  /** Both of the battery kWh fields are estimations */
+  /** Both of the battery kWh fields are estimations. */
   B = "B",
-  /** full_kwh field is estimated */
+  /** full_kwh field is estimated. */
   F = "F",
-  /** None of the battery kWh fields are estimations */
+  /** None of the battery kWh fields are estimations. */
   N = "N",
-  /** usable_kwh field is estimated */
+  /** usable_kwh field is estimated. */
   U = "U"
 }
 
 export type CarBody = {
-  /** Width with folded mirrors in mm */
+  /** Width with folded mirrors in mm. */
   width?: Maybe<Scalars["Int"]>;
-  /** Height (average height for adjustable suspensions) in mm */
+  /** Height (average height for adjustable suspensions) in mm. */
   height?: Maybe<Scalars["Int"]>;
-  /** Weight Unladen EU) in kg */
+  /** Weight Unladen EU) in kg. */
   weight?: Maybe<Scalars["Int"]>;
-  /** Number of seats */
+  /** Number of seats. */
   seats?: Maybe<Scalars["Int"]>;
 };
 
@@ -406,195 +406,195 @@ export enum CarConnectivityProvider {
   ENODE = "Enode"
 }
 
-/** Deprecated */
+/** Deprecated. */
 export type CarConsumption = {
-  /** Worst conditions are based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating. */
   worst?: Maybe<Scalars["Float"]>;
-  /** Best conditions are based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C. */
   best?: Maybe<Scalars["Float"]>;
 };
 
 /** The consumption of the car */
 export type CarConsumptionInput = {
-  /** Worst conditions are based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating. */
   worst?: Maybe<Scalars["Float"]>;
-  /** Best conditions are based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C. */
   best?: Maybe<Scalars["Float"]>;
 };
 
-/** Drivetrain */
+/** Drivetrain. */
 export enum CarDrivetrain {
-  /** Battery Electric Car */
+  /** Battery Electric Car.. */
   BEV = "BEV",
-  /** Extended Range Electric Car */
+  /** Extended Range Electric Car. */
   EREV = "EREV"
 }
 
-/** Deprecated */
+/** Deprecated. */
 export type CarEstimationData = {
-  /** Estimated battery efficiency on a highway or express roads, in km */
+  /** Estimated battery efficiency on a highway or express roads, in km. */
   highway?: Maybe<Scalars["Float"]>;
-  /** Estimated battery efficiency on city roads, in km */
+  /** Estimated battery efficiency on city roads, in km. */
   city?: Maybe<Scalars["Float"]>;
-  /** Estimated battery efficiency on highway and city roads combined, in km */
+  /** Estimated battery efficiency on highway and city roads combined, in km. */
   combined?: Maybe<Scalars["Float"]>;
 };
 
-/** Deprecated */
+/** Deprecated. */
 export type CarExtraConsumption = {
-  /** Consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the auxiliaries. */
   aux?: Maybe<CarConsumption>;
-  /** Consumption, in kWh, of the battery management system */
+  /** Consumption, in kWh, of the battery management system. */
   bms?: Maybe<CarConsumption>;
-  /** Consumption, in kWh, of a car in idle mode */
+  /** Consumption, in kWh, of a car in idle mode. */
   idle?: Maybe<CarConsumption>;
 };
 
-/** Fuel type */
+/** Fuel type. */
 export enum CarFuel {
-  /** Electricity only. Full electric car */
+  /** Electricity only. Full electric car. */
   E = "E"
 }
 
 export type CarImage = {
-  /** Image id */
+  /** Image id. */
   id?: Maybe<Scalars["ID"]>;
-  /** Image type */
+  /** Image type. */
   type?: Maybe<CarImageType>;
-  /** Full path URL of a large image */
+  /** Full path URL of a large image. */
   url?: Maybe<Scalars["String"]>;
-  /** Height of a large image in pixels */
+  /** Height of a large image in pixels. */
   height?: Maybe<Scalars["Int"]>;
-  /** Width of a large image in pixels */
+  /** Width of a large image in pixels. */
   width?: Maybe<Scalars["Int"]>;
-  /** Full path URL of a thumbnail image */
+  /** Full path URL of a thumbnail image. */
   thumbnail_url?: Maybe<Scalars["String"]>;
-  /** Height of a thumbnail image in pixels */
+  /** Height of a thumbnail image in pixels. */
   thumbnail_height?: Maybe<Scalars["Int"]>;
-  /** Width of a thumbnail image in pixels */
+  /** Width of a thumbnail image in pixels. */
   thumbnail_width?: Maybe<Scalars["Int"]>;
 };
 
-/** Deprecated */
+/** Deprecated. */
 export type CarImageData = {
-  /** Full size image of a car */
+  /** Full size image of a car. */
   image?: Maybe<CarImage>;
-  /** Thumbnail of a full size image */
+  /** Thumbnail of a full size image. */
   image_thumbnail?: Maybe<CarImage>;
-  /** Full size logo of the maker of a car */
+  /** Full size logo of the make of a car. */
   brand?: Maybe<CarImage>;
-  /** Thumbnail of a full size logo of the maker of a car */
+  /** Thumbnail of a full size logo of the make of a car. */
   brand_thumbnail?: Maybe<CarImage>;
 };
 
-/** Available types of images which can be found for a car. Each type has specific image sizes */
+/** Available types of images which can be found for a car. Each type has specific image sizes. */
 export enum CarImageType {
-  /** Images provided by a Car Datasource */
+  /** Images provided by a Car Datasource. */
   PROVIDER = "provider",
-  /** Full-sized image at 1536x864 px */
+  /** Full-sized image at 1536x864 px. */
   IMAGE = "image",
-  /** Thumbnail of a full-sized image at 131x72 px */
+  /** Thumbnail of a full-sized image at 131x72 px. */
   IMAGE_THUMBNAIL = "image_thumbnail",
-  /** Full-sized brand (maker) logo at 768x432 px */
+  /** Full-sized brand (make) logo at 768x432 px. */
   BRAND = "brand",
-  /** Thumbnail of a full-sized brand logo at 56x24 px */
+  /** Thumbnail of a full-sized brand (make) logo at 56x24 px. */
   BRAND_THUMBNAIL = "brand_thumbnail",
-  /** Placeholder image at 1536x864 px */
+  /** Placeholder image at 1536x864 px. */
   PLACEHOLDER = "placeholder"
 }
 
-/** When uploading images to a car, you can select one of this types. The rest of the types are automatically generated by the system */
+/** When uploading images to a car, you can select one of this types. The rest of the types are automatically generated by the system. */
 export enum CarImageTypeUploadable {
-  /** Full size image with a resolution at least 1536x864 px */
+  /** Full size image with a resolution at least 1536x864 px. */
   IMAGE = "image"
 }
 
-/** The output element of the carList query */
+/** The output element of the carList query. */
 export type CarList = {
-  /** Cars unique ID */
+  /** Cars unique ID. */
   id?: Maybe<Scalars["ID"]>;
-  /** Naming of a car */
+  /** Naming of a car. */
   naming?: Maybe<CarListNaming>;
-  /** Connectors available for a car */
+  /** Connectors available for a car. */
   connectors?: Maybe<Array<Maybe<CarPlug>>>;
-  /** Adapters of connectors available for a car */
+  /** Adapters of connectors available for a car. */
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
-  /** Battery of a car */
+  /** Battery of a car. */
   battery?: Maybe<CarListBattery>;
-  /** Body of a car */
+  /** Body of a car. */
   body?: Maybe<CarListBody>;
-  /** Availability of a car */
+  /** Availability of a car. */
   availability?: Maybe<CarListAvailability>;
-  /** Range of a car */
+  /** Range of a car. */
   range?: Maybe<CarListRange>;
-  /** Media of a car */
+  /** Media of a car. */
   media?: Maybe<CarListMedia>;
-  /** Routing of a car */
+  /** Routing of a car. */
   routing?: Maybe<CarListRouting>;
-  /** Information about vehicle connectivity */
+  /** Information about vehicle connectivity. */
   connect?: Maybe<Connect>;
   /**
-   * ID provided by a car data source as the row ID
+   * ID provided by a car data source as the row ID.
    * @deprecated Will be removed in the future
    */
   externalId?: Maybe<Scalars["String"]>;
   /**
-   * Car manufacturer
+   * Car manufacturer.
    * @deprecated In favor of naming.make
    */
   make?: Maybe<Scalars["String"]>;
   /**
-   * Car model
+   * Car model.
    * @deprecated In favor of naming.model
    */
   carModel?: Maybe<Scalars["String"]>;
   /**
-   * Car edition
+   * Car edition.
    * @deprecated In favor of naming.version
    */
   edition?: Maybe<Scalars["String"]>;
   /**
-   * Car model edition. Added by Chargetrip as an alternative for when a car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years
+   * Car model edition. Added by Chargetrip as an alternative for when a car manufacturer does not provide an edition name, or uses the same edition name across all trims or consecutive years.
    * @deprecated In favor of naming.chargetrip_version
    */
   chargetripEdition?: Maybe<Scalars["String"]>;
   /**
-   * Car version
+   * Car version.
    * @deprecated In favor of naming.edition
    */
   version?: Maybe<Scalars["String"]>;
   /**
-   * Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data
+   * Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data.
    * @deprecated In favor of range.chargetrip_range
    */
   chargetripRange?: Maybe<ChargetripRange>;
   /**
-   * Cars that support fast charging have a minimum charging speed of 43 kWh
+   * Cars that support fast charging have a minimum charging speed of 43 kWh.
    * @deprecated In favor of routing.fast_charging_support
    */
   fastChargingSupport?: Maybe<Scalars["Boolean"]>;
   /**
-   * Current production mode of a car
+   * Current production mode of a car.
    * @deprecated In favor of availability.status
    */
   mode?: Maybe<CarMode>;
   /**
-   * Number of seats
+   * Number of seats.
    * @deprecated In favor of body.seats
    */
   seats?: Maybe<Scalars["Int"]>;
   /**
-   * Usable battery capacity in kWh
+   * Usable battery capacity in kWh.
    * @deprecated In favor of battery.usable_kwh
    */
   batteryUsableKwh?: Maybe<Scalars["Float"]>;
   /**
-   * Full battery capacity in kWh
+   * Full battery capacity in kWh.
    * @deprecated In favor of battery.full_kwh
    */
   batteryFullKwh?: Maybe<Scalars["Float"]>;
   /**
-   * Images of a car in structured data
+   * Images of a car in structured data.
    * @deprecated In favor of media.image and media.brand
    */
   imagesData?: Maybe<CarImageData>;
@@ -640,87 +640,87 @@ export type CarList = {
 
 export type CarListAvailability = {
   /**
-   * Availability of car
+   * Availability of car.
    *
    * Values:
-   *    - 0 = Car no longer for sale in any market / region
-   *    - 1 = Car currently for sale in at least one market / region
-   *    - 2 = Car expected in market from Date_From (estimated), pre-order open
-   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open
-   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open
-   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open
-   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open
-   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown
-   *    - 91 = Status uncertain, introduction date and/or pricing unclear
+   *    - 0 = Car no longer for sale in any market / region.
+   *    - 1 = Car currently for sale in at least one market / region.
+   *    - 2 = Car expected in market from Date_From (estimated), pre-order open.
+   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open.
+   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open.
+   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open.
+   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open.
+   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown.
+   *    - 91 = Status uncertain, introduction date and/or pricing unclear.
    */
   status?: Maybe<Scalars["Int"]>;
 };
 
 export type CarListBattery = {
-  /** Usable battery capacity in kWh */
+  /** Usable battery capacity in kWh. */
   usable_kwh?: Maybe<Scalars["Float"]>;
-  /** Full battery capacity in kWh */
+  /** Full battery capacity in kWh. */
   full_kwh?: Maybe<Scalars["Float"]>;
 };
 
 export type CarListBody = {
-  /** Number of seats in car */
+  /** Number of seats in car. */
   seats?: Maybe<Scalars["Int"]>;
 };
 
 export type CarListFilter = {
   /**
-   * Availability of car
+   * Availability of car.
    *
    * Values:
-   *    - 0 = Car no longer for sale in any market / region
-   *    - 1 = Car currently for sale in at least one market / region
-   *    - 2 = Car expected in market from Date_From (estimated), pre-order open
-   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open
-   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open
-   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open
-   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open
-   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown
-   *    - 91 = Status uncertain, introduction date and/or pricing unclear
+   *    - 0 = Car no longer for sale in any market / region.
+   *    - 1 = Car currently for sale in at least one market / region.
+   *    - 2 = Car expected in market from Date_From (estimated), pre-order open.
+   *    - 3 = Car expected in market from Date_From (estimated), pre-order unkown or not open.
+   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open.
+   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open.
+   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open.
+   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown.
+   *    - 91 = Status uncertain, introduction date and/or pricing unclear.
    */
   availability?: Maybe<Array<Maybe<Scalars["Int"]>>>;
-  /** Information about vehicle connectivity */
+  /** Information about vehicle connectivity. */
   connect?: Maybe<ConnectFilter>;
 };
 
 export type CarListMedia = {
-  /** Latest image of the car */
+  /** Latest image of the car. */
   image?: Maybe<CarImage>;
-  /** Latest maker logo of the car */
+  /** Latest make logo of the car. */
   brand?: Maybe<CarImage>;
-  /** Latest video of the car */
+  /** Latest video of the car. */
   video?: Maybe<CarVideo>;
 };
 
 export type CarListNaming = {
-  /** Car manufacturer name */
+  /** Car manufacturer name. */
   make?: Maybe<Scalars["String"]>;
-  /** Car model name */
+  /** Car model name. */
   model?: Maybe<Scalars["String"]>;
-  /** Version, edition or submodel of car */
+  /** Version, edition or submodel of car. */
   version?: Maybe<Scalars["String"]>;
-  /** Another submodel level of car */
+  /** Another submodel level of car. */
   edition?: Maybe<Scalars["String"]>;
-  /** Car model version. Added by Chargetrip as an alternative for when a car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
+  /** Car model version. Added by Chargetrip as an alternative for when a car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years. */
   chargetrip_version?: Maybe<Scalars["String"]>;
 };
 
-/** Deprecated */
+/** Deprecated. */
 export type CarListQuery = {
-  /** Deprecated: Not used anymore */
+  /** Deprecated: Not used anymore. */
   make?: Maybe<Scalars["String"]>;
-  /** Deprecated: Not used anymore */
+  /** Deprecated: Not used anymore. */
   model?: Maybe<Scalars["String"]>;
-  /** Deprecated: Not used anymore */
+  /** Deprecated: Not used anymore. */
   version?: Maybe<Scalars["String"]>;
-  /** Deprecated: Not used anymore */
+  /** Deprecated: Not used anymore. */
   chargetrip_version?: Maybe<Scalars["String"]>;
-  /** Deprecated: Not used anymore */
+  /** Deprecated: Not used anymore. */
   mode?: Maybe<CarMode>;
 };
 
@@ -739,700 +739,700 @@ export type CarListRange = {
 };
 
 export type CarListRouting = {
-  /** Cars that support fast charging have a minimum charging speed of 43 kWh */
+  /** Cars that support fast charging have a minimum charging speed of 43 kWh. */
   fast_charging_support?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarMedia = {
-  /** URL to detail page on EV database */
+  /** URL to detail page on EV database. */
   evdb_details_url?: Maybe<Scalars["String"]>;
-  /** Latest image */
+  /** Latest image. */
   image?: Maybe<CarImage>;
-  /** Latest maker logo */
+  /** Latest make logo. */
   brand?: Maybe<CarImage>;
-  /** All images */
+  /** All images. */
   image_list?: Maybe<Array<Maybe<CarImage>>>;
-  /** Latest video */
+  /** Latest video. */
   video?: Maybe<CarVideo>;
-  /** All videos */
+  /** All videos. */
   video_list?: Maybe<Array<Maybe<CarVideo>>>;
   /**
-   * URL to detail page on EV database
+   * URL to detail page on EV database.
    * @deprecated Will be removed in the future. Please use evdb_details_url
    */
   evdb_detail_url?: Maybe<Scalars["String"]>;
 };
 
-/** Mode (state) of the current production */
+/** Mode (state) of the current production. */
 export enum CarMode {
-  /** Old car that is no longer manufactured */
+  /** Old car that is no longer manufactured. */
   INDEX_ONLY = "index_only",
-  /** Car is in production and has been released */
+  /** Car is in production and has been released. */
   PRODUCTION = "production",
-  /** Future releases of a car, a concept of the car, specs may change over time */
+  /** Future releases of a car, a concept of the car, specs may change over time. */
   CONCEPT = "concept"
 }
 
 export type CarNaming = {
-  /** Car manufacturer name */
+  /** Car manufacturer name. */
   make?: Maybe<Scalars["String"]>;
-  /** Car model name */
+  /** Car model name. */
   model?: Maybe<Scalars["String"]>;
-  /** Version, edition or submodel of car */
+  /** Version, edition or submodel of car. */
   version?: Maybe<Scalars["String"]>;
-  /** Another submodel level of car */
+  /** Another submodel level of car. */
   edition?: Maybe<Scalars["String"]>;
-  /** Car model version. Added by Chargetrip as an alternative for when a car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years */
+  /** Car model version. Added by Chargetrip as an alternative for when a car manufacturer does not provide an version name, or uses the same version name across all trims or consecutive years. */
   chargetrip_version?: Maybe<Scalars["String"]>;
 };
 
 export type CarPerformance = {
-  /** Acceleration 0-100 km/h in seconds */
+  /** Acceleration 0-100 km/h in seconds. */
   acceleration?: Maybe<Scalars["Float"]>;
-  /** Top speed of car in km/h */
+  /** Top speed of car in km/h. */
   top_speed?: Maybe<Scalars["Int"]>;
 };
 
-/** Car plug model */
+/** Car plug model. */
 export type CarPlug = {
-  /** Plug type, known as connector standard in OCPI */
+  /** Plug type, known as connector standard in OCPI. */
   standard?: Maybe<ConnectorType>;
-  /** Usable electric power in kW */
+  /** Usable electric power in kW. */
   power?: Maybe<Scalars["Float"]>;
-  /** Maximum electric power in kW */
+  /** Maximum electric power in kW. */
   max_electric_power?: Maybe<Scalars["Float"]>;
-  /** Time it takes to charge from 10 to 80% with a fast charger, shown in minutes */
+  /** Time it takes to charge from 10 to 80% with a fast charger, shown in minutes. */
   time?: Maybe<Scalars["Int"]>;
-  /** Charging speed in km/h */
+  /** Charging speed in km/h. */
   speed?: Maybe<Scalars["Int"]>;
 };
 
-/** The output element of the carPremium query */
+/** The output element of the carPremium query. */
 export type CarPremium = {
-  /** Unique ID of a car */
+  /** Unique ID of a car. */
   id?: Maybe<Scalars["ID"]>;
-  /** Internal ID of the successor car trim */
+  /** Internal ID of the successor car trim. */
   succesor_id?: Maybe<Scalars["String"]>;
-  /** Naming of a car */
+  /** Naming of a car. */
   naming?: Maybe<CarPremiumNaming>;
-  /** Connectors available for a car */
+  /** Connectors available for a car. */
   connectors?: Maybe<Array<Maybe<CarPlug>>>;
-  /** Charge details */
+  /** Charge details. */
   charge?: Maybe<CarPremiumCharge>;
-  /** Fast charge details */
+  /** Fast charge details. */
   fast_charge?: Maybe<CarPremiumFastCharge>;
-  /** Adapters of connectors available for a car */
+  /** Adapters of connectors available for a car. */
   adapters?: Maybe<Array<Maybe<CarPlug>>>;
-  /** Battery of a car */
+  /** Battery of a car. */
   battery?: Maybe<CarPremiumBattery>;
-  /** Body of a car */
+  /** Body of a car. */
   body?: Maybe<CarPremiumBody>;
-  /** Availability of a car */
+  /** Availability of a car. */
   availability?: Maybe<CarPremiumAvailability>;
-  /** Pricing of a car */
+  /** Pricing of a car. */
   price?: Maybe<CarPremiumPrice>;
-  /** Drivetrain of a car */
+  /** Drivetrain of a car. */
   drivetrain?: Maybe<CarPremiumDrivetrain>;
-  /** Performance of a car */
+  /** Performance of a car. */
   performance?: Maybe<CarPremiumPerformance>;
-  /** Range of a car */
+  /** Range of a car. */
   range?: Maybe<CarPremiumRange>;
-  /** Efficiency of a car */
+  /** Efficiency of a car. */
   efficiency?: Maybe<CarPremiumEfficiency>;
-  /** Safety of a car */
+  /** Safety of a car. */
   safety?: Maybe<CarPremiumSafety>;
-  /** Media of a car */
+  /** Media of a car. */
   media?: Maybe<CarPremiumMedia>;
-  /** Routing of a car */
+  /** Routing of a car. */
   routing?: Maybe<CarPremiumRouting>;
-  /** Information about vehicle connectivity */
+  /** Information about vehicle connectivity. */
   connect?: Maybe<Connect>;
 };
 
 export type CarPremiumAvailability = {
   /**
-   * Availability of car
+   * Availability of car.
    *
    * Values:
-   *    - 0 = Car no longer for sale in any market/region
-   *    - 1 = Car currently for sale in at least one market/region
-   *    - 2 = Car expected in market from Date_From (estimated), pre-order open
-   *    - 3 = Car expected in market from Date_From (estimated), pre-order unknown or not open
-   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open
-   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open
-   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open
-   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown
-   *    - 91 = Status uncertain, introduction date and/or pricing unclear
+   *    - 0 = Car no longer for sale in any market/region.
+   *    - 1 = Car currently for sale in at least one market/region.
+   *    - 2 = Car expected in market from Date_From (estimated), pre-order open.
+   *    - 3 = Car expected in market from Date_From (estimated), pre-order unknown or not open.
+   *    - 12 = Concept car, nearing production and/or confirmed, pre-order open.
+   *    - 13 = Concept car, nearing production and/or confirmed, pre-order unknown or not open.
+   *    - 22 = Concept car, not close to production and/or unconfirmed, pre-order open.
+   *    - 23 = Concept car, not close to production and/or unconfirmed, pre-order unknown.
+   *    - 91 = Status uncertain, introduction date and/or pricing unclear.
    */
   status?: Maybe<Scalars["Int"]>;
-  /** Date of introduction, mm-yyyy */
+  /** Date of introduction, mm-yyyy. */
   date_from?: Maybe<Scalars["String"]>;
-  /** Indicates if date from field is estimated */
+  /** Indicates if date from field is estimated. */
   date_from_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Date last available, mm-yyyy */
+  /** Date last available, mm-yyyy. */
   date_to?: Maybe<Scalars["String"]>;
 };
 
 export type CarPremiumBattery = {
-  /** Usable battery capacity in kWh */
+  /** Usable battery capacity in kWh. */
   usable_kwh?: Maybe<Scalars["Float"]>;
-  /** Full battery capacity in kWh */
+  /** Full battery capacity in kWh. */
   full_kwh?: Maybe<Scalars["Float"]>;
-  /** Indicates which battery fields are estimated */
+  /** Indicates which battery fields are estimated. */
   estimated_fields?: Maybe<CarBatteryFieldEstimations>;
-  /** Battery thermal management system (active/passive, air/liquid) */
+  /** Battery thermal management system (active/passive, air/liquid). */
   thermal_management_system?: Maybe<Scalars["String"]>;
-  /** Duration of battery warranty */
+  /** Duration of battery warranty. */
   warranty_period?: Maybe<Scalars["Float"]>;
-  /** Mileage of battery warranty */
+  /** Mileage of battery warranty. */
   warranty_mileage?: Maybe<Scalars["Float"]>;
 };
 
 export type CarPremiumBody = {
-  /** Length in mm */
+  /** Length in mm. */
   length?: Maybe<Scalars["Int"]>;
-  /** Width with folded mirrors in mm */
+  /** Width with folded mirrors in mm. */
   width?: Maybe<Scalars["Int"]>;
-  /** Width of vehicle in mm, including mirrors */
+  /** Width of vehicle in mm, including mirrors. */
   full_width?: Maybe<Scalars["Int"]>;
-  /** Height (average height for adjustable suspensions) in mm */
+  /** Height (average height for adjustable suspensions) in mm. */
   height?: Maybe<Scalars["Int"]>;
-  /** Indicates if length/width/height fields are estimations */
+  /** Indicates if length/width/height fields are estimations. */
   size_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Wheelbase in mm */
+  /** Wheelbase in mm. */
   wheelbase?: Maybe<Scalars["Int"]>;
-  /** Indicates if wheelbase field is estimated */
+  /** Indicates if wheelbase field is estimated. */
   wheelbase_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Weight (unladen EU) in kg */
+  /** Weight (unladen EU) in kg. */
   weight?: Maybe<Scalars["Int"]>;
-  /** Indicates if weight field is estimated */
+  /** Indicates if weight field is estimated. */
   weight_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum payload allowed for vehicle in kg */
+  /** Maximum payload allowed for vehicle in kg. */
   weight_max_payload?: Maybe<Scalars["Int"]>;
-  /** Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload) in kg */
+  /** Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload) in kg. */
   max_gross_vehicle_weight?: Maybe<Scalars["Int"]>;
-  /** Standard luggage capacity in l */
+  /** Standard luggage capacity in l. */
   boot_capacity?: Maybe<Scalars["Int"]>;
-  /** Storage capacity of front trunk/under the hood (frunk) */
+  /** Storage capacity of front trunk/under the hood (frunk). */
   boot_front_capacity?: Maybe<Scalars["Int"]>;
-  /** Maximum luggage capacity in l */
+  /** Maximum luggage capacity in l. */
   boot_capacity_max?: Maybe<Scalars["Int"]>;
-  /** Indicates if a tow hitch/towbar can be fitted according to vehicle homologation */
+  /** Indicates if a tow hitch/towbar can be fitted according to vehicle homologation. */
   tow_hitch_compatible?: Maybe<Scalars["Boolean"]>;
-  /** Maximum unbraked towing weight in kg */
+  /** Maximum unbraked towing weight in kg. */
   tow_weight_unbraked?: Maybe<Scalars["Int"]>;
-  /** Maximum braked towing weight in kg */
+  /** Maximum braked towing weight in kg. */
   tow_weight_braked?: Maybe<Scalars["Int"]>;
-  /** Indicates if tow weight fields are estimations */
+  /** Indicates if tow weight fields are estimations. */
   tow_weight_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum vertical load / noseweight on tow hitch according to vehicle homologation */
+  /** Maximum vertical load / noseweight on tow hitch according to vehicle homologation. */
   tow_weight_vertical_load?: Maybe<Scalars["Int"]>;
-  /** Maximum load on roof of car in kg */
+  /** Maximum load on roof of car in kg. */
   roof_load_max?: Maybe<Scalars["Int"]>;
-  /** Body type, listed in local naming convention where applicable */
+  /** Body type, listed in local naming convention where applicable. */
   body_type?: Maybe<Scalars["String"]>;
-  /** Segment, listed in local naming convention where applicable */
+  /** Segment, listed in local naming convention where applicable. */
   segment?: Maybe<Scalars["String"]>;
-  /** Number of seats */
+  /** Number of seats. */
   seats?: Maybe<Scalars["Int"]>;
-  /** Indicates whether a car has roof rails as a standard */
+  /** Indicates whether a car has roof rails as a standard. */
   has_roofrails?: Maybe<Scalars["Boolean"]>;
-  /** Turning circle of vehicle kerb-to-kerb */
+  /** Turning circle of vehicle kerb-to-kerb. */
   turning_circle?: Maybe<Scalars["Float"]>;
-  /** Name of vehicle platform used for vehicle (often abbreviated to indicate group platforms) */
+  /** Name of vehicle platform used for vehicle (often abbreviated to indicate group platforms). */
   vehicle_platform?: Maybe<Scalars["String"]>;
-  /** Indicates if the vehicle platform used for vehicle is a dedicated battery electric vehicle platform */
+  /** Indicates if the vehicle platform used for vehicle is a dedicated battery electric vehicle platform. */
   vehicle_platform_is_dedicated?: Maybe<Scalars["Boolean"]>;
   /**
-   * Indicates whether a car has roof rails as a standard
+   * Indicates whether a car has roof rails as a standard.
    * @deprecated In favor of has_roofrails
    */
   rooftrails?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumCharge = {
-  /** Location of charge port */
+  /** Location of charge port. */
   plug?: Maybe<CarPremiumChargePlug>;
-  /** Location of second charge port */
+  /** Location of second charge port. */
   second_plug?: Maybe<CarPremiumChargeSecondPlug>;
-  /** The car standard charge */
+  /** The car standard charge. */
   standard?: Maybe<CarPremiumChargeStandardOBC>;
-  /** The car alternative charge */
+  /** The car alternative charge. */
   alternative?: Maybe<CarPremiumChargeAlternativeOBC>;
-  /** The car option charge */
+  /** The car option charge. */
   option?: Maybe<CarPremiumChargeOptionOBC>;
 };
 
 export type CarPremiumChargeAlternativeOBC = {
-  /** Maximum power OBC can accept to charge a battery (standard OBC) */
+  /** Maximum power OBC can accept to charge a battery (standard OBC). */
   power?: Maybe<Scalars["Float"]>;
-  /** Number of phases the OBC accepts to achieve maximum power (standard OBC) */
+  /** Number of phases the OBC accepts to achieve maximum power (standard OBC). */
   phases?: Maybe<Scalars["Int"]>;
-  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC) */
+  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC). */
   phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% (standard OBC) */
+  /** Minutes needed to charge from 0% to 100% (standard OBC). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC) */
+  /** Charging speed when charging at maximum power (standard OBC). */
   charge_speed?: Maybe<Scalars["Int"]>;
-  /** Charging details for the standard OBC at several charging points */
+  /** Charging details for the standard OBC at several charging points. */
   table?: Maybe<Array<Maybe<CarPremiumChargeOBCTable>>>;
 };
 
 export type CarPremiumChargeOBCTable = {
-  /** Voltage between phase and neutral for this EVSE (phase voltage) */
+  /** Voltage between phase and neutral for this EVSE (phase voltage). */
   evse_phase_voltage?: Maybe<Scalars["Int"]>;
-  /** Current per phase for this EVSE (phase current) */
+  /** Current per phase for this EVSE (phase current). */
   evse_phase_amperage?: Maybe<Scalars["Int"]>;
-  /** Number of phases for this EVSE */
+  /** Number of phases for this EVSE. */
   evse_phases?: Maybe<Scalars["Int"]>;
-  /** Voltage between phase and neutral used by standard OBC (phase voltage) */
+  /** Voltage between phase and neutral used by standard OBC (phase voltage). */
   charge_phase_voltage?: Maybe<Scalars["Int"]>;
-  /** Current per phase used by standard OBC (phase current) */
+  /** Current per phase used by standard OBC (phase current). */
   charge_phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Number of phases used by standard OBC */
+  /** Number of phases used by standard OBC. */
   charge_phases?: Maybe<Scalars["Int"]>;
-  /** Power used by standard OBC (before OBC losses) */
+  /** Power used by standard OBC (before OBC losses). */
   charge_power?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% (standard OBC with this EVSE) */
+  /** Minutes needed to charge from 0% to 100% (standard OBC with this EVSE). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC with this EVSE) */
+  /** Charging speed when charging at maximum power (standard OBC with this EVSE). */
   charge_speed?: Maybe<Scalars["Int"]>;
 };
 
 export type CarPremiumChargeOptionOBC = {
-  /** Maximum power OBC can accept to charge a battery (standard OBC) */
+  /** Maximum power OBC can accept to charge a battery (standard OBC). */
   power?: Maybe<Scalars["Float"]>;
-  /** Number of phases the OBC accepts to achieve maximum power (standard OBC) */
+  /** Number of phases the OBC accepts to achieve maximum power (standard OBC). */
   phases?: Maybe<Scalars["Int"]>;
-  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC) */
+  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC). */
   phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% (standard OBC) */
+  /** Minutes needed to charge from 0% to 100% (standard OBC). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC) */
+  /** Charging speed when charging at maximum power (standard OBC). */
   charge_speed?: Maybe<Scalars["Int"]>;
-  /** Charging details for the standard OBC at several charging points */
+  /** Charging details for the standard OBC at several charging points. */
   table?: Maybe<Array<Maybe<CarPremiumChargeOBCTable>>>;
 };
 
 export type CarPremiumChargePlug = {
-  /** Type of charge port on vehicle */
+  /** Type of charge port on vehicle. */
   value?: Maybe<ConnectorType>;
-  /** Indicates if value is an estimate */
+  /** Indicates if value is an estimate. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Location of charge port */
+  /** Location of charge port. */
   location?: Maybe<Scalars["String"]>;
 };
 
 export type CarPremiumChargePower = {
-  /** Maximum value */
+  /** Maximum value. */
   max?: Maybe<Scalars["Float"]>;
-  /** Average value */
+  /** Average value. */
   average?: Maybe<Scalars["Float"]>;
 };
 
 export type CarPremiumChargeSecondPlug = {
-  /** Location of charge port */
+  /** Location of charge port. */
   location?: Maybe<Scalars["String"]>;
-  /** Indicates if second charge port is optional */
+  /** Indicates if second charge port is optional. */
   is_optional?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumChargeStandardOBC = {
-  /** Maximum power OBC can accept to charge a battery (standard OBC) */
+  /** Maximum power OBC can accept to charge a battery (standard OBC). */
   power?: Maybe<Scalars["Float"]>;
-  /** Number of phases the OBC accepts to achieve maximum power (standard OBC) */
+  /** Number of phases the OBC accepts to achieve maximum power (standard OBC). */
   phases?: Maybe<Scalars["Int"]>;
-  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC) */
+  /** Maximum current the OBC accepts per phase to achieve maximum power (standard OBC). */
   phase_amperage?: Maybe<Scalars["Float"]>;
-  /** Minutes needed to charge from 0% to 100% (standard OBC) */
+  /** Minutes needed to charge from 0% to 100% (standard OBC). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed when charging at maximum power (standard OBC) */
+  /** Charging speed when charging at maximum power (standard OBC). */
   charge_speed?: Maybe<Scalars["Int"]>;
-  /** Indicates if Charge_Standard fields are estimated */
+  /** Indicates if Charge_Standard fields are estimated. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Charging details for the standard OBC at several charging points */
+  /** Charging details for the standard OBC at several charging points. */
   table?: Maybe<Array<Maybe<CarPremiumChargeOBCTable>>>;
 };
 
 export type CarPremiumDrivetrain = {
-  /** Type of drivetrain */
+  /** Type of drivetrain. */
   type?: Maybe<CarDrivetrain>;
-  /** Fuel type */
+  /** Fuel type. */
   fuel?: Maybe<CarFuel>;
-  /** Propulsion type */
+  /** Propulsion type. */
   propulsion?: Maybe<CarPropulsion>;
-  /** Indicates if propulsion field is estimated */
+  /** Indicates if propulsion field is estimated. */
   propulsion_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum (combined) power output in kw */
+  /** Maximum (combined) power output in kw. */
   power?: Maybe<Scalars["Int"]>;
-  /** Indicates if power field is estimated */
+  /** Indicates if power field is estimated. */
   power_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Maximum (combined) power output in horsepower (PS) */
+  /** Maximum (combined) power output in horsepower (PS). */
   power_hp?: Maybe<Scalars["Int"]>;
-  /** Maximum (combined) torque output in newton meter */
+  /** Maximum (combined) torque output in newton meter. */
   torque?: Maybe<Scalars["Int"]>;
-  /** Indicates if torque field is estimated */
+  /** Indicates if torque field is estimated. */
   torque_is_estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumEfficiency = {
-  /** Rated efficiency in WLTP combined cycle */
+  /** Rated efficiency in WLTP combined cycle. */
   wltp?: Maybe<CarPremiumEfficiencyWLTP>;
-  /** Rated efficiency in WLTP combined cycle (TEH / least efficient trim) */
+  /** Rated efficiency in WLTP combined cycle (TEH / least efficient trim). */
   wltp_teh?: Maybe<CarPremiumEfficiencyWLTPTEH>;
-  /** Rated efficiency in NEDC combined cycle */
+  /** Rated efficiency in NEDC combined cycle. */
   nedc?: Maybe<CarPremiumEfficiencyNEDC>;
-  /** Car efficiency based on RealRange */
+  /** Car efficiency based on RealRange. */
   real?: Maybe<CarPremiumEfficiencyReal>;
 };
 
 export type CarPremiumEfficiencyNEDC = {
-  /** Rated efficiency in NEDC combined cycle in kWh/100 km */
+  /** Rated efficiency in NEDC combined cycle in kWh/100 km. */
   value?: Maybe<Scalars["Float"]>;
-  /** Rated efficiency in NEDC combined cycle presented in gas equivalent, in l/100 km */
+  /** Rated efficiency in NEDC combined cycle presented in gas equivalent, in l/100 km. */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in NEDC combined cycle (based on value) in kWh/100 km */
+  /** Rated vehicle efficiency in NEDC combined cycle (based on value) in kWh/100 km. */
   vehicle?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in NEDC combined cycle presented in gas equivalent in l/100 km */
+  /** Rated vehicle efficiency in NEDC combined cycle presented in gas equivalent in l/100 km. */
   vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated CO2 emissions in NEDC combined cycle in battery-only mode (NULL if not NEDC rated) in gr/km */
+  /** Rated CO2 emissions in NEDC combined cycle in battery-only mode (NULL if not NEDC rated) in gr/km. */
   co2?: Maybe<Scalars["Int"]>;
 };
 
 export type CarPremiumEfficiencyReal = {
-  /** Car efficiency based on RealRange (useable battery/range) in kWh/100 km */
+  /** Car efficiency based on RealRange (useable battery/range) in kWh/100 km. */
   value?: Maybe<Scalars["Float"]>;
-  /** Car efficiency based on RealRange presented in gas equivalent, in l/100 km */
+  /** Car efficiency based on RealRange presented in gas equivalent, in l/100 km. */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Worst conditions are based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating. */
   worst?: Maybe<CarPremiumEfficiencyRealValue>;
-  /** Best conditions are based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C. */
   best?: Maybe<CarPremiumEfficiencyRealValue>;
 };
 
 export type CarPremiumEfficiencyRealValue = {
-  /** Estimated value on highway or express roads */
+  /** Estimated value on highway or express roads. */
   highway?: Maybe<Scalars["Float"]>;
-  /** Estimated value on city roads */
+  /** Estimated value on city roads. */
   city?: Maybe<Scalars["Float"]>;
-  /** Estimated combined value */
+  /** Estimated combined value. */
   combined?: Maybe<Scalars["Float"]>;
 };
 
 export type CarPremiumEfficiencyWLTP = {
-  /** Rated efficiency in WLTP combined cycle in kWh/100 km */
+  /** Rated efficiency in WLTP combined cycle in kWh/100 km. */
   value?: Maybe<Scalars["Float"]>;
-  /** Rated efficiency in WLTP combined cycle presented in gas equivalent, in l/100 km */
+  /** Rated efficiency in WLTP combined cycle presented in gas equivalent, in l/100 km. */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP combined cycle (based on value) in kWh/100 km */
+  /** Rated vehicle efficiency in WLTP combined cycle (based on value) in kWh/100 km. */
   vehicle?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP combined cycle presented in gas equivalent, in l/100 km */
+  /** Rated vehicle efficiency in WLTP combined cycle presented in gas equivalent, in l/100 km. */
   vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated CO2 emissions in WLTP combined cycle in battery-only mode (NULL if not WLTP rated) in gr/km */
+  /** Rated CO2 emissions in WLTP combined cycle in battery-only mode (NULL if not WLTP rated) in gr/km. */
   co2?: Maybe<Scalars["Int"]>;
 };
 
 export type CarPremiumEfficiencyWLTPTEH = {
-  /** Rated efficiency in WLTP TEH combined cycle (TEH/least efficient trim) */
+  /** Rated efficiency in WLTP TEH combined cycle (TEH/least efficient trim). */
   value?: Maybe<Scalars["Float"]>;
-  /** Rated efficiency in WLTP TEH combined cycle presented in gas equivalent, in l/100 km */
+  /** Rated efficiency in WLTP TEH combined cycle presented in gas equivalent, in l/100 km. */
   fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP TEH combined cycle (based on value) in kWh/100 km */
+  /** Rated vehicle efficiency in WLTP TEH combined cycle (based on value) in kWh/100 km. */
   vehicle?: Maybe<Scalars["Float"]>;
-  /** Rated vehicle efficiency in WLTP TEH combined cycle presented in gas equivalent, in l/100 km */
+  /** Rated vehicle efficiency in WLTP TEH combined cycle presented in gas equivalent, in l/100 km. */
   vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
-  /** Rated CO2 emissions in WLTP TEH combined cycle in battery-only mode (NULL if not WLTP TEH rated) in gr/km */
+  /** Rated CO2 emissions in WLTP TEH combined cycle in battery-only mode (NULL if not WLTP TEH rated) in gr/km. */
   co2?: Maybe<Scalars["Int"]>;
 };
 
 export type CarPremiumFastCharge = {
-  /** Location of charge port */
+  /** Location of charge port. */
   plug?: Maybe<CarPremiumChargePlug>;
-  /** Power during fast charging from 10% to 80% SoC (optimal conditions, fastest charger) */
+  /** Power during fast charging from 10% to 80% SoC (optimal conditions, fastest charger). */
   power?: Maybe<CarPremiumChargePower>;
-  /** Minutes needed to charge from 10% to 80%, with average charging power (optimal conditions, fastest charger) */
+  /** Minutes needed to charge from 10% to 80%, with average charging power (optimal conditions, fastest charger). */
   charge_time?: Maybe<Scalars["Float"]>;
-  /** Charging speed during fast charging from 10% to 80% (optimal conditions, fastest charger) */
+  /** Charging speed during fast charging from 10% to 80% (optimal conditions, fastest charger). */
   charge_speed?: Maybe<Scalars["Float"]>;
-  /** Indicates if fast charge is optional in some markets/regions */
+  /** Indicates if fast charge is optional in some markets/regions. */
   is_optional?: Maybe<Scalars["Boolean"]>;
-  /** Indicates what fields are estimated */
+  /** Indicates what fields are estimated. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Charging details for fast charging */
+  /** Charging details for fast charging. */
   table?: Maybe<Array<Maybe<CarPremiumFastChargeTable>>>;
 };
 
 export type CarPremiumFastChargeTable = {
-  /** Charging details for fast charging (format: ChargerPlug-ChargerPower-AC/DC) */
+  /** Charging details for fast charging (format: ChargerPlug-ChargerPower-AC/DC). */
   format?: Maybe<Scalars["String"]>;
-  /** Fast charge power */
+  /** Fast charge power. */
   power?: Maybe<CarPremiumChargePower>;
-  /** Minutes needed to charge from 10% to 80% (optimal conditions) */
+  /** Minutes needed to charge from 10% to 80% (optimal conditions). */
   charge_time?: Maybe<Scalars["Int"]>;
-  /** Charging speed during fast charging from 10% to 80% (optimal conditions) */
+  /** Charging speed during fast charging from 10% to 80% (optimal conditions). */
   charge_speed?: Maybe<Scalars["Int"]>;
-  /** Indicates if maximum power during fast charging is limited by the vehicle */
+  /** Indicates if maximum power during fast charging is limited by the vehicle. */
   is_limited?: Maybe<Scalars["Boolean"]>;
-  /** Indicates if average power during fast charging is limited by the vehicle */
+  /** Indicates if average power during fast charging is limited by the vehicle. */
   average_is_limited?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumMedia = {
-  /** URL to detail page on EV database */
+  /** URL to detail page on EV database. */
   evdb_details_url?: Maybe<Scalars["String"]>;
-  /** Latest image */
+  /** Latest image. */
   image?: Maybe<CarImage>;
-  /** Latest maker logo */
+  /** Latest make logo. */
   brand?: Maybe<CarImage>;
-  /** All images */
+  /** All images. */
   image_list?: Maybe<Array<Maybe<CarImage>>>;
-  /** Latest video */
+  /** Latest video. */
   video?: Maybe<CarVideo>;
-  /** All videos */
+  /** All videos. */
   video_list?: Maybe<Array<Maybe<CarVideo>>>;
   /**
-   * URL to detail page on EV database
+   * URL to detail page on EV database.
    * @deprecated Will be removed in the future. Please use evdb_details_url
    */
   evdb_detail_url?: Maybe<Scalars["String"]>;
 };
 
 export type CarPremiumNaming = {
-  /** Car manufacturer name */
+  /** Car manufacturer name. */
   make?: Maybe<Scalars["String"]>;
-  /** Car model name */
+  /** Car model name. */
   model?: Maybe<Scalars["String"]>;
-  /** Version, edition or submodel of car */
+  /** Version, edition or submodel of car. */
   version?: Maybe<Scalars["String"]>;
-  /** Another submodel level of car */
+  /** Another submodel level of car. */
   edition?: Maybe<Scalars["String"]>;
-  /** Car model version. Added by Chargetrip as an alternative for when a car manufacturer does not provide a version name, or uses the same version name across all trims or consecutive years */
+  /** Car model version. Added by Chargetrip as an alternative for when a car manufacturer does not provide a version name, or uses the same version name across all trims or consecutive years. */
   chargetrip_version?: Maybe<Scalars["String"]>;
 };
 
 export type CarPremiumPerformance = {
-  /** Acceleration 0-100 km/h in seconds */
+  /** Acceleration 0-100 km/h in seconds. */
   acceleration?: Maybe<Scalars["Float"]>;
-  /** Indicates if acceleration field is estimated */
+  /** Indicates if acceleration field is estimated. */
   acceleration_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Top speed of car in km/h */
+  /** Top speed of car in km/h. */
   top_speed?: Maybe<Scalars["Int"]>;
-  /** Indicates if top_speed field is estimated */
+  /** Indicates if top_speed field is estimated. */
   top_speed_is_estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumPrice = {
-  /** Starting price for German market */
+  /** Starting price for German market. */
   de?: Maybe<CarPremiumPriceValue>;
-  /** Starting price for Dutch market */
+  /** Starting price for Dutch market. */
   nl?: Maybe<CarPremiumPriceValue>;
-  /** Starting price for British market */
+  /** Starting price for British market. */
   uk?: Maybe<CarPremiumPriceValueWithGrant>;
 };
 
 export type CarPremiumPriceValue = {
-  /** Starting price for local market */
+  /** Starting price for local market. */
   value?: Maybe<Scalars["Int"]>;
-  /** Currency name for local market */
+  /** Currency name for local market. */
   currency?: Maybe<Scalars["String"]>;
-  /** Indicates if price value is based on estimates */
+  /** Indicates if price value is based on estimates. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
   /**
-   * Indicates if price value is based on estimates
+   * Indicates if price value is based on estimates.
    * @deprecated In favor of is_estimated
    */
   estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumPriceValueWithGrant = {
-  /** Starting price for local market */
+  /** Starting price for local market. */
   value?: Maybe<Scalars["Int"]>;
-  /** Currency name for local market */
+  /** Currency name for local market. */
   currency?: Maybe<Scalars["String"]>;
-  /** Indicates if price value is based on estimates */
+  /** Indicates if the starting price is based on an estimate. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Grant is applied to value */
+  /** Grant that is applied to the starting price. */
   grant_applied?: Maybe<Scalars["Int"]>;
   /**
-   * Indicates if price value is based on estimates
+   * Indicates if price value is based on estimates.
    * @deprecated In favor of is_estimated
    */
   estimated?: Maybe<Scalars["Boolean"]>;
 };
 
 export type CarPremiumRange = {
-  /** Rated range in WLTP combined cycle (NULL if not WLTP rated) in km */
+  /** Rated range in WLTP combined cycle (NULL if not WLTP rated) in km. */
   wltp?: Maybe<Scalars["Int"]>;
-  /** Indicates if WLTP range is estimated (NULL if not WLTP rated) */
+  /** Indicates if WLTP range is estimated (NULL if not WLTP rated). */
   wltp_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Rated range in WLTP (TEH/least efficient trim) combined cycle (NULL if not WLTP rated) */
+  /** Rated range in WLTP (TEH/least efficient trim) combined cycle (NULL if not WLTP rated). */
   wltp_teh?: Maybe<Scalars["Int"]>;
-  /** Rated range in NEDC combined cycle (NULL if not NEDC rated) in km */
+  /** Rated range in NEDC combined cycle (NULL if not NEDC rated) in km. */
   nedc?: Maybe<Scalars["Int"]>;
-  /** Indicates if NEDC range is estimated (NULL if not NEDC rated) */
+  /** Indicates if NEDC range is estimated (NULL if not NEDC rated). */
   nedc_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Index range in EV Database RealRange model in km */
+  /** Index range in EV Database RealRange model in km. */
   real?: Maybe<Scalars["Int"]>;
-  /** Indicates if real is estimated */
+  /** Indicates if real is estimated. */
   real_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Worst conditions are based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating. */
   worst?: Maybe<CarPremiumRangeValue>;
-  /** Best conditions are based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C. */
   best?: Maybe<CarPremiumRangeValue>;
   /** Is an index value of what we consider to be the real-world range. (Comparable to Range_Real from EV Database.) It is essentially a normalized range to display on the front-end. */
   chargetrip_range?: Maybe<ChargetripRange>;
 };
 
 export type CarPremiumRangeValue = {
-  /** Estimated value on highway or express roads */
+  /** Estimated value on highway or express roads. */
   highway?: Maybe<Scalars["Int"]>;
-  /** Estimated value on city roads */
+  /** Estimated value on city roads. */
   city?: Maybe<Scalars["Int"]>;
-  /** Estimated combined value */
+  /** Estimated combined value. */
   combined?: Maybe<Scalars["Int"]>;
 };
 
 export type CarPremiumRouting = {
-  /** Cars that support fast charging have a minimum charging speed of 43 kWh */
+  /** Cars that support fast charging have a minimum charging speed of 43 kWh. */
   fast_charging_support?: Maybe<Scalars["Boolean"]>;
-  /** Drag coefficient */
+  /** Drag coefficient. */
   drag_coefficient?: Maybe<Scalars["Float"]>;
-  /** Tire pressure recommended by manufacturer */
+  /** Tire pressure recommended by manufacturer. */
   tire_pressure?: Maybe<Scalars["Float"]>;
-  /** Extra consumption model */
+  /** Extra consumption model. */
   consumption?: Maybe<CarPremiumRoutingConsumption>;
-  /** Amount of petrol that an equivalent petrol car would consume in l/100 km */
+  /** Amount of petrol that an equivalent petrol car would consume in l/100 km. */
   petrol_consumption?: Maybe<Scalars["Float"]>;
 };
 
 export type CarPremiumRoutingConsumption = {
-  /** Consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the auxiliaries. */
   aux?: Maybe<CarPremiumRoutingConsumptionValue>;
-  /** Consumption, in kWh, of the battery management system */
+  /** Consumption, in kWh, of the battery management system. */
   bms?: Maybe<CarPremiumRoutingConsumptionValue>;
-  /** Consumption, in kWh, of the car in idle mode */
+  /** Consumption, in kWh, of the car in idle mode. */
   idle?: Maybe<CarPremiumRoutingConsumptionValue>;
 };
 
 export type CarPremiumRoutingConsumptionValue = {
-  /** Best (lowest) consumption in summer */
+  /** Best (lowest) consumption in summer. */
   best?: Maybe<Scalars["Float"]>;
-  /** Best (lowest) consumption in winter */
+  /** Best (lowest) consumption in winter. */
   worst?: Maybe<Scalars["Float"]>;
 };
 
 export type CarPremiumSafety = {
-  /** Number of seats equipped with ISOFIX */
+  /** Number of seats equipped with ISOFIX. */
   isofix_seats?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP results */
+  /** EuroNCAP results. */
   euro_ncap?: Maybe<CarPremiumSafetyEuroNcap>;
 };
 
 export type CarPremiumSafetyEuroNcap = {
-  /** EuroNCAP rating (out of 5 stars) */
+  /** EuroNCAP rating (out of 5 stars). */
   rating?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP year of rating */
+  /** EuroNCAP year of rating. */
   year?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP rating of adult protection (out of 100%) */
+  /** EuroNCAP rating of adult protection (out of 100%). */
   adult?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP rating of child protection (out of 100%) */
+  /** EuroNCAP rating of child protection (out of 100%). */
   child?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP rating of vulnerable road users (out of 100%) */
+  /** EuroNCAP rating of vulnerable road users (out of 100%). */
   vru?: Maybe<Scalars["Int"]>;
-  /** EuroNCAP rating of safety assists (out of 100%) */
+  /** EuroNCAP rating of safety assists (out of 100%). */
   sa?: Maybe<Scalars["Int"]>;
 };
 
-/** Propulsion */
+/** Propulsion. */
 export enum CarPropulsion {
-  /** All-wheel drive car */
+  /** All-wheel drive car. */
   AWD = "AWD",
-  /** Front-wheel drive car */
+  /** Front-wheel drive car. */
   FRONT = "Front",
-  /** Rear-wheel drive car */
+  /** Rear-wheel drive car. */
   REAR = "Rear"
 }
 
 export type CarRange = {
-  /** Index range in EV Database RealRange model in km */
+  /** Index range in EV Database RealRange model in km. */
   real?: Maybe<Scalars["Int"]>;
-  /** Indicates if real is estimated */
+  /** Indicates if real is estimated. */
   real_is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Worst conditions are based on -10°C and use of heating */
+  /** Worst conditions are based on -10°C and use of heating. */
   worst?: Maybe<CarRangeValue>;
-  /** Best conditions are based on 23°C and no use of A/C */
+  /** Best conditions are based on 23°C and no use of A/C. */
   best?: Maybe<CarRangeValue>;
-  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data */
+  /** Chargetrip's custom real world range provides a carefully calculated display range for all EV models. This is based on our own research and driving data. */
   chargetrip_range?: Maybe<ChargetripRange>;
   /** @deprecated You will receive null values */
   wltp?: Maybe<Scalars["Float"]>;
 };
 
 export type CarRangeValue = {
-  /** Estimated value on the highway or express roads */
+  /** Estimated value on the highway or express roads. */
   highway?: Maybe<Scalars["Int"]>;
-  /** Estimated value on the cities road */
+  /** Estimated value on the cities road. */
   city?: Maybe<Scalars["Int"]>;
-  /** Estimated combined value */
+  /** Estimated combined value. */
   combined?: Maybe<Scalars["Int"]>;
 };
 
 export type CarRouting = {
-  /** Cars that support fast charging have a minimum charging speed of 43 kWh */
+  /** Cars that support fast charging have a minimum charging speed of 43 kWh. */
   fast_charging_support?: Maybe<Scalars["Boolean"]>;
 };
 
-/** Status of a car */
+/** Status of a car. */
 export enum CarStatus {
-  /** Was just imported */
+  /** Was just imported. */
   NEW = "new",
-  /** Is being reviewed by a human operator */
+  /** Is being reviewed by a human operator. */
   REVIEW = "review",
-  /** Is public and can be used by a customer */
+  /** Is public and can be used by a customer. */
   PUBLIC = "public",
-  /** Is removed and can not be used */
+  /** Is removed and can not be used. */
   REMOVED = "removed"
 }
 
 export type CarVideo = {
-  /** Video id */
+  /** Video id. */
   id?: Maybe<Scalars["ID"]>;
-  /** Full path URL of a video */
+  /** Full path URL of a video. */
   url?: Maybe<Scalars["String"]>;
 };
 
-/** Charging mode used at charging stations */
+/** Charging mode used at charging stations. */
 export enum ChargeMode {
-  /** Optimizes the charging time at each station, in order to decrease the total travel time. You will only charge up until the SOC you need in order to reach the next stop */
+  /** Optimizes the charging time at each station, in order to decrease the total travel time. You will only charge up until the SOC you need in order to reach the next stop. */
   OPTIMIZE_TRAVEL_TIME = "OPTIMIZE_TRAVEL_TIME",
-  /** Charge to the maximum capacity at every charging stop. The default maximum charging capacity is 80% */
+  /** Charge to the maximum capacity at every charging stop. The default maximum charging capacity is 80%. */
   ALWAYS_TO_MAX_CHARGE = "ALWAYS_TO_MAX_CHARGE"
 }
 
 export type ChargeSpeedInput = {
-  /** Value of the charge speed of the battery */
+  /** Value of the charge speed of the battery. */
   value: Scalars["Float"];
-  /** Type of the charge speed of the battery */
+  /** Type of the charge speed of the battery. */
   type: ChargeSpeedUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
 export enum ChargeSpeedUnit {
-  /** Return the charge speed in kilowatt hours */
+  /** Return the charge speed in kilowatt hours. */
   KILOWATT_HOUR = "kilowatt_hour",
-  /** Return the charge speed in kilometers per hour */
+  /** Return the charge speed in kilometers per hour. */
   KILOMETERS_PER_HOUR = "kilometers_per_hour",
-  /** Return the charge speed in miles per hour */
+  /** Return the charge speed in miles per hour. */
   MILES_PER_HOUR = "miles_per_hour"
 }
 
 export type ChargeTotalInput = {
-  /** Value of the temperature of the battery */
+  /** Value of the temperature of the battery. */
   value: Scalars["Float"];
-  /** Type of total charge amount */
+  /** Type of total charge amount. */
   type: StateOfChargeUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
@@ -1478,19 +1478,19 @@ export type ChargerStatuses = {
 /**
  * Chargetrip's custom real-world range provides a carefully calculated display range for all electric vehicle models based on our own research and driving data.
  * CT range is based on the theoretical distance driven using only the electric engine.
- * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges
+ * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges.
  */
 export type ChargetripRange = {
-  /** Range in kilometers. Worst conditions are based on -10°C and use of heating */
+  /** Range in kilometers. Worst conditions are based on -10°C and use of heating. */
   worst?: Maybe<Scalars["Int"]>;
-  /** Range in kilometers. Best conditions are based on 23°C and no use of A/C */
+  /** Range in kilometers. Best conditions are based on 23°C and no use of A/C. */
   best?: Maybe<Scalars["Int"]>;
 };
 
 /**
  * Chargetrip's custom real-world range provides a carefully calculated display range for all electric vehicle models based on our own research and driving data.
  * CT range is based on the theoretical distance driven using only the electric engine.
- * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges
+ * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges.
  */
 export type ChargetripRangeworstArgs = {
   unit?: Maybe<DistanceUnit>;
@@ -1499,7 +1499,7 @@ export type ChargetripRangeworstArgs = {
 /**
  * Chargetrip's custom real-world range provides a carefully calculated display range for all electric vehicle models based on our own research and driving data.
  * CT range is based on the theoretical distance driven using only the electric engine.
- * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges
+ * Vehicles that do not have a full electric drivetrain type ( all except Battery Electric Vehicles / BEV) therefore return relatively small ranges.
  */
 export type ChargetripRangebestArgs = {
   unit?: Maybe<DistanceUnit>;
@@ -1563,7 +1563,7 @@ export type ConnectCharge = {
 };
 
 export type ConnectFilter = {
-  /** List of connectivity providers to which a vehicle can connect */
+  /** List of connectivity providers to which a vehicle can connect. */
   providers?: Maybe<Array<Maybe<ConnectProvider>>>;
 };
 
@@ -1693,118 +1693,118 @@ export type ConnectorCustomProperties = {
 
 /** The socket or plug standard of the charging point. */
 export enum ConnectorType {
-  /** The connector type is CHAdeMO, DC */
+  /** The connector type is CHAdeMO, DC. */
   CHADEMO = "CHADEMO",
-  /** Standard/domestic household, type "A", NEMA 1-15, 2 pins */
+  /** Standard/domestic household, type "A", NEMA 1-15, 2 pins. */
   DOMESTIC_A = "DOMESTIC_A",
-  /** Standard/domestic household, type "B", NEMA 5-15, 3 pins */
+  /** Standard/domestic household, type "B", NEMA 5-15, 3 pins. */
   DOMESTIC_B = "DOMESTIC_B",
-  /** Standard/domestic household, type "C", CEE 7/17, 2 pins */
+  /** Standard/domestic household, type "C", CEE 7/17, 2 pins. */
   DOMESTIC_C = "DOMESTIC_C",
-  /** Standard/domestic household, type "D", 3 pins */
+  /** Standard/domestic household, type "D", 3 pins. */
   DOMESTIC_D = "DOMESTIC_D",
-  /** Standard/domestic household, type "E", CEE 7/5 3 pins */
+  /** Standard/domestic household, type "E", CEE 7/5 3 pins. */
   DOMESTIC_E = "DOMESTIC_E",
-  /** Standard/domestic household, type "F", CEE 7/4, Schuko, 3 pins */
+  /** Standard/domestic household, type "F", CEE 7/4, Schuko, 3 pins. */
   DOMESTIC_F = "DOMESTIC_F",
-  /** Standard/domestic household, type "G", BS 1363, Commonwealth, 3 pins */
+  /** Standard/domestic household, type "G", BS 1363, Commonwealth, 3 pins. */
   DOMESTIC_G = "DOMESTIC_G",
-  /** Standard/domestic household, type "H", SI-32, 3 pins */
+  /** Standard/domestic household, type "H", SI-32, 3 pins. */
   DOMESTIC_H = "DOMESTIC_H",
-  /** Standard/domestic household, type "I", AS 3112, 3 pins */
+  /** Standard/domestic household, type "I", AS 3112, 3 pins. */
   DOMESTIC_I = "DOMESTIC_I",
-  /** Standard/domestic household, type "J", SEV 1011, 3 pins */
+  /** Standard/domestic household, type "J", SEV 1011, 3 pins. */
   DOMESTIC_J = "DOMESTIC_J",
-  /** Standard/domestic household, type "K", DS 60884-2-D1, 3 pins */
+  /** Standard/domestic household, type "K", DS 60884-2-D1, 3 pins. */
   DOMESTIC_K = "DOMESTIC_K",
-  /** Standard/domestic household, type "L", CEI 23-16-VII, 3 pins */
+  /** Standard/domestic household, type "L", CEI 23-16-VII, 3 pins. */
   DOMESTIC_L = "DOMESTIC_L",
-  /** Standard/Domestic household, type "M", BS 546, 3 pins */
+  /** Standard/Domestic household, type "M", BS 546, 3 pins. */
   DOMESTIC_M = "DOMESTIC_M",
-  /** Standard/Domestic household, type "N", NBR 14136, 3 pins */
+  /** Standard/Domestic household, type "N", NBR 14136, 3 pins. */
   DOMESTIC_N = "DOMESTIC_N",
-  /** Standard/Domestic household, type "O", TIS 166-2549, 3 pins */
+  /** Standard/Domestic household, type "O", TIS 166-2549, 3 pins. */
   DOMESTIC_O = "DOMESTIC_O",
-  /** IEC 60309-2 Industrial connector single phase 16 amperes (usually blue) */
+  /** IEC 60309-2 Industrial connector single phase 16 amperes (usually blue). */
   IEC_60309_2_SINGLE_16 = "IEC_60309_2_single_16",
-  /** IEC 60309-2 Industrial connector three phase 16 amperes (usually red) */
+  /** IEC 60309-2 Industrial connector three phase 16 amperes (usually red). */
   IEC_60309_2_THREE_16 = "IEC_60309_2_three_16",
-  /** IEC 60309-2 Industrial connector three phase 32 amperes (usually red) */
+  /** IEC 60309-2 Industrial connector three phase 32 amperes (usually red). */
   IEC_60309_2_THREE_32 = "IEC_60309_2_three_32",
-  /** IEC 60309-2 Industrial connector three phase 64 amperes (usually red) */
+  /** IEC 60309-2 Industrial connector three phase 64 amperes (usually red). */
   IEC_60309_2_THREE_64 = "IEC_60309_2_three_64",
-  /** IEC 62196 Type 1 "SAE J1772" */
+  /** IEC 62196 Type 1 "SAE J1772". */
   IEC_62196_T1 = "IEC_62196_T1",
-  /** Combo Type 1 based, DC */
+  /** Combo Type 1 based, DC. */
   IEC_62196_T1_COMBO = "IEC_62196_T1_COMBO",
-  /** IEC 62196 Type 2 "Mennekes" */
+  /** IEC 62196 Type 2 "Mennekes". */
   IEC_62196_T2 = "IEC_62196_T2",
-  /** Combo Type 2 based, DC */
+  /** Combo Type 2 based, DC. */
   IEC_62196_T2_COMBO = "IEC_62196_T2_COMBO",
-  /** IEC 62196 Type 3A */
+  /** IEC 62196 Type 3A. */
   IEC_62196_T3A = "IEC_62196_T3A",
-  /** IEC 62196 Type 3C "Scame" */
+  /** IEC 62196 Type 3C "Scame". */
   IEC_62196_T3C = "IEC_62196_T3C",
-  /** On-board bottom-up-pantograph typically for bus charging */
+  /** On-board bottom-up-pantograph typically for bus charging. */
   PANTOGRAPH_BOTTOM_UP = "PANTOGRAPH_BOTTOM_UP",
-  /** Off-board top-down-pantograph typically for bus charging */
+  /** Off-board top-down-pantograph typically for bus charging. */
   PANTOGRAPH_TOP_DOWN = "PANTOGRAPH_TOP_DOWN",
-  /** Tesla connector "Roadster"-type (round, 4 pins) */
+  /** Tesla connector "Roadster"-type (round, 4 pins). */
   TESLA_R = "TESLA_R",
-  /** Tesla connector "Model-S"-type (oval, 5 pins) */
+  /** Tesla connector "Model-S"-type (oval, 5 pins). */
   TESLA_S = "TESLA_S",
-  /** The connector type is GB_T (Chinese standard), DC */
+  /** The connector type is GB_T (Chinese standard), DC. */
   GB_T = "GB_T",
   /** The ChaoJi connector. The new generation charging connector, harmonized between CHAdeMO and GB/T. DC. */
   CHAOJI = "CHAOJI",
-  /** The connector type is NEMA 5-20, 3 pins */
+  /** The connector type is NEMA 5-20, 3 pins. */
   NEMA_5_20 = "NEMA_5_20",
-  /** The connector type is NEMA 6-30, 3 pins */
+  /** The connector type is NEMA 6-30, 3 pins. */
   NEMA_6_30 = "NEMA_6_30",
-  /** The connector type is NEMA 6-50, 3 pins */
+  /** The connector type is NEMA 6-50, 3 pins. */
   NEMA_6_50 = "NEMA_6_50",
-  /** The connector type is NEMA 10-30, 3 pins */
+  /** The connector type is NEMA 10-30, 3 pins. */
   NEMA_10_30 = "NEMA_10_30",
-  /** The connector type is NEMA 10-50, 3 pins */
+  /** The connector type is NEMA 10-50, 3 pins. */
   NEMA_10_50 = "NEMA_10_50",
-  /** The connector type is NEMA 14-30, 3 pins, rating of 30 A */
+  /** The connector type is NEMA 14-30, 3 pins, rating of 30 A. */
   NEMA_14_30 = "NEMA_14_30",
-  /** The connector type is NEMA 14-50, 3 pins, rating of 50 A */
+  /** The connector type is NEMA 14-50, 3 pins, rating of 50 A. */
   NEMA_14_50 = "NEMA_14_50"
 }
 
 export enum ConsumptionUnit {
-  /** Return the consumption in kilowatt hours per 100 kilometers */
+  /** Return the consumption in kilowatt hours per 100 kilometers. */
   KILOWATT_HOURS_PER_100_KILOMETERS = "kilowatt_hours_per_100_kilometers",
-  /** Return the consumption in watt hours per kilometer */
+  /** Return the consumption in watt hours per kilometer. */
   WATT_HOURS_PER_KILOMETER = "watt_hours_per_kilometer",
-  /** Return the consumption in kilometers per kilowatt hour */
+  /** Return the consumption in kilometers per kilowatt hour. */
   KILOMETERS_PER_KILOWATT_HOUR = "kilometers_per_kilowatt_hour",
-  /** Return the consumption in kilowatt hours per 100 miles */
+  /** Return the consumption in kilowatt hours per 100 miles. */
   KILOWATT_HOURS_PER_100_MILES = "kilowatt_hours_per_100_miles",
-  /** Return the consumption in watt hours per mile */
+  /** Return the consumption in watt hours per mile. */
   WATT_HOURS_PER_MILE = "watt_hours_per_mile",
-  /** Return the consumption in miles per kilowatt hour */
+  /** Return the consumption in miles per kilowatt hour. */
   MILES_PER_KILOWATT_HOUR = "miles_per_kilowatt_hour"
 }
 
-/** The complete contact information */
+/** The complete contact information. */
 export type Contact = {
-  /** The phone number in international format */
+  /** The phone number in international format. */
   phone?: Maybe<Scalars["String"]>;
-  /** The email address */
+  /** The email address. */
   email?: Maybe<Scalars["String"]>;
-  /** The absolute URL of the website */
+  /** The absolute URL of the website. */
   website?: Maybe<Scalars["String"]>;
-  /** The absolute URL of the facebook profile page */
+  /** The absolute URL of the facebook profile page. */
   facebook?: Maybe<Scalars["String"]>;
-  /** The absolute URL of the twitter profile page */
+  /** The absolute URL of the twitter profile page. */
   twitter?: Maybe<Scalars["String"]>;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
 };
 
-/** ISO-3166 alpha-2 country codes */
+/** ISO-3166 alpha-2 country codes. */
 export enum CountryCodeAlpha2 {
   AD = "AD",
   AE = "AE",
@@ -2078,24 +2078,24 @@ export type CreateConnectedVehicleOptions = {
   scope?: Maybe<Array<ConnectScope>>;
 };
 
-/** Currency according to the ISO 4217 standard */
+/** Currency according to the ISO 4217 standard. */
 export enum CurrencyUnit {
-  /** Return the currency in EUR */
+  /** Return the currency in EUR. */
   EUR = "EUR",
-  /** Return the currency in USD */
+  /** Return the currency in USD. */
   USD = "USD",
-  /** Return the currency in GBP */
+  /** Return the currency in GBP. */
   GBP = "GBP"
 }
 
 export enum DistanceUnit {
-  /** Return the distance in meters */
+  /** Return the distance in meters. */
   METER = "meter",
-  /** Return the distance in feet */
+  /** Return the distance in feet. */
   FOOT = "foot",
-  /** Return the distance in kilometers */
+  /** Return the distance in kilometers. */
   KILOMETER = "kilometer",
-  /** Return the distance in miles */
+  /** Return the distance in miles. */
   MILE = "mile"
 }
 
@@ -2137,32 +2137,32 @@ export type EVSE = {
 };
 
 export type ElevationInput = {
-  /** Value of the elevation */
+  /** Value of the elevation. */
   value: Scalars["Float"];
-  /** Type of the value of elevation */
+  /** Type of the value of elevation. */
   type: DistanceUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
 export enum ElevationUnit {
-  /** Return the elevation in meters */
+  /** Return the elevation in meters. */
   METER = "meter",
-  /** Return the elevation in feet */
+  /** Return the elevation in feet. */
   FOOT = "foot"
 }
 
 export enum EmissionRateUnit {
-  /** Return the emission rate in grams per kilometer */
+  /** Return the emission rate in grams per kilometer. */
   GRAMS_PER_KILOMETER = "grams_per_kilometer",
-  /** Return the emission rate in ounces per mile */
+  /** Return the emission rate in ounces per mile. */
   OUNCES_PER_MILE = "ounces_per_mile"
 }
 
 export enum EmissionUnit {
-  /** Return the emission in grams */
+  /** Return the emission in grams. */
   GRAM = "gram",
-  /** Return the emission in ounces */
+  /** Return the emission in ounces. */
   OUNCE = "ounce"
 }
 
@@ -2200,27 +2200,27 @@ export type FeatureMultiPolygonPoint = {
   properties?: Maybe<Scalars["JSON"]>;
 };
 
-/** A GeoJSON Feature<Point> */
+/** A GeoJSON Feature<Point>. */
 export type FeaturePoint = {
-  /** Feature ID */
+  /** Feature ID. */
   id?: Maybe<Scalars["String"]>;
-  /** Feature type */
+  /** Feature type. */
   type: FeatureType;
-  /** Geometry of the feature */
+  /** Geometry of the feature. */
   geometry: Point;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
 };
 
-/** A GeoJSON Feature<Point> input */
+/** A GeoJSON Feature<Point> input. */
 export type FeaturePointInput = {
-  /** The feature ID */
+  /** The feature ID. */
   id?: Maybe<Scalars["String"]>;
-  /** Feature type */
+  /** Feature type. */
   type: FeatureType;
-  /** Geometry of the feature */
+  /** Geometry of the feature. */
   geometry: PointInput;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
 };
 
@@ -2252,10 +2252,17 @@ export enum FeatureType {
 }
 
 export enum FuelConsumptionUnit {
-  /** Return the fuel consumption in liters per 100 kilometers */
+  /** Return the fuel consumption in liters per 100 kilometers. */
   LITERS_PER_100_KILOMETERS = "liters_per_100_kilometers",
-  /** Return the fuel consumption in miles per gallon */
+  /** Return the fuel consumption in miles per gallon. */
   MILES_PER_GALLON = "miles_per_gallon"
+}
+
+export enum FuelUnit {
+  /** Return the fuel consumption in liters. */
+  LITER = "liter",
+  /** Return the fuel consumption in US gallon. */
+  GALLON = "gallon"
 }
 
 /** Geometry point with GPS coordinates */
@@ -2384,31 +2391,31 @@ export enum IsolineStatus {
   ERROR = "error"
 }
 
-/** Types of a leg */
+/** Types of a leg. */
 export enum LegType {
-  /** This leg ends at a charging station and the vehicle must recharge */
+  /** This leg ends at a charging station and the vehicle must recharge. */
   STATION = "station",
-  /** This leg ends at a via charging station and the vehicle must recharge */
+  /** This leg ends at a via charging station and the vehicle must recharge. */
   STATIONVIA = "stationVia",
-  /** This leg ends at a scheduled charging station and the vehicle must recharge */
+  /** This leg ends at a scheduled charging station and the vehicle must recharge. */
   STATIONAMENITY = "stationAmenity",
-  /** This leg ends at a via location */
+  /** This leg ends at a via location. */
   VIA = "via",
-  /** This leg ends at the destination, and is the last leg of the route */
+  /** This leg ends at the destination, and is the last leg of the route. */
   FINAL = "final",
-  /** This leg ends at the destination which is a charging station, and is the last leg of the route */
+  /** This leg ends at the destination which is a charging station, and is the last leg of the route. */
   STATIONFINAL = "stationFinal"
 }
 
-/** A GeoJSON LineString */
+/** A GeoJSON LineString. */
 export type LineString = {
-  /** LineString type */
+  /** LineString type. */
   type: LineStringType;
-  /** List of coordinates arrays with longitude as first value and latitude as second one */
+  /** List of coordinates arrays with longitude as first value and latitude as second one. */
   coordinates: Array<Maybe<Array<Scalars["Float"]>>>;
 };
 
-/** GeoJSON LineString type */
+/** GeoJSON LineString type. */
 export enum LineStringType {
   LINESTRING = "LineString"
 }
@@ -2428,9 +2435,9 @@ export enum MappingProvider {
 }
 
 export enum MeasurementUnit {
-  /** Return the measurement in millimeters */
+  /** Return the measurement in millimeters. */
   MILLIMETER = "millimeter",
-  /** Return the measurement in inches */
+  /** Return the measurement in inches. */
   INCH = "inch"
 }
 
@@ -2444,7 +2451,7 @@ export type MultiPolygon = {
   >;
 };
 
-/** GeoJSON MultiPolygon type */
+/** GeoJSON MultiPolygon type. */
 export enum MultiPolygonType {
   MULTIPOLYGON = "MultiPolygon"
 }
@@ -3261,11 +3268,11 @@ export enum OICPValueAddedServices {
 }
 
 export type OdometerInput = {
-  /** Value of the vehicle's odometer */
+  /** Value of the vehicle's odometer. */
   value: Scalars["Float"];
-  /** Type of the value of the vehicle's odometer */
+  /** Type of the value of the vehicle's odometer. */
   type: DistanceUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
@@ -3316,11 +3323,11 @@ export type OperatorListQuery = {
 };
 
 export type OutsideTempInput = {
-  /** Value of the outside temperature */
+  /** Value of the outside temperature. */
   value: Scalars["Float"];
-  /** Type of the value of the outside temperature */
+  /** Type of the value of the outside temperature. */
   type: TemperatureUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
@@ -3332,19 +3339,19 @@ export enum ParkingCost {
 }
 
 export type PathSegment = {
-  /** Elevation (altitude) in meters */
+  /** Elevation (altitude) in meters. */
   elevation?: Maybe<Scalars["Int"]>;
-  /** Average speed, in km/h, for this route path segment */
+  /** Average speed, in km/h, for this route path segment. */
   averageSpeed?: Maybe<Scalars["Float"]>;
-  /** Consumption, in kWh, of a route path segment */
+  /** Consumption, in kWh, of a route path segment. */
   consumption?: Maybe<Scalars["Float"]>;
-  /** Consumption, in kWh per km, of a route path segment */
+  /** Consumption, in kWh per km, of a route path segment. */
   consumptionPerKm?: Maybe<Scalars["Float"]>;
-  /** Distance, in meters, of a route path segment */
+  /** Distance, in meters, of a route path segment. */
   distance?: Maybe<Scalars["Float"]>;
-  /** Duration, in seconds, of a route path segment */
+  /** Duration, in seconds, of a route path segment. */
   duration?: Maybe<Scalars["Float"]>;
-  /** State of charge, in kWh, of a route path segment */
+  /** State of charge, in kWh, of a route path segment. */
   stateOfCharge?: Maybe<Scalars["Float"]>;
 };
 
@@ -3356,11 +3363,11 @@ export type Point = {
   coordinates: Array<Scalars["Float"]>;
 };
 
-/** A GeoJSON Point input */
+/** A GeoJSON Point input. */
 export type PointInput = {
-  /** Point type */
+  /** Point type. */
   type: PointType;
-  /** Coordinates [longitude, latitude] */
+  /** Coordinates [longitude, latitude]. */
   coordinates: Array<Scalars["Float"]>;
 };
 
@@ -3376,11 +3383,11 @@ export type PolygonProperties = {
 };
 
 export type PowerInput = {
-  /** Value of the positive or negative power. When negative the vehicle is charging */
+  /** Value of the positive or negative power. When negative the vehicle is charging. */
   value: Scalars["Float"];
-  /** Type of the value of the power */
+  /** Type of the value of the power. */
   type: PowerUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
@@ -3401,28 +3408,28 @@ export type PowerStats = {
 };
 
 export enum PowerUnit {
-  /** Return the power in kilowatts */
+  /** Return the power in kilowatts. */
   KILOWATT = "kilowatt",
-  /** Return the power in horsepower */
+  /** Return the power in horsepower. */
   HORSEPOWER = "horsepower"
 }
 
 export enum PressureUnit {
-  /** Return the pressure in bar */
+  /** Return the pressure in bar. */
   BAR = "bar",
-  /** Return the pressure in pounds per square inch */
+  /** Return the pressure in pounds per square inch. */
   POUNDS_PER_SQUARE_INCH = "pounds_per_square_inch"
 }
 
-/** The price model */
+/** The price model. */
 export type Price = {
-  /** The value of the price */
+  /** The value of the price. */
   value?: Maybe<Scalars["String"]>;
-  /** The currency of the price */
+  /** The currency of the price. */
   currency?: Maybe<Scalars["String"]>;
-  /** The pricing model */
+  /** The pricing model. */
   model?: Maybe<Scalars["String"]>;
-  /** The value of the price which should be display by the frontend */
+  /** The value of the price which should be display by the frontend. */
   displayValue?: Maybe<Scalars["String"]>;
 };
 
@@ -3508,6 +3515,8 @@ export type Query = {
   userReviewList?: Maybe<Array<Review>>;
   /** Get a route by ID */
   route?: Maybe<Route>;
+  /** [BETA] Emission profile for route. */
+  routeEmissions: RouteEmissions;
   /** Retrieve information about a route path segment */
   routePath?: Maybe<RoutePath>;
   /** Get the station statistics */
@@ -3602,6 +3611,11 @@ export type QueryrouteArgs = {
   id: Scalars["ID"];
 };
 
+export type QueryrouteEmissionsArgs = {
+  route_id: Scalars["ID"];
+  route_alternative_id?: Maybe<Scalars["ID"]>;
+};
+
 export type QueryroutePathArgs = {
   id: Scalars["ID"];
   location: PointInput;
@@ -3668,213 +3682,213 @@ export type RemoveConnectedVehicleInput = {
   id: Scalars["ID"];
 };
 
-/** EV specific data for a route request */
+/** EV specific data for a route request. */
 export type RequestEv = {
-  /** Internal ID of a Vehicle */
+  /** Internal ID of a Vehicle. */
   id?: Maybe<Scalars["ID"]>;
-  /** EV battery specific data */
+  /** EV battery specific data. */
   battery?: Maybe<RequestEvBattery>;
-  /** Supported plugs for an EV */
+  /** Supported plugs for an EV. */
   plugs?: Maybe<Array<Maybe<RequestEvPlug>>>;
-  /** Supported adapters of plugs for an EV */
+  /** Supported adapters of plugs for an EV. */
   adapters?: Maybe<Array<Maybe<RequestEvPlug>>>;
-  /** Minimum desired power of chargers */
+  /** Minimum desired power of chargers. */
   minPower?: Maybe<Scalars["Int"]>;
-  /** Climate is on. The default is true */
+  /** Climate is on. The default is true. */
   climate?: Maybe<Scalars["Boolean"]>;
-  /** Cargo weight, in kg */
+  /** Cargo weight, in kg. */
   cargo?: Maybe<Scalars["Float"]>;
   /**
-   * The number of passengers on board
-   * @deprecated In favor of occupants
+   * The number of passengers on board.
+   * @deprecated In favor of occupants.
    */
   numberOfPassengers?: Maybe<Scalars["Int"]>;
-  /** Number of occupants */
+  /** Number of occupants. */
   occupants?: Maybe<Scalars["Int"]>;
-  /** Consumption specific to an EV or inputed by a request */
+  /** Consumption specific to an EV or inputted by a request. */
   consumption?: Maybe<RequestEvConsumption>;
 };
 
 export type RequestEvBattery = {
-  /** Usable capacity of the battery used to compute the route. If this in not filled in, value as the vehicle battery.usable_kwh */
+  /** Usable capacity of the battery used to compute the route. If this in not filled in, value as the vehicle battery.usable_kwh. */
   capacity?: Maybe<RequestEvBatteryValue>;
-  /** Usable capacity of a battery, in kWh. This value is computed from the provided capacity value */
+  /** Usable capacity of a battery, in kWh. This value is computed from the provided capacity value. */
   capacityKwh?: Maybe<Scalars["Float"]>;
-  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and it will be equal to the battery.usable_kwh */
+  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and it will be equal to the battery.usable_kwh. */
   stateOfCharge?: Maybe<RequestEvBatteryValue>;
-  /** Current amount of energy in a battery, in kWh. This value is computed from the provided state of charge */
+  /** Current amount of energy in a battery, in kWh. This value is computed from the provided state of charge. */
   stateOfChargeKwh?: Maybe<Scalars["Float"]>;
-  /** Desired final amount of energy in a battery. If this is not filled in, it will be set to 20% of the vehicle battery.usable_kwh */
+  /** Desired final amount of energy in a battery. If this is not filled in, it will be set to 20% of the vehicle battery.usable_kwh. */
   finalStateOfCharge?: Maybe<RequestEvBatteryValue>;
-  /** Desired final amount of energy in a battery, in kWh. This value is computed from the provided final state of charge */
+  /** Desired final amount of energy in a battery, in kWh. This value is computed from the provided final state of charge. */
   finalStateOfChargeKwh?: Maybe<Scalars["Float"]>;
 };
 
 export type RequestEvBatteryInput = {
-  /** Usable capacity of a battery used to compute a route. We recommend you stay between 50% and 150%. If this in not filled in, we assume it is the same value as the vehicle battery.usable_kwh */
+  /** Usable capacity of a battery used to compute a route. We recommend you stay between 50% and 150%. If this in not filled in, we assume it is the same value as the vehicle battery.usable_kwh. */
   capacity?: Maybe<RequestEvBatteryInputValue>;
-  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and we fill it in with vehicle battery.usable_kwh */
+  /** Current amount of energy in a battery. If this is not filled in, we assume the battery is full and we fill it in with vehicle battery.usable_kwh. */
   stateOfCharge?: Maybe<RequestEvBatteryInputValue>;
-  /** Desired final amount of energy in a battery. The value should be between 0 and 80% of the vehicle battery.usable_kwh If this is not filled in, we assume it is 20% of the vehicle battery.usable_kwh */
+  /** Desired final amount of energy in a battery. The value should be between 0 and 80% of the vehicle battery.usable_kwh If this is not filled in, we assume it is 20% of the vehicle battery.usable_kwh. */
   finalStateOfCharge?: Maybe<RequestEvBatteryInputValue>;
 };
 
 export type RequestEvBatteryInputValue = {
-  /** Value of a desired final amount of energy in a battery */
+  /** Value of a desired final amount of energy in a battery. */
   value: Scalars["Float"];
-  /** Type of a desired final amount of energy in a battery */
+  /** Type of a desired final amount of energy in a battery. */
   type: BatteryInputType;
 };
 
 export type RequestEvBatteryValue = {
-  /** Value of the desired final amount of energy in a battery */
+  /** Value of the desired final amount of energy in a battery. */
   value: Scalars["Float"];
-  /** Type of the desired final amount of energy in a battery */
+  /** Type of the desired final amount of energy in a battery. */
   type: BatteryInputType;
 };
 
 export type RequestEvConsumption = {
-  /** Consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the auxiliaries. */
   aux?: Maybe<CarConsumption>;
-  /** The consumption, in kWh, of the battery management system */
+  /** The consumption, in kWh, of the battery management system. */
   bms?: Maybe<CarConsumption>;
-  /** The consumption, in kWh, of the vehicle in idle mode */
+  /** The consumption, in kWh, of the vehicle in idle mode. */
   idle?: Maybe<CarConsumption>;
 };
 
 export type RequestEvConsumptionInput = {
-  /** Consumption, in kWh, of the auxiliaries */
+  /** Consumption, in kWh, of the auxiliaries. */
   aux?: Maybe<CarConsumptionInput>;
-  /** Consumption, in kWh, of the battery management system */
+  /** Consumption, in kWh, of the battery management system. */
   bms?: Maybe<CarConsumptionInput>;
-  /** Consumption, in kWh, of the vehicle in idle mode */
+  /** Consumption, in kWh, of the vehicle in idle mode. */
   idle?: Maybe<CarConsumptionInput>;
 };
 
 export type RequestEvInput = {
-  /** Internal ID of a Vehicle */
+  /** Internal ID of a Vehicle. */
   id: Scalars["ID"];
-  /** The EV battery specific data */
+  /** The EV battery specific data. */
   battery?: Maybe<RequestEvBatteryInput>;
-  /** Supported plugs of an EV */
+  /** Supported plugs of an EV. */
   plugs?: Maybe<Array<Maybe<RequestEvPlugInput>>>;
-  /** Supported adapters of plugs of an EV */
+  /** Supported adapters of plugs of an EV. */
   adapters?: Maybe<Array<Maybe<RequestEvPlugInput>>>;
-  /** Minimum desired power of chargers */
+  /** Minimum desired power of chargers. */
   minPower?: Maybe<Scalars["Int"]>;
-  /** Flag which indicates if the climate is on. The default is true */
+  /** Flag which indicates if the climate is on. The default is true. */
   climate?: Maybe<Scalars["Boolean"]>;
-  /** Number of occupants */
+  /** Number of occupants. */
   occupants?: Maybe<Scalars["Int"]>;
-  /** Cargo weight, in kg */
+  /** Cargo weight, in kg. */
   cargo?: Maybe<Scalars["Int"]>;
-  /** Consumption specific to the EV or inputted by the request */
+  /** Consumption specific to the EV or inputted by the request. */
   consumption?: Maybe<RequestEvConsumptionInput>;
-  /** Deprecated */
+  /** Deprecated. */
   auxConsumption?: Maybe<Scalars["Float"]>;
-  /** Deprecated */
+  /** Deprecated. */
   bmsConsumption?: Maybe<Scalars["Float"]>;
 };
 
 export type RequestEvPlug = {
-  /** Type of the plug */
+  /** Type of the plug. */
   standard?: Maybe<ConnectorType>;
-  /** Maximum charging speed for a plug */
+  /** Maximum charging speed for a plug. */
   chargingPower?: Maybe<Scalars["Float"]>;
 };
 
 export type RequestEvPlugInput = {
-  /** Type of a plug */
+  /** Type of a plug. */
   standard: ConnectorType;
-  /** Maximum charging speed for this plug */
+  /** Maximum charging speed for this plug. */
   chargingPower: Scalars["Float"];
 };
 
 export type RequestInput = {
-  /** EV specific data for a route request */
+  /** EV specific data for a route request. */
   ev: RequestEvInput;
-  /** Route request data */
+  /** Route request data. */
   routeRequest: RequestRouteInput;
-  /** Telemetry data used to overwrite routing parameters */
+  /** Telemetry data used to overwrite routing parameters. */
   telemetry?: Maybe<Scalars["JSON"]>;
 };
 
 export type RequestRoute = {
   /**
-   * Requested amenities near the stations, within a 1 kilometer radius
-   * @deprecated Will be removed. Use the amenity preferences instead
+   * Requested amenities near the stations, within a 1 kilometer radius.
+   * @deprecated Will be removed. Use the amenity preferences instead.
    */
   amenities?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** Amenity preferences for a route */
+  /** Amenity preferences for a route. */
   amenity_preferences?: Maybe<RouteAmenityPreferences>;
   /**
-   * Requested operators
-   * @deprecated Will be removed. Use the operators property instead
+   * Requested operators.
+   * @deprecated Will be removed. Use the operators property instead.
    */
   operatorIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
   /**
-   * Preferred operators are required. In case there are no preferred operators the route cannot be calculated
-   * @deprecated Will be removed. Use the operators property instead
+   * Preferred operators are required. In case there are no preferred operators the route cannot be calculated.
+   * @deprecated Will be removed. Use the operators property instead.
    */
   operatorRequired?: Maybe<Scalars["Boolean"]>;
   /**
-   * Encourage the route to use preferred operators. In case there are no preferred operators the route can still be calculated
-   * @deprecated Will be removed. Use the operators property instead
+   * Encourage the route to use preferred operators. In case there are no preferred operators the route can still be calculated.
+   * @deprecated Will be removed. Use the operators property instead.
    */
   operatorPrefer?: Maybe<Scalars["Boolean"]>;
-  /** Operator prioritization for a route */
+  /** Operator prioritization for a route. */
   operators?: Maybe<RouteOperators>;
-  /** Season */
+  /** Season. */
   season?: Maybe<RouteSeason>;
-  /** Percentage for the minimum limit of the battery capacity before a recharge. The value should be between 0 and 60, with a default of 10% */
+  /** Percentage for the minimum limit of the battery capacity before a recharge. The value should be between 0 and 60, with a default of 10%. */
   safeRiskMargin?: Maybe<Scalars["Int"]>;
-  /** Origin of a route */
+  /** Origin of a route. */
   origin?: Maybe<FeaturePoint>;
-  /** Destination of a route */
+  /** Destination of a route. */
   destination?: Maybe<FeaturePoint>;
-  /** Locations where a route will stop */
+  /** Locations where a route will stop. */
   via?: Maybe<Array<Maybe<FeaturePoint>>>;
-  /** Radius in meters for alternative stations along a route (min 500 - max 5000) */
+  /** Radius in meters for alternative stations along a route (min 500 - max 5000). */
   stationsAlongRouteRadius?: Maybe<Scalars["Int"]>;
-  /** Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production */
+  /** Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production. */
   instructions?: Maybe<Scalars["Boolean"]>;
-  /** Mode that indicates if we optimize the charging time or always charge to the maximum capacity */
+  /** Mode that indicates if we optimize the charging time or always charge to the maximum capacity. */
   chargeMode?: Maybe<ChargeMode>;
 };
 
 export type RequestRouteInput = {
-  /** Deprecated: in favor of amenity preferences. A list of desired amenities near the stations, with a 1 kilometer radius */
+  /** Deprecated: in favor of amenity preferences. A list of desired amenities near the stations, with a 1 kilometer radius. */
   amenities?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** Amenity preferences for a route */
+  /** Amenity preferences for a route. */
   amenity_preferences?: Maybe<AmenityPreferencesInput>;
-  /** Deprecated: in favor of operators. A list of requested operators */
+  /** Deprecated: in favor of operators. A list of requested operators. */
   operatorIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** Deprecated: in favor of operators. Flag which indicates if the operators are required */
+  /** Deprecated: in favor of operators. Flag which indicates if the operators are required. */
   operatorRequired?: Maybe<Scalars["Boolean"]>;
-  /** Deprecated: in favor of operators. Flag which indicates if the preferred operators should be loaded */
+  /** Deprecated: in favor of operators. Flag which indicates if the preferred operators should be loaded. */
   operatorPrefer?: Maybe<Scalars["Boolean"]>;
-  /** Operator prioritization for a route */
+  /** Operator prioritization for a route. */
   operators?: Maybe<RouteOperatorsInput>;
-  /** Optional flag to specify the season */
+  /** Optional flag to specify the season. */
   season?: Maybe<RouteSeason>;
-  /** Percentage for a minimum limit of a battery capacity before a recharge. The value should be between 0 and 60, with a default of 10% */
+  /** Percentage for a minimum limit of a battery capacity before a recharge. The value should be between 0 and 60, with a default of 10%. */
   safeRiskMargin?: Maybe<Scalars["Int"]>;
-  /** Mode that indicates if we optimize the charging time or always charge to the maximum capacity */
+  /** Mode that indicates if we optimize the charging time or always charge to the maximum capacity. */
   chargeMode?: Maybe<ChargeMode>;
-  /** Origin of a route */
+  /** Origin of a route. */
   origin: FeaturePointInput;
-  /** Destination of a route */
+  /** Destination of a route. */
   destination: FeaturePointInput;
-  /** An optional list of locations where we should stop */
+  /** An optional list of locations where we should stop. */
   via?: Maybe<Array<Maybe<FeaturePointInput>>>;
-  /** Alternative stations along a route within a specified radius in meters (minimum 500, maximum 5000) */
+  /** Alternative stations along a route within a specified radius in meters (minimum 500, maximum 5000). */
   stationsAlongRouteRadius?: Maybe<Scalars["Int"]>;
-  /** Deprecated: all routes will have turn-by-turn instructions prepared. Boolean will be ignored */
+  /** Deprecated: all routes will have turn-by-turn instructions prepared. Boolean will be ignored. */
   instructions?: Maybe<Scalars["Boolean"]>;
 };
 
 export type RequestUser = {
-  /** ID of the user */
+  /** ID of the user. */
   id?: Maybe<Scalars["ID"]>;
 };
 
@@ -3986,88 +4000,88 @@ export type ReviewUser = {
 };
 
 export type Route = {
-  /** Recommended route */
+  /** Recommended route. */
   route?: Maybe<RouteAlternative>;
-  /** Available alternatives */
+  /** Available alternatives. */
   alternatives?: Maybe<Array<Maybe<RouteAlternative>>>;
-  /** EV specific data for a route request */
+  /** EV specific data for a route request. */
   ev?: Maybe<RequestEv>;
-  /** Route telemetry data */
+  /** Route telemetry data. */
   telemetry?: Maybe<Scalars["JSON"]>;
-  /** @deprecated You will receive null values */
+  /** @deprecated You will receive null values. */
   user?: Maybe<RequestUser>;
-  /** Route request data */
+  /** Route request data. */
   routeRequest?: Maybe<RequestRoute>;
-  /** Application who requested a route */
+  /** Application who requested a route. */
   app?: Maybe<RouteApp>;
-  /** Route status */
+  /** Route status. */
   status?: Maybe<RouteStatus>;
 };
 
 export type RouteAlternative = {
-  /** ID of a route alternative */
+  /** ID of a route alternative. */
   id?: Maybe<Scalars["ID"]>;
-  /** Type of alternative route */
+  /** Type of alternative route. */
   type?: Maybe<RouteAlternativeType>;
-  /** Number of charges along a route */
+  /** Number of charges along a route. */
   charges?: Maybe<Scalars["Int"]>;
-  /** Number of available charges along a route */
+  /** Number of available charges along a route. */
   chargesAvailable?: Maybe<Scalars["Int"]>;
-  /** Number of occupied charges along a route */
+  /** Number of occupied charges along a route. */
   chargesOccupied?: Maybe<Scalars["Int"]>;
-  /** Number of unknown charges along a route */
+  /** Number of unknown charges along a route. */
   chargesUnknown?: Maybe<Scalars["Int"]>;
-  /** Number of out of order charges along a route */
+  /** Number of out of order charges along a route. */
   chargesOutOfOrder?: Maybe<Scalars["Int"]>;
-  /** Total distance of a route in meters */
+  /** Total distance of a route in meters. */
   distance?: Maybe<Scalars["Int"]>;
-  /** Total duration of a route, including charge time, in seconds */
+  /** Total duration of a route, including charge time, in seconds. */
   duration?: Maybe<Scalars["Int"]>;
-  /** Total energy used for a route in kWh */
+  /** Total energy used for a route in kWh. */
   consumption?: Maybe<Scalars["Float"]>;
-  /** Total time required to charge for an entire route, in seconds */
+  /** Total time required to charge for an entire route, in seconds. */
   chargeTime?: Maybe<Scalars["Float"]>;
   /**
-   * Amenity ranking for an alternative
+   * Amenity ranking for an alternative.
    * @deprecated Will be removed in the future
    */
   amenityRanking?: Maybe<Scalars["Int"]>;
-  /** Range, in meters, available at the beginning of a trip */
+  /** Range, in meters, available at the beginning of a trip. */
   rangeStart?: Maybe<Scalars["Int"]>;
-  /** Total energy in a battery at the beginning of a trip, in kWh */
+  /** Total energy in a battery at the beginning of a trip, in kWh. */
   rangeStartKwh?: Maybe<Scalars["Float"]>;
-  /** Total energy in a battery at the beginning of a trip, in percentage */
+  /** Total energy in a battery at the beginning of a trip, in percentage. */
   rangeStartPercentage?: Maybe<Scalars["Int"]>;
   /** Remaining range, in meters, at the end of a trip. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEnd?: Maybe<Scalars["Int"]>;
   /** Remaining range, energy in kWh, at the end of a trip. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
-  /** Remaining range, energy in percentage, at the end of a trip */
+  /** Remaining range, energy in percentage, at the end of a trip. */
   rangeEndPercentage?: Maybe<Scalars["Int"]>;
-  /** Text information about a route direction */
+  /** Text information about a route direction. */
   via?: Maybe<Scalars["String"]>;
-  /** Polyline containing encoded coordinates */
+  /** Polyline containing encoded coordinates. */
   polyline?: Maybe<Scalars["String"]>;
-  /** Path elevation, distance, duration, consumption and speed values, grouped into 100 segments */
+  /** Path elevation, distance, duration, consumption and speed values, grouped into 100 segments. */
   pathPlot?: Maybe<Array<Maybe<PathSegment>>>;
   /**
-   * Elevation values. Each elevationPlot has a hundred points, independent of the length of a route
+   * Elevation values. Each elevationPlot has a hundred points, independent of the length of a route.
    * @deprecated Will be removed in the future; Use the pathPlot property
    */
   elevationPlot?: Maybe<Array<Maybe<Scalars["Float"]>>>;
-  /** Total number of meters which are going up on a route */
+  /** Total number of meters which are going up on a route. */
   elevationUp?: Maybe<Scalars["Float"]>;
-  /** Total number of meters which are going down on a route */
+  /** Total number of meters which are going down on a route. */
   elevationDown?: Maybe<Scalars["Float"]>;
-  /** Highest value from the elevation array */
+  /** Highest value from the elevation array. */
   elevationMax?: Maybe<Scalars["Float"]>;
-  /** Money and CO2 saving information */
+  /** Money and CO2 saving information. */
   saving?: Maybe<RouteAlternativeSaving>;
-  /** Legs of the route */
+  /** Legs of the route. */
   legs?: Maybe<Array<Maybe<RouteLeg>>>;
-  /** List of raw turn-by-turn navigation instructions */
+  /** List of raw turn-by-turn navigation instructions. */
   instructions?: Maybe<Array<Maybe<RouteInstruction>>>;
-  /** Alternative stations along a route within specified radius in meters. Only if it was provided at newRoute mutation */
+  /** Alternative stations along a route within specified radius in meters. Only if it was provided at newRoute mutation. */
   stationsAlongRoute?: Maybe<Array<Maybe<RouteStationsAlong>>>;
   /** Tags of a route alternative. Values: road, highway, toll, ferry, etc. */
   tags?: Maybe<Array<Maybe<RouteTagType>>>;
@@ -4078,66 +4092,251 @@ export type RouteAlternativepolylineArgs = {
 };
 
 export type RouteAlternativeSaving = {
-  /** Total amount of CO2, in grams, which would be used with a petrol vehicle */
+  /** Total amount of CO2, in grams, which would be used with a gasoline vehicle. */
   co2?: Maybe<Scalars["String"]>;
-  /** Money saved by a user driving this route with the electric vehicle */
+  /** Money saved by a user driving this route with the electric vehicle. */
   money?: Maybe<Scalars["String"]>;
-  /** Currency */
+  /** Currency. */
   currency?: Maybe<Scalars["String"]>;
-  /** Average gas price with which the calculation was made */
+  /** Average gas price with which the calculation was made. */
   averageGasPrice?: Maybe<Scalars["String"]>;
-  /** Average energy price with which the calculation was made */
+  /** Average energy price with which the calculation was made. */
   averageEnergyPrice?: Maybe<Scalars["String"]>;
 };
 
-/** Types of an alternative route */
+/** Types of an alternative route. */
 export enum RouteAlternativeType {
-  /** Fastest route between origin and destination */
+  /** Fastest route between origin and destination. */
   FASTEST = "fastest",
-  /** Best matching route based on operator and amenities preferences */
+  /** Best matching route based on operator and amenities preferences. */
   BESTMATCHING = "bestMatching",
-  /** An alternative to the fastest route */
+  /** An alternative to the fastest route. */
   ALTERNATIVE = "alternative"
 }
 
-/** Amenity preferences for a route */
+/** Amenity preferences for a route. */
 export type RouteAmenityPreferences = {
-  /** Desired amenities near all charge-stops along a route, with a 1 kilometer radius */
+  /** Desired amenities near all charge-stops along a route, with a 1 kilometer radius. */
   all_charge_stops?: Maybe<Array<AmenityType>>;
-  /** Scheduled charge stops, with a specified amenity and timeline */
+  /** Scheduled charge stops, with a specified amenity and timeline. */
   scheduled_charge_stops?: Maybe<Array<RouteScheduledChargeStop>>;
 };
 
 export type RouteApp = {
-  /** ID of the app who requested a route */
+  /** ID of the app who requested a route. */
   id?: Maybe<Scalars["ID"]>;
 };
 
+export type RouteEmbeddedEmissions = {
+  /** Total embedded emissions. */
+  total: Scalars["Float"];
+  /** Total manufacturing emissions. */
+  manufacturing: RouteEmbeddedManufacturingEmissions;
+  /** Total distribution related emissions. */
+  distribution: Scalars["Float"];
+  /** Distribution sea segment emissions. */
+  maritime: RouteEmbeddedMaritimeEmissions;
+  /** Distribution land segment emissions. */
+  land: RouteEmbeddedLandEmissions;
+};
+
+export type RouteEmbeddedEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedEmissionsdistributionArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedLandEmissions = {
+  /** Total embedded land emissions. */
+  total: Scalars["Float"];
+  /** Distribution land segment emissions from fuel consumption. */
+  fuel: Scalars["Float"];
+  /** Distribution land segment lifecycle emissions. */
+  lifecycle: Scalars["Float"];
+};
+
+export type RouteEmbeddedLandEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedLandEmissionsfuelArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedLandEmissionslifecycleArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedManufacturingEmissions = {
+  /** Total embedded manufacturing emissions. */
+  total: Scalars["Float"];
+  /** Body manufacturing emissions. */
+  body: Scalars["Float"];
+  /** Lithium ion battery manufacturing emissions. */
+  battery?: Maybe<Scalars["Float"]>;
+};
+
+export type RouteEmbeddedManufacturingEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedManufacturingEmissionsbodyArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedManufacturingEmissionsbatteryArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedMaritimeEmissions = {
+  /** Total embedded maritime emissions. */
+  total: Scalars["Float"];
+  /** Fuel related sea segment emissions. */
+  fuel: Scalars["Float"];
+  /** Port facility related sea segment emissions. */
+  port: Scalars["Float"];
+  /** Idling related sea segment emissions. */
+  idle: Scalars["Float"];
+  /** Distributed lifecycle related sea segment emissions. */
+  lifecycle: Scalars["Float"];
+};
+
+export type RouteEmbeddedMaritimeEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedMaritimeEmissionsfuelArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedMaritimeEmissionsportArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedMaritimeEmissionsidleArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmbeddedMaritimeEmissionslifecycleArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEmissions = {
+  /** ID of the route for which we retrieve the emissions profile. */
+  route_id: Scalars["ID"];
+  /** ID of the route alternative for which we retrieve the emissions profile. */
+  route_alternative_id: Scalars["ID"];
+  /** Emissions profile for the vehicle used in route. */
+  route_vehicle: RouteVehicleEmissions;
+  /** Emissions profile for the internal combustion engine equivalent. */
+  internal_combustion_vehicle: RouteInternalCombustionVehicleEmissions;
+};
+
+export type RouteEmissionsinternal_combustion_vehicleArgs = {
+  fuel_type?: Maybe<RouteOperationalFuelType>;
+};
+
+export type RouteEndOfLifeEmissions = {
+  /** Total end of life emissions. */
+  total: Scalars["Float"];
+  /** Total fluid related end of life emissions. */
+  fluids: RouteEndOfLifeFluidsEmissions;
+  /** Battery related end of life emissions. */
+  battery: Scalars["Float"];
+  /** Tire related end of life emissions. */
+  tires: Scalars["Float"];
+  /** Body end of life emissions. */
+  body: Scalars["Float"];
+  /** Transport end of life emissions. */
+  transport: Scalars["Float"];
+};
+
+export type RouteEndOfLifeEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeEmissionsbatteryArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeEmissionstiresArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeEmissionsbodyArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeEmissionstransportArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeFluidsEmissions = {
+  /** Total end of life fluids emissions. */
+  total: Scalars["Float"];
+  /** Total wiper fluid end of life emissions. */
+  wiper: Scalars["Float"];
+  /** Total brake fluid end of life emissions. */
+  brake: Scalars["Float"];
+  /** Total powertrain coolant fluid end of life emissions. */
+  coolant: Scalars["Float"];
+  /** Total transmission fluid end of life emissions. */
+  transmission: Scalars["Float"];
+  /** Total motor oil end of life emissions. */
+  motor_oil?: Maybe<Scalars["Float"]>;
+};
+
+export type RouteEndOfLifeFluidsEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeFluidsEmissionswiperArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeFluidsEmissionsbrakeArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeFluidsEmissionscoolantArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeFluidsEmissionstransmissionArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteEndOfLifeFluidsEmissionsmotor_oilArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
 export type RouteInstruction = {
-  /** Information about the points on the polyline */
+  /** Information about the points on the polyline. */
   points?: Maybe<RouteInstructionPoints>;
-  /** Sign of the instruction. See `RouteInstructionSign` */
+  /** Sign of the instruction. See `RouteInstructionSign`. */
   sign?: Maybe<RouteInstructionSign>;
-  /** Name of the street on which the instruction is */
+  /** Name of the street on which the instruction is. */
   name?: Maybe<Scalars["String"]>;
-  /** Distance, in meters, of the current route instruction */
+  /** Distance, in meters, of the current route instruction. */
   distance?: Maybe<Scalars["Int"]>;
-  /** Duration, in seconds, of the current route instruction */
+  /** Duration, in seconds, of the current route instruction. */
   time?: Maybe<Scalars["Int"]>;
-  /** Exit number on a roundabout. This field exists only on sign `USE_ROUNDABOUT` (6), otherwise is null */
+  /** Exit number on a roundabout. This field exists only on sign `USE_ROUNDABOUT` (6), otherwise is null. */
   exit_number?: Maybe<Scalars["Int"]>;
-  /** Curvature angle between the roundabout and street you exit the roundabout. This field exists only on sign USE_ROUNDABOUT (6), otherwise is null */
+  /** Curvature angle between the roundabout and street you exit the roundabout. This field exists only on sign USE_ROUNDABOUT (6), otherwise is null. */
   turn_angle?: Maybe<Scalars["Float"]>;
 };
 
 export type RouteInstructionPoints = {
-  /** Number of polyline points which are included in this instruction */
+  /** Number of polyline points which are included in this instruction. */
   size?: Maybe<Scalars["Int"]>;
-  /** The interval of points that are included in this instruction, an array with 2 values, where the first value is the index of the polyline where the interval starts. The second value is where it ends */
+  /** The interval of points that are included in this instruction, an array with 2 values, where the first value is the index of the polyline where the interval starts. The second value is where it ends. */
   interval?: Maybe<Array<Maybe<Scalars["Int"]>>>;
 };
 
-/** Sign belonging to the instruction indicating the main maneuver */
+/** Sign belonging to the instruction indicating the main maneuver. */
 export enum RouteInstructionSign {
   UNKNOWN = "UNKNOWN",
   U_TURN_UNKNOWN = "U_TURN_UNKNOWN",
@@ -4163,68 +4362,115 @@ export enum RouteInstructionSign {
   IGNORE = "IGNORE"
 }
 
+export type RouteInternalCombustionVehicleEmissions = {
+  /** Total emissions. */
+  total: Scalars["Float"];
+  /** Embedded emissions. */
+  embedded: RouteEmbeddedEmissions;
+  /** Operational emissions. */
+  operational: RouteInternalCombustionVehicleOperationalEmissions;
+  /** End of life emissions. */
+  end_of_life: RouteEndOfLifeEmissions;
+  /** Emissions info for the legs in the order as within the route. */
+  legs: Array<RouteInternalCombustionVehicleLegEmissions>;
+};
+
+export type RouteInternalCombustionVehicleEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteInternalCombustionVehicleLegEmissions = {
+  /** Total emissions for the leg. */
+  total: Scalars["Float"];
+  /** Embedded emissions for the leg. */
+  embedded: RouteEmbeddedEmissions;
+  /** Operational emissions for the leg. */
+  operational: RouteInternalCombustionVehicleOperationalEmissions;
+  /** End of life emissions for the leg. */
+  end_of_life: RouteEndOfLifeEmissions;
+};
+
+export type RouteInternalCombustionVehicleLegEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteInternalCombustionVehicleOperationalEmissions = {
+  /** Total operational emissions. */
+  total: Scalars["Float"];
+  /** Fuel emissions data. */
+  fuel: RouteOperationalFuelEmissions;
+  /** Total road infrastructure emissions. */
+  infrastructure: RouteOperationalInfrastructureEmissions;
+  /** Total maintenance emissions. */
+  maintenance: RouteOperationalMaintenanceEmissions;
+};
+
+export type RouteInternalCombustionVehicleOperationalEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
 export type RouteLeg = {
-  /** ID of a leg */
+  /** ID of a leg. */
   id?: Maybe<Scalars["ID"]>;
-  /** Distance from the start to the end of a leg, in meters */
+  /** Distance from the start to the end of a leg, in meters. */
   distance?: Maybe<Scalars["Int"]>;
-  /** Total drive time from the start to the end of a leg, in seconds */
+  /** Total drive time from the start to the end of a leg, in seconds. */
   duration?: Maybe<Scalars["Int"]>;
-  /** Total energy used in a leg in kWh */
+  /** Total energy used in a leg in kWh. */
   consumption?: Maybe<Scalars["Float"]>;
-  /** Range, in meters, available at the beginning of a leg */
+  /** Range, in meters, available at the beginning of a leg. */
   rangeStart?: Maybe<Scalars["Int"]>;
-  /** Total energy in a battery at the beginning of a leg, in kWh */
+  /** Total energy in a battery at the beginning of a leg, in kWh. */
   rangeStartKwh?: Maybe<Scalars["Float"]>;
-  /** Total energy in a battery at the beginning of a trip, in percentage */
+  /** Total energy in a battery at the beginning of a trip, in percentage. */
   rangeStartPercentage?: Maybe<Scalars["Int"]>;
   /** Range, in meters, available at the end of a leg. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEnd?: Maybe<Scalars["Int"]>;
   /** Total energy left in a battery at the end of a leg, in kWh. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
-  /** Remaining range, energy in percentage, at the end of a trip */
+  /** Remaining range, energy in percentage, at the end of a trip. */
   rangeEndPercentage?: Maybe<Scalars["Int"]>;
-  /** Origin point location */
+  /** Origin point location. */
   origin?: Maybe<FeaturePoint>;
-  /** Destination point location */
+  /** Destination point location. */
   destination?: Maybe<FeaturePoint>;
-  /** Type of a leg */
+  /** Type of a leg. */
   type?: Maybe<LegType>;
-  /** Name of a destination. This is the station name in case a user should charge or the name of the location in case this was provided */
+  /** Name of a destination. This is the station name in case a user should charge or the name of the location in case this was provided. */
   name?: Maybe<Scalars["String"]>;
-  /** ID of a station */
+  /** ID of a station. */
   stationId?: Maybe<Scalars["String"]>;
-  /** ID of an operator */
+  /** ID of an operator. */
   operatorId?: Maybe<Scalars["String"]>;
-  /** Name of an operator */
+  /** Name of an operator. */
   operatorName?: Maybe<Scalars["String"]>;
-  /** Ranking of an operator */
+  /** Ranking of an operator. */
   operatorRanking?: Maybe<Scalars["Int"]>;
-  /** Total time required to charge a battery until 80%, in seconds */
+  /** Total time required to charge a battery until 80%, in seconds. */
   chargeTime?: Maybe<Scalars["Int"]>;
-  /** Recommended EVSE where to charge */
+  /** Recommended EVSE where to charge. */
   evse?: Maybe<EVSE>;
-  /** Recommended connector for charging */
+  /** Recommended connector for charging. */
   connector?: Maybe<Connector>;
-  /** Number of compatible plugs available at a charge station */
+  /** Number of compatible plugs available at a charge station. */
   plugsAvailable?: Maybe<Scalars["Int"]>;
-  /** Number of compatible plugs occupied at a charge station */
+  /** Number of compatible plugs occupied at a charge station. */
   plugsOccupied?: Maybe<Scalars["Int"]>;
-  /** Number of compatible plugs unknown at a charge station */
+  /** Number of compatible plugs unknown at a charge station. */
   plugsUnknown?: Maybe<Scalars["Int"]>;
-  /** Number of compatible plugs out of order at a charge station */
+  /** Number of compatible plugs out of order at a charge station. */
   plugsOutOfOrder?: Maybe<Scalars["Int"]>;
-  /** Total number of compatible plugs at a charge station */
+  /** Total number of compatible plugs at a charge station. */
   plugsCount?: Maybe<Scalars["Int"]>;
-  /** Polyline containing encoded coordinates */
+  /** Polyline containing encoded coordinates. */
   polyline?: Maybe<Scalars["String"]>;
-  /** Steps of a leg */
+  /** Steps of a leg. */
   steps?: Maybe<Array<Maybe<RouteStep>>>;
-  /** Tags of a leg. Values: road, highway, toll, ferry */
+  /** Tags of a leg. Values: road, highway, toll, ferry. */
   tags?: Maybe<Array<Maybe<RouteTagType>>>;
-  /** Cargo weight in a vehicle for the duration of a leg, in kg */
+  /** Cargo weight in a vehicle for the duration of a leg, in kg. */
   cargo?: Maybe<Scalars["Float"]>;
-  /** Number of occupants in a vehicle for the duration of a leg */
+  /** Number of occupants in a vehicle for the duration of a leg. */
   occupants?: Maybe<Scalars["Int"]>;
 };
 
@@ -4251,170 +4497,532 @@ export type RouteMetaWarning = {
   data?: Maybe<Scalars["JSON"]>;
 };
 
-/** Prioritized operators for a route calculation */
+/** Köppen climate classification. */
+export enum RouteOperationalElectricityClimate {
+  /** Tropical rain forest climate. */
+  AF = "Af",
+  /** Tropical monsoon climate. */
+  AM = "Am",
+  /** Tropical savanna climate, dry summer. */
+  AW = "Aw",
+  /** Tropical savanna climate, dry winter. */
+  AS = "As",
+  /** Hot desert climate. */
+  BWH = "BWh",
+  /** Cold desert climate. */
+  BWK = "BWk",
+  /** Hot semi-arid climate. */
+  BSH = "BSh",
+  /** Cold semi-arid climate. */
+  BSK = "BSk",
+  /** Monsoon-influenced humid subtropical climate. */
+  CWA = "Cwa",
+  /** Subtropical highland climate. */
+  CWB = "Cwb",
+  /** Cold subtropical highland climate. */
+  CWC = "Cwc",
+  /** Humid subtropical climate. */
+  CFA = "Cfa",
+  /** Temperate oceanic climate. */
+  CFB = "Cfb",
+  /** Sub polar oceanic climate. */
+  CFC = "Cfc",
+  /** Hot-summer Mediterranean climate. */
+  CSA = "Csa",
+  /** Warm-summer Mediterranean climate. */
+  CSB = "Csb",
+  /** Cold-summer Mediterranean climate. */
+  CSC = "Csc",
+  /** Monsoon-influenced hot-summer humid continental climate. */
+  DWA = "Dwa",
+  /** Monsoon-influenced warm-summer humid continental climate. */
+  DWB = "Dwb",
+  /** Monsoon-influenced subarctic climate. */
+  DWC = "Dwc",
+  /** Monsoon-influenced extremely cold subarctic climate. */
+  DWD = "Dwd",
+  /** Hot-summer humid continental climate. */
+  DFA = "Dfa",
+  /** Warm-summer humid continental climate. */
+  DFB = "Dfb",
+  /** Subarctic climate. */
+  DFC = "Dfc",
+  /** Extremely cold subarctic climate. */
+  DFD = "Dfd",
+  /** Mediterranean-influenced hot-summer humid continental climate. */
+  DSA = "Dsa",
+  /** Mediterranean-influenced warm-summer humid continental climate. */
+  DSB = "Dsb",
+  /** Mediterranean-influenced subarctic climate. */
+  DSC = "Dsc",
+  /** Mediterranean-influenced extremely cold subarctic climate. */
+  DSD = "Dsd",
+  /** Tundra climate. */
+  ET = "ET",
+  /** Ice cap climate. */
+  EF = "EF"
+}
+
+export type RouteOperationalElectricityEmissions = {
+  /** Total electricity emissions. */
+  total: Scalars["Float"];
+  /** Base emissions without efficiency losses. */
+  base_emissions: Scalars["Float"];
+  /** Emissions for electricity lost in the battery. */
+  battery_losses: Scalars["Float"];
+  /** Emissions for electricity lost in transmission. */
+  transmission_losses: Scalars["Float"];
+  /** Emissions for electricity lost during charging. */
+  chargepoint_losses: Scalars["Float"];
+  /** Electricity efficiency information. */
+  electricity_efficiency: RouteOperationalElectricityEmissionsEfficiency;
+  /** Electricity intensity information. */
+  electricity_intensity: RouteOperationalElectricityEmissionsIntensity;
+};
+
+export type RouteOperationalElectricityEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalElectricityEmissionsbase_emissionsArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalElectricityEmissionsbattery_lossesArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalElectricityEmissionstransmission_lossesArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalElectricityEmissionschargepoint_lossesArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalElectricityEmissionsEfficiency = {
+  /** Average total electricity efficiency. */
+  total_efficiency: Scalars["Float"];
+  /** Average efficiency of the battery. */
+  battery_efficiency: Scalars["Float"];
+  /** Average efficiency of electricity transmission. */
+  transmission_efficiency: Scalars["Float"];
+  /** Average base regional grid efficiency. */
+  base_transmission_efficiency: Scalars["Float"];
+  /** Average transmission efficiency change due to temperature. */
+  transmission_efficiency_temperature_modifier: Scalars["Float"];
+  /** Average efficiency of the chargepoint. */
+  chargepoint_efficiency: Scalars["Float"];
+  /** Average evse efficiency. */
+  evse_efficiency: Scalars["Float"];
+  /** Average breaker efficiency. */
+  breaker_efficiency: Scalars["Float"];
+  /** Average power electronics unit efficiency. */
+  power_electronics_unit_efficiency: Scalars["Float"];
+  /** Average transformer efficiency. */
+  transformer_efficiency: Scalars["Float"];
+  /** Change in chargepoint efficiency due to temperature. */
+  chargepoint_efficiency_temperature_modifier: Scalars["Float"];
+  /** Average charging current in ampere. */
+  average_charging_current: Scalars["Float"];
+  /** Average charging voltage in volts. */
+  average_charging_voltage: Scalars["Float"];
+  /** Average outside temperature. */
+  average_temperature: Scalars["Float"];
+  /** Average regional temperature. */
+  average_regional_temperature: Scalars["Float"];
+};
+
+export type RouteOperationalElectricityEmissionsEfficiencyaverage_temperatureArgs = {
+  unit?: Maybe<TemperatureUnit>;
+};
+
+export type RouteOperationalElectricityEmissionsEfficiencyaverage_regional_temperatureArgs = {
+  unit?: Maybe<TemperatureUnit>;
+};
+
+export type RouteOperationalElectricityEmissionsGenerationMethods = {
+  /** Fraction of coal production. */
+  coal: Scalars["Float"];
+  /** Fraction of gas production. */
+  gas: Scalars["Float"];
+  /** Fraction of hydroelectric production. */
+  hydro: Scalars["Float"];
+  /** Fraction of solar production. */
+  solar: Scalars["Float"];
+  /** Fraction of wind production. */
+  wind: Scalars["Float"];
+  /** Fraction of oil production. */
+  oil: Scalars["Float"];
+  /** Fraction of nuclear production. */
+  nuclear: Scalars["Float"];
+  /** Fraction of biofuel production. */
+  biofuel: Scalars["Float"];
+  /** Fraction of other misc renewable production. */
+  other: Scalars["Float"];
+};
+
+export type RouteOperationalElectricityEmissionsIntensity = {
+  /** Average route electricity emissions intensity in unit CO2e/kWh. */
+  total_electricity_intensity: Scalars["Float"];
+  /** Base regional electricity emissions intensity in unit CO2e/kWh. */
+  base_electricity_intensity: Scalars["Float"];
+  /** Generation methods of electricity production. */
+  generation_methods: RouteOperationalElectricityEmissionsGenerationMethods;
+  /** Average emissions intensity of processing and transport of primary energy, power generation infrastructure, etc in unit CO2e/kWh. */
+  electricity_infrastructure_intensity: Scalars["Float"];
+  /** Season for which the route was calculated. */
+  season: RouteOperationalElectricitySeason;
+  /** The climate for which the route was calculated. */
+  climate: RouteOperationalElectricityClimate;
+  /** Average electricity demand at the time of route charges as a fraction of average demand. */
+  average_electricity_demand: Scalars["Float"];
+  /** Fraction of regional power generation that is not affected by demand (always on). */
+  base_load_fraction: Scalars["Float"];
+};
+
+export type RouteOperationalElectricityEmissionsIntensitytotal_electricity_intensityArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalElectricityEmissionsIntensitybase_electricity_intensityArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalElectricityEmissionsIntensityelectricity_infrastructure_intensityArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+/** Yearly seasons. */
+export enum RouteOperationalElectricitySeason {
+  /** Winter season. */
+  WINTER = "winter",
+  /** Spring season. */
+  SPRING = "spring",
+  /** Summer season. */
+  SUMMER = "summer",
+  /** Fall season. */
+  FALL = "fall"
+}
+
+export type RouteOperationalFluidEmissions = {
+  /** Total fluid. */
+  total: Scalars["Float"];
+  /** Total wiper fluid maintenance emissions. */
+  wiper: Scalars["Float"];
+  /** Total brake fluid maintenance emissions. */
+  brake: Scalars["Float"];
+  /** Total powertrain coolant fluid maintenance emissions. */
+  coolant: Scalars["Float"];
+  /** Total transmission fluid maintenance emissions. */
+  transmission: Scalars["Float"];
+  /** Total motor oil maintenance emissions. */
+  motor_oil?: Maybe<Scalars["Float"]>;
+};
+
+export type RouteOperationalFluidEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalFluidEmissionswiperArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalFluidEmissionsbrakeArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalFluidEmissionscoolantArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalFluidEmissionstransmissionArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalFluidEmissionsmotor_oilArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalFuelEmissions = {
+  /** Total fuel for the route. */
+  total: Scalars["Float"];
+  /** Direct (combustion) emissions of the fuel. */
+  direct_emissions: Scalars["Float"];
+  /** Indirect (production and transport) emissions of the fuel. */
+  indirect_emissions: Scalars["Float"];
+  /** Fuel consumption for the route in litres. */
+  fuel_consumption: Scalars["Float"];
+  /** Estimated internal combustion vehicle weight. */
+  weight: Scalars["Float"];
+  /** Estimated internal combustion vehicle engine torque. */
+  engine_torque: Scalars["Float"];
+  /** Average powertrain efficiency. */
+  powertrain_efficiency: Scalars["Float"];
+  /** Average base powertrain efficiency. */
+  base_powertrain_efficiency: Scalars["Float"];
+  /** Speed related change in powertrain efficiency from the base. */
+  powertrain_efficiency_speed_modifier: Scalars["Float"];
+  /** Average speed of the vehicle. */
+  average_speed: Scalars["Float"];
+};
+
+export type RouteOperationalFuelEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalFuelEmissionsdirect_emissionsArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalFuelEmissionsindirect_emissionsArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalFuelEmissionsfuel_consumptionArgs = {
+  unit?: Maybe<FuelUnit>;
+};
+
+export type RouteOperationalFuelEmissionsweightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type RouteOperationalFuelEmissionsengine_torqueArgs = {
+  unit?: Maybe<TorqueUnit>;
+};
+
+export type RouteOperationalFuelEmissionsaverage_speedArgs = {
+  unit?: Maybe<SpeedUnit>;
+};
+
+/** Fuel types. */
+export enum RouteOperationalFuelType {
+  /** Gasoline fuel. */
+  GASOLINE = "gasoline",
+  /** Diesel fuel. */
+  DIESEL = "diesel"
+}
+
+export type RouteOperationalInfrastructureEmissions = {
+  /** Total infrastructure. */
+  total: Scalars["Float"];
+  /** Embedded (construction, decommissioning, etc) emissions cost. */
+  embedded: Scalars["Float"];
+  /** Induced maintenance emissions. */
+  maintenance: Scalars["Float"];
+};
+
+export type RouteOperationalInfrastructureEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalInfrastructureEmissionsembeddedArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalInfrastructureEmissionsmaintenanceArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalMaintenanceEmissions = {
+  /** Total maintenance. */
+  total: Scalars["Float"];
+  /** Total fluid related maintenance emissions. */
+  fluids: RouteOperationalFluidEmissions;
+  /** Battery related maintenance emissions. */
+  battery: Scalars["Float"];
+  /** Tire related maintenance emissions. */
+  tires: Scalars["Float"];
+  /** Miscellaneous component maintenance emissions. */
+  components: Scalars["Float"];
+  /** Accident repair related maintenance emissions. */
+  repair: Scalars["Float"];
+};
+
+export type RouteOperationalMaintenanceEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalMaintenanceEmissionsbatteryArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalMaintenanceEmissionstiresArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalMaintenanceEmissionscomponentsArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteOperationalMaintenanceEmissionsrepairArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+/** Prioritized operators for a route calculation. */
 export type RouteOperators = {
-  /** Flag indicating if the operators ranking should be preferred or required */
+  /** Flag indicating if the operators ranking should be preferred or required. */
   type?: Maybe<RouteOperatorsType>;
-  /** Ranking of an operator with multiple levels, each level having it's own penalty value */
+  /** Ranking of an operator with multiple levels, each level having it's own penalty value. */
   ranking?: Maybe<RouteOperatorsRanking>;
-  /** Operator IDs which should be excluded from a route */
+  /** Operator IDs which should be excluded from a route. */
   exclude?: Maybe<Array<Maybe<Scalars["ID"]>>>;
 };
 
-/** Prioritized operators for a route calculation */
+/** Prioritized operators for a route calculation. */
 export type RouteOperatorsInput = {
-  /** Flag indicating if the operators ranking should be preferred or required */
+  /** Flag indicating if the operators ranking should be preferred or required. */
   type?: Maybe<RouteOperatorsType>;
-  /** Ranking of an operator with multiple levels, each level having it's own penalty value */
+  /** Ranking of an operator with multiple levels, each level having it's own penalty value. */
   ranking?: Maybe<RouteOperatorsRankingInput>;
-  /** Operator IDs which should be excluded from a route */
+  /** Operator IDs which should be excluded from a route. */
   exclude?: Maybe<Array<Maybe<Scalars["ID"]>>>;
 };
 
-/** Ranking configuration for prioritized operators */
+/** Ranking configuration for prioritized operators. */
 export type RouteOperatorsRanking = {
-  /** Level 1 (most significant) for operator ranking */
+  /** Level 1 (most significant) for operator ranking. */
   level1?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 2 for operator ranking */
+  /** Level 2 for operator ranking. */
   level2?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 3 for operator ranking */
+  /** Level 3 for operator ranking. */
   level3?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 4 for operator ranking */
+  /** Level 4 for operator ranking. */
   level4?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 5 for operator ranking */
+  /** Level 5 for operator ranking. */
   level5?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 6 for operator ranking */
+  /** Level 6 for operator ranking. */
   level6?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 7 for operator ranking */
+  /** Level 7 for operator ranking. */
   level7?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 8 for operator ranking */
+  /** Level 8 for operator ranking. */
   level8?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 9 for operator ranking */
+  /** Level 9 for operator ranking. */
   level9?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 10 (least significant) for operator ranking */
+  /** Level 10 (least significant) for operator ranking. */
   level10?: Maybe<Array<Maybe<Scalars["ID"]>>>;
 };
 
-/** Ranking configuration for prioritized operators */
+/** Ranking configuration for prioritized operators. */
 export type RouteOperatorsRankingInput = {
-  /** Level 1 (most significant) for operator ranking */
+  /** Level 1 (most significant) for operator ranking. */
   level1?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 2 for operator ranking */
+  /** Level 2 for operator ranking. */
   level2?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 3 for operator ranking */
+  /** Level 3 for operator ranking. */
   level3?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 4 for operator ranking */
+  /** Level 4 for operator ranking. */
   level4?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 5 for operator ranking */
+  /** Level 5 for operator ranking. */
   level5?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 6 for operator ranking */
+  /** Level 6 for operator ranking. */
   level6?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 7 for operator ranking */
+  /** Level 7 for operator ranking. */
   level7?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 8 for operator ranking */
+  /** Level 8 for operator ranking. */
   level8?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 9 for operator ranking */
+  /** Level 9 for operator ranking. */
   level9?: Maybe<Array<Maybe<Scalars["ID"]>>>;
-  /** Level 10 (least significant) for operator ranking */
+  /** Level 10 (least significant) for operator ranking. */
   level10?: Maybe<Array<Maybe<Scalars["ID"]>>>;
 };
 
-/** Type of operator prioritization for a route */
+/** Type of operator prioritization for a route. */
 export enum RouteOperatorsType {
-  /** Default option. Operators ranking will not be taken into account if no type is given */
+  /** Default option. Operators ranking will not be taken into account if no type is given. */
   NONE = "none",
-  /** Operators given in the operators ranking will be preferred when calculating routes */
+  /** Operators given in the operators ranking will be preferred when calculating routes. */
   PREFERRED = "preferred",
-  /** Operators given in the operators ranking will be required when calculating routes, all other operators will be ignored */
+  /** Operators given in the operators ranking will be required when calculating routes, all other operators will be ignored. */
   REQUIRED = "required"
 }
 
 export type RoutePath = {
-  /** GeoJSON location of a route path segment */
+  /** GeoJSON location of a route path segment. */
   location?: Maybe<Point>;
-  /** Elevation (altitude) in meters */
+  /** Elevation (altitude) in meters. */
   elevation?: Maybe<Scalars["Int"]>;
-  /** Average speed, in km/h, for this route path segment */
+  /** Average speed, in km/h, for this route path segment. */
   averageSpeed?: Maybe<Scalars["Float"]>;
-  /** Recommended speed, in km/h for this route path segment to optimise the consumption */
+  /** Recommended speed, in km/h for this route path segment to optimise the consumption. */
   recommendedSpeed?: Maybe<Scalars["Float"]>;
-  /** Consumption, in kWh, of a route path segment */
+  /** Consumption, in kWh, of a route path segment. */
   consumption?: Maybe<Scalars["Float"]>;
-  /** Consumption, in kWh per km, of a route path segment */
+  /** Consumption, in kWh per km, of a route path segment. */
   consumptionPerKm?: Maybe<Scalars["Float"]>;
-  /** Distance, in meters, of a route path segment */
+  /** Distance, in meters, of a route path segment. */
   distance?: Maybe<Scalars["Float"]>;
-  /** Duration, in seconds, of a route path segment */
+  /** Duration, in seconds, of a route path segment. */
   duration?: Maybe<Scalars["Float"]>;
-  /** State of charge, in kWh, of a route path segment */
+  /** State of charge, in kWh, of a route path segment. */
   stateOfCharge?: Maybe<Scalars["Float"]>;
 };
 
-/** Scheduled charge stop along a route */
+/** Scheduled charge stop along a route. */
 export type RouteScheduledChargeStop = {
-  /** List of amenity types */
+  /** List of amenity types. */
   types?: Maybe<Array<Maybe<AmenityType>>>;
-  /** Duration at the amenity, in seconds */
+  /** Duration at the amenity, in seconds. */
   duration?: Maybe<Scalars["Int"]>;
-  /** Maximum allowed offset from the stop_after value in seconds. Default is 1800 */
+  /** Maximum allowed offset from the stop_after value in seconds. Default is 1800. */
   offset?: Maybe<Scalars["Int"]>;
-  /** Desired drive time before a scheduled stop after leaving the previous stop, in seconds */
+  /** Desired drive time before a scheduled stop after leaving the previous stop, in seconds. */
   stop_after?: Maybe<Scalars["Int"]>;
-  /** Maximum distance from a station to an amenity, in meters */
+  /** Maximum distance from a station to an amenity, in meters. */
   max_distance_from_station?: Maybe<Scalars["Int"]>;
 };
 
-/** The season of the route */
+/** The season of the route. */
 export enum RouteSeason {
-  /** We suppose it is summer and we have the best weather conditions */
+  /** We suppose it is summer and we have the best weather conditions. */
   SUMMER = "summer",
-  /** We suppose it is winter and we have the worst weather conditions */
+  /** We suppose it is winter and we have the worst weather conditions. */
   WINTER = "winter",
-  /** We fetch the current weather conditions */
+  /** We fetch the current weather conditions. */
   CURRENT = "current"
 }
 
 export type RouteStationsAlong = {
-  /** The ID of station */
+  /** The ID of station. */
   id?: Maybe<Scalars["String"]>;
-  /** Geojson location of a station */
+  /** Geojson location of a station. */
   location?: Maybe<Point>;
-  /** Speed of a station. A station along a route can be either fast or turbo */
+  /** Speed of a station. A station along a route can be either fast or turbo. */
   speed?: Maybe<StationSpeedType>;
-  /** Status of a station */
+  /** Status of a station. */
   status?: Maybe<ChargerStatus>;
-  /** The station uses a preferred operator */
+  /** The station uses a preferred operator. */
   preferredOperator?: Maybe<Scalars["Boolean"]>;
-  /** Distance in meters between station and route path */
+  /** Distance in meters between station and route path. */
   distance?: Maybe<Scalars["Int"]>;
 };
 
-/** The status of a route. The status can be pending, processing, done, not_found or error */
+/** The status of a route. The status can be pending, processing, done, not_found or error. */
 export enum RouteStatus {
-  /** Route is queued and pending processing. Temporary status */
+  /** Route is queued and pending processing. Temporary status. */
   PENDING = "pending",
-  /** We are computing the route for your request. Temporary status */
+  /** We are computing the route for your request. Temporary status. */
   PROCESSING = "processing",
-  /** We finished computing the route, with a result. Final status */
+  /** We finished computing the route, with a result. Final status. */
   DONE = "done",
-  /** We finished the computing the route, without any result. Final status */
+  /** We finished the computing the route, without any result. Final status. */
   NOT_FOUND = "not_found",
-  /** An error occurred while computing the route. Final status */
+  /** An error occurred while computing the route. Final status. */
   ERROR = "error"
 }
 
 export type RouteStep = {
-  /** ID of a step */
+  /** ID of a step. */
   id?: Maybe<Scalars["ID"]>;
-  /** Type of a step */
+  /** Type of a step. */
   type?: Maybe<StepType>;
-  /** Polyline containing encoded coordinates */
+  /** Polyline containing encoded coordinates. */
   polyline?: Maybe<Scalars["String"]>;
-  /** Distance from the start to the end of a step, in meters */
+  /** Distance from the start to the end of a step, in meters. */
   distance?: Maybe<Scalars["Int"]>;
-  /** Total drive time from the start to the end of a step, in seconds */
+  /** Total drive time from the start to the end of a step, in seconds. */
   duration?: Maybe<Scalars["Int"]>;
-  /** Total energy used in a step in kWh */
+  /** Total energy used in a step in kWh. */
   consumption?: Maybe<Scalars["Float"]>;
 };
 
@@ -4422,7 +5030,7 @@ export type RouteSteppolylineArgs = {
   decimals?: Maybe<Scalars["Int"]>;
 };
 
-/** Tags of a route */
+/** Tags of a route. */
 export enum RouteTagType {
   ROAD = "road",
   HIGHWAY = "highway",
@@ -4432,24 +5040,71 @@ export enum RouteTagType {
   CROSSBORDER = "crossborder"
 }
 
-/** Scheduled charge stop along a route */
+export type RouteVehicleEmissions = {
+  /** Total emissions. */
+  total: Scalars["Float"];
+  /** Embedded emissions. */
+  embedded: RouteEmbeddedEmissions;
+  /** Operational emissions. */
+  operational: RouteVehicleOperationalEmissions;
+  /** End of life emissions. */
+  end_of_life: RouteEndOfLifeEmissions;
+  /** Emissions info for the legs in the order as within the route. */
+  legs: Array<RouteVehicleLegEmissions>;
+};
+
+export type RouteVehicleEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteVehicleLegEmissions = {
+  /** Total emissions for the leg. */
+  total: Scalars["Float"];
+  /** Embedded emissions for the leg. */
+  embedded: RouteEmbeddedEmissions;
+  /** Operational emissions for the leg. */
+  operational: RouteVehicleOperationalEmissions;
+  /** End of life emissions for the leg. */
+  end_of_life: RouteEndOfLifeEmissions;
+};
+
+export type RouteVehicleLegEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+export type RouteVehicleOperationalEmissions = {
+  /** Total operational emissions. */
+  total: Scalars["Float"];
+  /** Electricity emissions data. */
+  electricity: RouteOperationalElectricityEmissions;
+  /** Total road infrastructure emissions. */
+  infrastructure: RouteOperationalInfrastructureEmissions;
+  /** Total maintenance emissions. */
+  maintenance: RouteOperationalMaintenanceEmissions;
+};
+
+export type RouteVehicleOperationalEmissionstotalArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
+/** Scheduled charge stop along a route. */
 export type ScheduledChargeStopInput = {
-  /** List of amenity types */
+  /** List of amenity types. */
   types: Array<AmenityType>;
-  /** Duration at the amenity, in seconds. The value should be between 900 and 86400 */
+  /** Duration at the amenity, in seconds. The value should be between 900 and 86400. */
   duration: Scalars["Int"];
-  /** Maximum allowed offset from the stop_after value in seconds. Default is 1800 */
+  /** Maximum allowed offset from the stop_after value in seconds. Default is 1800. */
   offset?: Maybe<Scalars["Int"]>;
-  /** Desired drive time for a scheduled stop after leaving the origin point, in seconds */
+  /** Desired drive time for a scheduled stop after leaving the origin point, in seconds. */
   stop_after: Scalars["Int"];
-  /** Maximum distance from a station to an amenity, in meters. The value should be between 0 and 1000. Default is 1000 */
+  /** Maximum distance from a station to an amenity, in meters. The value should be between 0 and 1000. Default is 1000. */
   max_distance_from_station?: Maybe<Scalars["Int"]>;
 };
 
 export enum SpeedUnit {
-  /** Return the speed in kilometers per hour */
+  /** Return the speed in kilometers per hour. */
   KILOMETERS_PER_HOUR = "kilometers_per_hour",
-  /** Return the speed in miles per hour */
+  /** Return the speed in miles per hour. */
   MILES_PER_HOUR = "miles_per_hour"
 }
 
@@ -4462,22 +5117,22 @@ export type StandardStats = {
 };
 
 export type StateOfChargeInput = {
-  /** Value of the state of charge of the vehicle */
+  /** Value of the state of charge of the vehicle. */
   value: Scalars["Float"];
-  /** Type of the state of charge of the vehicle */
+  /** Type of the state of charge of the vehicle. */
   type: StateOfChargeUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
 export enum StateOfChargeUnit {
-  /** Return the state of charge in kilometers */
+  /** Return the state of charge in kilometers. */
   KILOMETER = "kilometer",
-  /** Return the state of charge in miles */
+  /** Return the state of charge in miles. */
   MILE = "mile",
-  /** Return the state of charge in kilowatt hours */
+  /** Return the state of charge in kilowatt hours. */
   KILOWATT_HOUR = "kilowatt_hour",
-  /** Return the state of charge as a percentage */
+  /** Return the state of charge as a percentage. */
   PERCENTAGE = "percentage"
 }
 
@@ -4685,13 +5340,13 @@ export type StationRoaming = {
   ios_app_link?: Maybe<Scalars["String"]>;
 };
 
-/** The station speed type */
+/** The station speed type. */
 export enum StationSpeedType {
-  /** Slow charging (below 43 kWh) */
+  /** Slow charging (below 43 kWh). */
   SLOW = "slow",
-  /** Fast charging stations (above 43 kWh and below 150 kWh) */
+  /** Fast charging stations (above 43 kWh and below 150 kWh). */
   FAST = "fast",
-  /** Ultra fast charging stations (above 150 kWh) */
+  /** Ultra fast charging stations (above 150 kWh). */
   TURBO = "turbo"
 }
 
@@ -4705,19 +5360,19 @@ export type StationStats = {
   amenities?: Maybe<Array<Maybe<AmenityStats>>>;
 };
 
-/** Types of a route step */
+/** Types of a route step. */
 export enum StepType {
-  /** This step is a road */
+  /** This step is a road. */
   ROAD = "road",
-  /** This step is a highway */
+  /** This step is a highway. */
   HIGHWAY = "highway",
-  /** This step is a toll road */
+  /** This step is a toll road. */
   TOLL = "toll",
-  /** This step is a ferry */
+  /** This step is a ferry. */
   FERRY = "ferry",
-  /** This step is reachable by walking */
+  /** This step is reachable by walking. */
   WALKING = "walking",
-  /** This step is a crossborder */
+  /** This step is a crossborder. */
   CROSSBORDER = "crossborder"
 }
 
@@ -4749,49 +5404,49 @@ export type SubscriptionrouteUpdatedByIdArgs = {
 };
 
 export type Telemetry = {
-  /** Value of the auxiliary power consumption of the vehicle */
+  /** Value of the auxiliary power consumption of the vehicle. */
   auxiliary_consumption?: Maybe<Scalars["Float"]>;
-  /** Battery current in ampere */
+  /** Battery current in ampere. */
   battery_current?: Maybe<Scalars["Float"]>;
-  /** Value of the temperature of the battery */
+  /** Value of the temperature of the battery. */
   battery_temperature?: Maybe<Scalars["Float"]>;
-  /** Battery voltage in volts */
+  /** Battery voltage in volts. */
   battery_voltage?: Maybe<Scalars["Float"]>;
-  /** Is the vehicle currently charging */
+  /** Is the vehicle currently charging. */
   is_charging?: Maybe<Scalars["Boolean"]>;
-  /** Value of the rate of charge of the battery */
+  /** Value of the rate of charge of the battery. */
   charge_speed?: Maybe<Scalars["Float"]>;
-  /** Value of the amount of battery charged */
+  /** Value of the amount of battery charged. */
   charge_total?: Maybe<Scalars["Float"]>;
-  /** Value of the current weight of the occupants */
+  /** Value of the current weight of the occupants. */
   total_occupant_weight?: Maybe<Scalars["Float"]>;
-  /** Value of the current weight of the cargo */
+  /** Value of the current weight of the cargo. */
   total_cargo_weight?: Maybe<Scalars["Float"]>;
-  /** Value of the current elevation */
+  /** Value of the current elevation. */
   elevation?: Maybe<Scalars["Float"]>;
-  /** Current heading in degrees */
+  /** Current heading in degrees. */
   heading?: Maybe<Scalars["Float"]>;
-  /** RPM of the motor */
+  /** RPM of the motor. */
   motor_rpm?: Maybe<Scalars["Int"]>;
-  /** Number of occupants present in the vehicle */
+  /** Number of occupants present in the vehicle. */
   occupants?: Maybe<Scalars["Int"]>;
-  /** Value of the vehicle's odometer */
+  /** Value of the vehicle's odometer. */
   odometer?: Maybe<Scalars["Float"]>;
-  /** Value of the outside temperature */
+  /** Value of the outside temperature. */
   outside_temperature?: Maybe<Scalars["Float"]>;
-  /** Vehicle is in park, neutral or turned off */
+  /** Vehicle is in park, neutral or turned off. */
   is_parked?: Maybe<Scalars["Boolean"]>;
-  /** Value of the positive or negative power. When negative the vehicle is charging */
+  /** Value of the positive or negative power. When negative the vehicle is charging. */
   power?: Maybe<Scalars["Float"]>;
-  /** Value of the state of charge of the vehicle */
+  /** Value of the state of charge of the vehicle. */
   state_of_charge?: Maybe<Scalars["Float"]>;
-  /** Values for the average tire pressures of all wheels, starting from the front side right to left and to the rear */
+  /** Values for the average tire pressures of all wheels, starting from the front side right to left and to the rear. */
   tire_pressure?: Maybe<Array<Scalars["Float"]>>;
-  /** UNIX timestamp in seconds */
+  /** UNIX timestamp in seconds. */
   timestamp?: Maybe<Scalars["Int"]>;
-  /** Value of the vehicle speed */
+  /** Value of the vehicle speed. */
   vehicle_speed?: Maybe<Scalars["Float"]>;
-  /** Custom input fields can be added based on telemetry architecture */
+  /** Custom input fields can be added based on telemetry architecture. */
   custom?: Maybe<Scalars["JSON"]>;
 };
 
@@ -4848,104 +5503,104 @@ export type Telemetryvehicle_speedArgs = {
 };
 
 export type TelemetryInput = {
-  /** Average auxiliary power consumption */
+  /** Average auxiliary power consumption. */
   auxiliary_consumption?: Maybe<AuxiliaryConsumptionInput>;
-  /** Battery current in ampere */
+  /** Battery current in ampere. */
   battery_current?: Maybe<Scalars["Float"]>;
-  /** Battery temperature */
+  /** Battery temperature. */
   battery_temperature?: Maybe<BatteryTemperatureInput>;
-  /** Battery voltage in volts */
+  /** Battery voltage in volts. */
   battery_voltage?: Maybe<Scalars["Float"]>;
-  /** Is the vehicle currently charging */
+  /** Is the vehicle currently charging. */
   is_charging?: Maybe<Scalars["Boolean"]>;
-  /** Rate of charge */
+  /** Rate of charge. */
   charge_speed?: Maybe<ChargeSpeedInput>;
-  /** Amount charged */
+  /** Amount charged. */
   charge_total?: Maybe<ChargeTotalInput>;
-  /** Cumulated weight of the occupants */
+  /** Cumulated weight of the occupants. */
   total_occupant_weight?: Maybe<TotalOccupantWeightInput>;
-  /** Weight of the cargo */
+  /** Weight of the cargo. */
   total_cargo_weight?: Maybe<TotalCargoWeightInput>;
-  /** Current elevation */
+  /** Current elevation. */
   elevation?: Maybe<ElevationInput>;
-  /** Current heading in degrees */
+  /** Current heading in degrees. */
   heading?: Maybe<Scalars["Float"]>;
-  /** RPM of the motor */
+  /** RPM of the motor. */
   motor_rpm?: Maybe<Scalars["Int"]>;
-  /** Number of occupants in the vehicle */
+  /** Number of occupants in the vehicle. */
   occupants?: Maybe<Scalars["Int"]>;
-  /** Mileage or odometer reading */
+  /** Mileage or odometer reading. */
   odometer?: Maybe<OdometerInput>;
-  /** Outside temperature */
+  /** Outside temperature. */
   outside_temperature?: Maybe<OutsideTempInput>;
-  /** Vehicle is in park, neutral or turned off */
+  /** Vehicle is in park, neutral or turned off. */
   is_parked?: Maybe<Scalars["Boolean"]>;
-  /** Vehicle power */
+  /** Vehicle power. */
   power?: Maybe<PowerInput>;
-  /** Battery state of charge */
+  /** Battery state of charge. */
   state_of_charge?: Maybe<StateOfChargeInput>;
-  /** Average tire pressures of all wheels, starting from the front side right to left and to the rear */
+  /** Average tire pressures of all wheels, starting from the front side right to left and to the rear. */
   tire_pressure?: Maybe<TirePressureInput>;
-  /** UNIX timestamp in seconds */
+  /** UNIX timestamp in seconds. */
   timestamp?: Maybe<Scalars["Int"]>;
-  /** Vehicle speed */
+  /** Vehicle speed. */
   vehicle_speed?: Maybe<VehicleSpeedInput>;
-  /** Custom input fields can be added based on telemetry architecture */
+  /** Custom input fields can be added based on telemetry architecture. */
   custom?: Maybe<Scalars["JSON"]>;
 };
 
 export enum TelemetryInputSource {
-  /** Manually inputted value */
+  /** Manually inputted value. */
   MANUAL = "manual",
-  /** Value from the vehicle's telemetry */
+  /** Value from the vehicle's telemetry. */
   TELEMETRY = "telemetry"
 }
 
 export enum TemperatureUnit {
-  /** Return the temperature in Celsius */
+  /** Return the temperature in Celsius. */
   CELSIUS = "Celsius",
-  /** Return the temperature in Fahrenheit */
+  /** Return the temperature in Fahrenheit. */
   FAHRENHEIT = "Fahrenheit"
 }
 
 export type TirePressureInput = {
-  /** Values for the tire pressure, starting from the front side right to left and to the rear */
+  /** Values for the tire pressure, starting from the front side right to left and to the rear. */
   value: Array<Scalars["Float"]>;
-  /** Type of the value of pressure */
+  /** Type of the value of pressure. */
   type: PressureUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
 export enum TorqueUnit {
-  /** Return the torque in newton meters */
+  /** Return the torque in newton meters. */
   NEWTON_METER = "newton_meter",
-  /** Return the torque in foot pounds */
+  /** Return the torque in foot pounds. */
   FOOT_POUND = "foot_pound"
 }
 
 export type TotalCargoWeightInput = {
-  /** Value of the current weight of the cargo */
+  /** Value of the current weight of the cargo. */
   value: Scalars["Float"];
-  /** Type of the current weight of the cargo */
+  /** Type of the current weight of the cargo. */
   type: WeightUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
 export type TotalOccupantWeightInput = {
-  /** Value of the current weight of the occupants */
+  /** Value of the current weight of the occupants. */
   value: Scalars["Float"];
-  /** Type of the current weight of the occupants */
+  /** Type of the current weight of the occupants. */
   type: WeightUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
 export enum TurningCircleUnit {
-  /** Return the turning circle in meters */
+  /** Return the turning circle in meters. */
   METER = "meter",
-  /** Return the turning circle in feet */
+  /** Return the turning circle in feet. */
   FOOT = "foot"
 }
 
@@ -5181,9 +5836,9 @@ export enum VehicleImageType {
   IMAGE_PREMIUM = "image_premium",
   /** Thumbnail of a premium image. */
   PREMIUM_IMAGE_THUMBNAIL = "premium_image_thumbnail",
-  /** Full-sized brand (maker) logo at 768x432 px. */
+  /** Full-sized brand (make) logo at 768x432 px. */
   BRAND = "brand",
-  /** Thumbnail of a full-sized brand logo at 56x24 px. */
+  /** Thumbnail of a full-sized brand (make) logo at 56x24 px. */
   BRAND_THUMBNAIL = "brand_thumbnail",
   /** Placeholder image at 1536x864 px. */
   PLACEHOLDER = "placeholder"
@@ -5266,8 +5921,13 @@ export type VehicleListFilter = {
 export type VehicleListMedia = {
   /** Featured image of the vehicle from a 45-degree angle. */
   image: VehicleImage;
-  /** Latest maker logo of the vehicle. */
+  /**
+   * Latest make logo of the vehicle.
+   * @deprecated In favor of make.
+   */
   brand: VehicleImage;
+  /** Latest make logo of the vehicle. */
+  make: VehicleImage;
   /** Latest video of the vehicle. */
   video?: Maybe<VehicleVideo>;
 };
@@ -5302,8 +5962,13 @@ export type VehicleListRouting = {
 export type VehicleMedia = {
   /** Featured image of the vehicle from a 45-degree angle. */
   image: VehicleImage;
-  /** Latest maker logo. */
+  /**
+   * Latest make logo.
+   * @deprecated In favor of make.
+   */
   brand: VehicleImage;
+  /** Latest make logo. */
+  make: VehicleImage;
   /** All images of the vehicle. */
   image_list: Array<VehicleImage>;
   /** Latest video. */
@@ -5372,8 +6037,13 @@ export type VehiclePremium = {
   body: VehiclePremiumBody;
   /** Availability of the vehicle. */
   availability: VehiclePremiumAvailability;
-  /** Pricing of the vehicle. */
+  /**
+   * Pricing of the vehicle.
+   * @deprecated In favor of pricing.
+   */
   price: VehiclePremiumPrice;
+  /** Starting price in the currency defined in the field argument. If not defined, it will return the starting price in the currency returned in the currency field. */
+  pricing: VehiclePremiumPriceValueWithGrant;
   /** Drivetrain of the vehicle. */
   drivetrain: VehiclePremiumDrivetrain;
   /** Performance of the vehicle. */
@@ -5463,7 +6133,10 @@ export type VehiclePremiumBody = {
   weight_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Maximum payload allowed for the vehicle, default in kg. */
   weight_max_payload?: Maybe<Scalars["Float"]>;
-  /** Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload), default in kg. */
+  /**
+   * Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload), default in kg.
+   * @deprecated In favor of weight_gvwr.nominal
+   */
   max_gross_vehicle_weight?: Maybe<Scalars["Float"]>;
   /** Standard luggage capacity, default in l. */
   boot_capacity?: Maybe<Scalars["Float"]>;
@@ -5903,8 +6576,13 @@ export type VehiclePremiumMedia = {
   provider_details_url?: Maybe<Scalars["String"]>;
   /** Featured image of the vehicle from a 45-degree angle. */
   image: VehicleImage;
-  /** Latest maker logo. */
+  /**
+   * Latest make logo.
+   * @deprecated In favor of make.
+   */
   brand: VehicleImage;
+  /** Latest make logo. */
+  make: VehicleImage;
   /** All images of the vehicle. */
   image_list: Array<VehicleImage>;
   /** Latest video. */
@@ -5965,9 +6643,9 @@ export type VehiclePremiumPriceValueWithGrant = {
   value?: Maybe<Scalars["Float"]>;
   /** Currency in which the value without optional field conversion is expressed. */
   currency?: Maybe<CurrencyUnit>;
-  /** Indicates if price value is based on estimates. */
+  /** Indicates if the starting price is based on an estimate. */
   is_estimated?: Maybe<Scalars["Boolean"]>;
-  /** Grant is applied to value. */
+  /** Grant that is applied to the starting price. */
   grant_applied?: Maybe<Scalars["Int"]>;
 };
 
@@ -6188,11 +6866,11 @@ export type VehicleRouting = {
 };
 
 export type VehicleSpeedInput = {
-  /** Value of the vehicle speed */
+  /** Value of the vehicle speed. */
   value: Scalars["Float"];
-  /** Type of the vehicle speed */
+  /** Type of the vehicle speed. */
   type: SpeedUnit;
-  /** Source of inputted data, defaults to 'manual' */
+  /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
 };
 
@@ -6247,17 +6925,17 @@ export type VehicleVideo = {
 };
 
 export enum VolumeUnit {
-  /** Return the volume in liters */
+  /** Return the volume in liters. */
   LITER = "liter",
-  /** Return the volume in cubic meters */
+  /** Return the volume in cubic meters. */
   CUBIC_METER = "cubic_meter",
-  /** Return the volume in cubic feet */
+  /** Return the volume in cubic feet. */
   CUBIC_FOOT = "cubic_foot"
 }
 
 export enum WeightUnit {
-  /** Return the weight in kilograms */
+  /** Return the weight in kilograms. */
   KILOGRAM = "kilogram",
-  /** Return the weight in pounds */
+  /** Return the weight in pounds. */
   POUND = "pound"
 }
