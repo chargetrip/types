@@ -114,6 +114,30 @@
             "deprecationReason": null
           },
           {
+            "name": "state_province",
+            "description": "State or province.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "municipality",
+            "description": "Municipality.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "city",
             "description": "City.",
             "args": [],
@@ -151,7 +175,47 @@
           },
           {
             "name": "postalCode",
-            "description": "Postal code of a location.",
+            "description": "Postal code of the location.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of postal_code."
+          },
+          {
+            "name": "what3Words",
+            "description": "String composed of 3 words which represent the location of an address on the globe. More details: http://w3w.co/<what3Words>.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of what_3_words."
+          },
+          {
+            "name": "formattedAddress",
+            "description": "Human-readable address of the location.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of formatted_address."
+          },
+          {
+            "name": "postal_code",
+            "description": "Postal code of the location.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -162,7 +226,7 @@
             "deprecationReason": null
           },
           {
-            "name": "what3Words",
+            "name": "what_3_words",
             "description": "String composed of 3 words which represent the location of an address on the globe. More details: http://w3w.co/<what3Words>.",
             "args": [],
             "type": {
@@ -174,8 +238,8 @@
             "deprecationReason": null
           },
           {
-            "name": "formattedAddress",
-            "description": "Human-readable address of a location.",
+            "name": "formatted_address",
+            "description": "Human-readable address of the location.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6534,11 +6598,11 @@
       {
         "kind": "OBJECT",
         "name": "Charger",
-        "description": "A groupped representation of EVSEs",
+        "description": "A grouped representation of EVSEs.",
         "fields": [
           {
             "name": "standard",
-            "description": "Type of charger",
+            "description": "Type of a charger.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -6550,7 +6614,7 @@
           },
           {
             "name": "power",
-            "description": "Power of a charger",
+            "description": "Power of a charger.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6562,7 +6626,7 @@
           },
           {
             "name": "price",
-            "description": "Price of a charger",
+            "description": "Price of a charger.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6574,7 +6638,7 @@
           },
           {
             "name": "speed",
-            "description": "Charging speed",
+            "description": "Charging speed.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -6586,7 +6650,7 @@
           },
           {
             "name": "status",
-            "description": "Statuses of all the EVSEs grouped in a charger",
+            "description": "Statuses of all the EVSEs grouped in a charger.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6598,7 +6662,7 @@
           },
           {
             "name": "total",
-            "description": "Total number of EVSEs grouped in a charger",
+            "description": "Total number of EVSEs grouped in a charger.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6624,25 +6688,25 @@
         "enumValues": [
           {
             "name": "free",
-            "description": "The charger is free",
+            "description": "The charger is free.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "busy",
-            "description": "The charger is occupied/busy",
+            "description": "The charger is occupied/busy.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "unknown",
-            "description": "The charger is unknown",
+            "description": "The charger is unknown.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "error",
-            "description": "The charger has an error",
+            "description": "The charger has an error.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6652,11 +6716,11 @@
       {
         "kind": "OBJECT",
         "name": "ChargerStatuses",
-        "description": "Groupping by status of the chargers",
+        "description": "Grouping by status of the chargers.",
         "fields": [
           {
             "name": "free",
-            "description": "How many are free",
+            "description": "How many are free.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6668,7 +6732,7 @@
           },
           {
             "name": "busy",
-            "description": "How many are busy",
+            "description": "How many are busy.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6680,7 +6744,7 @@
           },
           {
             "name": "unknown",
-            "description": "How many are unknown",
+            "description": "How many are unknown.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6692,7 +6756,7 @@
           },
           {
             "name": "error",
-            "description": "How many are not available",
+            "description": "How many are not available.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6776,7 +6840,7 @@
         "fields": [
           {
             "name": "code",
-            "description": "Charging behaviour of users divided in groups, based on real-time information",
+            "description": "Charging behaviour of users divided in groups, based on real-time information.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -6788,7 +6852,7 @@
           },
           {
             "name": "description",
-            "description": "Description of charging behaviour",
+            "description": "Description of charging behaviour.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6814,37 +6878,37 @@
         "enumValues": [
           {
             "name": "URBAN_CHARGING",
-            "description": "Mainly morning charging, and some mixed afternoon and evening charging",
+            "description": "Mainly morning charging, and some mixed afternoon and evening charging.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "FAST_CHARGING",
-            "description": "Mainly fast charging, with some morning and afternoon charging",
+            "description": "Mainly fast charging, with some morning and afternoon charging.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "MIXED_CHARGING",
-            "description": "Mixed behaviour between morning, afternoon, evening, overnight, and noise charging",
+            "description": "Mixed behaviour between morning, afternoon, evening, overnight, and noise charging.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "NOISE_CHARGING",
-            "description": "Mainly noise charging",
+            "description": "Mainly noise charging.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "OVERNIGHT_CHARGING",
-            "description": "Mainly overnight charging",
+            "description": "Mainly overnight charging.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "OFFICE_CHARGING",
-            "description": "Mainly morning charging, with some afternoon charging",
+            "description": "Mainly morning charging, with some afternoon charging.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -7434,11 +7498,11 @@
       {
         "kind": "OBJECT",
         "name": "Connector",
-        "description": "Connector data which extends OCPI Connector",
+        "description": "Connector data which extends OCPI Connector.",
         "fields": [
           {
             "name": "id",
-            "description": "Identifier of a connector within an EVSE. Two connectors may have the same ID as long as they do not belong to the same EVSE object.",
+            "description": "Identifier of a connector within an EVSE. Two connectors may have the same ID as long as they do not belong to the same EVSE object. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7450,7 +7514,7 @@
           },
           {
             "name": "standard",
-            "description": "Standard of an installed connector.",
+            "description": "Standard of an installed connector. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -7462,7 +7526,7 @@
           },
           {
             "name": "format",
-            "description": "Format (socket/cable) of an installed connector.",
+            "description": "Format (socket/cable) of an installed connector. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -7474,7 +7538,7 @@
           },
           {
             "name": "power_type",
-            "description": "Type of power of an installed connector. ",
+            "description": "Type of power of an installed connector. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -7486,7 +7550,7 @@
           },
           {
             "name": "max_voltage",
-            "description": "Maximum voltage of an connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full.",
+            "description": "Maximum voltage of an connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7498,7 +7562,7 @@
           },
           {
             "name": "max_amperage",
-            "description": "Maximum amperage of a connector, in ampere [A].",
+            "description": "Maximum amperage of a connector, in ampere [A]. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7510,7 +7574,7 @@
           },
           {
             "name": "max_electric_power",
-            "description": "Maximum electric power that can be delivered by a connector, in watt [W]. When the maximum electric power is lower than the calculated value from voltage and amperage, this value should be set.\nFor example: A DC Charge Point which can deliver up to 920V and up to 400A can be limited to a maximum of 150kW. Depending on the vehicle, it may supply maximum voltage or current, but not both at the same time.\nFor AC Charge Points, the amount of phases used can also have influence on the maximum power.",
+            "description": "Maximum electric power that can be delivered by a connector, in watt [W]. When the maximum electric power is lower than the calculated value from voltage and amperage, this value should be set.\nFor example: A DC Charge Point which can deliver up to 920V and up to 400A can be limited to a maximum of 150kW. Depending on the vehicle, it may supply maximum voltage or current, but not both at the same time.\nFor AC Charge Points, the amount of phases used can also have influence on the maximum power. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7522,7 +7586,7 @@
           },
           {
             "name": "power",
-            "description": "Maximum electric power in kW",
+            "description": "Maximum electric power in kW.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7534,7 +7598,7 @@
           },
           {
             "name": "tariff_ids",
-            "description": "Identifiers of the currently valid charging tariffs. Multiple tariffs are possible, but only one of each Tariff.type can be active at the same time. Tariffs with the same type are only allowed, if they are not active at the same time: start_date_time and end_date_time period not overlapping.\nWhen preference-based smart charging is supported, one tariff for every possible ProfileType should be provided. This tells the user about the options they have at this Connector, and what the tariff is for every option.\nFor a \"free of charge\" tariff, this field should be set and point to a defined \"free of charge\" tariff.",
+            "description": "Identifiers of the currently valid charging tariffs. Multiple tariffs are possible, but only one of each Tariff.type can be active at the same time. Tariffs with the same type are only allowed, if they are not active at the same time: start_date_time and end_date_time period not overlapping.\nWhen preference-based smart charging is supported, one tariff for every possible ProfileType should be provided. This tells the user about the options they have at this Connector, and what the tariff is for every option.\nFor a \"free of charge\" tariff, this field should be set and point to a defined \"free of charge\" tariff. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -7550,7 +7614,7 @@
           },
           {
             "name": "terms_and_conditions",
-            "description": "URL to an operator’s terms and conditions.",
+            "description": "URL to an operator’s terms and conditions. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7562,7 +7626,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when a connector was last updated (or created).",
+            "description": "Timestamp when a connector was last updated (or created). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7574,7 +7638,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -7586,7 +7650,7 @@
           },
           {
             "name": "tariff",
-            "description": "List of valid charging tariffs",
+            "description": "List of valid charging tariffs.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -7602,19 +7666,19 @@
           },
           {
             "name": "pricing",
-            "description": "Charging prices",
+            "description": "Charging prices.",
             "args": [],
             "type": {
               "kind": "OBJECT",
               "name": "Pricing",
               "ofType": null
             },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of custom_properties.pricing"
+            "isDeprecated": false,
+            "deprecationReason": null
           },
           {
             "name": "custom_properties",
-            "description": "Custom properties of a connector. These are vendor specific and will return null values on the fields that are not supported by your station database",
+            "description": "Custom properties of a connector. These are vendor specific and will return null values on the fields that are not supported by your station database.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -7633,23 +7697,23 @@
       {
         "kind": "OBJECT",
         "name": "ConnectorCustomProperties",
-        "description": "Custom properties for connectors",
+        "description": "Custom properties for connectors.",
         "fields": [
           {
             "name": "pricing",
-            "description": "Charging prices",
+            "description": "Charging prices.",
             "args": [],
             "type": {
               "kind": "OBJECT",
               "name": "Pricing",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of connector.pricing"
           },
           {
             "name": "oicp",
-            "description": "Custom connector properties for OICP databases. Station databases that not follow the OICP standard return null values",
+            "description": "Custom connector properties for OICP databases. Station databases that not follow the OICP standard return null values.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -9531,6 +9595,12 @@
             "deprecationReason": null
           },
           {
+            "name": "XK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "YE",
             "description": null,
             "isDeprecated": false,
@@ -9718,6 +9788,41 @@
       },
       {
         "kind": "ENUM",
+        "name": "DimensionUnit",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "meter",
+            "description": "Return the dimension in meters.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "foot",
+            "description": "Return the dimension in feet.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "kilometer",
+            "description": "Return the dimension in kilometers.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mile",
+            "description": "Return the dimension in miles.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "DistanceUnit",
         "description": null,
         "fields": null,
@@ -9754,11 +9859,11 @@
       {
         "kind": "OBJECT",
         "name": "EVSE",
-        "description": "EVSE data which extends OCPI EVSE",
+        "description": "EVSE data which extends OCPI EVSE.",
         "fields": [
           {
             "name": "uid",
-            "description": "Uniquely identifies an EVSE within the CPOs platform (and suboperator platforms). For example a database ID or the actual \"EVSE ID\". This field can never be changed, modified or renamed. This is the 'technical' identification of the EVSE, not to be used as 'human readable' identification, use the field evse_id for that.\nThis field is named uid instead of id, because id could be confused with evse_id which is an eMI3 defined field.",
+            "description": "Uniquely identifies an EVSE within the CPOs platform (and suboperator platforms). For example a database ID or the actual \"EVSE ID\". This field can never be changed, modified or renamed. This is the 'technical' identification of the EVSE, not to be used as 'human readable' identification, use the field evse_id for that.\nThis field is named uid instead of id, because id could be confused with evse_id which is an eMI3 defined field. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9770,7 +9875,7 @@
           },
           {
             "name": "evse_id",
-            "description": "Compliant with the following specification for EVSE ID from \"eMI3 standard version V1.0\" (http://emi3group.com/documents-links/) \"Part 2: business objects.\" Optional because: if an evse_id is to be re-used in the real world, the evse_id can be removed from an EVSE object if the status is set to REMOVED.",
+            "description": "Compliant with the following specification for EVSE ID from \"eMI3 standard version V1.0\" (http://emi3group.com/documents-links/) \"Part 2: business objects.\" Optional because: if an evse_id is to be re-used in the real world, the evse_id can be removed from an EVSE object if the status is set to REMOVED. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9782,7 +9887,7 @@
           },
           {
             "name": "status",
-            "description": "Indicates the current status of an EVSE.",
+            "description": "Indicates the current status of an EVSE. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -9794,7 +9899,7 @@
           },
           {
             "name": "status_schedule",
-            "description": "Indicates a planned status update of a nEVSE.",
+            "description": "Indicates a planned status update of a nEVSE. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -9810,7 +9915,7 @@
           },
           {
             "name": "capabilities",
-            "description": "List of functionalities that an EVSE is capable of.",
+            "description": "List of functionalities that an EVSE is capable of. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -9826,7 +9931,7 @@
           },
           {
             "name": "connectors",
-            "description": "List of available connectors on an EVSE.",
+            "description": "List of available connectors on an EVSE. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -9842,7 +9947,7 @@
           },
           {
             "name": "floor_level",
-            "description": "Level on which a Charge Point is located (in garage buildings) in the locally displayed numbering scheme.",
+            "description": "Level on which a Charge Point is located (in garage buildings) in the locally displayed numbering scheme. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9854,7 +9959,7 @@
           },
           {
             "name": "coordinates",
-            "description": "Coordinates of a EVSE.",
+            "description": "Coordinates of a EVSE. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -9866,7 +9971,7 @@
           },
           {
             "name": "physical_reference",
-            "description": "A number/string printed on the outside of an EVSE for visual identification.",
+            "description": "A number/string printed on the outside of an EVSE for visual identification. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9878,7 +9983,7 @@
           },
           {
             "name": "parking_restrictions",
-            "description": "Restrictions that apply to a parking spot.",
+            "description": "Restrictions that apply to a parking spot. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -9894,7 +9999,7 @@
           },
           {
             "name": "images",
-            "description": "Links to images related to an EVSE such as photos or logos.",
+            "description": "Links to images related to an EVSE such as photos or logos. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -9910,7 +10015,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when this EVSE or one of its Connectors was last updated (or created).",
+            "description": "Timestamp when this EVSE or one of its Connectors was last updated (or created). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9933,8 +10038,20 @@
             "deprecationReason": null
           },
           {
+            "name": "cpo_external_id",
+            "description": "Unique ID of the location in the system of the CPO.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9946,7 +10063,7 @@
           },
           {
             "name": "custom_properties",
-            "description": "Custom properties of an EVSE",
+            "description": "Custom properties of an EVSE.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -10083,13 +10200,13 @@
         "enumValues": [
           {
             "name": "gram",
-            "description": "Return the emission in grams.",
+            "description": "Return the emissions in grams.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "ounce",
-            "description": "Return the emission in ounces.",
+            "description": "Return the emissions in ounces.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -10099,11 +10216,11 @@
       {
         "kind": "OBJECT",
         "name": "EvseCustomProperties",
-        "description": "Custom EVSE properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values",
+        "description": "Custom EVSE properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values.",
         "fields": [
           {
             "name": "oicp",
-            "description": "OICP standard custom properties",
+            "description": "OICP standard custom properties.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -10619,6 +10736,76 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "HeavyVehiclesEUType",
+        "description": "Allowed N (EU) types of heavy vehicles.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "N1",
+            "description": "Only N1 type of heavy vehicles can be parked at the charging station. N1 vehicles have a maximum mass not exceeding 3.5 tonnes (7,700 lbs).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "N2",
+            "description": "Only N2 type of heavy vehicles can be parked at the charging station. N2 vehicles have a maximum mass exceeding 3.5 tonnes but not exceeding 12 tonnes (26,000 lbs).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "N3",
+            "description": "Only N3 type of heavy vehicles can be parked at the charging station. N3 vehicles have a maximum mass exceeding 12 tonnes (26,000 lbs).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "HeavyVehiclesFacility",
+        "description": "List of facilities in the location.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "TRUCK_PARKING",
+            "description": "Truck parking.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TRUCK_WASH",
+            "description": "Truck wash.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TRUCK_REPAIR",
+            "description": "Truck repair.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TRUCK_DEALERSHIP",
+            "description": "Truck dealership.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SECURE_TRUCK_PARKING",
+            "description": "Secure truck parking.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -12004,6 +12191,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "meta",
+            "description": "Navigation meta information.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationMeta",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -12102,6 +12301,41 @@
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationMeta",
+        "description": "Navigation meta information.",
+        "fields": [
+          {
+            "name": "created_at",
+            "description": "Creation time of the navigation session.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updated_at",
+            "description": "Last updated time of the navigation session.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -12616,7 +12850,7 @@
         "fields": [
           {
             "name": "latitude",
-            "description": "Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: \".\" Regex: -?[0-9]{1,2}\\.[0-9]{5,7}",
+            "description": "Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: \".\" Regex: -?[0-9]{1,2}\\.[0-9]{5,7}. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -12628,7 +12862,7 @@
           },
           {
             "name": "longitude",
-            "description": "Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: \".\" Regex: -?[0-9]{1,3}\\.[0-9]{5,7}",
+            "description": "Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: \".\" Regex: -?[0-9]{1,3}\\.[0-9]{5,7}. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -12640,7 +12874,7 @@
           },
           {
             "name": "name",
-            "description": "Name of the point in local language or as written at the location. For example the street name of a parking lot entrance or it’s number.",
+            "description": "Name of the point in local language or as written at the location. For example the street name of a parking lot entrance or it’s number. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -13073,7 +13307,7 @@
         "fields": [
           {
             "name": "language",
-            "description": "Language Code ISO 639-1",
+            "description": "Language Code ISO 639-1. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13085,7 +13319,7 @@
           },
           {
             "name": "text",
-            "description": "Text to be displayed to an end user. No markup, html etc. allowed.",
+            "description": "Text to be displayed to an end user. No markup, html etc. allowed. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13108,7 +13342,7 @@
         "fields": [
           {
             "name": "is_green_energy",
-            "description": "True if the power is 100% from regenerative sources",
+            "description": "True if the power is 100% from regenerative sources. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13120,7 +13354,7 @@
           },
           {
             "name": "energy_sources",
-            "description": "Key-value pairs (enum + percentage) of energy sources of this location’s tariff.",
+            "description": "Key-value pairs (enum + percentage) of energy sources of this location’s tariff. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -13136,7 +13370,7 @@
           },
           {
             "name": "environ_impact",
-            "description": "Key-value pairs (enum + percentage) of nuclear waste and CO2 exhaust of this location’s tariff.",
+            "description": "Key-value pairs (enum + percentage) of nuclear waste and CO2 exhaust of this location’s tariff. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -13152,7 +13386,7 @@
           },
           {
             "name": "supplier_name",
-            "description": "Name of the energy supplier, delivering the energy for this location or tariff.*",
+            "description": "Name of the energy supplier, delivering the energy for this location or tariff.*. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13164,7 +13398,7 @@
           },
           {
             "name": "energy_product_name",
-            "description": "Name of the energy suppliers product/tariff plan used at this location.*",
+            "description": "Name of the energy suppliers product/tariff plan used at this location.*. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13187,7 +13421,7 @@
         "fields": [
           {
             "name": "source",
-            "description": "The type of energy source.",
+            "description": "The type of energy source. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -13199,7 +13433,7 @@
           },
           {
             "name": "percentage",
-            "description": "Percentage of this source (0-100) in the mix.",
+            "description": "Percentage of this source (0-100) in the mix. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13281,7 +13515,7 @@
         "fields": [
           {
             "name": "category",
-            "description": "The environmental impact category of this value.",
+            "description": "The environmental impact category of this value. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -13293,7 +13527,7 @@
           },
           {
             "name": "amount",
-            "description": "Amount of this portion in g/kWh.",
+            "description": "Amount of this portion in g/kWh. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13339,7 +13573,7 @@
         "fields": [
           {
             "name": "period_begin",
-            "description": "Begin of the exception. In UTC, time_zone field can be used to convert to local time.",
+            "description": "Begin of the exception. In UTC, time_zone field can be used to convert to local time. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13351,7 +13585,7 @@
           },
           {
             "name": "period_end",
-            "description": "End of the exception. In UTC, time_zone field can be used to convert to local time.",
+            "description": "End of the exception. In UTC, time_zone field can be used to convert to local time. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13505,7 +13739,7 @@
         "fields": [
           {
             "name": "latitude",
-            "description": "Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: \".\" Regex: -?[0-9]{1,2}\\.[0-9]{5,7}",
+            "description": "Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: \".\" Regex: -?[0-9]{1,2}\\.[0-9]{5,7}. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13517,7 +13751,7 @@
           },
           {
             "name": "longitude",
-            "description": "Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: \".\" Regex: -?[0-9]{1,3}\\.[0-9]{5,7}",
+            "description": "Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: \".\" Regex: -?[0-9]{1,3}\\.[0-9]{5,7}. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13540,7 +13774,7 @@
         "fields": [
           {
             "name": "twentyfourseven",
-            "description": "True to represent 24 hours a day and 7 days a week, except the given exceptions.",
+            "description": "True to represent 24 hours a day and 7 days a week, except the given exceptions. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13552,7 +13786,7 @@
           },
           {
             "name": "regular_hours",
-            "description": "Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object.",
+            "description": "Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -13568,7 +13802,7 @@
           },
           {
             "name": "exceptional_openings",
-            "description": "Exceptions for specified calendar dates, time-range based. Periods the station is operating/accessible. Additional to regular_hours. May overlap regular rules.",
+            "description": "Exceptions for specified calendar dates, time-range based. Periods the station is operating/accessible. Additional to regular_hours. May overlap regular rules. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -13584,7 +13818,7 @@
           },
           {
             "name": "exceptional_closings",
-            "description": "Exceptions for specified calendar dates, time-range based. Periods the station is not operating/accessible. Overwriting regular_hours and exceptional_openings. Should not overlap exceptional_openings.",
+            "description": "Exceptions for specified calendar dates, time-range based. Periods the station is not operating/accessible. Overwriting regular_hours and exceptional_openings. Should not overlap exceptional_openings. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -13611,7 +13845,7 @@
         "fields": [
           {
             "name": "url",
-            "description": "URL from where the image data can be fetched through a web browser.",
+            "description": "URL from where the image data can be fetched through a web browser. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13623,7 +13857,7 @@
           },
           {
             "name": "thumbnail",
-            "description": "URL from where a thumbnail of the image can be fetched through a webbrowser.",
+            "description": "URL from where a thumbnail of the image can be fetched through a webbrowser. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13635,7 +13869,7 @@
           },
           {
             "name": "category",
-            "description": "Category of an image",
+            "description": "Category of an image. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -13647,7 +13881,7 @@
           },
           {
             "name": "type",
-            "description": "Image type: gif, jpeg, png, svg",
+            "description": "Image type: gif, jpeg, png, svg. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13659,7 +13893,7 @@
           },
           {
             "name": "width",
-            "description": "Width of the full scale image",
+            "description": "Width of the full scale image. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13671,7 +13905,7 @@
           },
           {
             "name": "height",
-            "description": "Height of the full scale image",
+            "description": "Height of the full scale image. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13876,7 +14110,7 @@
         "fields": [
           {
             "name": "excl_vat",
-            "description": "Price/Cost excluding VAT.",
+            "description": "Price/Cost excluding VAT. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13888,7 +14122,7 @@
           },
           {
             "name": "incl_vat",
-            "description": "Price/Cost including VAT.",
+            "description": "Price/Cost including VAT. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13911,7 +14145,7 @@
         "fields": [
           {
             "name": "type",
-            "description": "Type of tariff dimension.",
+            "description": "Type of tariff dimension. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -13923,7 +14157,7 @@
           },
           {
             "name": "price",
-            "description": "Price per unit (excl. VAT) for this tariff dimension.",
+            "description": "Price per unit (excl. VAT) for this tariff dimension. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13935,7 +14169,7 @@
           },
           {
             "name": "vat",
-            "description": "Applicable VAT percentage for this tariff dimension. If omitted, no VAT is applicable. Not providing a VAT is different from 0% VAT, which would be a value of 0.0 here.",
+            "description": "Applicable VAT percentage for this tariff dimension. If omitted, no VAT is applicable. Not providing a VAT is different from 0% VAT, which would be a value of 0.0 here. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13947,7 +14181,7 @@
           },
           {
             "name": "step_size",
-            "description": "Minimum amount to be billed. This unit will be billed in this step_size blocks. For example: if type is TIME and step_size has a value of 300, then time will be billed in blocks of 5 minutes. If 6 minutes were used, 10 minutes (2 blocks of step_size) will be billed.",
+            "description": "Minimum amount to be billed. This unit will be billed in this step_size blocks. For example: if type is TIME and step_size has a value of 300, then time will be billed in blocks of 5 minutes. If 6 minutes were used, 10 minutes (2 blocks of step_size) will be billed. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13970,7 +14204,7 @@
         "fields": [
           {
             "name": "weekday",
-            "description": "Number of days in the week, from Monday (1) till Sunday (7)",
+            "description": "Number of days in the week, from Monday (1) till Sunday (7). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13982,7 +14216,7 @@
           },
           {
             "name": "period_begin",
-            "description": "Begin of the regular period, in local time, given in hours and minutes. Must be in 24h format with leading zeros. Example: \"18:15\". Hour/Minute separator: \":\" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9].",
+            "description": "Begin of the regular period, in local time, given in hours and minutes. Must be in 24h format with leading zeros. Example: \"18:15\". Hour/Minute separator: \":\" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13994,7 +14228,7 @@
           },
           {
             "name": "period_end",
-            "description": "End of the regular period, in local time, syntax as for period_begin. Must be later than period_begin.",
+            "description": "End of the regular period, in local time, syntax as for period_begin. Must be later than period_begin. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14105,7 +14339,7 @@
         "fields": [
           {
             "name": "period_begin",
-            "description": "Begin of the scheduled period.",
+            "description": "Begin of the scheduled period. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14117,7 +14351,7 @@
           },
           {
             "name": "period_end",
-            "description": "End of the scheduled period, if known.",
+            "description": "End of the scheduled period, if known. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14129,7 +14363,7 @@
           },
           {
             "name": "status",
-            "description": "Status value during the scheduled period.",
+            "description": "Status value during the scheduled period. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -14152,7 +14386,7 @@
         "fields": [
           {
             "name": "country_code",
-            "description": "ISO-3166 alpha-2 country code of the CPO that owns this tariff",
+            "description": "ISO-3166 alpha-2 country code of the CPO that owns this tariff. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14164,7 +14398,7 @@
           },
           {
             "name": "party_id",
-            "description": "CPO ID of the CPO that owns this tariff (following the ISO-15118 standard)",
+            "description": "CPO ID of the CPO that owns this tariff (following the ISO-15118 standard). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14176,7 +14410,7 @@
           },
           {
             "name": "id",
-            "description": "Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms)",
+            "description": "Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14188,7 +14422,7 @@
           },
           {
             "name": "currency",
-            "description": "ISO-4217 code of the currency of this tariff.",
+            "description": "ISO-4217 code of the currency of this tariff. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14200,7 +14434,7 @@
           },
           {
             "name": "type",
-            "description": "Defines the type of the tariff. This allows for distinction in case of given charging preferences. When omitted, this tariff is valid for all sessions",
+            "description": "Defines the type of the tariff. This allows for distinction in case of given charging preferences. When omitted, this tariff is valid for all sessions. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -14212,7 +14446,7 @@
           },
           {
             "name": "tariff_alt_text",
-            "description": "List of alternative tariff information texts, in multiple languages",
+            "description": "List of alternative tariff information texts, in multiple languages. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14228,7 +14462,7 @@
           },
           {
             "name": "tariff_alt_url",
-            "description": "URL to a web page that contains an explanation of the tariff information in human readable form",
+            "description": "URL to a web page that contains an explanation of the tariff information in human readable form. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14240,7 +14474,7 @@
           },
           {
             "name": "min_price",
-            "description": "When this field is set, a charging session with this tariff will cost at least the amount shown. This is different from a FLAT fee (start tariff, transaction fee), as a FLAT fee is a fixed amount that must be paid for any charging session. A minimum price indicates that when the cost of a charging session is lower than this amount, the cost of the session will be equal to this amount",
+            "description": "When this field is set, a charging session with this tariff will cost at least the amount shown. This is different from a FLAT fee (start tariff, transaction fee), as a FLAT fee is a fixed amount that must be paid for any charging session. A minimum price indicates that when the cost of a charging session is lower than this amount, the cost of the session will be equal to this amount. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -14252,7 +14486,7 @@
           },
           {
             "name": "max_price",
-            "description": "When this field is set, a charging session with this tariff will NOT cost more than this amount",
+            "description": "When this field is set, a charging session with this tariff will NOT cost more than this amount. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -14264,7 +14498,7 @@
           },
           {
             "name": "elements",
-            "description": "List of tariff elements",
+            "description": "List of tariff elements. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14280,7 +14514,7 @@
           },
           {
             "name": "start_date_time",
-            "description": "Time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active",
+            "description": "Time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14292,7 +14526,7 @@
           },
           {
             "name": "end_date_time",
-            "description": "Time after which this tariff is no longer valid, in UTC, time_zone field if the location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future",
+            "description": "Time after which this tariff is no longer valid, in UTC, time_zone field if the location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14304,7 +14538,7 @@
           },
           {
             "name": "energy_mix",
-            "description": "Details about the energy supplied with this tariff",
+            "description": "Details about the energy supplied with this tariff. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -14316,7 +14550,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when this tariff was last updated (or created)",
+            "description": "Timestamp when this tariff was last updated (or created). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14374,7 +14608,7 @@
         "fields": [
           {
             "name": "price_components",
-            "description": "List of price components that describe the pricing of a tariff.",
+            "description": "List of price components that describe the pricing of a tariff. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14390,7 +14624,7 @@
           },
           {
             "name": "restrictions",
-            "description": "Restrictions that describe the applicability of a tariff.",
+            "description": "Restrictions that describe the applicability of a tariff. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14417,7 +14651,7 @@
         "fields": [
           {
             "name": "start_time",
-            "description": "Start time of day in local time, the time zone is defined in the time_zone field of the Location, for example 13:30, valid from this time of the day. Must be in 24h format with leading zeros. Hour/Minute separator: \":\" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]",
+            "description": "Start time of day in local time, the time zone is defined in the time_zone field of the Location, for example 13:30, valid from this time of the day. Must be in 24h format with leading zeros. Hour/Minute separator: \":\" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14429,7 +14663,7 @@
           },
           {
             "name": "end_time",
-            "description": "End time of day in local time, the time zone is defined in the time_zone field of the Location, for example 19:45, valid until this time of the day. Same syntax as start_time.",
+            "description": "End time of day in local time, the time zone is defined in the time_zone field of the Location, for example 19:45, valid until this time of the day. Same syntax as start_time. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14441,7 +14675,7 @@
           },
           {
             "name": "start_date",
-            "description": "Start date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-24, valid from this day. Regex: ([12][0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])",
+            "description": "Start date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-24, valid from this day. Regex: ([12][0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14453,7 +14687,7 @@
           },
           {
             "name": "end_date",
-            "description": "End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date",
+            "description": "End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14465,7 +14699,7 @@
           },
           {
             "name": "min_kwh",
-            "description": "Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used",
+            "description": "Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14477,7 +14711,7 @@
           },
           {
             "name": "max_kwh",
-            "description": "Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used",
+            "description": "Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14489,7 +14723,7 @@
           },
           {
             "name": "min_current",
-            "description": "Sum of the minimum current in over all phases, for example 5. When the EV is charging with more than the defined amount of current, this tariff element is/becomes active. If the charging current is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum current over the entire charging session. This restriction can make a tariff element become active when the charging current is above the defined value, but the tariff element MUST no longer be active when the charging current drops below the defined value",
+            "description": "Sum of the minimum current in over all phases, for example 5. When the EV is charging with more than the defined amount of current, this tariff element is/becomes active. If the charging current is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum current over the entire charging session. This restriction can make a tariff element become active when the charging current is above the defined value, but the tariff element MUST no longer be active when the charging current drops below the defined value. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14501,7 +14735,7 @@
           },
           {
             "name": "max_current",
-            "description": "Sum of the maximum current in over all phases, for example 20. When the EV is charging with less than the defined amount of current, this tariff element becomes/is active. If the charging current is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a tariff element become active when the charging current is below this value, but the tariff element MUST  no longer be active when the charging current raises above the defined value",
+            "description": "Sum of the maximum current in over all phases, for example 20. When the EV is charging with less than the defined amount of current, this tariff element becomes/is active. If the charging current is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a tariff element become active when the charging current is below this value, but the tariff element MUST  no longer be active when the charging current raises above the defined value. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14513,7 +14747,7 @@
           },
           {
             "name": "min_power",
-            "description": "Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this tariff element is/becomes active. If the charging power is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum power over the entire charging session. This restriction can make a tariff element become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value",
+            "description": "Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this tariff element is/becomes active. If the charging power is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum power over the entire charging session. This restriction can make a tariff element become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14525,7 +14759,7 @@
           },
           {
             "name": "max_power",
-            "description": "Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this tariff element becomes/is active. If the charging power is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This does not describe the maximum power over the entire charging session. This restriction can make a tariff element become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value",
+            "description": "Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this tariff element becomes/is active. If the charging power is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This does not describe the maximum power over the entire charging session. This restriction can make a tariff element become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14537,7 +14771,7 @@
           },
           {
             "name": "min_duration",
-            "description": "Minimum duration in seconds the charging session MUST last (inclusive). When the duration of a charging session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this tariff element is not yet active",
+            "description": "Minimum duration in seconds the charging session MUST last (inclusive). When the duration of a charging session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this tariff element is not yet active. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14549,7 +14783,7 @@
           },
           {
             "name": "max_duration",
-            "description": "Maximum duration in seconds the charging session MUST last (exclusive). When the duration of a charging session is shorter than the defined value, this tariff element is or becomes active. After that moment, this tariff element is no longer active",
+            "description": "Maximum duration in seconds the charging session MUST last (exclusive). When the duration of a charging session is shorter than the defined value, this tariff element is or becomes active. After that moment, this tariff element is no longer active. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14561,7 +14795,7 @@
           },
           {
             "name": "day_of_week",
-            "description": "Which day(s) of the week this tariff element is active.",
+            "description": "Which day(s) of the week this tariff element is active. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -14573,7 +14807,7 @@
           },
           {
             "name": "reservation",
-            "description": "When this field is present, the tariff element describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation",
+            "description": "When this field is present, the tariff element describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -14633,7 +14867,7 @@
       {
         "kind": "ENUM",
         "name": "OICPChargingModes",
-        "description": "List of charging modes that are supported",
+        "description": "List of charging modes that are supported.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -14674,11 +14908,11 @@
       {
         "kind": "OBJECT",
         "name": "OICPConnectorCustomProperties",
-        "description": "Custom connector properties for OICP databases. Station databases that not follow the OICP standard return null values",
+        "description": "Custom connector properties for OICP databases. Station databases that not follow the OICP standard return null values.",
         "fields": [
           {
             "name": "dynamic_power_level",
-            "description": "Returns whether the connector is able to deliver different power outputs",
+            "description": "Returns whether the connector is able to deliver different power outputs.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14690,7 +14924,7 @@
           },
           {
             "name": "charging_modes",
-            "description": "List of charging modes that are supported as specified by IEC 61851-1",
+            "description": "List of charging modes that are supported as specified by IEC 61851-1.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14717,7 +14951,7 @@
       {
         "kind": "ENUM",
         "name": "OICPEvseAuthenticationMode",
-        "description": "List of authentication modes that are supported",
+        "description": "List of authentication modes that are supported.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -14764,11 +14998,11 @@
       {
         "kind": "OBJECT",
         "name": "OICPEvseCustomProperties",
-        "description": "Custom EVSE properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values",
+        "description": "Custom EVSE properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values.",
         "fields": [
           {
             "name": "authentication_modes",
-            "description": "List of authentication modes that are supported",
+            "description": "List of authentication modes that are supported.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -14792,7 +15026,7 @@
           },
           {
             "name": "max_capacity",
-            "description": "Returns a value if the EVSE has a limited capacity (e.g. built-in battery). Values are in kWh",
+            "description": "Returns a value if the EVSE has a limited capacity (e.g. built-in battery). Values are in kWh.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14804,7 +15038,7 @@
           },
           {
             "name": "payment_options",
-            "description": "List of payment options that are supported",
+            "description": "List of payment options that are supported.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -14828,7 +15062,7 @@
           },
           {
             "name": "value_added_services",
-            "description": "List of value added services that are supported",
+            "description": "List of value added services that are supported.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -14852,7 +15086,7 @@
           },
           {
             "name": "additional_info",
-            "description": "List of additional info by locale",
+            "description": "List of additional info by locale.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14872,7 +15106,7 @@
           },
           {
             "name": "is_hubject_compatible",
-            "description": "When the value is set to false this station does not support remote start and stop by Hubject",
+            "description": "When the value is set to false this station does not support remote start and stop by Hubject.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -14888,7 +15122,7 @@
           },
           {
             "name": "hardware_manufacturer",
-            "description": "Name of the charging point manufacturer",
+            "description": "Name of the charging point manufacturer.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14911,7 +15145,7 @@
         "fields": [
           {
             "name": "lang",
-            "description": "The language in which the additional info text is provided",
+            "description": "The language in which the additional info text is provided.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14923,7 +15157,7 @@
           },
           {
             "name": "value",
-            "description": "Additional info text value",
+            "description": "Additional info text value.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14942,7 +15176,7 @@
       {
         "kind": "ENUM",
         "name": "OICPPaymentOptions",
-        "description": "List of payment options that are supported",
+        "description": "List of payment options that are supported.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -14971,11 +15205,11 @@
       {
         "kind": "OBJECT",
         "name": "OICPStationCustomProperties",
-        "description": "Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values",
+        "description": "Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values.",
         "fields": [
           {
             "name": "parking_facility",
-            "description": "Returns whether the station is a parking facility",
+            "description": "Returns whether the station is a parking facility.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14987,7 +15221,7 @@
           },
           {
             "name": "parking_spot",
-            "description": "Returns an identifier for the precise parking spot. Eg. 36 or 12-1",
+            "description": "Returns an identifier for the precise parking spot. Eg. 36 or 12-1.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14999,7 +15233,7 @@
           },
           {
             "name": "calibration_law_data_availability",
-            "description": "Returns information on how the charging station provides metering law data",
+            "description": "Returns information on how the charging station provides metering law data.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -15015,7 +15249,7 @@
           },
           {
             "name": "clearinghouse_id",
-            "description": "Identification of the corresponding clearing house in the event that roaming between different clearing houses must be processed in the future",
+            "description": "Identification of the corresponding clearing house in the event that roaming between different clearing houses must be processed in the future.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15034,7 +15268,7 @@
       {
         "kind": "ENUM",
         "name": "OICPValueAddedServices",
-        "description": "List of value added services that are supported",
+        "description": "List of value added services that are supported.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -15148,11 +15382,11 @@
       {
         "kind": "OBJECT",
         "name": "Operator",
-        "description": "The operator data which extends OCPI BusinessDetails",
+        "description": "Operator data which extends OCPI BusinessDetails.",
         "fields": [
           {
             "name": "id",
-            "description": "Unique operator ID",
+            "description": "Unique operator ID.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15164,7 +15398,7 @@
           },
           {
             "name": "external_id",
-            "description": "External ID of an operator provided by the operator data source",
+            "description": "External ID of an operator provided by the operator data source.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15176,7 +15410,7 @@
           },
           {
             "name": "name",
-            "description": "Name of an operator",
+            "description": "Name of an operator. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15188,7 +15422,7 @@
           },
           {
             "name": "website",
-            "description": "Link to an operator’s website",
+            "description": "Link to an operator’s website. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15200,7 +15434,7 @@
           },
           {
             "name": "logo",
-            "description": "Image link to an operator’s logo",
+            "description": "Image link to an operator’s logo. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -15212,15 +15446,15 @@
           },
           {
             "name": "country",
-            "description": "Deprecated: Not used anymore, please use countries property instead",
+            "description": "ISO-3166 alpha-2 country code an operator is active in.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of countries."
           },
           {
             "name": "countries",
@@ -15244,7 +15478,7 @@
           },
           {
             "name": "contact",
-            "description": "Contact information",
+            "description": "Contact information.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -15256,7 +15490,7 @@
           },
           {
             "name": "ranking",
-            "description": "Ranking level on which the operator is placed or null in case the operator is not on any ranking level",
+            "description": "Ranking level on which the operator is placed or null in case the operator is not on any ranking level.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15268,7 +15502,7 @@
           },
           {
             "name": "excluded",
-            "description": "Flag which indicates if the operator is in the excluded list",
+            "description": "Flag which indicates if the operator is in the excluded list.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15287,7 +15521,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "OperatorListFilter",
-        "description": "Filter which can be applied to retrieve the operator list action",
+        "description": "Filter which can be applied to retrieve the operator list action.",
         "fields": null,
         "inputFields": [
           {
@@ -15312,7 +15546,7 @@
           },
           {
             "name": "ranking",
-            "description": "List of ranking level(s) to be retrieved. Valid values are 1 to 10",
+            "description": "List of ranking level(s) to be retrieved. Valid values are 1 to 10.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -15332,7 +15566,7 @@
           },
           {
             "name": "excluded",
-            "description": "Only retrieve operators that are in the excluded list",
+            "description": "Only retrieve operators that are in the excluded list.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -15350,12 +15584,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "OperatorListQuery",
-        "description": "Filter which can be applied to retrieve the operator list action",
+        "description": "Filter which can be applied to retrieve the operator list action.",
         "fields": null,
         "inputFields": [
           {
             "name": "id",
-            "description": "Unique operator ID",
+            "description": "Unique operator ID.",
             "type": {
               "kind": "SCALAR",
               "name": "ID",
@@ -15367,7 +15601,7 @@
           },
           {
             "name": "external_id",
-            "description": "External ID of an operator provided by an operator data source",
+            "description": "External ID of an operator provided by an operator data source.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -15379,7 +15613,7 @@
           },
           {
             "name": "name",
-            "description": "Exact name",
+            "description": "Exact name.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -15391,7 +15625,7 @@
           },
           {
             "name": "country",
-            "description": "Exact country code",
+            "description": "Exact country code.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -15471,13 +15705,13 @@
         "enumValues": [
           {
             "name": "free",
-            "description": "Parking is free",
+            "description": "Parking is free.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "paid",
-            "description": "Parking includes a fee",
+            "description": "Parking includes a fee.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -15862,6 +16096,35 @@
       },
       {
         "kind": "ENUM",
+        "name": "PowerSupported",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "available",
+            "description": "Power is supported.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "not_available",
+            "description": "Power is not supported.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "announced",
+            "description": "Power is announced, but not yet supported.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "PowerUnit",
         "description": null,
         "fields": null,
@@ -15972,7 +16235,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "Unique ID of a price",
+            "description": "Unique ID of a price.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15984,7 +16247,7 @@
           },
           {
             "name": "price_list",
-            "description": "Price details",
+            "description": "Price details.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -16011,7 +16274,7 @@
         "fields": [
           {
             "name": "partner",
-            "description": "(MSP) Mobility Service Provider",
+            "description": "(MSP) Mobility Service Provider.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16023,7 +16286,7 @@
           },
           {
             "name": "product",
-            "description": "Product details",
+            "description": "Product details.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -16035,7 +16298,7 @@
           },
           {
             "name": "elements",
-            "description": "Price product elements",
+            "description": "Price product elements.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -16086,7 +16349,7 @@
           },
           {
             "name": "vat",
-            "description": "VAT percentage to apply",
+            "description": "VAT percentage to apply.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16112,25 +16375,25 @@
         "enumValues": [
           {
             "name": "ENERGY",
-            "description": "Price per kWh",
+            "description": "Price per kWh.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "FLAT",
-            "description": "Starting price, fixed fee per charge session",
+            "description": "Starting price, fixed fee per charge session.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "TIME",
-            "description": "Fixed price per hour",
+            "description": "Fixed price per hour.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "PARKING_TIME",
-            "description": "Parking price per hour",
+            "description": "Parking price per hour.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -16144,7 +16407,7 @@
         "fields": [
           {
             "name": "name",
-            "description": "Name of the payment card or subscription. If name is 'Adhoc price' the price is the CPO price",
+            "description": "Name of the payment card or subscription. If name is 'Adhoc price' the price is the CPO price.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16156,7 +16419,7 @@
           },
           {
             "name": "description",
-            "description": "Description of the product",
+            "description": "Description of the product.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16168,7 +16431,7 @@
           },
           {
             "name": "subscription_type",
-            "description": "Subscription type",
+            "description": "Subscription type.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16180,7 +16443,7 @@
           },
           {
             "name": "subscription_fee_excl_vat",
-            "description": "Subscription fee without VAT",
+            "description": "Subscription fee without VAT.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16192,7 +16455,7 @@
           },
           {
             "name": "currency",
-            "description": "Currency",
+            "description": "Currency.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16797,7 +17060,7 @@
           },
           {
             "name": "routeEmissions",
-            "description": "[BETA] Emission profile for route.",
+            "description": "[BETA] Emissions profile for route.",
             "args": [
               {
                 "name": "route_id",
@@ -16911,11 +17174,11 @@
           },
           {
             "name": "station",
-            "description": "Get information about a station by its ID",
+            "description": "Get information about a station by its ID.",
             "args": [
               {
                 "name": "id",
-                "description": "ID of a station",
+                "description": "ID of a station.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "ID",
@@ -16927,7 +17190,7 @@
               },
               {
                 "name": "evse_id",
-                "description": "ID of a EVSE",
+                "description": "ID of a EVSE.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -16948,11 +17211,11 @@
           },
           {
             "name": "stationList",
-            "description": "Get a full list of stations",
+            "description": "Get a full list of stations.",
             "args": [
               {
                 "name": "query",
-                "description": "Deprecated: Replaced by filter & search params",
+                "description": "Deprecated: Replaced by filter & search params.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationListQuery",
@@ -16964,7 +17227,7 @@
               },
               {
                 "name": "filter",
-                "description": "Filter station result",
+                "description": "Filter station result.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationListFilter",
@@ -16976,7 +17239,7 @@
               },
               {
                 "name": "search",
-                "description": "Search for stations by name, id and external id",
+                "description": "Search for stations by name, id and external id.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -16988,7 +17251,7 @@
               },
               {
                 "name": "size",
-                "description": "Number of elements (count) to return, default: 10",
+                "description": "Number of elements (count) to return, default: 10.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -17000,7 +17263,7 @@
               },
               {
                 "name": "page",
-                "description": "Page number to return, default: 0",
+                "description": "Page number to return, default: 0.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -17025,11 +17288,11 @@
           },
           {
             "name": "stationAround",
-            "description": "Search for stations around a GeoJSON point with a specific distance in meters",
+            "description": "Search for stations around a GeoJSON point with a specific distance in meters.",
             "args": [
               {
                 "name": "query",
-                "description": "Deprecated: Replaced by filter and search params",
+                "description": "Deprecated: Replaced by filter and search params.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationAroundQuery",
@@ -17041,7 +17304,7 @@
               },
               {
                 "name": "filter",
-                "description": "Filter station around result",
+                "description": "Filter station around result.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationAroundFilter",
@@ -17053,7 +17316,7 @@
               },
               {
                 "name": "search",
-                "description": "Search for stations around by name, id and external id",
+                "description": "Search for stations around by name, id and external id.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -17065,7 +17328,7 @@
               },
               {
                 "name": "size",
-                "description": "Number of elements (count) to return, default: 10",
+                "description": "Number of elements (count) to return, default: 10.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -17077,7 +17340,7 @@
               },
               {
                 "name": "page",
-                "description": "Page number to return, default: 0",
+                "description": "Page number to return, default: 0.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -18584,11 +18847,11 @@
       {
         "kind": "OBJECT",
         "name": "Review",
-        "description": "The review model",
+        "description": "Review model.",
         "fields": [
           {
             "name": "id",
-            "description": "ID of a review",
+            "description": "ID of a review.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -18604,7 +18867,7 @@
           },
           {
             "name": "station",
-            "description": "Station for which a review was provided",
+            "description": "Station for which a review was provided.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -18616,7 +18879,7 @@
           },
           {
             "name": "user",
-            "description": "User who added a review. If a review was added by an anonymous user, this will be null",
+            "description": "User who added a review. If a review was added by an anonymous user, this will be null.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -18628,7 +18891,7 @@
           },
           {
             "name": "rating",
-            "description": "Rating of a review",
+            "description": "Rating of a review.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -18640,7 +18903,7 @@
           },
           {
             "name": "message",
-            "description": "Message of a review",
+            "description": "Message of a review.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -18652,7 +18915,7 @@
           },
           {
             "name": "locale",
-            "description": "Locale of a message",
+            "description": "Locale of a message.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -18664,7 +18927,7 @@
           },
           {
             "name": "ev",
-            "description": "Vehicle that was provided/selected by a user",
+            "description": "Vehicle that was provided/selected by a user.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -18676,7 +18939,7 @@
           },
           {
             "name": "plugType",
-            "description": "Plug type that was provided/selected by a user",
+            "description": "Plug type that was provided/selected by a user.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -18688,7 +18951,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -18700,7 +18963,7 @@
           },
           {
             "name": "tags",
-            "description": "Boolean tags for a station review",
+            "description": "Boolean tags for a station review.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -18712,7 +18975,7 @@
           },
           {
             "name": "createdAt",
-            "description": "Date and time when a review was created",
+            "description": "Date and time when a review was created.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -18724,7 +18987,7 @@
           },
           {
             "name": "updatedAt",
-            "description": "Date and time when a review was updated",
+            "description": "Date and time when a review was updated.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -18743,12 +19006,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ReviewAdd",
-        "description": "Form input to add a new review",
+        "description": "Form input to add a new review.",
         "fields": null,
         "inputFields": [
           {
             "name": "stationId",
-            "description": "Station ID for which a review is provided",
+            "description": "Station ID for which a review is provided.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -18764,7 +19027,7 @@
           },
           {
             "name": "rating",
-            "description": "Rating of a review",
+            "description": "Rating of a review.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -18780,7 +19043,7 @@
           },
           {
             "name": "message",
-            "description": "Review message",
+            "description": "Review message.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -18792,7 +19055,7 @@
           },
           {
             "name": "locale",
-            "description": "Locale of a message",
+            "description": "Locale of a message.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -18804,7 +19067,7 @@
           },
           {
             "name": "ev",
-            "description": "ID of the vehicle that was provided/selected by a user",
+            "description": "ID of the vehicle that was provided/selected by a user.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -18816,7 +19079,7 @@
           },
           {
             "name": "plugType",
-            "description": "Plug type that was provided/selected by a user",
+            "description": "Plug type that was provided/selected by a user.",
             "type": {
               "kind": "ENUM",
               "name": "ConnectorType",
@@ -18828,7 +19091,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer.",
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
@@ -18840,7 +19103,7 @@
           },
           {
             "name": "tags",
-            "description": "Boolean tags for a station review",
+            "description": "Boolean tags for a station review.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ReviewTagsInput",
@@ -18858,12 +19121,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ReviewEdit",
-        "description": "Form input for edit an existing review",
+        "description": "Form input for edit an existing review.",
         "fields": null,
         "inputFields": [
           {
             "name": "rating",
-            "description": "Rating of a review",
+            "description": "Rating of a review.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -18879,7 +19142,7 @@
           },
           {
             "name": "message",
-            "description": "Review message",
+            "description": "Review message.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -18891,7 +19154,7 @@
           },
           {
             "name": "locale",
-            "description": "Locale of a message",
+            "description": "Locale of a message.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -18903,7 +19166,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer.",
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
@@ -18915,7 +19178,7 @@
           },
           {
             "name": "tags",
-            "description": "Boolean tags for a station review",
+            "description": "Boolean tags for a station review.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ReviewTagsInput",
@@ -18933,11 +19196,11 @@
       {
         "kind": "OBJECT",
         "name": "ReviewStats",
-        "description": "Statistical information for reviews of a station",
+        "description": "Statistical information for reviews of a station.",
         "fields": [
           {
             "name": "rating",
-            "description": "Average of all reviews",
+            "description": "Average of all reviews.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -18949,7 +19212,7 @@
           },
           {
             "name": "count",
-            "description": "'Total number of reviews",
+            "description": "'Total number of reviews.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -18968,11 +19231,11 @@
       {
         "kind": "OBJECT",
         "name": "ReviewTags",
-        "description": "Boolean tags for the station review",
+        "description": "Boolean tags for the station review.",
         "fields": [
           {
             "name": "working",
-            "description": "Flag which indicates if the station was working when the review was added",
+            "description": "Flag which indicates if the station was working when the review was added.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -18984,7 +19247,7 @@
           },
           {
             "name": "recommended",
-            "description": "Flag which indicates if the user recommended the station when the review was added",
+            "description": "Flag which indicates if the user recommended the station when the review was added.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19003,12 +19266,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ReviewTagsInput",
-        "description": "Boolean tags for a station review",
+        "description": "Boolean tags for a station review.",
         "fields": null,
         "inputFields": [
           {
             "name": "working",
-            "description": "Flag which indicates if a station was working when the review was added",
+            "description": "Flag which indicates if a station was working when the review was added.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -19020,7 +19283,7 @@
           },
           {
             "name": "recommended",
-            "description": "Flag which indicates if a user recommended a station when the review was added",
+            "description": "Flag which indicates if a user recommended a station when the review was added.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -19038,11 +19301,11 @@
       {
         "kind": "OBJECT",
         "name": "ReviewUser",
-        "description": "Special format for the user of a review",
+        "description": "Special format for the user of a review.",
         "fields": [
           {
             "name": "name",
-            "description": "User full name. If a review was added by an anonymous user, this will be null",
+            "description": "User full name. If a review was added by an anonymous user, this will be null.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19054,7 +19317,7 @@
           },
           {
             "name": "id",
-            "description": "User ID",
+            "description": "User ID.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19066,7 +19329,7 @@
           },
           {
             "name": "firstName",
-            "description": "First name",
+            "description": "First name.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19074,11 +19337,11 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "Please use name instead"
+            "deprecationReason": "In favor of name."
           },
           {
             "name": "lastName",
-            "description": "Last name",
+            "description": "Last name.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19086,7 +19349,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "Please use name instead"
+            "deprecationReason": "In favor of name"
           }
         ],
         "inputFields": null,
@@ -20307,7 +20570,7 @@
           },
           {
             "name": "internal_combustion_vehicle",
-            "description": "Emissions profile for the internal combustion engine equivalent.",
+            "description": "Emissions profile for an equivalent internal combustion engine vehicle.",
             "args": [
               {
                 "name": "fuel_type",
@@ -20977,7 +21240,7 @@
         "fields": [
           {
             "name": "total",
-            "description": "Total emissions.",
+            "description": "Total co2e emissions.",
             "args": [
               {
                 "name": "unit",
@@ -21089,7 +21352,7 @@
         "fields": [
           {
             "name": "total",
-            "description": "Total emissions for the leg.",
+            "description": "Total co2e emissions for the leg.",
             "args": [
               {
                 "name": "unit",
@@ -24523,7 +24786,7 @@
         "fields": [
           {
             "name": "total",
-            "description": "Total emissions.",
+            "description": "Total co2e emissions.",
             "args": [
               {
                 "name": "unit",
@@ -24635,7 +24898,7 @@
         "fields": [
           {
             "name": "total",
-            "description": "Total emissions for the leg.",
+            "description": "Total co2e emissions for the leg.",
             "args": [
               {
                 "name": "unit",
@@ -25046,23 +25309,11 @@
       {
         "kind": "OBJECT",
         "name": "Station",
-        "description": "Station data which extends OCPI Location",
+        "description": "Station data which extends OCPI Location.",
         "fields": [
           {
-            "name": "review",
-            "description": "Review of a station",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "ReviewStats",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
-            "description": "Unique ID of a station",
+            "description": "Unique ID of a station. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -25078,7 +25329,7 @@
           },
           {
             "name": "country_code",
-            "description": "ISO-3166 alpha-2 country code of a station",
+            "description": "ISO-3166 alpha-2 country code of a station. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25090,7 +25341,7 @@
           },
           {
             "name": "party_id",
-            "description": "CPO ID of a CPO that 'owns' this station (following the ISO-15118 standard)",
+            "description": "CPO ID of a CPO that 'owns' this station (following the ISO-15118 standard). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25102,7 +25353,7 @@
           },
           {
             "name": "publish",
-            "description": "Defines if a location may be published on a website or app etc.\nWhen this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this location.\nWhen the same location has EVSEs that may be published and may not be published, two 'locations' should be created",
+            "description": "Defines if a location may be published on a website or app etc.\nWhen this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this location.\nWhen the same location has EVSEs that may be published and may not be published, two 'locations' should be created. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25114,7 +25365,7 @@
           },
           {
             "name": "name",
-            "description": "Name of a charging station",
+            "description": "Name of a charging station. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25126,7 +25377,7 @@
           },
           {
             "name": "address",
-            "description": "Street/block name and house number if available",
+            "description": "Street/block name and house number if available. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25138,7 +25389,7 @@
           },
           {
             "name": "city",
-            "description": "City or town",
+            "description": "City or town. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25150,7 +25401,7 @@
           },
           {
             "name": "postal_code",
-            "description": "Postal code of a location, may only be omitted when a location has no postal code: in some countries charging locations at highways don’t have postal codes.",
+            "description": "Postal code of a location, may only be omitted when a location has no postal code: in some countries charging locations at highways don’t have postal codes. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25162,7 +25413,7 @@
           },
           {
             "name": "state",
-            "description": "State or province of a location, only to be used when relevant",
+            "description": "State or province of a location, only to be used when relevant. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25174,7 +25425,7 @@
           },
           {
             "name": "country",
-            "description": "ISO 3166-1 alpha-3 code for the country of this station",
+            "description": "ISO 3166-1 alpha-3 code for the country of this station. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25186,7 +25437,7 @@
           },
           {
             "name": "coordinates",
-            "description": "Coordinates of a location",
+            "description": "Coordinates of a location. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -25198,7 +25449,7 @@
           },
           {
             "name": "related_locations",
-            "description": "Geographical location of related points relevant to a user",
+            "description": "Geographical location of related points relevant to a user. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25214,7 +25465,7 @@
           },
           {
             "name": "parking_type",
-            "description": "Type of parking at a charge point location",
+            "description": "Type of parking at a charge point location. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -25226,7 +25477,7 @@
           },
           {
             "name": "evses",
-            "description": "EVSEs that belong to a station",
+            "description": "EVSEs that belong to a station. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25242,7 +25493,7 @@
           },
           {
             "name": "directions",
-            "description": "Human-readable directions on how to reach a station",
+            "description": "Human-readable directions on how to reach a station. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25258,7 +25509,7 @@
           },
           {
             "name": "operator",
-            "description": "Information about an operator",
+            "description": "Information about an operator. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -25270,7 +25521,7 @@
           },
           {
             "name": "suboperator",
-            "description": "Information about a suboperator if applicable",
+            "description": "Information about a suboperator if applicable. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -25282,7 +25533,7 @@
           },
           {
             "name": "owner",
-            "description": "Information about an owner if available",
+            "description": "Information about an owner if available. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -25294,7 +25545,7 @@
           },
           {
             "name": "facilities",
-            "description": "Facilities a charging station belongs to",
+            "description": "Facilities a charging station belongs to. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25310,7 +25561,7 @@
           },
           {
             "name": "time_zone",
-            "description": "Value from the IANA time zone database representing the time zone of a location. Examples: \"Europe/Oslo\", \"Europe/Zurich\". (http://www.iana.org/time-zones)",
+            "description": "Value from the IANA time zone database representing the time zone of a location. Examples: \"Europe/Oslo\", \"Europe/Zurich\". (http://www.iana.org/time-zones). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25322,7 +25573,7 @@
           },
           {
             "name": "opening_times",
-            "description": "Times when an EVSEs at a location can be accessed for charging",
+            "description": "Times when an EVSEs at a location can be accessed for charging. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -25334,7 +25585,7 @@
           },
           {
             "name": "charging_when_closed",
-            "description": "Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers overnight, is it allowed to charge till the next morning? Default: true",
+            "description": "Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers overnight, is it allowed to charge till the next morning? Default: true. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25346,7 +25597,7 @@
           },
           {
             "name": "images",
-            "description": "Links to images related to a location such as photos or logos",
+            "description": "Links to images related to a location such as photos or logos. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25362,7 +25613,7 @@
           },
           {
             "name": "energy_mix",
-            "description": "Details of the energy supplied at a location",
+            "description": "Details of the energy supplied at a location. This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -25374,7 +25625,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when a location, or one of its EVSEs or Connectors were last updated (or created)",
+            "description": "Timestamp when a location, or one of its EVSEs or Connectors were last updated (or created). This property is OCPI-compliant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25386,7 +25637,7 @@
           },
           {
             "name": "external_id",
-            "description": "ID provided by a station data source",
+            "description": "ID provided by a station data source.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25398,7 +25649,7 @@
           },
           {
             "name": "location",
-            "description": "GeoJSON location of a charging station",
+            "description": "GeoJSON location of a charging station.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -25410,7 +25661,7 @@
           },
           {
             "name": "elevation",
-            "description": "Elevation (altitude) level",
+            "description": "Elevation (altitude) level.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25422,7 +25673,7 @@
           },
           {
             "name": "chargers",
-            "description": "Groups of EVSEs by power and type",
+            "description": "Groups of EVSEs by power and type.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25438,7 +25689,7 @@
           },
           {
             "name": "amenities",
-            "description": "Amenities located at this location",
+            "description": "Amenities located at this location.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25450,7 +25701,7 @@
           },
           {
             "name": "physical_address",
-            "description": "Enriched information about the physical address of a station",
+            "description": "Enriched information about the physical address of a station.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -25461,8 +25712,76 @@
             "deprecationReason": null
           },
           {
+            "name": "heavy_vehicles_properties",
+            "description": "Describes the heavy vehicle properties at the location.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationHeavyVehiclesProperties",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "heavy_vehicles_restrictions",
+            "description": "Describes the heavy vehicle restrictions at the location.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationHeavyVehiclesRestrictions",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle_restrictions",
+            "description": "Describes the vehicle restrictions at the location.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationVehicleRestrictions",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "location_category",
+            "description": "Type of location where the charge point is located. For example, shop.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "entrance_for_navigation",
+            "description": "Coordinates for the location's entrances in decimal degrees. If available, there can be more than one entrances to the location.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "OCPIAdditionalGeoLocation",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer",
+            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25474,7 +25793,7 @@
           },
           {
             "name": "realtime",
-            "description": "A flag that indicates if a station has real-time information about the availability of its connectors",
+            "description": "A flag that indicates if a station has real-time information about the availability of its connectors.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25486,19 +25805,19 @@
           },
           {
             "name": "private",
-            "description": "A flag that indicates if a station is on private property",
+            "description": "A flag that indicates if a station is on private property.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of access_type."
           },
           {
             "name": "power",
-            "description": "Connectors grouped by power",
+            "description": "Connectors grouped by power.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -25510,7 +25829,7 @@
           },
           {
             "name": "predicted_availability",
-            "description": "Station availability",
+            "description": "Station availability.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25522,11 +25841,11 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "predicted_availability, no value will be sent. Deprecated in favor of predicted_occupancy"
+            "deprecationReason": "predicted_availability, no value will be sent. Deprecated in favor of predicted_occupancy."
           },
           {
             "name": "predicted_occupancy",
-            "description": "Predicted station occupancy",
+            "description": "Predicted station occupancy.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25537,12 +25856,12 @@
                 "ofType": null
               }
             },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of custom_properties.predicted_occupancy"
+            "isDeprecated": false,
+            "deprecationReason": null
           },
           {
             "name": "speed",
-            "description": "Charging speed for a station",
+            "description": "Charging speed for a station.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -25554,7 +25873,7 @@
           },
           {
             "name": "status",
-            "description": "Global status for a station",
+            "description": "Global status for a station.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -25566,11 +25885,107 @@
           },
           {
             "name": "custom_properties",
-            "description": "Custom properties of a station. These are vendor specific and will return null values on the fields that are not supported by your station database",
+            "description": "Custom properties of a station. These are vendor specific and will return null values on the fields that are not supported by your station database.",
             "args": [],
             "type": {
               "kind": "OBJECT",
               "name": "StationCustomProperties",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "review",
+            "description": "Review of a station.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ReviewStats",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "roaming",
+            "description": "List of eMSP cards accepted at a charging station.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "StationRoaming",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "support_phone_number",
+            "description": "Phone number for assistance at a charging station.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charging_behaviour",
+            "description": "Charging behavior of a station.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ChargingBehaviour",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "reliability_score",
+            "description": "Shows how reliable a charging station is (1 to 5; 1 = unreliable, 5 = reliable), taking into account the charging behaviour history and error values.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "adhoc_authorisation_payment_method",
+            "description": "Indicates the authentication and payment methods.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "StationAdhocAuthorisationPaymentMethod",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "access_type",
+            "description": "Type of access to the charging station.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "AccessType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -25583,14 +25998,115 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "StationAdhocAuthorisationPaymentMethod",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "AUTH_BY_CAR_PLUG_AND_CHARGE",
+            "description": "Authentication by car through Plug and Charge.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ONLINE_APPLE_PAY",
+            "description": "Apple Pay.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TERMINAL_IN_APP",
+            "description": "Terminal in app.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ONLINE_PAYPAL",
+            "description": "PayPal.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SERVICE_PROVIDER_RFID_CARD",
+            "description": "Service Provider RFID Card.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TERMINAL_QR_CODE",
+            "description": "Terminal QR Code.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TERMINAL_CREDIT_CARD",
+            "description": "Terminal Credit Card.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TERMINAL_DEBIT_CARD",
+            "description": "Terminal Debit Card.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TERMINAL_SMS",
+            "description": "Terminal SMS.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ONLINE_CREDIT_CARD",
+            "description": "Credit Card.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "OTHER_OTHER",
+            "description": "Other.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TERMINAL_CONTACTLESS",
+            "description": "Terminal Contactless.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ONLINE_GOOGLE_PAY",
+            "description": "Google Pay.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ONLINE_BANK_PAYMENT",
+            "description": "Bank Payment.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AUTH_BY_CAR_AUTOCHARGE",
+            "description": "Authentication by car through Auto Charge.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "StationAroundFilter",
-        "description": "Filter which can be applied to retrieve the station around list action",
+        "description": "Filter which can be applied to retrieve the station around list action.",
         "fields": null,
         "inputFields": [
           {
             "name": "location",
-            "description": "The GeoJSON Point of the center of the around me circle",
+            "description": "GeoJSON Point of the center of the around me circle.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "PointInput",
@@ -25602,7 +26118,7 @@
           },
           {
             "name": "distance",
-            "description": "Distance, in meters, to search around",
+            "description": "Distance, in meters, to search around.",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -25614,7 +26130,7 @@
           },
           {
             "name": "powers",
-            "description": "Powers in kWh",
+            "description": "Powers in kWh.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25630,7 +26146,7 @@
           },
           {
             "name": "amenities",
-            "description": "Amenities available near a station",
+            "description": "Amenities available near a station.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25646,7 +26162,7 @@
           },
           {
             "name": "power_groups",
-            "description": "Station speed",
+            "description": "Station speed.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25662,7 +26178,7 @@
           },
           {
             "name": "connectors",
-            "description": "Station socket or plug standards",
+            "description": "Station socket or plug standards.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25678,7 +26194,7 @@
           },
           {
             "name": "available_only",
-            "description": "Flag that allows you to return only available stations",
+            "description": "Flag that allows you to return only available stations.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -25690,7 +26206,7 @@
           },
           {
             "name": "preferred_operator",
-            "description": "Flag indicating if only stations that are owned by an operator from a clients ranking list are returned",
+            "description": "Flag indicating if only stations that are owned by an operator from a clients ranking list are returned.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -25708,12 +26224,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "StationAroundQuery",
-        "description": "Deprecated: Replaced by filter & search params",
+        "description": "Deprecated: Replaced by filter & search params.",
         "fields": null,
         "inputFields": [
           {
             "name": "location",
-            "description": "The GeoJSON Point of the center of the around me circle",
+            "description": "GeoJSON Point of the center of the around me circle.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "PointInput",
@@ -25725,7 +26241,7 @@
           },
           {
             "name": "distance",
-            "description": "Distance, in meters, to search around",
+            "description": "Distance, in meters, to search around.",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -25737,7 +26253,7 @@
           },
           {
             "name": "power",
-            "description": "Power in kWh",
+            "description": "Power in kWh.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25753,7 +26269,7 @@
           },
           {
             "name": "amenities",
-            "description": "Amenities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park",
+            "description": "Amenities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25779,7 +26295,7 @@
         "fields": [
           {
             "name": "roaming",
-            "description": "List of eMSP cards accepted at a charging station",
+            "description": "List of eMSP cards accepted at a charging station.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25790,48 +26306,48 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of station.roaming."
           },
           {
             "name": "support_phone_number",
-            "description": "Phone number for assistance at a charging station",
+            "description": "Phone number for assistance at a charging station.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of station.support_phone_number."
           },
           {
             "name": "charging_behaviour",
-            "description": "Charging behavior of a station",
+            "description": "Charging behavior of a station.",
             "args": [],
             "type": {
               "kind": "OBJECT",
               "name": "ChargingBehaviour",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of station.charging_behaviour."
           },
           {
             "name": "reliability_score",
-            "description": "Shows how reliable a charging station is (1 to 5; 1 = unreliable, 5 = reliable), taking into account the charging behaviour history and error values",
+            "description": "Shows how reliable a charging station is (1 to 5; 1 = unreliable, 5 = reliable), taking into account the charging behaviour history and error values.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Int",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of station.reliability_score."
           },
           {
             "name": "adhoc_authorisation_method",
-            "description": "List of available ad hoc payment methods",
+            "description": "List of available ad hoc payment methods.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25842,12 +26358,12 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of station.adhoc_authorisation_payment_method."
           },
           {
             "name": "predicted_occupancy",
-            "description": "Predicted station occupancy",
+            "description": "Predicted station occupancy.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25858,24 +26374,24 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of station.predicted_occupancy."
           },
           {
             "name": "access_type",
-            "description": "Type of access to the charging station",
+            "description": "Type of access to the charging station.",
             "args": [],
             "type": {
               "kind": "ENUM",
               "name": "AccessType",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of station.charging_behaviour."
           },
           {
             "name": "oicp",
-            "description": "Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values",
+            "description": "Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -25892,14 +26408,248 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "StationHeavyVehiclesProperties",
+        "description": "Describes the heavy vehicle properties at the location.",
+        "fields": [
+          {
+            "name": "is_dedicated",
+            "description": "Indicates whether the location was constructed mainly for the purpose of heavy vehicles like trucks.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "facilities",
+            "description": "List of facilities in the location.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "HeavyVehiclesFacility",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_trailer_accessible",
+            "description": "Indicates whether the location is suitable for trucks with trailers.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_drive_through",
+            "description": "Indicates whether the location is drive-through.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "allows_dangerous_goods",
+            "description": "Indicates whether the location allows charging of heavy vehicles transporting dangerous goods.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "allows_rigid_vehicles",
+            "description": "Indicates whether the location is suitable for rigid heavy vehicles.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "allows_overnight_parking",
+            "description": "Indicates whether the location allows overnight charging of heavy vehicles.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationHeavyVehiclesRestrictions",
+        "description": "Describes the heavy vehicle restrictions at the location.",
+        "fields": [
+          {
+            "name": "height",
+            "description": "Maximum height of the heavy vehicle that is allowed to be parked at the charging station.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DimensionUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "width",
+            "description": "Maximum width of the heavy vehicle that is allowed to be parked at the charging station.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DimensionUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "length",
+            "description": "Maximum length of the heavy vehicle that is allowed to be parked at the charging station.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DimensionUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mass",
+            "description": "Maximum mass of the heavy vehicle that is allowed to be parked at the charging station.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "WeightUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilogram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "allowed_types_EU",
+            "description": "Allowed N (EU) types of heavy vehicles.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "HeavyVehiclesEUType",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "StationListFilter",
-        "description": "Filter which can be applied to retrieve the station list action",
+        "description": "Filter which can be applied to retrieve the station list action.",
         "fields": null,
         "inputFields": [
           {
             "name": "powers",
-            "description": "Powers in kWh",
+            "description": "Powers in kWh.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25915,7 +26665,7 @@
           },
           {
             "name": "amenities",
-            "description": "Amenities available near a station",
+            "description": "Amenities available near a station.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25931,7 +26681,7 @@
           },
           {
             "name": "power_groups",
-            "description": "Station speed",
+            "description": "Station speed.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25947,7 +26697,7 @@
           },
           {
             "name": "connectors",
-            "description": "Station socket or plug standards",
+            "description": "Station socket or plug standards.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25963,7 +26713,7 @@
           },
           {
             "name": "available_only",
-            "description": "Flag that allows you to return only available stations",
+            "description": "Flag that allows you to return only available stations.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -25975,7 +26725,7 @@
           },
           {
             "name": "preferred_operator",
-            "description": "Flag indicating if only stations that are owned by an operator from a clients ranking list are returned",
+            "description": "Flag indicating if only stations that are owned by an operator from a clients ranking list are returned.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -25993,12 +26743,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "StationListQuery",
-        "description": "Deprecated: Replaced by filter & search params",
+        "description": "Deprecated: Replaced by filter & search params.",
         "fields": null,
         "inputFields": [
           {
             "name": "id",
-            "description": "ID of the station",
+            "description": "ID of the station.",
             "type": {
               "kind": "SCALAR",
               "name": "ID",
@@ -26010,7 +26760,7 @@
           },
           {
             "name": "external_id",
-            "description": "External ID of the station provided by the station data source",
+            "description": "External ID of the station provided by the station data source.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -26022,7 +26772,7 @@
           },
           {
             "name": "name",
-            "description": "Exact name",
+            "description": "Exact name.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -26040,11 +26790,11 @@
       {
         "kind": "OBJECT",
         "name": "StationPredictedAvailability",
-        "description": "Station availability for each weekday and hour",
+        "description": "Station availability for each weekday and hour.",
         "fields": [
           {
             "name": "weekday",
-            "description": "Number of weekday from 1 (monday) to 7 (sunday)",
+            "description": "Number of weekday from 1 (monday) to 7 (sunday).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -26056,7 +26806,7 @@
           },
           {
             "name": "prediction",
-            "description": "The prediction for each hour 0-23 from 1 to 5 (1 - very busy ... 5 very quiet (free))",
+            "description": "The prediction for each hour 0-23 from 1 to 5 (1 - very busy ... 5 very quiet (free)).",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -26079,11 +26829,11 @@
       {
         "kind": "OBJECT",
         "name": "StationPredictedOccupancy",
-        "description": "Station occupancy for each weekday and hour",
+        "description": "Station occupancy for each weekday and hour.",
         "fields": [
           {
             "name": "weekday",
-            "description": "Number of weekday from 1 (monday) to 7 (sunday)",
+            "description": "Number of weekday from 1 (monday) to 7 (sunday).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -26095,7 +26845,7 @@
           },
           {
             "name": "occupancy",
-            "description": "Occupancy on a scale from 1 to 10, where 1 means free for charging and 10 means fully occupied",
+            "description": "Occupancy on a scale from 1 to 10, where 1 means free for charging and 10 means fully occupied.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -26107,7 +26857,7 @@
           },
           {
             "name": "period_begin",
-            "description": "Start of the period of the occupancy prediction (string of 'hh-mmZ' format)",
+            "description": "Start of the period of the occupancy prediction (string of 'hh-mmZ' format).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -26119,7 +26869,7 @@
           },
           {
             "name": "period_end",
-            "description": "End of the period of the occupancy prediction (string of 'hh-mmZ' format)",
+            "description": "End of the period of the occupancy prediction (string of 'hh-mmZ' format).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -26141,8 +26891,40 @@
         "description": null,
         "fields": [
           {
+            "name": "partner_id",
+            "description": "Unique id for a provider. It is created by Eco-Movement, and it is stable.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ema_id",
+            "description": "Unique E-Mobility Account Identifier (eMA ID) for a provider.\nIt is created by Eco-Movement by combining the country code where the charging station is located, and the party id of the provider.\nFor example, NL-ECO. Note: A provider can have multiple eMA IDs.\nFor example, if a company named 'Example Company A' acquired 'Example Company B' and owns the charging stations of Example Company B,\nthen this attribute maps Example Company B's eMA IDs to Example Company A's eMA IDs. For example, ['NL-EXA', 'NL-EXB'].",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "emsp",
-            "description": "Name of the EMSP provider",
+            "description": "Name of the EMSP provider.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -26154,7 +26936,7 @@
           },
           {
             "name": "card",
-            "description": "Name of the card accepted at a charging station",
+            "description": "Name of the card accepted at a charging station.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -26166,7 +26948,7 @@
           },
           {
             "name": "android_app_link",
-            "description": "Link to native Android app for card accepted at a charging station",
+            "description": "Link to native Android app for card accepted at a charging station.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -26178,7 +26960,7 @@
           },
           {
             "name": "ios_app_link",
-            "description": "Link to native iOS app for card accepted at a charging station",
+            "description": "Link to native iOS app for card accepted at a charging station.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -26272,6 +27054,117 @@
                 "name": "AmenityStats",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationVehicleRestrictions",
+        "description": "Describes the vehicle restrictions at the location.",
+        "fields": [
+          {
+            "name": "mass",
+            "description": "Maximum weight for a vehicle that is allowed at the location.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "WeightUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilogram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "width",
+            "description": "Maximum width for a vehicle that is allowed at the location.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DimensionUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "height",
+            "description": "Maximum height for a vehicle that is allowed at the location.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DimensionUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "length",
+            "description": "Maximum length for a vehicle that is allowed at the location.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DimensionUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -27777,6 +28670,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "heat_pump",
+            "description": "Details about Heat Pump.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehicleHeatPump",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -27912,6 +28817,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of battery.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "VehicleBatteryType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -27948,6 +28865,23 @@
           {
             "name": "U",
             "description": "usable_kwh field is estimated.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "VehicleBatteryType",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "lithium_ion",
+            "description": "Lithium-Ion Battery.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -28451,6 +29385,41 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehicleHeatPump",
+        "description": null,
+        "fields": [
+          {
+            "name": "is_available",
+            "description": "Indicates if a heat pump is available for a specific vehicle.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_standard_equipment",
+            "description": "Indicates if a heat pump is standard equipment for a specific vehicle.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -29005,6 +29974,18 @@
                 "name": "Float",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of battery.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "VehicleBatteryType",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -29662,6 +30643,41 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "VehiclePlugAndChargeSupport",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "available",
+            "description": "Plug and charge is available.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "announced",
+            "description": "Plug and charge is announced, but not yet available.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "limited",
+            "description": "Plug and charge is available in a limited context.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "not_available",
+            "description": "Plug and charge is not available.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "VehiclePremium",
         "description": "The output element of the vehiclePremium query.",
@@ -30045,6 +31061,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "heat_pump",
+            "description": "Details about Heat Pump.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehicleHeatPump",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -30271,6 +31299,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of battery.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "VehicleBatteryType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -30435,6 +31475,31 @@
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ground_clearance",
+            "description": "Ground clearance of a vehicle as specified by the OEM, default in mm.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "MeasurementUnit",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -30907,6 +31972,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "VehiclePremiumChargeAlternativeOBC",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle_to_everything",
+            "description": "Vehicle-to-everything charge support.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehicleToEverything",
               "ofType": null
             },
             "isDeprecated": false,
@@ -32384,6 +33461,66 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "has_autocharge",
+            "description": "Indicates if autocharge is available.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "iso_15118_pnc_support",
+            "description": "Status of Plug & Charge (PnC ISO15118) support for vehicle.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "VehiclePlugAndChargeSupport",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "iso_15118_pnc_support_2",
+            "description": "Status of Plug & Charge (PnC ISO15118) -2 protocol support for vehicle.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "VehiclePlugAndChargeSupport",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "iso_15118_pnc_support_20",
+            "description": "Status of Plug & Charge (PnC ISO15118) -20 protocol support for vehicle.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "VehiclePlugAndChargeSupport",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_fastned_tested",
+            "description": "Indicates if the fastcharge data is based on a real-world test by Fastned.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -32922,6 +34059,30 @@
           {
             "name": "grant_applied",
             "description": "Grant that is applied to the starting price.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_delivery",
+            "description": "Total delivery fees (be aware that this field does not include grant).",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_first_registration_fee",
+            "description": "First registration fee (be aware that this field does not include grant).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -33519,6 +34680,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "url",
+            "description": "Link to the EuroNCAP test report.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -33975,6 +35148,170 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehicleToEverything",
+        "description": null,
+        "fields": [
+          {
+            "name": "vehicle_to_load",
+            "description": "Information about Vehicle-to-Load.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehicleToEverythingLoad",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle_to_home",
+            "description": "Information about Vehicle-to-Home.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehicleToEverythingHomeGrid",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle_to_grid",
+            "description": "Information about Vehicle-to-Grid.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehicleToEverythingHomeGrid",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehicleToEverythingHomeGrid",
+        "description": null,
+        "fields": [
+          {
+            "name": "ac",
+            "description": "Vehicle-to-Home/Grid AC power information.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehicleToEverythingPower",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "dc",
+            "description": "Vehicle-to-Home/Grid DC power information",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehicleToEverythingPower",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehicleToEverythingLoad",
+        "description": null,
+        "fields": [
+          {
+            "name": "ac",
+            "description": "Vehicle-to-Load power information.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehicleToEverythingPower",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "interior_ports",
+            "description": "Details on interior ports available for V2L.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "exterior_ports",
+            "description": "Details on exterior ports available for V2L.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehicleToEverythingPower",
+        "description": null,
+        "fields": [
+          {
+            "name": "is_supported",
+            "description": "Indicates if this charging is supported.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "PowerSupported",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_power",
+            "description": "Maximum power output, in kilowatts.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -35019,6 +36356,13 @@
       }
     ],
     "directives": [
+      {
+        "name": "ocpi",
+        "description": "Indicates that a property is OCPI-compliant.",
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION"],
+        "args": []
+      },
       {
         "name": "sanitizeHtml",
         "description": null,

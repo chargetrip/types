@@ -53,18 +53,37 @@ export type Address = {
   country?: Maybe<Scalars["String"]>;
   /** County code (2 letters). */
   county?: Maybe<Scalars["String"]>;
+  /** State or province. */
+  state_province?: Maybe<Scalars["String"]>;
+  /** Municipality. */
+  municipality?: Maybe<Scalars["String"]>;
   /** City. */
   city?: Maybe<Scalars["String"]>;
   /** Street name. */
   street?: Maybe<Scalars["String"]>;
   /** Street number. */
   number?: Maybe<Scalars["String"]>;
-  /** Postal code of a location. */
+  /**
+   * Postal code of the location.
+   * @deprecated In favor of postal_code.
+   */
   postalCode?: Maybe<Scalars["String"]>;
-  /** String composed of 3 words which represent the location of an address on the globe. More details: http://w3w.co/<what3Words>. */
+  /**
+   * String composed of 3 words which represent the location of an address on the globe. More details: http://w3w.co/<what3Words>.
+   * @deprecated In favor of what_3_words.
+   */
   what3Words?: Maybe<Scalars["String"]>;
-  /** Human-readable address of a location. */
+  /**
+   * Human-readable address of the location.
+   * @deprecated In favor of formatted_address.
+   */
   formattedAddress?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  /** Postal code of the location. */
+  postal_code?: Maybe<Scalars["String"]>;
+  /** String composed of 3 words which represent the location of an address on the globe. More details: http://w3w.co/<what3Words>. */
+  what_3_words?: Maybe<Scalars["String"]>;
+  /** Human-readable address of the location. */
+  formatted_address?: Maybe<Array<Maybe<Scalars["String"]>>>;
 };
 
 export enum AdhocAuthorisationMethod {
@@ -1436,42 +1455,42 @@ export type ChargeTotalInput = {
   source?: Maybe<TelemetryInputSource>;
 };
 
-/** A groupped representation of EVSEs */
+/** A grouped representation of EVSEs. */
 export type Charger = {
-  /** Type of charger */
+  /** Type of a charger. */
   standard?: Maybe<ConnectorType>;
-  /** Power of a charger */
+  /** Power of a charger. */
   power?: Maybe<Scalars["Float"]>;
-  /** Price of a charger */
+  /** Price of a charger. */
   price?: Maybe<Scalars["String"]>;
-  /** Charging speed */
+  /** Charging speed. */
   speed?: Maybe<StationSpeedType>;
-  /** Statuses of all the EVSEs grouped in a charger */
+  /** Statuses of all the EVSEs grouped in a charger. */
   status?: Maybe<ChargerStatuses>;
-  /** Total number of EVSEs grouped in a charger */
+  /** Total number of EVSEs grouped in a charger. */
   total?: Maybe<Scalars["Int"]>;
 };
 
 export enum ChargerStatus {
-  /** The charger is free */
+  /** The charger is free. */
   FREE = "free",
-  /** The charger is occupied/busy */
+  /** The charger is occupied/busy. */
   BUSY = "busy",
-  /** The charger is unknown */
+  /** The charger is unknown. */
   UNKNOWN = "unknown",
-  /** The charger has an error */
+  /** The charger has an error. */
   ERROR = "error"
 }
 
-/** Groupping by status of the chargers */
+/** Grouping by status of the chargers. */
 export type ChargerStatuses = {
-  /** How many are free */
+  /** How many are free. */
   free?: Maybe<Scalars["Int"]>;
-  /** How many are busy */
+  /** How many are busy. */
   busy?: Maybe<Scalars["Int"]>;
-  /** How many are unknown */
+  /** How many are unknown. */
   unknown?: Maybe<Scalars["Int"]>;
-  /** How many are not available */
+  /** How many are not available. */
   error?: Maybe<Scalars["Int"]>;
 };
 
@@ -1506,24 +1525,24 @@ export type ChargetripRangebestArgs = {
 };
 
 export type ChargingBehaviour = {
-  /** Charging behaviour of users divided in groups, based on real-time information */
+  /** Charging behaviour of users divided in groups, based on real-time information. */
   code?: Maybe<ChargingBehaviourCode>;
-  /** Description of charging behaviour */
+  /** Description of charging behaviour. */
   description?: Maybe<Scalars["String"]>;
 };
 
 export enum ChargingBehaviourCode {
-  /** Mainly morning charging, and some mixed afternoon and evening charging */
+  /** Mainly morning charging, and some mixed afternoon and evening charging. */
   URBAN_CHARGING = "URBAN_CHARGING",
-  /** Mainly fast charging, with some morning and afternoon charging */
+  /** Mainly fast charging, with some morning and afternoon charging. */
   FAST_CHARGING = "FAST_CHARGING",
-  /** Mixed behaviour between morning, afternoon, evening, overnight, and noise charging */
+  /** Mixed behaviour between morning, afternoon, evening, overnight, and noise charging. */
   MIXED_CHARGING = "MIXED_CHARGING",
-  /** Mainly noise charging */
+  /** Mainly noise charging. */
   NOISE_CHARGING = "NOISE_CHARGING",
-  /** Mainly overnight charging */
+  /** Mainly overnight charging. */
   OVERNIGHT_CHARGING = "OVERNIGHT_CHARGING",
-  /** Mainly morning charging, with some afternoon charging */
+  /** Mainly morning charging, with some afternoon charging. */
   OFFICE_CHARGING = "OFFICE_CHARGING"
 }
 
@@ -1638,56 +1657,56 @@ export enum ConnectedVehicleStatus {
   REMOVED = "removed"
 }
 
-/** Connector data which extends OCPI Connector */
+/** Connector data which extends OCPI Connector. */
 export type Connector = {
-  /** Identifier of a connector within an EVSE. Two connectors may have the same ID as long as they do not belong to the same EVSE object. */
+  /** Identifier of a connector within an EVSE. Two connectors may have the same ID as long as they do not belong to the same EVSE object. This property is OCPI-compliant. */
   id?: Maybe<Scalars["String"]>;
-  /** Standard of an installed connector. */
+  /** Standard of an installed connector. This property is OCPI-compliant. */
   standard?: Maybe<ConnectorType>;
-  /** Format (socket/cable) of an installed connector. */
+  /** Format (socket/cable) of an installed connector. This property is OCPI-compliant. */
   format?: Maybe<OCPIConnectorFormat>;
-  /** Type of power of an installed connector.  */
+  /** Type of power of an installed connector. This property is OCPI-compliant. */
   power_type?: Maybe<OCPIPowerType>;
-  /** Maximum voltage of an connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full. */
+  /** Maximum voltage of an connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full. This property is OCPI-compliant. */
   max_voltage?: Maybe<Scalars["Int"]>;
-  /** Maximum amperage of a connector, in ampere [A]. */
+  /** Maximum amperage of a connector, in ampere [A]. This property is OCPI-compliant. */
   max_amperage?: Maybe<Scalars["Int"]>;
   /**
    * Maximum electric power that can be delivered by a connector, in watt [W]. When the maximum electric power is lower than the calculated value from voltage and amperage, this value should be set.
    * For example: A DC Charge Point which can deliver up to 920V and up to 400A can be limited to a maximum of 150kW. Depending on the vehicle, it may supply maximum voltage or current, but not both at the same time.
-   * For AC Charge Points, the amount of phases used can also have influence on the maximum power.
+   * For AC Charge Points, the amount of phases used can also have influence on the maximum power. This property is OCPI-compliant.
    */
   max_electric_power?: Maybe<Scalars["Int"]>;
-  /** Maximum electric power in kW */
+  /** Maximum electric power in kW. */
   power?: Maybe<Scalars["Float"]>;
   /**
    * Identifiers of the currently valid charging tariffs. Multiple tariffs are possible, but only one of each Tariff.type can be active at the same time. Tariffs with the same type are only allowed, if they are not active at the same time: start_date_time and end_date_time period not overlapping.
    * When preference-based smart charging is supported, one tariff for every possible ProfileType should be provided. This tells the user about the options they have at this Connector, and what the tariff is for every option.
-   * For a "free of charge" tariff, this field should be set and point to a defined "free of charge" tariff.
+   * For a "free of charge" tariff, this field should be set and point to a defined "free of charge" tariff. This property is OCPI-compliant.
    */
   tariff_ids?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** URL to an operator’s terms and conditions. */
+  /** URL to an operator’s terms and conditions. This property is OCPI-compliant. */
   terms_and_conditions?: Maybe<Scalars["String"]>;
-  /** Timestamp when a connector was last updated (or created). */
+  /** Timestamp when a connector was last updated (or created). This property is OCPI-compliant. */
   last_updated?: Maybe<Scalars["DateTime"]>;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
-  /** List of valid charging tariffs */
+  /** List of valid charging tariffs. */
   tariff?: Maybe<Array<Maybe<OCPITariff>>>;
-  /**
-   * Charging prices
-   * @deprecated In favor of custom_properties.pricing
-   */
+  /** Charging prices. */
   pricing?: Maybe<Pricing>;
-  /** Custom properties of a connector. These are vendor specific and will return null values on the fields that are not supported by your station database */
+  /** Custom properties of a connector. These are vendor specific and will return null values on the fields that are not supported by your station database. */
   custom_properties?: Maybe<ConnectorCustomProperties>;
 };
 
-/** Custom properties for connectors */
+/** Custom properties for connectors. */
 export type ConnectorCustomProperties = {
-  /** Charging prices */
+  /**
+   * Charging prices.
+   * @deprecated In favor of connector.pricing
+   */
   pricing?: Maybe<Pricing>;
-  /** Custom connector properties for OICP databases. Station databases that not follow the OICP standard return null values */
+  /** Custom connector properties for OICP databases. Station databases that not follow the OICP standard return null values. */
   oicp?: Maybe<OICPConnectorCustomProperties>;
 };
 
@@ -2053,6 +2072,7 @@ export enum CountryCodeAlpha2 {
   VU = "VU",
   WF = "WF",
   WS = "WS",
+  XK = "XK",
   YE = "YE",
   YT = "YT",
   ZA = "ZA",
@@ -2088,6 +2108,17 @@ export enum CurrencyUnit {
   GBP = "GBP"
 }
 
+export enum DimensionUnit {
+  /** Return the dimension in meters. */
+  METER = "meter",
+  /** Return the dimension in feet. */
+  FOOT = "foot",
+  /** Return the dimension in kilometers. */
+  KILOMETER = "kilometer",
+  /** Return the dimension in miles. */
+  MILE = "mile"
+}
+
 export enum DistanceUnit {
   /** Return the distance in meters. */
   METER = "meter",
@@ -2099,40 +2130,42 @@ export enum DistanceUnit {
   MILE = "mile"
 }
 
-/** EVSE data which extends OCPI EVSE */
+/** EVSE data which extends OCPI EVSE. */
 export type EVSE = {
   /**
    * Uniquely identifies an EVSE within the CPOs platform (and suboperator platforms). For example a database ID or the actual "EVSE ID". This field can never be changed, modified or renamed. This is the 'technical' identification of the EVSE, not to be used as 'human readable' identification, use the field evse_id for that.
-   * This field is named uid instead of id, because id could be confused with evse_id which is an eMI3 defined field.
+   * This field is named uid instead of id, because id could be confused with evse_id which is an eMI3 defined field. This property is OCPI-compliant.
    */
   uid?: Maybe<Scalars["String"]>;
-  /** Compliant with the following specification for EVSE ID from "eMI3 standard version V1.0" (http://emi3group.com/documents-links/) "Part 2: business objects." Optional because: if an evse_id is to be re-used in the real world, the evse_id can be removed from an EVSE object if the status is set to REMOVED. */
+  /** Compliant with the following specification for EVSE ID from "eMI3 standard version V1.0" (http://emi3group.com/documents-links/) "Part 2: business objects." Optional because: if an evse_id is to be re-used in the real world, the evse_id can be removed from an EVSE object if the status is set to REMOVED. This property is OCPI-compliant. */
   evse_id?: Maybe<Scalars["String"]>;
-  /** Indicates the current status of an EVSE. */
+  /** Indicates the current status of an EVSE. This property is OCPI-compliant. */
   status?: Maybe<OCPIStatus>;
-  /** Indicates a planned status update of a nEVSE. */
+  /** Indicates a planned status update of a nEVSE. This property is OCPI-compliant. */
   status_schedule?: Maybe<Array<Maybe<OCPIStatusSchedule>>>;
-  /** List of functionalities that an EVSE is capable of. */
+  /** List of functionalities that an EVSE is capable of. This property is OCPI-compliant. */
   capabilities?: Maybe<Array<Maybe<OCPICapability>>>;
-  /** List of available connectors on an EVSE. */
+  /** List of available connectors on an EVSE. This property is OCPI-compliant. */
   connectors?: Maybe<Array<Maybe<Connector>>>;
-  /** Level on which a Charge Point is located (in garage buildings) in the locally displayed numbering scheme. */
+  /** Level on which a Charge Point is located (in garage buildings) in the locally displayed numbering scheme. This property is OCPI-compliant. */
   floor_level?: Maybe<Scalars["String"]>;
-  /** Coordinates of a EVSE. */
+  /** Coordinates of a EVSE. This property is OCPI-compliant. */
   coordinates?: Maybe<OCPIGeoLocation>;
-  /** A number/string printed on the outside of an EVSE for visual identification. */
+  /** A number/string printed on the outside of an EVSE for visual identification. This property is OCPI-compliant. */
   physical_reference?: Maybe<Scalars["String"]>;
-  /** Restrictions that apply to a parking spot. */
+  /** Restrictions that apply to a parking spot. This property is OCPI-compliant. */
   parking_restrictions?: Maybe<Array<Maybe<OCPIParkingRestriction>>>;
-  /** Links to images related to an EVSE such as photos or logos. */
+  /** Links to images related to an EVSE such as photos or logos. This property is OCPI-compliant. */
   images?: Maybe<Array<Maybe<OCPIImage>>>;
-  /** Timestamp when this EVSE or one of its Connectors was last updated (or created). */
+  /** Timestamp when this EVSE or one of its Connectors was last updated (or created). This property is OCPI-compliant. */
   last_updated?: Maybe<Scalars["DateTime"]>;
   /** Indicates if parking is free or paid. */
   parking_cost?: Maybe<ParkingCost>;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Unique ID of the location in the system of the CPO. */
+  cpo_external_id?: Maybe<Scalars["String"]>;
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
-  /** Custom properties of an EVSE */
+  /** Custom properties of an EVSE. */
   custom_properties?: Maybe<EvseCustomProperties>;
 };
 
@@ -2160,15 +2193,15 @@ export enum EmissionRateUnit {
 }
 
 export enum EmissionUnit {
-  /** Return the emission in grams. */
+  /** Return the emissions in grams. */
   GRAM = "gram",
-  /** Return the emission in ounces. */
+  /** Return the emissions in ounces. */
   OUNCE = "ounce"
 }
 
-/** Custom EVSE properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values */
+/** Custom EVSE properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values. */
 export type EvseCustomProperties = {
-  /** OICP standard custom properties */
+  /** OICP standard custom properties. */
   oicp?: Maybe<OICPEvseCustomProperties>;
 };
 
@@ -2270,6 +2303,30 @@ export type GeometryPoint = {
   type: PointType;
   coordinates: Array<Scalars["Float"]>;
 };
+
+/** Allowed N (EU) types of heavy vehicles. */
+export enum HeavyVehiclesEUType {
+  /** Only N1 type of heavy vehicles can be parked at the charging station. N1 vehicles have a maximum mass not exceeding 3.5 tonnes (7,700 lbs). */
+  N1 = "N1",
+  /** Only N2 type of heavy vehicles can be parked at the charging station. N2 vehicles have a maximum mass exceeding 3.5 tonnes but not exceeding 12 tonnes (26,000 lbs). */
+  N2 = "N2",
+  /** Only N3 type of heavy vehicles can be parked at the charging station. N3 vehicles have a maximum mass exceeding 12 tonnes (26,000 lbs). */
+  N3 = "N3"
+}
+
+/** List of facilities in the location. */
+export enum HeavyVehiclesFacility {
+  /** Truck parking. */
+  TRUCK_PARKING = "TRUCK_PARKING",
+  /** Truck wash. */
+  TRUCK_WASH = "TRUCK_WASH",
+  /** Truck repair. */
+  TRUCK_REPAIR = "TRUCK_REPAIR",
+  /** Truck dealership. */
+  TRUCK_DEALERSHIP = "TRUCK_DEALERSHIP",
+  /** Secure truck parking. */
+  SECURE_TRUCK_PARKING = "SECURE_TRUCK_PARKING"
+}
 
 /** Navigation service providers available */
 export enum InstructionsFormat {
@@ -2560,6 +2617,8 @@ export type Navigation = {
   alternative_stations: Array<NavigationStation>;
   /** Navigation instructions */
   instructions?: Maybe<Scalars["JSON"]>;
+  /** Navigation meta information. */
+  meta?: Maybe<NavigationMeta>;
 };
 
 /** The navigation session data */
@@ -2582,6 +2641,14 @@ export type NavigationInstructionsInput = {
   language?: Maybe<MappingLanguage>;
   /** Number of decimals used for the Google Polyline encoding Algorithm. Allowed values are 5 or 6, the default is 5 */
   precision?: Maybe<Scalars["Int"]>;
+};
+
+/** Navigation meta information. */
+export type NavigationMeta = {
+  /** Creation time of the navigation session. */
+  created_at?: Maybe<Scalars["DateTime"]>;
+  /** Last updated time of the navigation session. */
+  updated_at?: Maybe<Scalars["DateTime"]>;
 };
 
 /** Input for the navigation recalculate */
@@ -2675,11 +2742,11 @@ export type NavigationUpdateLocationsInput = {
 
 /** This class defines an additional geo location that is relevant for the Charge Point. The geodetic system to be used is WGS 84. */
 export type OCPIAdditionalGeoLocation = {
-  /** Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: "." Regex: -?[0-9]{1,2}\.[0-9]{5,7} */
+  /** Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: "." Regex: -?[0-9]{1,2}\.[0-9]{5,7}. This property is OCPI-compliant. */
   latitude?: Maybe<Scalars["String"]>;
-  /** Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: "." Regex: -?[0-9]{1,3}\.[0-9]{5,7} */
+  /** Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: "." Regex: -?[0-9]{1,3}\.[0-9]{5,7}. This property is OCPI-compliant. */
   longitude?: Maybe<Scalars["String"]>;
-  /** Name of the point in local language or as written at the location. For example the street name of a parking lot entrance or it’s number. */
+  /** Name of the point in local language or as written at the location. For example the street name of a parking lot entrance or it’s number. This property is OCPI-compliant. */
   name?: Maybe<OCPIDisplayText>;
 };
 
@@ -2814,30 +2881,30 @@ export enum OCPIDayOfWeek {
 }
 
 export type OCPIDisplayText = {
-  /** Language Code ISO 639-1 */
+  /** Language Code ISO 639-1. This property is OCPI-compliant. */
   language?: Maybe<Scalars["String"]>;
-  /** Text to be displayed to an end user. No markup, html etc. allowed. */
+  /** Text to be displayed to an end user. No markup, html etc. allowed. This property is OCPI-compliant. */
   text?: Maybe<Scalars["String"]>;
 };
 
 /** This type is used to specify the energy mix and environmental impact of the supplied energy at a location or in a tariff. */
 export type OCPIEnergyMix = {
-  /** True if the power is 100% from regenerative sources */
+  /** True if the power is 100% from regenerative sources. This property is OCPI-compliant. */
   is_green_energy?: Maybe<Scalars["Boolean"]>;
-  /** Key-value pairs (enum + percentage) of energy sources of this location’s tariff. */
+  /** Key-value pairs (enum + percentage) of energy sources of this location’s tariff. This property is OCPI-compliant. */
   energy_sources?: Maybe<Array<Maybe<OCPIEnergySource>>>;
-  /** Key-value pairs (enum + percentage) of nuclear waste and CO2 exhaust of this location’s tariff. */
+  /** Key-value pairs (enum + percentage) of nuclear waste and CO2 exhaust of this location’s tariff. This property is OCPI-compliant. */
   environ_impact?: Maybe<Array<Maybe<OCPIEnvironmentalImpact>>>;
-  /** Name of the energy supplier, delivering the energy for this location or tariff.* */
+  /** Name of the energy supplier, delivering the energy for this location or tariff.*. This property is OCPI-compliant. */
   supplier_name?: Maybe<Scalars["String"]>;
-  /** Name of the energy suppliers product/tariff plan used at this location.* */
+  /** Name of the energy suppliers product/tariff plan used at this location.*. This property is OCPI-compliant. */
   energy_product_name?: Maybe<Scalars["String"]>;
 };
 
 export type OCPIEnergySource = {
-  /** The type of energy source. */
+  /** The type of energy source. This property is OCPI-compliant. */
   source?: Maybe<OCPIEnergySourceCategory>;
-  /** Percentage of this source (0-100) in the mix. */
+  /** Percentage of this source (0-100) in the mix. This property is OCPI-compliant. */
   percentage?: Maybe<Scalars["Int"]>;
 };
 
@@ -2863,9 +2930,9 @@ export enum OCPIEnergySourceCategory {
 
 /** Amount of waste produced/emitted per kWh. */
 export type OCPIEnvironmentalImpact = {
-  /** The environmental impact category of this value. */
+  /** The environmental impact category of this value. This property is OCPI-compliant. */
   category?: Maybe<OCPIEnvironmentalImpactCategory>;
-  /** Amount of this portion in g/kWh. */
+  /** Amount of this portion in g/kWh. This property is OCPI-compliant. */
   amount?: Maybe<Scalars["Float"]>;
 };
 
@@ -2879,9 +2946,9 @@ export enum OCPIEnvironmentalImpactCategory {
 
 /** Specifies one exceptional period for opening or access hours. */
 export type OCPIExceptionalPeriod = {
-  /** Begin of the exception. In UTC, time_zone field can be used to convert to local time. */
+  /** Begin of the exception. In UTC, time_zone field can be used to convert to local time. This property is OCPI-compliant. */
   period_begin?: Maybe<Scalars["DateTime"]>;
-  /** End of the exception. In UTC, time_zone field can be used to convert to local time. */
+  /** End of the exception. In UTC, time_zone field can be used to convert to local time. This property is OCPI-compliant. */
   period_end?: Maybe<Scalars["DateTime"]>;
 };
 
@@ -2930,36 +2997,36 @@ export enum OCPIFacility {
 
 /** This class defines the geo location of the Charge Point. The geodetic system to be used is WGS 84. */
 export type OCPIGeoLocation = {
-  /** Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: "." Regex: -?[0-9]{1,2}\.[0-9]{5,7} */
+  /** Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: "." Regex: -?[0-9]{1,2}\.[0-9]{5,7}. This property is OCPI-compliant. */
   latitude?: Maybe<Scalars["String"]>;
-  /** Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: "." Regex: -?[0-9]{1,3}\.[0-9]{5,7} */
+  /** Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: "." Regex: -?[0-9]{1,3}\.[0-9]{5,7}. This property is OCPI-compliant. */
   longitude?: Maybe<Scalars["String"]>;
 };
 
 /** Opening and access hours of the location. */
 export type OCPIHours = {
-  /** True to represent 24 hours a day and 7 days a week, except the given exceptions. */
+  /** True to represent 24 hours a day and 7 days a week, except the given exceptions. This property is OCPI-compliant. */
   twentyfourseven?: Maybe<Scalars["Boolean"]>;
-  /** Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object. */
+  /** Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object. This property is OCPI-compliant. */
   regular_hours?: Maybe<Array<Maybe<OCPIRegularHours>>>;
-  /** Exceptions for specified calendar dates, time-range based. Periods the station is operating/accessible. Additional to regular_hours. May overlap regular rules. */
+  /** Exceptions for specified calendar dates, time-range based. Periods the station is operating/accessible. Additional to regular_hours. May overlap regular rules. This property is OCPI-compliant. */
   exceptional_openings?: Maybe<Array<Maybe<OCPIExceptionalPeriod>>>;
-  /** Exceptions for specified calendar dates, time-range based. Periods the station is not operating/accessible. Overwriting regular_hours and exceptional_openings. Should not overlap exceptional_openings. */
+  /** Exceptions for specified calendar dates, time-range based. Periods the station is not operating/accessible. Overwriting regular_hours and exceptional_openings. Should not overlap exceptional_openings. This property is OCPI-compliant. */
   exceptional_closings?: Maybe<Array<Maybe<OCPIExceptionalPeriod>>>;
 };
 
 export type OCPIImage = {
-  /** URL from where the image data can be fetched through a web browser. */
+  /** URL from where the image data can be fetched through a web browser. This property is OCPI-compliant. */
   url?: Maybe<Scalars["String"]>;
-  /** URL from where a thumbnail of the image can be fetched through a webbrowser. */
+  /** URL from where a thumbnail of the image can be fetched through a webbrowser. This property is OCPI-compliant. */
   thumbnail?: Maybe<Scalars["String"]>;
-  /** Category of an image */
+  /** Category of an image. This property is OCPI-compliant. */
   category?: Maybe<OCPIImageCategory>;
-  /** Image type: gif, jpeg, png, svg */
+  /** Image type: gif, jpeg, png, svg. This property is OCPI-compliant. */
   type?: Maybe<Scalars["String"]>;
-  /** Width of the full scale image */
+  /** Width of the full scale image. This property is OCPI-compliant. */
   width?: Maybe<Scalars["Int"]>;
-  /** Height of the full scale image */
+  /** Height of the full scale image. This property is OCPI-compliant. */
   height?: Maybe<Scalars["Int"]>;
 };
 
@@ -3025,30 +3092,30 @@ export enum OCPIPowerType {
 }
 
 export type OCPIPrice = {
-  /** Price/Cost excluding VAT. */
+  /** Price/Cost excluding VAT. This property is OCPI-compliant. */
   excl_vat?: Maybe<Scalars["Float"]>;
-  /** Price/Cost including VAT. */
+  /** Price/Cost including VAT. This property is OCPI-compliant. */
   incl_vat?: Maybe<Scalars["Float"]>;
 };
 
 export type OCPIPriceComponent = {
-  /** Type of tariff dimension. */
+  /** Type of tariff dimension. This property is OCPI-compliant. */
   type?: Maybe<OCPITariffDimensionType>;
-  /** Price per unit (excl. VAT) for this tariff dimension. */
+  /** Price per unit (excl. VAT) for this tariff dimension. This property is OCPI-compliant. */
   price?: Maybe<Scalars["Float"]>;
-  /** Applicable VAT percentage for this tariff dimension. If omitted, no VAT is applicable. Not providing a VAT is different from 0% VAT, which would be a value of 0.0 here. */
+  /** Applicable VAT percentage for this tariff dimension. If omitted, no VAT is applicable. Not providing a VAT is different from 0% VAT, which would be a value of 0.0 here. This property is OCPI-compliant. */
   vat?: Maybe<Scalars["Float"]>;
-  /** Minimum amount to be billed. This unit will be billed in this step_size blocks. For example: if type is TIME and step_size has a value of 300, then time will be billed in blocks of 5 minutes. If 6 minutes were used, 10 minutes (2 blocks of step_size) will be billed. */
+  /** Minimum amount to be billed. This unit will be billed in this step_size blocks. For example: if type is TIME and step_size has a value of 300, then time will be billed in blocks of 5 minutes. If 6 minutes were used, 10 minutes (2 blocks of step_size) will be billed. This property is OCPI-compliant. */
   step_size?: Maybe<Scalars["Int"]>;
 };
 
 /** Regular recurring operation or access hours. */
 export type OCPIRegularHours = {
-  /** Number of days in the week, from Monday (1) till Sunday (7) */
+  /** Number of days in the week, from Monday (1) till Sunday (7). This property is OCPI-compliant. */
   weekday?: Maybe<Scalars["Int"]>;
-  /** Begin of the regular period, in local time, given in hours and minutes. Must be in 24h format with leading zeros. Example: "18:15". Hour/Minute separator: ":" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]. */
+  /** Begin of the regular period, in local time, given in hours and minutes. Must be in 24h format with leading zeros. Example: "18:15". Hour/Minute separator: ":" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]. This property is OCPI-compliant. */
   period_begin?: Maybe<Scalars["String"]>;
-  /** End of the regular period, in local time, syntax as for period_begin. Must be later than period_begin. */
+  /** End of the regular period, in local time, syntax as for period_begin. Must be later than period_begin. This property is OCPI-compliant. */
   period_end?: Maybe<Scalars["String"]>;
 };
 
@@ -3083,42 +3150,42 @@ export enum OCPIStatus {
 
 /** This type is used to schedule status periods in the future. The eMSP can provide this information to the EV user for trip planning purposes. A period MAY have no end. Example: "This station will be running as of tomorrow. Today it is still planned and under construction. */
 export type OCPIStatusSchedule = {
-  /** Begin of the scheduled period. */
+  /** Begin of the scheduled period. This property is OCPI-compliant. */
   period_begin?: Maybe<Scalars["DateTime"]>;
-  /** End of the scheduled period, if known. */
+  /** End of the scheduled period, if known. This property is OCPI-compliant. */
   period_end?: Maybe<Scalars["DateTime"]>;
-  /** Status value during the scheduled period. */
+  /** Status value during the scheduled period. This property is OCPI-compliant. */
   status?: Maybe<OCPIStatus>;
 };
 
 export type OCPITariff = {
-  /** ISO-3166 alpha-2 country code of the CPO that owns this tariff */
+  /** ISO-3166 alpha-2 country code of the CPO that owns this tariff. This property is OCPI-compliant. */
   country_code?: Maybe<Scalars["String"]>;
-  /** CPO ID of the CPO that owns this tariff (following the ISO-15118 standard) */
+  /** CPO ID of the CPO that owns this tariff (following the ISO-15118 standard). This property is OCPI-compliant. */
   party_id?: Maybe<Scalars["String"]>;
-  /** Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms) */
+  /** Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms). This property is OCPI-compliant. */
   id?: Maybe<Scalars["String"]>;
-  /** ISO-4217 code of the currency of this tariff. */
+  /** ISO-4217 code of the currency of this tariff. This property is OCPI-compliant. */
   currency?: Maybe<Scalars["String"]>;
-  /** Defines the type of the tariff. This allows for distinction in case of given charging preferences. When omitted, this tariff is valid for all sessions */
+  /** Defines the type of the tariff. This allows for distinction in case of given charging preferences. When omitted, this tariff is valid for all sessions. This property is OCPI-compliant. */
   type?: Maybe<OCPITariffType>;
-  /** List of alternative tariff information texts, in multiple languages */
+  /** List of alternative tariff information texts, in multiple languages. This property is OCPI-compliant. */
   tariff_alt_text?: Maybe<Array<Maybe<OCPIDisplayText>>>;
-  /** URL to a web page that contains an explanation of the tariff information in human readable form */
+  /** URL to a web page that contains an explanation of the tariff information in human readable form. This property is OCPI-compliant. */
   tariff_alt_url?: Maybe<Scalars["String"]>;
-  /** When this field is set, a charging session with this tariff will cost at least the amount shown. This is different from a FLAT fee (start tariff, transaction fee), as a FLAT fee is a fixed amount that must be paid for any charging session. A minimum price indicates that when the cost of a charging session is lower than this amount, the cost of the session will be equal to this amount */
+  /** When this field is set, a charging session with this tariff will cost at least the amount shown. This is different from a FLAT fee (start tariff, transaction fee), as a FLAT fee is a fixed amount that must be paid for any charging session. A minimum price indicates that when the cost of a charging session is lower than this amount, the cost of the session will be equal to this amount. This property is OCPI-compliant. */
   min_price?: Maybe<OCPIPrice>;
-  /** When this field is set, a charging session with this tariff will NOT cost more than this amount */
+  /** When this field is set, a charging session with this tariff will NOT cost more than this amount. This property is OCPI-compliant. */
   max_price?: Maybe<OCPIPrice>;
-  /** List of tariff elements */
+  /** List of tariff elements. This property is OCPI-compliant. */
   elements?: Maybe<Array<Maybe<OCPITariffElement>>>;
-  /** Time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active */
+  /** Time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active. This property is OCPI-compliant. */
   start_date_time?: Maybe<Scalars["DateTime"]>;
-  /** Time after which this tariff is no longer valid, in UTC, time_zone field if the location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future */
+  /** Time after which this tariff is no longer valid, in UTC, time_zone field if the location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future. This property is OCPI-compliant. */
   end_date_time?: Maybe<Scalars["DateTime"]>;
-  /** Details about the energy supplied with this tariff */
+  /** Details about the energy supplied with this tariff. This property is OCPI-compliant. */
   energy_mix?: Maybe<OCPIEnergyMix>;
-  /** Timestamp when this tariff was last updated (or created) */
+  /** Timestamp when this tariff was last updated (or created). This property is OCPI-compliant. */
   last_updated?: Maybe<Scalars["DateTime"]>;
 };
 
@@ -3134,40 +3201,40 @@ export enum OCPITariffDimensionType {
 }
 
 export type OCPITariffElement = {
-  /** List of price components that describe the pricing of a tariff. */
+  /** List of price components that describe the pricing of a tariff. This property is OCPI-compliant. */
   price_components?: Maybe<Array<Maybe<OCPIPriceComponent>>>;
-  /** Restrictions that describe the applicability of a tariff. */
+  /** Restrictions that describe the applicability of a tariff. This property is OCPI-compliant. */
   restrictions?: Maybe<Array<Maybe<OCPITariffRestrictions>>>;
 };
 
 export type OCPITariffRestrictions = {
-  /** Start time of day in local time, the time zone is defined in the time_zone field of the Location, for example 13:30, valid from this time of the day. Must be in 24h format with leading zeros. Hour/Minute separator: ":" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9] */
+  /** Start time of day in local time, the time zone is defined in the time_zone field of the Location, for example 13:30, valid from this time of the day. Must be in 24h format with leading zeros. Hour/Minute separator: ":" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]. This property is OCPI-compliant. */
   start_time?: Maybe<Scalars["String"]>;
-  /** End time of day in local time, the time zone is defined in the time_zone field of the Location, for example 19:45, valid until this time of the day. Same syntax as start_time. */
+  /** End time of day in local time, the time zone is defined in the time_zone field of the Location, for example 19:45, valid until this time of the day. Same syntax as start_time. This property is OCPI-compliant. */
   end_time?: Maybe<Scalars["String"]>;
-  /** Start date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-24, valid from this day. Regex: ([12][0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) */
+  /** Start date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-24, valid from this day. Regex: ([12][0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]). This property is OCPI-compliant. */
   start_date?: Maybe<Scalars["String"]>;
-  /** End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date */
+  /** End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date. This property is OCPI-compliant. */
   end_date?: Maybe<Scalars["String"]>;
-  /** Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used */
+  /** Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used. This property is OCPI-compliant. */
   min_kwh?: Maybe<Scalars["Float"]>;
-  /** Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used */
+  /** Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used. This property is OCPI-compliant. */
   max_kwh?: Maybe<Scalars["Float"]>;
-  /** Sum of the minimum current in over all phases, for example 5. When the EV is charging with more than the defined amount of current, this tariff element is/becomes active. If the charging current is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum current over the entire charging session. This restriction can make a tariff element become active when the charging current is above the defined value, but the tariff element MUST no longer be active when the charging current drops below the defined value */
+  /** Sum of the minimum current in over all phases, for example 5. When the EV is charging with more than the defined amount of current, this tariff element is/becomes active. If the charging current is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum current over the entire charging session. This restriction can make a tariff element become active when the charging current is above the defined value, but the tariff element MUST no longer be active when the charging current drops below the defined value. This property is OCPI-compliant. */
   min_current?: Maybe<Scalars["Float"]>;
-  /** Sum of the maximum current in over all phases, for example 20. When the EV is charging with less than the defined amount of current, this tariff element becomes/is active. If the charging current is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a tariff element become active when the charging current is below this value, but the tariff element MUST  no longer be active when the charging current raises above the defined value */
+  /** Sum of the maximum current in over all phases, for example 20. When the EV is charging with less than the defined amount of current, this tariff element becomes/is active. If the charging current is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a tariff element become active when the charging current is below this value, but the tariff element MUST  no longer be active when the charging current raises above the defined value. This property is OCPI-compliant. */
   max_current?: Maybe<Scalars["Float"]>;
-  /** Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this tariff element is/becomes active. If the charging power is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum power over the entire charging session. This restriction can make a tariff element become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value */
+  /** Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this tariff element is/becomes active. If the charging power is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum power over the entire charging session. This restriction can make a tariff element become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value. This property is OCPI-compliant. */
   min_power?: Maybe<Scalars["Float"]>;
-  /** Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this tariff element becomes/is active. If the charging power is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This does not describe the maximum power over the entire charging session. This restriction can make a tariff element become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value */
+  /** Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this tariff element becomes/is active. If the charging power is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This does not describe the maximum power over the entire charging session. This restriction can make a tariff element become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value. This property is OCPI-compliant. */
   max_power?: Maybe<Scalars["Float"]>;
-  /** Minimum duration in seconds the charging session MUST last (inclusive). When the duration of a charging session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this tariff element is not yet active */
+  /** Minimum duration in seconds the charging session MUST last (inclusive). When the duration of a charging session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this tariff element is not yet active. This property is OCPI-compliant. */
   min_duration?: Maybe<Scalars["Float"]>;
-  /** Maximum duration in seconds the charging session MUST last (exclusive). When the duration of a charging session is shorter than the defined value, this tariff element is or becomes active. After that moment, this tariff element is no longer active */
+  /** Maximum duration in seconds the charging session MUST last (exclusive). When the duration of a charging session is shorter than the defined value, this tariff element is or becomes active. After that moment, this tariff element is no longer active. This property is OCPI-compliant. */
   max_duration?: Maybe<Scalars["Float"]>;
-  /** Which day(s) of the week this tariff element is active. */
+  /** Which day(s) of the week this tariff element is active. This property is OCPI-compliant. */
   day_of_week?: Maybe<OCPIDayOfWeek>;
-  /** When this field is present, the tariff element describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation */
+  /** When this field is present, the tariff element describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation. This property is OCPI-compliant. */
   reservation?: Maybe<OCPIReservationRestrictionType>;
 };
 
@@ -3184,7 +3251,7 @@ export enum OCPITariffType {
   REGULAR = "REGULAR"
 }
 
-/** List of charging modes that are supported */
+/** List of charging modes that are supported. */
 export enum OICPChargingModes {
   MODE_1 = "mode_1",
   MODE_2 = "mode_2",
@@ -3193,15 +3260,15 @@ export enum OICPChargingModes {
   CHADEMO = "chademo"
 }
 
-/** Custom connector properties for OICP databases. Station databases that not follow the OICP standard return null values */
+/** Custom connector properties for OICP databases. Station databases that not follow the OICP standard return null values. */
 export type OICPConnectorCustomProperties = {
-  /** Returns whether the connector is able to deliver different power outputs */
+  /** Returns whether the connector is able to deliver different power outputs. */
   dynamic_power_level?: Maybe<Scalars["Boolean"]>;
-  /** List of charging modes that are supported as specified by IEC 61851-1 */
+  /** List of charging modes that are supported as specified by IEC 61851-1. */
   charging_modes?: Maybe<Array<OICPChargingModes>>;
 };
 
-/** List of authentication modes that are supported */
+/** List of authentication modes that are supported. */
 export enum OICPEvseAuthenticationMode {
   NFC_RFID_CLASSIC = "nfc_rfid_classic",
   NFC_RFID_DESFIRE = "nfc_rfid_desfire",
@@ -3211,51 +3278,51 @@ export enum OICPEvseAuthenticationMode {
   NO_AUTHENTICATION_REQUIRED = "no_authentication_required"
 }
 
-/** Custom EVSE properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values */
+/** Custom EVSE properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values. */
 export type OICPEvseCustomProperties = {
-  /** List of authentication modes that are supported */
+  /** List of authentication modes that are supported. */
   authentication_modes: Array<OICPEvseAuthenticationMode>;
-  /** Returns a value if the EVSE has a limited capacity (e.g. built-in battery). Values are in kWh */
+  /** Returns a value if the EVSE has a limited capacity (e.g. built-in battery). Values are in kWh. */
   max_capacity?: Maybe<Scalars["Int"]>;
-  /** List of payment options that are supported */
+  /** List of payment options that are supported. */
   payment_options: Array<OICPPaymentOptions>;
-  /** List of value added services that are supported */
+  /** List of value added services that are supported. */
   value_added_services: Array<OICPValueAddedServices>;
-  /** List of additional info by locale */
+  /** List of additional info by locale. */
   additional_info?: Maybe<Array<OICPEvseCustomPropertiesAdditionalInfo>>;
-  /** When the value is set to false this station does not support remote start and stop by Hubject */
+  /** When the value is set to false this station does not support remote start and stop by Hubject. */
   is_hubject_compatible: Scalars["Boolean"];
-  /** Name of the charging point manufacturer */
+  /** Name of the charging point manufacturer. */
   hardware_manufacturer?: Maybe<Scalars["String"]>;
 };
 
 export type OICPEvseCustomPropertiesAdditionalInfo = {
-  /** The language in which the additional info text is provided */
+  /** The language in which the additional info text is provided. */
   lang?: Maybe<Scalars["String"]>;
-  /** Additional info text value */
+  /** Additional info text value. */
   value?: Maybe<Scalars["String"]>;
 };
 
-/** List of payment options that are supported */
+/** List of payment options that are supported. */
 export enum OICPPaymentOptions {
   NO_PAYMENT = "no_payment",
   DIRECT = "direct",
   CONTRACT = "contract"
 }
 
-/** Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values */
+/** Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values. */
 export type OICPStationCustomProperties = {
-  /** Returns whether the station is a parking facility */
+  /** Returns whether the station is a parking facility. */
   parking_facility?: Maybe<Scalars["Boolean"]>;
-  /** Returns an identifier for the precise parking spot. Eg. 36 or 12-1 */
+  /** Returns an identifier for the precise parking spot. Eg. 36 or 12-1. */
   parking_spot?: Maybe<Scalars["String"]>;
-  /** Returns information on how the charging station provides metering law data */
+  /** Returns information on how the charging station provides metering law data. */
   calibration_law_data_availability: Scalars["String"];
-  /** Identification of the corresponding clearing house in the event that roaming between different clearing houses must be processed in the future */
+  /** Identification of the corresponding clearing house in the event that roaming between different clearing houses must be processed in the future. */
   clearinghouse_id?: Maybe<Scalars["String"]>;
 };
 
-/** List of value added services that are supported */
+/** List of value added services that are supported. */
 export enum OICPValueAddedServices {
   RESERVATION = "reservation",
   DYNAMIC_PRICING = "dynamic_pricing",
@@ -3276,49 +3343,52 @@ export type OdometerInput = {
   source?: Maybe<TelemetryInputSource>;
 };
 
-/** The operator data which extends OCPI BusinessDetails */
+/** Operator data which extends OCPI BusinessDetails. */
 export type Operator = {
-  /** Unique operator ID */
+  /** Unique operator ID. */
   id?: Maybe<Scalars["ID"]>;
-  /** External ID of an operator provided by the operator data source */
+  /** External ID of an operator provided by the operator data source. */
   external_id?: Maybe<Scalars["String"]>;
-  /** Name of an operator */
+  /** Name of an operator. This property is OCPI-compliant. */
   name?: Maybe<Scalars["String"]>;
-  /** Link to an operator’s website */
+  /** Link to an operator’s website. This property is OCPI-compliant. */
   website?: Maybe<Scalars["String"]>;
-  /** Image link to an operator’s logo */
+  /** Image link to an operator’s logo. This property is OCPI-compliant. */
   logo?: Maybe<OCPIImage>;
-  /** Deprecated: Not used anymore, please use countries property instead */
+  /**
+   * ISO-3166 alpha-2 country code an operator is active in.
+   * @deprecated In favor of countries.
+   */
   country?: Maybe<Scalars["String"]>;
   /** ISO-3166 alpha-2 country codes an operator is active in. */
   countries?: Maybe<Array<CountryCodeAlpha2>>;
-  /** Contact information */
+  /** Contact information. */
   contact?: Maybe<Contact>;
-  /** Ranking level on which the operator is placed or null in case the operator is not on any ranking level */
+  /** Ranking level on which the operator is placed or null in case the operator is not on any ranking level. */
   ranking?: Maybe<Scalars["Int"]>;
-  /** Flag which indicates if the operator is in the excluded list */
+  /** Flag which indicates if the operator is in the excluded list. */
   excluded?: Maybe<Scalars["Boolean"]>;
 };
 
-/** Filter which can be applied to retrieve the operator list action */
+/** Filter which can be applied to retrieve the operator list action. */
 export type OperatorListFilter = {
   /** ISO-3166 alpha-2 country codes an operator is active in. */
   countries?: Maybe<Array<CountryCodeAlpha2>>;
-  /** List of ranking level(s) to be retrieved. Valid values are 1 to 10 */
+  /** List of ranking level(s) to be retrieved. Valid values are 1 to 10. */
   ranking?: Maybe<Array<Scalars["Int"]>>;
-  /** Only retrieve operators that are in the excluded list */
+  /** Only retrieve operators that are in the excluded list. */
   excluded?: Maybe<Scalars["Boolean"]>;
 };
 
-/** Filter which can be applied to retrieve the operator list action */
+/** Filter which can be applied to retrieve the operator list action. */
 export type OperatorListQuery = {
-  /** Unique operator ID */
+  /** Unique operator ID. */
   id?: Maybe<Scalars["ID"]>;
-  /** External ID of an operator provided by an operator data source */
+  /** External ID of an operator provided by an operator data source. */
   external_id?: Maybe<Scalars["String"]>;
-  /** Exact name */
+  /** Exact name. */
   name?: Maybe<Scalars["String"]>;
-  /** Exact country code */
+  /** Exact country code. */
   country?: Maybe<Scalars["String"]>;
 };
 
@@ -3332,9 +3402,9 @@ export type OutsideTempInput = {
 };
 
 export enum ParkingCost {
-  /** Parking is free */
+  /** Parking is free. */
   FREE = "free",
-  /** Parking includes a fee */
+  /** Parking includes a fee. */
   PAID = "paid"
 }
 
@@ -3407,6 +3477,15 @@ export type PowerStats = {
   powers?: Maybe<Array<Maybe<PowerList>>>;
 };
 
+export enum PowerSupported {
+  /** Power is supported. */
+  AVAILABLE = "available",
+  /** Power is not supported. */
+  NOT_AVAILABLE = "not_available",
+  /** Power is announced, but not yet supported. */
+  ANNOUNCED = "announced"
+}
+
 export enum PowerUnit {
   /** Return the power in kilowatts. */
   KILOWATT = "kilowatt",
@@ -3434,18 +3513,18 @@ export type Price = {
 };
 
 export type Pricing = {
-  /** Unique ID of a price */
+  /** Unique ID of a price. */
   id?: Maybe<Scalars["String"]>;
-  /** Price details */
+  /** Price details. */
   price_list?: Maybe<Array<Maybe<PricingList>>>;
 };
 
 export type PricingList = {
-  /** (MSP) Mobility Service Provider */
+  /** (MSP) Mobility Service Provider. */
   partner?: Maybe<Scalars["String"]>;
-  /** Product details */
+  /** Product details. */
   product?: Maybe<PricingListProduct>;
-  /** Price product elements */
+  /** Price product elements. */
   elements?: Maybe<Array<Maybe<PricingListElement>>>;
 };
 
@@ -3454,31 +3533,31 @@ export type PricingListElement = {
   type?: Maybe<PricingListElementType>;
   /** Price of the element type without VAT. */
   price_excl_vat?: Maybe<Scalars["Float"]>;
-  /** VAT percentage to apply */
+  /** VAT percentage to apply. */
   vat?: Maybe<Scalars["Float"]>;
 };
 
 export enum PricingListElementType {
-  /** Price per kWh */
+  /** Price per kWh. */
   ENERGY = "ENERGY",
-  /** Starting price, fixed fee per charge session */
+  /** Starting price, fixed fee per charge session. */
   FLAT = "FLAT",
-  /** Fixed price per hour */
+  /** Fixed price per hour. */
   TIME = "TIME",
-  /** Parking price per hour */
+  /** Parking price per hour. */
   PARKING_TIME = "PARKING_TIME"
 }
 
 export type PricingListProduct = {
-  /** Name of the payment card or subscription. If name is 'Adhoc price' the price is the CPO price */
+  /** Name of the payment card or subscription. If name is 'Adhoc price' the price is the CPO price. */
   name?: Maybe<Scalars["String"]>;
-  /** Description of the product */
+  /** Description of the product. */
   description?: Maybe<Scalars["String"]>;
-  /** Subscription type */
+  /** Subscription type. */
   subscription_type?: Maybe<Scalars["String"]>;
-  /** Subscription fee without VAT */
+  /** Subscription fee without VAT. */
   subscription_fee_excl_vat?: Maybe<Scalars["Float"]>;
-  /** Currency */
+  /** Currency. */
   currency?: Maybe<Scalars["String"]>;
 };
 
@@ -3515,17 +3594,17 @@ export type Query = {
   userReviewList?: Maybe<Array<Review>>;
   /** Get a route by ID */
   route?: Maybe<Route>;
-  /** [BETA] Emission profile for route. */
+  /** [BETA] Emissions profile for route. */
   routeEmissions: RouteEmissions;
   /** Retrieve information about a route path segment */
   routePath?: Maybe<RoutePath>;
   /** Get the station statistics */
   stationStats?: Maybe<StationStats>;
-  /** Get information about a station by its ID */
+  /** Get information about a station by its ID. */
   station?: Maybe<Station>;
-  /** Get a full list of stations */
+  /** Get a full list of stations. */
   stationList?: Maybe<Array<Maybe<Station>>>;
-  /** Search for stations around a GeoJSON point with a specific distance in meters */
+  /** Search for stations around a GeoJSON point with a specific distance in meters. */
   stationAround?: Maybe<Array<Maybe<Station>>>;
   /** Get information about a tariff by the tariff ID */
   tariff?: Maybe<OCPITariff>;
@@ -3892,109 +3971,109 @@ export type RequestUser = {
   id?: Maybe<Scalars["ID"]>;
 };
 
-/** The review model */
+/** Review model. */
 export type Review = {
-  /** ID of a review */
+  /** ID of a review. */
   id: Scalars["ID"];
-  /** Station for which a review was provided */
+  /** Station for which a review was provided. */
   station?: Maybe<Station>;
-  /** User who added a review. If a review was added by an anonymous user, this will be null */
+  /** User who added a review. If a review was added by an anonymous user, this will be null. */
   user?: Maybe<ReviewUser>;
-  /** Rating of a review */
+  /** Rating of a review. */
   rating?: Maybe<Scalars["Int"]>;
-  /** Message of a review */
+  /** Message of a review. */
   message?: Maybe<Scalars["String"]>;
-  /** Locale of a message */
+  /** Locale of a message. */
   locale?: Maybe<Scalars["String"]>;
-  /** Vehicle that was provided/selected by a user */
+  /** Vehicle that was provided/selected by a user. */
   ev?: Maybe<Car>;
-  /** Plug type that was provided/selected by a user */
+  /** Plug type that was provided/selected by a user. */
   plugType?: Maybe<ConnectorType>;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
-  /** Boolean tags for a station review */
+  /** Boolean tags for a station review. */
   tags?: Maybe<ReviewTags>;
-  /** Date and time when a review was created */
+  /** Date and time when a review was created. */
   createdAt?: Maybe<Scalars["String"]>;
-  /** Date and time when a review was updated */
+  /** Date and time when a review was updated. */
   updatedAt?: Maybe<Scalars["String"]>;
 };
 
-/** Form input to add a new review */
+/** Form input to add a new review. */
 export type ReviewAdd = {
-  /** Station ID for which a review is provided */
+  /** Station ID for which a review is provided. */
   stationId: Scalars["String"];
-  /** Rating of a review */
+  /** Rating of a review. */
   rating: Scalars["Int"];
-  /** Review message */
+  /** Review message. */
   message?: Maybe<Scalars["String"]>;
-  /** Locale of a message */
+  /** Locale of a message. */
   locale?: Maybe<Scalars["String"]>;
-  /** ID of the vehicle that was provided/selected by a user */
+  /** ID of the vehicle that was provided/selected by a user. */
   ev?: Maybe<Scalars["String"]>;
-  /** Plug type that was provided/selected by a user */
+  /** Plug type that was provided/selected by a user. */
   plugType?: Maybe<ConnectorType>;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
-  /** Boolean tags for a station review */
+  /** Boolean tags for a station review. */
   tags?: Maybe<ReviewTagsInput>;
 };
 
-/** Form input for edit an existing review */
+/** Form input for edit an existing review. */
 export type ReviewEdit = {
-  /** Rating of a review */
+  /** Rating of a review. */
   rating: Scalars["Int"];
-  /** Review message */
+  /** Review message. */
   message?: Maybe<Scalars["String"]>;
-  /** Locale of a message */
+  /** Locale of a message. */
   locale?: Maybe<Scalars["String"]>;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
-  /** Boolean tags for a station review */
+  /** Boolean tags for a station review. */
   tags?: Maybe<ReviewTagsInput>;
 };
 
-/** Statistical information for reviews of a station */
+/** Statistical information for reviews of a station. */
 export type ReviewStats = {
-  /** Average of all reviews */
+  /** Average of all reviews. */
   rating?: Maybe<Scalars["Float"]>;
-  /** 'Total number of reviews */
+  /** 'Total number of reviews. */
   count?: Maybe<Scalars["Int"]>;
 };
 
-/** Boolean tags for the station review */
+/** Boolean tags for the station review. */
 export type ReviewTags = {
-  /** Flag which indicates if the station was working when the review was added */
+  /** Flag which indicates if the station was working when the review was added. */
   working?: Maybe<Scalars["Boolean"]>;
-  /** Flag which indicates if the user recommended the station when the review was added */
+  /** Flag which indicates if the user recommended the station when the review was added. */
   recommended?: Maybe<Scalars["Boolean"]>;
 };
 
-/** Boolean tags for a station review */
+/** Boolean tags for a station review. */
 export type ReviewTagsInput = {
-  /** Flag which indicates if a station was working when the review was added */
+  /** Flag which indicates if a station was working when the review was added. */
   working?: Maybe<Scalars["Boolean"]>;
-  /** Flag which indicates if a user recommended a station when the review was added */
+  /** Flag which indicates if a user recommended a station when the review was added. */
   recommended?: Maybe<Scalars["Boolean"]>;
 };
 
-/** Special format for the user of a review */
+/** Special format for the user of a review. */
 export type ReviewUser = {
-  /** User full name. If a review was added by an anonymous user, this will be null */
+  /** User full name. If a review was added by an anonymous user, this will be null. */
   name?: Maybe<Scalars["String"]>;
   /**
-   * User ID
+   * User ID.
    * @deprecated Not sent back anymore, will be null
    */
   id?: Maybe<Scalars["ID"]>;
   /**
-   * First name
-   * @deprecated Please use name instead
+   * First name.
+   * @deprecated In favor of name.
    */
   firstName?: Maybe<Scalars["String"]>;
   /**
-   * Last name
-   * @deprecated Please use name instead
+   * Last name.
+   * @deprecated In favor of name
    */
   lastName?: Maybe<Scalars["String"]>;
 };
@@ -4230,7 +4309,7 @@ export type RouteEmissions = {
   route_alternative_id: Scalars["ID"];
   /** Emissions profile for the vehicle used in route. */
   route_vehicle: RouteVehicleEmissions;
-  /** Emissions profile for the internal combustion engine equivalent. */
+  /** Emissions profile for an equivalent internal combustion engine vehicle. */
   internal_combustion_vehicle: RouteInternalCombustionVehicleEmissions;
 };
 
@@ -4363,7 +4442,7 @@ export enum RouteInstructionSign {
 }
 
 export type RouteInternalCombustionVehicleEmissions = {
-  /** Total emissions. */
+  /** Total co2e emissions. */
   total: Scalars["Float"];
   /** Embedded emissions. */
   embedded: RouteEmbeddedEmissions;
@@ -4380,7 +4459,7 @@ export type RouteInternalCombustionVehicleEmissionstotalArgs = {
 };
 
 export type RouteInternalCombustionVehicleLegEmissions = {
-  /** Total emissions for the leg. */
+  /** Total co2e emissions for the leg. */
   total: Scalars["Float"];
   /** Embedded emissions for the leg. */
   embedded: RouteEmbeddedEmissions;
@@ -5041,7 +5120,7 @@ export enum RouteTagType {
 }
 
 export type RouteVehicleEmissions = {
-  /** Total emissions. */
+  /** Total co2e emissions. */
   total: Scalars["Float"];
   /** Embedded emissions. */
   embedded: RouteEmbeddedEmissions;
@@ -5058,7 +5137,7 @@ export type RouteVehicleEmissionstotalArgs = {
 };
 
 export type RouteVehicleLegEmissions = {
-  /** Total emissions for the leg. */
+  /** Total co2e emissions for the leg. */
   total: Scalars["Float"];
   /** Embedded emissions for the leg. */
   embedded: RouteEmbeddedEmissions;
@@ -5136,207 +5215,347 @@ export enum StateOfChargeUnit {
   PERCENTAGE = "percentage"
 }
 
-/** Station data which extends OCPI Location */
+/** Station data which extends OCPI Location. */
 export type Station = {
-  /** Review of a station */
-  review?: Maybe<ReviewStats>;
-  /** Unique ID of a station */
+  /** Unique ID of a station. This property is OCPI-compliant. */
   id: Scalars["ID"];
-  /** ISO-3166 alpha-2 country code of a station */
+  /** ISO-3166 alpha-2 country code of a station. This property is OCPI-compliant. */
   country_code?: Maybe<Scalars["String"]>;
-  /** CPO ID of a CPO that 'owns' this station (following the ISO-15118 standard) */
+  /** CPO ID of a CPO that 'owns' this station (following the ISO-15118 standard). This property is OCPI-compliant. */
   party_id?: Maybe<Scalars["String"]>;
   /**
    * Defines if a location may be published on a website or app etc.
    * When this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this location.
-   * When the same location has EVSEs that may be published and may not be published, two 'locations' should be created
+   * When the same location has EVSEs that may be published and may not be published, two 'locations' should be created. This property is OCPI-compliant.
    */
   publish?: Maybe<Scalars["Boolean"]>;
-  /** Name of a charging station */
+  /** Name of a charging station. This property is OCPI-compliant. */
   name?: Maybe<Scalars["String"]>;
-  /** Street/block name and house number if available */
+  /** Street/block name and house number if available. This property is OCPI-compliant. */
   address?: Maybe<Scalars["String"]>;
-  /** City or town */
+  /** City or town. This property is OCPI-compliant. */
   city?: Maybe<Scalars["String"]>;
-  /** Postal code of a location, may only be omitted when a location has no postal code: in some countries charging locations at highways don’t have postal codes. */
+  /** Postal code of a location, may only be omitted when a location has no postal code: in some countries charging locations at highways don’t have postal codes. This property is OCPI-compliant. */
   postal_code?: Maybe<Scalars["String"]>;
-  /** State or province of a location, only to be used when relevant */
+  /** State or province of a location, only to be used when relevant. This property is OCPI-compliant. */
   state?: Maybe<Scalars["String"]>;
-  /** ISO 3166-1 alpha-3 code for the country of this station */
+  /** ISO 3166-1 alpha-3 code for the country of this station. This property is OCPI-compliant. */
   country?: Maybe<Scalars["String"]>;
-  /** Coordinates of a location */
+  /** Coordinates of a location. This property is OCPI-compliant. */
   coordinates?: Maybe<OCPIGeoLocation>;
-  /** Geographical location of related points relevant to a user */
+  /** Geographical location of related points relevant to a user. This property is OCPI-compliant. */
   related_locations?: Maybe<Array<Maybe<OCPIAdditionalGeoLocation>>>;
-  /** Type of parking at a charge point location */
+  /** Type of parking at a charge point location. This property is OCPI-compliant. */
   parking_type?: Maybe<OCPIParkingType>;
-  /** EVSEs that belong to a station */
+  /** EVSEs that belong to a station. This property is OCPI-compliant. */
   evses?: Maybe<Array<Maybe<EVSE>>>;
-  /** Human-readable directions on how to reach a station */
+  /** Human-readable directions on how to reach a station. This property is OCPI-compliant. */
   directions?: Maybe<Array<Maybe<OCPIDisplayText>>>;
-  /** Information about an operator */
+  /** Information about an operator. This property is OCPI-compliant. */
   operator?: Maybe<Operator>;
-  /** Information about a suboperator if applicable */
+  /** Information about a suboperator if applicable. This property is OCPI-compliant. */
   suboperator?: Maybe<Operator>;
-  /** Information about an owner if available */
+  /** Information about an owner if available. This property is OCPI-compliant. */
   owner?: Maybe<Operator>;
-  /** Facilities a charging station belongs to */
+  /** Facilities a charging station belongs to. This property is OCPI-compliant. */
   facilities?: Maybe<Array<Maybe<OCPIFacility>>>;
-  /** Value from the IANA time zone database representing the time zone of a location. Examples: "Europe/Oslo", "Europe/Zurich". (http://www.iana.org/time-zones) */
+  /** Value from the IANA time zone database representing the time zone of a location. Examples: "Europe/Oslo", "Europe/Zurich". (http://www.iana.org/time-zones). This property is OCPI-compliant. */
   time_zone?: Maybe<Scalars["String"]>;
-  /** Times when an EVSEs at a location can be accessed for charging */
+  /** Times when an EVSEs at a location can be accessed for charging. This property is OCPI-compliant. */
   opening_times?: Maybe<OCPIHours>;
-  /** Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers overnight, is it allowed to charge till the next morning? Default: true */
+  /** Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers overnight, is it allowed to charge till the next morning? Default: true. This property is OCPI-compliant. */
   charging_when_closed?: Maybe<Scalars["Boolean"]>;
-  /** Links to images related to a location such as photos or logos */
+  /** Links to images related to a location such as photos or logos. This property is OCPI-compliant. */
   images?: Maybe<Array<Maybe<OCPIImage>>>;
-  /** Details of the energy supplied at a location */
+  /** Details of the energy supplied at a location. This property is OCPI-compliant. */
   energy_mix?: Maybe<OCPIEnergyMix>;
-  /** Timestamp when a location, or one of its EVSEs or Connectors were last updated (or created) */
+  /** Timestamp when a location, or one of its EVSEs or Connectors were last updated (or created). This property is OCPI-compliant. */
   last_updated?: Maybe<Scalars["DateTime"]>;
-  /** ID provided by a station data source */
+  /** ID provided by a station data source. */
   external_id?: Maybe<Scalars["String"]>;
-  /** GeoJSON location of a charging station */
+  /** GeoJSON location of a charging station. */
   location?: Maybe<Point>;
-  /** Elevation (altitude) level */
+  /** Elevation (altitude) level. */
   elevation?: Maybe<Scalars["Int"]>;
-  /** Groups of EVSEs by power and type */
+  /** Groups of EVSEs by power and type. */
   chargers?: Maybe<Array<Maybe<Charger>>>;
-  /** Amenities located at this location */
+  /** Amenities located at this location. */
   amenities?: Maybe<Scalars["JSON"]>;
-  /** Enriched information about the physical address of a station */
+  /** Enriched information about the physical address of a station. */
   physical_address?: Maybe<Address>;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer */
+  /** Describes the heavy vehicle properties at the location. */
+  heavy_vehicles_properties?: Maybe<StationHeavyVehiclesProperties>;
+  /** Describes the heavy vehicle restrictions at the location. */
+  heavy_vehicles_restrictions?: Maybe<StationHeavyVehiclesRestrictions>;
+  /** Describes the vehicle restrictions at the location. */
+  vehicle_restrictions?: Maybe<StationVehicleRestrictions>;
+  /** Type of location where the charge point is located. For example, shop. */
+  location_category?: Maybe<Scalars["String"]>;
+  /** Coordinates for the location's entrances in decimal degrees. If available, there can be more than one entrances to the location. */
+  entrance_for_navigation?: Maybe<Array<OCPIAdditionalGeoLocation>>;
+  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
-  /** A flag that indicates if a station has real-time information about the availability of its connectors */
+  /** A flag that indicates if a station has real-time information about the availability of its connectors. */
   realtime?: Maybe<Scalars["Boolean"]>;
-  /** A flag that indicates if a station is on private property */
+  /**
+   * A flag that indicates if a station is on private property.
+   * @deprecated In favor of access_type.
+   */
   private?: Maybe<Scalars["Boolean"]>;
-  /** Connectors grouped by power */
+  /** Connectors grouped by power. */
   power?: Maybe<Scalars["JSON"]>;
   /**
-   * Station availability
-   * @deprecated predicted_availability, no value will be sent. Deprecated in favor of predicted_occupancy
+   * Station availability.
+   * @deprecated predicted_availability, no value will be sent. Deprecated in favor of predicted_occupancy.
    */
   predicted_availability?: Maybe<Array<Maybe<StationPredictedAvailability>>>;
-  /**
-   * Predicted station occupancy
-   * @deprecated In favor of custom_properties.predicted_occupancy
-   */
+  /** Predicted station occupancy. */
   predicted_occupancy?: Maybe<Array<Maybe<StationPredictedOccupancy>>>;
-  /** Charging speed for a station */
+  /** Charging speed for a station. */
   speed?: Maybe<StationSpeedType>;
-  /** Global status for a station */
+  /** Global status for a station. */
   status?: Maybe<ChargerStatus>;
-  /** Custom properties of a station. These are vendor specific and will return null values on the fields that are not supported by your station database */
+  /** Custom properties of a station. These are vendor specific and will return null values on the fields that are not supported by your station database. */
   custom_properties?: Maybe<StationCustomProperties>;
+  /** Review of a station. */
+  review?: Maybe<ReviewStats>;
+  /** List of eMSP cards accepted at a charging station. */
+  roaming?: Maybe<Array<Maybe<StationRoaming>>>;
+  /** Phone number for assistance at a charging station. */
+  support_phone_number?: Maybe<Scalars["String"]>;
+  /** Charging behavior of a station. */
+  charging_behaviour?: Maybe<ChargingBehaviour>;
+  /** Shows how reliable a charging station is (1 to 5; 1 = unreliable, 5 = reliable), taking into account the charging behaviour history and error values. */
+  reliability_score?: Maybe<Scalars["Int"]>;
+  /** Indicates the authentication and payment methods. */
+  adhoc_authorisation_payment_method?: Maybe<
+    Array<StationAdhocAuthorisationPaymentMethod>
+  >;
+  /** Type of access to the charging station. */
+  access_type?: Maybe<AccessType>;
 };
 
-/** Filter which can be applied to retrieve the station around list action */
+export enum StationAdhocAuthorisationPaymentMethod {
+  /** Authentication by car through Plug and Charge. */
+  AUTH_BY_CAR_PLUG_AND_CHARGE = "AUTH_BY_CAR_PLUG_AND_CHARGE",
+  /** Apple Pay. */
+  ONLINE_APPLE_PAY = "ONLINE_APPLE_PAY",
+  /** Terminal in app. */
+  TERMINAL_IN_APP = "TERMINAL_IN_APP",
+  /** PayPal. */
+  ONLINE_PAYPAL = "ONLINE_PAYPAL",
+  /** Service Provider RFID Card. */
+  SERVICE_PROVIDER_RFID_CARD = "SERVICE_PROVIDER_RFID_CARD",
+  /** Terminal QR Code. */
+  TERMINAL_QR_CODE = "TERMINAL_QR_CODE",
+  /** Terminal Credit Card. */
+  TERMINAL_CREDIT_CARD = "TERMINAL_CREDIT_CARD",
+  /** Terminal Debit Card. */
+  TERMINAL_DEBIT_CARD = "TERMINAL_DEBIT_CARD",
+  /** Terminal SMS. */
+  TERMINAL_SMS = "TERMINAL_SMS",
+  /** Credit Card. */
+  ONLINE_CREDIT_CARD = "ONLINE_CREDIT_CARD",
+  /** Other. */
+  OTHER_OTHER = "OTHER_OTHER",
+  /** Terminal Contactless. */
+  TERMINAL_CONTACTLESS = "TERMINAL_CONTACTLESS",
+  /** Google Pay. */
+  ONLINE_GOOGLE_PAY = "ONLINE_GOOGLE_PAY",
+  /** Bank Payment. */
+  ONLINE_BANK_PAYMENT = "ONLINE_BANK_PAYMENT",
+  /** Authentication by car through Auto Charge. */
+  AUTH_BY_CAR_AUTOCHARGE = "AUTH_BY_CAR_AUTOCHARGE"
+}
+
+/** Filter which can be applied to retrieve the station around list action. */
 export type StationAroundFilter = {
-  /** The GeoJSON Point of the center of the around me circle */
+  /** GeoJSON Point of the center of the around me circle. */
   location?: Maybe<PointInput>;
-  /** Distance, in meters, to search around */
+  /** Distance, in meters, to search around. */
   distance?: Maybe<Scalars["Int"]>;
-  /** Powers in kWh */
+  /** Powers in kWh. */
   powers?: Maybe<Array<Maybe<Scalars["Float"]>>>;
-  /** Amenities available near a station */
+  /** Amenities available near a station. */
   amenities?: Maybe<Array<Maybe<Amenities>>>;
-  /** Station speed */
+  /** Station speed. */
   power_groups?: Maybe<Array<Maybe<StationSpeedType>>>;
-  /** Station socket or plug standards */
+  /** Station socket or plug standards. */
   connectors?: Maybe<Array<Maybe<ConnectorType>>>;
-  /** Flag that allows you to return only available stations */
+  /** Flag that allows you to return only available stations. */
   available_only?: Maybe<Scalars["Boolean"]>;
-  /** Flag indicating if only stations that are owned by an operator from a clients ranking list are returned */
+  /** Flag indicating if only stations that are owned by an operator from a clients ranking list are returned. */
   preferred_operator?: Maybe<Scalars["Boolean"]>;
 };
 
-/** Deprecated: Replaced by filter & search params */
+/** Deprecated: Replaced by filter & search params. */
 export type StationAroundQuery = {
-  /** The GeoJSON Point of the center of the around me circle */
+  /** GeoJSON Point of the center of the around me circle. */
   location?: Maybe<PointInput>;
-  /** Distance, in meters, to search around */
+  /** Distance, in meters, to search around. */
   distance?: Maybe<Scalars["Int"]>;
-  /** Power in kWh */
+  /** Power in kWh. */
   power?: Maybe<Array<Maybe<Scalars["Float"]>>>;
-  /** Amenities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park */
+  /** Amenities available near a station. Values: restaurant, bathroom, supermarket, playground, coffee, shopping, museum, hotel, park. */
   amenities?: Maybe<Array<Maybe<Scalars["String"]>>>;
 };
 
 export type StationCustomProperties = {
-  /** List of eMSP cards accepted at a charging station */
+  /**
+   * List of eMSP cards accepted at a charging station.
+   * @deprecated In favor of station.roaming.
+   */
   roaming?: Maybe<Array<Maybe<StationRoaming>>>;
-  /** Phone number for assistance at a charging station */
+  /**
+   * Phone number for assistance at a charging station.
+   * @deprecated In favor of station.support_phone_number.
+   */
   support_phone_number?: Maybe<Scalars["String"]>;
-  /** Charging behavior of a station */
+  /**
+   * Charging behavior of a station.
+   * @deprecated In favor of station.charging_behaviour.
+   */
   charging_behaviour?: Maybe<ChargingBehaviour>;
-  /** Shows how reliable a charging station is (1 to 5; 1 = unreliable, 5 = reliable), taking into account the charging behaviour history and error values */
+  /**
+   * Shows how reliable a charging station is (1 to 5; 1 = unreliable, 5 = reliable), taking into account the charging behaviour history and error values.
+   * @deprecated In favor of station.reliability_score.
+   */
   reliability_score?: Maybe<Scalars["Int"]>;
-  /** List of available ad hoc payment methods */
+  /**
+   * List of available ad hoc payment methods.
+   * @deprecated In favor of station.adhoc_authorisation_payment_method.
+   */
   adhoc_authorisation_method?: Maybe<Array<Maybe<AdhocAuthorisationMethod>>>;
-  /** Predicted station occupancy */
+  /**
+   * Predicted station occupancy.
+   * @deprecated In favor of station.predicted_occupancy.
+   */
   predicted_occupancy?: Maybe<Array<Maybe<StationPredictedOccupancy>>>;
-  /** Type of access to the charging station */
+  /**
+   * Type of access to the charging station.
+   * @deprecated In favor of station.charging_behaviour.
+   */
   access_type?: Maybe<AccessType>;
-  /** Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values */
+  /** Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values. */
   oicp?: Maybe<OICPStationCustomProperties>;
 };
 
-/** Filter which can be applied to retrieve the station list action */
+/** Describes the heavy vehicle properties at the location. */
+export type StationHeavyVehiclesProperties = {
+  /** Indicates whether the location was constructed mainly for the purpose of heavy vehicles like trucks. */
+  is_dedicated?: Maybe<Scalars["Boolean"]>;
+  /** List of facilities in the location. */
+  facilities?: Maybe<Array<HeavyVehiclesFacility>>;
+  /** Indicates whether the location is suitable for trucks with trailers. */
+  is_trailer_accessible?: Maybe<Scalars["Boolean"]>;
+  /** Indicates whether the location is drive-through. */
+  is_drive_through?: Maybe<Scalars["Boolean"]>;
+  /** Indicates whether the location allows charging of heavy vehicles transporting dangerous goods. */
+  allows_dangerous_goods?: Maybe<Scalars["Boolean"]>;
+  /** Indicates whether the location is suitable for rigid heavy vehicles. */
+  allows_rigid_vehicles?: Maybe<Scalars["Boolean"]>;
+  /** Indicates whether the location allows overnight charging of heavy vehicles. */
+  allows_overnight_parking?: Maybe<Scalars["Boolean"]>;
+};
+
+/** Describes the heavy vehicle restrictions at the location. */
+export type StationHeavyVehiclesRestrictions = {
+  /** Maximum height of the heavy vehicle that is allowed to be parked at the charging station. */
+  height?: Maybe<Scalars["Float"]>;
+  /** Maximum width of the heavy vehicle that is allowed to be parked at the charging station. */
+  width?: Maybe<Scalars["Float"]>;
+  /** Maximum length of the heavy vehicle that is allowed to be parked at the charging station. */
+  length?: Maybe<Scalars["Float"]>;
+  /** Maximum mass of the heavy vehicle that is allowed to be parked at the charging station. */
+  mass?: Maybe<Scalars["Float"]>;
+  /** Allowed N (EU) types of heavy vehicles. */
+  allowed_types_EU?: Maybe<Array<HeavyVehiclesEUType>>;
+};
+
+/** Describes the heavy vehicle restrictions at the location. */
+export type StationHeavyVehiclesRestrictionsheightArgs = {
+  unit?: Maybe<DimensionUnit>;
+};
+
+/** Describes the heavy vehicle restrictions at the location. */
+export type StationHeavyVehiclesRestrictionswidthArgs = {
+  unit?: Maybe<DimensionUnit>;
+};
+
+/** Describes the heavy vehicle restrictions at the location. */
+export type StationHeavyVehiclesRestrictionslengthArgs = {
+  unit?: Maybe<DimensionUnit>;
+};
+
+/** Describes the heavy vehicle restrictions at the location. */
+export type StationHeavyVehiclesRestrictionsmassArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+/** Filter which can be applied to retrieve the station list action. */
 export type StationListFilter = {
-  /** Powers in kWh */
+  /** Powers in kWh. */
   powers?: Maybe<Array<Maybe<Scalars["Float"]>>>;
-  /** Amenities available near a station */
+  /** Amenities available near a station. */
   amenities?: Maybe<Array<Maybe<Amenities>>>;
-  /** Station speed */
+  /** Station speed. */
   power_groups?: Maybe<Array<Maybe<StationSpeedType>>>;
-  /** Station socket or plug standards */
+  /** Station socket or plug standards. */
   connectors?: Maybe<Array<Maybe<ConnectorType>>>;
-  /** Flag that allows you to return only available stations */
+  /** Flag that allows you to return only available stations. */
   available_only?: Maybe<Scalars["Boolean"]>;
-  /** Flag indicating if only stations that are owned by an operator from a clients ranking list are returned */
+  /** Flag indicating if only stations that are owned by an operator from a clients ranking list are returned. */
   preferred_operator?: Maybe<Scalars["Boolean"]>;
 };
 
-/** Deprecated: Replaced by filter & search params */
+/** Deprecated: Replaced by filter & search params. */
 export type StationListQuery = {
-  /** ID of the station */
+  /** ID of the station. */
   id?: Maybe<Scalars["ID"]>;
-  /** External ID of the station provided by the station data source */
+  /** External ID of the station provided by the station data source. */
   external_id?: Maybe<Scalars["String"]>;
-  /** Exact name */
+  /** Exact name. */
   name?: Maybe<Scalars["String"]>;
 };
 
-/** Station availability for each weekday and hour */
+/** Station availability for each weekday and hour. */
 export type StationPredictedAvailability = {
-  /** Number of weekday from 1 (monday) to 7 (sunday) */
+  /** Number of weekday from 1 (monday) to 7 (sunday). */
   weekday?: Maybe<Scalars["Int"]>;
-  /** The prediction for each hour 0-23 from 1 to 5 (1 - very busy ... 5 very quiet (free)) */
+  /** The prediction for each hour 0-23 from 1 to 5 (1 - very busy ... 5 very quiet (free)). */
   prediction?: Maybe<Array<Maybe<Scalars["Int"]>>>;
 };
 
-/** Station occupancy for each weekday and hour */
+/** Station occupancy for each weekday and hour. */
 export type StationPredictedOccupancy = {
-  /** Number of weekday from 1 (monday) to 7 (sunday) */
+  /** Number of weekday from 1 (monday) to 7 (sunday). */
   weekday?: Maybe<Scalars["Int"]>;
-  /** Occupancy on a scale from 1 to 10, where 1 means free for charging and 10 means fully occupied */
+  /** Occupancy on a scale from 1 to 10, where 1 means free for charging and 10 means fully occupied. */
   occupancy?: Maybe<Scalars["Int"]>;
-  /** Start of the period of the occupancy prediction (string of 'hh-mmZ' format) */
+  /** Start of the period of the occupancy prediction (string of 'hh-mmZ' format). */
   period_begin?: Maybe<Scalars["String"]>;
-  /** End of the period of the occupancy prediction (string of 'hh-mmZ' format) */
+  /** End of the period of the occupancy prediction (string of 'hh-mmZ' format). */
   period_end?: Maybe<Scalars["String"]>;
 };
 
 export type StationRoaming = {
-  /** Name of the EMSP provider */
+  /** Unique id for a provider. It is created by Eco-Movement, and it is stable. */
+  partner_id?: Maybe<Scalars["String"]>;
+  /**
+   * Unique E-Mobility Account Identifier (eMA ID) for a provider.
+   * It is created by Eco-Movement by combining the country code where the charging station is located, and the party id of the provider.
+   * For example, NL-ECO. Note: A provider can have multiple eMA IDs.
+   * For example, if a company named 'Example Company A' acquired 'Example Company B' and owns the charging stations of Example Company B,
+   * then this attribute maps Example Company B's eMA IDs to Example Company A's eMA IDs. For example, ['NL-EXA', 'NL-EXB'].
+   */
+  ema_id?: Maybe<Array<Scalars["String"]>>;
+  /** Name of the EMSP provider. */
   emsp?: Maybe<Scalars["String"]>;
-  /** Name of the card accepted at a charging station */
+  /** Name of the card accepted at a charging station. */
   card?: Maybe<Scalars["String"]>;
-  /** Link to native Android app for card accepted at a charging station */
+  /** Link to native Android app for card accepted at a charging station. */
   android_app_link?: Maybe<Scalars["String"]>;
-  /** Link to native iOS app for card accepted at a charging station */
+  /** Link to native iOS app for card accepted at a charging station. */
   ios_app_link?: Maybe<Scalars["String"]>;
 };
 
@@ -5358,6 +5577,38 @@ export type StationStats = {
   power?: Maybe<Array<Maybe<PowerStats>>>;
   /** Stations count grouped by amenities */
   amenities?: Maybe<Array<Maybe<AmenityStats>>>;
+};
+
+/** Describes the vehicle restrictions at the location. */
+export type StationVehicleRestrictions = {
+  /** Maximum weight for a vehicle that is allowed at the location. */
+  mass?: Maybe<Scalars["Float"]>;
+  /** Maximum width for a vehicle that is allowed at the location. */
+  width?: Maybe<Scalars["Float"]>;
+  /** Maximum height for a vehicle that is allowed at the location. */
+  height?: Maybe<Scalars["Float"]>;
+  /** Maximum length for a vehicle that is allowed at the location. */
+  length?: Maybe<Scalars["Float"]>;
+};
+
+/** Describes the vehicle restrictions at the location. */
+export type StationVehicleRestrictionsmassArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+/** Describes the vehicle restrictions at the location. */
+export type StationVehicleRestrictionswidthArgs = {
+  unit?: Maybe<DimensionUnit>;
+};
+
+/** Describes the vehicle restrictions at the location. */
+export type StationVehicleRestrictionsheightArgs = {
+  unit?: Maybe<DimensionUnit>;
+};
+
+/** Describes the vehicle restrictions at the location. */
+export type StationVehicleRestrictionslengthArgs = {
+  unit?: Maybe<DimensionUnit>;
 };
 
 /** Types of a route step. */
@@ -5645,6 +5896,8 @@ export type Vehicle = {
   purpose: VehiclePurpose;
   /** Type of vehicle. */
   type: VehicleType;
+  /** Details about Heat Pump. */
+  heat_pump?: Maybe<VehicleHeatPump>;
 };
 
 export type VehicleAvailability = {
@@ -5679,6 +5932,8 @@ export type VehicleBattery = {
   full_kwh: Scalars["Float"];
   /** Usable battery capacity in kWh. */
   usable_kwh: Scalars["Float"];
+  /** Type of battery. */
+  type?: Maybe<VehicleBatteryType>;
 };
 
 /** Battery field estimated. */
@@ -5691,6 +5946,11 @@ export enum VehicleBatteryFieldEstimations {
   N = "N",
   /** usable_kwh field is estimated. */
   U = "U"
+}
+
+export enum VehicleBatteryType {
+  /** Lithium-Ion Battery. */
+  LITHIUM_ION = "lithium_ion"
 }
 
 export type VehicleBody = {
@@ -5805,6 +6065,13 @@ export enum VehicleFuel {
   P = "P"
 }
 
+export type VehicleHeatPump = {
+  /** Indicates if a heat pump is available for a specific vehicle. */
+  is_available?: Maybe<Scalars["Boolean"]>;
+  /** Indicates if a heat pump is standard equipment for a specific vehicle. */
+  is_standard_equipment?: Maybe<Scalars["Boolean"]>;
+};
+
 export type VehicleImage = {
   /** Image id. */
   id?: Maybe<Scalars["ID"]>;
@@ -5896,6 +6163,8 @@ export type VehicleListBattery = {
   full_kwh: Scalars["Float"];
   /** Usable battery capacity in kWh. */
   usable_kwh: Scalars["Float"];
+  /** Type of battery. */
+  type?: Maybe<VehicleBatteryType>;
 };
 
 export type VehicleListBody = {
@@ -6015,6 +6284,17 @@ export type VehiclePerformancetop_speedArgs = {
   unit?: Maybe<SpeedUnit>;
 };
 
+export enum VehiclePlugAndChargeSupport {
+  /** Plug and charge is available. */
+  AVAILABLE = "available",
+  /** Plug and charge is announced, but not yet available. */
+  ANNOUNCED = "announced",
+  /** Plug and charge is available in a limited context. */
+  LIMITED = "limited",
+  /** Plug and charge is not available. */
+  NOT_AVAILABLE = "not_available"
+}
+
 /** The output element of the vehiclePremium query. */
 export type VehiclePremium = {
   /** Vehicles unique ID. */
@@ -6066,6 +6346,8 @@ export type VehiclePremium = {
   purpose: VehiclePurpose;
   /** Type of vehicle. */
   type: VehicleType;
+  /** Details about Heat Pump. */
+  heat_pump?: Maybe<VehicleHeatPump>;
 };
 
 export type VehiclePremiumAvailability = {
@@ -6104,6 +6386,8 @@ export type VehiclePremiumBattery = {
   weight?: Maybe<Scalars["Float"]>;
   /** Nominal voltage of battery. */
   nominal_voltage?: Maybe<Scalars["Float"]>;
+  /** Type of battery. */
+  type?: Maybe<VehicleBatteryType>;
 };
 
 export type VehiclePremiumBody = {
@@ -6121,6 +6405,8 @@ export type VehiclePremiumBody = {
   wheelbase?: Maybe<Scalars["Float"]>;
   /** Indicates if wheelbase field is estimated. */
   wheelbase_is_estimated?: Maybe<Scalars["Boolean"]>;
+  /** Ground clearance of a vehicle as specified by the OEM, default in mm. */
+  ground_clearance?: Maybe<Scalars["Float"]>;
   /** Weight (unladen EU). */
   weight: VehicleBodyWeight;
   /** Maximum allowed vehicle weight with payload. */
@@ -6192,6 +6478,10 @@ export type VehiclePremiumBodywheelbaseArgs = {
   unit?: Maybe<MeasurementUnit>;
 };
 
+export type VehiclePremiumBodyground_clearanceArgs = {
+  unit?: Maybe<MeasurementUnit>;
+};
+
 export type VehiclePremiumBodyweight_max_payloadArgs = {
   unit?: Maybe<WeightUnit>;
 };
@@ -6239,6 +6529,8 @@ export type VehiclePremiumCharge = {
   option?: Maybe<VehiclePremiumChargeOptionOBC>;
   /** Alternative upgrade for the standard onboard charger when available. */
   alternative?: Maybe<VehiclePremiumChargeAlternativeOBC>;
+  /** Vehicle-to-everything charge support. */
+  vehicle_to_everything?: Maybe<VehicleToEverything>;
 };
 
 export type VehiclePremiumChargeAlternativeOBC = {
@@ -6546,6 +6838,16 @@ export type VehiclePremiumFastCharge = {
   is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Charging details for fast charging. */
   table?: Maybe<Array<Maybe<VehiclePremiumFastChargeTable>>>;
+  /** Indicates if autocharge is available. */
+  has_autocharge?: Maybe<Scalars["Boolean"]>;
+  /** Status of Plug & Charge (PnC ISO15118) support for vehicle. */
+  iso_15118_pnc_support?: Maybe<VehiclePlugAndChargeSupport>;
+  /** Status of Plug & Charge (PnC ISO15118) -2 protocol support for vehicle. */
+  iso_15118_pnc_support_2?: Maybe<VehiclePlugAndChargeSupport>;
+  /** Status of Plug & Charge (PnC ISO15118) -20 protocol support for vehicle. */
+  iso_15118_pnc_support_20?: Maybe<VehiclePlugAndChargeSupport>;
+  /** Indicates if the fastcharge data is based on a real-world test by Fastned. */
+  is_fastned_tested?: Maybe<Scalars["Boolean"]>;
 };
 
 export type VehiclePremiumFastChargecharge_speedArgs = {
@@ -6647,6 +6949,10 @@ export type VehiclePremiumPriceValueWithGrant = {
   is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Grant that is applied to the starting price. */
   grant_applied?: Maybe<Scalars["Int"]>;
+  /** Total delivery fees (be aware that this field does not include grant). */
+  price_delivery?: Maybe<Scalars["Int"]>;
+  /** First registration fee (be aware that this field does not include grant). */
+  price_first_registration_fee?: Maybe<Scalars["Int"]>;
 };
 
 export type VehiclePremiumPriceValueWithGrantvalueArgs = {
@@ -6770,6 +7076,8 @@ export type VehiclePremiumSafetyEuroNcap = {
   vru?: Maybe<Scalars["Int"]>;
   /** EuroNCAP rating of safety assists (out of 100%). */
   sa?: Maybe<Scalars["Int"]>;
+  /** Link to the EuroNCAP test report. */
+  url?: Maybe<Scalars["String"]>;
 };
 
 /** Propulsion. */
@@ -6885,6 +7193,38 @@ export enum VehicleStatus {
   /** Is archived and can not be used. */
   ARCHIVED = "archived"
 }
+
+export type VehicleToEverything = {
+  /** Information about Vehicle-to-Load. */
+  vehicle_to_load?: Maybe<VehicleToEverythingLoad>;
+  /** Information about Vehicle-to-Home. */
+  vehicle_to_home?: Maybe<VehicleToEverythingHomeGrid>;
+  /** Information about Vehicle-to-Grid. */
+  vehicle_to_grid?: Maybe<VehicleToEverythingHomeGrid>;
+};
+
+export type VehicleToEverythingHomeGrid = {
+  /** Vehicle-to-Home/Grid AC power information. */
+  ac?: Maybe<VehicleToEverythingPower>;
+  /** Vehicle-to-Home/Grid DC power information */
+  dc?: Maybe<VehicleToEverythingPower>;
+};
+
+export type VehicleToEverythingLoad = {
+  /** Vehicle-to-Load power information. */
+  ac?: Maybe<VehicleToEverythingPower>;
+  /** Details on interior ports available for V2L. */
+  interior_ports?: Maybe<Scalars["String"]>;
+  /** Details on exterior ports available for V2L. */
+  exterior_ports?: Maybe<Scalars["String"]>;
+};
+
+export type VehicleToEverythingPower = {
+  /** Indicates if this charging is supported. */
+  is_supported?: Maybe<PowerSupported>;
+  /** Maximum power output, in kilowatts. */
+  maximum_power?: Maybe<Scalars["String"]>;
+};
 
 export enum VehicleType {
   /** Any motor vehicle with two wheels or a motor vehicle with no more than four wheels, does not have parallel seating, and is controlled by means of handlebars. */
