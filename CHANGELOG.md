@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/chargetrip/types/compare/v1.40.0...v1.41.0) (2024-04-04)
+
+
+### Features
+
+* HVAC ([5a0136c](https://github.com/chargetrip/types/commit/5a0136cd1d0cc012442bcf958003eaaffb69ec90))
+
 # [1.40.0](https://github.com/chargetrip/types/compare/v1.39.0...v1.40.0) (2024-04-01)
 
 
