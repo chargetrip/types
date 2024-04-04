@@ -10740,6 +10740,35 @@
       },
       {
         "kind": "ENUM",
+        "name": "HeatPumpMode",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "default",
+            "description": "Default to the vehicle configuration.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "installed",
+            "description": "Vehicle has it installed.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "none",
+            "description": "Vehicle doesn't have it installed.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "HeavyVehiclesEUType",
         "description": "Allowed N (EU) types of heavy vehicles.",
         "fields": null,
@@ -10919,6 +10948,89 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "IsolineCabin",
+        "description": null,
+        "fields": [
+          {
+            "name": "is_preconditioned",
+            "description": "Flag which indicate if the vehicle cabin was preconditioned for the desired temperature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "desired_temperature",
+            "description": "Desired temperature inside the cabin. Default is 20 degrees Celsius or 68 degrees Fahrenheit.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Type of temperature, defaults to 'Celsius'.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "TemperatureUnit",
+                  "ofType": null
+                },
+                "defaultValue": "Celsius",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "IsolineCabinInput",
+        "description": "Information about the cabin of the vehicle.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "is_preconditioned",
+            "description": "Flag which indicate if the vehicle cabin was preconditioned for the desired temperature.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": "false",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "desired_temperature",
+            "description": "Desired temperature inside the cabin. Default is 20 degrees Celsius or 68 degrees Fahrenheit.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TemperatureInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "IsolineFerryConnectionsType",
         "description": null,
@@ -11048,6 +11160,30 @@
               "ofType": null
             },
             "defaultValue": "true",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "heat_pump",
+            "description": "Vehicle Heat Pump configuration.",
+            "type": {
+              "kind": "ENUM",
+              "name": "HeatPumpMode",
+              "ofType": null
+            },
+            "defaultValue": "default",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cabin",
+            "description": "Vehicle cabin configuration.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IsolineCabinInput",
+              "ofType": null
+            },
+            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -11269,6 +11405,30 @@
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "heat_pump",
+            "description": "Vehicle Heat Pump configuration.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "HeatPumpMode",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cabin",
+            "description": "Vehicle cabin configuration.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "IsolineCabin",
               "ofType": null
             },
             "isDeprecated": false,
@@ -17780,6 +17940,30 @@
             "deprecationReason": null
           },
           {
+            "name": "heatPump",
+            "description": "Vehicle Heat Pump configuration.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "HeatPumpMode",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cabin",
+            "description": "Vehicle cabin configuration.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RequestEvCabin",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "cargo",
             "description": "Cargo weight, in kg.",
             "args": [],
@@ -18051,9 +18235,104 @@
       },
       {
         "kind": "OBJECT",
+        "name": "RequestEvCabin",
+        "description": "Vehicle cabin configuration.",
+        "fields": [
+          {
+            "name": "isPreconditioned",
+            "description": "Flag which indicate if the vehicle cabin was preconditioned for the desired temperature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "desiredTemperature",
+            "description": "Desired cabin temperature. Default is 20 degrees Celsius or 68 degrees Fahrenheit.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Type of temperature, defaults to 'Celsius'.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "TemperatureUnit",
+                  "ofType": null
+                },
+                "defaultValue": "Celsius",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RequestEvCabinInput",
+        "description": "Vehicle cabin configuration.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "isPreconditioned",
+            "description": "Flag which indicate if the vehicle cabin was preconditioned for the desired temperature.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": "false",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "desiredTemperature",
+            "description": "Desired cabin temperature. Default is 20 degrees Celsius or 68 degrees Fahrenheit.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TemperatureInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "RequestEvConsumption",
         "description": null,
         "fields": [
+          {
+            "name": "auxiliary",
+            "description": "The amount of energy, in kWh, used by the auxiliary systems of the vehicle in a hour, like media box, etc",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "aux",
             "description": "Consumption, in kWh, of the auxiliaries.",
@@ -18063,8 +18342,8 @@
               "name": "CarConsumption",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of auxiliary"
           },
           {
             "name": "bms",
@@ -18075,8 +18354,8 @@
               "name": "CarConsumption",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of auxiliary"
           },
           {
             "name": "idle",
@@ -18087,8 +18366,8 @@
               "name": "CarConsumption",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of auxiliary"
           }
         ],
         "inputFields": null,
@@ -18103,8 +18382,20 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "auxiliary",
+            "description": "The amount of energy, in kWh, used by the auxiliary systems of the vehicle in a hour, like media box, etc.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "aux",
-            "description": "Consumption, in kWh, of the auxiliaries.",
+            "description": "Deprecated in favor of auxiliary.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -18116,7 +18407,7 @@
           },
           {
             "name": "bms",
-            "description": "Consumption, in kWh, of the battery management system.",
+            "description": "Deprecated in favor of auxiliary.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -18128,7 +18419,7 @@
           },
           {
             "name": "idle",
-            "description": "Consumption, in kWh, of the vehicle in idle mode.",
+            "description": "Deprecated in favor of auxiliary.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -18227,6 +18518,30 @@
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "heatPump",
+            "description": "Vehicle Heat Pump configuration.",
+            "type": {
+              "kind": "ENUM",
+              "name": "HeatPumpMode",
+              "ofType": null
+            },
+            "defaultValue": "default",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cabin",
+            "description": "Vehicle cabin configuration.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RequestEvCabinInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -19619,7 +19934,7 @@
           },
           {
             "name": "rangeStart",
-            "description": "Range, in meters, available at the beginning of a trip.",
+            "description": "Display value that indicates the range, in meters, available at the beginning of the trip. This range is calculated using the Chargetrip range, the conditions at the time of planning the route, weather scenario (current or seasonal) and the route input.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19655,7 +19970,7 @@
           },
           {
             "name": "rangeEnd",
-            "description": "Remaining range, in meters, at the end of a trip. In the case of a non BEV where the range end is negative, the value will be 0.",
+            "description": "Display value that indicates the range, in meters, available at the end of the trip. This range is calculated using the Chargetrip range, the conditions at the time of planning the route, weather scenario (current or seasonal) and the route input. Please note: In case of a non BEV where the range end is negative, the value will be 0.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -21576,7 +21891,7 @@
           },
           {
             "name": "rangeStart",
-            "description": "Range, in meters, available at the beginning of a leg.",
+            "description": "Display value that indicates the range, in meters, available at the beginning of the leg. This range is calculated using the Chargetrip range, the conditions at the time of planning the route, weather scenario (current or seasonal) and the route input.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -21612,7 +21927,7 @@
           },
           {
             "name": "rangeEnd",
-            "description": "Range, in meters, available at the end of a leg. In the case of a non BEV where the range end is negative, the value will be 0.",
+            "description": "Display value that indicates the range, in meters, available at the end of the leg. This range is calculated using the Chargetrip range, the conditions at the time of planning the route, weather scenario (current or seasonal) and the route input. Please note: In case of a non BEV where the range end is negative, the value will be 0.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -28100,6 +28415,92 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "Temperature",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Value of the temperature.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of temperature.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "TemperatureUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TemperatureInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "value",
+            "description": "Value of the temperature.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of temperature.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "TemperatureUnit",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "TemperatureUnit",
         "description": null,
@@ -34493,6 +34894,18 @@
         "description": null,
         "fields": [
           {
+            "name": "auxiliary",
+            "description": "The amount of energy, in kWh, used by the auxiliary systems of the vehicle in a hour, like media box, etc",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "aux",
             "description": "Consumption, in kWh, of the auxiliaries.",
             "args": [],
@@ -34501,8 +34914,8 @@
               "name": "VehiclePremiumRoutingConsumptionValue",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of auxiliary"
           },
           {
             "name": "bms",
@@ -34513,8 +34926,8 @@
               "name": "VehiclePremiumRoutingConsumptionValue",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of auxiliary"
           },
           {
             "name": "idle",
@@ -34525,8 +34938,8 @@
               "name": "VehiclePremiumRoutingConsumptionValue",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of auxiliary"
           }
         ],
         "inputFields": null,
@@ -36444,6 +36857,50 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "subFieldUnitConvert",
+        "description": null,
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "subField",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fromUnit",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "unitParameterName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,

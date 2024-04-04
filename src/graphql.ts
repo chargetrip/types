@@ -2304,6 +2304,15 @@ export type GeometryPoint = {
   coordinates: Array<Scalars["Float"]>;
 };
 
+export enum HeatPumpMode {
+  /** Default to the vehicle configuration. */
+  DEFAULT = "default",
+  /** Vehicle has it installed. */
+  INSTALLED = "installed",
+  /** Vehicle doesn't have it installed. */
+  NONE = "none"
+}
+
 /** Allowed N (EU) types of heavy vehicles. */
 export enum HeavyVehiclesEUType {
   /** Only N1 type of heavy vehicles can be parked at the charging station. N1 vehicles have a maximum mass not exceeding 3.5 tonnes (7,700 lbs). */
@@ -2349,6 +2358,25 @@ export type Isoline = {
   request_input?: Maybe<IsolineRequestInput>;
 };
 
+export type IsolineCabin = {
+  /** Flag which indicate if the vehicle cabin was preconditioned for the desired temperature. */
+  is_preconditioned?: Maybe<Scalars["Boolean"]>;
+  /** Desired temperature inside the cabin. Default is 20 degrees Celsius or 68 degrees Fahrenheit. */
+  desired_temperature?: Maybe<Scalars["Float"]>;
+};
+
+export type IsolineCabindesired_temperatureArgs = {
+  unit?: Maybe<TemperatureUnit>;
+};
+
+/** Information about the cabin of the vehicle. */
+export type IsolineCabinInput = {
+  /** Flag which indicate if the vehicle cabin was preconditioned for the desired temperature. */
+  is_preconditioned?: Maybe<Scalars["Boolean"]>;
+  /** Desired temperature inside the cabin. Default is 20 degrees Celsius or 68 degrees Fahrenheit. */
+  desired_temperature?: Maybe<TemperatureInput>;
+};
+
 export enum IsolineFerryConnectionsType {
   /** Ferry connections should not be included. */
   NONE = "none",
@@ -2373,6 +2401,10 @@ export type IsolineInput = {
   total_cargo_weight?: Maybe<TotalCargoWeightInput>;
   /** Climate is on. */
   climate_control?: Maybe<Scalars["Boolean"]>;
+  /** Vehicle Heat Pump configuration. */
+  heat_pump?: Maybe<HeatPumpMode>;
+  /** Vehicle cabin configuration. */
+  cabin?: Maybe<IsolineCabinInput>;
   /** Season to be taken into account when generating the isoline. */
   season?: Maybe<RouteSeason>;
   /** Polygons precision quality. */
@@ -2410,6 +2442,10 @@ export type IsolineRequestInput = {
   total_cargo_weight?: Maybe<Scalars["Float"]>;
   /** Climate is on. */
   climate_control?: Maybe<Scalars["Boolean"]>;
+  /** Vehicle Heat Pump configuration. */
+  heat_pump?: Maybe<HeatPumpMode>;
+  /** Vehicle cabin configuration. */
+  cabin?: Maybe<IsolineCabin>;
   /** Season taken into account when isoline was generated. */
   season?: Maybe<RouteSeason>;
   /** Polygons precision quality. */
@@ -3775,6 +3811,10 @@ export type RequestEv = {
   minPower?: Maybe<Scalars["Int"]>;
   /** Climate is on. The default is true. */
   climate?: Maybe<Scalars["Boolean"]>;
+  /** Vehicle Heat Pump configuration. */
+  heatPump?: Maybe<HeatPumpMode>;
+  /** Vehicle cabin configuration. */
+  cabin?: Maybe<RequestEvCabin>;
   /** Cargo weight, in kg. */
   cargo?: Maybe<Scalars["Float"]>;
   /**
@@ -3826,21 +3866,55 @@ export type RequestEvBatteryValue = {
   type: BatteryInputType;
 };
 
+/** Vehicle cabin configuration. */
+export type RequestEvCabin = {
+  /** Flag which indicate if the vehicle cabin was preconditioned for the desired temperature. */
+  isPreconditioned?: Maybe<Scalars["Boolean"]>;
+  /** Desired cabin temperature. Default is 20 degrees Celsius or 68 degrees Fahrenheit. */
+  desiredTemperature?: Maybe<Scalars["Float"]>;
+};
+
+/** Vehicle cabin configuration. */
+export type RequestEvCabindesiredTemperatureArgs = {
+  unit?: Maybe<TemperatureUnit>;
+};
+
+/** Vehicle cabin configuration. */
+export type RequestEvCabinInput = {
+  /** Flag which indicate if the vehicle cabin was preconditioned for the desired temperature. */
+  isPreconditioned?: Maybe<Scalars["Boolean"]>;
+  /** Desired cabin temperature. Default is 20 degrees Celsius or 68 degrees Fahrenheit. */
+  desiredTemperature?: Maybe<TemperatureInput>;
+};
+
 export type RequestEvConsumption = {
-  /** Consumption, in kWh, of the auxiliaries. */
+  /** The amount of energy, in kWh, used by the auxiliary systems of the vehicle in a hour, like media box, etc */
+  auxiliary?: Maybe<Scalars["Float"]>;
+  /**
+   * Consumption, in kWh, of the auxiliaries.
+   * @deprecated In favor of auxiliary
+   */
   aux?: Maybe<CarConsumption>;
-  /** The consumption, in kWh, of the battery management system. */
+  /**
+   * The consumption, in kWh, of the battery management system.
+   * @deprecated In favor of auxiliary
+   */
   bms?: Maybe<CarConsumption>;
-  /** The consumption, in kWh, of the vehicle in idle mode. */
+  /**
+   * The consumption, in kWh, of the vehicle in idle mode.
+   * @deprecated In favor of auxiliary
+   */
   idle?: Maybe<CarConsumption>;
 };
 
 export type RequestEvConsumptionInput = {
-  /** Consumption, in kWh, of the auxiliaries. */
+  /** The amount of energy, in kWh, used by the auxiliary systems of the vehicle in a hour, like media box, etc. */
+  auxiliary?: Maybe<Scalars["Float"]>;
+  /** Deprecated in favor of auxiliary. */
   aux?: Maybe<CarConsumptionInput>;
-  /** Consumption, in kWh, of the battery management system. */
+  /** Deprecated in favor of auxiliary. */
   bms?: Maybe<CarConsumptionInput>;
-  /** Consumption, in kWh, of the vehicle in idle mode. */
+  /** Deprecated in favor of auxiliary. */
   idle?: Maybe<CarConsumptionInput>;
 };
 
@@ -3857,6 +3931,10 @@ export type RequestEvInput = {
   minPower?: Maybe<Scalars["Int"]>;
   /** Flag which indicates if the climate is on. The default is true. */
   climate?: Maybe<Scalars["Boolean"]>;
+  /** Vehicle Heat Pump configuration. */
+  heatPump?: Maybe<HeatPumpMode>;
+  /** Vehicle cabin configuration. */
+  cabin?: Maybe<RequestEvCabinInput>;
   /** Number of occupants. */
   occupants?: Maybe<Scalars["Int"]>;
   /** Cargo weight, in kg. */
@@ -4125,13 +4203,13 @@ export type RouteAlternative = {
    * @deprecated Will be removed in the future
    */
   amenityRanking?: Maybe<Scalars["Int"]>;
-  /** Range, in meters, available at the beginning of a trip. */
+  /** Display value that indicates the range, in meters, available at the beginning of the trip. This range is calculated using the Chargetrip range, the conditions at the time of planning the route, weather scenario (current or seasonal) and the route input. */
   rangeStart?: Maybe<Scalars["Int"]>;
   /** Total energy in a battery at the beginning of a trip, in kWh. */
   rangeStartKwh?: Maybe<Scalars["Float"]>;
   /** Total energy in a battery at the beginning of a trip, in percentage. */
   rangeStartPercentage?: Maybe<Scalars["Int"]>;
-  /** Remaining range, in meters, at the end of a trip. In the case of a non BEV where the range end is negative, the value will be 0. */
+  /** Display value that indicates the range, in meters, available at the end of the trip. This range is calculated using the Chargetrip range, the conditions at the time of planning the route, weather scenario (current or seasonal) and the route input. Please note: In case of a non BEV where the range end is negative, the value will be 0. */
   rangeEnd?: Maybe<Scalars["Int"]>;
   /** Remaining range, energy in kWh, at the end of a trip. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
@@ -4497,13 +4575,13 @@ export type RouteLeg = {
   duration?: Maybe<Scalars["Int"]>;
   /** Total energy used in a leg in kWh. */
   consumption?: Maybe<Scalars["Float"]>;
-  /** Range, in meters, available at the beginning of a leg. */
+  /** Display value that indicates the range, in meters, available at the beginning of the leg. This range is calculated using the Chargetrip range, the conditions at the time of planning the route, weather scenario (current or seasonal) and the route input. */
   rangeStart?: Maybe<Scalars["Int"]>;
   /** Total energy in a battery at the beginning of a leg, in kWh. */
   rangeStartKwh?: Maybe<Scalars["Float"]>;
   /** Total energy in a battery at the beginning of a trip, in percentage. */
   rangeStartPercentage?: Maybe<Scalars["Int"]>;
-  /** Range, in meters, available at the end of a leg. In the case of a non BEV where the range end is negative, the value will be 0. */
+  /** Display value that indicates the range, in meters, available at the end of the leg. This range is calculated using the Chargetrip range, the conditions at the time of planning the route, weather scenario (current or seasonal) and the route input. Please note: In case of a non BEV where the range end is negative, the value will be 0. */
   rangeEnd?: Maybe<Scalars["Int"]>;
   /** Total energy left in a battery at the end of a leg, in kWh. In the case of a non BEV where the range end is negative, the value will be 0. */
   rangeEndKwh?: Maybe<Scalars["Float"]>;
@@ -5807,6 +5885,20 @@ export enum TelemetryInputSource {
   TELEMETRY = "telemetry"
 }
 
+export type Temperature = {
+  /** Value of the temperature. */
+  value: Scalars["Float"];
+  /** Type of temperature. */
+  type: TemperatureUnit;
+};
+
+export type TemperatureInput = {
+  /** Value of the temperature. */
+  value: Scalars["Float"];
+  /** Type of temperature. */
+  type: TemperatureUnit;
+};
+
 export enum TemperatureUnit {
   /** Return the temperature in Celsius. */
   CELSIUS = "Celsius",
@@ -7041,11 +7133,22 @@ export type VehiclePremiumRoutingfuel_consumptionArgs = {
 };
 
 export type VehiclePremiumRoutingConsumption = {
-  /** Consumption, in kWh, of the auxiliaries. */
+  /** The amount of energy, in kWh, used by the auxiliary systems of the vehicle in a hour, like media box, etc */
+  auxiliary?: Maybe<Scalars["Float"]>;
+  /**
+   * Consumption, in kWh, of the auxiliaries.
+   * @deprecated In favor of auxiliary
+   */
   aux?: Maybe<VehiclePremiumRoutingConsumptionValue>;
-  /** Consumption, in kWh, of the battery management system. */
+  /**
+   * Consumption, in kWh, of the battery management system.
+   * @deprecated In favor of auxiliary
+   */
   bms?: Maybe<VehiclePremiumRoutingConsumptionValue>;
-  /** Consumption, in kWh, of the vehicle in idle mode. */
+  /**
+   * Consumption, in kWh, of the vehicle in idle mode.
+   * @deprecated In favor of auxiliary
+   */
   idle?: Maybe<VehiclePremiumRoutingConsumptionValue>;
 };
 
