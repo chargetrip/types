@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/chargetrip/types/compare/v1.39.0...v1.40.0) (2024-04-01)
+
+
+### Features
+
+* Release vehicle and stations ([f3140b6](https://github.com/chargetrip/types/commit/f3140b6aae319f88fbbc2affbc7bc3c639b89a9f))
+
 # [1.39.0](https://github.com/chargetrip/types/compare/v1.38.0...v1.39.0) (2024-01-03)
 
 
