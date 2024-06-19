@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/chargetrip/types/compare/v1.35.0...v1.36.0) (2024-06-19)
+
+
+### Features
+
+* unit conversions ([9a0580a](https://github.com/chargetrip/types/commit/9a0580aa0576f66b1f825040cd49e1ffe3346b74))
+
 # [1.35.0](https://github.com/chargetrip/types/compare/v1.34.0...v1.35.0) (2022-12-19)
 
 
