@@ -1,9 +1,82 @@
-# [1.36.0](https://github.com/chargetrip/types/compare/v1.35.0...v1.36.0) (2024-06-19)
+# [1.41.0](https://github.com/chargetrip/types/compare/v1.40.0...v1.41.0) (2024-04-04)
 
 
 ### Features
 
-* unit conversions ([9a0580a](https://github.com/chargetrip/types/commit/9a0580aa0576f66b1f825040cd49e1ffe3346b74))
+* HVAC ([5a0136c](https://github.com/chargetrip/types/commit/5a0136cd1d0cc012442bcf958003eaaffb69ec90))
+
+# [1.40.0](https://github.com/chargetrip/types/compare/v1.39.0...v1.40.0) (2024-04-01)
+
+
+### Features
+
+* Release vehicle and stations ([f3140b6](https://github.com/chargetrip/types/commit/f3140b6aae319f88fbbc2affbc7bc3c639b89a9f))
+
+# [1.39.0](https://github.com/chargetrip/types/compare/v1.38.0...v1.39.0) (2024-01-03)
+
+
+### Features
+
+* Emissions API ([d6aaf0f](https://github.com/chargetrip/types/commit/d6aaf0f7a27450a0f4c81b6ed1e7f71068c0cfa2))
+
+# [1.38.0](https://github.com/chargetrip/types/compare/v1.37.4...v1.38.0) (2023-11-28)
+
+
+### Features
+
+* Release ([b62d4a1](https://github.com/chargetrip/types/commit/b62d4a1992159f0f6e7aa9eadff02d953a36338d))
+
+## [1.37.4](https://github.com/chargetrip/types/compare/v1.37.3...v1.37.4) (2023-08-29)
+
+
+### Bug Fixes
+
+* add regeneration into the build script ([6dddce5](https://github.com/chargetrip/types/commit/6dddce5d91f46134adf01d7d35657581005c1d3d))
+
+## [1.37.3](https://github.com/chargetrip/types/compare/v1.37.2...v1.37.3) (2023-08-29)
+
+
+### Bug Fixes
+
+* regenerated types ([d5d1650](https://github.com/chargetrip/types/commit/d5d1650ed09bab48e96f2911c152cab4404fa06a))
+
+## [1.37.2](https://github.com/chargetrip/types/compare/v1.37.1...v1.37.2) (2023-08-29)
+
+
+### Bug Fixes
+
+* trigger deploy ([9731bd2](https://github.com/chargetrip/types/commit/9731bd293d9d465c8c03746247aa56b66d033de1))
+
+## [1.37.1](https://github.com/chargetrip/types/compare/v1.37.0...v1.37.1) (2023-07-06)
+
+
+### Bug Fixes
+
+* add cronjob for automatic deployment on release days ([c575f8f](https://github.com/chargetrip/types/commit/c575f8f1e50dd52304a96d99158136d905ec273d))
+* added manual trigger for package deployment ([2091ca2](https://github.com/chargetrip/types/commit/2091ca25df315d0a8730fa8bc65d153ec50c35a2))
+
+# [1.37.0](https://github.com/chargetrip/types/compare/v1.36.0...v1.37.0) (2023-04-26)
+
+
+### Features
+
+* generated new types ([4733400](https://github.com/chargetrip/types/commit/4733400cd3d8f0d61ca3d546fbb13e0baff23e1a))
+
+# [1.36.0](https://github.com/chargetrip/types/compare/v1.35.1...v1.36.0) (2023-04-03)
+
+
+### Features
+
+* added new types by generating ([11e0467](https://github.com/chargetrip/types/commit/11e046727bcc2e2ed0b842ce145250ec15f1b73d))
+
+## [1.35.1](https://github.com/chargetrip/types/compare/v1.35.0...v1.35.1) (2023-04-03)
+
+
+### Bug Fixes
+
+* move master to main ([1443a2f](https://github.com/chargetrip/types/commit/1443a2f51b1131e03789cd43941ad65ee8903233))
+* new release yml ([1820a3e](https://github.com/chargetrip/types/commit/1820a3e0dfaa3db88265b284af2ea0f01dc513f5))
+* patched semantic release ([939ea85](https://github.com/chargetrip/types/commit/939ea85e54ff54c6555ed776ce33ac014c2e6544))
 
 # [1.35.0](https://github.com/chargetrip/types/compare/v1.34.0...v1.35.0) (2022-12-19)
 
