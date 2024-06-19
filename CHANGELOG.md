@@ -1,3 +1,12 @@
+# [1.42.0](https://github.com/chargetrip/types/compare/v1.41.0...v1.42.0) (2024-06-19)
+
+
+### Features
+
+* new release ([7cc150f](https://github.com/chargetrip/types/commit/7cc150f30626b1178378d1ae17d32be71d5e996a))
+* unit conversions ([b999008](https://github.com/chargetrip/types/commit/b99900895471229665a8b8eb8e40e45c4c26be9b))
+* unit conversions ([9a0580a](https://github.com/chargetrip/types/commit/9a0580aa0576f66b1f825040cd49e1ffe3346b74))
+
 # [1.41.0](https://github.com/chargetrip/types/compare/v1.40.0...v1.41.0) (2024-04-04)
 
 
