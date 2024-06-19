@@ -3715,7 +3715,7 @@ export type Query = {
   navigationMapping?: Maybe<Scalars["JSON"]>;
   /** Get information about a vehicle by its ID. */
   vehicle?: Maybe<Vehicle>;
-  /** Vehicle premium data provides even more information about your vehicle: tire pressure, prices, drivetrain data, and more. Please contact us for access to premium data. */
+  /** Vehicle premium data provides even more information about your vehicle:  tire pressure, prices, drivetrain data, and more. Please contact us for access to premium data. */
   vehiclePremium?: Maybe<VehiclePremium>;
   /** Get a full list of vehicles. */
   vehicleList?: Maybe<Array<Maybe<VehicleList>>>;
