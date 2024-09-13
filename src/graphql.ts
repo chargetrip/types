@@ -8786,7 +8786,6 @@ export enum VolumeUnit {
   /** Return the volume in cubic feet. */
   CUBIC_FOOT = "cubic_foot"
 }
-
 /** Weight unit. */
 export enum WeightUnit {
   /** Return the weight in kilograms. */
