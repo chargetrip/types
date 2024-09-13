@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/chargetrip/types/compare/v1.42.0...v1.43.0) (2024-09-13)
+
+
+### Features
+
+* Route V2 ([6f6c91c](https://github.com/chargetrip/types/commit/6f6c91c815dec211a8df8cacf3eaa89e4b631caa))
+
 # [1.42.0](https://github.com/chargetrip/types/compare/v1.41.0...v1.42.0) (2024-06-19)
 
 
