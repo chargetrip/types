@@ -1011,13 +1011,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -7803,6 +7799,26 @@
               "name": "Pricing",
               "ofType": null
             },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of prices."
+          },
+          {
+            "name": "prices",
+            "description": "Dynamic charging prices.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ConnectorPrice",
+                  "ofType": null
+                }
+              }
+            },
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -7839,7 +7855,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of connector.pricing"
+            "deprecationReason": "In favor of connector.prices."
           },
           {
             "name": "oicp",
@@ -7857,6 +7873,881 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ConnectorPrice",
+        "description": "Connector charging price.",
+        "fields": [
+          {
+            "name": "external_id",
+            "description": "ID for the price.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "partner",
+            "description": "Owner of the payment product.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "partner_id",
+            "description": "ID for the owner of the payment product.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "product",
+            "description": "Payment product.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ConnectorPriceProduct",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "elements",
+            "description": "Price product elements.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "ConnectorPriceElement",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "last_updated",
+            "description": "Indicates when the pricing data was last updated. The date is in ISO 8601 standard and the time zone is UTC. The update could be a price update or any other update (for example, pricing type update).",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ConnectorPriceElement",
+        "description": null,
+        "fields": [
+          {
+            "name": "components",
+            "description": "Connector price element components.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "ConnectorPriceElementComponent",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "restrictions",
+            "description": "Connector price element restrictions.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ConnectorPriceElementRestrictions",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ConnectorPriceElementComponent",
+        "description": null,
+        "fields": [
+          {
+            "name": "type",
+            "description": "Type of pricing that is applicable.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ConnectorPriceElementComponentType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_excl_vat",
+            "description": "Applicable price excluding VAT.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vat",
+            "description": "Applicable VAT.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "step_size",
+            "description": "\tIndicates the minimum amount that is billed. A\nunit is billed in step-size blocks. For example, if the type is TIME and step_size is 300, then the time is billed in blocks of 5 minutes. Hence, if 6 minutes is used, then 10 minutes (2 blocks of step_size) is billed.\n\n\tNote: step_size also depends on the type. Every type (except FLAT) defines a step_size multiplier. This is the size of every 'step' and the unit. For example, PARKING_TIME has a step-size multiplier of 1 second. Therefore, the step_size of a price component is multiplied by 1 second. Thus, step_size = 300 means 300 seconds.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ConnectorPriceElementComponentType",
+        "description": "Type of pricing that is applicable.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "energy",
+            "description": "Price per kWh.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "flat",
+            "description": "Fixed price per charging session.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "parking_time",
+            "description": "Parking price per hour. This fee is applicable even if the parked car is not charging.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "time",
+            "description": "Fixed price per hour.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ConnectorPriceElementRestrictions",
+        "description": null,
+        "fields": [
+          {
+            "name": "start_time",
+            "description": "Starting time of the day for the prices.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end_time",
+            "description": "Ending time of the day for the prices.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "start_date",
+            "description": "Starting date for the prices.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end_date",
+            "description": "Ending date for the prices.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minimum_kwh",
+            "description": "Minimum energy used, in kWh.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_kwh",
+            "description": "Maximum energy used, in kWh.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minimum_power",
+            "description": "Minimum charging speed, in kW.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_power",
+            "description": "Maximum charging speed, in kW.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minimum_current",
+            "description": "Sum of the minimum current (in Amperes) over all the phases. When the EV is charging with more than or equal to this value the prices are active. If the charging current is lower, this price is inactive.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_current",
+            "description": "Sum of the maximum current (in Amperes) over all the phases. When the EV is charging with less than this value the prices are active. If the charging current is higher, this price is inactive.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minimum_price",
+            "description": "Minimum price based on the amount of kWh that is being delivered.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_price",
+            "description": "Maximum price based on the amount of kWh that is being delivered.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "overstay_battery_percentage",
+            "description": "Battery percentage at which the overstay prices are active.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ConnectorPriceRestrictionsOverstayBatteryPercentage",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "overstay_time",
+            "description": "Time after which the overstay prices are active.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ConnectorPriceRestrictionsOverstayTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minimum_duration",
+            "description": "Minimum duration, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_duration",
+            "description": "Maximum duration, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "day_of_week",
+            "description": "Day(s) of the week that the prices are valid.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "DayOfWeek",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "emsp_contract_date",
+            "description": "Contract signed between the eMSP and the customer.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ConnectorPriceRestrictionsEmspContractDate",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "reservation",
+            "description": "When this field is present, the ConnectorPriceElement describes reservation costs.\nA reservation starts when the reservation is made, and ends when the driver starts charging on the reserved EVSE/Location,\nor when the reservation expires. A reservation can only have: `flat` and `time` ConnectorPriceElementComponentType,\nwhere time is for the duration of the reservation.\n\nWhen a price has both, `reservation` and `reservation_expires` ConnectorPriceElement,\nwhere both ConnectorPriceElement have a time ConnectorPriceElementComponent,\nthen the time based cost of an expired reservation will be calculated based on the `reservation_expires` ConnectorPriceElement.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ConnectorPriceRestrictionsReservationType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ConnectorPriceProduct",
+        "description": "Payment product.",
+        "fields": [
+          {
+            "name": "name",
+            "description": "Name of the payment product.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of the payment product.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ConnectorPriceProductType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": "A brief description of the product.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "subscription_type",
+            "description": "Indicates the type of subscription.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ConnectorPriceProductSubscriptionType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "subscription_fee_excl_vat",
+            "description": "Subscription price for a month or year, excluding VAT, if applicable.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "currency",
+            "description": "Three-digit currency code of the country where the charging station is located.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "CurrencyUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ConnectorPriceProductSubscriptionType",
+        "description": "Type of the payment product.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "monthly",
+            "description": "The subscription fee is applicable every month.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "yearly",
+            "description": "The subscription fee is applicable every year.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "one_off",
+            "description": "An initial fee is applicable to purchase a RFID card or chip, but there isn't a recurring subscription fee.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "not_applicable",
+            "description": "The product doesn’t have a subscription option.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ConnectorPriceProductType",
+        "description": "Type of the payment product.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ad_hoc",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "msp",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cpo_subscription",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ConnectorPriceRestrictionsEmspContractDate",
+        "description": null,
+        "fields": [
+          {
+            "name": "name",
+            "description": "Name of the contract signed between the eMSP and a customer.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "from",
+            "description": "Prices are active from this date, which is based on the contract signed between the eMSP and a customer.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "to",
+            "description": "Prices are active until this date, which is based on the contract signed between the eMSP and a customer.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ConnectorPriceRestrictionsOverstayBatteryPercentage",
+        "description": null,
+        "fields": [
+          {
+            "name": "minimum",
+            "description": "Battery percentage at which the overstay prices are active.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Battery percentage at which the overstay prices are inactive.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "unit",
+            "description": "Unit for the time after which the prices are active.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ConnectorPriceRestrictionsOverstayTimeUnit",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ConnectorPriceRestrictionsOverstayTime",
+        "description": null,
+        "fields": [
+          {
+            "name": "minimum",
+            "description": "Time at which the overstay prices are active.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Time at which the overstay prices are inactive.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "unit",
+            "description": "Unit for the time after which the prices are active.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ConnectorPriceRestrictionsOverstayTimeUnit",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ConnectorPriceRestrictionsOverstayTimeUnit",
+        "description": "The unit of time after which the overstay restrictions are applicable.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "seconds",
+            "description": "The overstay restrictions are applicable after a certain number of seconds.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minutes",
+            "description": "The overstay restrictions are applicable after a certain number of minutes.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hours",
+            "description": "The overstay restrictions are applicable after a certain number of hours.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ConnectorPriceRestrictionsReservationType",
+        "description": "Describes the cost associated with reserving a charging station.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "reservation",
+            "description": "Describes costs for a reservation.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "reservation_expires",
+            "description": "Describes costs for a reservation that expires (i.e. driver does not start a charging session before expiry date of the reservation).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -10119,18 +11010,6 @@
             "deprecationReason": null
           },
           {
-            "name": "elevation",
-            "description": "Current elevation.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ElevationInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "departure_time",
             "description": "Route departure time.",
             "type": {
@@ -10974,6 +11853,59 @@
       },
       {
         "kind": "ENUM",
+        "name": "DayOfWeek",
+        "description": "Represents a day of the week.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "monday",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tuesday",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wednesday",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "thursday",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "friday",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "saturday",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sunday",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "DimensionUnit",
         "description": null,
         "fields": null,
@@ -11363,13 +12295,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -11977,12 +12905,12 @@
       },
       {
         "kind": "OBJECT",
-        "name": "FluidEmissions",
+        "name": "FluidEndOfLifeEmissions",
         "description": null,
         "fields": [
           {
             "name": "total",
-            "description": "Total fluid emissions.",
+            "description": "Total fluid end of life emissions.",
             "args": [
               {
                 "name": "unit",
@@ -12011,7 +12939,7 @@
           },
           {
             "name": "wiper",
-            "description": "Wiper fluid maintenance emissions.",
+            "description": "Wiper fluid end of life emissions.",
             "args": [
               {
                 "name": "unit",
@@ -12040,7 +12968,7 @@
           },
           {
             "name": "brake",
-            "description": "Brake fluid maintenance emissions.",
+            "description": "Brake fluid end of life emissions.",
             "args": [
               {
                 "name": "unit",
@@ -12069,7 +12997,7 @@
           },
           {
             "name": "powertrain_coolant",
-            "description": "Powertrain coolant fluid maintenance emissions.",
+            "description": "Powertrain coolant fluid end of life emissions.",
             "args": [
               {
                 "name": "unit",
@@ -12098,7 +13026,7 @@
           },
           {
             "name": "transmission",
-            "description": "Transmission fluid maintenance emissions.",
+            "description": "Transmission fluid end of life emissions.",
             "args": [
               {
                 "name": "unit",
@@ -12127,7 +13055,7 @@
           },
           {
             "name": "motor_oil",
-            "description": "Motor oil maintenance emissions.",
+            "description": "Motor oil end of life emissions.",
             "args": [
               {
                 "name": "unit",
@@ -12145,6 +13073,109 @@
             "type": {
               "kind": "SCALAR",
               "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "FluidMaintenanceEmissions",
+        "description": null,
+        "fields": [
+          {
+            "name": "total",
+            "description": "Total fluid maintenance emissions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "wiper",
+            "description": "Wiper fluid maintenance emissions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "brake",
+            "description": "Brake fluid maintenance emissions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "powertrain_coolant",
+            "description": "Powertrain coolant fluid maintenance emissions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "transmission",
+            "description": "Transmission fluid maintenance emissions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "motor_oil",
+            "description": "Motor oil maintenance emissions.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteOperationalMaintenanceEmissionsField",
               "ofType": null
             },
             "isDeprecated": false,
@@ -17033,6 +18064,65 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "Odometer",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Value of the vehicle's odometer.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of the value of the vehicle's odometer.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "DistanceUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "source",
+            "description": "Source of inputted data.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "TelemetryInputSource",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "OdometerInput",
         "description": null,
@@ -17353,6 +18443,35 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "OperatorRankingLevel",
+        "description": "Operator ranking level.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "low",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "medium",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "high",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "OutsideTempInput",
         "description": null,
@@ -17397,65 +18516,6 @@
               "kind": "ENUM",
               "name": "TelemetryInputSource",
               "ofType": null
-            },
-            "defaultValue": "manual",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "OutsideTemperatureInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "value",
-            "description": "Value of the outside temperature.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "type",
-            "description": "Type of the value of the outside temperature.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TemperatureUnit",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "source",
-            "description": "Source of inputted data.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -18858,7 +19918,7 @@
               },
               {
                 "name": "route_details_id",
-                "description": "ID of the route details for which we retrieve the emissions profile. If not provided, we will retrieve the recommended route details.",
+                "description": "ID of the route details for which we retrieve the emissions profile.",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -18887,7 +19947,7 @@
           },
           {
             "name": "routeEmissions",
-            "description": "[BETA] Emissions profile for route.",
+            "description": "Emissions profile for route.",
             "args": [
               {
                 "name": "route_id",
@@ -19256,75 +20316,6 @@
                 "name": "OCPITariff",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "navigationMapping",
-            "description": "Deprecated: This query will be removed in favor of navigation query and subscription. Mapping can be retrieved via the instructions field.",
-            "args": [
-              {
-                "name": "id",
-                "description": "ID of a route that needs to be mapped to navigation service provider specific format",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "provider",
-                "description": "Navigation service provider",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "MappingProvider",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "precision",
-                "description": "Number of decimals used for Google Polyline encoding Algorithm. Allowed values are 5 or 6.",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": "5",
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "language",
-                "description": "Preferred language.",
-                "type": {
-                  "kind": "ENUM",
-                  "name": "MappingLanguage",
-                  "ofType": null
-                },
-                "defaultValue": "en",
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "SCALAR",
-              "name": "JSON",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -22038,6 +23029,18 @@
         "description": null,
         "fields": [
           {
+            "name": "id",
+            "description": "ID of the feature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": "Feature type.",
             "args": [],
@@ -22093,6 +23096,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "id",
+            "description": "ID of the feature.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "type",
             "description": "Feature type.",
@@ -22227,38 +23242,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "type",
-            "description": "Type of a computed route.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "RouteDetailsType",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "connectors",
-            "description": "Aggregation of the connectors.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RouteDetailsConnectors",
                 "ofType": null
               }
             },
@@ -22645,143 +23628,9 @@
             "description": "Ranking of an operator.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "ENUM",
+              "name": "OperatorRankingLevel",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "RouteDetailsConnectors",
-        "description": "Aggregation of the connectors on a route.",
-        "fields": [
-          {
-            "name": "all",
-            "description": "Aggregation of every connector on a route.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RouteDetailsConnectorsValues",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "usable",
-            "description": "Aggregation of every usable connector on a route.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RouteDetailsConnectorsValues",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "RouteDetailsConnectorsValues",
-        "description": "Aggregation of the connectors on a route by status.",
-        "fields": [
-          {
-            "name": "total",
-            "description": "Total numbers of connectors.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "available",
-            "description": "Number of connectors with status available.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "occupied",
-            "description": "Number of connectors with status occupied.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "unknown",
-            "description": "Number of connectors with status unknown.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "out_of_order",
-            "description": "Number of connectors with status out of order.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -23345,22 +24194,6 @@
             "deprecationReason": null
           },
           {
-            "name": "connectors",
-            "description": "Aggregation of the connectors on the leg.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RouteDetailsConnectors",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "polyline",
             "description": "Polyline containing encoded coordinates.",
             "args": [
@@ -23477,6 +24310,18 @@
         "description": null,
         "fields": [
           {
+            "name": "id",
+            "description": "ID of the feature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": "Feature type.",
             "args": [],
@@ -23586,7 +24431,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "Float",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -24069,6 +24914,18 @@
         "description": null,
         "fields": [
           {
+            "name": "id",
+            "description": "ID of the feature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": "Feature type.",
             "args": [],
@@ -24250,47 +25107,7 @@
             "deprecationReason": null
           },
           {
-            "name": "station_name",
-            "description": "Name of a station.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "operator_id",
-            "description": "ID of an operator.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "operator_name",
-            "description": "Name of an operator.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "evse_uid",
+            "name": "evse_id",
             "description": "ID of the EVSE that was selected in a route.",
             "args": [],
             "type": {
@@ -24306,28 +25123,12 @@
             "description": "ID of the connector that was selected in a route.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "amenities",
-            "description": "List of amenities present at the station.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "AmenityType",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -24813,35 +25614,6 @@
           },
           {
             "name": "crossborder",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "RouteDetailsType",
-        "description": "Types of a route.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "fastest",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "best_matching",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "alternative",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -25445,7 +26217,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "FluidEmissions",
+                "name": "FluidEndOfLifeEmissions",
                 "ofType": null
               }
             },
@@ -28600,26 +29372,13 @@
           {
             "name": "total",
             "description": "Total maintenance emissions.",
-            "args": [
-              {
-                "name": "unit",
-                "description": "Emission unit.",
-                "type": {
-                  "kind": "ENUM",
-                  "name": "EmissionUnit",
-                  "ofType": null
-                },
-                "defaultValue": "gram",
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
+            "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
                 "ofType": null
               }
             },
@@ -28635,7 +29394,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "FluidEmissions",
+                "name": "FluidMaintenanceEmissions",
                 "ofType": null
               }
             },
@@ -28645,26 +29404,13 @@
           {
             "name": "battery",
             "description": "Battery related maintenance emissions.",
-            "args": [
-              {
-                "name": "unit",
-                "description": "Emission unit.",
-                "type": {
-                  "kind": "ENUM",
-                  "name": "EmissionUnit",
-                  "ofType": null
-                },
-                "defaultValue": "gram",
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
+            "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
                 "ofType": null
               }
             },
@@ -28674,26 +29420,13 @@
           {
             "name": "tires",
             "description": "Tire related maintenance emissions.",
-            "args": [
-              {
-                "name": "unit",
-                "description": "Emission unit.",
-                "type": {
-                  "kind": "ENUM",
-                  "name": "EmissionUnit",
-                  "ofType": null
-                },
-                "defaultValue": "gram",
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
+            "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
                 "ofType": null
               }
             },
@@ -28703,6 +29436,49 @@
           {
             "name": "components",
             "description": "Miscellaneous component maintenance emissions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "repair",
+            "description": "Accident repair related maintenance emissions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteOperationalMaintenanceEmissionsField",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteOperationalMaintenanceEmissionsField",
+        "description": null,
+        "fields": [
+          {
+            "name": "total",
+            "description": "Total emissions.",
             "args": [
               {
                 "name": "unit",
@@ -28730,8 +29506,37 @@
             "deprecationReason": null
           },
           {
-            "name": "repair",
-            "description": "Accident repair related maintenance emissions.",
+            "name": "production",
+            "description": "Emissions from replacement production and transport.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Emission unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "EmissionUnit",
+                  "ofType": null
+                },
+                "defaultValue": "gram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "disposal",
+            "description": "Emissions from disposal.",
             "args": [
               {
                 "name": "unit",
@@ -28769,18 +29574,6 @@
         "name": "RouteOperatorPreferences",
         "description": null,
         "fields": [
-          {
-            "name": "type",
-            "description": "Flag indicating if an operator should be preferred or required.",
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "RouteOperatorsType",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "ranking",
             "description": "Ranking of an operator with multiple levels, each level having its own penalty value.",
@@ -28826,22 +29619,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "type",
-            "description": "Flag indicating if the operators ranking should be preferred or required.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "RouteOperatorsType",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "ranking",
             "description": "Ranking of an operator with multiple levels, each level having its own penalty value.",
             "type": {
@@ -28884,8 +29661,86 @@
         "description": null,
         "fields": [
           {
-            "name": "level_one",
-            "description": "Level one (most significant) for operator ranking.",
+            "name": "type",
+            "description": "Flag indicating if an operator should be preferred or required.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteOperatorsType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "levels",
+            "description": "Ranking levels for operator ranking.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteOperatorPreferencesRankingLevels",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RouteOperatorPreferencesRankingInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "type",
+            "description": "Flag indicating if the operators ranking should be preferred or required.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteOperatorsType",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "levels",
+            "description": "Ranking levels for operator ranking.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RouteOperatorPreferencesRankingLevelsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteOperatorPreferencesRankingLevels",
+        "description": null,
+        "fields": [
+          {
+            "name": "low",
+            "description": "Least significant level for operators ranking.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -28904,8 +29759,8 @@
             "deprecationReason": null
           },
           {
-            "name": "level_two",
-            "description": "Level two for operator ranking.",
+            "name": "medium",
+            "description": "Medium level for operators ranking.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -28924,148 +29779,8 @@
             "deprecationReason": null
           },
           {
-            "name": "level_three",
-            "description": "Level three for operator ranking.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RouteOperatorsValue",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_four",
-            "description": "Level four for operator ranking.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RouteOperatorsValue",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_five",
-            "description": "Level five for operator ranking.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RouteOperatorsValue",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_six",
-            "description": "Level six for operator ranking.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RouteOperatorsValue",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_seven",
-            "description": "Level seven for operator ranking.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RouteOperatorsValue",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_eight",
-            "description": "Level eight for operator ranking.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RouteOperatorsValue",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_nine",
-            "description": "Level nine for operator ranking.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RouteOperatorsValue",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_ten",
-            "description": "Level ten for operator ranking.",
+            "name": "high",
+            "description": "Most significant level for operator ranking.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -29091,13 +29806,13 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "RouteOperatorPreferencesRankingInput",
+        "name": "RouteOperatorPreferencesRankingLevelsInput",
         "description": null,
         "fields": null,
         "inputFields": [
           {
-            "name": "level_one",
-            "description": "Level one (most significant) for operator ranking.",
+            "name": "low",
+            "description": "Least significant level for operator ranking.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -29116,8 +29831,8 @@
             "deprecationReason": null
           },
           {
-            "name": "level_two",
-            "description": "Level two for operator ranking.",
+            "name": "medium",
+            "description": "Medium level for operator ranking.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -29136,148 +29851,8 @@
             "deprecationReason": null
           },
           {
-            "name": "level_three",
-            "description": "Level three for operator ranking.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "RouteOperatorsValueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_four",
-            "description": "Level four for operator ranking.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "RouteOperatorsValueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_five",
-            "description": "Level five for operator ranking.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "RouteOperatorsValueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_six",
-            "description": "Level six for operator ranking.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "RouteOperatorsValueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_seven",
-            "description": "Level seven for operator ranking.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "RouteOperatorsValueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_eight",
-            "description": "Level eight for operator ranking.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "RouteOperatorsValueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_nine",
-            "description": "Level nine for operator ranking.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "RouteOperatorsValueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "level_ten",
-            "description": "Level ten (least significant) for operator ranking.",
+            "name": "high",
+            "description": "Most significant level three for operator ranking.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -29796,7 +30371,7 @@
           },
           {
             "name": "countries",
-            "description": "List of country codes.",
+            "description": "List of countries in which the operator should be preferred/excluded. When omitted the operator will be preferred/excluded in every country.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -29844,25 +30419,21 @@
           },
           {
             "name": "countries",
-            "description": "List of countries in which the operator should be excluded. When not specified the operator will be excluded in every country.",
+            "description": "List of countries in which the operator should be preferred/excluded. When omitted the operator will be preferred/excluded in every country.",
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "LIST",
+                "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "CountryCodeAlpha2",
-                    "ofType": null
-                  }
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -29876,6 +30447,18 @@
         "name": "RouteOriginFeaturePoint",
         "description": null,
         "fields": [
+          {
+            "name": "id",
+            "description": "ID of the feature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "type",
             "description": "Feature type.",
@@ -29932,6 +30515,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "id",
+            "description": "ID of the feature.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "type",
             "description": "Feature type.",
@@ -30040,18 +30635,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RoutePropertiesVehicleInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "station",
-            "description": "Station data at the origin location.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "RoutePropertiesStationInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30207,62 +30790,6 @@
               "kind": "SCALAR",
               "name": "Int",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "temperature",
-            "description": "Temperature.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "air_pressure",
-            "description": "Air pressure.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "solar_irradiance",
-            "description": "Solar irradiance.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "country",
-            "description": "Country.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "CountryCodeAlpha2",
-                  "ofType": null
-                }
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -31008,8 +31535,8 @@
             "description": "Value of the vehicle's odometer.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Float",
+              "kind": "OBJECT",
+              "name": "Odometer",
               "ofType": null
             },
             "isDeprecated": false,
@@ -31303,7 +31830,7 @@
             "description": "Battery temperature.",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "BatteryTemperatureInput",
+              "name": "TemperatureInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -31981,11 +32508,23 @@
             "deprecationReason": null
           },
           {
+            "name": "motor_rpm",
+            "description": "Revolutions per minute of the motor, a measure of the rotational speed of the motor's rotor component.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "outside_temperature",
             "description": "Outside temperature.",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "OutsideTemperatureInput",
+              "name": "TemperatureInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -32332,6 +32871,18 @@
         "description": null,
         "fields": [
           {
+            "name": "id",
+            "description": "ID of the feature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": "Feature type.",
             "args": [],
@@ -32387,6 +32938,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "id",
+            "description": "ID of the feature.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "type",
             "description": "Feature type.",
@@ -32446,13 +33009,9 @@
             "description": "Location data of the via point.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RoutePropertiesLocation",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "RoutePropertiesLocation",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -32462,13 +33021,9 @@
             "description": "Vehicle data of the via point.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RoutePropertiesVehicle",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "RoutePropertiesVehicle",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -32478,13 +33033,9 @@
             "description": "Station data of the via point.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RoutePropertiesStation",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "RoutePropertiesStation",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -32505,13 +33056,9 @@
             "name": "location",
             "description": "Location data of the via point.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "RoutePropertiesLocationInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "RoutePropertiesLocationInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -32521,13 +33068,9 @@
             "name": "vehicle",
             "description": "Vehicle data of the via point.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "RoutePropertiesVehicleInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "RoutePropertiesVehicleInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -32537,13 +33080,9 @@
             "name": "station",
             "description": "Station data of the via point.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "RoutePropertiesStationInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "RoutePropertiesStationInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -33361,8 +33900,8 @@
               "name": "JSON",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "No longer used."
           },
           {
             "name": "realtime",
@@ -35741,22 +36280,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "source",
-            "description": "Source of inputted data.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -35799,22 +36322,6 @@
               }
             },
             "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "source",
-            "description": "Source of inputted data.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
-            },
-            "defaultValue": "manual",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -43323,41 +43830,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "VehicleStatus",
-        "description": "Status of a vehicle.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "draft",
-            "description": "Is being reviewed by a human operator.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "public",
-            "description": "Is public and can be used by a customer.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "private",
-            "description": "Is private and can be used by a human operator.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "archived",
-            "description": "Is archived and can not be used.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "VehicleToEverything",
         "description": null,
@@ -44571,6 +45043,54 @@
         "args": [
           {
             "name": "unitParameterName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "defaultValue",
+        "description": null,
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "type",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "defaultValue",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "PlainString",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
             "description": null,
             "type": {
               "kind": "SCALAR",

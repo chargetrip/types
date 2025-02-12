@@ -219,7 +219,7 @@ export type BatteryTemperatureInput = {
   /** Type of temperature of the battery. */
   type: TemperatureUnit;
   /** Source of inputted data, defaults to 'manual'. */
-  source?: TelemetryInputSource;
+  source?: Maybe<TelemetryInputSource>;
 };
 
 /** Deprecated: In favour of Vehicle. */
@@ -1791,8 +1791,13 @@ export type Connector = {
   properties?: Maybe<Scalars["JSON"]>;
   /** List of valid charging tariffs. */
   tariff?: Maybe<Array<Maybe<OCPITariff>>>;
-  /** Charging prices. */
+  /**
+   * Charging prices.
+   * @deprecated In favor of prices.
+   */
   pricing?: Maybe<Pricing>;
+  /** Dynamic charging prices. */
+  prices?: Maybe<Array<ConnectorPrice>>;
   /** Custom properties of a connector. These are vendor specific and will return null values on the fields that are not supported by your station database. */
   custom_properties?: Maybe<ConnectorCustomProperties>;
 };
@@ -1801,12 +1806,195 @@ export type Connector = {
 export type ConnectorCustomProperties = {
   /**
    * Charging prices.
-   * @deprecated In favor of connector.pricing
+   * @deprecated In favor of connector.prices.
    */
   pricing?: Maybe<Pricing>;
   /** Custom connector properties for OICP databases. Station databases that not follow the OICP standard return null values. */
   oicp?: Maybe<OICPConnectorCustomProperties>;
 };
+
+/** Connector charging price. */
+export type ConnectorPrice = {
+  /** ID for the price. */
+  external_id: Scalars["String"];
+  /** Owner of the payment product. */
+  partner?: Maybe<Scalars["String"]>;
+  /** ID for the owner of the payment product. */
+  partner_id: Scalars["String"];
+  /** Payment product. */
+  product: ConnectorPriceProduct;
+  /** Price product elements. */
+  elements: Array<ConnectorPriceElement>;
+  /** Indicates when the pricing data was last updated. The date is in ISO 8601 standard and the time zone is UTC. The update could be a price update or any other update (for example, pricing type update). */
+  last_updated?: Maybe<Scalars["DateTime"]>;
+};
+
+export type ConnectorPriceElement = {
+  /** Connector price element components. */
+  components: Array<ConnectorPriceElementComponent>;
+  /** Connector price element restrictions. */
+  restrictions?: Maybe<ConnectorPriceElementRestrictions>;
+};
+
+export type ConnectorPriceElementComponent = {
+  /** Type of pricing that is applicable. */
+  type: ConnectorPriceElementComponentType;
+  /** Applicable price excluding VAT. */
+  price_excl_vat: Scalars["Float"];
+  /** Applicable VAT. */
+  vat: Scalars["Float"];
+  /**
+   * 	Indicates the minimum amount that is billed. A
+   * unit is billed in step-size blocks. For example, if the type is TIME and step_size is 300, then the time is billed in blocks of 5 minutes. Hence, if 6 minutes is used, then 10 minutes (2 blocks of step_size) is billed.
+   *
+   * 	Note: step_size also depends on the type. Every type (except FLAT) defines a step_size multiplier. This is the size of every 'step' and the unit. For example, PARKING_TIME has a step-size multiplier of 1 second. Therefore, the step_size of a price component is multiplied by 1 second. Thus, step_size = 300 means 300 seconds.
+   */
+  step_size: Scalars["Int"];
+};
+
+/** Type of pricing that is applicable. */
+export enum ConnectorPriceElementComponentType {
+  /** Price per kWh. */
+  ENERGY = "energy",
+  /** Fixed price per charging session. */
+  FLAT = "flat",
+  /** Parking price per hour. This fee is applicable even if the parked car is not charging. */
+  PARKING_TIME = "parking_time",
+  /** Fixed price per hour. */
+  TIME = "time"
+}
+
+export type ConnectorPriceElementRestrictions = {
+  /** Starting time of the day for the prices. */
+  start_time?: Maybe<Scalars["String"]>;
+  /** Ending time of the day for the prices. */
+  end_time?: Maybe<Scalars["String"]>;
+  /** Starting date for the prices. */
+  start_date?: Maybe<Scalars["String"]>;
+  /** Ending date for the prices. */
+  end_date?: Maybe<Scalars["String"]>;
+  /** Minimum energy used, in kWh. */
+  minimum_kwh?: Maybe<Scalars["Float"]>;
+  /** Maximum energy used, in kWh. */
+  maximum_kwh?: Maybe<Scalars["Float"]>;
+  /** Minimum charging speed, in kW. */
+  minimum_power?: Maybe<Scalars["Float"]>;
+  /** Maximum charging speed, in kW. */
+  maximum_power?: Maybe<Scalars["Float"]>;
+  /** Sum of the minimum current (in Amperes) over all the phases. When the EV is charging with more than or equal to this value the prices are active. If the charging current is lower, this price is inactive. */
+  minimum_current?: Maybe<Scalars["Float"]>;
+  /** Sum of the maximum current (in Amperes) over all the phases. When the EV is charging with less than this value the prices are active. If the charging current is higher, this price is inactive. */
+  maximum_current?: Maybe<Scalars["Float"]>;
+  /** Minimum price based on the amount of kWh that is being delivered. */
+  minimum_price?: Maybe<Scalars["Float"]>;
+  /** Maximum price based on the amount of kWh that is being delivered. */
+  maximum_price?: Maybe<Scalars["Float"]>;
+  /** Battery percentage at which the overstay prices are active. */
+  overstay_battery_percentage?: Maybe<
+    ConnectorPriceRestrictionsOverstayBatteryPercentage
+  >;
+  /** Time after which the overstay prices are active. */
+  overstay_time?: Maybe<ConnectorPriceRestrictionsOverstayTime>;
+  /** Minimum duration, in seconds. */
+  minimum_duration?: Maybe<Scalars["Int"]>;
+  /** Maximum duration, in seconds. */
+  maximum_duration?: Maybe<Scalars["Int"]>;
+  /** Day(s) of the week that the prices are valid. */
+  day_of_week?: Maybe<Array<DayOfWeek>>;
+  /** Contract signed between the eMSP and the customer. */
+  emsp_contract_date?: Maybe<ConnectorPriceRestrictionsEmspContractDate>;
+  /**
+   * When this field is present, the ConnectorPriceElement describes reservation costs.
+   * A reservation starts when the reservation is made, and ends when the driver starts charging on the reserved EVSE/Location,
+   * or when the reservation expires. A reservation can only have: `flat` and `time` ConnectorPriceElementComponentType,
+   * where time is for the duration of the reservation.
+   *
+   * When a price has both, `reservation` and `reservation_expires` ConnectorPriceElement,
+   * where both ConnectorPriceElement have a time ConnectorPriceElementComponent,
+   * then the time based cost of an expired reservation will be calculated based on the `reservation_expires` ConnectorPriceElement.
+   */
+  reservation?: Maybe<ConnectorPriceRestrictionsReservationType>;
+};
+
+/** Payment product. */
+export type ConnectorPriceProduct = {
+  /** Name of the payment product. */
+  name: Scalars["String"];
+  /** Type of the payment product. */
+  type: ConnectorPriceProductType;
+  /** A brief description of the product. */
+  description: Scalars["String"];
+  /** Indicates the type of subscription. */
+  subscription_type: ConnectorPriceProductSubscriptionType;
+  /** Subscription price for a month or year, excluding VAT, if applicable. */
+  subscription_fee_excl_vat: Scalars["Float"];
+  /** Three-digit currency code of the country where the charging station is located. */
+  currency: CurrencyUnit;
+};
+
+/** Type of the payment product. */
+export enum ConnectorPriceProductSubscriptionType {
+  /** The subscription fee is applicable every month. */
+  MONTHLY = "monthly",
+  /** The subscription fee is applicable every year. */
+  YEARLY = "yearly",
+  /** An initial fee is applicable to purchase a RFID card or chip, but there isn't a recurring subscription fee. */
+  ONE_OFF = "one_off",
+  /** The product doesn’t have a subscription option. */
+  NOT_APPLICABLE = "not_applicable"
+}
+
+/** Type of the payment product. */
+export enum ConnectorPriceProductType {
+  AD_HOC = "ad_hoc",
+  MSP = "msp",
+  CPO_SUBSCRIPTION = "cpo_subscription"
+}
+
+export type ConnectorPriceRestrictionsEmspContractDate = {
+  /** Name of the contract signed between the eMSP and a customer. */
+  name?: Maybe<Scalars["String"]>;
+  /** Prices are active from this date, which is based on the contract signed between the eMSP and a customer. */
+  from?: Maybe<Scalars["String"]>;
+  /** Prices are active until this date, which is based on the contract signed between the eMSP and a customer. */
+  to?: Maybe<Scalars["String"]>;
+};
+
+export type ConnectorPriceRestrictionsOverstayBatteryPercentage = {
+  /** Battery percentage at which the overstay prices are active. */
+  minimum?: Maybe<Scalars["Int"]>;
+  /** Battery percentage at which the overstay prices are inactive. */
+  maximum?: Maybe<Scalars["Int"]>;
+  /** Unit for the time after which the prices are active. */
+  unit?: Maybe<ConnectorPriceRestrictionsOverstayTimeUnit>;
+};
+
+export type ConnectorPriceRestrictionsOverstayTime = {
+  /** Time at which the overstay prices are active. */
+  minimum?: Maybe<Scalars["Int"]>;
+  /** Time at which the overstay prices are inactive. */
+  maximum?: Maybe<Scalars["Int"]>;
+  /** Unit for the time after which the prices are active. */
+  unit?: Maybe<ConnectorPriceRestrictionsOverstayTimeUnit>;
+};
+
+/** The unit of time after which the overstay restrictions are applicable. */
+export enum ConnectorPriceRestrictionsOverstayTimeUnit {
+  /** The overstay restrictions are applicable after a certain number of seconds. */
+  SECONDS = "seconds",
+  /** The overstay restrictions are applicable after a certain number of minutes. */
+  MINUTES = "minutes",
+  /** The overstay restrictions are applicable after a certain number of hours. */
+  HOURS = "hours"
+}
+
+/** Describes the cost associated with reserving a charging station. */
+export enum ConnectorPriceRestrictionsReservationType {
+  /** Describes costs for a reservation. */
+  RESERVATION = "reservation",
+  /** Describes costs for a reservation that expires (i.e. driver does not start a charging session before expiry date of the reservation). */
+  RESERVATION_EXPIRES = "reservation_expires"
+}
 
 /** The socket or plug standard of the charging point. */
 export enum ConnectorType {
@@ -2231,8 +2419,6 @@ export type CreateRouteInput = {
   season?: Maybe<RouteSeason>;
   /** Alternative stations along a route within a specified radius in meters (minimum 500, maximum 5000). */
   alternative_station_radius?: Maybe<Scalars["Int"]>;
-  /** Current elevation. */
-  elevation?: Maybe<ElevationInput>;
   /** Route departure time. */
   departure_time?: Maybe<Scalars["DateTime"]>;
 };
@@ -2378,6 +2564,17 @@ export enum CurrencyUnit {
   ZMW = "ZMW"
 }
 
+/** Represents a day of the week. */
+export enum DayOfWeek {
+  MONDAY = "monday",
+  TUESDAY = "tuesday",
+  WEDNESDAY = "wednesday",
+  THURSDAY = "thursday",
+  FRIDAY = "friday",
+  SATURDAY = "saturday",
+  SUNDAY = "sunday"
+}
+
 export enum DimensionUnit {
   /** Return the dimension in meters. */
   METER = "meter",
@@ -2457,7 +2654,7 @@ export type ElevationInput = {
   /** Type of the value of elevation. */
   type: DistanceUnit;
   /** Source of inputted data, defaults to 'manual'. */
-  source?: TelemetryInputSource;
+  source?: Maybe<TelemetryInputSource>;
 };
 
 export enum ElevationUnit {
@@ -2582,43 +2779,58 @@ export enum FeatureType {
   FEATURE = "Feature"
 }
 
-export type FluidEmissions = {
-  /** Total fluid emissions. */
+export type FluidEndOfLifeEmissions = {
+  /** Total fluid end of life emissions. */
   total: Scalars["Float"];
-  /** Wiper fluid maintenance emissions. */
+  /** Wiper fluid end of life emissions. */
   wiper: Scalars["Float"];
-  /** Brake fluid maintenance emissions. */
+  /** Brake fluid end of life emissions. */
   brake: Scalars["Float"];
-  /** Powertrain coolant fluid maintenance emissions. */
+  /** Powertrain coolant fluid end of life emissions. */
   powertrain_coolant: Scalars["Float"];
-  /** Transmission fluid maintenance emissions. */
+  /** Transmission fluid end of life emissions. */
   transmission: Scalars["Float"];
-  /** Motor oil maintenance emissions. */
+  /** Motor oil end of life emissions. */
   motor_oil?: Maybe<Scalars["Float"]>;
 };
 
-export type FluidEmissionstotalArgs = {
+export type FluidEndOfLifeEmissionstotalArgs = {
   unit?: Maybe<EmissionUnit>;
 };
 
-export type FluidEmissionswiperArgs = {
+export type FluidEndOfLifeEmissionswiperArgs = {
   unit?: Maybe<EmissionUnit>;
 };
 
-export type FluidEmissionsbrakeArgs = {
+export type FluidEndOfLifeEmissionsbrakeArgs = {
   unit?: Maybe<EmissionUnit>;
 };
 
-export type FluidEmissionspowertrain_coolantArgs = {
+export type FluidEndOfLifeEmissionspowertrain_coolantArgs = {
   unit?: Maybe<EmissionUnit>;
 };
 
-export type FluidEmissionstransmissionArgs = {
+export type FluidEndOfLifeEmissionstransmissionArgs = {
   unit?: Maybe<EmissionUnit>;
 };
 
-export type FluidEmissionsmotor_oilArgs = {
+export type FluidEndOfLifeEmissionsmotor_oilArgs = {
   unit?: Maybe<EmissionUnit>;
+};
+
+export type FluidMaintenanceEmissions = {
+  /** Total fluid maintenance emissions. */
+  total: RouteOperationalMaintenanceEmissionsField;
+  /** Wiper fluid maintenance emissions. */
+  wiper: RouteOperationalMaintenanceEmissionsField;
+  /** Brake fluid maintenance emissions. */
+  brake: RouteOperationalMaintenanceEmissionsField;
+  /** Powertrain coolant fluid maintenance emissions. */
+  powertrain_coolant: RouteOperationalMaintenanceEmissionsField;
+  /** Transmission fluid maintenance emissions. */
+  transmission: RouteOperationalMaintenanceEmissionsField;
+  /** Motor oil maintenance emissions. */
+  motor_oil?: Maybe<RouteOperationalMaintenanceEmissionsField>;
 };
 
 export enum FuelConsumptionUnit {
@@ -3714,6 +3926,15 @@ export enum OICPValueAddedServices {
   NONE = "none"
 }
 
+export type Odometer = {
+  /** Value of the vehicle's odometer. */
+  value: Scalars["Float"];
+  /** Type of the value of the vehicle's odometer. */
+  type: DistanceUnit;
+  /** Source of inputted data. */
+  source: TelemetryInputSource;
+};
+
 export type OdometerInput = {
   /** Value of the vehicle's odometer. */
   value: Scalars["Float"];
@@ -3772,6 +3993,13 @@ export type OperatorListQuery = {
   country?: Maybe<Scalars["String"]>;
 };
 
+/** Operator ranking level. */
+export enum OperatorRankingLevel {
+  LOW = "low",
+  MEDIUM = "medium",
+  HIGH = "high"
+}
+
 export type OutsideTempInput = {
   /** Value of the outside temperature. */
   value: Scalars["Float"];
@@ -3779,15 +4007,6 @@ export type OutsideTempInput = {
   type: TemperatureUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
-};
-
-export type OutsideTemperatureInput = {
-  /** Value of the outside temperature. */
-  value: Scalars["Float"];
-  /** Type of the value of the outside temperature. */
-  type: TemperatureUnit;
-  /** Source of inputted data. */
-  source?: TelemetryInputSource;
 };
 
 export enum ParkingCost {
@@ -3982,7 +4201,7 @@ export type Query = {
   getRoute: RouteResponse;
   /** [BETA] Get emissions for a route. */
   getRouteEmissions: RouteDetailsEmissions;
-  /** [BETA] Emissions profile for route. */
+  /** Emissions profile for route. */
   routeEmissions: RouteEmissions;
   /** Retrieve information about a route path segment */
   routePath?: Maybe<RoutePath>;
@@ -3998,8 +4217,6 @@ export type Query = {
   tariff?: Maybe<OCPITariff>;
   /** Get the full list of tariffs. */
   tariffList?: Maybe<Array<Maybe<OCPITariff>>>;
-  /** Deprecated: This query will be removed in favor of navigation query and subscription. Mapping can be retrieved via the instructions field. */
-  navigationMapping?: Maybe<Scalars["JSON"]>;
   /** Get information about a vehicle by its ID. */
   vehicle?: Maybe<Vehicle>;
   /** Vehicle premium data provides even more information about your vehicle: tire pressure, prices, drivetrain data, and more. Please contact us for access to premium data. */
@@ -4126,13 +4343,6 @@ export type QuerytariffArgs = {
 export type QuerytariffListArgs = {
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
-};
-
-export type QuerynavigationMappingArgs = {
-  id: Scalars["ID"];
-  provider: MappingProvider;
-  precision?: Maybe<Scalars["Int"]>;
-  language?: Maybe<MappingLanguage>;
 };
 
 export type QueryvehicleArgs = {
@@ -4646,6 +4856,8 @@ export type RouteApp = {
 };
 
 export type RouteDestinationFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
@@ -4655,6 +4867,8 @@ export type RouteDestinationFeaturePoint = {
 };
 
 export type RouteDestinationFeaturePointInput = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
@@ -4680,10 +4894,6 @@ export type RouteDestinationPropertiesInput = {
 export type RouteDetails = {
   /** ID of a route computation. */
   id: Scalars["ID"];
-  /** Type of a computed route. */
-  type: RouteDetailsType;
-  /** Aggregation of the connectors. */
-  connectors: RouteDetailsConnectors;
   /** Total distance of a route. */
   distance: Scalars["Float"];
   /** Aggregation of all durations of a route. */
@@ -4739,29 +4949,7 @@ export type RouteDetailsAlternativeStation = {
   /** Status of a station. */
   status: ChargerStatus;
   /** Ranking of an operator. */
-  operator_ranking?: Maybe<Scalars["Int"]>;
-};
-
-/** Aggregation of the connectors on a route. */
-export type RouteDetailsConnectors = {
-  /** Aggregation of every connector on a route. */
-  all: RouteDetailsConnectorsValues;
-  /** Aggregation of every usable connector on a route. */
-  usable: RouteDetailsConnectorsValues;
-};
-
-/** Aggregation of the connectors on a route by status. */
-export type RouteDetailsConnectorsValues = {
-  /** Total numbers of connectors. */
-  total: Scalars["Int"];
-  /** Number of connectors with status available. */
-  available: Scalars["Int"];
-  /** Number of connectors with status occupied. */
-  occupied: Scalars["Int"];
-  /** Number of connectors with status unknown. */
-  unknown: Scalars["Int"];
-  /** Number of connectors with status out of order. */
-  out_of_order: Scalars["Int"];
+  operator_ranking?: Maybe<OperatorRankingLevel>;
 };
 
 /** Aggregation of all durations of a route. */
@@ -4848,8 +5036,6 @@ export type RouteDetailsLeg = {
   name?: Maybe<Scalars["String"]>;
   /** Information about the station at the origin of this leg. */
   station?: Maybe<RouteDetailsLegStation>;
-  /** Aggregation of the connectors on the leg. */
-  connectors: RouteDetailsConnectors;
   /** Polyline containing encoded coordinates. */
   polyline: Scalars["String"];
   /** Aggregation of tags over the current leg. Tags are further subdivided over individual sections and maneuvers. */
@@ -4886,6 +5072,8 @@ export type RouteDetailsLegpolylineArgs = {
 };
 
 export type RouteDetailsLegFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
@@ -4902,7 +5090,7 @@ export type RouteDetailsLegFeatureProperties = {
   /** External ID of the station. */
   external_station_id?: Maybe<Scalars["ID"]>;
   /** Temperature at the location. */
-  temperature?: Maybe<Scalars["Float"]>;
+  temperature?: Maybe<Scalars["Int"]>;
   /** Air pressure at the location. */
   air_pressure?: Maybe<Scalars["Float"]>;
   /** Solar irradiance at the location. */
@@ -4990,6 +5178,8 @@ export type RouteDetailsLegSectiondistanceArgs = {
 };
 
 export type RouteDetailsLegSectionFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
@@ -5025,18 +5215,10 @@ export enum RouteDetailsLegSectionType {
 export type RouteDetailsLegStation = {
   /** ID of a station. */
   station_id: Scalars["ID"];
-  /** Name of a station. */
-  station_name?: Maybe<Scalars["String"]>;
-  /** ID of an operator. */
-  operator_id: Scalars["ID"];
-  /** Name of an operator. */
-  operator_name?: Maybe<Scalars["String"]>;
   /** ID of the EVSE that was selected in a route. */
-  evse_uid?: Maybe<Scalars["ID"]>;
+  evse_id?: Maybe<Scalars["ID"]>;
   /** ID of the connector that was selected in a route. */
-  connector_id?: Maybe<Scalars["ID"]>;
-  /** List of amenities present at the station. */
-  amenities?: Maybe<Array<AmenityType>>;
+  connector_id: Scalars["ID"];
 };
 
 /** Type of a leg. */
@@ -5129,13 +5311,6 @@ export enum RouteDetailsTag {
   FERRY = "ferry",
   WALKING = "walking",
   CROSSBORDER = "crossborder"
-}
-
-/** Types of a route. */
-export enum RouteDetailsType {
-  FASTEST = "fastest",
-  BEST_MATCHING = "best_matching",
-  ALTERNATIVE = "alternative"
 }
 
 export type RouteEmbeddedEmissions = {
@@ -5253,7 +5428,7 @@ export type RouteEndOfLifeEmissions = {
   /** Total end of life emissions. */
   total: Scalars["Float"];
   /** Fluid related end of life emissions. */
-  fluids: FluidEmissions;
+  fluids: FluidEndOfLifeEmissions;
   /** Battery related end of life emissions. */
   battery: Scalars["Float"];
   /** Tire related end of life emissions. */
@@ -5860,42 +6035,41 @@ export type RouteOperationalInfrastructureEmissionsmaintenanceArgs = {
 
 export type RouteOperationalMaintenanceEmissions = {
   /** Total maintenance emissions. */
-  total: Scalars["Float"];
+  total: RouteOperationalMaintenanceEmissionsField;
   /** Fluid related maintenance emissions. */
-  fluids: FluidEmissions;
+  fluids: FluidMaintenanceEmissions;
   /** Battery related maintenance emissions. */
-  battery: Scalars["Float"];
+  battery: RouteOperationalMaintenanceEmissionsField;
   /** Tire related maintenance emissions. */
-  tires: Scalars["Float"];
+  tires: RouteOperationalMaintenanceEmissionsField;
   /** Miscellaneous component maintenance emissions. */
-  components: Scalars["Float"];
+  components: RouteOperationalMaintenanceEmissionsField;
   /** Accident repair related maintenance emissions. */
-  repair: Scalars["Float"];
+  repair: RouteOperationalMaintenanceEmissionsField;
 };
 
-export type RouteOperationalMaintenanceEmissionstotalArgs = {
+export type RouteOperationalMaintenanceEmissionsField = {
+  /** Total emissions. */
+  total: Scalars["Float"];
+  /** Emissions from replacement production and transport. */
+  production: Scalars["Float"];
+  /** Emissions from disposal. */
+  disposal: Scalars["Float"];
+};
+
+export type RouteOperationalMaintenanceEmissionsFieldtotalArgs = {
   unit?: Maybe<EmissionUnit>;
 };
 
-export type RouteOperationalMaintenanceEmissionsbatteryArgs = {
+export type RouteOperationalMaintenanceEmissionsFieldproductionArgs = {
   unit?: Maybe<EmissionUnit>;
 };
 
-export type RouteOperationalMaintenanceEmissionstiresArgs = {
-  unit?: Maybe<EmissionUnit>;
-};
-
-export type RouteOperationalMaintenanceEmissionscomponentsArgs = {
-  unit?: Maybe<EmissionUnit>;
-};
-
-export type RouteOperationalMaintenanceEmissionsrepairArgs = {
+export type RouteOperationalMaintenanceEmissionsFielddisposalArgs = {
   unit?: Maybe<EmissionUnit>;
 };
 
 export type RouteOperatorPreferences = {
-  /** Flag indicating if an operator should be preferred or required. */
-  type?: Maybe<RouteOperatorsType>;
   /** Ranking of an operator with multiple levels, each level having its own penalty value. */
   ranking?: Maybe<RouteOperatorPreferencesRanking>;
   /** Route operators that should be excluded. */
@@ -5904,8 +6078,6 @@ export type RouteOperatorPreferences = {
 
 /** Prioritized operators for a route calculation. */
 export type RouteOperatorPreferencesInput = {
-  /** Flag indicating if the operators ranking should be preferred or required. */
-  type: RouteOperatorsType;
   /** Ranking of an operator with multiple levels, each level having its own penalty value. */
   ranking?: Maybe<RouteOperatorPreferencesRankingInput>;
   /** Route operators that should be excluded. */
@@ -5913,49 +6085,35 @@ export type RouteOperatorPreferencesInput = {
 };
 
 export type RouteOperatorPreferencesRanking = {
-  /** Level one (most significant) for operator ranking. */
-  level_one?: Maybe<Array<RouteOperatorsValue>>;
-  /** Level two for operator ranking. */
-  level_two?: Maybe<Array<RouteOperatorsValue>>;
-  /** Level three for operator ranking. */
-  level_three?: Maybe<Array<RouteOperatorsValue>>;
-  /** Level four for operator ranking. */
-  level_four?: Maybe<Array<RouteOperatorsValue>>;
-  /** Level five for operator ranking. */
-  level_five?: Maybe<Array<RouteOperatorsValue>>;
-  /** Level six for operator ranking. */
-  level_six?: Maybe<Array<RouteOperatorsValue>>;
-  /** Level seven for operator ranking. */
-  level_seven?: Maybe<Array<RouteOperatorsValue>>;
-  /** Level eight for operator ranking. */
-  level_eight?: Maybe<Array<RouteOperatorsValue>>;
-  /** Level nine for operator ranking. */
-  level_nine?: Maybe<Array<RouteOperatorsValue>>;
-  /** Level ten for operator ranking. */
-  level_ten?: Maybe<Array<RouteOperatorsValue>>;
+  /** Flag indicating if an operator should be preferred or required. */
+  type: RouteOperatorsType;
+  /** Ranking levels for operator ranking. */
+  levels?: Maybe<RouteOperatorPreferencesRankingLevels>;
 };
 
 export type RouteOperatorPreferencesRankingInput = {
-  /** Level one (most significant) for operator ranking. */
-  level_one?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Level two for operator ranking. */
-  level_two?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Level three for operator ranking. */
-  level_three?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Level four for operator ranking. */
-  level_four?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Level five for operator ranking. */
-  level_five?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Level six for operator ranking. */
-  level_six?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Level seven for operator ranking. */
-  level_seven?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Level eight for operator ranking. */
-  level_eight?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Level nine for operator ranking. */
-  level_nine?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Level ten (least significant) for operator ranking. */
-  level_ten?: Maybe<Array<RouteOperatorsValueInput>>;
+  /** Flag indicating if the operators ranking should be preferred or required. */
+  type: RouteOperatorsType;
+  /** Ranking levels for operator ranking. */
+  levels?: Maybe<RouteOperatorPreferencesRankingLevelsInput>;
+};
+
+export type RouteOperatorPreferencesRankingLevels = {
+  /** Least significant level for operators ranking. */
+  low?: Maybe<Array<RouteOperatorsValue>>;
+  /** Medium level for operators ranking. */
+  medium?: Maybe<Array<RouteOperatorsValue>>;
+  /** Most significant level for operator ranking. */
+  high?: Maybe<Array<RouteOperatorsValue>>;
+};
+
+export type RouteOperatorPreferencesRankingLevelsInput = {
+  /** Least significant level for operator ranking. */
+  low?: Maybe<Array<RouteOperatorsValueInput>>;
+  /** Medium level for operator ranking. */
+  medium?: Maybe<Array<RouteOperatorsValueInput>>;
+  /** Most significant level three for operator ranking. */
+  high?: Maybe<Array<RouteOperatorsValueInput>>;
 };
 
 /** Prioritized operators for a route calculation. */
@@ -6039,18 +6197,20 @@ export enum RouteOperatorsType {
 export type RouteOperatorsValue = {
   /** ID of an operator. */
   id: Scalars["ID"];
-  /** List of country codes. */
+  /** List of countries in which the operator should be preferred/excluded. When omitted the operator will be preferred/excluded in every country. */
   countries?: Maybe<Array<CountryCodeAlpha2>>;
 };
 
 export type RouteOperatorsValueInput = {
   /** ID of an operator. */
   id: Scalars["ID"];
-  /** List of countries in which the operator should be excluded. When not specified the operator will be excluded in every country. */
-  countries: Array<CountryCodeAlpha2>;
+  /** List of countries in which the operator should be preferred/excluded. When omitted the operator will be preferred/excluded in every country. */
+  countries?: Maybe<Array<CountryCodeAlpha2>>;
 };
 
 export type RouteOriginFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
@@ -6060,6 +6220,8 @@ export type RouteOriginFeaturePoint = {
 };
 
 export type RouteOriginFeaturePointInput = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
@@ -6080,8 +6242,6 @@ export type RouteOriginPropertiesInput = {
   location?: Maybe<RoutePropertiesLocationInput>;
   /** Vehicle data at the origin location. */
   vehicle?: Maybe<RoutePropertiesVehicleInput>;
-  /** Station data at the origin location. */
-  station?: Maybe<RoutePropertiesStationInput>;
 };
 
 export type RoutePath = {
@@ -6110,14 +6270,6 @@ export type RoutePropertiesLocation = {
   name?: Maybe<Scalars["String"]>;
   /** Duration to stay at this point. */
   stop_duration?: Maybe<Scalars["Int"]>;
-  /** Temperature. */
-  temperature?: Maybe<Scalars["Float"]>;
-  /** Air pressure. */
-  air_pressure?: Maybe<Scalars["Float"]>;
-  /** Solar irradiance. */
-  solar_irradiance?: Maybe<Scalars["Float"]>;
-  /** Country. */
-  country?: Maybe<Array<CountryCodeAlpha2>>;
 };
 
 export type RoutePropertiesLocationInput = {
@@ -6266,7 +6418,7 @@ export type RouteVehicle = {
   /** Average tire pressures of all wheels, starting from the front side (right to left) and then to the rear. */
   tire_pressure?: Maybe<TirePressure>;
   /** Value of the vehicle's odometer. */
-  odometer?: Maybe<Scalars["Float"]>;
+  odometer?: Maybe<Odometer>;
   /** Value of the auxiliary power consumption of the vehicle. */
   auxiliary_consumption?: Maybe<AuxiliaryConsumption>;
   /** Flag which indicates if climate control is on. */
@@ -6315,7 +6467,7 @@ export type RouteVehicleBatteryInput = {
   /** Minimum battery state of charge. */
   final_state_of_charge?: Maybe<StateOfChargeInput>;
   /** Battery temperature. */
-  temperature?: Maybe<BatteryTemperatureInput>;
+  temperature?: Maybe<TemperatureInput>;
   /** Battery current in ampere. */
   current?: Maybe<Scalars["Float"]>;
   /** Battery voltage in volts. */
@@ -6423,8 +6575,10 @@ export type RouteVehicleInput = {
   heat_pump?: Maybe<HeatPumpMode>;
   /** Vehicle cabin configuration for creating the route. */
   cabin?: Maybe<RouteVehicleCabinInput>;
+  /** Revolutions per minute of the motor, a measure of the rotational speed of the motor's rotor component. */
+  motor_rpm?: Maybe<Scalars["Int"]>;
   /** Outside temperature. */
-  outside_temperature?: Maybe<OutsideTemperatureInput>;
+  outside_temperature?: Maybe<TemperatureInput>;
   /** Vehicle is in park, neutral or turned off. */
   is_parked?: Maybe<Scalars["Boolean"]>;
   /** Vehicle speed. */
@@ -6485,6 +6639,8 @@ export type RouteVehicleOperationalEmissionstotalArgs = {
 };
 
 export type RouteViaFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
@@ -6494,6 +6650,8 @@ export type RouteViaFeaturePoint = {
 };
 
 export type RouteViaFeaturePointInput = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
@@ -6504,20 +6662,20 @@ export type RouteViaFeaturePointInput = {
 
 export type RouteViaProperties = {
   /** Location data of the via point. */
-  location: RoutePropertiesLocation;
+  location?: Maybe<RoutePropertiesLocation>;
   /** Vehicle data of the via point. */
-  vehicle: RoutePropertiesVehicle;
+  vehicle?: Maybe<RoutePropertiesVehicle>;
   /** Station data of the via point. */
-  station: RoutePropertiesStation;
+  station?: Maybe<RoutePropertiesStation>;
 };
 
 export type RouteViaPropertiesInput = {
   /** Location data of the via point. */
-  location: RoutePropertiesLocationInput;
+  location?: Maybe<RoutePropertiesLocationInput>;
   /** Vehicle data of the via point. */
-  vehicle: RoutePropertiesVehicleInput;
+  vehicle?: Maybe<RoutePropertiesVehicleInput>;
   /** Station data of the via point. */
-  station: RoutePropertiesStationInput;
+  station?: Maybe<RoutePropertiesStationInput>;
 };
 
 /** Scheduled charge stop along a route. */
@@ -6663,7 +6821,10 @@ export type Station = {
   location_category?: Maybe<Scalars["String"]>;
   /** Coordinates for the location's entrances in decimal degrees. If available, there can be more than one entrances to the location. */
   entrance_for_navigation?: Maybe<Array<OCPIAdditionalGeoLocation>>;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
+  /**
+   * Optional object where you can store custom data you need in your application. This extends the current functionalities we offer.
+   * @deprecated No longer used.
+   */
   properties?: Maybe<Scalars["JSON"]>;
   /** A flag that indicates if a station has real-time information about the availability of its connectors. */
   realtime?: Maybe<Scalars["Boolean"]>;
@@ -7189,8 +7350,6 @@ export type Temperature = {
   value: Scalars["Float"];
   /** Type of temperature. */
   type: TemperatureUnit;
-  /** Source of inputted data. */
-  source: TelemetryInputSource;
 };
 
 export type TemperatureInput = {
@@ -7198,8 +7357,6 @@ export type TemperatureInput = {
   value: Scalars["Float"];
   /** Type of temperature. */
   type: TemperatureUnit;
-  /** Source of inputted data. */
-  source?: TelemetryInputSource;
 };
 
 /** Temperature unit. */
@@ -8696,18 +8853,6 @@ export type VehicleSpeedInput = {
   source?: TelemetryInputSource;
 };
 
-/** Status of a vehicle. */
-export enum VehicleStatus {
-  /** Is being reviewed by a human operator. */
-  DRAFT = "draft",
-  /** Is public and can be used by a customer. */
-  PUBLIC = "public",
-  /** Is private and can be used by a human operator. */
-  PRIVATE = "private",
-  /** Is archived and can not be used. */
-  ARCHIVED = "archived"
-}
-
 export type VehicleToEverything = {
   /** Information about Vehicle-to-Load. */
   vehicle_to_load?: Maybe<VehicleToEverythingLoad>;
@@ -8786,6 +8931,7 @@ export enum VolumeUnit {
   /** Return the volume in cubic feet. */
   CUBIC_FOOT = "cubic_foot"
 }
+
 /** Weight unit. */
 export enum WeightUnit {
   /** Return the weight in kilograms. */
