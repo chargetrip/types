@@ -1,3 +1,10 @@
+# [1.44.0](https://github.com/chargetrip/types/compare/v1.43.0...v1.44.0) (2025-02-12)
+
+
+### Features
+
+* updated read me URLs ([d0b02a5](https://github.com/chargetrip/types/commit/d0b02a56b640d3c915826f0ae9b4b8d4c665457e))
+
 # [1.43.0](https://github.com/chargetrip/types/compare/v1.42.0...v1.43.0) (2024-09-13)
 
 
