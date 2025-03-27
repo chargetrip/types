@@ -9180,4 +9180,3 @@ export enum WeightUnit {
   /** Return the weight in pounds. */
   POUND = "pound"
 }
-
