@@ -40,7 +40,9 @@
         "@semantic-release/git",
         {
           "assets": [
-            "CHANGELOG.md"
+            "CHANGELOG.md",
+            "graphql.schema.json",
+            "graphql.ts"
           ]
         }
       ],
