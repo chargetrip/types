@@ -329,6 +329,130 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "AlternativeStationRadius",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Value of the alternative station radius.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of the alternative station radius.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "DistanceUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "source",
+            "description": "Source of inputted data.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "TelemetryInputSource",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Float",
+        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "AlternativeStationRadiusInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "value",
+            "description": "Value of the alternative station radius.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of the alternative station radius.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "DistanceUnit",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "source",
+            "description": "Source of inputted data.",
+            "type": {
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
+            },
+            "defaultValue": "manual",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "Amenities",
         "description": "Amenities available near a station",
@@ -550,16 +674,6 @@
         "kind": "SCALAR",
         "name": "ID",
         "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Float",
-        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -900,13 +1014,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -6620,13 +6730,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -10871,11 +10977,11 @@
           },
           {
             "name": "alternative_station_radius",
-            "description": "Alternative stations along a route within a specified radius in meters (minimum 500, maximum 5000).",
+            "description": "Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "OBJECT",
+              "name": "AlternativeStationRadius",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10999,10 +11105,10 @@
           },
           {
             "name": "alternative_station_radius",
-            "description": "Alternative stations along a route within a specified radius in meters (minimum 500, maximum 5000).",
+            "description": "Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit.",
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "INPUT_OBJECT",
+              "name": "AlternativeStationRadiusInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11024,6 +11130,1091 @@
         ],
         "interfaces": null,
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "Currency",
+        "description": "Currency in the ISO 4217 format.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "AED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AFN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ALL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AMD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ANG",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AOA",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ARS",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AUD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AWG",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AZN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BAM",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BBD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BDT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BGN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BHD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BIF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BMD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BND",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BOB",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BRL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BSD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BTN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BWP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BYN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BYR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BZD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CAD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CDF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CHF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CLF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CLP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CNY",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "COP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CRC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CUC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CUP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CVE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CZK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DJF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DKK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DZD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "EGP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ERN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ETB",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "EUR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FJD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FKP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GBP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GEL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GGP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GHS",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GIP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GMD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GNF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GTQ",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GYD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "HKD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "HNL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "HRK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "HTG",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "HUF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IDR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ILS",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IMP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "INR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IQD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IRR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ISK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "JEP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "JMD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "JOD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "JPY",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KES",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KGS",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KHR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KMF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KPW",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KRW",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KWD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KYD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "KZT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LAK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LBP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LKR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LRD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LSL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LTL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LVL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LYD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MAD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MDL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MGA",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MKD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MMK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MNT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MOP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MRO",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MUR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MVR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MWK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MXN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MYR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MZN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NAD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NGN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NIO",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NOK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NPR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NZD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "OMR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAB",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PEN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PGK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PHP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PKR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PLN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PYG",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "QAR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RON",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RSD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RUB",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RWF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SAR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SBD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SCR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SDG",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SEK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SGD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SHP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SLL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SOS",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SRD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "STD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SVC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SYP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SZL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "THB",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TJS",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TMT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TND",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TOP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TRY",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TTD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TWD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TZS",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UAH",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UGX",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "USD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UYU",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UZS",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "VEF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "VND",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "VUV",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "WST",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XAF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XAG",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XAU",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XCD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XDR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XOF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XPF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "YER",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ZAR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ZMK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ZMW",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ZWL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XPT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XPD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BTC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ETH",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BNB",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XRP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SOL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AVAX",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MATIC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LTC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ADA",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -18164,13 +19355,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -18512,6 +19699,120 @@
           {
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
+            "type": {
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
+            },
+            "defaultValue": "manual",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "OutsideTemperature",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Value of the temperature.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of the temperature.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "TemperatureUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "source",
+            "description": "Source of inputted data.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "TelemetryInputSource",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "OutsideTemperatureInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "value",
+            "description": "Value of the outside temperature.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of the value of the outside temperature.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "TemperatureUnit",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "source",
+            "description": "Source of inputted data.",
             "type": {
               "kind": "ENUM",
               "name": "TelemetryInputSource",
@@ -22472,7 +23773,7 @@
           },
           {
             "name": "charges",
-            "description": "Number of charges along a route.",
+            "description": "Number of charging stops required for this route.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -23368,34 +24669,18 @@
             "deprecationReason": null
           },
           {
-            "name": "via",
-            "description": "Text information about a route direction.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "polyline",
             "description": "Polyline containing encoded coordinates.",
             "args": [
               {
                 "name": "decimals",
-                "description": null,
+                "description": "Polyline decimals",
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "PolylineInputDecimals",
-                    "ofType": null
-                  }
+                  "kind": "ENUM",
+                  "name": "PolylineInputDecimals",
+                  "ofType": null
                 },
-                "defaultValue": null,
+                "defaultValue": "five",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -23486,7 +24771,7 @@
           },
           {
             "name": "alternative_stations",
-            "description": null,
+            "description": "Alternative stations along a route within specified radius.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -23534,7 +24819,7 @@
           },
           {
             "name": "charges",
-            "description": "Number of charges along a route.",
+            "description": "Number of charging stops required for this route.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -24170,18 +25455,6 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
-            "description": "Name of a destination. This is the station name in case a user should charge or the name of the location in case this was provided.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "station",
             "description": "Information about the station at the origin of this leg.",
             "args": [],
@@ -24199,17 +25472,13 @@
             "args": [
               {
                 "name": "decimals",
-                "description": null,
+                "description": "Polyline decimals",
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "PolylineInputDecimals",
-                    "ofType": null
-                  }
+                  "kind": "ENUM",
+                  "name": "PolylineInputDecimals",
+                  "ofType": null
                 },
-                "defaultValue": null,
+                "defaultValue": "five",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -24487,7 +25756,7 @@
           },
           {
             "name": "total_occupant_weight",
-            "description": "Value of the current weight of the occupants.",
+            "description": "Value of the combined weight of the occupants.",
             "args": [
               {
                 "name": "unit",
@@ -24818,17 +26087,13 @@
             "args": [
               {
                 "name": "decimals",
-                "description": null,
+                "description": "Polyline decimals",
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "PolylineInputDecimals",
-                    "ofType": null
-                  }
+                  "kind": "ENUM",
+                  "name": "PolylineInputDecimals",
+                  "ofType": null
                 },
-                "defaultValue": null,
+                "defaultValue": "five",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -24872,7 +26137,7 @@
           },
           {
             "name": "duration",
-            "description": "Total drive time from the start to the end of a section, in seconds.",
+            "description": "Total duration of a section, in seconds. The value will be 0 for walking sections.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -24888,7 +26153,7 @@
           },
           {
             "name": "consumption",
-            "description": "Total energy used in a section in kilowatt-hours.",
+            "description": "Total energy used in a section in kilowatt-hours. The value will be 0 for walking sections.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -25002,7 +26267,7 @@
           },
           {
             "name": "total_occupant_weight",
-            "description": "Value of the current weight of the occupants.",
+            "description": "Value of the combined weight of the occupants.",
             "args": [
               {
                 "name": "unit",
@@ -25214,7 +26479,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "RouteDetailsLegFeaturePoint",
+              "name": "RouteDetailsLegSectionFeaturePoint",
               "ofType": null
             },
             "isDeprecated": false,
@@ -25493,7 +26758,7 @@
             "deprecationReason": null
           },
           {
-            "name": "max_speed",
+            "name": "maximum_speed",
             "description": "Maximum vehicle speed of a route path segment.",
             "args": [
               {
@@ -25535,7 +26800,20 @@
           {
             "name": "money",
             "description": "Money saved by a user driving this route with an electric vehicle.",
-            "args": [],
+            "args": [
+              {
+                "name": "currency",
+                "description": "Currency to convert the amount to.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Currency",
+                  "ofType": null
+                },
+                "defaultValue": "EUR",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -25547,11 +26825,28 @@
           {
             "name": "average_gas_price",
             "description": "Average gas price with which the calculation was made.",
-            "args": [],
+            "args": [
+              {
+                "name": "currency",
+                "description": "Currency to convert the amount to.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Currency",
+                  "ofType": null
+                },
+                "defaultValue": "EUR",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -25559,11 +26854,28 @@
           {
             "name": "average_energy_price",
             "description": "Average energy price with which the calculation was made.",
-            "args": [],
+            "args": [
+              {
+                "name": "currency",
+                "description": "Currency to convert the amount to.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Currency",
+                  "ofType": null
+                },
+                "defaultValue": "EUR",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -30781,18 +32093,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "stop_duration",
-            "description": "Duration to stay at this point.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -30812,18 +32112,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "stop_duration",
-            "description": "Duration to stay at this point.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -30924,7 +32212,7 @@
           },
           {
             "name": "total_occupant_weight",
-            "description": "Combined weight of the occupants.",
+            "description": "Combined weight of the occupants. This can only be used in combination with occupants.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -30972,7 +32260,7 @@
           },
           {
             "name": "total_occupant_weight",
-            "description": "Combined weight of the occupants.",
+            "description": "Combined weight of the occupants. This can only be used in combination with occupants.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TotalOccupantWeightInput",
@@ -30988,6 +32276,76 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TotalCargoWeightInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RoutePropertiesViaLocation",
+        "description": null,
+        "fields": [
+          {
+            "name": "name",
+            "description": "Name that should overwrite the name that is automatically assigned to this location (for example: address or station name).",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at this point, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RoutePropertiesViaLocationInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "name",
+            "description": "Name that should overwrite the name that is automatically assigned to this location (for example: address or station name).",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at this point, in seconds.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -31074,22 +32432,6 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "CreateRoute",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "region",
-            "description": "Region of a route calculation.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },
@@ -31616,7 +32958,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "Temperature",
+              "name": "OutsideTemperature",
               "ofType": null
             },
             "isDeprecated": false,
@@ -31624,7 +32966,7 @@
           },
           {
             "name": "is_parked",
-            "description": "Vehicle is in park, neutral or turned off.",
+            "description": "Flag which indicates if vehicle is in park, neutral or turned off.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -31703,7 +33045,7 @@
           },
           {
             "name": "final_state_of_charge",
-            "description": "Minimum final battery state of charge.",
+            "description": "Minimum final battery state of charge. The value should be between 0 and 60% of the battery capacity.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -31755,7 +33097,7 @@
           },
           {
             "name": "power",
-            "description": "Value of the positive or negative power. When negative, the vehicle is charging.",
+            "description": "Value of the positive or negative power, in kWh. When negative, the vehicle is charging.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -31767,7 +33109,7 @@
           },
           {
             "name": "is_charging",
-            "description": "Indicates if the vehicle is charging.",
+            "description": "Flag which indicates if the vehicle is charging.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -31815,7 +33157,7 @@
           },
           {
             "name": "final_state_of_charge",
-            "description": "Minimum battery state of charge.",
+            "description": "Minimum final battery state of charge. The value should be between 0 and 60% of the battery capacity.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StateOfChargeInput",
@@ -31863,7 +33205,7 @@
           },
           {
             "name": "power",
-            "description": "Vehicle power.",
+            "description": "Value of the positive or negative power, in kWh. When negative, the vehicle is charging.",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -31875,7 +33217,7 @@
           },
           {
             "name": "is_charging",
-            "description": "Vehicle is currently charging.",
+            "description": "Flag which indicates if the vehicle is charging.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -31943,13 +33285,9 @@
             "name": "is_preconditioned",
             "description": "Flag which indicates if the vehicle cabin was preconditioned for the desired temperature.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
             },
             "defaultValue": "false",
             "isDeprecated": false,
@@ -31959,13 +33297,9 @@
             "name": "desired_temperature",
             "description": "Desired cabin temperature. Default is 20 degrees Celsius or 68 degrees Fahrenheit.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "TemperatureInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "TemperatureInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -31999,14 +33333,14 @@
           },
           {
             "name": "minimum_power",
-            "description": "Minimum desired power of chargers.",
+            "description": "Minimum desired power of chargers, in kWh.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -32097,7 +33431,7 @@
             "deprecationReason": null
           },
           {
-            "name": "max_charge_speed",
+            "name": "maximum_charge_speed",
             "description": "Maximum charging speed for the plug.",
             "args": [],
             "type": {
@@ -32141,7 +33475,7 @@
             "deprecationReason": null
           },
           {
-            "name": "max_charge_speed",
+            "name": "maximum_charge_speed",
             "description": "Maximum charging speed for this plug.",
             "type": {
               "kind": "NON_NULL",
@@ -32175,13 +33509,13 @@
               "name": "ChargeMode",
               "ofType": null
             },
-            "defaultValue": "OPTIMIZE_TRAVEL_TIME",
+            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "minimum_power",
-            "description": "Minimum desired power of chargers.",
+            "description": "Minimum desired power of chargers, in kWh.",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -32199,7 +33533,7 @@
               "name": "Int",
               "ofType": null
             },
-            "defaultValue": "10",
+            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -32524,7 +33858,7 @@
             "description": "Outside temperature.",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TemperatureInput",
+              "name": "OutsideTemperatureInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -32533,7 +33867,7 @@
           },
           {
             "name": "is_parked",
-            "description": "Vehicle is in park, neutral or turned off.",
+            "description": "Flag which indicates if vehicle is in park, neutral or turned off.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -33010,7 +34344,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "RoutePropertiesLocation",
+              "name": "RoutePropertiesViaLocation",
               "ofType": null
             },
             "isDeprecated": false,
@@ -33057,7 +34391,7 @@
             "description": "Location data of the via point.",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "RoutePropertiesLocationInput",
+              "name": "RoutePropertiesViaLocationInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -33366,13 +34700,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -36240,6 +37570,12 @@
             "description": "Value from the vehicle's telemetry.",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "default",
+            "description": "Default value.",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -36470,13 +37806,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -36611,13 +37943,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -36635,7 +37963,7 @@
         "fields": [
           {
             "name": "value",
-            "description": "Value of the current weight of the occupants.",
+            "description": "Value of the combined weight of the occupants.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -36695,7 +38023,7 @@
         "inputFields": [
           {
             "name": "value",
-            "description": "Value of the current weight of the occupants.",
+            "description": "Value of the combined weight of the occupants.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -36729,13 +38057,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
@@ -43812,13 +45136,9 @@
             "name": "source",
             "description": "Source of inputted data, defaults to 'manual'.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "TelemetryInputSource",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "TelemetryInputSource",
+              "ofType": null
             },
             "defaultValue": "manual",
             "isDeprecated": false,
