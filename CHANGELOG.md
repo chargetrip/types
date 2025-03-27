@@ -1,3 +1,15 @@
+# [1.45.0](https://github.com/chargetrip/types/compare/v1.44.0...v1.45.0) (2025-03-27)
+
+
+### Bug Fixes
+
+* fix lint issues ([b688c86](https://github.com/chargetrip/types/commit/b688c86ba9f4cd756a19f5441615b471930853e7))
+
+
+### Features
+
+* Route V2 schema changes ([e81b2d3](https://github.com/chargetrip/types/commit/e81b2d388edbd5cb7dec42d705884aec3e200072))
+
 # [1.44.0](https://github.com/chargetrip/types/compare/v1.43.0...v1.44.0) (2025-02-12)
 
 
