@@ -1,3 +1,10 @@
+## [1.46.1](https://github.com/chargetrip/types/compare/v1.46.0...v1.46.1) (2025-04-09)
+
+
+### Bug Fixes
+
+* add commit message on semantic release ([0f7d760](https://github.com/chargetrip/types/commit/0f7d7608b5cf968829f7ce1acc3de3915b28e9ee))
+
 # [1.46.0](https://github.com/chargetrip/types/compare/v1.45.0...v1.46.0) (2025-04-09)
 
 
