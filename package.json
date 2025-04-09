@@ -43,7 +43,8 @@
             "CHANGELOG.md",
             "graphql.schema.json",
             "graphql.ts"
-          ]
+          ],
+          "message": "fix: automatically release new version."
         }
       ],
       "@semantic-release/github",
