@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/chargetrip/types/compare/v1.45.0...v1.46.0) (2025-04-09)
+
+
+### Features
+
+* updated package to fetch latest schema ([d1f293c](https://github.com/chargetrip/types/commit/d1f293cc06a7491b4c84122a12a3836acb31afe6))
+
 # [1.45.0](https://github.com/chargetrip/types/compare/v1.44.0...v1.45.0) (2025-03-27)
 
 
