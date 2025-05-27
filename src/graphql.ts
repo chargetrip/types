@@ -102,7 +102,7 @@ export enum AdhocAuthorisationMethod {
 export type AlternativeStationRadius = {
   /** Value of the alternative station radius. */
   value: Scalars["Float"];
-  /** Type of the alternative station radius. */
+  /** Preferred unit for the alternative station radius. */
   type: DistanceUnit;
   /** Source of inputted data. */
   source: TelemetryInputSource;
@@ -111,7 +111,7 @@ export type AlternativeStationRadius = {
 export type AlternativeStationRadiusInput = {
   /** Value of the alternative station radius. */
   value: Scalars["Float"];
-  /** Type of the alternative station radius. */
+  /** Preferred unit for the alternative station radius. */
   type: DistanceUnit;
   /** Source of inputted data. */
   source?: Maybe<TelemetryInputSource>;
@@ -192,18 +192,18 @@ export type AuthorizeConnectedVehicleOptions = {
 };
 
 export type AuxiliaryConsumption = {
-  /** Value of the auxiliary power consumption of the vehicle. */
+  /** Value of the vehicle's auxiliary power consumption. */
   value: Scalars["Float"];
-  /** Type of auxiliary power consumption of the vehicle. */
+  /** Preferred unit for the vehicle's auxiliary power consumption. */
   type: AuxiliaryConsumptionUnit;
   /** Source of inputted data. */
   source: TelemetryInputSource;
 };
 
 export type AuxiliaryConsumptionInput = {
-  /** Value of the auxiliary power consumption of the vehicle. */
+  /** Value of the vehicle's auxiliary power consumption. */
   value: Scalars["Float"];
-  /** Type of auxiliary power consumption of the vehicle. */
+  /** Preferred unit for the vehicle's auxiliary power consumption. */
   type: AuxiliaryConsumptionUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -226,7 +226,7 @@ export enum BatteryInputType {
 export type BatteryTemperatureInput = {
   /** Value of the temperature of the battery. */
   value: Scalars["Float"];
-  /** Type of temperature of the battery. */
+  /** Preferred unit for the temperature of the battery. */
   type: TemperatureUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -263,16 +263,16 @@ export enum ChargeMode {
 export type ChargeSpeed = {
   /** Value of the charge speed of the battery. */
   value: Scalars["Float"];
-  /** Type of the charge speed of the battery. */
+  /** Preferred unit for the battery's charge speed. */
   type: ChargeSpeedUnit;
   /** Source of inputted data */
   source: TelemetryInputSource;
 };
 
 export type ChargeSpeedInput = {
-  /** Value of the charge speed of the battery. */
+  /** Value of the battery's charge speed. */
   value: Scalars["Float"];
-  /** Type of the charge speed of the battery. */
+  /** Preferred unit for the battery's charge speed. */
   type: ChargeSpeedUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -291,7 +291,7 @@ export enum ChargeSpeedUnit {
 export type ChargeTotalInput = {
   /** Value of the temperature of the battery. */
   value: Scalars["Float"];
-  /** Type of total charge amount. */
+  /** Preferred unit for the total charge amount. */
   type: StateOfChargeUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -616,7 +616,7 @@ export enum ConnectorPriceElementComponentType {
   FLAT = "flat",
   /** Parking price per hour. This fee is applicable even if the parked car is not charging. */
   PARKING_TIME = "parking_time",
-  /** Fixed price per hour. */
+  /** Fixed price per unit of time defined in the step size. */
   TIME = "time"
 }
 
@@ -1155,8 +1155,8 @@ export type CreateRoute = {
   season: RouteSeason;
   /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
   alternative_station_radius?: Maybe<AlternativeStationRadius>;
-  /** Departure time of a route. */
-  departure_time?: Maybe<Scalars["DateTime"]>;
+  /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
+  departure_time: Scalars["DateTime"];
 };
 
 /** Input for the create route mutation. */
@@ -1175,7 +1175,7 @@ export type CreateRouteInput = {
   season?: Maybe<RouteSeason>;
   /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
   alternative_station_radius?: Maybe<AlternativeStationRadiusInput>;
-  /** Route departure time. */
+  /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
   departure_time?: Maybe<Scalars["DateTime"]>;
 };
 
@@ -1590,7 +1590,7 @@ export type ElectricityGenerationMethodintensityArgs = {
 export type ElevationInput = {
   /** Value of the elevation. */
   value: Scalars["Float"];
-  /** Type of the value of elevation. */
+  /** Preferred unit for the elevation. */
   type: DistanceUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -1809,7 +1809,9 @@ export enum HeavyVehiclesEUType {
   /** Only N2 type of heavy vehicles can be parked at the charging station. N2 vehicles have a maximum mass exceeding 3.5 tonnes but not exceeding 12 tonnes (26,000 lbs). */
   N2 = "N2",
   /** Only N3 type of heavy vehicles can be parked at the charging station. N3 vehicles have a maximum mass exceeding 12 tonnes (26,000 lbs). */
-  N3 = "N3"
+  N3 = "N3",
+  /** N3 type of heavy vehicles having O4 type of trailers can be parked at the charging station. N3 vehicles have a maximum mass exceeding 12 tonnes (26,000 lbs) and O4 trailers have a maximum mass exceeding 10 tonnes (22000 lbs). */
+  N3_O4 = "N3_O4"
 }
 
 /** List of facilities in the location. */
@@ -2070,9 +2072,9 @@ export type Mutation = {
    * This is a premium feature, contact Chargetrip for more information.
    */
   deleteUserReview: Review;
-  /** [BETA] Create a new route from the route input and its ID. */
+  /** Create a new route from the route input and its ID. */
   createRoute: Scalars["ID"];
-  /** Create a new route from the route input and its ID */
+  /** Deprecated: In favor of createRoute. */
   newRoute?: Maybe<Scalars["ID"]>;
 };
 
@@ -2868,7 +2870,7 @@ export enum OICPValueAddedServices {
 export type Odometer = {
   /** Value of the vehicle's odometer. */
   value: Scalars["Float"];
-  /** Type of the value of the vehicle's odometer. */
+  /** Preferred unit for the vehicle's odometer. */
   type: DistanceUnit;
   /** Source of inputted data. */
   source: TelemetryInputSource;
@@ -2877,7 +2879,7 @@ export type Odometer = {
 export type OdometerInput = {
   /** Value of the vehicle's odometer. */
   value: Scalars["Float"];
-  /** Type of the value of the vehicle's odometer. */
+  /** Preferred unit for the vehicle's odometer. */
   type: DistanceUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -2904,20 +2906,30 @@ export type Operator = {
   countries?: Maybe<Array<CountryCodeAlpha2>>;
   /** Contact information. */
   contact?: Maybe<Contact>;
-  /** Ranking level on which the operator is placed or null in case the operator is not on any ranking level. */
+  /**
+   * Ranking level on which the operator is placed or null in case the operator is not on any ranking level. Default operator preference applied to routes created through newRoute mutation if no operator preference is specified in the request.
+   * @deprecated In favor of ranking_levels.
+   */
   ranking?: Maybe<Scalars["Int"]>;
-  /** Flag which indicates if the operator is in the excluded list. */
+  /**
+   * Flag which indicates if the operator is in the excluded list. Default operator preference applied to routes created through newRoute mutation if no operator preference is specified in the request.
+   * @deprecated In favor of excluded_countries.
+   */
   excluded?: Maybe<Scalars["Boolean"]>;
+  /** Ranking configuration for the operator. An operator can be ranked on different levels in different countries. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request. */
+  ranking_levels?: Maybe<OperatorRankingLevels>;
+  /** List of countries where the operator is excluded. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request. */
+  excluded_countries?: Maybe<Array<CountryCodeAlpha2>>;
 };
 
 /** Filter which can be applied to retrieve the operator list action. */
 export type OperatorListFilter = {
   /** ISO-3166 alpha-2 country codes an operator is active in. */
   countries?: Maybe<Array<CountryCodeAlpha2>>;
-  /** List of ranking level(s) to be retrieved. Valid values are 1 to 10. */
-  ranking?: Maybe<Array<Scalars["Int"]>>;
-  /** Only retrieve operators that are in the excluded list. */
-  excluded?: Maybe<Scalars["Boolean"]>;
+  /** List of ranking level(s) to be retrieved. An operator can be ranked on different levels in different countries. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request. */
+  ranking_levels?: Maybe<OperatorRankingLevelsFilter>;
+  /** List of countries where the operator is excluded. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request. */
+  excluded_countries?: Maybe<Array<CountryCodeAlpha2>>;
 };
 
 /** Filter which can be applied to retrieve the operator list action. */
@@ -2939,10 +2951,30 @@ export enum OperatorRankingLevel {
   HIGH = "high"
 }
 
+/** Ranking configuration for the operator. An operator can be ranked on different levels in different countries. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request. */
+export type OperatorRankingLevels = {
+  /** Low level for operators ranking. */
+  low?: Maybe<Array<CountryCodeAlpha2>>;
+  /** Medium level for operators ranking. */
+  medium?: Maybe<Array<CountryCodeAlpha2>>;
+  /** High level for operators ranking. */
+  high?: Maybe<Array<CountryCodeAlpha2>>;
+};
+
+/** Filter operators by ranking levels. */
+export type OperatorRankingLevelsFilter = {
+  /** Low level for operators ranking. */
+  low?: Maybe<Array<CountryCodeAlpha2>>;
+  /** Medium level for operators ranking. */
+  medium?: Maybe<Array<CountryCodeAlpha2>>;
+  /** High level for operators ranking. */
+  high?: Maybe<Array<CountryCodeAlpha2>>;
+};
+
 export type OutsideTempInput = {
   /** Value of the outside temperature. */
   value: Scalars["Float"];
-  /** Type of the value of the outside temperature. */
+  /** Preferred unit for the outside temperature. */
   type: TemperatureUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -2951,7 +2983,7 @@ export type OutsideTempInput = {
 export type OutsideTemperature = {
   /** Value of the temperature. */
   value: Scalars["Float"];
-  /** Type of the temperature. */
+  /** Preferred unit for the outside temperature. */
   type: TemperatureUnit;
   /** Source of inputted data. */
   source: TelemetryInputSource;
@@ -2960,7 +2992,7 @@ export type OutsideTemperature = {
 export type OutsideTemperatureInput = {
   /** Value of the outside temperature. */
   value: Scalars["Float"];
-  /** Type of the value of the outside temperature. */
+  /** Preferred unit for the outside temperature. */
   type: TemperatureUnit;
   /** Source of inputted data. */
   source?: Maybe<TelemetryInputSource>;
@@ -3026,7 +3058,7 @@ export enum PolylineInputDecimals {
 export type PowerInput = {
   /** Value of the positive or negative power. When negative the vehicle is charging. */
   value: Scalars["Float"];
-  /** Type of the value of the power. */
+  /** Preferred unit for the power. */
   type: PowerUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -3130,15 +3162,15 @@ export type Query = {
    * This is a premium feature, contact Chargetrip for more information.
    */
   userReviewList?: Maybe<Array<Review>>;
-  /** Get a route by ID */
+  /** Deprecated: In favor of getRoute. */
   route?: Maybe<Route>;
-  /** [BETA] Get a route by ID. */
+  /** Get a route by ID. */
   getRoute: RouteResponse;
-  /** [BETA] Get emissions for a route. */
+  /** Get emissions for a route. */
   getRouteEmissions: RouteDetailsEmissions;
-  /** Emissions profile for route. */
+  /** Deprecated: In favor of getRouteEmissions. */
   routeEmissions: RouteEmissions;
-  /** Retrieve information about a route path segment */
+  /** Deprecated: In favor of RouteDetails.path_plot. */
   routePath?: Maybe<RoutePath>;
   /** Get information about a station by its ID. */
   station?: Maybe<Station>;
@@ -3814,14 +3846,14 @@ export type RouteDetails = {
   distance: Scalars["Float"];
   /** Aggregation of all durations of a route. */
   durations: RouteDetailsDurations;
-  /** Total energy used for a route in kilowatt hours. */
-  consumption: Scalars["Float"];
-  /** Range available at the beginning of a trip. */
-  range_at_origin: Scalars["Float"];
-  /** Range available at the end of a trip. */
-  range_at_destination: Scalars["Float"];
+  /** Total energy used for a route in kilowatt hours. For HEVs and PHEVs this field will return null. */
+  consumption?: Maybe<Scalars["Float"]>;
+  /** Range available at the start of a trip. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_origin?: Maybe<Scalars["Float"]>;
+  /** Range available at the end of a trip. Note: The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_destination?: Maybe<Scalars["Float"]>;
   /** Polyline containing encoded coordinates. */
-  polyline?: Maybe<Scalars["String"]>;
+  polyline: Scalars["String"];
   /** Path elevation, distance, duration, consumption and speed values, grouped into 100 segments. */
   path_plot: Array<RouteDetailsPathSegment>;
   /** Details about elevation on a route. */
@@ -3830,7 +3862,7 @@ export type RouteDetails = {
   savings?: Maybe<RouteDetailsSavings>;
   /** Legs of a route. */
   legs: Array<RouteDetailsLeg>;
-  /** Alternative stations along a route within specified radius. */
+  /** Alternative stations along a route within a specified radius. Will only return stations if alternative_station_radius was specified in the createRoute mutation. */
   alternative_stations: Array<RouteDetailsAlternativeStation>;
   /** Aggregation of tags over the current RouteDetails. Tags are available on legs and further subdivided over individual sections and maneuvers. */
   tags: Array<RouteDetailsTag>;
@@ -3863,7 +3895,7 @@ export type RouteDetailsAlternativeStation = {
   speed: StationSpeedType;
   /** Status of a station. */
   status: ChargerStatus;
-  /** Ranking of an operator. */
+  /** The value indicates the operator's ranking based on the station's location, in accordance with the list of countries from the configuration or request. */
   operator_ranking?: Maybe<OperatorRankingLevel>;
 };
 
@@ -3871,14 +3903,14 @@ export type RouteDetailsAlternativeStation = {
 export type RouteDetailsDurations = {
   /** Total duration, in seconds. */
   total: Scalars["Int"];
-  /** Total duration charging, in seconds. */
+  /** Total charging duration, in seconds. */
   charging: Scalars["Int"];
-  /** Total duration driving, in seconds. */
+  /** Total driving duration, in seconds. */
   driving: Scalars["Int"];
-  /** Total duration stopped for a short stay, for example at a via point, in seconds. */
+  /** Total stop duration, excluding charge stops, in seconds. */
   stopover: Scalars["Int"];
-  /** Total duration of ferry rides, in seconds. */
-  ferry?: Maybe<Scalars["Int"]>;
+  /** Total ferry duration, in seconds. */
+  ferry: Scalars["Int"];
 };
 
 export type RouteDetailsElevation = {
@@ -3933,21 +3965,21 @@ export type RouteDetailsLeg = {
   distance: Scalars["Float"];
   /** Aggregation of all durations of a route leg. */
   durations: RouteDetailsDurations;
-  /** Total energy used in a leg in kilowatt hours. */
-  consumption: Scalars["Float"];
+  /** Total energy used in a leg in kilowatt hours. For HEVs and PHEVs this field will return null. */
+  consumption?: Maybe<Scalars["Float"]>;
   /** Origin point location. */
   origin: RouteDetailsLegFeaturePoint;
   /** Destination point location. */
   destination: RouteDetailsLegFeaturePoint;
-  /** Range at the origin of the leg. */
-  range_at_origin: Scalars["Float"];
-  /** Range at the destination of the leg. */
-  range_at_destination: Scalars["Float"];
-  /** Range after charging on the leg. */
+  /** Range at the start of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_origin?: Maybe<Scalars["Float"]>;
+  /** Range available at the end of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_destination?: Maybe<Scalars["Float"]>;
+  /** Range after charging on the leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
   range_after_charge?: Maybe<Scalars["Float"]>;
   /** Type of a leg. */
   type: RouteDetailsLegType;
-  /** Information about the station at the origin of this leg. */
+  /** Information about the station at the destination of a leg.  */
   station?: Maybe<RouteDetailsLegStation>;
   /** Polyline containing encoded coordinates. */
   polyline: Scalars["String"];
@@ -4033,7 +4065,7 @@ export type RouteDetailsLegFeaturePropertiestotal_cargo_weightArgs = {
 export type RouteDetailsLegManeuverPoints = {
   /** Number of polyline points which are included in this instruction. */
   size: Scalars["Int"];
-  /** Interval of points that are included in this instruction, an array with 2 values, where the first value is the index of the polyline where the interval starts. The second value is where it ends. */
+  /** Interval of points included in this instruction, represented as an array with two values: the first is the index of the polyline where the interval starts, and the second is where it ends. */
   interval: Array<Scalars["Int"]>;
 };
 
@@ -4073,13 +4105,13 @@ export type RouteDetailsLegSection = {
   /** Aggregation of tags over the current section. */
   tags: Array<RouteDetailsTag>;
   /** Polyline containing encoded coordinates. */
-  polyline?: Maybe<Scalars["String"]>;
+  polyline: Scalars["String"];
   /** Distance from the start to the end of a section. */
   distance: Scalars["Float"];
   /** Total duration of a section, in seconds. The value will be 0 for walking sections. */
   duration: Scalars["Float"];
   /** Total energy used in a section in kilowatt-hours. The value will be 0 for walking sections. */
-  consumption: Scalars["Float"];
+  consumption?: Maybe<Scalars["Float"]>;
 };
 
 export type RouteDetailsLegSectionpolylineArgs = {
@@ -4136,11 +4168,17 @@ export type RouteDetailsLegStation = {
 
 /** Type of a leg. */
 export enum RouteDetailsLegType {
+  /** This leg ends at a charging station and the vehicle must recharge. */
   STATION = "station",
+  /** This leg ends at a via charging station and the vehicle must recharge. */
   STATION_VIA = "station_via",
+  /** This leg ends at the destination which is a charging station, and is the last leg of the route. */
   STATION_FINAL = "station_final",
+  /** This leg ends at a scheduled charging station and the vehicle must recharge. */
   STATION_AMENITY = "station_amenity",
+  /** This leg ends at a via location. */
   VIA = "via",
+  /** This leg ends at the destination, and is the last leg of the route. */
   FINAL = "final"
 }
 
@@ -4148,8 +4186,8 @@ export type RouteDetailsManeuver = {
   /** Type of instruction. */
   type: RouteDetailsLegManeuverType;
   /** Location of the maneuver. */
-  location?: Maybe<RouteDetailsLegSectionFeaturePoint>;
-  /** Name of the street on which an instruction is. */
+  location: RouteDetailsLegSectionFeaturePoint;
+  /** Name of the street associated with the instruction. */
   name?: Maybe<Scalars["String"]>;
   /** Distance, in meters, of a route instruction. */
   distance: Scalars["Float"];
@@ -4162,7 +4200,7 @@ export type RouteDetailsManeuver = {
   /** Curvature angle between the roundabout and the exit of the roundabout. This field exists only on sign USE_ROUNDABOUT (6), otherwise this value is `null`. */
   turn_angle?: Maybe<Scalars["Float"]>;
   /** Aggregation of tags over the current maneuver. */
-  tags?: Maybe<Array<RouteDetailsTag>>;
+  tags: Array<RouteDetailsTag>;
 };
 
 export type RouteDetailsManeuverdistanceArgs = {
@@ -4174,13 +4212,13 @@ export type RouteDetailsPathSegment = {
   elevation: Scalars["Float"];
   /** Average speed of a route path segment. */
   average_speed: Scalars["Float"];
-  /** Consumption, in kilowatt hours, of a route path segment. */
-  consumption: Scalars["Float"];
+  /** Consumption, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null. */
+  consumption?: Maybe<Scalars["Float"]>;
   /** Distance of a route path segment. */
   distance: Scalars["Float"];
   /** Duration, in seconds, of a route path segment. */
   duration: Scalars["Float"];
-  /** State of charge, in kilowatt hours, of a route path segment. */
+  /** State of charge, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null. */
   state_of_charge?: Maybe<Scalars["Float"]>;
   /** Maximum vehicle speed of a route path segment. */
   maximum_speed: Scalars["Float"];
@@ -5000,7 +5038,7 @@ export type RouteOperationalMaintenanceEmissionsFielddisposalArgs = {
 export type RouteOperatorPreferences = {
   /** Ranking of an operator with multiple levels, each level having its own penalty value. */
   ranking?: Maybe<RouteOperatorPreferencesRanking>;
-  /** Route operators that should be excluded. */
+  /** Operators that should be excluded for a route calculation. */
   exclude?: Maybe<Array<RouteOperatorsValue>>;
 };
 
@@ -5008,7 +5046,7 @@ export type RouteOperatorPreferences = {
 export type RouteOperatorPreferencesInput = {
   /** Ranking of an operator with multiple levels, each level having its own penalty value. */
   ranking?: Maybe<RouteOperatorPreferencesRankingInput>;
-  /** Route operators that should be excluded. */
+  /** Operators that should be excluded for a route calculation. */
   exclude?: Maybe<Array<RouteOperatorsValueInput>>;
 };
 
@@ -5040,7 +5078,7 @@ export type RouteOperatorPreferencesRankingLevelsInput = {
   low?: Maybe<Array<RouteOperatorsValueInput>>;
   /** Medium level for operator ranking. */
   medium?: Maybe<Array<RouteOperatorsValueInput>>;
-  /** Most significant level three for operator ranking. */
+  /** Most significant level for operator ranking. */
   high?: Maybe<Array<RouteOperatorsValueInput>>;
 };
 
@@ -5219,9 +5257,9 @@ export type RoutePropertiesStationInput = {
 
 export type RoutePropertiesVehicle = {
   /** Number of occupants present in the vehicle. */
-  occupants?: Maybe<Scalars["Int"]>;
+  occupants: Scalars["Int"];
   /** Combined weight of the occupants. This can only be used in combination with occupants. */
-  total_occupant_weight?: Maybe<TotalOccupantWeight>;
+  total_occupant_weight: TotalOccupantWeight;
   /** Weight of the cargo. */
   total_cargo_weight?: Maybe<TotalCargoWeight>;
 };
@@ -5348,26 +5386,26 @@ export type RouteVehicle = {
   /** ID of the vehicle. */
   id: Scalars["ID"];
   /** EV battery specific configuration. */
-  battery?: Maybe<RouteVehicleBattery>;
+  battery: RouteVehicleBattery;
   /** Charging configuration. */
-  charging?: Maybe<RouteVehicleCharging>;
-  /** Average tire pressures of all wheels, starting from the front side (right to left) and then to the rear. */
-  tire_pressure?: Maybe<TirePressure>;
+  charging: RouteVehicleCharging;
+  /** Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right. */
+  tire_pressure: TirePressure;
   /** Value of the vehicle's odometer. */
   odometer?: Maybe<Odometer>;
   /** Value of the auxiliary power consumption of the vehicle. */
-  auxiliary_consumption?: Maybe<AuxiliaryConsumption>;
-  /** Flag which indicates if climate control is on. */
-  climate?: Maybe<Scalars["Boolean"]>;
+  auxiliary_consumption: AuxiliaryConsumption;
+  /** Flag indicating if climate control is on. */
+  climate: Scalars["Boolean"];
   /** Vehicle Heat Pump configuration. */
   heat_pump: HeatPumpMode;
-  /** Vehicle cabin configuration. */
+  /** Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true. */
   cabin: RouteVehicleCabin;
   /** Revolutions per minute of the motor, a measure of the rotational speed of the motor's rotor component. */
   motor_rpm?: Maybe<Scalars["Int"]>;
   /** Value of the outside temperature. */
   outside_temperature?: Maybe<OutsideTemperature>;
-  /** Flag which indicates if vehicle is in park, neutral or turned off. */
+  /** Flag indicating if a vehicle is in park, neutral, or turned off. */
   is_parked?: Maybe<Scalars["Boolean"]>;
   /** Value of the vehicle's speed. */
   vehicle_speed?: Maybe<VehicleSpeed>;
@@ -5376,11 +5414,11 @@ export type RouteVehicle = {
 };
 
 export type RouteVehicleBattery = {
-  /** Battery capacity. */
+  /** Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh. */
   capacity: StateOfCharge;
-  /** State of charge. */
+  /** Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity.  */
   state_of_charge: StateOfCharge;
-  /** Minimum final battery state of charge. The value should be between 0 and 60% of the battery capacity. */
+  /** Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default. */
   final_state_of_charge: StateOfCharge;
   /** Temperature of the battery. */
   temperature?: Maybe<Temperature>;
@@ -5390,17 +5428,17 @@ export type RouteVehicleBattery = {
   voltage?: Maybe<Scalars["Float"]>;
   /** Value of the positive or negative power, in kWh. When negative, the vehicle is charging. */
   power?: Maybe<Scalars["Float"]>;
-  /** Flag which indicates if the vehicle is charging. */
+  /** Flag indicating if the vehicle is charging. */
   is_charging?: Maybe<Scalars["Boolean"]>;
 };
 
 /** EV battery specific configuration for a create route mutation. */
 export type RouteVehicleBatteryInput = {
-  /** Battery capacity. */
+  /** Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh. */
   capacity?: Maybe<StateOfChargeInput>;
-  /** Battery state of charge. */
+  /** Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity.  */
   state_of_charge?: Maybe<StateOfChargeInput>;
-  /** Minimum final battery state of charge. The value should be between 0 and 60% of the battery capacity. */
+  /** Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default. */
   final_state_of_charge?: Maybe<StateOfChargeInput>;
   /** Battery temperature. */
   temperature?: Maybe<TemperatureInput>;
@@ -5410,19 +5448,19 @@ export type RouteVehicleBatteryInput = {
   voltage?: Maybe<Scalars["Float"]>;
   /** Value of the positive or negative power, in kWh. When negative, the vehicle is charging. */
   power?: Maybe<Scalars["Float"]>;
-  /** Flag which indicates if the vehicle is charging. */
+  /** Flag indicating if the vehicle is charging. */
   is_charging?: Maybe<Scalars["Boolean"]>;
 };
 
 export type RouteVehicleCabin = {
-  /** Flag which indicates if the vehicle cabin was preconditioned for the desired temperature. */
+  /** Flag indicating if the vehicle cabin was preconditioned for the desired temperature. */
   is_preconditioned: Scalars["Boolean"];
   /** Desired cabin temperature. Default is 20 degrees Celsius or 68 degrees Fahrenheit. */
   desired_temperature: Temperature;
 };
 
 export type RouteVehicleCabinInput = {
-  /** Flag which indicates if the vehicle cabin was preconditioned for the desired temperature. */
+  /** Flag indicating if the vehicle cabin was preconditioned for the desired temperature. */
   is_preconditioned?: Maybe<Scalars["Boolean"]>;
   /** Desired cabin temperature. Default is 20 degrees Celsius or 68 degrees Fahrenheit. */
   desired_temperature?: Maybe<TemperatureInput>;
@@ -5433,18 +5471,18 @@ export type RouteVehicleCharging = {
   mode: ChargeMode;
   /** Minimum desired power of chargers, in kWh. */
   minimum_power: Scalars["Float"];
-  /** Percentage for the minimum limit of the battery's capacity before a recharge. The value should be between 0 and 60. Defaults to 10. */
+  /** Minimum remaining state of charge at charging stops, expressed as a percentage. The value must be between 0 and 60. If not provided, the project configuration value is used. */
   risk_margin: Scalars["Int"];
-  /** Supported connectors. */
-  connectors?: Maybe<Array<RouteVehicleChargingConnector>>;
-  /** Supported adapters. */
-  adapters?: Maybe<Array<RouteVehicleChargingConnector>>;
+  /** Supported connectors. If not specified, it defaults to the vehicle's connectors. */
+  connectors: Array<RouteVehicleChargingConnector>;
+  /** Supported adapters. If not specified, adapters will not be considered. */
+  adapters: Array<RouteVehicleChargingConnector>;
 };
 
 export type RouteVehicleChargingConnector = {
   /** Type of the plug. */
   standard: ConnectorType;
-  /** Maximum charging speed for the plug. */
+  /** Maximum charging speed for this plug. */
   maximum_charge_speed: ChargeSpeed;
 };
 
@@ -5460,11 +5498,11 @@ export type RouteVehicleChargingInput = {
   mode?: Maybe<ChargeMode>;
   /** Minimum desired power of chargers, in kWh. */
   minimum_power?: Maybe<Scalars["Float"]>;
-  /** Percentage representing the minimum value of the state of charge at a next charge stop. The value should be between 0 and 60. */
+  /** Minimum remaining state of charge at charging stops, expressed as a percentage. The value must be between 0 and 60. If not provided, the project configuration value is used. */
   risk_margin?: Maybe<Scalars["Int"]>;
-  /** Supported connectors. */
+  /** Supported connectors. If not specified, it defaults to the vehicle's connectors. */
   connectors?: Maybe<Array<RouteVehicleChargingConnectorInput>>;
-  /** Supported adapters. */
+  /** Supported adapters. If not specified, adapters will not be considered. */
   adapters?: Maybe<Array<RouteVehicleChargingConnectorInput>>;
 };
 
@@ -5499,23 +5537,23 @@ export type RouteVehicleInput = {
   battery?: Maybe<RouteVehicleBatteryInput>;
   /** Charging configuration. */
   charging?: Maybe<RouteVehicleChargingInput>;
-  /** Average tire pressures of all wheels. */
+  /** Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right. */
   tire_pressure?: Maybe<TirePressureInput>;
   /** Odometer (mileage) reading. */
   odometer?: Maybe<OdometerInput>;
   /** Average auxiliary power consumption. */
   auxiliary_consumption?: Maybe<AuxiliaryConsumptionInput>;
-  /** Flag which indicates if climate control is on. */
+  /** Flag indicating if climate control is on. */
   climate?: Maybe<Scalars["Boolean"]>;
   /** Vehicle Heat Pump configuration. */
   heat_pump?: Maybe<HeatPumpMode>;
-  /** Vehicle cabin configuration for creating the route. */
+  /** Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true. */
   cabin?: Maybe<RouteVehicleCabinInput>;
   /** Revolutions per minute of the motor, a measure of the rotational speed of the motor's rotor component. */
   motor_rpm?: Maybe<Scalars["Int"]>;
   /** Outside temperature. */
   outside_temperature?: Maybe<OutsideTemperatureInput>;
-  /** Flag which indicates if vehicle is in park, neutral or turned off. */
+  /** Flag indicating if a vehicle is in park, neutral, or turned off. */
   is_parked?: Maybe<Scalars["Boolean"]>;
   /** Vehicle speed. */
   vehicle_speed?: Maybe<VehicleSpeedInput>;
@@ -5644,16 +5682,16 @@ export enum SpeedUnit {
 export type StateOfCharge = {
   /** Value of the state of charge of the vehicle. */
   value: Scalars["Float"];
-  /** Type of the state of charge of the vehicle. */
+  /** Preferred unit for the vehicle's state of charge. */
   type: StateOfChargeUnit;
   /** Source of inputted data. */
   source: TelemetryInputSource;
 };
 
 export type StateOfChargeInput = {
-  /** Value of the state of charge of the vehicle. */
+  /** Value of the vehicle's state of charge. */
   value: Scalars["Float"];
-  /** Type of the state of charge of the vehicle. */
+  /** Preferred unit for the vehicle's state of charge. */
   type: StateOfChargeUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -6083,9 +6121,9 @@ export type Subscription = {
   isoline?: Maybe<Isoline>;
   /** [BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates */
   navigationUpdatedById?: Maybe<Navigation>;
-  /** Subscription for a specific route was updated in the system event */
+  /** Deprecated: In favor of route. */
   routeUpdatedById?: Maybe<Route>;
-  /** [BETA] Subscription for a specific route was updated in the system event */
+  /** Subscribe to a specific route to receive system event updates. */
   route: RouteResponse;
 };
 
@@ -6268,14 +6306,14 @@ export enum TelemetryInputSource {
 export type Temperature = {
   /** Value of the temperature. */
   value: Scalars["Float"];
-  /** Type of temperature. */
+  /** Preferred unit for the temperature. */
   type: TemperatureUnit;
 };
 
 export type TemperatureInput = {
   /** Value of the temperature. */
   value: Scalars["Float"];
-  /** Type of temperature. */
+  /** Preferred unit for the temperature. */
   type: TemperatureUnit;
 };
 
@@ -6288,18 +6326,18 @@ export enum TemperatureUnit {
 }
 
 export type TirePressure = {
-  /** Values for the tire pressure, starting from the front side right to left and to the rear (FR, FL, RL, RR). */
+  /** Values for the tire pressure, ordered from front right to front left, then rear left to rear right. */
   value: Array<Scalars["Float"]>;
-  /** Type of the value of pressure. */
+  /** Preferred unit for the tire pressure. */
   type: PressureUnit;
   /** Source of inputted data. */
   source: TelemetryInputSource;
 };
 
 export type TirePressureInput = {
-  /** Values for the tire pressure, starting from the front side right to left and to the rear. */
+  /** Values for the tire pressure, ordered from front right to front left, then rear left to rear right. */
   value: Array<Scalars["Float"]>;
-  /** Type of the value of pressure. */
+  /** Preferred unit for the tire pressure. */
   type: PressureUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -6315,7 +6353,7 @@ export enum TorqueUnit {
 export type TotalCargoWeight = {
   /** Value of the current weight of the cargo. */
   value: Scalars["Float"];
-  /** Type of the current weight of the cargo. */
+  /** Preferred unit for the current weight of the cargo. */
   type: WeightUnit;
   /** Source of inputted data. */
   source: TelemetryInputSource;
@@ -6324,7 +6362,7 @@ export type TotalCargoWeight = {
 export type TotalCargoWeightInput = {
   /** Value of the current weight of the cargo. */
   value: Scalars["Float"];
-  /** Type of the current weight of the cargo. */
+  /** Preferred unit for the current weight of the cargo. */
   type: WeightUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -6333,7 +6371,7 @@ export type TotalCargoWeightInput = {
 export type TotalOccupantWeight = {
   /** Value of the combined weight of the occupants. */
   value: Scalars["Float"];
-  /** Type of the current weight of the occupants. */
+  /** Preferred unit for the current weight of the occupants. */
   type: WeightUnit;
   /** Source of inputted data. */
   source: TelemetryInputSource;
@@ -6342,7 +6380,7 @@ export type TotalOccupantWeight = {
 export type TotalOccupantWeightInput = {
   /** Value of the combined weight of the occupants. */
   value: Scalars["Float"];
-  /** Type of the current weight of the occupants. */
+  /** Preferred unit for the current weight of the occupants. */
   type: WeightUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
@@ -7758,16 +7796,16 @@ export type VehicleRouting = {
 export type VehicleSpeed = {
   /** Value of the vehicle speed. */
   value: Scalars["Float"];
-  /** Type of the vehicle speed. */
+  /** Preferred unit for the vehicle's speed. */
   type: SpeedUnit;
   /** Source of inputted data. */
   source: TelemetryInputSource;
 };
 
 export type VehicleSpeedInput = {
-  /** Value of the vehicle speed. */
+  /** Value of the vehicle's speed. */
   value: Scalars["Float"];
-  /** Type of the vehicle speed. */
+  /** Preferred unit for the vehicle's speed. */
   type: SpeedUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
