@@ -1,3 +1,10 @@
+## [1.46.2](https://github.com/chargetrip/types/compare/v1.46.1...v1.46.2) (2025-05-27)
+
+
+### Bug Fixes
+
+* new type generation ([b69d4de](https://github.com/chargetrip/types/commit/b69d4de331e49c620f6a2690165ad76cd22cf884))
+
 ## [1.46.1](https://github.com/chargetrip/types/compare/v1.46.0...v1.46.1) (2025-04-09)
 
 
