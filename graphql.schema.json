@@ -351,7 +351,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the alternative station radius.",
+            "description": "Preferred unit for the alternative station radius.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -421,7 +421,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the alternative station radius.",
+            "description": "Preferred unit for the alternative station radius.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -885,7 +885,7 @@
         "fields": [
           {
             "name": "value",
-            "description": "Value of the auxiliary power consumption of the vehicle.",
+            "description": "Value of the vehicle's auxiliary power consumption.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -901,7 +901,7 @@
           },
           {
             "name": "type",
-            "description": "Type of auxiliary power consumption of the vehicle.",
+            "description": "Preferred unit for the vehicle's auxiliary power consumption.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -945,7 +945,7 @@
         "inputFields": [
           {
             "name": "value",
-            "description": "Value of the auxiliary power consumption of the vehicle.",
+            "description": "Value of the vehicle's auxiliary power consumption.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -961,7 +961,7 @@
           },
           {
             "name": "type",
-            "description": "Type of auxiliary power consumption of the vehicle.",
+            "description": "Preferred unit for the vehicle's auxiliary power consumption.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1068,7 +1068,7 @@
           },
           {
             "name": "type",
-            "description": "Type of temperature of the battery.",
+            "description": "Preferred unit for the temperature of the battery.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1232,7 +1232,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the charge speed of the battery.",
+            "description": "Preferred unit for the battery's charge speed.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1276,7 +1276,7 @@
         "inputFields": [
           {
             "name": "value",
-            "description": "Value of the charge speed of the battery.",
+            "description": "Value of the battery's charge speed.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1292,7 +1292,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the charge speed of the battery.",
+            "description": "Preferred unit for the battery's charge speed.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1376,7 +1376,7 @@
           },
           {
             "name": "type",
-            "description": "Type of total charge amount.",
+            "description": "Preferred unit for the total charge amount.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2828,7 +2828,7 @@
           },
           {
             "name": "time",
-            "description": "Fixed price per hour.",
+            "description": "Fixed price per unit of time defined in the step size.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -5579,12 +5579,16 @@
           },
           {
             "name": "departure_time",
-            "description": "Departure time of a route.",
+            "description": "Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -5707,7 +5711,7 @@
           },
           {
             "name": "departure_time",
-            "description": "Route departure time.",
+            "description": "Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data.",
             "type": {
               "kind": "SCALAR",
               "name": "DateTime",
@@ -8058,7 +8062,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the value of elevation.",
+            "description": "Preferred unit for the elevation.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -9117,6 +9121,12 @@
           {
             "name": "N3",
             "description": "Only N3 type of heavy vehicles can be parked at the charging station. N3 vehicles have a maximum mass exceeding 12 tonnes (26,000 lbs).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "N3_O4",
+            "description": "N3 type of heavy vehicles having O4 type of trailers can be parked at the charging station. N3 vehicles have a maximum mass exceeding 12 tonnes (26,000 lbs) and O4 trailers have a maximum mass exceeding 10 tonnes (22000 lbs).",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -10488,7 +10498,7 @@
           },
           {
             "name": "createRoute",
-            "description": "[BETA] Create a new route from the route input and its ID.",
+            "description": "Create a new route from the route input and its ID.",
             "args": [
               {
                 "name": "input",
@@ -10521,7 +10531,7 @@
           },
           {
             "name": "newRoute",
-            "description": "Create a new route from the route input and its ID",
+            "description": "Deprecated: In favor of createRoute.",
             "args": [
               {
                 "name": "input",
@@ -13867,7 +13877,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the value of the vehicle's odometer.",
+            "description": "Preferred unit for the vehicle's odometer.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -13927,7 +13937,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the value of the vehicle's odometer.",
+            "description": "Preferred unit for the vehicle's odometer.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -14069,24 +14079,56 @@
           },
           {
             "name": "ranking",
-            "description": "Ranking level on which the operator is placed or null in case the operator is not on any ranking level.",
+            "description": "Ranking level on which the operator is placed or null in case the operator is not on any ranking level. Default operator preference applied to routes created through newRoute mutation if no operator preference is specified in the request.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Int",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of ranking_levels."
           },
           {
             "name": "excluded",
-            "description": "Flag which indicates if the operator is in the excluded list.",
+            "description": "Flag which indicates if the operator is in the excluded list. Default operator preference applied to routes created through newRoute mutation if no operator preference is specified in the request.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
               "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of excluded_countries."
+          },
+          {
+            "name": "ranking_levels",
+            "description": "Ranking configuration for the operator. An operator can be ranked on different levels in different countries. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "OperatorRankingLevels",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "excluded_countries",
+            "description": "List of countries where the operator is excluded. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -14124,8 +14166,20 @@
             "deprecationReason": null
           },
           {
-            "name": "ranking",
-            "description": "List of ranking level(s) to be retrieved. Valid values are 1 to 10.",
+            "name": "ranking_levels",
+            "description": "List of ranking level(s) to be retrieved. An operator can be ranked on different levels in different countries. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "OperatorRankingLevelsFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "excluded_countries",
+            "description": "List of countries where the operator is excluded. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -14133,23 +14187,11 @@
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
                   "ofType": null
                 }
               }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "excluded",
-            "description": "Only retrieve operators that are in the excluded list.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -14249,6 +14291,148 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "OperatorRankingLevels",
+        "description": "Ranking configuration for the operator. An operator can be ranked on different levels in different countries. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request.",
+        "fields": [
+          {
+            "name": "low",
+            "description": "Low level for operators ranking.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "medium",
+            "description": "Medium level for operators ranking.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "high",
+            "description": "High level for operators ranking.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "OperatorRankingLevelsFilter",
+        "description": "Filter operators by ranking levels.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "low",
+            "description": "Low level for operators ranking.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "medium",
+            "description": "Medium level for operators ranking.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "high",
+            "description": "High level for operators ranking.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "OutsideTempInput",
         "description": null,
@@ -14272,7 +14456,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the value of the outside temperature.",
+            "description": "Preferred unit for the outside temperature.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -14326,7 +14510,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the temperature.",
+            "description": "Preferred unit for the outside temperature.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -14386,7 +14570,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the value of the outside temperature.",
+            "description": "Preferred unit for the outside temperature.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -14744,7 +14928,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the value of the power.",
+            "description": "Preferred unit for the power.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -15514,7 +15698,7 @@
           },
           {
             "name": "route",
-            "description": "Get a route by ID",
+            "description": "Deprecated: In favor of getRoute.",
             "args": [
               {
                 "name": "id",
@@ -15543,7 +15727,7 @@
           },
           {
             "name": "getRoute",
-            "description": "[BETA] Get a route by ID.",
+            "description": "Get a route by ID.",
             "args": [
               {
                 "name": "id",
@@ -15576,7 +15760,7 @@
           },
           {
             "name": "getRouteEmissions",
-            "description": "[BETA] Get emissions for a route.",
+            "description": "Get emissions for a route.",
             "args": [
               {
                 "name": "route_id",
@@ -15625,7 +15809,7 @@
           },
           {
             "name": "routeEmissions",
-            "description": "Emissions profile for route.",
+            "description": "Deprecated: In favor of getRouteEmissions.",
             "args": [
               {
                 "name": "route_id",
@@ -15670,7 +15854,7 @@
           },
           {
             "name": "routePath",
-            "description": "Retrieve information about a route path segment",
+            "description": "Deprecated: In favor of RouteDetails.path_plot.",
             "args": [
               {
                 "name": "id",
@@ -18961,23 +19145,19 @@
           },
           {
             "name": "consumption",
-            "description": "Total energy used for a route in kilowatt hours.",
+            "description": "Total energy used for a route in kilowatt hours. For HEVs and PHEVs this field will return null.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "range_at_origin",
-            "description": "Range available at the beginning of a trip.",
+            "description": "Range available at the start of a trip. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
             "args": [
               {
                 "name": "unit",
@@ -18993,20 +19173,16 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "range_at_destination",
-            "description": "Range available at the end of a trip.",
+            "description": "Range available at the end of a trip. Note: The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
             "args": [
               {
                 "name": "unit",
@@ -19022,13 +19198,9 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -19051,9 +19223,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -19136,7 +19312,7 @@
           },
           {
             "name": "alternative_stations",
-            "description": "Alternative stations along a route within specified radius.",
+            "description": "Alternative stations along a route within a specified radius. Will only return stations if alternative_station_radius was specified in the createRoute mutation.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -19275,7 +19451,7 @@
           },
           {
             "name": "operator_ranking",
-            "description": "Ranking of an operator.",
+            "description": "The value indicates the operator's ranking based on the station's location, in accordance with the list of countries from the configuration or request.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -19314,7 +19490,7 @@
           },
           {
             "name": "charging",
-            "description": "Total duration charging, in seconds.",
+            "description": "Total charging duration, in seconds.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -19330,7 +19506,7 @@
           },
           {
             "name": "driving",
-            "description": "Total duration driving, in seconds.",
+            "description": "Total driving duration, in seconds.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -19346,7 +19522,7 @@
           },
           {
             "name": "stopover",
-            "description": "Total duration stopped for a short stay, for example at a via point, in seconds.",
+            "description": "Total stop duration, excluding charge stops, in seconds.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -19362,12 +19538,16 @@
           },
           {
             "name": "ferry",
-            "description": "Total duration of ferry rides, in seconds.",
+            "description": "Total ferry duration, in seconds.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -19674,16 +19854,12 @@
           },
           {
             "name": "consumption",
-            "description": "Total energy used in a leg in kilowatt hours.",
+            "description": "Total energy used in a leg in kilowatt hours. For HEVs and PHEVs this field will return null.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -19722,7 +19898,7 @@
           },
           {
             "name": "range_at_origin",
-            "description": "Range at the origin of the leg.",
+            "description": "Range at the start of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
             "args": [
               {
                 "name": "unit",
@@ -19738,20 +19914,16 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "range_at_destination",
-            "description": "Range at the destination of the leg.",
+            "description": "Range available at the end of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
             "args": [
               {
                 "name": "unit",
@@ -19767,20 +19939,16 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "range_after_charge",
-            "description": "Range after charging on the leg.",
+            "description": "Range after charging on the leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
             "args": [
               {
                 "name": "unit",
@@ -19821,7 +19989,7 @@
           },
           {
             "name": "station",
-            "description": "Information about the station at the origin of this leg.",
+            "description": "Information about the station at the destination of a leg. ",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -20198,7 +20366,7 @@
           },
           {
             "name": "interval",
-            "description": "Interval of points that are included in this instruction, an array with 2 values, where the first value is the index of the polyline where the interval starts. The second value is where it ends.",
+            "description": "Interval of points included in this instruction, represented as an array with two values: the first is the index of the polyline where the interval starts, and the second is where it ends.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -20464,9 +20632,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -20521,13 +20693,9 @@
             "description": "Total energy used in a section in kilowatt-hours. The value will be 0 for walking sections.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -20780,37 +20948,37 @@
         "enumValues": [
           {
             "name": "station",
-            "description": null,
+            "description": "This leg ends at a charging station and the vehicle must recharge.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "station_via",
-            "description": null,
+            "description": "This leg ends at a via charging station and the vehicle must recharge.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "station_final",
-            "description": null,
+            "description": "This leg ends at the destination which is a charging station, and is the last leg of the route.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "station_amenity",
-            "description": null,
+            "description": "This leg ends at a scheduled charging station and the vehicle must recharge.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "via",
-            "description": null,
+            "description": "This leg ends at a via location.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "final",
-            "description": null,
+            "description": "This leg ends at the destination, and is the last leg of the route.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -20843,16 +21011,20 @@
             "description": "Location of the maneuver.",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "RouteDetailsLegSectionFeaturePoint",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDetailsLegSectionFeaturePoint",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "name",
-            "description": "Name of the street on which an instruction is.",
+            "description": "Name of the street associated with the instruction.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -20952,15 +21124,19 @@
             "description": "Aggregation of tags over the current maneuver.",
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "ENUM",
-                  "name": "RouteDetailsTag",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "RouteDetailsTag",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -21038,16 +21214,12 @@
           },
           {
             "name": "consumption",
-            "description": "Consumption, in kilowatt hours, of a route path segment.",
+            "description": "Consumption, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -21099,7 +21271,7 @@
           },
           {
             "name": "state_of_charge",
-            "description": "State of charge, in kilowatt hours, of a route path segment.",
+            "description": "State of charge, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null.",
             "args": [
               {
                 "name": "unit",
@@ -25265,7 +25437,7 @@
           },
           {
             "name": "exclude",
-            "description": "Route operators that should be excluded.",
+            "description": "Operators that should be excluded for a route calculation.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -25309,7 +25481,7 @@
           },
           {
             "name": "exclude",
-            "description": "Route operators that should be excluded.",
+            "description": "Operators that should be excluded for a route calculation.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -25529,7 +25701,7 @@
           },
           {
             "name": "high",
-            "description": "Most significant level three for operator ranking.",
+            "description": "Most significant level for operator ranking.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -26568,9 +26740,13 @@
             "description": "Number of occupants present in the vehicle.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -26580,9 +26756,13 @@
             "description": "Combined weight of the occupants. This can only be used in combination with occupants.",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "TotalOccupantWeight",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "TotalOccupantWeight",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -27206,9 +27386,13 @@
             "description": "EV battery specific configuration.",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "RouteVehicleBattery",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteVehicleBattery",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -27218,21 +27402,29 @@
             "description": "Charging configuration.",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "RouteVehicleCharging",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteVehicleCharging",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "tire_pressure",
-            "description": "Average tire pressures of all wheels, starting from the front side (right to left) and then to the rear.",
+            "description": "Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right.",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "TirePressure",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "TirePressure",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -27254,21 +27446,29 @@
             "description": "Value of the auxiliary power consumption of the vehicle.",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "AuxiliaryConsumption",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "AuxiliaryConsumption",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "climate",
-            "description": "Flag which indicates if climate control is on.",
+            "description": "Flag indicating if climate control is on.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -27291,7 +27491,7 @@
           },
           {
             "name": "cabin",
-            "description": "Vehicle cabin configuration.",
+            "description": "Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -27331,7 +27531,7 @@
           },
           {
             "name": "is_parked",
-            "description": "Flag which indicates if vehicle is in park, neutral or turned off.",
+            "description": "Flag indicating if a vehicle is in park, neutral, or turned off.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -27378,7 +27578,7 @@
         "fields": [
           {
             "name": "capacity",
-            "description": "Battery capacity.",
+            "description": "Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -27394,7 +27594,7 @@
           },
           {
             "name": "state_of_charge",
-            "description": "State of charge.",
+            "description": "Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity. ",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -27410,7 +27610,7 @@
           },
           {
             "name": "final_state_of_charge",
-            "description": "Minimum final battery state of charge. The value should be between 0 and 60% of the battery capacity.",
+            "description": "Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -27474,7 +27674,7 @@
           },
           {
             "name": "is_charging",
-            "description": "Flag which indicates if the vehicle is charging.",
+            "description": "Flag indicating if the vehicle is charging.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -27498,7 +27698,7 @@
         "inputFields": [
           {
             "name": "capacity",
-            "description": "Battery capacity.",
+            "description": "Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StateOfChargeInput",
@@ -27510,7 +27710,7 @@
           },
           {
             "name": "state_of_charge",
-            "description": "Battery state of charge.",
+            "description": "Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity. ",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StateOfChargeInput",
@@ -27522,7 +27722,7 @@
           },
           {
             "name": "final_state_of_charge",
-            "description": "Minimum final battery state of charge. The value should be between 0 and 60% of the battery capacity.",
+            "description": "Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StateOfChargeInput",
@@ -27582,7 +27782,7 @@
           },
           {
             "name": "is_charging",
-            "description": "Flag which indicates if the vehicle is charging.",
+            "description": "Flag indicating if the vehicle is charging.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -27604,7 +27804,7 @@
         "fields": [
           {
             "name": "is_preconditioned",
-            "description": "Flag which indicates if the vehicle cabin was preconditioned for the desired temperature.",
+            "description": "Flag indicating if the vehicle cabin was preconditioned for the desired temperature.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -27648,7 +27848,7 @@
         "inputFields": [
           {
             "name": "is_preconditioned",
-            "description": "Flag which indicates if the vehicle cabin was preconditioned for the desired temperature.",
+            "description": "Flag indicating if the vehicle cabin was preconditioned for the desired temperature.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -27714,7 +27914,7 @@
           },
           {
             "name": "risk_margin",
-            "description": "Percentage for the minimum limit of the battery's capacity before a recharge. The value should be between 0 and 60. Defaults to 10.",
+            "description": "Minimum remaining state of charge at charging stops, expressed as a percentage. The value must be between 0 and 60. If not provided, the project configuration value is used.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -27730,18 +27930,22 @@
           },
           {
             "name": "connectors",
-            "description": "Supported connectors.",
+            "description": "Supported connectors. If not specified, it defaults to the vehicle's connectors.",
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RouteVehicleChargingConnector",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "RouteVehicleChargingConnector",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -27750,18 +27954,22 @@
           },
           {
             "name": "adapters",
-            "description": "Supported adapters.",
+            "description": "Supported adapters. If not specified, adapters will not be considered.",
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RouteVehicleChargingConnector",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "RouteVehicleChargingConnector",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -27797,7 +28005,7 @@
           },
           {
             "name": "maximum_charge_speed",
-            "description": "Maximum charging speed for the plug.",
+            "description": "Maximum charging speed for this plug.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -27892,7 +28100,7 @@
           },
           {
             "name": "risk_margin",
-            "description": "Percentage representing the minimum value of the state of charge at a next charge stop. The value should be between 0 and 60.",
+            "description": "Minimum remaining state of charge at charging stops, expressed as a percentage. The value must be between 0 and 60. If not provided, the project configuration value is used.",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -27904,7 +28112,7 @@
           },
           {
             "name": "connectors",
-            "description": "Supported connectors.",
+            "description": "Supported connectors. If not specified, it defaults to the vehicle's connectors.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -27924,7 +28132,7 @@
           },
           {
             "name": "adapters",
-            "description": "Supported adapters.",
+            "description": "Supported adapters. If not specified, adapters will not be considered.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -28136,7 +28344,7 @@
           },
           {
             "name": "tire_pressure",
-            "description": "Average tire pressures of all wheels.",
+            "description": "Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TirePressureInput",
@@ -28172,7 +28380,7 @@
           },
           {
             "name": "climate",
-            "description": "Flag which indicates if climate control is on.",
+            "description": "Flag indicating if climate control is on.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -28196,7 +28404,7 @@
           },
           {
             "name": "cabin",
-            "description": "Vehicle cabin configuration for creating the route.",
+            "description": "Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RouteVehicleCabinInput",
@@ -28232,7 +28440,7 @@
           },
           {
             "name": "is_parked",
-            "description": "Flag which indicates if vehicle is in park, neutral or turned off.",
+            "description": "Flag indicating if a vehicle is in park, neutral, or turned off.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -28952,7 +29160,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the state of charge of the vehicle.",
+            "description": "Preferred unit for the vehicle's state of charge.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -28996,7 +29204,7 @@
         "inputFields": [
           {
             "name": "value",
-            "description": "Value of the state of charge of the vehicle.",
+            "description": "Value of the vehicle's state of charge.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -29012,7 +29220,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the state of charge of the vehicle.",
+            "description": "Preferred unit for the vehicle's state of charge.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -31029,7 +31237,7 @@
           },
           {
             "name": "routeUpdatedById",
-            "description": "Subscription for a specific route was updated in the system event",
+            "description": "Deprecated: In favor of route.",
             "args": [
               {
                 "name": "id",
@@ -31058,7 +31266,7 @@
           },
           {
             "name": "route",
-            "description": "[BETA] Subscription for a specific route was updated in the system event",
+            "description": "Subscribe to a specific route to receive system event updates.",
             "args": [
               {
                 "name": "id",
@@ -31874,7 +32082,7 @@
           },
           {
             "name": "type",
-            "description": "Type of temperature.",
+            "description": "Preferred unit for the temperature.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -31918,7 +32126,7 @@
           },
           {
             "name": "type",
-            "description": "Type of temperature.",
+            "description": "Preferred unit for the temperature.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -31967,7 +32175,7 @@
         "fields": [
           {
             "name": "value",
-            "description": "Values for the tire pressure, starting from the front side right to left and to the rear (FR, FL, RL, RR).",
+            "description": "Values for the tire pressure, ordered from front right to front left, then rear left to rear right.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -31991,7 +32199,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the value of pressure.",
+            "description": "Preferred unit for the tire pressure.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -32035,7 +32243,7 @@
         "inputFields": [
           {
             "name": "value",
-            "description": "Values for the tire pressure, starting from the front side right to left and to the rear.",
+            "description": "Values for the tire pressure, ordered from front right to front left, then rear left to rear right.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -32059,7 +32267,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the value of pressure.",
+            "description": "Preferred unit for the tire pressure.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -32136,7 +32344,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the current weight of the cargo.",
+            "description": "Preferred unit for the current weight of the cargo.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -32196,7 +32404,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the current weight of the cargo.",
+            "description": "Preferred unit for the current weight of the cargo.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -32250,7 +32458,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the current weight of the occupants.",
+            "description": "Preferred unit for the current weight of the occupants.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -32310,7 +32518,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the current weight of the occupants.",
+            "description": "Preferred unit for the current weight of the occupants.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -39329,7 +39537,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the vehicle speed.",
+            "description": "Preferred unit for the vehicle's speed.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -39373,7 +39581,7 @@
         "inputFields": [
           {
             "name": "value",
-            "description": "Value of the vehicle speed.",
+            "description": "Value of the vehicle's speed.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -39389,7 +39597,7 @@
           },
           {
             "name": "type",
-            "description": "Type of the vehicle speed.",
+            "description": "Preferred unit for the vehicle's speed.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -41080,6 +41288,86 @@
               "ofType": null
             },
             "defaultValue": "false",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "validateIntInterval",
+        "description": "Validate if the value is a valid integer between min and max.",
+        "isRepeatable": false,
+        "locations": ["INPUT_FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "min",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "max",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minErrorCode",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minErrorMessage",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maxErrorCode",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maxErrorMessage",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           }
