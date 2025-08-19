@@ -1157,6 +1157,10 @@ export type CreateRoute = {
   alternative_station_radius?: Maybe<AlternativeStationRadius>;
   /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
   departure_time: Scalars["DateTime"];
+  /** [BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
+  avoid?: Maybe<Array<RouteAvoid>>;
+  /** [BETA] User-defined maximum speed used for this route, if provided. */
+  maximum_speed?: Maybe<MaximumSpeed>;
 };
 
 /** Input for the create route mutation. */
@@ -1177,6 +1181,10 @@ export type CreateRouteInput = {
   alternative_station_radius?: Maybe<AlternativeStationRadiusInput>;
   /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
   departure_time?: Maybe<Scalars["DateTime"]>;
+  /** [BETA] Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
+  avoid?: Maybe<Array<RouteAvoid>>;
+  /** [BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. */
+  maximum_speed?: Maybe<MaximumSpeedInput>;
 };
 
 /** Currency in the ISO 4217 format. */
@@ -2018,6 +2026,20 @@ export enum MappingProvider {
   MAPBOXV5 = "MapboxV5"
 }
 
+export type MaximumSpeed = {
+  /** Numeric value of the user-defined maximum speed. */
+  value: Scalars["Int"];
+  /** Unit in which speed is measured. */
+  type: SpeedUnit;
+};
+
+export type MaximumSpeedInput = {
+  /** Numeric value of the user-defined maximum speed. */
+  value: Scalars["Int"];
+  /** Unit in which speed is measured. */
+  type: SpeedUnit;
+};
+
 export enum MeasurementUnit {
   /** Return the measurement in millimeters. */
   MILLIMETER = "millimeter",
@@ -2072,10 +2094,10 @@ export type Mutation = {
    * This is a premium feature, contact Chargetrip for more information.
    */
   deleteUserReview: Review;
-  /** Create a new route from the route input and its ID. */
-  createRoute: Scalars["ID"];
   /** Deprecated: In favor of createRoute. */
   newRoute?: Maybe<Scalars["ID"]>;
+  /** Create a new route from the route input and its ID. */
+  createRoute: Scalars["ID"];
 };
 
 export type MutationcreateConnectedVehicleArgs = {
@@ -2122,12 +2144,12 @@ export type MutationdeleteUserReviewArgs = {
   id: Scalars["ID"];
 };
 
-export type MutationcreateRouteArgs = {
-  input: CreateRouteInput;
-};
-
 export type MutationnewRouteArgs = {
   input?: Maybe<RequestInput>;
+};
+
+export type MutationcreateRouteArgs = {
+  input: CreateRouteInput;
 };
 
 /** The navigation session data */
@@ -3162,16 +3184,16 @@ export type Query = {
    * This is a premium feature, contact Chargetrip for more information.
    */
   userReviewList?: Maybe<Array<Review>>;
+  /** Deprecated: In favor of getRouteEmissions. */
+  routeEmissions: RouteEmissions;
   /** Deprecated: In favor of getRoute. */
   route?: Maybe<Route>;
+  /** Deprecated: In favor of RouteDetails.path_plot. */
+  routePath?: Maybe<RoutePath>;
   /** Get a route by ID. */
   getRoute: RouteResponse;
   /** Get emissions for a route. */
   getRouteEmissions: RouteDetailsEmissions;
-  /** Deprecated: In favor of getRouteEmissions. */
-  routeEmissions: RouteEmissions;
-  /** Deprecated: In favor of RouteDetails.path_plot. */
-  routePath?: Maybe<RoutePath>;
   /** Get information about a station by its ID. */
   station?: Maybe<Station>;
   /** Get a full list of stations. */
@@ -3239,8 +3261,19 @@ export type QueryuserReviewListArgs = {
   page?: Maybe<Scalars["Int"]>;
 };
 
+export type QueryrouteEmissionsArgs = {
+  route_id: Scalars["ID"];
+  route_alternative_id?: Maybe<Scalars["ID"]>;
+};
+
 export type QueryrouteArgs = {
   id: Scalars["ID"];
+};
+
+export type QueryroutePathArgs = {
+  id: Scalars["ID"];
+  location: PointInput;
+  alternativeId?: Maybe<Scalars["ID"]>;
 };
 
 export type QuerygetRouteArgs = {
@@ -3250,17 +3283,6 @@ export type QuerygetRouteArgs = {
 export type QuerygetRouteEmissionsArgs = {
   route_id: Scalars["ID"];
   route_details_id: Scalars["ID"];
-};
-
-export type QueryrouteEmissionsArgs = {
-  route_id: Scalars["ID"];
-  route_alternative_id?: Maybe<Scalars["ID"]>;
-};
-
-export type QueryroutePathArgs = {
-  id: Scalars["ID"];
-  location: PointInput;
-  alternativeId?: Maybe<Scalars["ID"]>;
 };
 
 export type QuerystationArgs = {
@@ -3803,6 +3825,12 @@ export type RouteApp = {
   id?: Maybe<Scalars["ID"]>;
 };
 
+/** Types of route features that can be avoided in routing. */
+export enum RouteAvoid {
+  TOLL_ROAD = "toll_road",
+  FERRY = "ferry"
+}
+
 export type RouteDestinationFeaturePoint = {
   /** ID of the feature. */
   id?: Maybe<Scalars["ID"]>;
@@ -3897,6 +3925,8 @@ export type RouteDetailsAlternativeStation = {
   status: ChargerStatus;
   /** The value indicates the operator's ranking based on the station's location, in accordance with the list of countries from the configuration or request. */
   operator_ranking?: Maybe<OperatorRankingLevel>;
+  /** ID of the station's operator. */
+  operator_id?: Maybe<Scalars["ID"]>;
 };
 
 /** Aggregation of all durations of a route. */
@@ -4210,7 +4240,7 @@ export type RouteDetailsManeuverdistanceArgs = {
 export type RouteDetailsPathSegment = {
   /** Elevation value of a route path segment. */
   elevation: Scalars["Float"];
-  /** Average speed of a route path segment. */
+  /** Average speed of a route path segment. This value is determined using legal maximum speed and, if provided, the user defined maximum speed. */
   average_speed: Scalars["Float"];
   /** Consumption, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null. */
   consumption?: Maybe<Scalars["Float"]>;
@@ -4220,7 +4250,10 @@ export type RouteDetailsPathSegment = {
   duration: Scalars["Float"];
   /** State of charge, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null. */
   state_of_charge?: Maybe<Scalars["Float"]>;
-  /** Maximum vehicle speed of a route path segment. */
+  /**
+   * Maximum vehicle speed of a route path segment.
+   * @deprecated Will be removed in the future.
+   */
   maximum_speed: Scalars["Float"];
 };
 
@@ -4657,14 +4690,14 @@ export type RouteLegOperationalElectricityEmissionsIntensity = {
   energy_sources: RouteOperationalElectricityEnergySources;
   /** Average emissions intensity of processing and transport of primary energy, power generation infrastructure, etc. in unit CO2e/kWh. */
   infrastructure: Scalars["Float"];
-  /** Estimated electricity demand at the time and place the electricity for this leg was obtained as a fraction of the annual average demand. */
-  average_demand: Scalars["Float"];
-  /** Fraction of regional power generation that is not affected by demand (is assumed to always be on). */
-  base_load_fraction: Scalars["Float"];
   /** Season for which the leg was calculated. */
   season: RouteOperationalElectricitySeason;
   /** Climate for which the leg was calculated. */
   climate: RouteOperationalElectricityClimate;
+  /** Estimated electricity demand at the time and place the electricity for this leg was obtained as a fraction of the annual average demand. */
+  average_demand: Scalars["Float"];
+  /** Fraction of regional power generation that is not affected by demand (is assumed to always be on). */
+  base_load_fraction: Scalars["Float"];
 };
 
 /** Electricity emission intensity for a leg */
@@ -6115,28 +6148,16 @@ export enum StepType {
 }
 
 export type Subscription = {
-  /** [BETA] Subscribe to a connected vehicle. */
-  connectedVehicle?: Maybe<ConnectedVehicle>;
-  /** Subscribe to an isoline in order to receive updates. */
-  isoline?: Maybe<Isoline>;
-  /** [BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates */
-  navigationUpdatedById?: Maybe<Navigation>;
   /** Deprecated: In favor of route. */
   routeUpdatedById?: Maybe<Route>;
   /** Subscribe to a specific route to receive system event updates. */
   route: RouteResponse;
-};
-
-export type SubscriptionconnectedVehicleArgs = {
-  id: Scalars["ID"];
-};
-
-export type SubscriptionisolineArgs = {
-  id: Scalars["ID"];
-};
-
-export type SubscriptionnavigationUpdatedByIdArgs = {
-  id: Scalars["ID"];
+  /** [BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates */
+  navigationUpdatedById?: Maybe<Navigation>;
+  /** [BETA] Subscribe to a connected vehicle. */
+  connectedVehicle?: Maybe<ConnectedVehicle>;
+  /** Subscribe to an isoline in order to receive updates. */
+  isoline?: Maybe<Isoline>;
 };
 
 export type SubscriptionrouteUpdatedByIdArgs = {
@@ -6144,6 +6165,18 @@ export type SubscriptionrouteUpdatedByIdArgs = {
 };
 
 export type SubscriptionrouteArgs = {
+  id: Scalars["ID"];
+};
+
+export type SubscriptionnavigationUpdatedByIdArgs = {
+  id: Scalars["ID"];
+};
+
+export type SubscriptionconnectedVehicleArgs = {
+  id: Scalars["ID"];
+};
+
+export type SubscriptionisolineArgs = {
   id: Scalars["ID"];
 };
 
