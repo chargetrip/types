@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/chargetrip/types/compare/v1.46.2...v1.47.0) (2025-08-19)
+
+
+### Features
+
+* update schema with latest route v2 changes ([39ec50f](https://github.com/chargetrip/types/commit/39ec50fcd4f5aa3f2de8e3b5a6d0509e4f1adc66))
+
 ## [1.46.2](https://github.com/chargetrip/types/compare/v1.46.1...v1.46.2) (2025-05-27)
 
 
