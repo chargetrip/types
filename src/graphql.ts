@@ -99,6 +99,24 @@ export enum AdhocAuthorisationMethod {
   SMS = "SMS"
 }
 
+export type AirPressure = {
+  /** Value of the atmospheric pressure. */
+  value: Scalars["Float"];
+  /** Atmospheric pressure unit. */
+  type: AirPressureUnit;
+};
+
+export type AirPressureInput = {
+  /** Value of the atmospheric pressure. */
+  value: Scalars["Float"];
+  /** Atmospheric pressure unit. */
+  type: AirPressureUnit;
+};
+
+export enum AirPressureUnit {
+  MILLIBAR = "millibar"
+}
+
 export type AlternativeStationRadius = {
   /** Value of the alternative station radius. */
   value: Scalars["Float"];
@@ -117,7 +135,7 @@ export type AlternativeStationRadiusInput = {
   source?: Maybe<TelemetryInputSource>;
 };
 
-/** Amenities available near a station */
+/** Amenities available near a station. */
 export enum Amenities {
   PARK = "park",
   RESTAURANT = "restaurant",
@@ -131,30 +149,95 @@ export enum Amenities {
   PHARMACY = "pharmacy"
 }
 
-/** The amenity model */
+/** Amenity data. */
 export type Amenity = {
-  /** Unique amenity ID */
+  /**
+   * Unique amenity ID.
+   * @deprecated Will be removed in the future.
+   */
   id?: Maybe<Scalars["ID"]>;
-  /** ID provided by an amenity data source as the row ID */
+  /**
+   * ID provided by an amenity data source as the row ID.
+   * @deprecated In favor of external_id.
+   */
   externalId?: Maybe<Scalars["String"]>;
-  /** Name of an amenity */
+  /** ID provided by an amenity data source as the row ID. */
+  external_id: Scalars["String"];
+  /** Name of the amenity. */
   name?: Maybe<Scalars["String"]>;
-  /** Geo location coordinates. This is a GeoJSON Point */
-  location?: Maybe<Point>;
-  /** Embedded Address */
+  /** Geo location coordinates. This is a GeoJSON Point. */
+  location: Point;
+  /** Address of the amenity. */
   address?: Maybe<Address>;
-  /** Type of amenity. An amenity can belong to multiple categories */
-  type?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** Rating of an amenity, the value will be between 0.0 and 10.0. If no rating has been given, the value will be set to null */
-  rating?: Maybe<Scalars["Float"]>;
-  /** Computed distance between station and amenity */
+  /** Type of amenity. An amenity can belong to multiple categories. */
+  type: Array<Maybe<Scalars["String"]>>;
+  /**
+   * Computed distance between station and amenity.
+   * @deprecated In favor of station_distance.
+   */
   distance?: Maybe<Scalars["Int"]>;
-  /** Full path URL to amenity foursquare page */
+  /** Computed distance between station and amenity. */
+  station_distance: Scalars["Float"];
+  /**
+   * Full path URL to amenity foursquare page.
+   * @deprecated Will be removed in the future.
+   */
   foursquareUrl?: Maybe<Scalars["String"]>;
-  /** Date and time when an amenity was created */
+  /** Opening hours of the amenity. */
+  opening_hours?: Maybe<AmenityOpeningHours>;
+  /** Indicates whether pets are allowed. This does not apply to assistance dogs, which may have legal access. */
+  pets_allowed?: Maybe<Scalars["Boolean"]>;
+  /** Accessibility options at the amenity. */
+  accessibility?: Maybe<AmenityAccessibility>;
+  /** Contact information for the amenity. */
+  contact?: Maybe<AmenityContact>;
+  /** Rating of an amenity, the value will be between 0.0 and 10.0. If no rating has been given, the value will be set to null. */
+  rating?: Maybe<Scalars["Float"]>;
+  /**
+   * Date and time when an amenity was created.
+   * @deprecated Will be removed in the future.
+   */
   createdAt?: Maybe<Scalars["String"]>;
-  /** Date and time when an amenity was last updated */
+  /**
+   * Date and time when an amenity was last updated.
+   * @deprecated In favor of last_updated.
+   */
   updatedAt?: Maybe<Scalars["String"]>;
+  /** Date and time when an amenity was last updated. */
+  last_updated: Scalars["DateTime"];
+};
+
+/** Amenity data. */
+export type Amenitystation_distanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+/** Accessibility options at the amenity. */
+export type AmenityAccessibility = {
+  /** Type of wheelchair accessibility at the amenity. */
+  wheelchair?: Maybe<AmenityWheelchairAccessibilityType>;
+};
+
+/** Contact information for the amenity. */
+export type AmenityContact = {
+  /** Phone number to contact the amenity. */
+  phone?: Maybe<Scalars["String"]>;
+  /** Website of the amenity. */
+  website?: Maybe<Scalars["String"]>;
+};
+
+/** Filter that can be applied to retrieve the amenity list. */
+export type AmenityListFilter = {
+  /** Type of amenity. An amenity can belong to multiple categories. */
+  type?: Maybe<Array<Amenities>>;
+};
+
+/** Opening and access hours of the location. */
+export type AmenityOpeningHours = {
+  /** True to represent 24 hours a day and 7 days a week. */
+  twentyfourseven?: Maybe<Scalars["Boolean"]>;
+  /** Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object. */
+  regular_hours?: Maybe<Array<Maybe<AmenityRegularHours>>>;
 };
 
 /** Amenity preferences for a route. */
@@ -163,6 +246,16 @@ export type AmenityPreferencesInput = {
   all_charge_stops?: Maybe<Array<AmenityType>>;
   /** Scheduled charge stops, with a specified amenity and timeline. */
   scheduled_charge_stops?: Maybe<Array<ScheduledChargeStopInput>>;
+};
+
+/** Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object. */
+export type AmenityRegularHours = {
+  /** Number of days in the week, from Monday (1) till Sunday (7). */
+  weekday?: Maybe<Scalars["Int"]>;
+  /** Beginning of the regular period, in local time, given in hours and minutes. Must be in 24h format with leading zeros. Example: "18:15". Hour/Minute separator: ":" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]. */
+  period_begin?: Maybe<Scalars["String"]>;
+  /** End of the regular period, in local time, syntax as for period_begin. Must be later than period_begin. */
+  period_end?: Maybe<Scalars["String"]>;
 };
 
 /** A list of amenity types. */
@@ -177,6 +270,18 @@ export enum AmenityType {
   SUPERMARKET = "supermarket",
   PLAYGROUND = "playground",
   PHARMACY = "pharmacy"
+}
+
+/** Type of wheelchair accessibility at the amenity. */
+export enum AmenityWheelchairAccessibilityType {
+  /** Wheelchairs have full unrestricted access. */
+  YES = "yes",
+  /** Wheelchairs have partial access (e.g some areas can be accessed and others not, areas requiring assistance by someone pushing up a steep gradient). */
+  LIMITED = "limited",
+  /** Wheelchairs have no unrestricted access (e.g. stair only access). */
+  NO = "no",
+  /** The amenity is designated or purpose-built for wheelchairs (e.g. bathroom designed for wheelchair access only). */
+  DESIGNATED = "designated"
 }
 
 export type AuthorizeConnectedVehicleInput = {
@@ -278,7 +383,6 @@ export type ChargeSpeedInput = {
   source?: Maybe<TelemetryInputSource>;
 };
 
-/** Charge speed unit. */
 export enum ChargeSpeedUnit {
   /** Return the charge speed in kilowatt hours. */
   KILOWATT_HOUR = "kilowatt_hour",
@@ -313,7 +417,6 @@ export type Charger = {
   total?: Maybe<Scalars["Int"]>;
 };
 
-/** Status of a charger. */
 export enum ChargerStatus {
   /** The charger is free. */
   FREE = "free",
@@ -867,6 +970,7 @@ export type Contact = {
 
 /** ISO-3166 alpha-2 country codes. */
 export enum CountryCodeAlpha2 {
+  AA = "AA",
   AD = "AD",
   AE = "AE",
   AF = "AF",
@@ -1151,12 +1255,21 @@ export type CreateRoute = {
   via?: Maybe<Array<RouteViaFeaturePoint>>;
   /** Operator preferences for a route. When provided, prefers routes that use higher order operators. */
   operators?: Maybe<RouteOperatorPreferences>;
-  /** Season of a route. */
-  season: RouteSeason;
+  /**
+   * Season of a route.
+   * @deprecated In favor of weather.
+   */
+  season?: Maybe<RouteSeason>;
   /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
   alternative_station_radius?: Maybe<AlternativeStationRadius>;
   /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
   departure_time: Scalars["DateTime"];
+  /** [BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
+  avoid?: Maybe<Array<RouteAvoid>>;
+  /** [BETA] User-defined maximum speed used for this route, if provided. */
+  maximum_speed?: Maybe<MaximumSpeed>;
+  /** Weather configuration for the route. Defined by a preset or custom weather conditions. */
+  weather?: Maybe<RouteWeather>;
 };
 
 /** Input for the create route mutation. */
@@ -1177,6 +1290,12 @@ export type CreateRouteInput = {
   alternative_station_radius?: Maybe<AlternativeStationRadiusInput>;
   /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
   departure_time?: Maybe<Scalars["DateTime"]>;
+  /** [BETA] Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
+  avoid?: Maybe<Array<RouteAvoid>>;
+  /** [BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. */
+  maximum_speed?: Maybe<MaximumSpeedInput>;
+  /** Weather configuration for the route. Defined by a preset or custom weather conditions. */
+  weather?: Maybe<RouteWeatherInput>;
 };
 
 /** Currency in the ISO 4217 format. */
@@ -1525,7 +1644,6 @@ export enum DimensionUnit {
   MILE = "mile"
 }
 
-/** Distance unit */
 export enum DistanceUnit {
   /** Return the distance in meters. */
   METER = "meter",
@@ -2018,6 +2136,20 @@ export enum MappingProvider {
   MAPBOXV5 = "MapboxV5"
 }
 
+export type MaximumSpeed = {
+  /** Numeric value of the user-defined maximum speed. */
+  value: Scalars["Int"];
+  /** Unit in which speed is measured. */
+  type: SpeedUnit;
+};
+
+export type MaximumSpeedInput = {
+  /** Numeric value of the user-defined maximum speed. */
+  value: Scalars["Int"];
+  /** Unit in which speed is measured. */
+  type: SpeedUnit;
+};
+
 export enum MeasurementUnit {
   /** Return the measurement in millimeters. */
   MILLIMETER = "millimeter",
@@ -2072,10 +2204,13 @@ export type Mutation = {
    * This is a premium feature, contact Chargetrip for more information.
    */
   deleteUserReview: Review;
+  /**
+   * Deprecated: In favor of createRoute.
+   * @deprecated In favor of `createRoute`.
+   */
+  newRoute?: Maybe<Scalars["ID"]>;
   /** Create a new route from the route input and its ID. */
   createRoute: Scalars["ID"];
-  /** Deprecated: In favor of createRoute. */
-  newRoute?: Maybe<Scalars["ID"]>;
 };
 
 export type MutationcreateConnectedVehicleArgs = {
@@ -2122,12 +2257,12 @@ export type MutationdeleteUserReviewArgs = {
   id: Scalars["ID"];
 };
 
-export type MutationcreateRouteArgs = {
-  input: CreateRouteInput;
-};
-
 export type MutationnewRouteArgs = {
   input?: Maybe<RequestInput>;
+};
+
+export type MutationcreateRouteArgs = {
+  input: CreateRouteInput;
 };
 
 /** The navigation session data */
@@ -2926,6 +3061,10 @@ export type Operator = {
 export type OperatorListFilter = {
   /** ISO-3166 alpha-2 country codes an operator is active in. */
   countries?: Maybe<Array<CountryCodeAlpha2>>;
+  /** List of ranking level(s) to be retrieved. Valid values are 1 to 10. Default operator preference applied to routes created through newRoute mutation if no operator preference is specified in the request. */
+  ranking?: Maybe<Array<Scalars["Int"]>>;
+  /** Only retrieve operators that are in the excluded list. Default operator preference applied to routes created through newRoute mutation if no operator preference is specified in the request. */
+  excluded?: Maybe<Scalars["Boolean"]>;
   /** List of ranking level(s) to be retrieved. An operator can be ranked on different levels in different countries. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request. */
   ranking_levels?: Maybe<OperatorRankingLevelsFilter>;
   /** List of countries where the operator is excluded. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request. */
@@ -3080,7 +3219,6 @@ export enum PowerUnit {
   HORSEPOWER = "horsepower"
 }
 
-/** Pressure units. */
 export enum PressureUnit {
   /** Return the pressure in bar. */
   BAR = "bar",
@@ -3138,7 +3276,7 @@ export type PricingListProduct = {
 };
 
 export type Query = {
-  /** Get a full list of amenities around a station */
+  /** Get a full list of amenities around a station. */
   amenityList?: Maybe<Array<Maybe<Amenity>>>;
   /** [BETA] Get a connected vehicles by id */
   connectedVehicle?: Maybe<ConnectedVehicle>;
@@ -3162,16 +3300,25 @@ export type Query = {
    * This is a premium feature, contact Chargetrip for more information.
    */
   userReviewList?: Maybe<Array<Review>>;
-  /** Deprecated: In favor of getRoute. */
+  /**
+   * Deprecated: In favor of getRouteEmissions.
+   * @deprecated In favor of `getRouteEmissions`.
+   */
+  routeEmissions: RouteEmissions;
+  /**
+   * Deprecated: In favor of getRoute.
+   * @deprecated In favor of `getRoute`.
+   */
   route?: Maybe<Route>;
-  /** Get a route by ID. */
-  getRoute: RouteResponse;
+  /**
+   * Deprecated: In favor of RouteDetails.path_plot.
+   * @deprecated In favor of `RouteDetails.path_plot`.
+   */
+  routePath?: Maybe<RoutePath>;
   /** Get emissions for a route. */
   getRouteEmissions: RouteDetailsEmissions;
-  /** Deprecated: In favor of getRouteEmissions. */
-  routeEmissions: RouteEmissions;
-  /** Deprecated: In favor of RouteDetails.path_plot. */
-  routePath?: Maybe<RoutePath>;
+  /** Get a route by ID. */
+  getRoute: RouteResponse;
   /** Get information about a station by its ID. */
   station?: Maybe<Station>;
   /** Get a full list of stations. */
@@ -3188,10 +3335,17 @@ export type Query = {
   vehiclePremium?: Maybe<VehiclePremium>;
   /** Get a full list of vehicles. */
   vehicleList?: Maybe<Array<Maybe<VehicleList>>>;
+  /** [BETA] Get a full list of vehicle makes. */
+  vehicleMakes: VehicleMakesResponse;
+  /** [BETA] Get a full list of vehicle make models. */
+  vehicleModels: VehicleModelsResponse;
 };
 
 export type QueryamenityListArgs = {
   stationId: Scalars["ID"];
+  filter?: Maybe<AmenityListFilter>;
+  size?: Maybe<Scalars["Int"]>;
+  page?: Maybe<Scalars["Int"]>;
 };
 
 export type QueryconnectedVehicleArgs = {
@@ -3239,12 +3393,19 @@ export type QueryuserReviewListArgs = {
   page?: Maybe<Scalars["Int"]>;
 };
 
+export type QueryrouteEmissionsArgs = {
+  route_id: Scalars["ID"];
+  route_alternative_id?: Maybe<Scalars["ID"]>;
+};
+
 export type QueryrouteArgs = {
   id: Scalars["ID"];
 };
 
-export type QuerygetRouteArgs = {
+export type QueryroutePathArgs = {
   id: Scalars["ID"];
+  location: PointInput;
+  alternativeId?: Maybe<Scalars["ID"]>;
 };
 
 export type QuerygetRouteEmissionsArgs = {
@@ -3252,15 +3413,8 @@ export type QuerygetRouteEmissionsArgs = {
   route_details_id: Scalars["ID"];
 };
 
-export type QueryrouteEmissionsArgs = {
-  route_id: Scalars["ID"];
-  route_alternative_id?: Maybe<Scalars["ID"]>;
-};
-
-export type QueryroutePathArgs = {
+export type QuerygetRouteArgs = {
   id: Scalars["ID"];
-  location: PointInput;
-  alternativeId?: Maybe<Scalars["ID"]>;
 };
 
 export type QuerystationArgs = {
@@ -3309,6 +3463,15 @@ export type QueryvehicleListArgs = {
   country?: Maybe<CountryCodeAlpha2>;
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
+};
+
+export type QueryvehicleMakesArgs = {
+  country?: Maybe<CountryCodeAlpha2>;
+};
+
+export type QueryvehicleModelsArgs = {
+  filter: VehicleModelsFilter;
+  country?: Maybe<CountryCodeAlpha2>;
 };
 
 export type RemoveConnectedVehicleInput = {
@@ -3454,15 +3617,17 @@ export type RequestEvInput = {
   heatPump?: Maybe<HeatPumpMode>;
   /** Vehicle cabin configuration. */
   cabin?: Maybe<RequestEvCabinInput>;
+  /** Number of passengers on board. */
+  numberOfPassengers?: Maybe<Scalars["Int"]>;
   /** Number of occupants. */
   occupants?: Maybe<Scalars["Int"]>;
   /** Cargo weight, in kg. */
   cargo?: Maybe<Scalars["Int"]>;
   /** Consumption specific to the EV or inputted by the request. */
   consumption?: Maybe<RequestEvConsumptionInput>;
-  /** Deprecated. */
+  /** In favor of `consumption`. */
   auxConsumption?: Maybe<Scalars["Float"]>;
-  /** Deprecated. */
+  /** In favor of `consumption`. */
   bmsConsumption?: Maybe<Scalars["Float"]>;
 };
 
@@ -3526,7 +3691,10 @@ export type RequestRoute = {
   via?: Maybe<Array<Maybe<FeaturePoint>>>;
   /** Radius in meters for alternative stations along a route (min 500 - max 5000). */
   stationsAlongRouteRadius?: Maybe<Scalars["Int"]>;
-  /** Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production. */
+  /**
+   * Flag indicating wether the turn-by-turn navigation instructions should be prepared. Disclaimer: The functionality is under active development and the final API is a subject to change. Not ready for production.
+   * @deprecated Deprecated: all routes will have turn-by-turn instructions prepared. Boolean will be ignored.
+   */
   instructions?: Maybe<Scalars["Boolean"]>;
   /** Mode that indicates if we optimize the charging time or always charge to the maximum capacity. */
   chargeMode?: Maybe<ChargeMode>;
@@ -3803,6 +3971,12 @@ export type RouteApp = {
   id?: Maybe<Scalars["ID"]>;
 };
 
+/** Types of route features that can be avoided in routing. */
+export enum RouteAvoid {
+  TOLL_ROAD = "toll_road",
+  FERRY = "ferry"
+}
+
 export type RouteDestinationFeaturePoint = {
   /** ID of the feature. */
   id?: Maybe<Scalars["ID"]>;
@@ -3897,6 +4071,8 @@ export type RouteDetailsAlternativeStation = {
   status: ChargerStatus;
   /** The value indicates the operator's ranking based on the station's location, in accordance with the list of countries from the configuration or request. */
   operator_ranking?: Maybe<OperatorRankingLevel>;
+  /** ID of the station's operator. */
+  operator_id?: Maybe<Scalars["ID"]>;
 };
 
 /** Aggregation of all durations of a route. */
@@ -3979,7 +4155,7 @@ export type RouteDetailsLeg = {
   range_after_charge?: Maybe<Scalars["Float"]>;
   /** Type of a leg. */
   type: RouteDetailsLegType;
-  /** Information about the station at the destination of a leg.  */
+  /** Information about the station at the destination of a leg. */
   station?: Maybe<RouteDetailsLegStation>;
   /** Polyline containing encoded coordinates. */
   polyline: Scalars["String"];
@@ -4210,7 +4386,7 @@ export type RouteDetailsManeuverdistanceArgs = {
 export type RouteDetailsPathSegment = {
   /** Elevation value of a route path segment. */
   elevation: Scalars["Float"];
-  /** Average speed of a route path segment. */
+  /** Average speed of a route path segment. This value is determined using legal maximum speed and, if provided, the user defined maximum speed. */
   average_speed: Scalars["Float"];
   /** Consumption, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null. */
   consumption?: Maybe<Scalars["Float"]>;
@@ -4220,7 +4396,10 @@ export type RouteDetailsPathSegment = {
   duration: Scalars["Float"];
   /** State of charge, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null. */
   state_of_charge?: Maybe<Scalars["Float"]>;
-  /** Maximum vehicle speed of a route path segment. */
+  /**
+   * Maximum vehicle speed of a route path segment.
+   * @deprecated Will be removed in the future.
+   */
   maximum_speed: Scalars["Float"];
 };
 
@@ -4655,16 +4834,18 @@ export type RouteLegOperationalElectricityEmissionsIntensity = {
   base_iso_14083_2023_regional_value: EmissionsFactor;
   /** Electricity mix for the leg. */
   energy_sources: RouteOperationalElectricityEnergySources;
+  /** Model used to estimate the electricity mix. */
+  energy_source_model: RouteOperationalElectricityEnergySourceModel;
   /** Average emissions intensity of processing and transport of primary energy, power generation infrastructure, etc. in unit CO2e/kWh. */
   infrastructure: Scalars["Float"];
-  /** Estimated electricity demand at the time and place the electricity for this leg was obtained as a fraction of the annual average demand. */
-  average_demand: Scalars["Float"];
-  /** Fraction of regional power generation that is not affected by demand (is assumed to always be on). */
-  base_load_fraction: Scalars["Float"];
   /** Season for which the leg was calculated. */
   season: RouteOperationalElectricitySeason;
   /** Climate for which the leg was calculated. */
   climate: RouteOperationalElectricityClimate;
+  /** Estimated electricity demand at the time and place the electricity for this leg was obtained as a fraction of the annual average demand. */
+  average_demand: Scalars["Float"];
+  /** Fraction of regional power generation that is not affected by demand (is assumed to always be on). */
+  base_load_fraction: Scalars["Float"];
 };
 
 /** Electricity emission intensity for a leg */
@@ -4883,6 +5064,24 @@ export type RouteOperationalElectricityEmissionsIntensityiso_14083_2023Args = {
 export type RouteOperationalElectricityEmissionsIntensityinfrastructureArgs = {
   unit?: Maybe<EmissionUnit>;
 };
+
+/** Energy source models. */
+export enum RouteOperationalElectricityEnergySourceModel {
+  /** Historical average energy mix for the month. */
+  GRID_MONTHLY_AVERAGE = "grid_monthly_average",
+  /** Historical average energy mix for the month and hour. */
+  GRID_HOURLY_AVERAGE = "grid_hourly_average",
+  /** Estimate using historical average electricity demand for the month. */
+  GRID_DEMAND_BASED_MONTHLY_AVERAGE = "grid_demand_based_monthly_average",
+  /** Estimate using historical average electricity demand for the month and hour. */
+  GRID_DEMAND_BASED_HOURLY_AVERAGE = "grid_demand_based_hourly_average",
+  /** Estimate using the seasonal average electricity demand for the climate. */
+  CLIMATE_DEMAND_BASED_SEASONAL_AVERAGE = "climate_demand_based_seasonal_average",
+  /** Estimate using the seasonal average electricity demand for the hour and climate. */
+  CLIMATE_DEMAND_BASED_HOURLY_AVERAGE = "climate_demand_based_hourly_average",
+  /** Regional default energy mix. */
+  DEFAULT = "default"
+}
 
 export type RouteOperationalElectricityEnergySources = {
   /** Electricity produced by coal power plants. */
@@ -5416,7 +5615,7 @@ export type RouteVehicle = {
 export type RouteVehicleBattery = {
   /** Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh. */
   capacity: StateOfCharge;
-  /** Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity.  */
+  /** Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity. */
   state_of_charge: StateOfCharge;
   /** Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default. */
   final_state_of_charge: StateOfCharge;
@@ -5436,7 +5635,7 @@ export type RouteVehicleBattery = {
 export type RouteVehicleBatteryInput = {
   /** Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh. */
   capacity?: Maybe<StateOfChargeInput>;
-  /** Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity.  */
+  /** Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity. */
   state_of_charge?: Maybe<StateOfChargeInput>;
   /** Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default. */
   final_state_of_charge?: Maybe<StateOfChargeInput>;
@@ -5652,6 +5851,38 @@ export type RouteViaPropertiesInput = {
   station?: Maybe<RoutePropertiesStationInput>;
 };
 
+export type RouteWeather = {
+  /** Weather configuration applied to the route. */
+  type: WeatherType;
+  /** [BETA] Custom weather conditions applied to the route. Only present when 'type' is set to 'CUSTOM'. */
+  custom?: Maybe<RouteWeatherCustomConditions>;
+};
+
+export type RouteWeatherCustomConditions = {
+  /** Average ambient temperature estimated along the route. */
+  temperature: Temperature;
+  /** Atmospheric pressure along the route. */
+  air_pressure: AirPressure;
+  /** Solar irradiance along the route. */
+  solar_irradiance: SolarIrradiance;
+};
+
+export type RouteWeatherCustomConditionsInput = {
+  /** Average ambient temperature estimated along the route. */
+  temperature: TemperatureInput;
+  /** Atmospheric pressure along the route. */
+  air_pressure: AirPressureInput;
+  /** Solar irradiance along the route. */
+  solar_irradiance: SolarIrradianceInput;
+};
+
+export type RouteWeatherInput = {
+  /** Weather configuration applied to the route. */
+  type?: Maybe<WeatherType>;
+  /** [BETA] Custom weather conditions to apply to the route. Required only when 'type' is 'CUSTOM'. Must be omitted for other weather types. */
+  custom?: Maybe<RouteWeatherCustomConditionsInput>;
+};
+
 /** Scheduled charge stop along a route. */
 export type ScheduledChargeStopInput = {
   /** List of amenity types. */
@@ -5666,12 +5897,29 @@ export type ScheduledChargeStopInput = {
   max_distance_from_station?: Maybe<Scalars["Int"]>;
 };
 
+export type SolarIrradiance = {
+  /** Value of the solar irradiance. */
+  value: Scalars["Float"];
+  /** Solar irradiance unit. */
+  type: SolarIrradianceUnit;
+};
+
+export type SolarIrradianceInput = {
+  /** Value of the solar irradiance. */
+  value: Scalars["Float"];
+  /** Solar irradiance unit. */
+  type: SolarIrradianceUnit;
+};
+
+export enum SolarIrradianceUnit {
+  WATTS_PER_SQUARE_METER = "watts_per_square_meter"
+}
+
 export enum SortDirection {
   ASCENDING = "ascending",
   DESCENDING = "descending"
 }
 
-/** Speed units. */
 export enum SpeedUnit {
   /** Return the speed in kilometers per hour. */
   KILOMETERS_PER_HOUR = "kilometers_per_hour",
@@ -5697,7 +5945,6 @@ export type StateOfChargeInput = {
   source?: Maybe<TelemetryInputSource>;
 };
 
-/** State of charge unit. */
 export enum StateOfChargeUnit {
   /** Return the state of charge in kilometers. */
   KILOMETER = "kilometer",
@@ -5930,7 +6177,7 @@ export type StationCustomProperties = {
   predicted_occupancy?: Maybe<Array<Maybe<StationPredictedOccupancy>>>;
   /**
    * Type of access to the charging station.
-   * @deprecated In favor of station.charging_behaviour.
+   * @deprecated In favor of station.access_type.
    */
   access_type?: Maybe<AccessType>;
   /** Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values. */
@@ -6115,28 +6362,16 @@ export enum StepType {
 }
 
 export type Subscription = {
-  /** [BETA] Subscribe to a connected vehicle. */
-  connectedVehicle?: Maybe<ConnectedVehicle>;
-  /** Subscribe to an isoline in order to receive updates. */
-  isoline?: Maybe<Isoline>;
-  /** [BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates */
-  navigationUpdatedById?: Maybe<Navigation>;
   /** Deprecated: In favor of route. */
   routeUpdatedById?: Maybe<Route>;
   /** Subscribe to a specific route to receive system event updates. */
   route: RouteResponse;
-};
-
-export type SubscriptionconnectedVehicleArgs = {
-  id: Scalars["ID"];
-};
-
-export type SubscriptionisolineArgs = {
-  id: Scalars["ID"];
-};
-
-export type SubscriptionnavigationUpdatedByIdArgs = {
-  id: Scalars["ID"];
+  /** [BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates */
+  navigationUpdatedById?: Maybe<Navigation>;
+  /** [BETA] Subscribe to a connected vehicle. */
+  connectedVehicle?: Maybe<ConnectedVehicle>;
+  /** Subscribe to an isoline in order to receive updates. */
+  isoline?: Maybe<Isoline>;
 };
 
 export type SubscriptionrouteUpdatedByIdArgs = {
@@ -6144,6 +6379,18 @@ export type SubscriptionrouteUpdatedByIdArgs = {
 };
 
 export type SubscriptionrouteArgs = {
+  id: Scalars["ID"];
+};
+
+export type SubscriptionnavigationUpdatedByIdArgs = {
+  id: Scalars["ID"];
+};
+
+export type SubscriptionconnectedVehicleArgs = {
+  id: Scalars["ID"];
+};
+
+export type SubscriptionisolineArgs = {
   id: Scalars["ID"];
 };
 
@@ -6293,7 +6540,6 @@ export type TelemetryInput = {
   custom?: Maybe<Scalars["JSON"]>;
 };
 
-/** Telemetry input sources. */
 export enum TelemetryInputSource {
   /** Manually inputted value. */
   MANUAL = "manual",
@@ -6317,7 +6563,6 @@ export type TemperatureInput = {
   type: TemperatureUnit;
 };
 
-/** Temperature unit. */
 export enum TemperatureUnit {
   /** Return the temperature in Celsius. */
   CELSIUS = "Celsius",
@@ -6743,6 +6988,10 @@ export type VehicleListFilter = {
   purpose?: Maybe<Array<VehiclePurpose>>;
   /** Type of vehicle. */
   type?: Maybe<Array<VehicleType>>;
+  /** [BETA] Make of vehicle. */
+  make?: Maybe<Scalars["String"]>;
+  /** [BETA] Model of vehicle. */
+  model?: Maybe<Scalars["String"]>;
 };
 
 export type VehicleListMedia = {
@@ -6787,6 +7036,20 @@ export type VehicleListRouting = {
   fast_charging_support: Scalars["Boolean"];
 };
 
+/** Vehicle make data. */
+export type VehicleMake = {
+  /** Vehicle make name. */
+  name: Scalars["String"];
+  /** Vehicle make image. */
+  image: VehicleImage;
+};
+
+/** Vehicle makes response object. */
+export type VehicleMakesResponse = {
+  /** Elements of the vehicle make list. */
+  items: Array<VehicleMake>;
+};
+
 export type VehicleMedia = {
   /** Featured image of the vehicle from a 45-degree angle. */
   image: VehicleImage;
@@ -6814,6 +7077,24 @@ export enum VehicleMode {
   /** Future releases of a vehicle, a concept of the vehicle, specs may change over time. */
   CONCEPT = "concept"
 }
+
+/** Vehicle model data. */
+export type VehicleModel = {
+  /** Vehicle model name. */
+  name: Scalars["String"];
+};
+
+/** Filter vehicle model list result. */
+export type VehicleModelsFilter = {
+  /** Vehicle make. */
+  make: Scalars["String"];
+};
+
+/** Vehicle models response object. */
+export type VehicleModelsResponse = {
+  /** Elements of the vehicle model list. */
+  items: Array<VehicleModel>;
+};
 
 export type VehicleNaming = {
   /** Vehicle manufacturer name. */
@@ -7890,7 +8171,18 @@ export enum VolumeUnit {
   CUBIC_FOOT = "cubic_foot"
 }
 
-/** Weight unit. */
+/** Type of weather conditions used in the route calculation. */
+export enum WeatherType {
+  /** Fixed seasonal preset representing typical summer weather conditions. Can't be used in combination with weather.custom. */
+  SUMMER = "summer",
+  /** Fixed seasonal preset representing typical winter weather conditions. Can't be used in combination with weather.custom. */
+  WINTER = "winter",
+  /** A dynamic preset that uses real weather data based on the route's departure time. Can't be used in combination with weather.custom. */
+  ACTUAL = "actual",
+  /** Must be used in combination with weather.custom object. */
+  CUSTOM = "custom"
+}
+
 export enum WeightUnit {
   /** Return the weight in kilograms. */
   KILOGRAM = "kilogram",

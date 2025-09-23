@@ -330,6 +330,119 @@
       },
       {
         "kind": "OBJECT",
+        "name": "AirPressure",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Value of the atmospheric pressure.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Atmospheric pressure unit.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "AirPressureUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Float",
+        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "AirPressureInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "value",
+            "description": "Value of the atmospheric pressure.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Atmospheric pressure unit.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "AirPressureUnit",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "AirPressureUnit",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "millibar",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "AlternativeStationRadius",
         "description": null,
         "fields": [
@@ -384,16 +497,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Float",
-        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -455,7 +558,7 @@
       {
         "kind": "ENUM",
         "name": "Amenities",
-        "description": "Amenities available near a station",
+        "description": "Amenities available near a station.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -526,74 +629,38 @@
       {
         "kind": "OBJECT",
         "name": "Amenity",
-        "description": "The amenity model",
+        "description": "Amenity data.",
         "fields": [
           {
             "name": "id",
-            "description": "Unique amenity ID",
+            "description": "Unique amenity ID.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "ID",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future."
           },
           {
             "name": "externalId",
-            "description": "ID provided by an amenity data source as the row ID",
+            "description": "ID provided by an amenity data source as the row ID.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of external_id."
           },
           {
-            "name": "name",
-            "description": "Name of an amenity",
+            "name": "external_id",
+            "description": "ID provided by an amenity data source as the row ID.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "location",
-            "description": "Geo location coordinates. This is a GeoJSON Point",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Point",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "address",
-            "description": "Embedded Address",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Address",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "type",
-            "description": "Type of amenity. An amenity can belong to multiple categories",
-            "args": [],
-            "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
@@ -605,8 +672,169 @@
             "deprecationReason": null
           },
           {
+            "name": "name",
+            "description": "Name of the amenity.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "location",
+            "description": "Geo location coordinates. This is a GeoJSON Point.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Point",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "address",
+            "description": "Address of the amenity.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Address",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of amenity. An amenity can belong to multiple categories.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "distance",
+            "description": "Computed distance between station and amenity.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of station_distance."
+          },
+          {
+            "name": "station_distance",
+            "description": "Computed distance between station and amenity.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "foursquareUrl",
+            "description": "Full path URL to amenity foursquare page.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future."
+          },
+          {
+            "name": "opening_hours",
+            "description": "Opening hours of the amenity.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "AmenityOpeningHours",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pets_allowed",
+            "description": "Indicates whether pets are allowed. This does not apply to assistance dogs, which may have legal access.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "accessibility",
+            "description": "Accessibility options at the amenity.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "AmenityAccessibility",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "contact",
+            "description": "Contact information for the amenity.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "AmenityContact",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "rating",
-            "description": "Rating of an amenity, the value will be between 0.0 and 10.0. If no rating has been given, the value will be set to null",
+            "description": "Rating of an amenity, the value will be between 0.0 and 10.0. If no rating has been given, the value will be set to null.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -617,49 +845,41 @@
             "deprecationReason": null
           },
           {
-            "name": "distance",
-            "description": "Computed distance between station and amenity",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "foursquareUrl",
-            "description": "Full path URL to amenity foursquare page",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
-            "description": "Date and time when an amenity was created",
+            "description": "Date and time when an amenity was created.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future."
           },
           {
             "name": "updatedAt",
-            "description": "Date and time when an amenity was last updated",
+            "description": "Date and time when an amenity was last updated.",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of last_updated."
+          },
+          {
+            "name": "last_updated",
+            "description": "Date and time when an amenity was last updated.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -687,6 +907,144 @@
         "fields": null,
         "inputFields": null,
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "description": "The `Boolean` scalar type represents `true` or `false`.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AmenityAccessibility",
+        "description": "Accessibility options at the amenity.",
+        "fields": [
+          {
+            "name": "wheelchair",
+            "description": "Type of wheelchair accessibility at the amenity.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "AmenityWheelchairAccessibilityType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AmenityContact",
+        "description": "Contact information for the amenity.",
+        "fields": [
+          {
+            "name": "phone",
+            "description": "Phone number to contact the amenity.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "website",
+            "description": "Website of the amenity.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "AmenityListFilter",
+        "description": "Filter that can be applied to retrieve the amenity list.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "type",
+            "description": "Type of amenity. An amenity can belong to multiple categories.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "Amenities",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AmenityOpeningHours",
+        "description": "Opening and access hours of the location.",
+        "fields": [
+          {
+            "name": "twentyfourseven",
+            "description": "True to represent 24 hours a day and 7 days a week.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "regular_hours",
+            "description": "Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "AmenityRegularHours",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -738,6 +1096,53 @@
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AmenityRegularHours",
+        "description": "Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object.",
+        "fields": [
+          {
+            "name": "weekday",
+            "description": "Number of days in the week, from Monday (1) till Sunday (7).",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "period_begin",
+            "description": "Beginning of the regular period, in local time, given in hours and minutes. Must be in 24h format with leading zeros. Example: \"18:15\". Hour/Minute separator: \":\" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9].",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "period_end",
+            "description": "End of the regular period, in local time, syntax as for period_begin. Must be later than period_begin.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -806,6 +1211,41 @@
           {
             "name": "pharmacy",
             "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "AmenityWheelchairAccessibilityType",
+        "description": "Type of wheelchair accessibility at the amenity.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "yes",
+            "description": "Wheelchairs have full unrestricted access.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "limited",
+            "description": "Wheelchairs have partial access (e.g some areas can be accessed and others not, areas requiring assistance by someone pushing up a steep gradient).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "no",
+            "description": "Wheelchairs have no unrestricted access (e.g. stair only access).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "designated",
+            "description": "The amenity is designated or purpose-built for wheelchairs (e.g. bathroom designed for wheelchair access only).",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1326,7 +1766,7 @@
       {
         "kind": "ENUM",
         "name": "ChargeSpeedUnit",
-        "description": "Charge speed unit.",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1493,7 +1933,7 @@
       {
         "kind": "ENUM",
         "name": "ChargerStatus",
-        "description": "Status of a charger.",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1921,16 +2361,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Boolean",
-        "description": "The `Boolean` scalar type represents `true` or `false`.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -3830,6 +4260,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "AA",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "AD",
             "description": null,
             "isDeprecated": false,
@@ -5554,16 +5990,12 @@
             "description": "Season of a route.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "RouteSeason",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "RouteSeason",
+              "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of weather."
           },
           {
             "name": "alternative_station_radius",
@@ -5589,6 +6021,50 @@
                 "name": "DateTime",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "avoid",
+            "description": "[BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "RouteAvoid",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_speed",
+            "description": "[BETA] User-defined maximum speed used for this route, if provided.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MaximumSpeed",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "weather",
+            "description": "Weather configuration for the route. Defined by a preset or custom weather conditions.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteWeather",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -5693,7 +6169,7 @@
               "name": "RouteSeason",
               "ofType": null
             },
-            "defaultValue": "current",
+            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5715,6 +6191,50 @@
             "type": {
               "kind": "SCALAR",
               "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "avoid",
+            "description": "[BETA] Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "RouteAvoid",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_speed",
+            "description": "[BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MaximumSpeedInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "weather",
+            "description": "Weather configuration for the route. Defined by a preset or custom weather conditions.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RouteWeatherInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -7727,7 +8247,7 @@
       {
         "kind": "ENUM",
         "name": "DistanceUnit",
-        "description": "Distance unit",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -10070,6 +10590,92 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "MaximumSpeed",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Numeric value of the user-defined maximum speed.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Unit in which speed is measured.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "SpeedUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MaximumSpeedInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "value",
+            "description": "Numeric value of the user-defined maximum speed.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Unit in which speed is measured.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "SpeedUnit",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "MeasurementUnit",
         "description": null,
@@ -10497,6 +11103,31 @@
             "deprecationReason": null
           },
           {
+            "name": "newRoute",
+            "description": "Deprecated: In favor of createRoute.",
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "RequestInput",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `createRoute`."
+          },
+          {
             "name": "createRoute",
             "description": "Create a new route from the route input and its ID.",
             "args": [
@@ -10525,31 +11156,6 @@
                 "name": "ID",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "newRoute",
-            "description": "Deprecated: In favor of createRoute.",
-            "args": [
-              {
-                "name": "input",
-                "description": null,
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "RequestInput",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -14166,6 +14772,38 @@
             "deprecationReason": null
           },
           {
+            "name": "ranking",
+            "description": "List of ranking level(s) to be retrieved. Valid values are 1 to 10. Default operator preference applied to routes created through newRoute mutation if no operator preference is specified in the request.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "excluded",
+            "description": "Only retrieve operators that are in the excluded list. Default operator preference applied to routes created through newRoute mutation if no operator preference is specified in the request.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "ranking_levels",
             "description": "List of ranking level(s) to be retrieved. An operator can be ranked on different levels in different countries. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request.",
             "type": {
@@ -15014,7 +15652,7 @@
       {
         "kind": "ENUM",
         "name": "PressureUnit",
-        "description": "Pressure units.",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -15284,11 +15922,11 @@
         "fields": [
           {
             "name": "amenityList",
-            "description": "Get a full list of amenities around a station",
+            "description": "Get a full list of amenities around a station.",
             "args": [
               {
                 "name": "stationId",
-                "description": "The station ID",
+                "description": "ID of the station.",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -15299,6 +15937,42 @@
                   }
                 },
                 "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "filter",
+                "description": "Criteria to filter amenities.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "AmenityListFilter",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "size",
+                "description": "Number of elements (count) to return.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "10",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "page",
+                "description": "Page number to return.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "0",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -15697,117 +16371,6 @@
             "deprecationReason": null
           },
           {
-            "name": "route",
-            "description": "Deprecated: In favor of getRoute.",
-            "args": [
-              {
-                "name": "id",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Route",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "getRoute",
-            "description": "Get a route by ID.",
-            "args": [
-              {
-                "name": "id",
-                "description": "ID of a route.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RouteResponse",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "getRouteEmissions",
-            "description": "Get emissions for a route.",
-            "args": [
-              {
-                "name": "route_id",
-                "description": "ID of the route for which we retrieve the emissions profile.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "route_details_id",
-                "description": "ID of the route details for which we retrieve the emissions profile.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RouteDetailsEmissions",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "routeEmissions",
             "description": "Deprecated: In favor of getRouteEmissions.",
             "args": [
@@ -15849,8 +16412,37 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `getRouteEmissions`."
+          },
+          {
+            "name": "route",
+            "description": "Deprecated: In favor of getRoute.",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Route",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `getRoute`."
           },
           {
             "name": "routePath",
@@ -15905,6 +16497,88 @@
               "kind": "OBJECT",
               "name": "RoutePath",
               "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `RouteDetails.path_plot`."
+          },
+          {
+            "name": "getRouteEmissions",
+            "description": "Get emissions for a route.",
+            "args": [
+              {
+                "name": "route_id",
+                "description": "ID of the route for which we retrieve the emissions profile.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "route_details_id",
+                "description": "ID of the route details for which we retrieve the emissions profile.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDetailsEmissions",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "getRoute",
+            "description": "Get a route by ID.",
+            "args": [
+              {
+                "name": "id",
+                "description": "ID of a route.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteResponse",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -16323,6 +16997,80 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "VehicleList",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicleMakes",
+            "description": "[BETA] Get a full list of vehicle makes.",
+            "args": [
+              {
+                "name": "country",
+                "description": "ISO-3166 alpha-2 country code to apply localization on vehicle data if available.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "VehicleMakesResponse",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicleModels",
+            "description": "[BETA] Get a full list of vehicle make models.",
+            "args": [
+              {
+                "name": "filter",
+                "description": "Filter vehicle models result.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "VehicleModelsFilter",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "country",
+                "description": "ISO-3166 alpha-2 country code to apply localization on vehicle data if available.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "VehicleModelsResponse",
                 "ofType": null
               }
             },
@@ -17057,6 +17805,18 @@
             "deprecationReason": null
           },
           {
+            "name": "numberOfPassengers",
+            "description": "Number of passengers on board.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "occupants",
             "description": "Number of occupants.",
             "type": {
@@ -17094,7 +17854,7 @@
           },
           {
             "name": "auxConsumption",
-            "description": "Deprecated.",
+            "description": "In favor of `consumption`.",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -17106,7 +17866,7 @@
           },
           {
             "name": "bmsConsumption",
-            "description": "Deprecated.",
+            "description": "In favor of `consumption`.",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -17424,8 +18184,8 @@
               "name": "Boolean",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Deprecated: all routes will have turn-by-turn instructions prepared. Boolean will be ignored."
           },
           {
             "name": "chargeMode",
@@ -18874,6 +19634,29 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "RouteAvoid",
+        "description": "Types of route features that can be avoided in routing.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "toll_road",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ferry",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "RouteDestinationFeaturePoint",
         "description": null,
@@ -19460,6 +20243,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "operator_id",
+            "description": "ID of the station's operator.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -19989,7 +20784,7 @@
           },
           {
             "name": "station",
-            "description": "Information about the station at the destination of a leg. ",
+            "description": "Information about the station at the destination of a leg.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -21185,7 +21980,7 @@
           },
           {
             "name": "average_speed",
-            "description": "Average speed of a route path segment.",
+            "description": "Average speed of a route path segment. This value is determined using legal maximum speed and, if provided, the user defined maximum speed.",
             "args": [
               {
                 "name": "unit",
@@ -21320,8 +22115,8 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Will be removed in the future."
           }
         ],
         "inputFields": null,
@@ -23528,6 +24323,22 @@
             "deprecationReason": null
           },
           {
+            "name": "energy_source_model",
+            "description": "Model used to estimate the electricity mix.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteOperationalElectricityEnergySourceModel",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "infrastructure",
             "description": "Average emissions intensity of processing and transport of primary energy, power generation infrastructure, etc. in unit CO2e/kWh.",
             "args": [
@@ -23544,38 +24355,6 @@
                 "deprecationReason": null
               }
             ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "average_demand",
-            "description": "Estimated electricity demand at the time and place the electricity for this leg was obtained as a fraction of the annual average demand.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "base_load_fraction",
-            "description": "Fraction of regional power generation that is not affected by demand (is assumed to always be on).",
-            "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -23614,6 +24393,38 @@
               "ofType": {
                 "kind": "ENUM",
                 "name": "RouteOperationalElectricityClimate",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "average_demand",
+            "description": "Estimated electricity demand at the time and place the electricity for this leg was obtained as a fraction of the annual average demand.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "base_load_fraction",
+            "description": "Fraction of regional power generation that is not affected by demand (is assumed to always be on).",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -24622,6 +25433,59 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "RouteOperationalElectricityEnergySourceModel",
+        "description": "Energy source models.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "grid_monthly_average",
+            "description": "Historical average energy mix for the month.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "grid_hourly_average",
+            "description": "Historical average energy mix for the month and hour.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "grid_demand_based_monthly_average",
+            "description": "Estimate using historical average electricity demand for the month.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "grid_demand_based_hourly_average",
+            "description": "Estimate using historical average electricity demand for the month and hour.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "climate_demand_based_seasonal_average",
+            "description": "Estimate using the seasonal average electricity demand for the climate.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "climate_demand_based_hourly_average",
+            "description": "Estimate using the seasonal average electricity demand for the hour and climate.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "default",
+            "description": "Regional default energy mix.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -27594,7 +28458,7 @@
           },
           {
             "name": "state_of_charge",
-            "description": "Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity. ",
+            "description": "Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -27710,7 +28574,7 @@
           },
           {
             "name": "state_of_charge",
-            "description": "Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity. ",
+            "description": "Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StateOfChargeInput",
@@ -29001,6 +29865,198 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "RouteWeather",
+        "description": null,
+        "fields": [
+          {
+            "name": "type",
+            "description": "Weather configuration applied to the route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "WeatherType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "custom",
+            "description": "[BETA] Custom weather conditions applied to the route. Only present when 'type' is set to 'CUSTOM'.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteWeatherCustomConditions",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteWeatherCustomConditions",
+        "description": null,
+        "fields": [
+          {
+            "name": "temperature",
+            "description": "Average ambient temperature estimated along the route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Temperature",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "air_pressure",
+            "description": "Atmospheric pressure along the route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "AirPressure",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "solar_irradiance",
+            "description": "Solar irradiance along the route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "SolarIrradiance",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RouteWeatherCustomConditionsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "temperature",
+            "description": "Average ambient temperature estimated along the route.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TemperatureInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "air_pressure",
+            "description": "Atmospheric pressure along the route.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "AirPressureInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "solar_irradiance",
+            "description": "Solar irradiance along the route.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "SolarIrradianceInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RouteWeatherInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "type",
+            "description": "Weather configuration applied to the route.",
+            "type": {
+              "kind": "ENUM",
+              "name": "WeatherType",
+              "ofType": null
+            },
+            "defaultValue": "actual",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "custom",
+            "description": "[BETA] Custom weather conditions to apply to the route. Required only when 'type' is 'CUSTOM'. Must be omitted for other weather types.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RouteWeatherCustomConditionsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "ScheduledChargeStopInput",
         "description": "Scheduled charge stop along a route.",
@@ -29092,6 +30148,109 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "SolarIrradiance",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Value of the solar irradiance.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Solar irradiance unit.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "SolarIrradianceUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "SolarIrradianceInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "value",
+            "description": "Value of the solar irradiance.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Solar irradiance unit.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "SolarIrradianceUnit",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "SolarIrradianceUnit",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "watts_per_square_meter",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "SortDirection",
         "description": null,
@@ -29117,7 +30276,7 @@
       {
         "kind": "ENUM",
         "name": "SpeedUnit",
-        "description": "Speed units.",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -29254,7 +30413,7 @@
       {
         "kind": "ENUM",
         "name": "StateOfChargeUnit",
-        "description": "State of charge unit.",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -30367,7 +31526,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of station.charging_behaviour."
+            "deprecationReason": "In favor of station.access_type."
           },
           {
             "name": "oicp",
@@ -31149,93 +32308,6 @@
         "description": null,
         "fields": [
           {
-            "name": "connectedVehicle",
-            "description": "[BETA] Subscribe to a connected vehicle.",
-            "args": [
-              {
-                "name": "id",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "ConnectedVehicle",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "isoline",
-            "description": "Subscribe to an isoline in order to receive updates.",
-            "args": [
-              {
-                "name": "id",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Isoline",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "navigationUpdatedById",
-            "description": "[BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates",
-            "args": [
-              {
-                "name": "id",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Navigation",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "routeUpdatedById",
             "description": "Deprecated: In favor of route.",
             "args": [
@@ -31293,6 +32365,93 @@
                 "name": "RouteResponse",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "navigationUpdatedById",
+            "description": "[BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Navigation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectedVehicle",
+            "description": "[BETA] Subscribe to a connected vehicle.",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ConnectedVehicle",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "isoline",
+            "description": "Subscribe to an isoline in order to receive updates.",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Isoline",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -32033,7 +33192,7 @@
       {
         "kind": "ENUM",
         "name": "TelemetryInputSource",
-        "description": "Telemetry input sources.",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -32148,7 +33307,7 @@
       {
         "kind": "ENUM",
         "name": "TemperatureUnit",
-        "description": "Temperature unit.",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -34426,6 +35585,30 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "make",
+            "description": "[BETA] Make of vehicle.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "model",
+            "description": "[BETA] Model of vehicle.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -34642,6 +35825,84 @@
       },
       {
         "kind": "OBJECT",
+        "name": "VehicleMake",
+        "description": "Vehicle make data.",
+        "fields": [
+          {
+            "name": "name",
+            "description": "Vehicle make name.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "image",
+            "description": "Vehicle make image.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "VehicleImage",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehicleMakesResponse",
+        "description": "Vehicle makes response object.",
+        "fields": [
+          {
+            "name": "items",
+            "description": "Elements of the vehicle make list.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "VehicleMake",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "VehicleMedia",
         "description": null,
         "fields": [
@@ -34782,6 +36043,95 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehicleModel",
+        "description": "Vehicle model data.",
+        "fields": [
+          {
+            "name": "name",
+            "description": "Vehicle model name.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "VehicleModelsFilter",
+        "description": "Filter vehicle model list result.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "make",
+            "description": "Vehicle make.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehicleModelsResponse",
+        "description": "Vehicle models response object.",
+        "fields": [
+          {
+            "name": "items",
+            "description": "Elements of the vehicle model list.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "VehicleModel",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -39917,8 +41267,43 @@
       },
       {
         "kind": "ENUM",
+        "name": "WeatherType",
+        "description": "Type of weather conditions used in the route calculation.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "summer",
+            "description": "Fixed seasonal preset representing typical summer weather conditions. Can't be used in combination with weather.custom.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "winter",
+            "description": "Fixed seasonal preset representing typical winter weather conditions. Can't be used in combination with weather.custom.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "actual",
+            "description": "A dynamic preset that uses real weather data based on the route's departure time. Can't be used in combination with weather.custom.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "custom",
+            "description": "Must be used in combination with weather.custom object.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "WeightUnit",
-        "description": "Weight unit.",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -40835,13 +42220,53 @@
     ],
     "directives": [
       {
-        "name": "chargeSpeedConvert",
-        "description": "Converting the value of a charge speed input to a single unit.",
+        "name": "chargetripDeprecated",
+        "description": null,
         "isRepeatable": false,
-        "locations": ["FIELD_DEFINITION"],
+        "locations": [
+          "FIELD_DEFINITION",
+          "INPUT_FIELD_DEFINITION",
+          "ENUM_VALUE"
+        ],
         "args": [
           {
-            "name": "unitParameterName",
+            "name": "reason",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "serviceName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "removeAfter",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "replacedBy",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -40855,17 +42280,48 @@
         ]
       },
       {
-        "name": "defaultValue",
+        "name": "cost",
+        "description": null,
+        "isRepeatable": false,
+        "locations": [
+          "ARGUMENT_DEFINITION",
+          "ENUM",
+          "FIELD_DEFINITION",
+          "INPUT_FIELD_DEFINITION",
+          "OBJECT",
+          "SCALAR"
+        ],
+        "args": [
+          {
+            "name": "weight",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "listSize",
         "description": null,
         "isRepeatable": false,
         "locations": ["FIELD_DEFINITION"],
         "args": [
           {
-            "name": "type",
+            "name": "assumedSize",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "PlainString",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -40873,15 +42329,19 @@
             "deprecationReason": null
           },
           {
-            "name": "defaultValue",
+            "name": "slicingArguments",
             "description": null,
             "type": {
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "PlainString",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -40889,102 +42349,34 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
+            "name": "sizedFields",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
-      },
-      {
-        "name": "emissionUnitArgument",
-        "description": null,
-        "isRepeatable": false,
-        "locations": ["FIELD_DEFINITION"],
-        "args": [
-          {
-            "name": "type",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "defaultValue",
+            "name": "requireOneSlicingArgument",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "PlainString",
+              "name": "Boolean",
               "ofType": null
             },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
-      },
-      {
-        "name": "fuelUnitArgument",
-        "description": null,
-        "isRepeatable": false,
-        "locations": ["FIELD_DEFINITION"],
-        "args": [
-          {
-            "name": "type",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "defaultValue",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
+            "defaultValue": "true",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -40992,386 +42384,17 @@
       },
       {
         "name": "ocpi",
-        "description": "Indicates that a property is OCPI-compliant.",
+        "description": null,
         "isRepeatable": false,
         "locations": ["FIELD_DEFINITION"],
         "args": []
       },
       {
-        "name": "sanitizeHtml",
-        "description": null,
+        "name": "oneOf",
+        "description": "Indicates exactly one field must be supplied and this field must not be `null`.",
         "isRepeatable": false,
-        "locations": ["FIELD_DEFINITION", "INPUT_FIELD_DEFINITION"],
-        "args": [
-          {
-            "name": "allowedTags",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "allowedIframeHostnames",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "selfClosing",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "allowedSchemes",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "allowedSchemesAppliedToAttributes",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
-      },
-      {
-        "name": "stateOfChargeConvert",
-        "description": "Converting the value of a state of charge input to a single unit.",
-        "isRepeatable": false,
-        "locations": ["FIELD_DEFINITION"],
-        "args": [
-          {
-            "name": "unitParameterName",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
-      },
-      {
-        "name": "subFieldUnitConvert",
-        "description": "Converts the value of a member with nested fields to another unit type.",
-        "isRepeatable": false,
-        "locations": ["FIELD_DEFINITION"],
-        "args": [
-          {
-            "name": "fromUnit",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "subField",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "unitParameterName",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "round",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": "false",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
-      },
-      {
-        "name": "torqueUnitArgument",
-        "description": null,
-        "isRepeatable": false,
-        "locations": ["FIELD_DEFINITION"],
-        "args": [
-          {
-            "name": "type",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "defaultValue",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
-      },
-      {
-        "name": "unitArgument",
-        "description": null,
-        "isRepeatable": false,
-        "locations": ["FIELD_DEFINITION"],
-        "args": [
-          {
-            "name": "type",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "defaultValue",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
-      },
-      {
-        "name": "unitConvert",
-        "description": "Converts the value of a field to another unit type.",
-        "isRepeatable": false,
-        "locations": ["FIELD_DEFINITION"],
-        "args": [
-          {
-            "name": "fromUnit",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "unitParameterName",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "PlainString",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "round",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": "false",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
-      },
-      {
-        "name": "validateIntInterval",
-        "description": "Validate if the value is a valid integer between min and max.",
-        "isRepeatable": false,
-        "locations": ["INPUT_FIELD_DEFINITION"],
-        "args": [
-          {
-            "name": "min",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "max",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "minErrorCode",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "minErrorMessage",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "maxErrorCode",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "maxErrorMessage",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
+        "locations": ["INPUT_OBJECT"],
+        "args": []
       },
       {
         "name": "include",
