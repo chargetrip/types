@@ -1,5 +1,4 @@
 name: "Release"
-
 on:
   schedule:
     - cron: "0 0 * * 2,4"
@@ -19,17 +18,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          node-version: 24
-          cache: "yarn"
           fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
       - name: Lint
         run: yarn lint
+
       - name: Build package
         run: yarn build
+
       - name: Generate types
         run: yarn generate:types
+
       - name: Semantic release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
