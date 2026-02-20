@@ -1,3 +1,14 @@
+## [1.47.2](https://github.com/chargetrip/types/compare/v1.47.1...v1.47.2) (2026-02-20)
+
+
+### Bug Fixes
+
+* permissions ([11e32c5](https://github.com/chargetrip/types/commit/11e32c5987f634b5bbd63c601ab4a2631aae2a9b))
+* release file ([4f8b93d](https://github.com/chargetrip/types/commit/4f8b93d08dee87621548b1b3876b2c80cc38211e))
+* semantic release update ([0e72108](https://github.com/chargetrip/types/commit/0e72108ae24cf7adac1fdc0da1a1caec3ac514aa))
+* switch to OICD ([4c74ba5](https://github.com/chargetrip/types/commit/4c74ba5450077e19ace0344e8621ed579ad382bf))
+* yml update ([8e5bb85](https://github.com/chargetrip/types/commit/8e5bb85aa9631cb39a15e644a98fcee517404869))
+
 ## [1.47.1](https://github.com/chargetrip/types/compare/v1.47.0...v1.47.1) (2025-09-23)
 
 

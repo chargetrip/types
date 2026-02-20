@@ -4117,6 +4117,18 @@
             "description": "The connector type is NEMA 14-50, 3 pins, rating of 50 A.",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "GBT_AC",
+            "description": "Guobiao GB/T 20234.2 AC socket/connector.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GBT_DC",
+            "description": "Guobiao GB/T 20234.3 DC connector.",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -6046,12 +6058,12 @@
             "deprecationReason": null
           },
           {
-            "name": "maximum_speed",
-            "description": "[BETA] User-defined maximum speed used for this route, if provided.",
+            "name": "driving_preferences",
+            "description": "[BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied.",
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "MaximumSpeed",
+              "name": "RouteDrivingPreferences",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6064,6 +6076,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "RouteWeather",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_preferences",
+            "description": "Charging stations preferences for route calculation.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteStationPreferences",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6151,7 +6175,7 @@
           },
           {
             "name": "operators",
-            "description": "Prioritized operators for a route calculation.",
+            "description": "Operator preferences and restrictions for route calculation. If not specified, excludes operators per project settings, but applies no operator ranking.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RouteOperatorPreferencesInput",
@@ -6218,11 +6242,11 @@
             "deprecationReason": null
           },
           {
-            "name": "maximum_speed",
-            "description": "[BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead.",
+            "name": "weather",
+            "description": "Weather configuration for the route. Defined by a preset or custom weather conditions.",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "MaximumSpeedInput",
+              "name": "RouteWeatherInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -6230,11 +6254,23 @@
             "deprecationReason": null
           },
           {
-            "name": "weather",
-            "description": "Weather configuration for the route. Defined by a preset or custom weather conditions.",
+            "name": "station_preferences",
+            "description": "Charging stations preferences for route calculation.",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "RouteWeatherInput",
+              "name": "RouteStationPreferencesInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "driving_preferences",
+            "description": "[BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RouteDrivingPreferencesInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -8245,6 +8281,49 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "DistanceInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "value",
+            "description": "Value of the distance.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "unit",
+            "description": "Unit of distance.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "DistanceUnit",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "DistanceUnit",
         "description": null,
@@ -8254,25 +8333,25 @@
         "enumValues": [
           {
             "name": "meter",
-            "description": "Return the distance in meters.",
+            "description": "Distance in meters.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "foot",
-            "description": "Return the distance in feet.",
+            "description": "Distance in feet.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "kilometer",
-            "description": "Return the distance in kilometers.",
+            "description": "Distance in kilometers.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "mile",
-            "description": "Return the distance in miles.",
+            "description": "Distance in miles.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -9695,29 +9774,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "InstructionsFormat",
-        "description": "Navigation service providers available",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "Chargetrip",
-            "description": "Chargetrip raw instructions",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "MapboxV5",
-            "description": "Mapbox instructions mapping",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "Isoline",
         "description": null,
@@ -9750,6 +9806,31 @@
                 "name": "IsolineStatus",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_distance",
+            "description": "Distance from the origin to the furthest reachable point within the isoline. Represents the longest drivable distance, not a straight-line or vehicle range.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -10103,6 +10184,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "maximum_speed",
+            "description": "[BETA] User-defined maximum speed used for the isoline.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MaximumSpeedInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -10384,6 +10477,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "maximum_speed",
+            "description": "[BETA] Maximum speed to consider when generating the isoline. In the segments where legal speed is lower than this value, the legal speed will be used instead.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MaximumSpeed",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -10543,46 +10648,6 @@
           {
             "name": "LineString",
             "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "MappingLanguage",
-        "description": "Preferred language for the mapping",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "en",
-            "description": "English(US)",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "MappingProvider",
-        "description": "Navigation service providers available",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "Chargetrip",
-            "description": "Chargetrip raw instructions",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "MapboxV5",
-            "description": "Mapbox instructions mapping",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -11169,11 +11234,11 @@
       {
         "kind": "OBJECT",
         "name": "Navigation",
-        "description": "The navigation session data",
+        "description": "The navigation session data.",
         "fields": [
           {
             "name": "id",
-            "description": "ID of the navigation session",
+            "description": "ID of the navigation session.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11188,15 +11253,15 @@
             "deprecationReason": null
           },
           {
-            "name": "route_id",
-            "description": "The current route used for navigation",
+            "name": "overview",
+            "description": "Navigation session details overview.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
+                "kind": "OBJECT",
+                "name": "NavigationOverview",
                 "ofType": null
               }
             },
@@ -11204,31 +11269,15 @@
             "deprecationReason": null
           },
           {
-            "name": "route_alternative_id",
-            "description": "The current route alternative used for navigation",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "state",
-            "description": "The state of a navigation session. The status can be driving, charging, finished, or error",
+            "name": "status",
+            "description": "The status of a navigation session. The status can be driving, charging, finished, or error.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "NavigationState",
+                "name": "NavigationStatus",
                 "ofType": null
               }
             },
@@ -11236,8 +11285,117 @@
             "deprecationReason": null
           },
           {
+            "name": "meta",
+            "description": "Navigation meta information.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationMeta",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationFinishInput",
+        "description": "Input for the navigation recalculate.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "ID of the navigation session.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_location",
+            "description": "Current coordinates.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PointInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationMeta",
+        "description": "Navigation meta information.",
+        "fields": [
+          {
+            "name": "created_at",
+            "description": "Creation time of the navigation session.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updated_at",
+            "description": "Last updated time of the navigation session.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationOverview",
+        "description": "The navigation session overview details.",
+        "fields": [
+          {
             "name": "state_of_charge",
-            "description": "State of charge at the last known location",
+            "description": "State of charge at the last known location.",
             "args": [
               {
                 "name": "unit",
@@ -11266,7 +11424,7 @@
           },
           {
             "name": "last_known_location",
-            "description": "Last known location",
+            "description": "Last known location.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11282,7 +11440,7 @@
           },
           {
             "name": "next_station",
-            "description": "Next charging station",
+            "description": "Next charging station.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -11294,7 +11452,7 @@
           },
           {
             "name": "alternative_stations",
-            "description": "A set of alternative charging stations to next station",
+            "description": "A set of alternative charging stations to next station.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11318,153 +11476,65 @@
           },
           {
             "name": "instructions",
-            "description": "Navigation instructions",
+            "description": "Navigation route instructions.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "JSON",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RouteInstruction",
+                  "ofType": null
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "meta",
-            "description": "Navigation meta information.",
+            "name": "live_route_request",
+            "description": "Continuously updated route request input.",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "NavigationMeta",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CreateRoute",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "NavigationFinishInput",
-        "description": "Input for the navigation recalculate",
-        "fields": null,
-        "inputFields": [
+          },
           {
-            "name": "id",
-            "description": "ID of the navigation session",
+            "name": "polyline",
+            "description": "Polyline containing encoded coordinates.",
+            "args": [
+              {
+                "name": "decimals",
+                "description": "Polyline decimals",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "PolylineInputDecimals",
+                  "ofType": null
+                },
+                "defaultValue": "five",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "ID",
+                "name": "String",
                 "ofType": null
               }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "current_location",
-            "description": "Current coordinates",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PointInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "NavigationInstructionsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "instructions_format",
-            "description": "Turn by turn instructions format for a route",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "InstructionsFormat",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "language",
-            "description": "Preferred navigation instructions language. Default: en",
-            "type": {
-              "kind": "ENUM",
-              "name": "MappingLanguage",
-              "ofType": null
-            },
-            "defaultValue": "en",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "precision",
-            "description": "Number of decimals used for the Google Polyline encoding Algorithm. Allowed values are 5 or 6.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": "5",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "NavigationMeta",
-        "description": "Navigation meta information.",
-        "fields": [
-          {
-            "name": "created_at",
-            "description": "Creation time of the navigation session.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updated_at",
-            "description": "Last updated time of the navigation session.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11478,12 +11548,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "NavigationRecalculateInput",
-        "description": "Input for the navigation recalculate",
+        "description": "Input for the navigation recalculate.",
         "fields": null,
         "inputFields": [
           {
             "name": "id",
-            "description": "ID of the navigation session",
+            "description": "ID of the navigation session.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -11499,7 +11569,7 @@
           },
           {
             "name": "state_of_charge",
-            "description": "State of charge at origin",
+            "description": "State of charge at origin.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StateOfChargeInput",
@@ -11511,7 +11581,7 @@
           },
           {
             "name": "current_location",
-            "description": "Origin location of a new route",
+            "description": "Origin location of a new route.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -11527,7 +11597,7 @@
           },
           {
             "name": "via",
-            "description": "Via points of a new route. If this field is not sent, the original via points will be used",
+            "description": "Via points of a new route. If this field is not sent, the original via points will be used.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -11547,7 +11617,7 @@
           },
           {
             "name": "telemetry",
-            "description": "Telemetry data input",
+            "description": "Telemetry data input.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TelemetryInput",
@@ -11565,12 +11635,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "NavigationStartInput",
-        "description": "Input for the navigation start",
+        "description": "Input for the navigation start.",
         "fields": null,
         "inputFields": [
           {
             "name": "route_id",
-            "description": "ID of the route of the navigation session",
+            "description": "ID of the route of the navigation session.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -11585,42 +11655,14 @@
             "deprecationReason": null
           },
           {
-            "name": "route_alternative_id",
-            "description": "ID of the route alternative of the navigation session",
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "current_location",
-            "description": "Current coordinates",
+            "description": "Current coordinates.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "PointInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "instructions",
-            "description": "Instruction input format",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "NavigationInstructionsInput",
                 "ofType": null
               }
             },
@@ -11634,48 +11676,13 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "NavigationState",
-        "description": "State of navigation session",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "driving",
-            "description": "Vehicle is driving",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "charging",
-            "description": "Vehicle is charging",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "finished",
-            "description": "Navigation session is completed (either manually or automatically 48 hours after the last update)",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "error",
-            "description": "Failed to update navigation session due to route error or not found",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "NavigationStation",
-        "description": "Navigation session station type",
+        "description": "Navigation session station type.",
         "fields": [
           {
             "name": "station_id",
-            "description": "The ID as string of the charging station",
+            "description": "The ID as string of the charging station.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11691,7 +11698,7 @@
           },
           {
             "name": "station_location",
-            "description": "GPS location of the charging station",
+            "description": "GPS location of the charging station.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11707,7 +11714,7 @@
           },
           {
             "name": "via",
-            "description": "An array with all GPS locations of via points until the next charging station",
+            "description": "An array with all GPS locations of via points until the next charging station.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11731,7 +11738,7 @@
           },
           {
             "name": "estimated_state_of_charge",
-            "description": "Estimated state of charge, at arrival on the next charging station",
+            "description": "Estimated state of charge, at arrival on the next charging station.",
             "args": [
               {
                 "name": "unit",
@@ -11760,7 +11767,7 @@
           },
           {
             "name": "estimated_consumption",
-            "description": "Estimated consumption, in kWh, from last the known location until the next charging station",
+            "description": "Estimated consumption, in kWh, from last the known location until the next charging station.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11776,14 +11783,14 @@
           },
           {
             "name": "estimated_duration",
-            "description": "Estimated duration, in seconds, from the last known location until the next charging station",
+            "description": "Estimated duration, in seconds, from the last known location until the next charging station.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -11797,14 +11804,104 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "NavigationStatus",
+        "description": "State of navigation session.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "driving",
+            "description": "Vehicle is driving.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charging",
+            "description": "Vehicle is charging.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "finished",
+            "description": "Navigation session is completed (either manually or automatically 48 hours after the last update).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "error",
+            "description": "Failed to update navigation session due to route error or not found.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationSubscription",
+        "description": "The navigation session subscription data",
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of the navigation session.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": "The status of a navigation session. The status can be driving, charging, finished, or error.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "NavigationStatus",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "meta",
+            "description": "Navigation meta information.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationMeta",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "NavigationUpdateInput",
-        "description": "Input for the navigation update",
+        "description": "Input for the navigation update.",
         "fields": null,
         "inputFields": [
           {
             "name": "id",
-            "description": "ID of the navigation session",
+            "description": "ID of the navigation session.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -11820,7 +11917,7 @@
           },
           {
             "name": "location_data",
-            "description": "A list of locations that were collected since the last update",
+            "description": "A list of locations that were collected since the last update.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -11844,7 +11941,7 @@
           },
           {
             "name": "telemetry",
-            "description": "Telemetry data input",
+            "description": "Telemetry data input.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TelemetryInput",
@@ -11862,12 +11959,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "NavigationUpdateLocationPropertiesInput",
-        "description": "Properties of the location",
+        "description": "Properties of the location.",
         "fields": null,
         "inputFields": [
           {
             "name": "route_leg",
-            "description": "Current route leg index corresponding to a location",
+            "description": "Current route leg index corresponding to a location.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -11883,7 +11980,7 @@
           },
           {
             "name": "speed",
-            "description": "Speed at a location",
+            "description": "Speed at a location.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "VehicleSpeedInput",
@@ -11895,7 +11992,7 @@
           },
           {
             "name": "timestamp",
-            "description": "UNIX timestamp at location, in seconds",
+            "description": "UNIX timestamp at location, in seconds.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -11911,7 +12008,7 @@
           },
           {
             "name": "elevation",
-            "description": "Elevation information",
+            "description": "Elevation information.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ElevationInput",
@@ -11929,12 +12026,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "NavigationUpdateLocationsInput",
-        "description": "Input for the navigation update locations",
+        "description": "Input for the navigation update locations.",
         "fields": null,
         "inputFields": [
           {
             "name": "geometry",
-            "description": "GPS location",
+            "description": "GPS location.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -11950,7 +12047,7 @@
           },
           {
             "name": "properties",
-            "description": "Extra information about the location",
+            "description": "Extra information about the location.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -12377,6 +12474,18 @@
           {
             "name": "NEMA_14_50",
             "description": "The connector type is NEMA 14-50, 3 pins, rating of 50 A",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GBT_AC",
+            "description": "Guobiao GB/T 20234.2 AC socket/connector.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GBT_DC",
+            "description": "Guobiao GB/T 20234.3 DC connector.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -14738,6 +14847,26 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "avoided_countries",
+            "description": "List of countries where the operator is avoided. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -14897,6 +15026,41 @@
         ],
         "interfaces": null,
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "OperatorPreferenceType",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ranked",
+            "description": "Operators that have been set as preferred or required.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "unranked",
+            "description": "Operators that have not been set as neither preferred or required or avoided nor excluded.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "avoided",
+            "description": "Operators that have been set to be avoided.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "excluded",
+            "description": "Operators that have been set to be excluded.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -15236,6 +15400,73 @@
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PageInfo",
+        "description": "Information about the list page.",
+        "fields": [
+          {
+            "name": "has_next_page",
+            "description": "Flag that indicates if it has a next page.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "has_previous_page",
+            "description": "Flag that indicates if it has a previous page.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "start_cursor",
+            "description": "Cursor of the first connection of the page. If the page is empty, this is null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end_cursor",
+            "description": "Cursor of the last connection of the page. If the page is empty, this is null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -16584,6 +16815,131 @@
             "deprecationReason": null
           },
           {
+            "name": "getRouteStationsWithAmenities",
+            "description": "[BETA] Search for stations with amenities within a specific time window and distance of a previously calculated route.",
+            "args": [
+              {
+                "name": "route_id",
+                "description": "ID of the route request.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "route_details_id",
+                "description": "ID of the route.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "time_window",
+                "description": "Time window along the route to search for stations with amenities.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RouteTimeWindow",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "amenity_types",
+                "description": "Type of amenity to search along the route. Behaves as logical OR when multiple values are provided.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "AmenityType",
+                        "ofType": null
+                      }
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "filter",
+                "description": "Filter results by station or amenity properties.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "RouteStationsWithAmenityFilter",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "first",
+                "description": "Maximum number of items to return per page, a value between 1 and 10.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "10",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "after",
+                "description": "Returns the items in the list that come after the specified cursor. For the first page, this field should not be specified.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteStationsWithAmenitiesConnection",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "station",
             "description": "Get information about a station by its ID.",
             "args": [
@@ -17025,7 +17381,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "VehicleMakesResponse",
+                "name": "VehicleMakesConnection",
                 "ofType": null
               }
             },
@@ -17040,13 +17396,9 @@
                 "name": "filter",
                 "description": "Filter vehicle models result.",
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "VehicleModelsFilter",
-                    "ofType": null
-                  }
+                  "kind": "INPUT_OBJECT",
+                  "name": "VehicleModelsFilter",
+                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
@@ -17063,6 +17415,30 @@
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
+              },
+              {
+                "name": "first",
+                "description": "Maximum number of items to return per page, a value between 1 and 10.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "10",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "after",
+                "description": "Returns the items in the list that come after the specified cursor. For the first page, this field should not be specified.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
             ],
             "type": {
@@ -17070,7 +17446,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "VehicleModelsResponse",
+                "name": "VehicleModelsConnection",
                 "ofType": null
               }
             },
@@ -19560,6 +19936,29 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "RouteAmenityFilter",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "maximum_distance_from_station",
+            "description": "Maximum distance from the station to the amenity. The value must be between 0 and 1 000 meters. If not specified, defaults to 250 meters.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DistanceInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "RouteAmenityPreferences",
         "description": "Amenity preferences for a route.",
@@ -19694,20 +20093,16 @@
             "description": "Geometry of the feature.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Point",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "Point",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "properties",
-            "description": "Optional object where additional properties can be specified.",
+            "description": "Additional feature properties.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -19761,13 +20156,9 @@
             "name": "geometry",
             "description": "Geometry of the feature.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PointInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "PointInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -19775,7 +20166,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where additional properties can be specified.",
+            "description": "Additional feature properties.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RouteDestinationPropertiesInput",
@@ -19845,7 +20236,7 @@
           },
           {
             "name": "station",
-            "description": "Data about the destination station.",
+            "description": "Specifies a charging station at the destination. If a known station is provided, it will be used as charging stop. Any configured operator preferences are ignored for this stop.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RoutePropertiesStationInput",
@@ -20095,7 +20486,7 @@
           },
           {
             "name": "alternative_stations",
-            "description": "Alternative stations along a route within a specified radius. Will only return stations if alternative_station_radius was specified in the createRoute mutation.",
+            "description": "Alternative stations along a route within a specified radius.\n\nIncludes stations from preferred/required/avoided operators but excludes stations from excluded operators.\nThis list is only populated if `alternative_station_radius` was specified in the `createRoute` mutation.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -20265,7 +20656,7 @@
       {
         "kind": "OBJECT",
         "name": "RouteDetailsDurations",
-        "description": "Aggregation of all durations of a route.",
+        "description": null,
         "fields": [
           {
             "name": "total",
@@ -20317,7 +20708,7 @@
           },
           {
             "name": "stopover",
-            "description": "Total stop duration, excluding charge stops, in seconds.",
+            "description": "Total duration stopped at a location via or at a station via, excluding charging time and charging penalty, in seconds.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -21067,8 +21458,8 @@
               "name": "Int",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of legs.durations"
           },
           {
             "name": "occupants",
@@ -22259,6 +22650,123 @@
           {
             "name": "crossborder",
             "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteDrivingPreferences",
+        "description": null,
+        "fields": [
+          {
+            "name": "speed_factor",
+            "description": "[BETA] Factor to adjust the route's calculated average speed. Accepts values between 0.80 and 1.20. 1.0 is neutral. Values below 1.0 reduce speed (e.g. 0.95 is -5%), values above increase it. If provided in combination with style, this overrides the speed factor implied by the selected 'style'.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_speed",
+            "description": "[BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. If provided in combination with 'style, this overrides the maximum speed implied by the selected 'style'.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MaximumSpeed",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "style",
+            "description": "[BETA] Defines a driving style. If provided in combination with 'maximum_speed' or 'speed_factor', those values override the values defined by the selected 'style'.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "RouteDrivingStyle",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RouteDrivingPreferencesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "speed_factor",
+            "description": "[BETA] Factor to adjust the route's calculated average speed. Accepts values between 0.80 and 1.20. 1.0 is neutral. Values below 1.0 reduce speed (e.g. 0.95 is -5%), values above increase it. If provided in combination with style, this overrides the speed factor implied by the selected 'style'.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_speed",
+            "description": "[BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. If provided in combination with 'style, this overrides the maximum speed implied by the selected 'style'.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MaximumSpeedInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "style",
+            "description": "[BETA] Defines a driving style. If provided in combination with 'maximum_speed' or 'speed_factor', those values override the values defined by the selected 'style'.",
+            "type": {
+              "kind": "ENUM",
+              "name": "RouteDrivingStyle",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "RouteDrivingStyle",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "eco",
+            "description": "Lower average driving speed and lower energy consumption. Applies a speed limit of 110 km/h to all segments where a higher legal limit is allowed and reduces by 5% the route's average driving speed.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sport",
+            "description": "Higher average driving speed and higher energy consumption. Applies no speed limit and increases by 5% the route's average driving speed.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -26318,6 +26826,26 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "avoid",
+            "description": "Operators that should be avoided, but not excluded, for a route calculation.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RouteOperatorsValue",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -26333,7 +26861,7 @@
         "inputFields": [
           {
             "name": "ranking",
-            "description": "Ranking of an operator with multiple levels, each level having its own penalty value.",
+            "description": "Operators to be preferred in route calculation. If not specified, no operator ranking is applied (including project-configured ranking).",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RouteOperatorPreferencesRankingInput",
@@ -26345,7 +26873,27 @@
           },
           {
             "name": "exclude",
-            "description": "Operators that should be excluded for a route calculation.",
+            "description": "Operators to be excluded from route calculation. If specified, overrides project-configured operator exclusions. If not specified, applies project-configured operator exclusions.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "RouteOperatorsValueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "avoid",
+            "description": "Operators that should be avoided, but not excluded, for a route calculation.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -26415,7 +26963,7 @@
         "inputFields": [
           {
             "name": "type",
-            "description": "Flag indicating if the operators ranking should be preferred or required.",
+            "description": "Ranking enforcement type: preferred (applies ranking levels), required (routes only via ranked operators), or none (no ranking applied).",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -26431,7 +26979,7 @@
           },
           {
             "name": "levels",
-            "description": "Ranking levels for operator ranking.",
+            "description": "Priority levels for operator ranking. If not specified, applies the specified enforcement type to the project-configured operator ranking.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RouteOperatorPreferencesRankingLevelsInput",
@@ -27132,7 +27680,7 @@
           },
           {
             "name": "countries",
-            "description": "List of countries in which the operator should be preferred/excluded. When omitted the operator will be preferred/excluded in every country.",
+            "description": "List of countries in which the operator should be preferred/excluded/avoided. When omitted the operator will be preferred/excluded in every country.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -27552,6 +28100,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -27583,6 +28143,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -27958,6 +28530,258 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "RouteStationFilter",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "maximum_distance_from_path",
+            "description": "Filters stations within this distance from the route path. The value must be between 0 and 10 000 meters. If not specified, defaults to 1 000 meters.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DistanceInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operator_preference",
+            "description": "Filters stations by operator preference types. This filter depends exclusively on the preferences used for the route calculation. If not specified, stations from all preference types (ranked, unranked, avoided, excluded) are returned.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperatorPreferenceType",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteStationOperator",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "Unique operator ID.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "preference_type",
+            "description": "Operator's preference status specifically for this route calculation.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "OperatorPreferenceType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteStationPreferences",
+        "description": null,
+        "fields": [
+          {
+            "name": "prefer_highway_charging",
+            "description": "[BETA] Flag to prioritise charging stations located directly on the highway, avoiding exiting highways to charge. This preference is considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. The preference's weight is configurable in project settings.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RouteStationPreferencesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "prefer_highway_charging",
+            "description": "[BETA] Flag to prioritise charging stations located directly on the highway, avoiding exiting highways to charge. This preference is considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. The preference's weight is configurable in project settings.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": "true",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteStationWithAmenities",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of the station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "external_id",
+            "description": "ID of the station provided by the station data source.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "location",
+            "description": "GeoJSON location of the station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Point",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operator",
+            "description": "Information about the station's operator.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteStationOperator",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "distance_from_path",
+            "description": "Distance of the station to the closest point in the original route.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "matching_amenities",
+            "description": "List of up to 5 amenities matching the specified amenity type. Sorted by ascending distance from the station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Amenity",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "RouteStationsAlong",
         "description": null,
@@ -28037,6 +28861,108 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteStationsWithAmenitiesConnection",
+        "description": null,
+        "fields": [
+          {
+            "name": "total_count",
+            "description": "Total number of stations with amenities of the specified type.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "page_info",
+            "description": "Information about the current page.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nodes",
+            "description": "List of stations with amenities of the specified type.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "RouteStationWithAmenities",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RouteStationsWithAmenityFilter",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "station",
+            "description": "Station filters.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RouteStationFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "amenity",
+            "description": "Amenity filters.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RouteAmenityFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -28222,6 +29148,45 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RouteTimeWindow",
+        "description": "Specifies a temporal window to search for stations with matching amenity types. Defined by a center from the journey origin and a surrounding time margin.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "center",
+            "description": "Center point of the search, expressed as the travel time, in seconds, from the journey's origin.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "margin",
+            "description": "Duration in seconds to extend the search on either side of the 'center'. Maximum allowed value is 2700 (45 minutes). If not specified, defaults to 900 seconds (15 minutes).",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": "900",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -29674,20 +30639,16 @@
             "description": "Geometry of the feature.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Point",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "Point",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "properties",
-            "description": "Optional object where additional properties can be specified.",
+            "description": "Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -29741,13 +30702,9 @@
             "name": "geometry",
             "description": "Geometry of the feature.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PointInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "PointInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -29755,7 +30712,7 @@
           },
           {
             "name": "properties",
-            "description": "Optional object where additional properties can be specified.",
+            "description": "Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RouteViaPropertiesInput",
@@ -29849,7 +30806,7 @@
           },
           {
             "name": "station",
-            "description": "Station data of the via point.",
+            "description": "Specifies a charging station at the via. If a known station is provided, it will be used as charging stop. Any configured operator preferences are ignored for this stop.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RoutePropertiesStationInput",
@@ -31345,7 +32302,7 @@
           },
           {
             "name": "preferred_operator",
-            "description": "Flag indicating if only stations that are owned by an operator from a clients ranking list are returned.",
+            "description": "Flag to filter for stations operated by an operator present in the project's ranking list.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -31864,7 +32821,7 @@
           },
           {
             "name": "preferred_operator",
-            "description": "Flag indicating if only stations that are owned by an operator from a clients ranking list are returned.",
+            "description": "Flag to filter for stations operated by an operator present in the project's ranking list.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -32392,7 +33349,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "Navigation",
+              "name": "NavigationSubscription",
               "ofType": null
             },
             "isDeprecated": false,
@@ -35868,12 +36825,12 @@
       },
       {
         "kind": "OBJECT",
-        "name": "VehicleMakesResponse",
+        "name": "VehicleMakesConnection",
         "description": "Vehicle makes response object.",
         "fields": [
           {
-            "name": "items",
-            "description": "Elements of the vehicle make list.",
+            "name": "nodes",
+            "description": "List of vehicle makes.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -36073,40 +37030,45 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "VehicleModelsFilter",
-        "description": "Filter vehicle model list result.",
-        "fields": null,
-        "inputFields": [
+        "kind": "OBJECT",
+        "name": "VehicleModelsConnection",
+        "description": "Vehicle models response object.",
+        "fields": [
           {
-            "name": "make",
-            "description": "Vehicle make.",
+            "name": "total_count",
+            "description": "Total number of unique vehicle models.",
+            "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "String",
+                "name": "Int",
                 "ofType": null
               }
             },
-            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "VehicleModelsResponse",
-        "description": "Vehicle models response object.",
-        "fields": [
+          },
           {
-            "name": "items",
-            "description": "Elements of the vehicle model list.",
+            "name": "page_info",
+            "description": "Information about the current page.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nodes",
+            "description": "List of vehicle models.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -36131,6 +37093,29 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "VehicleModelsFilter",
+        "description": "Filter vehicle model list result.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "make",
+            "description": "Vehicle make.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
