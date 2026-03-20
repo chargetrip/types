@@ -5,11 +5,9 @@ on:
   push:
     branches:
       - main
-
 permissions:
   id-token: write
   contents: write
-
 jobs:
   release:
     name: Release
@@ -19,6 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,7 +37,25 @@ jobs:
       - name: Generate types
         run: yarn generate:types
 
+      - name: Commit generated types
+        id: commit_types
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if git diff --staged --quiet; then
+            echo "No changes to generated types"
+            echo "types_changed=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "feat: regenerate GraphQL types"
+            git push
+            echo "types_changed=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: Semantic release
+        # Skip if we just pushed a commit — semantic-release will run again
+        # on the push trigger from that commit
+        if: steps.commit_types.outputs.types_changed == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
