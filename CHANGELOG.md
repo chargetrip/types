@@ -1,3 +1,11 @@
+# [1.48.0](https://github.com/chargetrip/types/compare/v1.47.2...v1.48.0) (2026-03-20)
+
+
+### Features
+
+* included commit message for automated types release ([630ba29](https://github.com/chargetrip/types/commit/630ba29d8380fa9c601e6bdc2f77d6ec3d0ad321))
+* regenerate GraphQL types ([2493a89](https://github.com/chargetrip/types/commit/2493a8925d2e8924dd0daf607e082b2fb67d3930))
+
 ## [1.47.2](https://github.com/chargetrip/types/compare/v1.47.1...v1.47.2) (2026-02-20)
 
 
