@@ -622,6 +622,18 @@
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "bakery",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "convenience_store",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -676,9 +688,13 @@
             "description": "Name of the amenity.",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1210,6 +1226,18 @@
           },
           {
             "name": "pharmacy",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "bakery",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "convenience_store",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -19273,42 +19301,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": "User ID.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "Not sent back anymore, will be null"
-          },
-          {
-            "name": "firstName",
-            "description": "First name.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of name."
-          },
-          {
-            "name": "lastName",
-            "description": "Last name.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of name"
           }
         ],
         "inputFields": null,
@@ -20547,6 +20539,26 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "warnings",
+            "description": "[BETA] Warnings that certain conditions specified in a route mutation are not respected.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RouteWarning",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -21280,6 +21292,26 @@
                     "name": "RouteDetailsLegSection",
                     "ofType": null
                   }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "warnings",
+            "description": "[BETA] Warnings that certain conditions specified in a route mutation are not respected.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RouteDetailsLegWarning",
+                  "ofType": null
                 }
               }
             },
@@ -22165,6 +22197,80 @@
           {
             "name": "final",
             "description": "This leg ends at the destination, and is the last leg of the route.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteDetailsLegWarning",
+        "description": null,
+        "fields": [
+          {
+            "name": "code",
+            "description": "The code of the warning.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteDetailsLegWarningCode",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "RouteDetailsLegWarningCode",
+        "description": "Types of warnings that can be encountered in a route leg.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "via_not_vehicle_accessible",
+            "description": "The via location cannot be reached by vehicle.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operators_preferred_not_available",
+            "description": "The leg could not use stations from the preferred operator(s).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_weight_exceeded",
+            "description": "Vehicle's load may exceed the maximum supported weight of the vehicle.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "segment_unavoidable",
+            "description": "The leg includes sections requested to be avoided.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_limited_open_hours",
+            "description": "The charging station used in the leg has limited opening hours.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "via_insufficient_charging_time",
+            "description": "The specified stop duration at the via charging station is insufficient to start a charging session.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -26963,7 +27069,7 @@
         "inputFields": [
           {
             "name": "type",
-            "description": "Ranking enforcement type: preferred (applies ranking levels), required (routes only via ranked operators), or none (no ranking applied).",
+            "description": "Determines how operator preferences are applied to stations during route calculation. If no ranking is provided through 'levels' or project settings, no operator preference is applied.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -30823,6 +30929,92 @@
       },
       {
         "kind": "OBJECT",
+        "name": "RouteWarning",
+        "description": null,
+        "fields": [
+          {
+            "name": "code",
+            "description": "The code of the warning.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteWarningCode",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "RouteWarningCode",
+        "description": "Types of warnings that can be encountered in a route.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ev_unavailable_in_region",
+            "description": "The selected vehicle model is unavailable on one or more regions along the route.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hev_no_charging_stations",
+            "description": "Route excludes charging stations as a hybrid vehicle does not require external charging.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "erev_battery_only_range",
+            "description": "Route is calculated using only the battery range of the extended-range vehicle. ",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "origin_not_vehicle_accessible",
+            "description": "The origin location cannot be reached by vehicle and requires a walking section to reach the point.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "destination_not_vehicle_accessible",
+            "description": "The destination location cannot be reached by vehicle and requires a walking section to reach the point.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "final_soc_not_possible",
+            "description": "The requested final state of charge cannot be achieved.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "low_speed",
+            "description": "The set maximum speed is too low (below 50 km/h) and may result in an inefficient route.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operator_preferences_not_found",
+            "description": "Operator preferences were ignored because they have not been configured for this project nor provided in the route create request.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "RouteWeather",
         "description": null,
         "fields": [
@@ -31900,18 +32092,6 @@
             "deprecationReason": null
           },
           {
-            "name": "private",
-            "description": "A flag that indicates if a station is on private property.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of access_type."
-          },
-          {
             "name": "power",
             "description": "Connectors grouped by power.",
             "args": [],
@@ -31922,22 +32102,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "predicted_availability",
-            "description": "Station availability.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "StationPredictedAvailability",
-                "ofType": null
-              }
-            },
-            "isDeprecated": true,
-            "deprecationReason": "predicted_availability, no value will be sent. Deprecated in favor of predicted_occupancy."
           },
           {
             "name": "predicted_occupancy",
@@ -32390,46 +32554,6 @@
         "description": null,
         "fields": [
           {
-            "name": "roaming",
-            "description": "List of eMSP cards accepted at a charging station.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "StationRoaming",
-                "ofType": null
-              }
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of station.roaming."
-          },
-          {
-            "name": "support_phone_number",
-            "description": "Phone number for assistance at a charging station.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of station.support_phone_number."
-          },
-          {
-            "name": "charging_behaviour",
-            "description": "Charging behavior of a station.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "ChargingBehaviour",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of station.charging_behaviour."
-          },
-          {
             "name": "reliability_score",
             "description": "Shows how reliable a charging station is (1 to 5; 1 = unreliable, 5 = reliable), taking into account the charging behaviour history and error values.",
             "args": [],
@@ -32440,50 +32564,6 @@
             },
             "isDeprecated": true,
             "deprecationReason": "In favor of station.reliability_score."
-          },
-          {
-            "name": "adhoc_authorisation_method",
-            "description": "List of available ad hoc payment methods.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "AdhocAuthorisationMethod",
-                "ofType": null
-              }
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of station.adhoc_authorisation_payment_method."
-          },
-          {
-            "name": "predicted_occupancy",
-            "description": "Predicted station occupancy.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "StationPredictedOccupancy",
-                "ofType": null
-              }
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of station.predicted_occupancy."
-          },
-          {
-            "name": "access_type",
-            "description": "Type of access to the charging station.",
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "AccessType",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of station.access_type."
           },
           {
             "name": "oicp",
@@ -37476,22 +37556,6 @@
             "deprecationReason": null
           },
           {
-            "name": "price",
-            "description": "Pricing of the vehicle.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "VehiclePremiumPrice",
-                "ofType": null
-              }
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of pricing."
-          },
-          {
             "name": "pricing",
             "description": "Starting price in the currency defined in the field argument. If not defined, it will return the starting price in the currency returned in the currency field.",
             "args": [],
@@ -38227,31 +38291,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "max_gross_vehicle_weight",
-            "description": "Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload).",
-            "args": [
-              {
-                "name": "unit",
-                "description": null,
-                "type": {
-                  "kind": "ENUM",
-                  "name": "WeightUnit",
-                  "ofType": null
-                },
-                "defaultValue": "kilogram",
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of weight_gvwr.nominal"
           },
           {
             "name": "boot_capacity",
@@ -41243,103 +41282,6 @@
                   "ofType": null
                 },
                 "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "aux",
-            "description": "Consumption, in kWh, of the auxiliaries.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "VehiclePremiumRoutingConsumptionValue",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of auxiliary"
-          },
-          {
-            "name": "bms",
-            "description": "Consumption, in kWh, of the battery management system.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "VehiclePremiumRoutingConsumptionValue",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of auxiliary"
-          },
-          {
-            "name": "idle",
-            "description": "Consumption, in kWh, of the vehicle in idle mode.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "VehiclePremiumRoutingConsumptionValue",
-              "ofType": null
-            },
-            "isDeprecated": true,
-            "deprecationReason": "In favor of auxiliary"
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "VehiclePremiumRoutingConsumptionValue",
-        "description": null,
-        "fields": [
-          {
-            "name": "best",
-            "description": "Best (lowest) consumption in summer.",
-            "args": [
-              {
-                "name": "unit",
-                "description": null,
-                "type": {
-                  "kind": "ENUM",
-                  "name": "ConsumptionUnit",
-                  "ofType": null
-                },
-                "defaultValue": "kilowatt_hours_per_100_kilometers",
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "worst",
-            "description": "Best (lowest) consumption in winter.",
-            "args": [
-              {
-                "name": "unit",
-                "description": null,
-                "type": {
-                  "kind": "ENUM",
-                  "name": "ConsumptionUnit",
-                  "ofType": null
-                },
-                "defaultValue": "kilowatt_hours_per_100_kilometers",
                 "isDeprecated": false,
                 "deprecationReason": null
               }

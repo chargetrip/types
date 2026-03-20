@@ -146,7 +146,9 @@ export enum Amenities {
   BATHROOM = "bathroom",
   SUPERMARKET = "supermarket",
   PLAYGROUND = "playground",
-  PHARMACY = "pharmacy"
+  PHARMACY = "pharmacy",
+  BAKERY = "bakery",
+  CONVENIENCE_STORE = "convenience_store"
 }
 
 /** Amenity data. */
@@ -164,7 +166,7 @@ export type Amenity = {
   /** ID provided by an amenity data source as the row ID. */
   external_id: Scalars["String"];
   /** Name of the amenity. */
-  name?: Maybe<Scalars["String"]>;
+  name: Scalars["String"];
   /** Geo location coordinates. This is a GeoJSON Point. */
   location: Point;
   /** Address of the amenity. */
@@ -269,7 +271,9 @@ export enum AmenityType {
   BATHROOM = "bathroom",
   SUPERMARKET = "supermarket",
   PLAYGROUND = "playground",
-  PHARMACY = "pharmacy"
+  PHARMACY = "pharmacy",
+  BAKERY = "bakery",
+  CONVENIENCE_STORE = "convenience_store"
 }
 
 /** Type of wheelchair accessibility at the amenity. */
@@ -934,7 +938,11 @@ export enum ConnectorType {
   /** The connector type is NEMA 14-30, 3 pins, rating of 30 A. */
   NEMA_14_30 = "NEMA_14_30",
   /** The connector type is NEMA 14-50, 3 pins, rating of 50 A. */
-  NEMA_14_50 = "NEMA_14_50"
+  NEMA_14_50 = "NEMA_14_50",
+  /** Guobiao GB/T 20234.2 AC socket/connector. */
+  GBT_AC = "GBT_AC",
+  /** Guobiao GB/T 20234.3 DC connector. */
+  GBT_DC = "GBT_DC"
 }
 
 export enum ConsumptionUnit {
@@ -1266,10 +1274,12 @@ export type CreateRoute = {
   departure_time: Scalars["DateTime"];
   /** [BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
   avoid?: Maybe<Array<RouteAvoid>>;
-  /** [BETA] User-defined maximum speed used for this route, if provided. */
-  maximum_speed?: Maybe<MaximumSpeed>;
+  /** [BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied. */
+  driving_preferences?: Maybe<RouteDrivingPreferences>;
   /** Weather configuration for the route. Defined by a preset or custom weather conditions. */
   weather?: Maybe<RouteWeather>;
+  /** Charging stations preferences for route calculation. */
+  station_preferences?: Maybe<RouteStationPreferences>;
 };
 
 /** Input for the create route mutation. */
@@ -1282,7 +1292,7 @@ export type CreateRouteInput = {
   destination: RouteDestinationFeaturePointInput;
   /** Optional via points of a route. */
   via?: Maybe<Array<RouteViaFeaturePointInput>>;
-  /** Prioritized operators for a route calculation. */
+  /** Operator preferences and restrictions for route calculation. If not specified, excludes operators per project settings, but applies no operator ranking. */
   operators?: Maybe<RouteOperatorPreferencesInput>;
   /** Optional flag to specify the season. */
   season?: Maybe<RouteSeason>;
@@ -1292,10 +1302,12 @@ export type CreateRouteInput = {
   departure_time?: Maybe<Scalars["DateTime"]>;
   /** [BETA] Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
   avoid?: Maybe<Array<RouteAvoid>>;
-  /** [BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. */
-  maximum_speed?: Maybe<MaximumSpeedInput>;
   /** Weather configuration for the route. Defined by a preset or custom weather conditions. */
   weather?: Maybe<RouteWeatherInput>;
+  /** Charging stations preferences for route calculation. */
+  station_preferences?: Maybe<RouteStationPreferencesInput>;
+  /** [BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied. */
+  driving_preferences?: Maybe<RouteDrivingPreferencesInput>;
 };
 
 /** Currency in the ISO 4217 format. */
@@ -1644,14 +1656,21 @@ export enum DimensionUnit {
   MILE = "mile"
 }
 
+export type DistanceInput = {
+  /** Value of the distance. */
+  value: Scalars["Float"];
+  /** Unit of distance. */
+  unit: DistanceUnit;
+};
+
 export enum DistanceUnit {
-  /** Return the distance in meters. */
+  /** Distance in meters. */
   METER = "meter",
-  /** Return the distance in feet. */
+  /** Distance in feet. */
   FOOT = "foot",
-  /** Return the distance in kilometers. */
+  /** Distance in kilometers. */
   KILOMETER = "kilometer",
-  /** Return the distance in miles. */
+  /** Distance in miles. */
   MILE = "mile"
 }
 
@@ -1946,25 +1965,23 @@ export enum HeavyVehiclesFacility {
   SECURE_TRUCK_PARKING = "SECURE_TRUCK_PARKING"
 }
 
-/** Navigation service providers available */
-export enum InstructionsFormat {
-  /** Chargetrip raw instructions */
-  CHARGETRIP = "Chargetrip",
-  /** Mapbox instructions mapping */
-  MAPBOXV5 = "MapboxV5"
-}
-
 export type Isoline = {
   /** Isoline id. */
   id: Scalars["ID"];
   /** Isoline status. */
   status: IsolineStatus;
+  /** Distance from the origin to the furthest reachable point within the isoline. Represents the longest drivable distance, not a straight-line or vehicle range. */
+  maximum_distance?: Maybe<Scalars["Float"]>;
   /** Shape of the isoline consisting in a list of multipolygons. */
   polygons?: Maybe<Array<Maybe<FeatureMultiPolygon>>>;
   /** List of the ferries uniting islands formed by the isoline. */
   ferries?: Maybe<Array<Maybe<FeatureLineString>>>;
   /** The inputted request data for the isoline used to compute it. */
   request_input?: Maybe<IsolineRequestInput>;
+};
+
+export type Isolinemaximum_distanceArgs = {
+  unit?: Maybe<DistanceUnit>;
 };
 
 export type IsolineCabin = {
@@ -2024,6 +2041,8 @@ export type IsolineInput = {
   state_of_charge?: Maybe<StateOfChargeInput>;
   /** Minimum final battery state of charge. Default is 0 */
   final_state_of_charge?: Maybe<StateOfChargeInput>;
+  /** [BETA] User-defined maximum speed used for the isoline. */
+  maximum_speed?: Maybe<MaximumSpeedInput>;
 };
 
 /** Granularity of the isoline. */
@@ -2065,6 +2084,8 @@ export type IsolineRequestInput = {
   state_of_charge: Scalars["Float"];
   /** Minimum final battery state of charge. */
   final_state_of_charge: Scalars["Float"];
+  /** [BETA] Maximum speed to consider when generating the isoline. In the segments where legal speed is lower than this value, the legal speed will be used instead. */
+  maximum_speed?: Maybe<MaximumSpeed>;
 };
 
 export type IsolineRequestInputtotal_occupant_weightArgs = {
@@ -2120,20 +2141,6 @@ export type LineString = {
 /** GeoJSON LineString type. */
 export enum LineStringType {
   LINESTRING = "LineString"
-}
-
-/** Preferred language for the mapping */
-export enum MappingLanguage {
-  /** English(US) */
-  EN = "en"
-}
-
-/** Navigation service providers available */
-export enum MappingProvider {
-  /** Chargetrip raw instructions */
-  CHARGETRIP = "Chargetrip",
-  /** Mapbox instructions mapping */
-  MAPBOXV5 = "MapboxV5"
 }
 
 export type MaximumSpeed = {
@@ -2265,146 +2272,154 @@ export type MutationcreateRouteArgs = {
   input: CreateRouteInput;
 };
 
-/** The navigation session data */
+/** The navigation session data. */
 export type Navigation = {
-  /** ID of the navigation session */
+  /** ID of the navigation session. */
   id: Scalars["ID"];
-  /** The current route used for navigation */
-  route_id: Scalars["ID"];
-  /** The current route alternative used for navigation */
-  route_alternative_id: Scalars["ID"];
-  /** The state of a navigation session. The status can be driving, charging, finished, or error */
-  state: NavigationState;
-  /** State of charge at the last known location */
-  state_of_charge: Scalars["Float"];
-  /** Last known location */
-  last_known_location: Point;
-  /** Next charging station */
-  next_station?: Maybe<NavigationStation>;
-  /** A set of alternative charging stations to next station */
-  alternative_stations: Array<NavigationStation>;
-  /** Navigation instructions */
-  instructions?: Maybe<Scalars["JSON"]>;
+  /** Navigation session details overview. */
+  overview: NavigationOverview;
+  /** The status of a navigation session. The status can be driving, charging, finished, or error. */
+  status: NavigationStatus;
   /** Navigation meta information. */
   meta?: Maybe<NavigationMeta>;
 };
 
-/** The navigation session data */
-export type Navigationstate_of_chargeArgs = {
-  unit?: Maybe<StateOfChargeUnit>;
-};
-
-/** Input for the navigation recalculate */
+/** Input for the navigation recalculate. */
 export type NavigationFinishInput = {
-  /** ID of the navigation session */
+  /** ID of the navigation session. */
   id: Scalars["ID"];
-  /** Current coordinates */
+  /** Current coordinates. */
   current_location: PointInput;
-};
-
-export type NavigationInstructionsInput = {
-  /** Turn by turn instructions format for a route */
-  instructions_format: InstructionsFormat;
-  /** Preferred navigation instructions language. Default: en */
-  language?: Maybe<MappingLanguage>;
-  /** Number of decimals used for the Google Polyline encoding Algorithm. Allowed values are 5 or 6. */
-  precision?: Maybe<Scalars["Int"]>;
 };
 
 /** Navigation meta information. */
 export type NavigationMeta = {
   /** Creation time of the navigation session. */
-  created_at?: Maybe<Scalars["DateTime"]>;
+  created_at: Scalars["DateTime"];
   /** Last updated time of the navigation session. */
-  updated_at?: Maybe<Scalars["DateTime"]>;
+  updated_at: Scalars["DateTime"];
 };
 
-/** Input for the navigation recalculate */
+/** The navigation session overview details. */
+export type NavigationOverview = {
+  /** State of charge at the last known location. */
+  state_of_charge: Scalars["Float"];
+  /** Last known location. */
+  last_known_location: Point;
+  /** Next charging station. */
+  next_station?: Maybe<NavigationStation>;
+  /** A set of alternative charging stations to next station. */
+  alternative_stations: Array<NavigationStation>;
+  /** Navigation route instructions. */
+  instructions: Array<Maybe<RouteInstruction>>;
+  /** Continuously updated route request input. */
+  live_route_request: CreateRoute;
+  /** Polyline containing encoded coordinates. */
+  polyline: Scalars["String"];
+};
+
+/** The navigation session overview details. */
+export type NavigationOverviewstate_of_chargeArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+/** The navigation session overview details. */
+export type NavigationOverviewpolylineArgs = {
+  decimals?: Maybe<PolylineInputDecimals>;
+};
+
+/** Input for the navigation recalculate. */
 export type NavigationRecalculateInput = {
-  /** ID of the navigation session */
+  /** ID of the navigation session. */
   id: Scalars["ID"];
-  /** State of charge at origin */
+  /** State of charge at origin. */
   state_of_charge?: Maybe<StateOfChargeInput>;
-  /** Origin location of a new route */
+  /** Origin location of a new route. */
   current_location: PointInput;
-  /** Via points of a new route. If this field is not sent, the original via points will be used */
+  /** Via points of a new route. If this field is not sent, the original via points will be used. */
   via?: Maybe<Array<FeaturePointInput>>;
-  /** Telemetry data input */
+  /** Telemetry data input. */
   telemetry?: Maybe<TelemetryInput>;
 };
 
-/** Input for the navigation start */
+/** Input for the navigation start. */
 export type NavigationStartInput = {
-  /** ID of the route of the navigation session */
+  /** ID of the route of the navigation session. */
   route_id: Scalars["ID"];
-  /** ID of the route alternative of the navigation session */
-  route_alternative_id?: Maybe<Scalars["ID"]>;
-  /** Current coordinates */
+  /** Current coordinates. */
   current_location: PointInput;
-  /** Instruction input format */
-  instructions: NavigationInstructionsInput;
 };
 
-/** State of navigation session */
-export enum NavigationState {
-  /** Vehicle is driving */
-  DRIVING = "driving",
-  /** Vehicle is charging */
-  CHARGING = "charging",
-  /** Navigation session is completed (either manually or automatically 48 hours after the last update) */
-  FINISHED = "finished",
-  /** Failed to update navigation session due to route error or not found */
-  ERROR = "error"
-}
-
-/** Navigation session station type */
+/** Navigation session station type. */
 export type NavigationStation = {
-  /** The ID as string of the charging station */
+  /** The ID as string of the charging station. */
   station_id: Scalars["ID"];
-  /** GPS location of the charging station */
+  /** GPS location of the charging station. */
   station_location: Point;
-  /** An array with all GPS locations of via points until the next charging station */
+  /** An array with all GPS locations of via points until the next charging station. */
   via: Array<Point>;
-  /** Estimated state of charge, at arrival on the next charging station */
+  /** Estimated state of charge, at arrival on the next charging station. */
   estimated_state_of_charge: Scalars["Float"];
-  /** Estimated consumption, in kWh, from last the known location until the next charging station */
+  /** Estimated consumption, in kWh, from last the known location until the next charging station. */
   estimated_consumption: Scalars["Float"];
-  /** Estimated duration, in seconds, from the last known location until the next charging station */
-  estimated_duration: Scalars["Int"];
+  /** Estimated duration, in seconds, from the last known location until the next charging station. */
+  estimated_duration: Scalars["Float"];
 };
 
-/** Navigation session station type */
+/** Navigation session station type. */
 export type NavigationStationestimated_state_of_chargeArgs = {
   unit?: Maybe<StateOfChargeUnit>;
 };
 
-/** Input for the navigation update */
-export type NavigationUpdateInput = {
-  /** ID of the navigation session */
+/** State of navigation session. */
+export enum NavigationStatus {
+  /** Vehicle is driving. */
+  DRIVING = "driving",
+  /** Vehicle is charging. */
+  CHARGING = "charging",
+  /** Navigation session is completed (either manually or automatically 48 hours after the last update). */
+  FINISHED = "finished",
+  /** Failed to update navigation session due to route error or not found. */
+  ERROR = "error"
+}
+
+/** The navigation session subscription data */
+export type NavigationSubscription = {
+  /** ID of the navigation session. */
   id: Scalars["ID"];
-  /** A list of locations that were collected since the last update */
+  /** The status of a navigation session. The status can be driving, charging, finished, or error. */
+  status: NavigationStatus;
+  /** Navigation meta information. */
+  meta?: Maybe<NavigationMeta>;
+};
+
+/** Input for the navigation update. */
+export type NavigationUpdateInput = {
+  /** ID of the navigation session. */
+  id: Scalars["ID"];
+  /** A list of locations that were collected since the last update. */
   location_data: Array<NavigationUpdateLocationsInput>;
-  /** Telemetry data input */
+  /** Telemetry data input. */
   telemetry?: Maybe<TelemetryInput>;
 };
 
-/** Properties of the location */
+/** Properties of the location. */
 export type NavigationUpdateLocationPropertiesInput = {
-  /** Current route leg index corresponding to a location */
+  /** Current route leg index corresponding to a location. */
   route_leg: Scalars["Int"];
-  /** Speed at a location */
+  /** Speed at a location. */
   speed?: Maybe<VehicleSpeedInput>;
-  /** UNIX timestamp at location, in seconds */
+  /** UNIX timestamp at location, in seconds. */
   timestamp: Scalars["Int"];
-  /** Elevation information */
+  /** Elevation information. */
   elevation?: Maybe<ElevationInput>;
 };
 
-/** Input for the navigation update locations */
+/** Input for the navigation update locations. */
 export type NavigationUpdateLocationsInput = {
-  /** GPS location */
+  /** GPS location. */
   geometry: PointInput;
-  /** Extra information about the location */
+  /** Extra information about the location. */
   properties: NavigationUpdateLocationPropertiesInput;
 };
 
@@ -2535,7 +2550,11 @@ export enum OCPIConnectorType {
   /** The connector type is NEMA 14-30, 3 pins, rating of 30 A */
   NEMA_14_30 = "NEMA_14_30",
   /** The connector type is NEMA 14-50, 3 pins, rating of 50 A */
-  NEMA_14_50 = "NEMA_14_50"
+  NEMA_14_50 = "NEMA_14_50",
+  /** Guobiao GB/T 20234.2 AC socket/connector. */
+  GBT_AC = "GBT_AC",
+  /** Guobiao GB/T 20234.3 DC connector. */
+  GBT_DC = "GBT_DC"
 }
 
 export enum OCPIDayOfWeek {
@@ -3055,6 +3074,8 @@ export type Operator = {
   ranking_levels?: Maybe<OperatorRankingLevels>;
   /** List of countries where the operator is excluded. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request. */
   excluded_countries?: Maybe<Array<CountryCodeAlpha2>>;
+  /** List of countries where the operator is avoided. Default operator preference applied to routes created through createRoute mutation if no operator preference is specified in the request. */
+  avoided_countries?: Maybe<Array<CountryCodeAlpha2>>;
 };
 
 /** Filter which can be applied to retrieve the operator list action. */
@@ -3082,6 +3103,17 @@ export type OperatorListQuery = {
   /** Exact country code. */
   country?: Maybe<Scalars["String"]>;
 };
+
+export enum OperatorPreferenceType {
+  /** Operators that have been set as preferred or required. */
+  RANKED = "ranked",
+  /** Operators that have not been set as neither preferred or required or avoided nor excluded. */
+  UNRANKED = "unranked",
+  /** Operators that have been set to be avoided. */
+  AVOIDED = "avoided",
+  /** Operators that have been set to be excluded. */
+  EXCLUDED = "excluded"
+}
 
 /** Operator ranking level. */
 export enum OperatorRankingLevel {
@@ -3135,6 +3167,18 @@ export type OutsideTemperatureInput = {
   type: TemperatureUnit;
   /** Source of inputted data. */
   source?: Maybe<TelemetryInputSource>;
+};
+
+/** Information about the list page. */
+export type PageInfo = {
+  /** Flag that indicates if it has a next page. */
+  has_next_page: Scalars["Boolean"];
+  /** Flag that indicates if it has a previous page. */
+  has_previous_page: Scalars["Boolean"];
+  /** Cursor of the first connection of the page. If the page is empty, this is null. */
+  start_cursor?: Maybe<Scalars["String"]>;
+  /** Cursor of the last connection of the page. If the page is empty, this is null. */
+  end_cursor?: Maybe<Scalars["String"]>;
 };
 
 export enum ParkingCost {
@@ -3319,6 +3363,8 @@ export type Query = {
   getRouteEmissions: RouteDetailsEmissions;
   /** Get a route by ID. */
   getRoute: RouteResponse;
+  /** [BETA] Search for stations with amenities within a specific time window and distance of a previously calculated route. */
+  getRouteStationsWithAmenities: RouteStationsWithAmenitiesConnection;
   /** Get information about a station by its ID. */
   station?: Maybe<Station>;
   /** Get a full list of stations. */
@@ -3336,9 +3382,9 @@ export type Query = {
   /** Get a full list of vehicles. */
   vehicleList?: Maybe<Array<Maybe<VehicleList>>>;
   /** [BETA] Get a full list of vehicle makes. */
-  vehicleMakes: VehicleMakesResponse;
+  vehicleMakes: VehicleMakesConnection;
   /** [BETA] Get a full list of vehicle make models. */
-  vehicleModels: VehicleModelsResponse;
+  vehicleModels: VehicleModelsConnection;
 };
 
 export type QueryamenityListArgs = {
@@ -3417,6 +3463,16 @@ export type QuerygetRouteArgs = {
   id: Scalars["ID"];
 };
 
+export type QuerygetRouteStationsWithAmenitiesArgs = {
+  route_id: Scalars["ID"];
+  route_details_id: Scalars["ID"];
+  time_window: RouteTimeWindow;
+  amenity_types: Array<AmenityType>;
+  filter?: Maybe<RouteStationsWithAmenityFilter>;
+  first?: Maybe<Scalars["Int"]>;
+  after?: Maybe<Scalars["String"]>;
+};
+
 export type QuerystationArgs = {
   id?: Maybe<Scalars["ID"]>;
   evse_id?: Maybe<Scalars["String"]>;
@@ -3470,8 +3526,10 @@ export type QueryvehicleMakesArgs = {
 };
 
 export type QueryvehicleModelsArgs = {
-  filter: VehicleModelsFilter;
+  filter?: Maybe<VehicleModelsFilter>;
   country?: Maybe<CountryCodeAlpha2>;
+  first?: Maybe<Scalars["Int"]>;
+  after?: Maybe<Scalars["String"]>;
 };
 
 export type RemoveConnectedVehicleInput = {
@@ -3826,21 +3884,6 @@ export type ReviewTagsInput = {
 export type ReviewUser = {
   /** User full name. If a review was added by an anonymous user, this will be null. */
   name?: Maybe<Scalars["String"]>;
-  /**
-   * User ID.
-   * @deprecated Not sent back anymore, will be null
-   */
-  id?: Maybe<Scalars["ID"]>;
-  /**
-   * First name.
-   * @deprecated In favor of name.
-   */
-  firstName?: Maybe<Scalars["String"]>;
-  /**
-   * Last name.
-   * @deprecated In favor of name
-   */
-  lastName?: Maybe<Scalars["String"]>;
 };
 
 export type Route = {
@@ -3958,6 +4001,11 @@ export enum RouteAlternativeType {
   ALTERNATIVE = "alternative"
 }
 
+export type RouteAmenityFilter = {
+  /** Maximum distance from the station to the amenity. The value must be between 0 and 1 000 meters. If not specified, defaults to 250 meters. */
+  maximum_distance_from_station?: Maybe<DistanceInput>;
+};
+
 /** Amenity preferences for a route. */
 export type RouteAmenityPreferences = {
   /** Desired amenities near all charge-stops along a route, with a 1 kilometer radius. */
@@ -3983,8 +4031,8 @@ export type RouteDestinationFeaturePoint = {
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
-  geometry: Point;
-  /** Optional object where additional properties can be specified. */
+  geometry?: Maybe<Point>;
+  /** Additional feature properties. */
   properties?: Maybe<RouteDestinationProperties>;
 };
 
@@ -3994,8 +4042,8 @@ export type RouteDestinationFeaturePointInput = {
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
-  geometry: PointInput;
-  /** Optional object where additional properties can be specified. */
+  geometry?: Maybe<PointInput>;
+  /** Additional feature properties. */
   properties?: Maybe<RouteDestinationPropertiesInput>;
 };
 
@@ -4009,7 +4057,7 @@ export type RouteDestinationProperties = {
 export type RouteDestinationPropertiesInput = {
   /** Data about the destination location. */
   location?: Maybe<RoutePropertiesLocationInput>;
-  /** Data about the destination station. */
+  /** Specifies a charging station at the destination. If a known station is provided, it will be used as charging stop. Any configured operator preferences are ignored for this stop. */
   station?: Maybe<RoutePropertiesStationInput>;
 };
 
@@ -4036,12 +4084,19 @@ export type RouteDetails = {
   savings?: Maybe<RouteDetailsSavings>;
   /** Legs of a route. */
   legs: Array<RouteDetailsLeg>;
-  /** Alternative stations along a route within a specified radius. Will only return stations if alternative_station_radius was specified in the createRoute mutation. */
+  /**
+   * Alternative stations along a route within a specified radius.
+   *
+   * Includes stations from preferred/required/avoided operators but excludes stations from excluded operators.
+   * This list is only populated if `alternative_station_radius` was specified in the `createRoute` mutation.
+   */
   alternative_stations: Array<RouteDetailsAlternativeStation>;
   /** Aggregation of tags over the current RouteDetails. Tags are available on legs and further subdivided over individual sections and maneuvers. */
   tags: Array<RouteDetailsTag>;
   /** Number of charging stops required for this route. */
   charges: Scalars["Int"];
+  /** [BETA] Warnings that certain conditions specified in a route mutation are not respected. */
+  warnings?: Maybe<Array<RouteWarning>>;
 };
 
 export type RouteDetailsdistanceArgs = {
@@ -4075,7 +4130,6 @@ export type RouteDetailsAlternativeStation = {
   operator_id?: Maybe<Scalars["ID"]>;
 };
 
-/** Aggregation of all durations of a route. */
 export type RouteDetailsDurations = {
   /** Total duration, in seconds. */
   total: Scalars["Int"];
@@ -4083,7 +4137,7 @@ export type RouteDetailsDurations = {
   charging: Scalars["Int"];
   /** Total driving duration, in seconds. */
   driving: Scalars["Int"];
-  /** Total stop duration, excluding charge stops, in seconds. */
+  /** Total duration stopped at a location via or at a station via, excluding charging time and charging penalty, in seconds. */
   stopover: Scalars["Int"];
   /** Total ferry duration, in seconds. */
   ferry: Scalars["Int"];
@@ -4165,6 +4219,8 @@ export type RouteDetailsLeg = {
   maneuvers: Array<RouteDetailsManeuver>;
   /** Road sections of a leg - divided by means of transportation. */
   sections: Array<RouteDetailsLegSection>;
+  /** [BETA] Warnings that certain conditions specified in a route mutation are not respected. */
+  warnings?: Maybe<Array<RouteDetailsLegWarning>>;
 };
 
 /** Leg of a route detail. */
@@ -4216,7 +4272,10 @@ export type RouteDetailsLegFeatureProperties = {
   air_pressure?: Maybe<Scalars["Float"]>;
   /** Solar irradiance at the location. */
   solar_irradiance?: Maybe<Scalars["Float"]>;
-  /** Duration, in seconds, of time spent at this location. */
+  /**
+   * Duration, in seconds, of time spent at this location.
+   * @deprecated In favor of legs.durations
+   */
   duration?: Maybe<Scalars["Int"]>;
   /** Number of occupants present in the vehicle. */
   occupants?: Maybe<Scalars["Int"]>;
@@ -4358,6 +4417,27 @@ export enum RouteDetailsLegType {
   FINAL = "final"
 }
 
+export type RouteDetailsLegWarning = {
+  /** The code of the warning. */
+  code: RouteDetailsLegWarningCode;
+};
+
+/** Types of warnings that can be encountered in a route leg. */
+export enum RouteDetailsLegWarningCode {
+  /** The via location cannot be reached by vehicle. */
+  VIA_NOT_VEHICLE_ACCESSIBLE = "via_not_vehicle_accessible",
+  /** The leg could not use stations from the preferred operator(s). */
+  OPERATORS_PREFERRED_NOT_AVAILABLE = "operators_preferred_not_available",
+  /** Vehicle's load may exceed the maximum supported weight of the vehicle. */
+  MAXIMUM_WEIGHT_EXCEEDED = "maximum_weight_exceeded",
+  /** The leg includes sections requested to be avoided. */
+  SEGMENT_UNAVOIDABLE = "segment_unavoidable",
+  /** The charging station used in the leg has limited opening hours. */
+  STATION_LIMITED_OPEN_HOURS = "station_limited_open_hours",
+  /** The specified stop duration at the via charging station is insufficient to start a charging session. */
+  VIA_INSUFFICIENT_CHARGING_TIME = "via_insufficient_charging_time"
+}
+
 export type RouteDetailsManeuver = {
   /** Type of instruction. */
   type: RouteDetailsLegManeuverType;
@@ -4456,6 +4536,31 @@ export enum RouteDetailsTag {
   FERRY = "ferry",
   WALKING = "walking",
   CROSSBORDER = "crossborder"
+}
+
+export type RouteDrivingPreferences = {
+  /** [BETA] Factor to adjust the route's calculated average speed. Accepts values between 0.80 and 1.20. 1.0 is neutral. Values below 1.0 reduce speed (e.g. 0.95 is -5%), values above increase it. If provided in combination with style, this overrides the speed factor implied by the selected 'style'. */
+  speed_factor?: Maybe<Scalars["Float"]>;
+  /** [BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. If provided in combination with 'style, this overrides the maximum speed implied by the selected 'style'. */
+  maximum_speed?: Maybe<MaximumSpeed>;
+  /** [BETA] Defines a driving style. If provided in combination with 'maximum_speed' or 'speed_factor', those values override the values defined by the selected 'style'. */
+  style?: Maybe<RouteDrivingStyle>;
+};
+
+export type RouteDrivingPreferencesInput = {
+  /** [BETA] Factor to adjust the route's calculated average speed. Accepts values between 0.80 and 1.20. 1.0 is neutral. Values below 1.0 reduce speed (e.g. 0.95 is -5%), values above increase it. If provided in combination with style, this overrides the speed factor implied by the selected 'style'. */
+  speed_factor?: Maybe<Scalars["Float"]>;
+  /** [BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. If provided in combination with 'style, this overrides the maximum speed implied by the selected 'style'. */
+  maximum_speed?: Maybe<MaximumSpeedInput>;
+  /** [BETA] Defines a driving style. If provided in combination with 'maximum_speed' or 'speed_factor', those values override the values defined by the selected 'style'. */
+  style?: Maybe<RouteDrivingStyle>;
+};
+
+export enum RouteDrivingStyle {
+  /** Lower average driving speed and lower energy consumption. Applies a speed limit of 110 km/h to all segments where a higher legal limit is allowed and reduces by 5% the route's average driving speed. */
+  ECO = "eco",
+  /** Higher average driving speed and higher energy consumption. Applies no speed limit and increases by 5% the route's average driving speed. */
+  SPORT = "sport"
 }
 
 export type RouteEmbeddedEmissions = {
@@ -5239,14 +5344,18 @@ export type RouteOperatorPreferences = {
   ranking?: Maybe<RouteOperatorPreferencesRanking>;
   /** Operators that should be excluded for a route calculation. */
   exclude?: Maybe<Array<RouteOperatorsValue>>;
+  /** Operators that should be avoided, but not excluded, for a route calculation. */
+  avoid?: Maybe<Array<RouteOperatorsValue>>;
 };
 
 /** Prioritized operators for a route calculation. */
 export type RouteOperatorPreferencesInput = {
-  /** Ranking of an operator with multiple levels, each level having its own penalty value. */
+  /** Operators to be preferred in route calculation. If not specified, no operator ranking is applied (including project-configured ranking). */
   ranking?: Maybe<RouteOperatorPreferencesRankingInput>;
-  /** Operators that should be excluded for a route calculation. */
+  /** Operators to be excluded from route calculation. If specified, overrides project-configured operator exclusions. If not specified, applies project-configured operator exclusions. */
   exclude?: Maybe<Array<RouteOperatorsValueInput>>;
+  /** Operators that should be avoided, but not excluded, for a route calculation. */
+  avoid?: Maybe<Array<RouteOperatorsValueInput>>;
 };
 
 export type RouteOperatorPreferencesRanking = {
@@ -5257,9 +5366,9 @@ export type RouteOperatorPreferencesRanking = {
 };
 
 export type RouteOperatorPreferencesRankingInput = {
-  /** Flag indicating if the operators ranking should be preferred or required. */
+  /** Determines how operator preferences are applied to stations during route calculation. If no ranking is provided through 'levels' or project settings, no operator preference is applied. */
   type: RouteOperatorsType;
-  /** Ranking levels for operator ranking. */
+  /** Priority levels for operator ranking. If not specified, applies the specified enforcement type to the project-configured operator ranking. */
   levels?: Maybe<RouteOperatorPreferencesRankingLevelsInput>;
 };
 
@@ -5369,7 +5478,7 @@ export type RouteOperatorsValue = {
 export type RouteOperatorsValueInput = {
   /** ID of an operator. */
   id: Scalars["ID"];
-  /** List of countries in which the operator should be preferred/excluded. When omitted the operator will be preferred/excluded in every country. */
+  /** List of countries in which the operator should be preferred/excluded/avoided. When omitted the operator will be preferred/excluded in every country. */
   countries?: Maybe<Array<CountryCodeAlpha2>>;
 };
 
@@ -5445,6 +5554,8 @@ export type RoutePropertiesStation = {
   station_id?: Maybe<Scalars["ID"]>;
   /** External ID of the station. When provided and valid, the coordinates of this station will be used. */
   external_station_id?: Maybe<Scalars["ID"]>;
+  /** Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode. */
+  stop_duration?: Maybe<Scalars["Int"]>;
 };
 
 export type RoutePropertiesStationInput = {
@@ -5452,6 +5563,8 @@ export type RoutePropertiesStationInput = {
   station_id?: Maybe<Scalars["ID"]>;
   /** External ID of the station. When provided and valid, the coordinates of this station will be used. */
   external_station_id?: Maybe<Scalars["ID"]>;
+  /** Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode. */
+  stop_duration?: Maybe<Scalars["Int"]>;
 };
 
 export type RoutePropertiesVehicle = {
@@ -5523,6 +5636,49 @@ export enum RouteSeason {
   CURRENT = "current"
 }
 
+export type RouteStationFilter = {
+  /** Filters stations within this distance from the route path. The value must be between 0 and 10 000 meters. If not specified, defaults to 1 000 meters. */
+  maximum_distance_from_path?: Maybe<DistanceInput>;
+  /** Filters stations by operator preference types. This filter depends exclusively on the preferences used for the route calculation. If not specified, stations from all preference types (ranked, unranked, avoided, excluded) are returned. */
+  operator_preference?: Maybe<Array<OperatorPreferenceType>>;
+};
+
+export type RouteStationOperator = {
+  /** Unique operator ID. */
+  id?: Maybe<Scalars["ID"]>;
+  /** Operator's preference status specifically for this route calculation. */
+  preference_type: OperatorPreferenceType;
+};
+
+export type RouteStationPreferences = {
+  /** [BETA] Flag to prioritise charging stations located directly on the highway, avoiding exiting highways to charge. This preference is considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. The preference's weight is configurable in project settings. */
+  prefer_highway_charging?: Maybe<Scalars["Boolean"]>;
+};
+
+export type RouteStationPreferencesInput = {
+  /** [BETA] Flag to prioritise charging stations located directly on the highway, avoiding exiting highways to charge. This preference is considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. The preference's weight is configurable in project settings. */
+  prefer_highway_charging?: Maybe<Scalars["Boolean"]>;
+};
+
+export type RouteStationWithAmenities = {
+  /** ID of the station. */
+  id: Scalars["ID"];
+  /** ID of the station provided by the station data source. */
+  external_id?: Maybe<Scalars["ID"]>;
+  /** GeoJSON location of the station. */
+  location: Point;
+  /** Information about the station's operator. */
+  operator: RouteStationOperator;
+  /** Distance of the station to the closest point in the original route. */
+  distance_from_path: Scalars["Float"];
+  /** List of up to 5 amenities matching the specified amenity type. Sorted by ascending distance from the station. */
+  matching_amenities: Array<Amenity>;
+};
+
+export type RouteStationWithAmenitiesdistance_from_pathArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
 export type RouteStationsAlong = {
   /** The ID of station. */
   id?: Maybe<Scalars["String"]>;
@@ -5536,6 +5692,22 @@ export type RouteStationsAlong = {
   preferredOperator?: Maybe<Scalars["Boolean"]>;
   /** Distance in meters between station and route path. */
   distance?: Maybe<Scalars["Int"]>;
+};
+
+export type RouteStationsWithAmenitiesConnection = {
+  /** Total number of stations with amenities of the specified type. */
+  total_count: Scalars["Int"];
+  /** Information about the current page. */
+  page_info: PageInfo;
+  /** List of stations with amenities of the specified type. */
+  nodes: Array<RouteStationWithAmenities>;
+};
+
+export type RouteStationsWithAmenityFilter = {
+  /** Station filters. */
+  station?: Maybe<RouteStationFilter>;
+  /** Amenity filters. */
+  amenity?: Maybe<RouteAmenityFilter>;
 };
 
 /** The status of a route. The status can be pending, processing, done, not_found or error. */
@@ -5580,6 +5752,14 @@ export enum RouteTagType {
   WALKING = "walking",
   CROSSBORDER = "crossborder"
 }
+
+/** Specifies a temporal window to search for stations with matching amenity types. Defined by a center from the journey origin and a surrounding time margin. */
+export type RouteTimeWindow = {
+  /** Center point of the search, expressed as the travel time, in seconds, from the journey's origin. */
+  center: Scalars["Int"];
+  /** Duration in seconds to extend the search on either side of the 'center'. Maximum allowed value is 2700 (45 minutes). If not specified, defaults to 900 seconds (15 minutes). */
+  margin?: Maybe<Scalars["Int"]>;
+};
 
 export type RouteVehicle = {
   /** ID of the vehicle. */
@@ -5817,8 +5997,8 @@ export type RouteViaFeaturePoint = {
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
-  geometry: Point;
-  /** Optional object where additional properties can be specified. */
+  geometry?: Maybe<Point>;
+  /** Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location. */
   properties?: Maybe<RouteViaProperties>;
 };
 
@@ -5828,8 +6008,8 @@ export type RouteViaFeaturePointInput = {
   /** Feature type. */
   type: FeatureType;
   /** Geometry of the feature. */
-  geometry: PointInput;
-  /** Optional object where additional properties can be specified. */
+  geometry?: Maybe<PointInput>;
+  /** Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location. */
   properties?: Maybe<RouteViaPropertiesInput>;
 };
 
@@ -5847,9 +6027,34 @@ export type RouteViaPropertiesInput = {
   location?: Maybe<RoutePropertiesViaLocationInput>;
   /** Vehicle data of the via point. */
   vehicle?: Maybe<RoutePropertiesVehicleInput>;
-  /** Station data of the via point. */
+  /** Specifies a charging station at the via. If a known station is provided, it will be used as charging stop. Any configured operator preferences are ignored for this stop. */
   station?: Maybe<RoutePropertiesStationInput>;
 };
+
+export type RouteWarning = {
+  /** The code of the warning. */
+  code: RouteWarningCode;
+};
+
+/** Types of warnings that can be encountered in a route. */
+export enum RouteWarningCode {
+  /** The selected vehicle model is unavailable on one or more regions along the route. */
+  EV_UNAVAILABLE_IN_REGION = "ev_unavailable_in_region",
+  /** Route excludes charging stations as a hybrid vehicle does not require external charging. */
+  HEV_NO_CHARGING_STATIONS = "hev_no_charging_stations",
+  /** Route is calculated using only the battery range of the extended-range vehicle.  */
+  EREV_BATTERY_ONLY_RANGE = "erev_battery_only_range",
+  /** The origin location cannot be reached by vehicle and requires a walking section to reach the point. */
+  ORIGIN_NOT_VEHICLE_ACCESSIBLE = "origin_not_vehicle_accessible",
+  /** The destination location cannot be reached by vehicle and requires a walking section to reach the point. */
+  DESTINATION_NOT_VEHICLE_ACCESSIBLE = "destination_not_vehicle_accessible",
+  /** The requested final state of charge cannot be achieved. */
+  FINAL_SOC_NOT_POSSIBLE = "final_soc_not_possible",
+  /** The set maximum speed is too low (below 50 km/h) and may result in an inefficient route. */
+  LOW_SPEED = "low_speed",
+  /** Operator preferences were ignored because they have not been configured for this project nor provided in the route create request. */
+  OPERATOR_PREFERENCES_NOT_FOUND = "operator_preferences_not_found"
+}
 
 export type RouteWeather = {
   /** Weather configuration applied to the route. */
@@ -6041,18 +6246,8 @@ export type Station = {
   properties?: Maybe<Scalars["JSON"]>;
   /** A flag that indicates if a station has real-time information about the availability of its connectors. */
   realtime?: Maybe<Scalars["Boolean"]>;
-  /**
-   * A flag that indicates if a station is on private property.
-   * @deprecated In favor of access_type.
-   */
-  private?: Maybe<Scalars["Boolean"]>;
   /** Connectors grouped by power. */
   power?: Maybe<Scalars["JSON"]>;
-  /**
-   * Station availability.
-   * @deprecated predicted_availability, no value will be sent. Deprecated in favor of predicted_occupancy.
-   */
-  predicted_availability?: Maybe<Array<Maybe<StationPredictedAvailability>>>;
   /** Predicted station occupancy. */
   predicted_occupancy?: Maybe<Array<Maybe<StationPredictedOccupancy>>>;
   /** Charging speed for a station. */
@@ -6128,7 +6323,7 @@ export type StationAroundFilter = {
   connectors?: Maybe<Array<Maybe<ConnectorType>>>;
   /** Flag that allows you to return only available stations. */
   available_only?: Maybe<Scalars["Boolean"]>;
-  /** Flag indicating if only stations that are owned by an operator from a clients ranking list are returned. */
+  /** Flag to filter for stations operated by an operator present in the project's ranking list. */
   preferred_operator?: Maybe<Scalars["Boolean"]>;
 };
 
@@ -6146,40 +6341,10 @@ export type StationAroundQuery = {
 
 export type StationCustomProperties = {
   /**
-   * List of eMSP cards accepted at a charging station.
-   * @deprecated In favor of station.roaming.
-   */
-  roaming?: Maybe<Array<Maybe<StationRoaming>>>;
-  /**
-   * Phone number for assistance at a charging station.
-   * @deprecated In favor of station.support_phone_number.
-   */
-  support_phone_number?: Maybe<Scalars["String"]>;
-  /**
-   * Charging behavior of a station.
-   * @deprecated In favor of station.charging_behaviour.
-   */
-  charging_behaviour?: Maybe<ChargingBehaviour>;
-  /**
    * Shows how reliable a charging station is (1 to 5; 1 = unreliable, 5 = reliable), taking into account the charging behaviour history and error values.
    * @deprecated In favor of station.reliability_score.
    */
   reliability_score?: Maybe<Scalars["Int"]>;
-  /**
-   * List of available ad hoc payment methods.
-   * @deprecated In favor of station.adhoc_authorisation_payment_method.
-   */
-  adhoc_authorisation_method?: Maybe<Array<Maybe<AdhocAuthorisationMethod>>>;
-  /**
-   * Predicted station occupancy.
-   * @deprecated In favor of station.predicted_occupancy.
-   */
-  predicted_occupancy?: Maybe<Array<Maybe<StationPredictedOccupancy>>>;
-  /**
-   * Type of access to the charging station.
-   * @deprecated In favor of station.access_type.
-   */
-  access_type?: Maybe<AccessType>;
   /** Custom station properties for OICP databases such as the global Hubject database. Station databases that not follow the OICP standard return null values. */
   oicp?: Maybe<OICPStationCustomProperties>;
 };
@@ -6248,7 +6413,7 @@ export type StationListFilter = {
   connectors?: Maybe<Array<Maybe<ConnectorType>>>;
   /** Flag that allows you to return only available stations. */
   available_only?: Maybe<Scalars["Boolean"]>;
-  /** Flag indicating if only stations that are owned by an operator from a clients ranking list are returned. */
+  /** Flag to filter for stations operated by an operator present in the project's ranking list. */
   preferred_operator?: Maybe<Scalars["Boolean"]>;
 };
 
@@ -6367,7 +6532,7 @@ export type Subscription = {
   /** Subscribe to a specific route to receive system event updates. */
   route: RouteResponse;
   /** [BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates */
-  navigationUpdatedById?: Maybe<Navigation>;
+  navigationUpdatedById?: Maybe<NavigationSubscription>;
   /** [BETA] Subscribe to a connected vehicle. */
   connectedVehicle?: Maybe<ConnectedVehicle>;
   /** Subscribe to an isoline in order to receive updates. */
@@ -7045,9 +7210,9 @@ export type VehicleMake = {
 };
 
 /** Vehicle makes response object. */
-export type VehicleMakesResponse = {
-  /** Elements of the vehicle make list. */
-  items: Array<VehicleMake>;
+export type VehicleMakesConnection = {
+  /** List of vehicle makes. */
+  nodes: Array<VehicleMake>;
 };
 
 export type VehicleMedia = {
@@ -7084,16 +7249,20 @@ export type VehicleModel = {
   name: Scalars["String"];
 };
 
+/** Vehicle models response object. */
+export type VehicleModelsConnection = {
+  /** Total number of unique vehicle models. */
+  total_count: Scalars["Int"];
+  /** Information about the current page. */
+  page_info: PageInfo;
+  /** List of vehicle models. */
+  nodes: Array<VehicleModel>;
+};
+
 /** Filter vehicle model list result. */
 export type VehicleModelsFilter = {
   /** Vehicle make. */
-  make: Scalars["String"];
-};
-
-/** Vehicle models response object. */
-export type VehicleModelsResponse = {
-  /** Elements of the vehicle model list. */
-  items: Array<VehicleModel>;
+  make?: Maybe<Scalars["String"]>;
 };
 
 export type VehicleNaming = {
@@ -7157,11 +7326,6 @@ export type VehiclePremium = {
   body: VehiclePremiumBody;
   /** Availability of the vehicle. */
   availability: VehiclePremiumAvailability;
-  /**
-   * Pricing of the vehicle.
-   * @deprecated In favor of pricing.
-   */
-  price: VehiclePremiumPrice;
   /** Starting price in the currency defined in the field argument. If not defined, it will return the starting price in the currency returned in the currency field. */
   pricing: VehiclePremiumPriceValueWithGrant;
   /** Drivetrain of the vehicle. */
@@ -7263,11 +7427,6 @@ export type VehiclePremiumBody = {
   weight_is_estimated?: Maybe<Scalars["Boolean"]>;
   /** Maximum payload allowed for the vehicle. */
   weight_max_payload?: Maybe<Scalars["Float"]>;
-  /**
-   * Gross Vehicle Weight (GVWR) - (max allowed vehicle weight with payload).
-   * @deprecated In favor of weight_gvwr.nominal
-   */
-  max_gross_vehicle_weight?: Maybe<Scalars["Float"]>;
   /** Standard luggage capacity. */
   boot_capacity?: Maybe<Scalars["Float"]>;
   /** Storage capacity of front trunk/under the hood (frunk). */
@@ -7327,10 +7486,6 @@ export type VehiclePremiumBodyground_clearanceArgs = {
 };
 
 export type VehiclePremiumBodyweight_max_payloadArgs = {
-  unit?: Maybe<WeightUnit>;
-};
-
-export type VehiclePremiumBodymax_gross_vehicle_weightArgs = {
   unit?: Maybe<WeightUnit>;
 };
 
@@ -7920,40 +8075,10 @@ export type VehiclePremiumRoutingfuel_consumptionArgs = {
 export type VehiclePremiumRoutingConsumption = {
   /** The amount of energy, in kWh, used by the auxiliary systems of the vehicle in an hour, like media box, etc */
   auxiliary?: Maybe<Scalars["Float"]>;
-  /**
-   * Consumption, in kWh, of the auxiliaries.
-   * @deprecated In favor of auxiliary
-   */
-  aux?: Maybe<VehiclePremiumRoutingConsumptionValue>;
-  /**
-   * Consumption, in kWh, of the battery management system.
-   * @deprecated In favor of auxiliary
-   */
-  bms?: Maybe<VehiclePremiumRoutingConsumptionValue>;
-  /**
-   * Consumption, in kWh, of the vehicle in idle mode.
-   * @deprecated In favor of auxiliary
-   */
-  idle?: Maybe<VehiclePremiumRoutingConsumptionValue>;
 };
 
 export type VehiclePremiumRoutingConsumptionauxiliaryArgs = {
   unit?: Maybe<AuxiliaryConsumptionUnit>;
-};
-
-export type VehiclePremiumRoutingConsumptionValue = {
-  /** Best (lowest) consumption in summer. */
-  best?: Maybe<Scalars["Float"]>;
-  /** Best (lowest) consumption in winter. */
-  worst?: Maybe<Scalars["Float"]>;
-};
-
-export type VehiclePremiumRoutingConsumptionValuebestArgs = {
-  unit?: Maybe<ConsumptionUnit>;
-};
-
-export type VehiclePremiumRoutingConsumptionValueworstArgs = {
-  unit?: Maybe<ConsumptionUnit>;
 };
 
 export type VehiclePremiumSafety = {
