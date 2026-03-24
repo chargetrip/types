@@ -2196,6 +2196,41 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "CongestionLevel",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "unknown",
+            "description": "Congestion level is unknown or could not be determined.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "low",
+            "description": "Traffic is flowing freely with little to no delay.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "medium",
+            "description": "Increased traffic volume causing minor delays.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "high",
+            "description": "Significant traffic volume causing heavy delays and potential standstills.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Connect",
         "description": null,
@@ -6120,6 +6155,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "traffic_aware",
+            "description": "[BETA] Indicates whether current traffic conditions were considered during route calculation. This feature is disabled by default and requires explicit enablement for your project. Please contact Chargetrip support for more information.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -6302,6 +6349,18 @@
               "ofType": null
             },
             "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "traffic_aware",
+            "description": "[BETA] Route should consider current traffic conditions. This feature is disabled by default and requires explicit enablement for your project. Please contact Chargetrip support for more information.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": "false",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -20559,6 +20618,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "traffic",
+            "description": "[BETA] Information regarding traffic conditions along the route. Available for routes created with traffic_aware set.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteDetailsTraffic",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -21317,6 +21388,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "traffic",
+            "description": "[BETA] Information regarding traffic conditions along the route's leg . Available for routes created with traffic_aware set to true.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteDetailsLegTraffic",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -21917,6 +22000,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "traffic",
+            "description": "[BETA] Information regarding traffic conditions along the leg's section. Available for routes created with traffic_aware set to true.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteDetailsLegSectionTraffic",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -22073,6 +22168,41 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "RouteDetailsLegSectionTraffic",
+        "description": null,
+        "fields": [
+          {
+            "name": "congestions",
+            "description": "[BETA] Traffic congestion intervals mapped to the polyline indices of the leg's section.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "TrafficCongestionInterval",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "RouteDetailsLegSectionType",
         "description": "Type of a route details leg section.",
@@ -22145,6 +22275,41 @@
                 "kind": "SCALAR",
                 "name": "ID",
                 "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteDetailsLegTraffic",
+        "description": null,
+        "fields": [
+          {
+            "name": "congestions",
+            "description": "[BETA] Traffic congestion intervals mapped to the polyline indices of the leg.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "TrafficCongestionInterval",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,
@@ -22760,6 +22925,53 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RouteDetailsTraffic",
+        "description": null,
+        "fields": [
+          {
+            "name": "delay",
+            "description": "[BETA] Additional driving duration, in seconds, caused by traffic congestion compared to free-flow conditions. This value is already included in route total and driving durations.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "congestions",
+            "description": "[BETA] Traffic congestion intervals mapped to the polyline indices of the leg.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "TrafficCongestionInterval",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -34742,6 +34954,65 @@
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TrafficCongestionInterval",
+        "description": null,
+        "fields": [
+          {
+            "name": "start_index",
+            "description": "Starting index of this interval in the polyline.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end_index",
+            "description": "Ending index of this interval in the polyline.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "level",
+            "description": "Congestion level for this specific interval.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "CongestionLevel",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },

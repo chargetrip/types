@@ -507,6 +507,17 @@ export enum ChargingBehaviourCode {
   OFFICE_CHARGING = "OFFICE_CHARGING"
 }
 
+export enum CongestionLevel {
+  /** Congestion level is unknown or could not be determined. */
+  UNKNOWN = "unknown",
+  /** Traffic is flowing freely with little to no delay. */
+  LOW = "low",
+  /** Increased traffic volume causing minor delays. */
+  MEDIUM = "medium",
+  /** Significant traffic volume causing heavy delays and potential standstills. */
+  HIGH = "high"
+}
+
 export type Connect = {
   /** List of connectivity providers to which the vehicle can connect. This field returns null for free users. Please contact customer success for more information. */
   providers?: Maybe<Array<ConnectProvider>>;
@@ -1280,6 +1291,8 @@ export type CreateRoute = {
   weather?: Maybe<RouteWeather>;
   /** Charging stations preferences for route calculation. */
   station_preferences?: Maybe<RouteStationPreferences>;
+  /** [BETA] Indicates whether current traffic conditions were considered during route calculation. This feature is disabled by default and requires explicit enablement for your project. Please contact Chargetrip support for more information. */
+  traffic_aware?: Maybe<Scalars["Boolean"]>;
 };
 
 /** Input for the create route mutation. */
@@ -1308,6 +1321,8 @@ export type CreateRouteInput = {
   station_preferences?: Maybe<RouteStationPreferencesInput>;
   /** [BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied. */
   driving_preferences?: Maybe<RouteDrivingPreferencesInput>;
+  /** [BETA] Route should consider current traffic conditions. This feature is disabled by default and requires explicit enablement for your project. Please contact Chargetrip support for more information. */
+  traffic_aware?: Maybe<Scalars["Boolean"]>;
 };
 
 /** Currency in the ISO 4217 format. */
@@ -4097,6 +4112,8 @@ export type RouteDetails = {
   charges: Scalars["Int"];
   /** [BETA] Warnings that certain conditions specified in a route mutation are not respected. */
   warnings?: Maybe<Array<RouteWarning>>;
+  /** [BETA] Information regarding traffic conditions along the route. Available for routes created with traffic_aware set. */
+  traffic?: Maybe<RouteDetailsTraffic>;
 };
 
 export type RouteDetailsdistanceArgs = {
@@ -4221,6 +4238,8 @@ export type RouteDetailsLeg = {
   sections: Array<RouteDetailsLegSection>;
   /** [BETA] Warnings that certain conditions specified in a route mutation are not respected. */
   warnings?: Maybe<Array<RouteDetailsLegWarning>>;
+  /** [BETA] Information regarding traffic conditions along the route's leg . Available for routes created with traffic_aware set to true. */
+  traffic?: Maybe<RouteDetailsLegTraffic>;
 };
 
 /** Leg of a route detail. */
@@ -4347,6 +4366,8 @@ export type RouteDetailsLegSection = {
   duration: Scalars["Float"];
   /** Total energy used in a section in kilowatt-hours. The value will be 0 for walking sections. */
   consumption?: Maybe<Scalars["Float"]>;
+  /** [BETA] Information regarding traffic conditions along the leg's section. Available for routes created with traffic_aware set to true. */
+  traffic?: Maybe<RouteDetailsLegSectionTraffic>;
 };
 
 export type RouteDetailsLegSectionpolylineArgs = {
@@ -4385,6 +4406,11 @@ export type RouteDetailsLegSectionFeaturePointPropertiestotal_cargo_weightArgs =
   unit?: Maybe<WeightUnit>;
 };
 
+export type RouteDetailsLegSectionTraffic = {
+  /** [BETA] Traffic congestion intervals mapped to the polyline indices of the leg's section. */
+  congestions: Array<TrafficCongestionInterval>;
+};
+
 /** Type of a route details leg section. */
 export enum RouteDetailsLegSectionType {
   DRIVING = "driving",
@@ -4399,6 +4425,11 @@ export type RouteDetailsLegStation = {
   evse_id?: Maybe<Scalars["ID"]>;
   /** ID of the connector that was selected in a route. */
   connector_id: Scalars["ID"];
+};
+
+export type RouteDetailsLegTraffic = {
+  /** [BETA] Traffic congestion intervals mapped to the polyline indices of the leg. */
+  congestions: Array<TrafficCongestionInterval>;
 };
 
 /** Type of a leg. */
@@ -4537,6 +4568,13 @@ export enum RouteDetailsTag {
   WALKING = "walking",
   CROSSBORDER = "crossborder"
 }
+
+export type RouteDetailsTraffic = {
+  /** [BETA] Additional driving duration, in seconds, caused by traffic congestion compared to free-flow conditions. This value is already included in route total and driving durations. */
+  delay: Scalars["Int"];
+  /** [BETA] Traffic congestion intervals mapped to the polyline indices of the leg. */
+  congestions: Array<Maybe<TrafficCongestionInterval>>;
+};
 
 export type RouteDrivingPreferences = {
   /** [BETA] Factor to adjust the route's calculated average speed. Accepts values between 0.80 and 1.20. 1.0 is neutral. Values below 1.0 reduce speed (e.g. 0.95 is -5%), values above increase it. If provided in combination with style, this overrides the speed factor implied by the selected 'style'. */
@@ -6794,6 +6832,15 @@ export type TotalOccupantWeightInput = {
   type: WeightUnit;
   /** Source of inputted data, defaults to 'manual'. */
   source?: Maybe<TelemetryInputSource>;
+};
+
+export type TrafficCongestionInterval = {
+  /** Starting index of this interval in the polyline. */
+  start_index: Scalars["Int"];
+  /** Ending index of this interval in the polyline. */
+  end_index: Scalars["Int"];
+  /** Congestion level for this specific interval. */
+  level: CongestionLevel;
 };
 
 export enum TurningCircleUnit {
