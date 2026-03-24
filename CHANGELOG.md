@@ -1,3 +1,10 @@
+# [1.49.0](https://github.com/chargetrip/types/compare/v1.48.0...v1.49.0) (2026-03-24)
+
+
+### Features
+
+* regenerate GraphQL types ([82218fc](https://github.com/chargetrip/types/commit/82218fc880c25c11a4dbf9a2fe8cba7501b38e40))
+
 # [1.48.0](https://github.com/chargetrip/types/compare/v1.47.2...v1.48.0) (2026-03-20)
 
 
