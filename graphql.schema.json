@@ -8898,7 +8898,20 @@
           {
             "name": "value",
             "description": "The base regional emissions factor in CO2e/kWh.",
-            "args": [],
+            "args": [
+              {
+                "name": "unit",
+                "description": "Emission unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "EmissionUnit",
+                  "ofType": null
+                },
+                "defaultValue": "gram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -26269,6 +26282,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "ocpi_station_energy_mix",
+            "description": "The current energy mix of the charging station provided by the CPO was used.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "grid_monthly_average",
             "description": "Historical average energy mix for the month.",

@@ -1778,6 +1778,10 @@ export type EmissionsFactor = {
   value: Scalars["Float"];
 };
 
+export type EmissionsFactorvalueArgs = {
+  unit?: Maybe<EmissionUnit>;
+};
+
 /** Emissions factor type. */
 export enum EmissionsFactorType {
   COUNTRY = "country",
@@ -5210,6 +5214,8 @@ export type RouteOperationalElectricityEmissionsIntensityinfrastructureArgs = {
 
 /** Energy source models. */
 export enum RouteOperationalElectricityEnergySourceModel {
+  /** The current energy mix of the charging station provided by the CPO was used. */
+  OCPI_STATION_ENERGY_MIX = "ocpi_station_energy_mix",
   /** Historical average energy mix for the month. */
   GRID_MONTHLY_AVERAGE = "grid_monthly_average",
   /** Historical average energy mix for the month and hour. */
