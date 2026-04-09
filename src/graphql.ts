@@ -5695,12 +5695,12 @@ export type RouteStationOperator = {
 };
 
 export type RouteStationPreferences = {
-  /** [BETA] Flag to prioritise charging stations located directly on the highway, avoiding exiting highways to charge. This preference is considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. The preference's weight is configurable in project settings. */
+  /** [BETA] Prioritises charging stations located directly on the highway, avoiding exiting highways to charge. It's considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. */
   prefer_highway_charging?: Maybe<Scalars["Boolean"]>;
 };
 
 export type RouteStationPreferencesInput = {
-  /** [BETA] Flag to prioritise charging stations located directly on the highway, avoiding exiting highways to charge. This preference is considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. The preference's weight is configurable in project settings. */
+  /** [BETA] Prioritises charging stations located directly on the highway, avoiding exiting highways to charge. It's considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. This logic may require additional client-specific tuning. Please contact Chargetrip if the behavior seems suboptimal. */
   prefer_highway_charging?: Maybe<Scalars["Boolean"]>;
 };
 
