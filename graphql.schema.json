@@ -6085,6 +6085,18 @@
             "deprecationReason": null
           },
           {
+            "name": "alternative_routes",
+            "description": "[BETA] Number of alternative routes to request.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "departure_time",
             "description": "Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data.",
             "args": [],
@@ -6281,6 +6293,18 @@
               "ofType": null
             },
             "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "alternative_routes",
+            "description": "[BETA] Additional alternative routes to calculate. Performed on a best-effort basis, it may return fewer than requested, or even none. Set to 0 to create only the recommended route.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": "0",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -28725,6 +28749,26 @@
             "deprecationReason": null
           },
           {
+            "name": "alternatives",
+            "description": "[BETA] Alternative routes.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RouteDetails",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "meta",
             "description": "Meta data for a route.",
             "args": [],
@@ -31238,6 +31282,12 @@
           {
             "name": "operator_preferences_not_found",
             "description": "Operator preferences were ignored because they have not been configured for this project nor provided in the route create request.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "traffic_data_not_available",
+            "description": "Traffic data for this route is not available.",
             "isDeprecated": false,
             "deprecationReason": null
           }

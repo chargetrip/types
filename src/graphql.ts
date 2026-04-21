@@ -1281,6 +1281,8 @@ export type CreateRoute = {
   season?: Maybe<RouteSeason>;
   /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
   alternative_station_radius?: Maybe<AlternativeStationRadius>;
+  /** [BETA] Number of alternative routes to request. */
+  alternative_routes?: Maybe<Scalars["Int"]>;
   /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
   departure_time: Scalars["DateTime"];
   /** [BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
@@ -1311,6 +1313,8 @@ export type CreateRouteInput = {
   season?: Maybe<RouteSeason>;
   /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
   alternative_station_radius?: Maybe<AlternativeStationRadiusInput>;
+  /** [BETA] Additional alternative routes to calculate. Performed on a best-effort basis, it may return fewer than requested, or even none. Set to 0 to create only the recommended route. */
+  alternative_routes?: Maybe<Scalars["Int"]>;
   /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
   departure_time?: Maybe<Scalars["DateTime"]>;
   /** [BETA] Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
@@ -5650,6 +5654,8 @@ export type RouteResponse = {
   status: RouteStatus;
   /** Recommended route. */
   recommended?: Maybe<RouteDetails>;
+  /** [BETA] Alternative routes. */
+  alternatives?: Maybe<Array<RouteDetails>>;
   /** Meta data for a route. */
   meta: RouteMetadata;
   /** Route request. */
@@ -6097,7 +6103,9 @@ export enum RouteWarningCode {
   /** The set maximum speed is too low (below 50 km/h) and may result in an inefficient route. */
   LOW_SPEED = "low_speed",
   /** Operator preferences were ignored because they have not been configured for this project nor provided in the route create request. */
-  OPERATOR_PREFERENCES_NOT_FOUND = "operator_preferences_not_found"
+  OPERATOR_PREFERENCES_NOT_FOUND = "operator_preferences_not_found",
+  /** Traffic data for this route is not available. */
+  TRAFFIC_DATA_NOT_AVAILABLE = "traffic_data_not_available"
 }
 
 export type RouteWeather = {
