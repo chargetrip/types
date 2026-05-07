@@ -2054,7 +2054,9 @@ export type IsolineInput = {
   heat_pump?: Maybe<HeatPumpMode>;
   /** Vehicle cabin configuration. */
   cabin?: Maybe<IsolineCabinInput>;
-  /** Season to be taken into account when generating the isoline. */
+  /** Weather configuration for the isoline. Defined by a preset or custom weather conditions. If not specified, defaults to real-time weather data. */
+  weather?: Maybe<IsolineWeatherInput>;
+  /** Season to be taken into account when generating the isoline. If not specified, defaults to real-time weather data. */
   season?: Maybe<RouteSeason>;
   /** Polygons precision quality. */
   quality?: Maybe<IsolineQuality>;
@@ -2097,8 +2099,13 @@ export type IsolineRequestInput = {
   heat_pump?: Maybe<HeatPumpMode>;
   /** Vehicle cabin configuration. */
   cabin?: Maybe<IsolineCabin>;
-  /** Season taken into account when isoline was generated. */
+  /**
+   * Season taken into account when isoline was generated.
+   * @deprecated In favor of weather.
+   */
   season?: Maybe<RouteSeason>;
+  /** Weather configuration for the isoline. Defined by a preset or custom weather conditions. */
+  weather?: Maybe<IsolineWeather>;
   /** Polygons precision quality. */
   quality?: Maybe<IsolineQuality>;
   /** Ferry connections. */
@@ -2136,6 +2143,38 @@ export enum IsolineStatus {
   /** There was an error while generating the isoline label. */
   ERROR = "error"
 }
+
+export type IsolineWeather = {
+  /** Weather configuration applied to the isoline. */
+  type: WeatherType;
+  /** [BETA] Custom weather conditions applied to the isoline. Only present when 'type' is set to 'CUSTOM'. */
+  custom?: Maybe<IsolineWeatherCustomConditions>;
+};
+
+export type IsolineWeatherCustomConditions = {
+  /** Average ambient temperature estimated along the isoline. */
+  temperature: Temperature;
+  /** Atmospheric pressure along the isoline. */
+  air_pressure: AirPressure;
+  /** Solar irradiance along the isoline. */
+  solar_irradiance: SolarIrradiance;
+};
+
+export type IsolineWeatherCustomConditionsInput = {
+  /** Average ambient temperature estimated within the isoline. */
+  temperature: TemperatureInput;
+  /** Atmospheric pressure within the isoline. */
+  air_pressure: AirPressureInput;
+  /** Solar irradiance within the isoline. */
+  solar_irradiance: SolarIrradianceInput;
+};
+
+export type IsolineWeatherInput = {
+  /** Weather configuration applied within the isoline. */
+  type?: Maybe<WeatherType>;
+  /** [BETA] Custom weather conditions to apply within the isoline. Required only when 'type' is 'CUSTOM'. Must be omitted for other weather types. */
+  custom?: Maybe<IsolineWeatherCustomConditionsInput>;
+};
 
 /** Types of a leg. */
 export enum LegType {
@@ -4473,6 +4512,12 @@ export enum RouteDetailsLegWarningCode {
   SEGMENT_UNAVOIDABLE = "segment_unavoidable",
   /** The charging station used in the leg has limited opening hours. */
   STATION_LIMITED_OPEN_HOURS = "station_limited_open_hours",
+  /** The leg's charging station has unknown open hours. */
+  STATION_UNKNOWN_OPEN_HOURS = "station_unknown_open_hours",
+  /** The leg's charging station is closed at the estimated time of arrival. */
+  STATION_CLOSED = "station_closed",
+  /** The leg's charging station is closing within 45 minutes of the estimated time of arrival. */
+  STATION_CLOSING_SOON = "station_closing_soon",
   /** The specified stop duration at the via charging station is insufficient to start a charging session. */
   VIA_INSUFFICIENT_CHARGING_TIME = "via_insufficient_charging_time"
 }

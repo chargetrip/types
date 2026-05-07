@@ -10250,14 +10250,26 @@
             "deprecationReason": null
           },
           {
+            "name": "weather",
+            "description": "Weather configuration for the isoline. Defined by a preset or custom weather conditions. If not specified, defaults to real-time weather data.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IsolineWeatherInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "season",
-            "description": "Season to be taken into account when generating the isoline.",
+            "description": "Season to be taken into account when generating the isoline. If not specified, defaults to real-time weather data.",
             "type": {
               "kind": "ENUM",
               "name": "RouteSeason",
               "ofType": null
             },
-            "defaultValue": "current",
+            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -10517,6 +10529,18 @@
               "name": "RouteSeason",
               "ofType": null
             },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of weather."
+          },
+          {
+            "name": "weather",
+            "description": "Weather configuration for the isoline. Defined by a preset or custom weather conditions.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "IsolineWeather",
+              "ofType": null
+            },
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -10647,6 +10671,198 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "IsolineWeather",
+        "description": null,
+        "fields": [
+          {
+            "name": "type",
+            "description": "Weather configuration applied to the isoline.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "WeatherType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "custom",
+            "description": "[BETA] Custom weather conditions applied to the isoline. Only present when 'type' is set to 'CUSTOM'.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "IsolineWeatherCustomConditions",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "IsolineWeatherCustomConditions",
+        "description": null,
+        "fields": [
+          {
+            "name": "temperature",
+            "description": "Average ambient temperature estimated along the isoline.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Temperature",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "air_pressure",
+            "description": "Atmospheric pressure along the isoline.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "AirPressure",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "solar_irradiance",
+            "description": "Solar irradiance along the isoline.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "SolarIrradiance",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "IsolineWeatherCustomConditionsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "temperature",
+            "description": "Average ambient temperature estimated within the isoline.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TemperatureInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "air_pressure",
+            "description": "Atmospheric pressure within the isoline.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "AirPressureInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "solar_irradiance",
+            "description": "Solar irradiance within the isoline.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "SolarIrradianceInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "IsolineWeatherInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "type",
+            "description": "Weather configuration applied within the isoline.",
+            "type": {
+              "kind": "ENUM",
+              "name": "WeatherType",
+              "ofType": null
+            },
+            "defaultValue": "actual",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "custom",
+            "description": "[BETA] Custom weather conditions to apply within the isoline. Required only when 'type' is 'CUSTOM'. Must be omitted for other weather types.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IsolineWeatherCustomConditionsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -22467,6 +22683,24 @@
           {
             "name": "station_limited_open_hours",
             "description": "The charging station used in the leg has limited opening hours.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_unknown_open_hours",
+            "description": "The leg's charging station has unknown open hours.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_closed",
+            "description": "The leg's charging station is closed at the estimated time of arrival.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_closing_soon",
+            "description": "The leg's charging station is closing within 45 minutes of the estimated time of arrival.",
             "isDeprecated": false,
             "deprecationReason": null
           },
