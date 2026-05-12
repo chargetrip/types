@@ -63,16 +63,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "Acknowledgement",
-        "description": "Acknowledgement scalar. Returns 'OK'.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "Address",
         "description": "Information about an address.",
@@ -183,7 +173,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of postal_code."
+            "deprecationReason": "In favor of `postal_code`."
           },
           {
             "name": "what3Words",
@@ -195,7 +185,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of what_3_words."
+            "deprecationReason": "In favor of `what_3_words`."
           },
           {
             "name": "formattedAddress",
@@ -211,7 +201,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of formatted_address."
+            "deprecationReason": "In favor of `formatted_address`."
           },
           {
             "name": "postal_code",
@@ -653,7 +643,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed in the future."
+            "deprecationReason": "Will be removed."
           },
           {
             "name": "externalId",
@@ -665,7 +655,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of external_id."
+            "deprecationReason": "In favor of `external_id`."
           },
           {
             "name": "external_id",
@@ -757,7 +747,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of station_distance."
+            "deprecationReason": "In favor of `station_distance`."
           },
           {
             "name": "station_distance",
@@ -798,7 +788,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed in the future."
+            "deprecationReason": "Will be removed."
           },
           {
             "name": "opening_hours",
@@ -870,7 +860,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed in the future."
+            "deprecationReason": "Will be removed."
           },
           {
             "name": "updatedAt",
@@ -882,7 +872,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of last_updated."
+            "deprecationReason": "In favor of `last_updated`."
           },
           {
             "name": "last_updated",
@@ -1587,7 +1577,7 @@
       {
         "kind": "OBJECT",
         "name": "CarConsumption",
-        "description": "Deprecated.",
+        "description": "Consumption of the car.",
         "fields": [
           {
             "name": "worst",
@@ -1622,7 +1612,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "CarConsumptionInput",
-        "description": "Deprecated: In favour of VehicleConsumptionInput.",
+        "description": "Consumption of the car.",
         "fields": null,
         "inputFields": [
           {
@@ -2817,7 +2807,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "Identifier of a connector within an EVSE. Two connectors may have the same ID as long as they do not belong to the same EVSE object. This property is OCPI-compliant.",
+            "description": "Identifier of a connector within an EVSE. Two connectors may have the same ID as long as they do not belong to the same EVSE object.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2829,7 +2819,7 @@
           },
           {
             "name": "standard",
-            "description": "Standard of an installed connector. This property is OCPI-compliant.",
+            "description": "Standard of an installed connector.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -2841,7 +2831,7 @@
           },
           {
             "name": "format",
-            "description": "Format (socket/cable) of an installed connector. This property is OCPI-compliant.",
+            "description": "Format (socket/cable) of an installed connector.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -2853,7 +2843,7 @@
           },
           {
             "name": "power_type",
-            "description": "Type of power of an installed connector. This property is OCPI-compliant.",
+            "description": "Type of power of an installed connector.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -2865,7 +2855,7 @@
           },
           {
             "name": "max_voltage",
-            "description": "Maximum voltage of an connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full. This property is OCPI-compliant.",
+            "description": "Maximum voltage of an connector (line to neutral for AC_3_PHASE), in volt [V]. For example: DC Chargers might vary the voltage during charging when battery almost full.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2877,7 +2867,7 @@
           },
           {
             "name": "max_amperage",
-            "description": "Maximum amperage of a connector, in ampere [A]. This property is OCPI-compliant.",
+            "description": "Maximum amperage of a connector, in ampere [A].",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2889,7 +2879,7 @@
           },
           {
             "name": "max_electric_power",
-            "description": "Maximum electric power that can be delivered by a connector, in watt [W]. When the maximum electric power is lower than the calculated value from voltage and amperage, this value should be set.\nFor example: A DC Charge Point which can deliver up to 920V and up to 400A can be limited to a maximum of 150kW. Depending on the vehicle, it may supply maximum voltage or current, but not both at the same time.\nFor AC Charge Points, the amount of phases used can also have influence on the maximum power. This property is OCPI-compliant.",
+            "description": "Maximum electric power that can be delivered by a connector, in watt [W]. When the maximum electric power is lower than the calculated value from voltage and amperage, this value should be set.\nFor example: A DC Charge Point which can deliver up to 920V and up to 400A can be limited to a maximum of 150kW. Depending on the vehicle, it may supply maximum voltage or current, but not both at the same time.\nFor AC Charge Points, the amount of phases used can also have influence on the maximum power.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2913,7 +2903,7 @@
           },
           {
             "name": "tariff_ids",
-            "description": "Identifiers of the currently valid charging tariffs. Multiple tariffs are possible, but only one of each Tariff.type can be active at the same time. Tariffs with the same type are only allowed, if they are not active at the same time: start_date_time and end_date_time period not overlapping.\nWhen preference-based smart charging is supported, one tariff for every possible ProfileType should be provided. This tells the user about the options they have at this Connector, and what the tariff is for every option.\nFor a \"free of charge\" tariff, this field should be set and point to a defined \"free of charge\" tariff. This property is OCPI-compliant.",
+            "description": "Identifiers of the currently valid charging tariffs. Multiple tariffs are possible, but only one of each Tariff.type can be active at the same time. Tariffs with the same type are only allowed, if they are not active at the same time: start_date_time and end_date_time period not overlapping.\nWhen preference-based smart charging is supported, one tariff for every possible ProfileType should be provided. This tells the user about the options they have at this Connector, and what the tariff is for every option.\nFor a \"free of charge\" tariff, this field should be set and point to a defined \"free of charge\" tariff.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -2929,7 +2919,7 @@
           },
           {
             "name": "terms_and_conditions",
-            "description": "URL to an operator’s terms and conditions. This property is OCPI-compliant.",
+            "description": "URL to an operator’s terms and conditions.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2941,7 +2931,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when a connector was last updated (or created). This property is OCPI-compliant.",
+            "description": "Timestamp when a connector was last updated (or created).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2989,7 +2979,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of prices."
+            "deprecationReason": "In favor of `prices`."
           },
           {
             "name": "prices",
@@ -3044,7 +3034,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of connector.prices."
+            "deprecationReason": "In favor of `connector.prices`."
           },
           {
             "name": "oicp",
@@ -3942,7 +3932,7 @@
       {
         "kind": "ENUM",
         "name": "ConnectorType",
-        "description": "The socket or plug standard of the charging point.",
+        "description": "Socket or plug standard of the charging point.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6070,7 +6060,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of weather."
+            "deprecationReason": "In favor of `weather`."
           },
           {
             "name": "alternative_station_radius",
@@ -6384,7 +6374,7 @@
               "name": "Boolean",
               "ofType": null
             },
-            "defaultValue": "false",
+            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -8476,7 +8466,7 @@
         "fields": [
           {
             "name": "uid",
-            "description": "Uniquely identifies an EVSE within the CPOs platform (and suboperator platforms). For example a database ID or the actual \"EVSE ID\". This field can never be changed, modified or renamed. This is the 'technical' identification of the EVSE, not to be used as 'human readable' identification, use the field evse_id for that.\nThis field is named uid instead of id, because id could be confused with evse_id which is an eMI3 defined field. This property is OCPI-compliant.",
+            "description": "Uniquely identifies an EVSE within the CPOs platform (and suboperator platforms). For example a database ID or the actual \"EVSE ID\". This field can never be changed, modified or renamed. This is the 'technical' identification of the EVSE, not to be used as 'human readable' identification, use the field evse_id for that.\nThis field is named uid instead of id, because id could be confused with evse_id which is an eMI3 defined field.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8488,7 +8478,7 @@
           },
           {
             "name": "evse_id",
-            "description": "Compliant with the following specification for EVSE ID from \"eMI3 standard version V1.0\" (http://emi3group.com/documents-links/) \"Part 2: business objects.\" Optional because: if an evse_id is to be re-used in the real world, the evse_id can be removed from an EVSE object if the status is set to REMOVED. This property is OCPI-compliant.",
+            "description": "Compliant with the following specification for EVSE ID from \"eMI3 standard version V1.0\" (http://emi3group.com/documents-links/) \"Part 2: business objects.\" Optional because: if an evse_id is to be re-used in the real world, the evse_id can be removed from an EVSE object if the status is set to REMOVED.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8500,7 +8490,7 @@
           },
           {
             "name": "status",
-            "description": "Indicates the current status of an EVSE. This property is OCPI-compliant.",
+            "description": "Indicates the current status of an EVSE.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -8512,7 +8502,7 @@
           },
           {
             "name": "status_schedule",
-            "description": "Indicates a planned status update of a nEVSE. This property is OCPI-compliant.",
+            "description": "Indicates a planned status update of a nEVSE.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -8528,7 +8518,7 @@
           },
           {
             "name": "capabilities",
-            "description": "List of functionalities that an EVSE is capable of. This property is OCPI-compliant.",
+            "description": "List of functionalities that an EVSE is capable of.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -8544,7 +8534,7 @@
           },
           {
             "name": "connectors",
-            "description": "List of available connectors on an EVSE. This property is OCPI-compliant.",
+            "description": "List of available connectors on an EVSE.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -8560,7 +8550,7 @@
           },
           {
             "name": "floor_level",
-            "description": "Level on which a Charge Point is located (in garage buildings) in the locally displayed numbering scheme. This property is OCPI-compliant.",
+            "description": "Level on which a Charge Point is located (in garage buildings) in the locally displayed numbering scheme.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8572,7 +8562,7 @@
           },
           {
             "name": "coordinates",
-            "description": "Coordinates of a EVSE. This property is OCPI-compliant.",
+            "description": "Coordinates of a EVSE.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -8584,7 +8574,7 @@
           },
           {
             "name": "physical_reference",
-            "description": "A number/string printed on the outside of an EVSE for visual identification. This property is OCPI-compliant.",
+            "description": "A number/string printed on the outside of an EVSE for visual identification.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8596,7 +8586,7 @@
           },
           {
             "name": "parking_restrictions",
-            "description": "Restrictions that apply to a parking spot. This property is OCPI-compliant.",
+            "description": "Restrictions that apply to a parking spot.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -8612,7 +8602,7 @@
           },
           {
             "name": "images",
-            "description": "Links to images related to an EVSE such as photos or logos. This property is OCPI-compliant.",
+            "description": "Links to images related to an EVSE such as photos or logos.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -8628,7 +8618,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when this EVSE or one of its Connectors was last updated (or created). This property is OCPI-compliant.",
+            "description": "Timestamp when this EVSE or one of its Connectors was last updated (or created).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -10996,6 +10986,153 @@
       },
       {
         "kind": "OBJECT",
+        "name": "LiveRouteRequest",
+        "description": null,
+        "fields": [
+          {
+            "name": "vehicle",
+            "description": "Vehicle used on a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteVehicle",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "origin",
+            "description": "Origin of a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteOriginFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "destination",
+            "description": "Destination of a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDestinationFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "via",
+            "description": "Via points of a route.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "NavigationViaFeaturePoint",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operators",
+            "description": "Operator preferences for a route. When provided, prefers routes that use higher order operators.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteOperatorPreferences",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "alternative_station_radius",
+            "description": "Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "AlternativeStationRadius",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "avoid",
+            "description": "[BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "RouteAvoid",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "driving_preferences",
+            "description": "[BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteDrivingPreferences",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_preferences",
+            "description": "Charging stations preferences for route calculation.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteStationPreferences",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "MaximumSpeed",
         "description": null,
         "fields": [
@@ -11377,7 +11514,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "Acknowledgement",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11406,7 +11543,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "Acknowledgement",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11435,7 +11572,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "Acknowledgement",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11509,7 +11646,7 @@
           },
           {
             "name": "newRoute",
-            "description": "Deprecated: In favor of createRoute.",
+            "description": "Create a new route from the route input.",
             "args": [
               {
                 "name": "input",
@@ -11534,7 +11671,7 @@
           },
           {
             "name": "createRoute",
-            "description": "Create a new route from the route input and its ID.",
+            "description": "Create a new route from the route input.",
             "args": [
               {
                 "name": "input",
@@ -11574,7 +11711,7 @@
       {
         "kind": "OBJECT",
         "name": "Navigation",
-        "description": "The navigation session data.",
+        "description": "Navigation session data.",
         "fields": [
           {
             "name": "id",
@@ -11609,8 +11746,24 @@
             "deprecationReason": null
           },
           {
+            "name": "vehicle_status",
+            "description": "The status of the navigation session vehicle. The status can be driving, charging or parked.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "NavigationVehicleStatus",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "status",
-            "description": "The status of a navigation session. The status can be driving, charging, finished, or error.",
+            "description": "The status of a navigation session. The status can be active, finished or error.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11640,6 +11793,200 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationAlternativeStation",
+        "description": "Navigation session alternative station type.",
+        "fields": [
+          {
+            "name": "location",
+            "description": "Coordinates of a station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Point",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_id",
+            "description": "ID of the station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "evse_id",
+            "description": "ID of the EVSE that was selected in a route.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connector_id",
+            "description": "ID of the connector that was selected in a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operator",
+            "description": "Station operator.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationStationOperator",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationChange",
+        "description": "Represents the most recent completed meaningful change to the navigation session.",
+        "fields": [
+          {
+            "name": "created_at",
+            "description": "Timestamp when the change was finalized.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "What kind of change occurred.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "NavigationChangeType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "source",
+            "description": "Where the change originated from.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "NavigationChangeSource",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "NavigationChangeSource",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "client",
+            "description": "Triggered by an explicit client action (e.g. a recalculateNavigation call).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "server",
+            "description": "Triggered by backend domain changes (e.g. station availability, background recalculation).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "NavigationChangeType",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "started",
+            "description": "Navigation session has just started.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "route_updated",
+            "description": "The route has been modified or recalculated.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "next_station_availability_updated",
+            "description": "Next station availability has changed.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -11682,6 +12029,134 @@
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationLegSection",
+        "description": "Navigation route leg section details.",
+        "fields": [
+          {
+            "name": "type",
+            "description": "Section type.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteDetailsLegSectionType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "origin",
+            "description": "Origin point.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDetailsLegSectionFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "destination",
+            "description": "Destination point.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDetailsLegSectionFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tags",
+            "description": "Aggregation of tags over the current section.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "RouteDetailsTag",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "polyline",
+            "description": "Polyline containing encoded coordinates.",
+            "args": [
+              {
+                "name": "decimals",
+                "description": "Polyline decimals",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "PolylineInputDecimals",
+                  "ofType": null
+                },
+                "defaultValue": "five",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "duration",
+            "description": "Total duration of a section, in seconds. The value will be 0 for walking sections.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -11731,7 +12206,7 @@
       {
         "kind": "OBJECT",
         "name": "NavigationOverview",
-        "description": "The navigation session overview details.",
+        "description": "Navigation session overview details.",
         "fields": [
           {
             "name": "state_of_charge",
@@ -11739,7 +12214,7 @@
             "args": [
               {
                 "name": "unit",
-                "description": null,
+                "description": "State of charge unit.",
                 "type": {
                   "kind": "ENUM",
                   "name": "StateOfChargeUnit",
@@ -11779,20 +12254,24 @@
             "deprecationReason": null
           },
           {
-            "name": "next_station",
-            "description": "Next charging station.",
+            "name": "next_stop",
+            "description": "Next stop details. Can be a charging or a location stop.",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "NavigationStation",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "NavigationStop",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "alternative_stations",
-            "description": "A set of alternative charging stations to next station.",
+            "name": "legs",
+            "description": "Continuously updated route legs.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11801,14 +12280,26 @@
                 "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "NavigationStation",
-                    "ofType": null
-                  }
+                  "kind": "OBJECT",
+                  "name": "NavigationRouteLeg",
+                  "ofType": null
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "durations",
+            "description": "Continuously updated durations of the route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDetailsDurations",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -11843,7 +12334,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "CreateRoute",
+                "name": "LiveRouteRequest",
                 "ofType": null
               }
             },
@@ -11882,6 +12373,272 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationPropertiesStation",
+        "description": null,
+        "fields": [
+          {
+            "name": "station_id",
+            "description": "ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "external_station_id",
+            "description": "External ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationPropertiesStationInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "station_id",
+            "description": "ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "external_station_id",
+            "description": "External ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationPropertiesVehicle",
+        "description": null,
+        "fields": [
+          {
+            "name": "occupants",
+            "description": "Number of occupants present in the vehicle.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_occupant_weight",
+            "description": "Combined weight of the occupants. This can only be used in combination with occupants.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "TotalOccupantWeight",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "Weight of the cargo.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TotalCargoWeight",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationPropertiesVehicleInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "occupants",
+            "description": "Number of occupants present in the vehicle.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_occupant_weight",
+            "description": "Combined weight of the occupants. This can only be used in combination with occupants.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TotalOccupantWeightInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "Weight of the cargo.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TotalCargoWeightInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationPropertiesViaLocation",
+        "description": null,
+        "fields": [
+          {
+            "name": "name",
+            "description": "Name that should overwrite the name that is automatically assigned to this location (for example: address or station name).",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at this point, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationPropertiesViaLocationInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "name",
+            "description": "Name that should overwrite the name that is automatically assigned to this location (for example: address or station name).",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at this point, in seconds.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -11946,7 +12703,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "FeaturePointInput",
+                  "name": "NavigationViaFeaturePointInput",
                   "ofType": null
                 }
               }
@@ -11969,6 +12726,245 @@
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationRouteLeg",
+        "description": "Navigation route leg details.",
+        "fields": [
+          {
+            "name": "distance",
+            "description": "Distance from the start to the end of a leg.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "durations",
+            "description": "Aggregation of all durations of a route leg.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDetailsDurations",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "origin",
+            "description": "Origin point location.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDetailsLegFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "destination",
+            "description": "Destination point location.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDetailsLegFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "range_at_origin",
+            "description": "Range at the start of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "range_at_destination",
+            "description": "Range available at the end of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "range_after_charge",
+            "description": "Range after charging on the leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of a leg.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteDetailsLegType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station",
+            "description": "Information about the station at the destination of a leg.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteDetailsLegStation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sections",
+            "description": "Road sections of a leg - divided by means of transportation.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "NavigationLegSection",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tags",
+            "description": "Aggregation of tags over the current leg. Tags are further subdivided over individual sections and maneuvers.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "RouteDetailsTag",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -12022,7 +13018,7 @@
         "fields": [
           {
             "name": "station_id",
-            "description": "The ID as string of the charging station.",
+            "description": "ID of the station.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -12037,15 +13033,27 @@
             "deprecationReason": null
           },
           {
-            "name": "station_location",
-            "description": "GPS location of the charging station.",
+            "name": "evse_id",
+            "description": "ID of the EVSE that was selected in a route.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connector_id",
+            "description": "ID of the connector that was selected in a route.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "Point",
+                "kind": "SCALAR",
+                "name": "ID",
                 "ofType": null
               }
             },
@@ -12053,36 +13061,87 @@
             "deprecationReason": null
           },
           {
-            "name": "via",
-            "description": "An array with all GPS locations of via points until the next charging station.",
+            "name": "operator",
+            "description": "Station operator.",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "Point",
-                    "ofType": null
-                  }
-                }
-              }
+              "kind": "OBJECT",
+              "name": "NavigationStationOperator",
+              "ofType": null
             },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationStationOperator",
+        "description": "Navigation session station operator.",
+        "fields": [
+          {
+            "name": "id",
+            "description": "Unique operator ID.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "NavigationStatus",
+        "description": "Status of navigation session.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "active",
+            "description": "Navigation session is live and currently tracking.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "estimated_state_of_charge",
-            "description": "Estimated state of charge, at arrival on the next charging station.",
+            "name": "finished",
+            "description": "Navigation session is completed (either manually or automatically 48 hours after the last update).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "error",
+            "description": "Failed to update navigation session due to route error or not found.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationStop",
+        "description": "Next stop details. Can be a charging or a location stop.",
+        "fields": [
+          {
+            "name": "arrival_state_of_charge",
+            "description": "Estimated arrival state of charge at next stop. For HEVs and PHEVs this field will return null.",
             "args": [
               {
                 "name": "unit",
-                "description": null,
+                "description": "State of charge unit.",
                 "type": {
                   "kind": "ENUM",
                   "name": "StateOfChargeUnit",
@@ -12106,15 +13165,15 @@
             "deprecationReason": null
           },
           {
-            "name": "estimated_consumption",
-            "description": "Estimated consumption, in kWh, from last the known location until the next charging station.",
+            "name": "arrival_time",
+            "description": "Estimated arrival time at the next stop.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Float",
+                "name": "DateTime",
                 "ofType": null
               }
             },
@@ -12122,16 +13181,48 @@
             "deprecationReason": null
           },
           {
-            "name": "estimated_duration",
-            "description": "Estimated duration, in seconds, from the last known location until the next charging station.",
+            "name": "location",
+            "description": "Coordinates of the next stop.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
+                "kind": "OBJECT",
+                "name": "Point",
                 "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station",
+            "description": "Next stop's station to charge. Only present if the next stop is a station.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationStation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "alternative_stations",
+            "description": "A set of alternative charging stations to next station. Only present if next stop is a station.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "NavigationAlternativeStation",
+                  "ofType": null
+                }
               }
             },
             "isDeprecated": false,
@@ -12141,41 +13232,6 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "NavigationStatus",
-        "description": "State of navigation session.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "driving",
-            "description": "Vehicle is driving.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "charging",
-            "description": "Vehicle is charging.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "finished",
-            "description": "Navigation session is completed (either manually or automatically 48 hours after the last update).",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "error",
-            "description": "Failed to update navigation session due to route error or not found.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
         "possibleTypes": null
       },
       {
@@ -12200,8 +13256,24 @@
             "deprecationReason": null
           },
           {
+            "name": "vehicle_status",
+            "description": "The status of the navigation session vehicle. The status can be driving, charging or parked.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "NavigationVehicleStatus",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "status",
-            "description": "The status of a navigation session. The status can be driving, charging, finished, or error.",
+            "description": "The status of the navigation session. The status can be active, finished or error.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -12223,6 +13295,22 @@
               "kind": "OBJECT",
               "name": "NavigationMeta",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "last_change",
+            "description": "Information about the latest completed change.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "NavigationChange",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -12278,18 +13366,6 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "telemetry",
-            "description": "Telemetry data input.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "TelemetryInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -12298,10 +13374,34 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "NavigationUpdateLocationPropertiesInput",
-        "description": "Properties of the location.",
+        "name": "NavigationUpdateLocationsInput",
+        "description": "Input for the navigation update locations.",
         "fields": null,
         "inputFields": [
+          {
+            "name": "coordinates",
+            "description": "Location coordinates [longitude, latitude].",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Float",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "route_leg",
             "description": "Current route leg index corresponding to a location.",
@@ -12313,18 +13413,6 @@
                 "name": "Int",
                 "ofType": null
               }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "speed",
-            "description": "Speed at a location.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "VehicleSpeedInput",
-              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -12347,11 +13435,11 @@
             "deprecationReason": null
           },
           {
-            "name": "elevation",
-            "description": "Elevation information.",
+            "name": "telemetry",
+            "description": "Telemetry data input.",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ElevationInput",
+              "name": "TelemetryInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -12364,14 +13452,138 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "NavigationVehicleStatus",
+        "description": "Status of navigation session vehicle.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "driving",
+            "description": "Vehicle is driving.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charging",
+            "description": "Vehicle is charging.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "parked",
+            "description": "Vehicle is parked.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationViaFeaturePoint",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of the feature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Feature type.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "FeatureType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "geometry",
+            "description": "Geometry of the feature.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Point",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "properties",
+            "description": "Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationViaProperties",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
-        "name": "NavigationUpdateLocationsInput",
-        "description": "Input for the navigation update locations.",
+        "name": "NavigationViaFeaturePointInput",
+        "description": null,
         "fields": null,
         "inputFields": [
           {
+            "name": "id",
+            "description": "ID of the feature.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Feature type.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "FeatureType",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "geometry",
-            "description": "GPS location.",
+            "description": "Geometry of the feature.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -12387,15 +13599,105 @@
           },
           {
             "name": "properties",
-            "description": "Extra information about the location.",
+            "description": "Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location.",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "NavigationUpdateLocationPropertiesInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "NavigationViaPropertiesInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationViaProperties",
+        "description": null,
+        "fields": [
+          {
+            "name": "location",
+            "description": "Location data of the via point.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationPropertiesViaLocation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle",
+            "description": "Vehicle data of the via point.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationPropertiesVehicle",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station",
+            "description": "Station data of the via point.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "NavigationPropertiesStation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NavigationViaPropertiesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "location",
+            "description": "Location data of the via point.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NavigationPropertiesViaLocationInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle",
+            "description": "Vehicle data of the via point.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NavigationPropertiesVehicleInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station",
+            "description": "Specifies a charging station at the via. If a known station is provided, it will be used as charging stop. Any configured operator preferences are ignored for this stop.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NavigationPropertiesStationInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -12423,7 +13725,7 @@
         "fields": [
           {
             "name": "latitude",
-            "description": "Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: \".\" Regex: -?[0-9]{1,2}\\.[0-9]{5,7}. This property is OCPI-compliant.",
+            "description": "Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: \".\" Regex: -?[0-9]{1,2}\\.[0-9]{5,7}",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -12435,7 +13737,7 @@
           },
           {
             "name": "longitude",
-            "description": "Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: \".\" Regex: -?[0-9]{1,3}\\.[0-9]{5,7}. This property is OCPI-compliant.",
+            "description": "Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: \".\" Regex: -?[0-9]{1,3}\\.[0-9]{5,7}",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -12447,7 +13749,7 @@
           },
           {
             "name": "name",
-            "description": "Name of the point in local language or as written at the location. For example the street name of a parking lot entrance or it’s number. This property is OCPI-compliant.",
+            "description": "Name of the point in local language or as written at the location. For example the street name of a parking lot entrance or it’s number.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -12578,7 +13880,7 @@
       {
         "kind": "ENUM",
         "name": "OCPIConnectorType",
-        "description": "Deprecated: Please use ConnectorType instead",
+        "description": "Socket or plug standard of the charging point.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -12892,7 +14194,7 @@
         "fields": [
           {
             "name": "language",
-            "description": "Language Code ISO 639-1. This property is OCPI-compliant.",
+            "description": "Language Code ISO 639-1",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -12904,7 +14206,7 @@
           },
           {
             "name": "text",
-            "description": "Text to be displayed to an end user. No markup, html etc. allowed. This property is OCPI-compliant.",
+            "description": "Text to be displayed to an end user. No markup, html etc. allowed.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -12927,7 +14229,7 @@
         "fields": [
           {
             "name": "is_green_energy",
-            "description": "True if the power is 100% from regenerative sources. This property is OCPI-compliant.",
+            "description": "True if the power is 100% from regenerative sources",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -12939,7 +14241,7 @@
           },
           {
             "name": "energy_sources",
-            "description": "Key-value pairs (enum + percentage) of energy sources of this location’s tariff. This property is OCPI-compliant.",
+            "description": "Key-value pairs (enum + percentage) of energy sources of this location’s tariff.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -12955,7 +14257,7 @@
           },
           {
             "name": "environ_impact",
-            "description": "Key-value pairs (enum + percentage) of nuclear waste and CO2 exhaust of this location’s tariff. This property is OCPI-compliant.",
+            "description": "Key-value pairs (enum + percentage) of nuclear waste and CO2 exhaust of this location’s tariff.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -12971,7 +14273,7 @@
           },
           {
             "name": "supplier_name",
-            "description": "Name of the energy supplier, delivering the energy for this location or tariff.*. This property is OCPI-compliant.",
+            "description": "Name of the energy supplier, delivering the energy for this location or tariff.*",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -12983,7 +14285,7 @@
           },
           {
             "name": "energy_product_name",
-            "description": "Name of the energy suppliers product/tariff plan used at this location.*. This property is OCPI-compliant.",
+            "description": "Name of the energy suppliers product/tariff plan used at this location.*",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13006,7 +14308,7 @@
         "fields": [
           {
             "name": "source",
-            "description": "The type of energy source. This property is OCPI-compliant.",
+            "description": "The type of energy source.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -13018,7 +14320,7 @@
           },
           {
             "name": "percentage",
-            "description": "Percentage of this source (0-100) in the mix. This property is OCPI-compliant.",
+            "description": "Percentage of this source (0-100) in the mix.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13100,7 +14402,7 @@
         "fields": [
           {
             "name": "category",
-            "description": "The environmental impact category of this value. This property is OCPI-compliant.",
+            "description": "The environmental impact category of this value.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -13112,7 +14414,7 @@
           },
           {
             "name": "amount",
-            "description": "Amount of this portion in g/kWh. This property is OCPI-compliant.",
+            "description": "Amount of this portion in g/kWh.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13158,7 +14460,7 @@
         "fields": [
           {
             "name": "period_begin",
-            "description": "Begin of the exception. In UTC, time_zone field can be used to convert to local time. This property is OCPI-compliant.",
+            "description": "Begin of the exception. In UTC, time_zone field can be used to convert to local time.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13170,7 +14472,7 @@
           },
           {
             "name": "period_end",
-            "description": "End of the exception. In UTC, time_zone field can be used to convert to local time. This property is OCPI-compliant.",
+            "description": "End of the exception. In UTC, time_zone field can be used to convert to local time.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13324,7 +14626,7 @@
         "fields": [
           {
             "name": "latitude",
-            "description": "Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: \".\" Regex: -?[0-9]{1,2}\\.[0-9]{5,7}. This property is OCPI-compliant.",
+            "description": "Latitude of the point in decimal degree. Example: 50.770774. Decimal separator: \".\" Regex: -?[0-9]{1,2}\\.[0-9]{5,7}",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13336,7 +14638,7 @@
           },
           {
             "name": "longitude",
-            "description": "Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: \".\" Regex: -?[0-9]{1,3}\\.[0-9]{5,7}. This property is OCPI-compliant.",
+            "description": "Longitude of the point in decimal degree. Example: -126.104965. Decimal separator: \".\" Regex: -?[0-9]{1,3}\\.[0-9]{5,7}",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13359,7 +14661,7 @@
         "fields": [
           {
             "name": "twentyfourseven",
-            "description": "True to represent 24 hours a day and 7 days a week, except the given exceptions. This property is OCPI-compliant.",
+            "description": "True to represent 24 hours a day and 7 days a week, except the given exceptions.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13371,7 +14673,7 @@
           },
           {
             "name": "regular_hours",
-            "description": "Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object. This property is OCPI-compliant.",
+            "description": "Regular hours, weekday-based. Only to be used if twentyfourseven=false, then this field needs to contain at least one RegularHours object.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -13387,7 +14689,7 @@
           },
           {
             "name": "exceptional_openings",
-            "description": "Exceptions for specified calendar dates, time-range based. Periods the station is operating/accessible. Additional to regular_hours. May overlap regular rules. This property is OCPI-compliant.",
+            "description": "Exceptions for specified calendar dates, time-range based. Periods the station is operating/accessible. Additional to regular_hours. May overlap regular rules.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -13403,7 +14705,7 @@
           },
           {
             "name": "exceptional_closings",
-            "description": "Exceptions for specified calendar dates, time-range based. Periods the station is not operating/accessible. Overwriting regular_hours and exceptional_openings. Should not overlap exceptional_openings. This property is OCPI-compliant.",
+            "description": "Exceptions for specified calendar dates, time-range based. Periods the station is not operating/accessible. Overwriting regular_hours and exceptional_openings. Should not overlap exceptional_openings.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -13430,7 +14732,7 @@
         "fields": [
           {
             "name": "url",
-            "description": "URL from where the image data can be fetched through a web browser. This property is OCPI-compliant.",
+            "description": "URL from where the image data can be fetched through a web browser.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13442,7 +14744,7 @@
           },
           {
             "name": "thumbnail",
-            "description": "URL from where a thumbnail of the image can be fetched through a webbrowser. This property is OCPI-compliant.",
+            "description": "URL from where a thumbnail of the image can be fetched through a webbrowser.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13454,7 +14756,7 @@
           },
           {
             "name": "category",
-            "description": "Category of an image. This property is OCPI-compliant.",
+            "description": "Category of an image",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -13466,7 +14768,7 @@
           },
           {
             "name": "type",
-            "description": "Image type: gif, jpeg, png, svg. This property is OCPI-compliant.",
+            "description": "Image type: gif, jpeg, png, svg",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13478,7 +14780,7 @@
           },
           {
             "name": "width",
-            "description": "Width of the full scale image. This property is OCPI-compliant.",
+            "description": "Width of the full scale image",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13490,7 +14792,7 @@
           },
           {
             "name": "height",
-            "description": "Height of the full scale image. This property is OCPI-compliant.",
+            "description": "Height of the full scale image",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13695,7 +14997,7 @@
         "fields": [
           {
             "name": "excl_vat",
-            "description": "Price/Cost excluding VAT. This property is OCPI-compliant.",
+            "description": "Price/Cost excluding VAT.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13707,7 +15009,7 @@
           },
           {
             "name": "incl_vat",
-            "description": "Price/Cost including VAT. This property is OCPI-compliant.",
+            "description": "Price/Cost including VAT.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13730,7 +15032,7 @@
         "fields": [
           {
             "name": "type",
-            "description": "Type of tariff dimension. This property is OCPI-compliant.",
+            "description": "Type of tariff dimension.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -13742,7 +15044,7 @@
           },
           {
             "name": "price",
-            "description": "Price per unit (excl. VAT) for this tariff dimension. This property is OCPI-compliant.",
+            "description": "Price per unit (excl. VAT) for this tariff dimension.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13754,7 +15056,7 @@
           },
           {
             "name": "vat",
-            "description": "Applicable VAT percentage for this tariff dimension. If omitted, no VAT is applicable. Not providing a VAT is different from 0% VAT, which would be a value of 0.0 here. This property is OCPI-compliant.",
+            "description": "Applicable VAT percentage for this tariff dimension. If omitted, no VAT is applicable. Not providing a VAT is different from 0% VAT, which would be a value of 0.0 here.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13766,7 +15068,7 @@
           },
           {
             "name": "step_size",
-            "description": "Minimum amount to be billed. This unit will be billed in this step_size blocks. For example: if type is TIME and step_size has a value of 300, then time will be billed in blocks of 5 minutes. If 6 minutes were used, 10 minutes (2 blocks of step_size) will be billed. This property is OCPI-compliant.",
+            "description": "Minimum amount to be billed. This unit will be billed in this step_size blocks. For example: if type is TIME and step_size has a value of 300, then time will be billed in blocks of 5 minutes. If 6 minutes were used, 10 minutes (2 blocks of step_size) will be billed.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13789,7 +15091,7 @@
         "fields": [
           {
             "name": "weekday",
-            "description": "Number of days in the week, from Monday (1) till Sunday (7). This property is OCPI-compliant.",
+            "description": "Number of days in the week, from Monday (1) till Sunday (7)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13801,7 +15103,7 @@
           },
           {
             "name": "period_begin",
-            "description": "Begin of the regular period, in local time, given in hours and minutes. Must be in 24h format with leading zeros. Example: \"18:15\". Hour/Minute separator: \":\" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]. This property is OCPI-compliant.",
+            "description": "Begin of the regular period, in local time, given in hours and minutes. Must be in 24h format with leading zeros. Example: \"18:15\". Hour/Minute separator: \":\" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9].",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13813,7 +15115,7 @@
           },
           {
             "name": "period_end",
-            "description": "End of the regular period, in local time, syntax as for period_begin. Must be later than period_begin. This property is OCPI-compliant.",
+            "description": "End of the regular period, in local time, syntax as for period_begin. Must be later than period_begin.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13924,7 +15226,7 @@
         "fields": [
           {
             "name": "period_begin",
-            "description": "Begin of the scheduled period. This property is OCPI-compliant.",
+            "description": "Begin of the scheduled period.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13936,7 +15238,7 @@
           },
           {
             "name": "period_end",
-            "description": "End of the scheduled period, if known. This property is OCPI-compliant.",
+            "description": "End of the scheduled period, if known.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13948,7 +15250,7 @@
           },
           {
             "name": "status",
-            "description": "Status value during the scheduled period. This property is OCPI-compliant.",
+            "description": "Status value during the scheduled period.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -13971,7 +15273,7 @@
         "fields": [
           {
             "name": "country_code",
-            "description": "ISO-3166 alpha-2 country code of the CPO that owns this tariff. This property is OCPI-compliant.",
+            "description": "ISO-3166 alpha-2 country code of the CPO that owns this tariff",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13983,7 +15285,7 @@
           },
           {
             "name": "party_id",
-            "description": "CPO ID of the CPO that owns this tariff (following the ISO-15118 standard). This property is OCPI-compliant.",
+            "description": "CPO ID of the CPO that owns this tariff (following the ISO-15118 standard)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -13995,7 +15297,7 @@
           },
           {
             "name": "id",
-            "description": "Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms). This property is OCPI-compliant.",
+            "description": "Uniquely identifies the tariff within the CPO’s platform (and suboperator platforms)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14007,7 +15309,7 @@
           },
           {
             "name": "currency",
-            "description": "ISO-4217 code of the currency of this tariff. This property is OCPI-compliant.",
+            "description": "ISO-4217 code of the currency of this tariff.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14019,7 +15321,7 @@
           },
           {
             "name": "type",
-            "description": "Defines the type of the tariff. This allows for distinction in case of given charging preferences. When omitted, this tariff is valid for all sessions. This property is OCPI-compliant.",
+            "description": "Defines the type of the tariff. This allows for distinction in case of given charging preferences. When omitted, this tariff is valid for all sessions",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -14031,7 +15333,7 @@
           },
           {
             "name": "tariff_alt_text",
-            "description": "List of alternative tariff information texts, in multiple languages. This property is OCPI-compliant.",
+            "description": "List of alternative tariff information texts, in multiple languages",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14047,7 +15349,7 @@
           },
           {
             "name": "tariff_alt_url",
-            "description": "URL to a web page that contains an explanation of the tariff information in human readable form. This property is OCPI-compliant.",
+            "description": "URL to a web page that contains an explanation of the tariff information in human readable form",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14059,7 +15361,7 @@
           },
           {
             "name": "min_price",
-            "description": "When this field is set, a charging session with this tariff will cost at least the amount shown. This is different from a FLAT fee (start tariff, transaction fee), as a FLAT fee is a fixed amount that must be paid for any charging session. A minimum price indicates that when the cost of a charging session is lower than this amount, the cost of the session will be equal to this amount. This property is OCPI-compliant.",
+            "description": "When this field is set, a charging session with this tariff will cost at least the amount shown. This is different from a FLAT fee (start tariff, transaction fee), as a FLAT fee is a fixed amount that must be paid for any charging session. A minimum price indicates that when the cost of a charging session is lower than this amount, the cost of the session will be equal to this amount",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -14071,7 +15373,7 @@
           },
           {
             "name": "max_price",
-            "description": "When this field is set, a charging session with this tariff will NOT cost more than this amount. This property is OCPI-compliant.",
+            "description": "When this field is set, a charging session with this tariff will NOT cost more than this amount",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -14083,7 +15385,7 @@
           },
           {
             "name": "elements",
-            "description": "List of tariff elements. This property is OCPI-compliant.",
+            "description": "List of tariff elements",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14099,7 +15401,7 @@
           },
           {
             "name": "start_date_time",
-            "description": "Time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active. This property is OCPI-compliant.",
+            "description": "Time when this tariff becomes active, in UTC, time_zone field of the Location can be used to convert to local time. Typically used for a new tariff that is already given with the location, before it becomes active",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14111,7 +15413,7 @@
           },
           {
             "name": "end_date_time",
-            "description": "Time after which this tariff is no longer valid, in UTC, time_zone field if the location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future. This property is OCPI-compliant.",
+            "description": "Time after which this tariff is no longer valid, in UTC, time_zone field if the location can be used to convert to local time. Typically used when this tariff is going to be replaced with a different tariff in the near future",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14123,7 +15425,7 @@
           },
           {
             "name": "energy_mix",
-            "description": "Details about the energy supplied with this tariff. This property is OCPI-compliant.",
+            "description": "Details about the energy supplied with this tariff",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -14135,7 +15437,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when this tariff was last updated (or created). This property is OCPI-compliant.",
+            "description": "Timestamp when this tariff was last updated (or created)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14193,7 +15495,7 @@
         "fields": [
           {
             "name": "price_components",
-            "description": "List of price components that describe the pricing of a tariff. This property is OCPI-compliant.",
+            "description": "List of price components that describe the pricing of a tariff.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14209,7 +15511,7 @@
           },
           {
             "name": "restrictions",
-            "description": "Restrictions that describe the applicability of a tariff. This property is OCPI-compliant.",
+            "description": "Restrictions that describe the applicability of a tariff.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -14236,7 +15538,7 @@
         "fields": [
           {
             "name": "start_time",
-            "description": "Start time of day in local time, the time zone is defined in the time_zone field of the Location, for example 13:30, valid from this time of the day. Must be in 24h format with leading zeros. Hour/Minute separator: \":\" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]. This property is OCPI-compliant.",
+            "description": "Start time of day in local time, the time zone is defined in the time_zone field of the Location, for example 13:30, valid from this time of the day. Must be in 24h format with leading zeros. Hour/Minute separator: \":\" Regex: ([0-1][0-9]|2[1-3]):[0-5][0-9]",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14248,7 +15550,7 @@
           },
           {
             "name": "end_time",
-            "description": "End time of day in local time, the time zone is defined in the time_zone field of the Location, for example 19:45, valid until this time of the day. Same syntax as start_time. This property is OCPI-compliant.",
+            "description": "End time of day in local time, the time zone is defined in the time_zone field of the Location, for example 19:45, valid until this time of the day. Same syntax as start_time.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14260,7 +15562,7 @@
           },
           {
             "name": "start_date",
-            "description": "Start date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-24, valid from this day. Regex: ([12][0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]). This property is OCPI-compliant.",
+            "description": "Start date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-24, valid from this day. Regex: ([12][0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14272,7 +15574,7 @@
           },
           {
             "name": "end_date",
-            "description": "End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date. This property is OCPI-compliant.",
+            "description": "End date in local time, the time zone is defined in the time_zone field of the Location, for example: 2015-12-27, valid until this day (exclusive). Same syntax as start_date",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14284,7 +15586,7 @@
           },
           {
             "name": "min_kwh",
-            "description": "Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used. This property is OCPI-compliant.",
+            "description": "Minimum consumed energy in kWh, for example 20, valid from this amount of energy being used",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14296,7 +15598,7 @@
           },
           {
             "name": "max_kwh",
-            "description": "Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used. This property is OCPI-compliant.",
+            "description": "Maximum consumed energy in kWh, for example 50, valid until this amount of energy being used",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14308,7 +15610,7 @@
           },
           {
             "name": "min_current",
-            "description": "Sum of the minimum current in over all phases, for example 5. When the EV is charging with more than the defined amount of current, this tariff element is/becomes active. If the charging current is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum current over the entire charging session. This restriction can make a tariff element become active when the charging current is above the defined value, but the tariff element MUST no longer be active when the charging current drops below the defined value. This property is OCPI-compliant.",
+            "description": "Sum of the minimum current in over all phases, for example 5. When the EV is charging with more than the defined amount of current, this tariff element is/becomes active. If the charging current is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum current over the entire charging session. This restriction can make a tariff element become active when the charging current is above the defined value, but the tariff element MUST no longer be active when the charging current drops below the defined value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14320,7 +15622,7 @@
           },
           {
             "name": "max_current",
-            "description": "Sum of the maximum current in over all phases, for example 20. When the EV is charging with less than the defined amount of current, this tariff element becomes/is active. If the charging current is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a tariff element become active when the charging current is below this value, but the tariff element MUST  no longer be active when the charging current raises above the defined value. This property is OCPI-compliant.",
+            "description": "Sum of the maximum current in over all phases, for example 20. When the EV is charging with less than the defined amount of current, this tariff element becomes/is active. If the charging current is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This describes NOT the maximum current over the entire Charging Session. This restriction can make a tariff element become active when the charging current is below this value, but the tariff element MUST  no longer be active when the charging current raises above the defined value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14332,7 +15634,7 @@
           },
           {
             "name": "min_power",
-            "description": "Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this tariff element is/becomes active. If the charging power is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum power over the entire charging session. This restriction can make a tariff element become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value. This property is OCPI-compliant.",
+            "description": "Minimum power in kW, for example 5. When the EV is charging with more than the defined amount of power, this tariff element is/becomes active. If the charging power is or becomes lower, this tariff element is not or no longer valid and becomes inactive. This does not describe the minimum power over the entire charging session. This restriction can make a tariff element become active when the charging power is above this value, but the TariffElement MUST no longer be active when the charging power drops below the defined value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14344,7 +15646,7 @@
           },
           {
             "name": "max_power",
-            "description": "Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this tariff element becomes/is active. If the charging power is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This does not describe the maximum power over the entire charging session. This restriction can make a tariff element become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value. This property is OCPI-compliant.",
+            "description": "Maximum power in kW, for example 20. When the EV is charging with less than the defined amount of power, this tariff element becomes/is active. If the charging power is or becomes higher, this tariff element is not or no longer valid and becomes inactive. This does not describe the maximum power over the entire charging session. This restriction can make a tariff element become active when the charging power is below this value, but the TariffElement MUST no longer be active when the charging power raises above the defined value",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14356,7 +15658,7 @@
           },
           {
             "name": "min_duration",
-            "description": "Minimum duration in seconds the charging session MUST last (inclusive). When the duration of a charging session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this tariff element is not yet active. This property is OCPI-compliant.",
+            "description": "Minimum duration in seconds the charging session MUST last (inclusive). When the duration of a charging session is longer than the defined value, this TariffElement is or becomes active. Before that moment, this tariff element is not yet active",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14368,7 +15670,7 @@
           },
           {
             "name": "max_duration",
-            "description": "Maximum duration in seconds the charging session MUST last (exclusive). When the duration of a charging session is shorter than the defined value, this tariff element is or becomes active. After that moment, this tariff element is no longer active. This property is OCPI-compliant.",
+            "description": "Maximum duration in seconds the charging session MUST last (exclusive). When the duration of a charging session is shorter than the defined value, this tariff element is or becomes active. After that moment, this tariff element is no longer active",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -14380,7 +15682,7 @@
           },
           {
             "name": "day_of_week",
-            "description": "Which day(s) of the week this tariff element is active. This property is OCPI-compliant.",
+            "description": "Which day(s) of the week this tariff element is active.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -14392,7 +15694,7 @@
           },
           {
             "name": "reservation",
-            "description": "When this field is present, the tariff element describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation. This property is OCPI-compliant.",
+            "description": "When this field is present, the tariff element describes reservation costs. A reservation starts when the reservation is made, and ends when the drivers starts charging on the reserved EVSE/Location, or when the reservation expires. A reservation can only have: FLAT and TIME TariffDimensions, where TIME is for the duration of the reservation",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -15054,7 +16356,7 @@
           },
           {
             "name": "name",
-            "description": "Name of an operator. This property is OCPI-compliant.",
+            "description": "Name of an operator.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15066,7 +16368,7 @@
           },
           {
             "name": "website",
-            "description": "Link to an operator’s website. This property is OCPI-compliant.",
+            "description": "Link to an operator’s website.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -15078,7 +16380,7 @@
           },
           {
             "name": "logo",
-            "description": "Image link to an operator’s logo. This property is OCPI-compliant.",
+            "description": "Image link to an operator’s logo.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -15098,7 +16400,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of countries."
+            "deprecationReason": "In favor of `countries`."
           },
           {
             "name": "countries",
@@ -15142,7 +16444,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of ranking_levels."
+            "deprecationReason": "In favor of `ranking_levels`."
           },
           {
             "name": "excluded",
@@ -15154,7 +16456,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of excluded_countries."
+            "deprecationReason": "In favor of `excluded_countries`."
           },
           {
             "name": "ranking_levels",
@@ -15217,7 +16519,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "OperatorListFilter",
-        "description": "Filter which can be applied to retrieve the operator list action.",
+        "description": "Criteria to filter operators in the operator list query.",
         "fields": null,
         "inputFields": [
           {
@@ -15312,7 +16614,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "OperatorListQuery",
-        "description": "Filter which can be applied to retrieve the operator list action.",
+        "description": "Query parameters to filter operators in the operator list query.",
         "fields": null,
         "inputFields": [
           {
@@ -16735,7 +18037,7 @@
             "args": [
               {
                 "name": "query",
-                "description": "Deprecated: Replaced by filter & search params.",
+                "description": "Query parameters to filter operators.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "OperatorListQuery",
@@ -16759,7 +18061,7 @@
               },
               {
                 "name": "filter",
-                "description": "Filter operators by parameters.",
+                "description": "Criteria to filter operators.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "OperatorListFilter",
@@ -16943,7 +18245,7 @@
           },
           {
             "name": "routeEmissions",
-            "description": "Deprecated: In favor of getRouteEmissions.",
+            "description": "Get emissions for a route.",
             "args": [
               {
                 "name": "route_id",
@@ -16988,7 +18290,7 @@
           },
           {
             "name": "route",
-            "description": "Deprecated: In favor of getRoute.",
+            "description": "Get a route by ID.",
             "args": [
               {
                 "name": "id",
@@ -17017,7 +18319,7 @@
           },
           {
             "name": "routePath",
-            "description": "Deprecated: In favor of RouteDetails.path_plot.",
+            "description": "Get a route path segment by ID.",
             "args": [
               {
                 "name": "id",
@@ -17322,7 +18624,7 @@
             "args": [
               {
                 "name": "query",
-                "description": "Deprecated: Replaced by filter & search params.",
+                "description": "Query parameters to filter stations.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationListQuery",
@@ -17334,7 +18636,7 @@
               },
               {
                 "name": "filter",
-                "description": "Filter station result.",
+                "description": "Criteria to filter stations.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationListFilter",
@@ -17399,7 +18701,7 @@
             "args": [
               {
                 "name": "query",
-                "description": "Deprecated: Replaced by filter and search params.",
+                "description": "Query parameters to filter stations.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationAroundQuery",
@@ -17411,7 +18713,7 @@
               },
               {
                 "name": "filter",
-                "description": "Filter station around result.",
+                "description": "Criteria to filter stations.",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "StationAroundFilter",
@@ -17949,7 +19251,7 @@
           },
           {
             "name": "numberOfPassengers",
-            "description": "The number of passengers on board.",
+            "description": "Number of passengers on board.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -17957,7 +19259,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of occupants."
+            "deprecationReason": "In favor of `occupants`."
           },
           {
             "name": "occupants",
@@ -18315,11 +19617,11 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of auxiliary"
+            "deprecationReason": "In favor of `auxiliary`"
           },
           {
             "name": "bms",
-            "description": "The consumption, in kWh, of the battery management system.",
+            "description": "Consumption, in kWh, of the battery management system.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -18327,11 +19629,11 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of auxiliary"
+            "deprecationReason": "In favor of `auxiliary`"
           },
           {
             "name": "idle",
-            "description": "The consumption, in kWh, of the vehicle in idle mode.",
+            "description": "Consumption, in kWh, of the vehicle in idle mode.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -18339,7 +19641,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of auxiliary"
+            "deprecationReason": "In favor of `auxiliary`"
           }
         ],
         "inputFields": null,
@@ -18355,7 +19657,7 @@
         "inputFields": [
           {
             "name": "auxiliary",
-            "description": "The amount of energy, in kWh, used by the auxiliary systems of the vehicle in an hour, like media box, etc.",
+            "description": "Amount of energy, in kWh, used by the auxiliary systems of the vehicle in an hour, like media box, etc.",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -18367,7 +19669,7 @@
           },
           {
             "name": "aux",
-            "description": "Deprecated in favor of auxiliary.",
+            "description": "Consumption, in kWh, of the auxiliaries.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -18379,7 +19681,7 @@
           },
           {
             "name": "bms",
-            "description": "Deprecated in favor of auxiliary.",
+            "description": "Consumption, in kWh, of the battery management system.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -18391,7 +19693,7 @@
           },
           {
             "name": "idle",
-            "description": "Deprecated in favor of auxiliary.",
+            "description": "Consumption, in kWh, of the vehicle in idle mode.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CarConsumptionInput",
@@ -18570,7 +19872,7 @@
           },
           {
             "name": "auxConsumption",
-            "description": "In favor of `consumption`.",
+            "description": "Consumption, in kWh, of the auxiliaries.",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -18582,7 +19884,7 @@
           },
           {
             "name": "bmsConsumption",
-            "description": "In favor of `consumption`.",
+            "description": "Consumption, in kWh, of the battery management system.",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -18749,7 +20051,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed. Use the amenity preferences instead."
+            "deprecationReason": "In favor of `amenity_preferences`."
           },
           {
             "name": "amenity_preferences",
@@ -18777,7 +20079,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed. Use the operators property instead."
+            "deprecationReason": "In favor of `operators`."
           },
           {
             "name": "operatorRequired",
@@ -18789,7 +20091,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed. Use the operators property instead."
+            "deprecationReason": "In favor of `operators`."
           },
           {
             "name": "operatorPrefer",
@@ -18801,7 +20103,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed. Use the operators property instead."
+            "deprecationReason": "In favor of `operators`."
           },
           {
             "name": "operators",
@@ -18901,7 +20203,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "Deprecated: all routes will have turn-by-turn instructions prepared. Boolean will be ignored."
+            "deprecationReason": "All routes will have turn-by-turn instructions prepared. Boolean will be ignored."
           },
           {
             "name": "chargeMode",
@@ -18929,7 +20231,7 @@
         "inputFields": [
           {
             "name": "amenities",
-            "description": "Deprecated: in favor of amenity preferences. A list of desired amenities near the stations, with a 1 kilometer radius.",
+            "description": "A list of desired amenities near the stations, with a 1 kilometer radius.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -18957,7 +20259,7 @@
           },
           {
             "name": "operatorIds",
-            "description": "Deprecated: in favor of operators. A list of requested operators.",
+            "description": "A list of requested operators.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -18973,7 +20275,7 @@
           },
           {
             "name": "operatorRequired",
-            "description": "Deprecated: in favor of operators. Flag which indicates if the operators are required.",
+            "description": "Flag which indicates if the operators are required.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -18985,7 +20287,7 @@
           },
           {
             "name": "operatorPrefer",
-            "description": "Deprecated: in favor of operators. Flag which indicates if the preferred operators should be loaded.",
+            "description": "Flag which indicates if the preferred operators should be loaded.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -19105,7 +20407,7 @@
           },
           {
             "name": "instructions",
-            "description": "Deprecated: all routes will have turn-by-turn instructions prepared. Boolean will be ignored.",
+            "description": "Flag to enable turn-by-turn instructions.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -19878,7 +21180,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed in the future"
+            "deprecationReason": "Will be removed."
           },
           {
             "name": "rangeStart",
@@ -20019,7 +21321,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed in the future; Use the pathPlot property"
+            "deprecationReason": "In favor of `pathPlot`."
           },
           {
             "name": "elevationUp",
@@ -21827,7 +23129,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of legs.durations"
+            "deprecationReason": "In favor of `legs.durations`."
           },
           {
             "name": "occupants",
@@ -23049,7 +24351,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "Will be removed in the future."
+            "deprecationReason": "Will be removed."
           }
         ],
         "inputFields": null,
@@ -29233,7 +30535,7 @@
         "fields": [
           {
             "name": "prefer_highway_charging",
-            "description": "[BETA] Prioritises charging stations located directly on the highway, avoiding exiting highways to charge. It's considered alongside final SOC and operator preferences, and may reduce their influence if they conflict.",
+            "description": "Prioritises charging stations located directly on the highway, avoiding exiting highways to charge. It's considered alongside final SOC and operator preferences, and may reduce their influence if they conflict.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -29257,7 +30559,7 @@
         "inputFields": [
           {
             "name": "prefer_highway_charging",
-            "description": "[BETA] Prioritises charging stations located directly on the highway, avoiding exiting highways to charge. It's considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. This logic may require additional client-specific tuning. Please contact Chargetrip if the behavior seems suboptimal.",
+            "description": "Prioritises charging stations located directly on the highway, avoiding exiting highways to charge. It's considered alongside final SOC and operator preferences, and may reduce their influence if they conflict. This logic may require additional client-specific tuning. Please contact Chargetrip if the behavior seems suboptimal.",
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -32116,7 +33418,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "Unique ID of a station. This property is OCPI-compliant.",
+            "description": "Unique ID of a station.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -32132,7 +33434,7 @@
           },
           {
             "name": "country_code",
-            "description": "ISO-3166 alpha-2 country code of a station. This property is OCPI-compliant.",
+            "description": "ISO-3166 alpha-2 country code of a station.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32144,7 +33446,7 @@
           },
           {
             "name": "party_id",
-            "description": "CPO ID of a CPO that 'owns' this station (following the ISO-15118 standard). This property is OCPI-compliant.",
+            "description": "CPO ID of a CPO that 'owns' this station (following the ISO-15118 standard).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32156,7 +33458,7 @@
           },
           {
             "name": "publish",
-            "description": "Defines if a location may be published on a website or app etc.\nWhen this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this location.\nWhen the same location has EVSEs that may be published and may not be published, two 'locations' should be created. This property is OCPI-compliant.",
+            "description": "Defines if a location may be published on a website or app etc.\nWhen this is set to false, only tokens identified in the field: publish_allowed_to are allowed to show this location.\nWhen the same location has EVSEs that may be published and may not be published, two 'locations' should be created.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32168,7 +33470,7 @@
           },
           {
             "name": "name",
-            "description": "Name of a charging station. This property is OCPI-compliant.",
+            "description": "Name of a charging station.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32180,7 +33482,7 @@
           },
           {
             "name": "address",
-            "description": "Street/block name and house number if available. This property is OCPI-compliant.",
+            "description": "Street/block name and house number if available.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32192,7 +33494,7 @@
           },
           {
             "name": "city",
-            "description": "City or town. This property is OCPI-compliant.",
+            "description": "City or town",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32204,7 +33506,7 @@
           },
           {
             "name": "postal_code",
-            "description": "Postal code of a location, may only be omitted when a location has no postal code: in some countries charging locations at highways don’t have postal codes. This property is OCPI-compliant.",
+            "description": "Postal code of a location, may only be omitted when a location has no postal code: in some countries charging locations at highways don’t have postal codes.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32216,7 +33518,7 @@
           },
           {
             "name": "state",
-            "description": "State or province of a location, only to be used when relevant. This property is OCPI-compliant.",
+            "description": "State or province of a location, only to be used when relevant.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32228,7 +33530,7 @@
           },
           {
             "name": "country",
-            "description": "ISO 3166-1 alpha-3 code for the country of this station. This property is OCPI-compliant.",
+            "description": "ISO 3166-1 alpha-3 code for the country of this station.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32240,7 +33542,7 @@
           },
           {
             "name": "coordinates",
-            "description": "Coordinates of a location. This property is OCPI-compliant.",
+            "description": "Coordinates of a location.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -32252,7 +33554,7 @@
           },
           {
             "name": "related_locations",
-            "description": "Geographical location of related points relevant to a user. This property is OCPI-compliant.",
+            "description": "Geographical location of related points relevant to a user.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -32268,7 +33570,7 @@
           },
           {
             "name": "parking_type",
-            "description": "Type of parking at a charge point location. This property is OCPI-compliant.",
+            "description": "Type of parking at a charge point location.",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -32280,7 +33582,7 @@
           },
           {
             "name": "evses",
-            "description": "EVSEs that belong to a station. This property is OCPI-compliant.",
+            "description": "EVSEs that belong to a station.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -32296,7 +33598,7 @@
           },
           {
             "name": "directions",
-            "description": "Human-readable directions on how to reach a station. This property is OCPI-compliant.",
+            "description": "Human-readable directions on how to reach a station.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -32312,7 +33614,7 @@
           },
           {
             "name": "operator",
-            "description": "Information about an operator. This property is OCPI-compliant.",
+            "description": "Information about an operator.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -32324,7 +33626,7 @@
           },
           {
             "name": "suboperator",
-            "description": "Information about a suboperator if applicable. This property is OCPI-compliant.",
+            "description": "Information about a suboperator if applicable.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -32336,7 +33638,7 @@
           },
           {
             "name": "owner",
-            "description": "Information about an owner if available. This property is OCPI-compliant.",
+            "description": "Information about an owner if available.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -32348,7 +33650,7 @@
           },
           {
             "name": "facilities",
-            "description": "Facilities a charging station belongs to. This property is OCPI-compliant.",
+            "description": "Facilities a charging station belongs to.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -32364,7 +33666,7 @@
           },
           {
             "name": "time_zone",
-            "description": "Value from the IANA time zone database representing the time zone of a location. Examples: \"Europe/Oslo\", \"Europe/Zurich\". (http://www.iana.org/time-zones). This property is OCPI-compliant.",
+            "description": "Value from the IANA time zone database representing the time zone of a location. Examples: \"Europe/Oslo\", \"Europe/Zurich\". (http://www.iana.org/time-zones).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32376,7 +33678,7 @@
           },
           {
             "name": "opening_times",
-            "description": "Times when an EVSEs at a location can be accessed for charging. This property is OCPI-compliant.",
+            "description": "Times when an EVSEs at a location can be accessed for charging.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -32388,7 +33690,7 @@
           },
           {
             "name": "charging_when_closed",
-            "description": "Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers overnight, is it allowed to charge till the next morning? Default: true. This property is OCPI-compliant.",
+            "description": "Indicates if the EVSEs are still charging outside the opening hours. E.g. when a parking garage closes its barriers overnight, is it allowed to charge till the next morning? Default: true.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32400,7 +33702,7 @@
           },
           {
             "name": "images",
-            "description": "Links to images related to a location such as photos or logos. This property is OCPI-compliant.",
+            "description": "Links to images related to a location such as photos or logos.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -32416,7 +33718,7 @@
           },
           {
             "name": "energy_mix",
-            "description": "Details of the energy supplied at a location. This property is OCPI-compliant.",
+            "description": "Details of the energy supplied at a location.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -32428,7 +33730,7 @@
           },
           {
             "name": "last_updated",
-            "description": "Timestamp when a location, or one of its EVSEs or Connectors were last updated (or created). This property is OCPI-compliant.",
+            "description": "Timestamp when a location, or one of its EVSEs or Connectors were last updated (or created).",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32876,7 +34178,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "StationAroundFilter",
-        "description": "Filter which can be applied to retrieve the station around list action.",
+        "description": "Criteria to filter stations in the station around query.",
         "fields": null,
         "inputFields": [
           {
@@ -32999,7 +34301,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "StationAroundQuery",
-        "description": "Deprecated: Replaced by filter & search params.",
+        "description": "Query parameters to filter stations in the station around query.",
         "fields": null,
         "inputFields": [
           {
@@ -33078,7 +34380,7 @@
               "ofType": null
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of station.reliability_score."
+            "deprecationReason": "In favor of `station.reliability_score`."
           },
           {
             "name": "oicp",
@@ -33335,7 +34637,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "StationListFilter",
-        "description": "Filter which can be applied to retrieve the station list action.",
+        "description": "Criteria to filter stations in the station list query.",
         "fields": null,
         "inputFields": [
           {
@@ -33434,7 +34736,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "StationListQuery",
-        "description": "Deprecated: Replaced by filter & search params.",
+        "description": "Query parameters to filter stations in the station list query.",
         "fields": null,
         "inputFields": [
           {
@@ -33861,7 +35163,7 @@
         "fields": [
           {
             "name": "routeUpdatedById",
-            "description": "Deprecated: In favor of route.",
+            "description": "Subscribe to a specific route to receive system event updates.",
             "args": [
               {
                 "name": "id",
@@ -33885,8 +35187,8 @@
               "name": "Route",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `route`."
           },
           {
             "name": "route",
@@ -33922,8 +35224,8 @@
             "deprecationReason": null
           },
           {
-            "name": "navigationUpdatedById",
-            "description": "[BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates",
+            "name": "navigation",
+            "description": "[BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates.",
             "args": [
               {
                 "name": "id",
@@ -34412,18 +35714,6 @@
             "deprecationReason": null
           },
           {
-            "name": "timestamp",
-            "description": "UNIX timestamp in seconds.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "vehicle_speed",
             "description": "Value of the vehicle speed.",
             "args": [
@@ -34694,18 +35984,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TirePressureInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timestamp",
-            "description": "UNIX timestamp in seconds.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -36198,7 +37476,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of charge_speed."
+            "deprecationReason": "In favor of `charge_speed`."
           },
           {
             "name": "charge_speed",
@@ -37261,7 +38539,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of make."
+            "deprecationReason": "In favor of `make`."
           },
           {
             "name": "make",
@@ -37547,7 +38825,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of make."
+            "deprecationReason": "In favor of `make`."
           },
           {
             "name": "make",
@@ -41009,7 +42287,7 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "In favor of make."
+            "deprecationReason": "In favor of `make`."
           },
           {
             "name": "make",
@@ -43721,21 +44999,44 @@
     ],
     "directives": [
       {
-        "name": "chargetripDeprecated",
-        "description": null,
+        "name": "chargeSpeedConvert",
+        "description": "Converting the value of a charge speed input to a single unit.",
         "isRepeatable": false,
-        "locations": [
-          "FIELD_DEFINITION",
-          "INPUT_FIELD_DEFINITION",
-          "ENUM_VALUE"
-        ],
+        "locations": ["FIELD_DEFINITION"],
         "args": [
           {
-            "name": "reason",
+            "name": "unitParameterName",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "chargetripDeprecated",
+        "description": "Chargetrip own deprecation directive which is overwriting the default GraphQL deprecated directive by adding the deprecation service and after how much time.",
+        "isRepeatable": false,
+        "locations": [
+          "FIELD_DEFINITION",
+          "INPUT_FIELD_DEFINITION",
+          "INPUT_OBJECT",
+          "ENUM",
+          "ENUM_VALUE",
+          "ARGUMENT_DEFINITION"
+        ],
+        "args": [
+          {
+            "name": "reason",
+            "description": "Reason why this field is deprecated.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -43744,10 +45045,10 @@
           },
           {
             "name": "serviceName",
-            "description": null,
+            "description": "Name of the service that is deprecating this field.",
             "type": {
               "kind": "SCALAR",
-              "name": "PlainString",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -43756,10 +45057,10 @@
           },
           {
             "name": "removeAfter",
-            "description": null,
+            "description": "Time after which this field will be removed, in format like '1 year' or '2 years', default to '1 year'.",
             "type": {
               "kind": "SCALAR",
-              "name": "PlainString",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -43768,10 +45069,10 @@
           },
           {
             "name": "replacedBy",
-            "description": null,
+            "description": "Name of the field that replaces this one, if applicable.",
             "type": {
               "kind": "SCALAR",
-              "name": "PlainString",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -43804,6 +45105,78 @@
                 "name": "Int",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "defaultValue",
+        "description": null,
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "type",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "defaultValue",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "PlainString",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "experimental",
+        "description": null,
+        "isRepeatable": false,
+        "locations": [
+          "FIELD_DEFINITION",
+          "INPUT_FIELD_DEFINITION",
+          "ARGUMENT_DEFINITION"
+        ],
+        "args": [
+          {
+            "name": "stage",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -43885,7 +45258,7 @@
       },
       {
         "name": "ocpi",
-        "description": null,
+        "description": "Indicates that a property is OCPI-compliant.",
         "isRepeatable": false,
         "locations": ["FIELD_DEFINITION"],
         "args": []
@@ -43896,6 +45269,241 @@
         "isRepeatable": false,
         "locations": ["INPUT_OBJECT"],
         "args": []
+      },
+      {
+        "name": "roundValue",
+        "description": "Rounds a number to a given number of significant figures.",
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "precision",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "sanitizeHtml",
+        "description": null,
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION", "INPUT_FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "allowedTags",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "allowedIframeHostnames",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "selfClosing",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "allowedSchemes",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "allowedSchemesAppliedToAttributes",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "shareable",
+        "description": null,
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION", "OBJECT"],
+        "args": []
+      },
+      {
+        "name": "stateOfChargeConvert",
+        "description": "Converting the value of a state of charge input to a single unit.",
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "unitParameterName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "subFieldUnitConvert",
+        "description": "Converts the value of a member with nested fields to another unit type.",
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "fromUnit",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "subField",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "unitParameterName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "round",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": "false",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
+        "name": "unitConvert",
+        "description": "Converts the value of a field to another unit type.",
+        "isRepeatable": false,
+        "locations": ["FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "fromUnit",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "unitParameterName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "PlainString",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "precision",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
       },
       {
         "name": "include",
