@@ -6388,7 +6388,9 @@ export enum RouteWarningCode {
   /** Operator preferences were ignored because they have not been configured for this project nor provided in the route create request. */
   OPERATOR_PREFERENCES_NOT_FOUND = "operator_preferences_not_found",
   /** Traffic data for this route is not available. */
-  TRAFFIC_DATA_NOT_AVAILABLE = "traffic_data_not_available"
+  TRAFFIC_DATA_NOT_AVAILABLE = "traffic_data_not_available",
+  /** One or more preferred, excluded, or avoided operators have no active stations available and were ignored. */
+  OPERATORS_IGNORED = "operators_ignored"
 }
 
 export type RouteWeather = {

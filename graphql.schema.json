@@ -32826,6 +32826,12 @@
             "description": "Traffic data for this route is not available.",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "operators_ignored",
+            "description": "One or more preferred, excluded, or avoided operators have no active stations available and were ignored.",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
