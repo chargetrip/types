@@ -2203,27 +2203,6 @@ export enum LineStringType {
   LINESTRING = "LineString"
 }
 
-export type LiveRouteRequest = {
-  /** Vehicle used on a route. */
-  vehicle: RouteVehicle;
-  /** Origin of a route. */
-  origin: RouteOriginFeaturePoint;
-  /** Destination of a route. */
-  destination: RouteDestinationFeaturePoint;
-  /** Via points of a route. */
-  via?: Maybe<Array<NavigationViaFeaturePoint>>;
-  /** Operator preferences for a route. When provided, prefers routes that use higher order operators. */
-  operators?: Maybe<RouteOperatorPreferences>;
-  /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
-  alternative_station_radius?: Maybe<AlternativeStationRadius>;
-  /** [BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
-  avoid?: Maybe<Array<RouteAvoid>>;
-  /** [BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied. */
-  driving_preferences?: Maybe<RouteDrivingPreferences>;
-  /** Charging stations preferences for route calculation. */
-  station_preferences?: Maybe<RouteStationPreferences>;
-};
-
 export type MaximumSpeed = {
   /** Numeric value of the user-defined maximum speed. */
   value: Scalars["Int"];
@@ -2407,7 +2386,7 @@ export enum NavigationChangeType {
   NEXT_STATION_AVAILABILITY_UPDATED = "next_station_availability_updated"
 }
 
-/** Input for the navigation recalculate. */
+/** Input for the navigation finish. */
 export type NavigationFinishInput = {
   /** ID of the navigation session. */
   id: Scalars["ID"];
@@ -2436,6 +2415,27 @@ export type NavigationLegSectionpolylineArgs = {
   decimals?: Maybe<PolylineInputDecimals>;
 };
 
+export type NavigationLiveRouteRequest = {
+  /** Vehicle used on a route. */
+  vehicle: NavigationRouteVehicle;
+  /** Origin of a route. */
+  origin: RouteOriginFeaturePoint;
+  /** Destination of a route. */
+  destination: RouteDestinationFeaturePoint;
+  /** Via points of a route. */
+  via?: Maybe<Array<NavigationViaFeaturePoint>>;
+  /** Operator preferences for a route. When provided, prefers routes that use higher order operators. */
+  operators?: Maybe<RouteOperatorPreferences>;
+  /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
+  alternative_station_radius?: Maybe<AlternativeStationRadius>;
+  /** [BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
+  avoid?: Maybe<Array<RouteAvoid>>;
+  /** [BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied. */
+  driving_preferences?: Maybe<RouteDrivingPreferences>;
+  /** Charging stations preferences for route calculation. */
+  station_preferences?: Maybe<RouteStationPreferences>;
+};
+
 /** Navigation meta information. */
 export type NavigationMeta = {
   /** Creation time of the navigation session. */
@@ -2459,9 +2459,11 @@ export type NavigationOverview = {
   /** Navigation route instructions. */
   instructions: Array<Maybe<RouteInstruction>>;
   /** Continuously updated route request input. */
-  live_route_request: LiveRouteRequest;
+  live_route_request: NavigationLiveRouteRequest;
   /** Polyline containing encoded coordinates. */
   polyline: Scalars["String"];
+  /** Telemetry data. */
+  telemetry?: Maybe<Telemetry>;
 };
 
 /** Navigation session overview details. */
@@ -2582,6 +2584,21 @@ export type NavigationRouteLegrange_at_destinationArgs = {
 /** Navigation route leg details. */
 export type NavigationRouteLegrange_after_chargeArgs = {
   unit?: Maybe<StateOfChargeUnit>;
+};
+
+export type NavigationRouteVehicle = {
+  /** ID of the vehicle. */
+  id: Scalars["ID"];
+  /** EV battery specific configuration. */
+  battery: RouteVehicleBattery;
+  /** Charging configuration. */
+  charging: RouteVehicleCharging;
+  /** Flag indicating if climate control is on. */
+  climate: Scalars["Boolean"];
+  /** Vehicle Heat Pump configuration. */
+  heat_pump: HeatPumpMode;
+  /** Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true. */
+  cabin: RouteVehicleCabin;
 };
 
 /** Input for the navigation start. */

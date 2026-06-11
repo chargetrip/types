@@ -10986,153 +10986,6 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LiveRouteRequest",
-        "description": null,
-        "fields": [
-          {
-            "name": "vehicle",
-            "description": "Vehicle used on a route.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RouteVehicle",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "origin",
-            "description": "Origin of a route.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RouteOriginFeaturePoint",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "destination",
-            "description": "Destination of a route.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RouteDestinationFeaturePoint",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "via",
-            "description": "Via points of a route.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "NavigationViaFeaturePoint",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "operators",
-            "description": "Operator preferences for a route. When provided, prefers routes that use higher order operators.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "RouteOperatorPreferences",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "alternative_station_radius",
-            "description": "Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "AlternativeStationRadius",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "avoid",
-            "description": "[BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable.",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "RouteAvoid",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "driving_preferences",
-            "description": "[BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "RouteDrivingPreferences",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "station_preferences",
-            "description": "Charging stations preferences for route calculation.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "RouteStationPreferences",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
         "name": "MaximumSpeed",
         "description": null,
         "fields": [
@@ -11992,7 +11845,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "NavigationFinishInput",
-        "description": "Input for the navigation recalculate.",
+        "description": "Input for the navigation finish.",
         "fields": null,
         "inputFields": [
           {
@@ -12150,6 +12003,153 @@
                 "name": "Float",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationLiveRouteRequest",
+        "description": null,
+        "fields": [
+          {
+            "name": "vehicle",
+            "description": "Vehicle used on a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "NavigationRouteVehicle",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "origin",
+            "description": "Origin of a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteOriginFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "destination",
+            "description": "Destination of a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteDestinationFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "via",
+            "description": "Via points of a route.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "NavigationViaFeaturePoint",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operators",
+            "description": "Operator preferences for a route. When provided, prefers routes that use higher order operators.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteOperatorPreferences",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "alternative_station_radius",
+            "description": "Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "AlternativeStationRadius",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "avoid",
+            "description": "[BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "RouteAvoid",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "driving_preferences",
+            "description": "[BETA] Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteDrivingPreferences",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_preferences",
+            "description": "Charging stations preferences for route calculation.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteStationPreferences",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -12334,7 +12334,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "LiveRouteRequest",
+                "name": "NavigationLiveRouteRequest",
                 "ofType": null
               }
             },
@@ -12366,6 +12366,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "telemetry",
+            "description": "Telemetry data.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Telemetry",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -12957,6 +12969,113 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NavigationRouteVehicle",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of the vehicle.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "battery",
+            "description": "EV battery specific configuration.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteVehicleBattery",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charging",
+            "description": "Charging configuration.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteVehicleCharging",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "climate",
+            "description": "Flag indicating if climate control is on.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "heat_pump",
+            "description": "Vehicle Heat Pump configuration.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "HeatPumpMode",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cabin",
+            "description": "Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteVehicleCabin",
+                "ofType": null
               }
             },
             "isDeprecated": false,
