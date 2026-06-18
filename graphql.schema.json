@@ -32947,6 +32947,18 @@
             "deprecationReason": null
           },
           {
+            "name": "weather_forecast_not_available",
+            "description": "Not possible to fetch weather data for a departure time further than 4 days in the future. Current weather used as alternative.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "weather_history_not_available",
+            "description": "Not possible to fetch weather data for a departure time longer than 2 years ago. Current weather used as an alternative.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "operators_ignored",
             "description": "One or more preferred, excluded, or avoided operators have no active stations available and were ignored.",
             "isDeprecated": false,

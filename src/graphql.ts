@@ -6406,6 +6406,10 @@ export enum RouteWarningCode {
   OPERATOR_PREFERENCES_NOT_FOUND = "operator_preferences_not_found",
   /** Traffic data for this route is not available. */
   TRAFFIC_DATA_NOT_AVAILABLE = "traffic_data_not_available",
+  /** Not possible to fetch weather data for a departure time further than 4 days in the future. Current weather used as alternative. */
+  WEATHER_FORECAST_NOT_AVAILABLE = "weather_forecast_not_available",
+  /** Not possible to fetch weather data for a departure time longer than 2 years ago. Current weather used as an alternative. */
+  WEATHER_HISTORY_NOT_AVAILABLE = "weather_history_not_available",
   /** One or more preferred, excluded, or avoided operators have no active stations available and were ignored. */
   OPERATORS_IGNORED = "operators_ignored"
 }
