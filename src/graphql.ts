@@ -4414,7 +4414,7 @@ export type RouteDetails = {
   charges: Scalars["Int"];
   /** [BETA] Warnings that certain conditions specified in a route mutation are not respected. */
   warnings?: Maybe<Array<RouteWarning>>;
-  /** [BETA] Information regarding traffic conditions along the route. Available for routes created with traffic_aware set. */
+  /** [BETA] Traffic conditions along the route. Only returns data if `traffic_aware` is set to true in the `createRoute` mutation. */
   traffic?: Maybe<RouteDetailsTraffic>;
 };
 
@@ -4454,7 +4454,7 @@ export type RouteDetailsDurations = {
   total: Scalars["Int"];
   /** Total charging duration, in seconds. */
   charging: Scalars["Int"];
-  /** Total driving duration, in seconds. */
+  /** Total driving duration, in seconds. Takes into account traffic congestion when `traffic_aware` is set to true in the `createRoute` mutation. */
   driving: Scalars["Int"];
   /** Total duration stopped at a location via or at a station via, excluding charging time and charging penalty, in seconds. */
   stopover: Scalars["Int"];
@@ -4540,7 +4540,7 @@ export type RouteDetailsLeg = {
   sections: Array<RouteDetailsLegSection>;
   /** [BETA] Warnings that certain conditions specified in a route mutation are not respected. */
   warnings?: Maybe<Array<RouteDetailsLegWarning>>;
-  /** [BETA] Information regarding traffic conditions along the route's leg . Available for routes created with traffic_aware set to true. */
+  /** [BETA] Traffic conditions along the leg. Only returns data if `traffic_aware` is set to true in the `createRoute` mutation. */
   traffic?: Maybe<RouteDetailsLegTraffic>;
 };
 
@@ -4774,7 +4774,13 @@ export enum RouteDetailsLegWarningCode {
   /** The leg's charging station is closing within 45 minutes of the estimated time of arrival. */
   STATION_CLOSING_SOON = "station_closing_soon",
   /** The specified stop duration at the via charging station is insufficient to start a charging session. */
-  VIA_INSUFFICIENT_CHARGING_TIME = "via_insufficient_charging_time"
+  VIA_INSUFFICIENT_CHARGING_TIME = "via_insufficient_charging_time",
+  /** The selected via station does not have compatible connectors that meet the minimum power threshold. The route still includes this charging stop, but charging will be slower than requested. */
+  VIA_STATION_BELOW_MINIMUM_POWER = "via_station_below_minimum_power",
+  /** The charging station at the destination does not have any connectors compatible with the selected vehicle. */
+  DESTINATION_CHARGER_INCOMPATIBLE = "destination_charger_incompatible",
+  /** The charging station at the destination is restricted to heavy-duty trucks. */
+  DESTINATION_STATION_TRUCK_ONLY = "destination_station_truck_only"
 }
 
 export type RouteDetailsManeuver = {
@@ -7740,9 +7746,9 @@ export type VehiclePremiumBattery = {
   estimated_fields?: Maybe<VehicleBatteryFieldEstimations>;
   /** Battery thermal management system (active/passive, air/liquid). */
   thermal_management_system?: Maybe<Scalars["String"]>;
-  /** Duration of battery warranty. */
+  /** Duration of battery warranty in years. */
   warranty_period?: Maybe<Scalars["Float"]>;
-  /** Mileage of battery warranty. */
+  /** Mileage of battery warranty in kilometers. */
   warranty_mileage?: Maybe<Scalars["Float"]>;
   /** Chemistry of the battery. */
   chemistry?: Maybe<Scalars["String"]>;

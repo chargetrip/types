@@ -22295,7 +22295,7 @@
           },
           {
             "name": "traffic",
-            "description": "[BETA] Information regarding traffic conditions along the route. Available for routes created with traffic_aware set.",
+            "description": "[BETA] Traffic conditions along the route. Only returns data if `traffic_aware` is set to true in the `createRoute` mutation.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -22449,7 +22449,7 @@
           },
           {
             "name": "driving",
-            "description": "Total driving duration, in seconds.",
+            "description": "Total driving duration, in seconds. Takes into account traffic congestion when `traffic_aware` is set to true in the `createRoute` mutation.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -23065,7 +23065,7 @@
           },
           {
             "name": "traffic",
-            "description": "[BETA] Information regarding traffic conditions along the route's leg . Available for routes created with traffic_aware set to true.",
+            "description": "[BETA] Traffic conditions along the leg. Only returns data if `traffic_aware` is set to true in the `createRoute` mutation.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -24128,6 +24128,24 @@
           {
             "name": "via_insufficient_charging_time",
             "description": "The specified stop duration at the via charging station is insufficient to start a charging session.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "via_station_below_minimum_power",
+            "description": "The selected via station does not have compatible connectors that meet the minimum power threshold. The route still includes this charging stop, but charging will be slower than requested.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "destination_charger_incompatible",
+            "description": "The charging station at the destination does not have any connectors compatible with the selected vehicle.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "destination_station_truck_only",
+            "description": "The charging station at the destination is restricted to heavy-duty trucks.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -39880,7 +39898,7 @@
           },
           {
             "name": "warranty_period",
-            "description": "Duration of battery warranty.",
+            "description": "Duration of battery warranty in years.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -39892,7 +39910,7 @@
           },
           {
             "name": "warranty_mileage",
-            "description": "Mileage of battery warranty.",
+            "description": "Mileage of battery warranty in kilometers.",
             "args": [],
             "type": {
               "kind": "SCALAR",
