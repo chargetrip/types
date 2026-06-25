@@ -151,10 +151,7 @@ export enum Amenities {
 
 /** Amenity data. */
 export type Amenity = {
-  /**
-   * Unique amenity ID.
-   * @deprecated Will be removed.
-   */
+  /** Unique amenity ID. */
   id?: Maybe<Scalars["ID"]>;
   /**
    * ID provided by an amenity data source as the row ID.
@@ -1327,6 +1324,52 @@ export type CreateRouteInput = {
   traffic_aware?: Maybe<Scalars["Boolean"]>;
 };
 
+export type CreateTruckRoute = {
+  /** Vehicle specific input. */
+  vehicle: RouteTruckVehicle;
+  /** Origin of a route. */
+  origin: RouteTruckOriginFeaturePoint;
+  /** Destination of a route. */
+  destination: RouteDestinationFeaturePoint;
+  /** Optional via points of a route. */
+  via?: Maybe<Array<RouteTruckViaFeaturePoint>>;
+  /** Prioritized operators for a route calculation. */
+  operators?: Maybe<RouteOperatorPreferences>;
+  /** Weather configuration for the route. Defined by a preset or custom weather conditions. */
+  weather?: Maybe<RouteWeather>;
+  /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. If not specified, no alternative stations will be discovered. */
+  alternative_station_radius?: Maybe<AlternativeStationRadius>;
+  /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. If not specified, defaults to the current request time. */
+  departure_time?: Maybe<Scalars["DateTime"]>;
+  /** Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
+  avoid?: Maybe<Array<RouteTruckAvoid>>;
+  /** Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. */
+  maximum_speed?: Maybe<MaximumSpeed>;
+};
+
+export type CreateTruckRouteInput = {
+  /** Vehicle specific input. */
+  vehicle: RouteTruckVehicleInput;
+  /** Origin of a route. */
+  origin: RouteTruckOriginFeaturePointInput;
+  /** Destination of a route. */
+  destination: RouteDestinationFeaturePointInput;
+  /** Optional via points of a route. */
+  via?: Maybe<Array<RouteTruckViaFeaturePointInput>>;
+  /** Prioritized operators for a route calculation. */
+  operators?: Maybe<RouteOperatorPreferencesInput>;
+  /** Weather configuration for the route. Defined by a preset or custom weather conditions. */
+  weather?: Maybe<RouteWeatherInput>;
+  /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. If not specified, no alternative stations will be discovered. */
+  alternative_station_radius?: Maybe<AlternativeStationRadiusInput>;
+  /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. If not specified, defaults to the current request time. */
+  departure_time?: Maybe<Scalars["DateTime"]>;
+  /** Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
+  avoid?: Maybe<Array<RouteTruckAvoid>>;
+  /** Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. */
+  maximum_speed?: Maybe<MaximumSpeedInput>;
+};
+
 /** Currency in the ISO 4217 format. */
 export enum Currency {
   AED = "AED",
@@ -1672,6 +1715,13 @@ export enum DimensionUnit {
   /** Return the dimension in miles. */
   MILE = "mile"
 }
+
+export type DimensionsInput = {
+  /** Value of the dimension */
+  value: Scalars["Float"];
+  /** Dimension unit */
+  type: MeasurementUnit;
+};
 
 export type DistanceInput = {
   /** Value of the distance. */
@@ -2278,6 +2328,8 @@ export type Mutation = {
   newRoute?: Maybe<Scalars["ID"]>;
   /** Create a new route from the route input. */
   createRoute: Scalars["ID"];
+  /** [ALPHA] Create a new truck route from the route input and its ID. */
+  createTruckRoute: Scalars["ID"];
 };
 
 export type MutationcreateConnectedVehicleArgs = {
@@ -2330,6 +2382,10 @@ export type MutationnewRouteArgs = {
 
 export type MutationcreateRouteArgs = {
   input: CreateRouteInput;
+};
+
+export type MutationcreateTruckRouteArgs = {
+  input: CreateTruckRouteInput;
 };
 
 /** Navigation session data. */
@@ -3682,6 +3738,8 @@ export type Query = {
   getRoute: RouteResponse;
   /** [BETA] Search for stations with amenities within a specific time window and distance of a previously calculated route. */
   getRouteStationsWithAmenities: RouteStationsWithAmenitiesConnection;
+  /** [ALPHA] Get a e-truck route by ID. */
+  getTruckRoute: TruckRouteResponse;
   /** Get information about a station by its ID. */
   station?: Maybe<Station>;
   /** Get a full list of stations. */
@@ -3788,6 +3846,10 @@ export type QuerygetRouteStationsWithAmenitiesArgs = {
   filter?: Maybe<RouteStationsWithAmenityFilter>;
   first?: Maybe<Scalars["Int"]>;
   after?: Maybe<Scalars["String"]>;
+};
+
+export type QuerygetTruckRouteArgs = {
+  id: Scalars["ID"];
 };
 
 export type QuerystationArgs = {
@@ -6117,6 +6179,188 @@ export type RouteTimeWindow = {
   margin?: Maybe<Scalars["Int"]>;
 };
 
+/** Types of route features that can be avoided in truck routing. */
+export enum RouteTruckAvoid {
+  TOLL_ROAD = "toll_road",
+  FERRY = "ferry"
+}
+
+export type RouteTruckOriginFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
+  /** Feature type. */
+  type: FeatureType;
+  /** Geometry of the feature. */
+  geometry: Point;
+  /** Additional location and vehicle properties can be specified. */
+  properties?: Maybe<RouteTruckOriginProperties>;
+};
+
+export type RouteTruckOriginFeaturePointInput = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
+  /** Feature type. */
+  type: FeatureType;
+  /** Geometry of the feature. */
+  geometry: PointInput;
+  /** Additional location and vehicle properties can be specified. */
+  properties?: Maybe<RouteTruckOriginPropertiesInput>;
+};
+
+export type RouteTruckOriginProperties = {
+  /** Data about the origin location. */
+  location?: Maybe<RouteTruckPropertiesLocation>;
+  /** Vehicle configuration at this point. Properties defined here are persistent and will be applied to all subsequent via points in the route unless explicitly overridden at a specific point. If not specified, assumes one occupant, with 80kg of mass and no trailers added */
+  vehicle?: Maybe<RouteTruckPropertiesVehicle>;
+};
+
+export type RouteTruckOriginPropertiesInput = {
+  /** Data about the origin location. */
+  location?: Maybe<RouteTruckPropertiesLocationInput>;
+  /** Vehicle configuration at this point. Properties defined here are persistent and will be applied to all subsequent via points in the route unless explicitly overridden at a specific point. If not specified, assumes one occupant, with 80kg of mass and no trailers added */
+  vehicle?: Maybe<RouteTruckPropertiesVehicleInput>;
+};
+
+export type RouteTruckPropertiesLocation = {
+  /** Name override for the choosen location. */
+  name?: Maybe<Scalars["String"]>;
+};
+
+export type RouteTruckPropertiesLocationInput = {
+  /** Name override for the choosen location. */
+  name?: Maybe<Scalars["String"]>;
+};
+
+export type RouteTruckPropertiesVehicle = {
+  /** Number of occupants in the vehicle. */
+  occupants: Scalars["Int"];
+  /** Combined weight of the all occupants. Defaults to 80kg if not specified. */
+  total_occupant_weight?: Maybe<TotalOccupantWeight>;
+  /** Total weight of all cargo in the vehicle, including the cargo in any attached trailers. */
+  total_cargo_weight?: Maybe<TotalCargoWeight>;
+  /** The number of axles of the main vehicle (e.g., rigid truck or tractor unit) in contact with the road. Excludes semi-trailer axles, those should be provided in trailer object. If not specified, it assumes  main vehicle's all axles (liftable and rigid) are in use. */
+  axles_in_use?: Maybe<Scalars["Int"]>;
+  /** Configuration and dimensions for attached trailers. Required when the choosen vehicle is tractor unit. If not specified, no trailer configuration is set . */
+  trailer?: Maybe<RouteTruckVehicleTrailer>;
+};
+
+export type RouteTruckPropertiesVehicleInput = {
+  /** Number of occupants in the vehicle. Defaults to 1 if not specified. */
+  occupants?: Maybe<Scalars["Int"]>;
+  /** Combined weight of the all occupants. Defaults to 80kg if not specified. */
+  total_occupant_weight?: Maybe<TotalOccupantWeightInput>;
+  /** Total weight of all cargo in the vehicle, including the cargo in any attached trailers. */
+  total_cargo_weight?: Maybe<TotalCargoWeightInput>;
+  /** The number of axles of the main vehicle (e.g., rigid truck or tractor unit) in contact with the road. Excludes semi-trailer axles, those should be provided in trailer object. If not specified, it assumes  main vehicle's all axles (liftable and rigid) are in use. */
+  axles_in_use?: Maybe<Scalars["Int"]>;
+  /** Configuration and dimensions for attached trailers. Required when the choosen vehicle is tractor unit. If not specified, no trailer configuration is set . */
+  trailer?: Maybe<RouteTruckVehicleTrailerInput>;
+};
+
+export type RouteTruckVehicle = {
+  /** ID of the vehicle. */
+  id: Scalars["ID"];
+  /** EV battery specific configuration. */
+  battery: RouteVehicleBattery;
+  /** Charging configuration. */
+  charging: RouteVehicleCharging;
+  /** Value of the auxiliary power consumption of the vehicle. */
+  auxiliary_consumption: AuxiliaryConsumption;
+  /** Flag indicating if climate control is on. */
+  climate: Scalars["Boolean"];
+  /** Vehicle Heat Pump configuration. */
+  heat_pump: HeatPumpMode;
+  /** Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true. */
+  cabin: RouteVehicleCabin;
+  /** Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right. */
+  tire_pressure: TirePressure;
+};
+
+export type RouteTruckVehicleInput = {
+  /** ID of the vehicle. */
+  id: Scalars["ID"];
+  /** EV battery specific configuration. */
+  battery?: Maybe<RouteVehicleBatteryInput>;
+  /** Charging configuration. */
+  charging?: Maybe<RouteVehicleChargingInput>;
+  /** Value of the auxiliary power consumption of the vehicle. */
+  auxiliary_consumption?: Maybe<AuxiliaryConsumptionInput>;
+  /** Flag indicating if climate control is on. */
+  climate?: Maybe<Scalars["Boolean"]>;
+  /** Vehicle Heat Pump configuration. */
+  heat_pump?: Maybe<HeatPumpMode>;
+  /** Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true. */
+  cabin?: Maybe<RouteVehicleCabinInput>;
+  /** Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right. */
+  tire_pressure?: Maybe<TirePressureInput>;
+};
+
+export type RouteTruckVehicleTrailer = {
+  /** Number of trailers. */
+  count: Scalars["Int"];
+  /** Number of axles of all attached trailers in contact with the road. This value does not include the main vehicle/tractor unit axles. Will be combined with the main vehicle's known number of axles. */
+  axles_in_use: Scalars["Int"];
+  /** Total unladen (empty) weight of all attached trailers. Will be combined with the main vehicle's known unladen weight. */
+  unladen_weight: Scalars["Float"];
+  /** Total physical dimensions of the vehicle combination of the main vehicle and trailers. */
+  combined_vehicle_dimensions: TruckTrailerCombinedDimensions;
+};
+
+export type RouteTruckVehicleTrailerunladen_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type RouteTruckVehicleTrailerInput = {
+  /** Number of trailers. */
+  count: Scalars["Int"];
+  /** Number of axles of all attached trailers in contact with the road. This value does not include the main vehicle/tractor unit axles. Will be combined with the main vehicle's known number of axles. */
+  axles_in_use: Scalars["Int"];
+  /** Total unladen (empty) weight of all attached trailers. Will be combined with the main vehicle's known unladen weight. */
+  unladen_weight: WeightInput;
+  /** Total physical dimensions of the vehicle combination of the main vehicle and trailers. */
+  combined_vehicle_dimensions: TruckTrailerCombinedDimensionsInput;
+};
+
+export type RouteTruckViaFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
+  /** Feature type. */
+  type: FeatureType;
+  /** Geometry of the feature. */
+  geometry?: Maybe<Point>;
+  /** Optional object where additional properties can be specified. */
+  properties?: Maybe<RouteTruckViaProperties>;
+};
+
+export type RouteTruckViaFeaturePointInput = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
+  /** Feature type. */
+  type: FeatureType;
+  /** Geometry of the feature. */
+  geometry?: Maybe<PointInput>;
+  /** Optional object where additional properties can be specified. */
+  properties?: Maybe<RouteTruckViaPropertiesInput>;
+};
+
+export type RouteTruckViaProperties = {
+  /** Location data of the via point. */
+  location?: Maybe<RoutePropertiesViaLocation>;
+  /** Vehicle configuration at this point. Properties defined here override previous settings and persist for all subsequent segments of the route until changed again. If not specified, the vehicle state from the previous point remains in effect. */
+  vehicle?: Maybe<RouteTruckPropertiesVehicle>;
+  /** Station data of the via point. */
+  station?: Maybe<RoutePropertiesStation>;
+};
+
+export type RouteTruckViaPropertiesInput = {
+  /** Location data of the via point. */
+  location?: Maybe<RoutePropertiesViaLocationInput>;
+  /** Vehicle configuration at this point. Properties defined here override previous settings and persist for all subsequent segments of the route until changed again. If not specified, the vehicle state from the previous point remains in effect. */
+  vehicle?: Maybe<RouteTruckPropertiesVehicleInput>;
+  /** Station data of the via point. */
+  station?: Maybe<RoutePropertiesStationInput>;
+};
+
 export type RouteVehicle = {
   /** ID of the vehicle. */
   id: Scalars["ID"];
@@ -6898,6 +7142,8 @@ export type Subscription = {
   routeUpdatedById?: Maybe<Route>;
   /** Subscribe to a specific route to receive system event updates. */
   route: RouteResponse;
+  /** [ALPHA] Subscribe to e-truck route to receive system event updates. */
+  truckRoute: TruckRouteResponse;
   /** [BETA] Subscribe to navigation session system event updates. We strongly recommend using this at all times to not miss any updates. */
   navigation?: Maybe<NavigationSubscription>;
   /** [BETA] Subscribe to a connected vehicle. */
@@ -6911,6 +7157,10 @@ export type SubscriptionrouteUpdatedByIdArgs = {
 };
 
 export type SubscriptionrouteArgs = {
+  id: Scalars["ID"];
+};
+
+export type SubscriptiontruckRouteArgs = {
   id: Scalars["ID"];
 };
 
@@ -7166,6 +7416,263 @@ export type TrafficCongestionInterval = {
   end_index: Scalars["Int"];
   /** Congestion level for this specific interval. */
   level: CongestionLevel;
+};
+
+export type TruckRouteDetails = {
+  /** ID of a route computation. */
+  id: Scalars["ID"];
+  /** Total distance of a route. */
+  distance: Scalars["Float"];
+  /** Aggregation of all durations of a route. */
+  durations: RouteDetailsDurations;
+  /** Total energy used for a route in kilowatt hours. For HEVs and PHEVs this field will return null. */
+  consumption?: Maybe<Scalars["Float"]>;
+  /** Range available at the start of a trip. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_origin?: Maybe<Scalars["Float"]>;
+  /** Range available at the end of a trip. Note: The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_destination?: Maybe<Scalars["Float"]>;
+  /** Polyline containing encoded coordinates. */
+  polyline: Scalars["String"];
+  /** Path elevation, distance, duration, consumption and speed values, grouped into 100 segments. */
+  path_plot: Array<RouteDetailsPathSegment>;
+  /** Details about elevation on a route. */
+  elevation: RouteDetailsElevation;
+  /** Money saving information. */
+  savings?: Maybe<RouteDetailsSavings>;
+  /** Legs of a route. */
+  legs: Array<TruckRouteDetailsLeg>;
+  /** Alternative stations along a route within a specified radius. Will only return stations if alternative_station_radius was specified in the createRoute mutation. */
+  alternative_stations: Array<RouteDetailsAlternativeStation>;
+  /** Aggregation of tags over the current RouteDetails. Tags are available on legs and further subdivided over individual sections and maneuvers. */
+  tags: Array<RouteDetailsTag>;
+  /** Number of charging stops required for this route. */
+  charges: Scalars["Int"];
+};
+
+export type TruckRouteDetailsdistanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+export type TruckRouteDetailsrange_at_originArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+export type TruckRouteDetailsrange_at_destinationArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+export type TruckRouteDetailspolylineArgs = {
+  decimals?: Maybe<PolylineInputDecimals>;
+};
+
+/** Leg of a route detail. */
+export type TruckRouteDetailsLeg = {
+  /** Distance from the start to the end of a leg. */
+  distance: Scalars["Float"];
+  /** Aggregation of all durations of a route leg. */
+  durations: RouteDetailsDurations;
+  /** Total energy used in a leg in kilowatt hours. For HEVs and PHEVs this field will return null. */
+  consumption?: Maybe<Scalars["Float"]>;
+  /** Origin point location. */
+  origin: TruckRouteDetailsLegFeaturePoint;
+  /** Destination point location. */
+  destination: TruckRouteDetailsLegFeaturePoint;
+  /** Range at the start of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_origin?: Maybe<Scalars["Float"]>;
+  /** Range available at the end of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_destination?: Maybe<Scalars["Float"]>;
+  /** Range after charging on the leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_after_charge?: Maybe<Scalars["Float"]>;
+  /** Type of a leg. */
+  type: RouteDetailsLegType;
+  /** Information about the station at the destination of a leg. */
+  station?: Maybe<RouteDetailsLegStation>;
+  /** Polyline containing encoded coordinates. */
+  polyline: Scalars["String"];
+  /** Aggregation of tags over the current leg. Tags are further subdivided over individual sections and maneuvers. */
+  tags: Array<RouteDetailsTag>;
+  /** Maneuvers of a leg - used to generate turn-by-turn instructions. */
+  maneuvers: Array<RouteDetailsManeuver>;
+  /** Road sections of a leg - divided by means of transportation. */
+  sections: Array<TruckRouteDetailsLegSection>;
+};
+
+/** Leg of a route detail. */
+export type TruckRouteDetailsLegdistanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+/** Leg of a route detail. */
+export type TruckRouteDetailsLegrange_at_originArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+/** Leg of a route detail. */
+export type TruckRouteDetailsLegrange_at_destinationArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+/** Leg of a route detail. */
+export type TruckRouteDetailsLegrange_after_chargeArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+/** Leg of a route detail. */
+export type TruckRouteDetailsLegpolylineArgs = {
+  decimals?: Maybe<PolylineInputDecimals>;
+};
+
+export type TruckRouteDetailsLegFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
+  /** Feature type. */
+  type: FeatureType;
+  /** Geometry of the feature. */
+  geometry: Point;
+  /** Properties of the feature. */
+  properties?: Maybe<TruckRouteDetailsLegFeatureProperties>;
+};
+
+export type TruckRouteDetailsLegFeatureProperties = {
+  /** Name of the location. */
+  name?: Maybe<Scalars["String"]>;
+  /** ID of the station. */
+  station_id?: Maybe<Scalars["ID"]>;
+  /** External ID of the station. */
+  external_station_id?: Maybe<Scalars["ID"]>;
+  /** Temperature at the location. */
+  temperature?: Maybe<Scalars["Int"]>;
+  /** Air pressure at the location. */
+  air_pressure?: Maybe<Scalars["Float"]>;
+  /** Solar irradiance at the location. */
+  solar_irradiance?: Maybe<Scalars["Float"]>;
+  /** Duration, in seconds, of time spent at this location. */
+  duration?: Maybe<Scalars["Int"]>;
+  /** Number of occupants present in the vehicle. */
+  occupants: Scalars["Int"];
+  /** Value of the combined weight of the occupants. */
+  total_occupant_weight: Scalars["Float"];
+  /** Value of the current weight of the cargo. */
+  total_cargo_weight?: Maybe<Scalars["Float"]>;
+  /** Number of trailers. */
+  trailer_count: Scalars["Int"];
+};
+
+export type TruckRouteDetailsLegFeaturePropertiestemperatureArgs = {
+  unit?: Maybe<TemperatureUnit>;
+};
+
+export type TruckRouteDetailsLegFeaturePropertiestotal_occupant_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type TruckRouteDetailsLegFeaturePropertiestotal_cargo_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type TruckRouteDetailsLegSection = {
+  /** Section type. */
+  type: RouteDetailsLegSectionType;
+  /** Origin point. */
+  origin: TruckRouteDetailsLegSectionFeaturePoint;
+  /** Destination point. */
+  destination: TruckRouteDetailsLegSectionFeaturePoint;
+  /** Aggregation of tags over the current section. */
+  tags: Array<RouteDetailsTag>;
+  /** Polyline containing encoded coordinates. */
+  polyline: Scalars["String"];
+  /** Distance from the start to the end of a section. */
+  distance: Scalars["Float"];
+  /** Total duration of a section, in seconds. The value will be 0 for walking sections. */
+  duration: Scalars["Float"];
+  /** Total energy used in a section in kilowatt-hours. The value will be 0 for walking sections. */
+  consumption?: Maybe<Scalars["Float"]>;
+};
+
+export type TruckRouteDetailsLegSectionpolylineArgs = {
+  decimals?: Maybe<PolylineInputDecimals>;
+};
+
+export type TruckRouteDetailsLegSectiondistanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+export type TruckRouteDetailsLegSectionFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
+  /** Feature type. */
+  type: FeatureType;
+  /** Geometry of the feature. */
+  geometry: Point;
+  /** Properties of the feature. */
+  properties: TruckRouteDetailsLegSectionFeaturePointProperties;
+};
+
+export type TruckRouteDetailsLegSectionFeaturePointProperties = {
+  /** Number of occupants present in the vehicle. */
+  occupants: Scalars["Int"];
+  /** Value of the combined weight of the occupants. */
+  total_occupant_weight?: Maybe<Scalars["Float"]>;
+  /** Value of the current weight of the cargo. */
+  total_cargo_weight?: Maybe<Scalars["Float"]>;
+  /** Number of trailers. */
+  trailer_count: Scalars["Int"];
+};
+
+export type TruckRouteDetailsLegSectionFeaturePointPropertiestotal_occupant_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type TruckRouteDetailsLegSectionFeaturePointPropertiestotal_cargo_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type TruckRouteResponse = {
+  /** ID of a route calculation. */
+  id: Scalars["ID"];
+  /** Status of a route. */
+  status: RouteStatus;
+  /** Recommended route. */
+  recommended?: Maybe<TruckRouteDetails>;
+  /** Meta data for a route. */
+  meta: RouteMetadata;
+  /** Route request. */
+  request_input: CreateTruckRoute;
+};
+
+/** Physical dimensions of the vehicle and trailers combination. */
+export type TruckTrailerCombinedDimensions = {
+  /** Maximum height of the combination trailer and main vehicle combination (ground to highest vehicle point). */
+  height: Scalars["Float"];
+  /** Maximum width of the trailers and main vehicle combination. */
+  width: Scalars["Float"];
+  /** Total length of the trailers and main vehicle combination (bumper to bumper). */
+  length: Scalars["Float"];
+};
+
+/** Physical dimensions of the vehicle and trailers combination. */
+export type TruckTrailerCombinedDimensionsheightArgs = {
+  unit?: Maybe<MeasurementUnit>;
+};
+
+/** Physical dimensions of the vehicle and trailers combination. */
+export type TruckTrailerCombinedDimensionswidthArgs = {
+  unit?: Maybe<MeasurementUnit>;
+};
+
+/** Physical dimensions of the vehicle and trailers combination. */
+export type TruckTrailerCombinedDimensionslengthArgs = {
+  unit?: Maybe<MeasurementUnit>;
+};
+
+/** Physical dimensions of the vehicle and trailers combination. */
+export type TruckTrailerCombinedDimensionsInput = {
+  /** Maximum height of the combination trailer and main vehicle combination (ground to highest vehicle point). */
+  height: DimensionsInput;
+  /** Maximum width of the trailers and main vehicle combination. */
+  width: DimensionsInput;
+  /** Total length of the trailers and main vehicle combination (bumper to bumper). */
+  length: DimensionsInput;
 };
 
 export enum TurningCircleUnit {
@@ -8679,6 +9186,13 @@ export enum WeatherType {
   /** Must be used in combination with weather.custom object. */
   CUSTOM = "custom"
 }
+
+export type WeightInput = {
+  /** Preferred unit for the weight */
+  type: WeightUnit;
+  /** Value of weight */
+  value: Scalars["Float"];
+};
 
 export enum WeightUnit {
   /** Return the weight in kilograms. */
