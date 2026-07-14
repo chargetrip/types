@@ -4196,9 +4196,9 @@ export type Review = {
   /** Boolean tags for a station review. */
   tags?: Maybe<ReviewTags>;
   /** Date and time when a review was created. */
-  createdAt?: Maybe<Scalars["String"]>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
   /** Date and time when a review was updated. */
-  updatedAt?: Maybe<Scalars["String"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
 };
 
 /** Form input to add a new review. */
