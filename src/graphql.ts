@@ -358,9 +358,9 @@ export type CarConsumptionInput = {
 
 /** Charging mode used at charging stations. */
 export enum ChargeMode {
-  /** Optimizes the charging time at each station, in order to decrease the total travel time. You will only charge up until the SOC you need in order to reach the next stop. */
+  /** Optimizes the charging time at each station, in order to decrease the total travel time. Charges the vehicle only to the SOC required to reach the next stop, without exceeding the configured 'maximum_state_of_charge'. */
   OPTIMIZE_TRAVEL_TIME = "OPTIMIZE_TRAVEL_TIME",
-  /** Charge to the maximum capacity at every charging stop. The default maximum charging capacity is 80%. */
+  /** Charges up to the maximum configured state of charge (SoC) at each station. The maximum SoC is determined by 'maximum_state_of_charge'. */
   ALWAYS_TO_MAX_CHARGE = "ALWAYS_TO_MAX_CHARGE"
 }
 
@@ -3757,9 +3757,9 @@ export type Query = {
   /** Get a full list of vehicles. */
   vehicleList?: Maybe<Array<Maybe<VehicleList>>>;
   /** [BETA] Get a full list of vehicle makes. */
-  vehicleMakes: VehicleMakesConnection;
+  vehicleMakes?: Maybe<VehicleMakesConnection>;
   /** [BETA] Get a full list of vehicle make models. */
-  vehicleModels: VehicleModelsConnection;
+  vehicleModels?: Maybe<VehicleModelsConnection>;
 };
 
 export type QueryamenityListArgs = {
@@ -3902,6 +3902,9 @@ export type QueryvehicleListArgs = {
 
 export type QueryvehicleMakesArgs = {
   country?: Maybe<CountryCodeAlpha2>;
+  filter?: Maybe<VehicleMakesFilter>;
+  first?: Maybe<Scalars["Int"]>;
+  after?: Maybe<Scalars["String"]>;
 };
 
 export type QueryvehicleModelsArgs = {
@@ -4842,7 +4845,11 @@ export enum RouteDetailsLegWarningCode {
   /** The charging station at the destination does not have any connectors compatible with the selected vehicle. */
   DESTINATION_CHARGER_INCOMPATIBLE = "destination_charger_incompatible",
   /** The charging station at the destination is restricted to heavy-duty trucks. */
-  DESTINATION_STATION_TRUCK_ONLY = "destination_station_truck_only"
+  DESTINATION_STATION_TRUCK_ONLY = "destination_station_truck_only",
+  /** Expected arrival state of charge for the leg is below the safety risk margin. */
+  RISK_MARGIN_SOC_NOT_POSSIBLE = "risk_margin_soc_not_possible",
+  /** Requested final state of charge value is below the specified safe risk margin. Safe risk margin is used instead. */
+  FINAL_SOC_BELOW_RISK_MARGIN = "final_soc_below_risk_margin"
 }
 
 export type RouteDetailsManeuver = {
@@ -6393,11 +6400,11 @@ export type RouteVehicle = {
 };
 
 export type RouteVehicleBattery = {
-  /** Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh. */
+  /** Usable capacity of a battery used to compute a route. The value must be between 50% and 150% of a vehicle's baseline battery capacity. If not provided, the vehicle's full usable capacity by default. */
   capacity: StateOfCharge;
-  /** Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity. */
+  /** Current amount of energy in a battery. If not provided, battery is assumed to be fully charged. */
   state_of_charge: StateOfCharge;
-  /** Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default. */
+  /** Desired final amount of energy in a battery at the end of a trip. The value must be between 0 and 80% of the vehicle's battery capacity. If not provided, or if the specified value is below the safe risk margin, the safe risk margin is used by default. */
   final_state_of_charge: StateOfCharge;
   /** Temperature of the battery. */
   temperature?: Maybe<Temperature>;
@@ -6413,11 +6420,11 @@ export type RouteVehicleBattery = {
 
 /** EV battery specific configuration for a create route mutation. */
 export type RouteVehicleBatteryInput = {
-  /** Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh. */
+  /** Usable capacity of a battery used to compute a route. The value must be between 50% and 150% of a vehicle's baseline battery capacity. If not provided, the vehicle's full usable capacity by default. */
   capacity?: Maybe<StateOfChargeInput>;
-  /** Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity. */
+  /** Current amount of energy in a battery. If not provided, battery is assumed to be fully charged. */
   state_of_charge?: Maybe<StateOfChargeInput>;
-  /** Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default. */
+  /** Desired final amount of energy in a battery at the end of a trip. The value must be between 0 and 80% of the vehicle's battery capacity. If not provided, or if the specified value is below the safe risk margin, the safe risk margin is used by default. */
   final_state_of_charge?: Maybe<StateOfChargeInput>;
   /** Battery temperature. */
   temperature?: Maybe<TemperatureInput>;
@@ -6446,7 +6453,7 @@ export type RouteVehicleCabinInput = {
 };
 
 export type RouteVehicleCharging = {
-  /** Mode that indicates if the charging time is optimized or if always charged to the maximum capacity. */
+  /** Mode that indicates if the charging time is optimized or if always charged to the maximum state of charge. */
   mode: ChargeMode;
   /** Minimum desired power of chargers, in kWh. */
   minimum_power: Scalars["Float"];
@@ -6456,6 +6463,8 @@ export type RouteVehicleCharging = {
   connectors: Array<RouteVehicleChargingConnector>;
   /** Supported adapters. If not specified, adapters will not be considered. */
   adapters: Array<RouteVehicleChargingConnector>;
+  /** Maximum state of charge (%) the vehicle can reach at any charging stop. If not specified defaults to 80%. */
+  maximum_state_of_charge: Scalars["Int"];
 };
 
 export type RouteVehicleChargingConnector = {
@@ -6473,7 +6482,7 @@ export type RouteVehicleChargingConnectorInput = {
 };
 
 export type RouteVehicleChargingInput = {
-  /** Mode that indicates if the charging time is optimized or if always charged to the maximum capacity. */
+  /** Mode that indicates if the charging time is optimized or if always charged to the maximum state of charge. */
   mode?: Maybe<ChargeMode>;
   /** Minimum desired power of chargers, in kWh. */
   minimum_power?: Maybe<Scalars["Float"]>;
@@ -6483,6 +6492,8 @@ export type RouteVehicleChargingInput = {
   connectors?: Maybe<Array<RouteVehicleChargingConnectorInput>>;
   /** Supported adapters. If not specified, adapters will not be considered. */
   adapters?: Maybe<Array<RouteVehicleChargingConnectorInput>>;
+  /** Maximum state of charge (%) the vehicle can reach at any charging stop. The value must be between 80 and 100. */
+  maximum_state_of_charge?: Scalars["Int"];
 };
 
 export type RouteVehicleEmissions = {
@@ -6638,19 +6649,19 @@ export type RouteWarning = {
 
 /** Types of warnings that can be encountered in a route. */
 export enum RouteWarningCode {
-  /** The selected vehicle model is unavailable on one or more regions along the route. */
+  /** Selected vehicle model is unavailable on one or more regions along the route. */
   EV_UNAVAILABLE_IN_REGION = "ev_unavailable_in_region",
   /** Route excludes charging stations as a hybrid vehicle does not require external charging. */
   HEV_NO_CHARGING_STATIONS = "hev_no_charging_stations",
   /** Route is calculated using only the battery range of the extended-range vehicle.  */
   EREV_BATTERY_ONLY_RANGE = "erev_battery_only_range",
-  /** The origin location cannot be reached by vehicle and requires a walking section to reach the point. */
+  /** Origin location cannot be reached by vehicle and requires a walking section to reach the point. */
   ORIGIN_NOT_VEHICLE_ACCESSIBLE = "origin_not_vehicle_accessible",
-  /** The destination location cannot be reached by vehicle and requires a walking section to reach the point. */
+  /** Destination location cannot be reached by vehicle and requires a walking section to reach the point. */
   DESTINATION_NOT_VEHICLE_ACCESSIBLE = "destination_not_vehicle_accessible",
-  /** The requested final state of charge cannot be achieved. */
+  /** Requested final state of charge cannot be achieved. */
   FINAL_SOC_NOT_POSSIBLE = "final_soc_not_possible",
-  /** The set maximum speed is too low (below 50 km/h) and may result in an inefficient route. */
+  /** Set maximum speed is too low (below 50 km/h) and may result in an inefficient route. */
   LOW_SPEED = "low_speed",
   /** Operator preferences were ignored because they have not been configured for this project nor provided in the route create request. */
   OPERATOR_PREFERENCES_NOT_FOUND = "operator_preferences_not_found",
@@ -8032,8 +8043,8 @@ export type VehicleListFilter = {
   purpose?: Maybe<Array<VehiclePurpose>>;
   /** Type of vehicle. */
   type?: Maybe<Array<VehicleType>>;
-  /** [BETA] Make of vehicle. */
-  make?: Maybe<Scalars["String"]>;
+  /** ID of the vehicle make. */
+  make?: Maybe<Scalars["ID"]>;
   /** [BETA] Model of vehicle. */
   model?: Maybe<Scalars["String"]>;
 };
@@ -8082,16 +8093,32 @@ export type VehicleListRouting = {
 
 /** Vehicle make data. */
 export type VehicleMake = {
+  /** ID of the vehicle make. */
+  id: Scalars["ID"];
   /** Vehicle make name. */
   name: Scalars["String"];
   /** Vehicle make image. */
   image: VehicleImage;
+  /** Number of public and private unique models manufactured by the make. */
+  model_count: Scalars["Int"];
 };
 
 /** Vehicle makes response object. */
 export type VehicleMakesConnection = {
+  /** Total number of unique vehicle makes. */
+  total_count: Scalars["Int"];
+  /** Information about the current page. */
+  page_info: PageInfo;
   /** List of vehicle makes. */
   nodes: Array<VehicleMake>;
+};
+
+/** Filter vehicle make list result. */
+export type VehicleMakesFilter = {
+  /** Regions in which the Make has vehicles. */
+  region?: Maybe<Array<VehicleRegion>>;
+  /** Type of vehicle which the Make has vehicles. */
+  type?: Maybe<Array<VehicleType>>;
 };
 
 export type VehicleMedia = {
@@ -8126,6 +8153,8 @@ export enum VehicleMode {
 export type VehicleModel = {
   /** Vehicle model name. */
   name: Scalars["String"];
+  /** Number of public and private vehicles associated to this model. */
+  vehicle_count: Scalars["Int"];
 };
 
 /** Vehicle models response object. */
@@ -8141,7 +8170,7 @@ export type VehicleModelsConnection = {
 /** Filter vehicle model list result. */
 export type VehicleModelsFilter = {
   /** Vehicle make. */
-  make?: Maybe<Scalars["String"]>;
+  make: Scalars["ID"];
 };
 
 export type VehicleNaming = {

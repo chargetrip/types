@@ -1654,13 +1654,13 @@
         "enumValues": [
           {
             "name": "OPTIMIZE_TRAVEL_TIME",
-            "description": "Optimizes the charging time at each station, in order to decrease the total travel time. You will only charge up until the SOC you need in order to reach the next stop.",
+            "description": "Optimizes the charging time at each station, in order to decrease the total travel time. Charges the vehicle only to the SOC required to reach the next stop, without exceeding the configured 'maximum_state_of_charge'.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "ALWAYS_TO_MAX_CHARGE",
-            "description": "Charge to the maximum capacity at every charging stop. The default maximum charging capacity is 80%.",
+            "description": "Charges up to the maximum configured state of charge (SoC) at each station. The maximum SoC is determined by 'maximum_state_of_charge'.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -19562,16 +19562,48 @@
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
+              },
+              {
+                "name": "filter",
+                "description": "Filter vehicle makes result.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "VehicleMakesFilter",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "first",
+                "description": "Maximum number of items to return per page, a value between 1 and 10.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "10",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "after",
+                "description": "Returns the items in the list that come after the specified cursor. For the first page, this field should not be specified.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "VehicleMakesConnection",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "VehicleMakesConnection",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -19630,13 +19662,9 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "VehicleModelsConnection",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "VehicleModelsConnection",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -24573,6 +24601,18 @@
           {
             "name": "destination_station_truck_only",
             "description": "The charging station at the destination is restricted to heavy-duty trucks.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "risk_margin_soc_not_possible",
+            "description": "Expected arrival state of charge for the leg is below the safety risk margin.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "final_soc_below_risk_margin",
+            "description": "Requested final state of charge value is below the specified safe risk margin. Safe risk margin is used instead.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -32940,7 +32980,7 @@
         "fields": [
           {
             "name": "capacity",
-            "description": "Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh.",
+            "description": "Usable capacity of a battery used to compute a route. The value must be between 50% and 150% of a vehicle's baseline battery capacity. If not provided, the vehicle's full usable capacity by default.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -32956,7 +32996,7 @@
           },
           {
             "name": "state_of_charge",
-            "description": "Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity.",
+            "description": "Current amount of energy in a battery. If not provided, battery is assumed to be fully charged.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -32972,7 +33012,7 @@
           },
           {
             "name": "final_state_of_charge",
-            "description": "Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default.",
+            "description": "Desired final amount of energy in a battery at the end of a trip. The value must be between 0 and 80% of the vehicle's battery capacity. If not provided, or if the specified value is below the safe risk margin, the safe risk margin is used by default.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -33060,7 +33100,7 @@
         "inputFields": [
           {
             "name": "capacity",
-            "description": "Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle battery.usable_kwh.",
+            "description": "Usable capacity of a battery used to compute a route. The value must be between 50% and 150% of a vehicle's baseline battery capacity. If not provided, the vehicle's full usable capacity by default.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StateOfChargeInput",
@@ -33072,7 +33112,7 @@
           },
           {
             "name": "state_of_charge",
-            "description": "Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle battery.capacity.",
+            "description": "Current amount of energy in a battery. If not provided, battery is assumed to be fully charged.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StateOfChargeInput",
@@ -33084,7 +33124,7 @@
           },
           {
             "name": "final_state_of_charge",
-            "description": "Desired final amount of energy in a battery at the and of a trip. The value must be between 0 and 60% of the vehicle battery.capacity. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default.",
+            "description": "Desired final amount of energy in a battery at the end of a trip. The value must be between 0 and 80% of the vehicle's battery capacity. If not provided, or if the specified value is below the safe risk margin, the safe risk margin is used by default.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StateOfChargeInput",
@@ -33244,7 +33284,7 @@
         "fields": [
           {
             "name": "mode",
-            "description": "Mode that indicates if the charging time is optimized or if always charged to the maximum capacity.",
+            "description": "Mode that indicates if the charging time is optimized or if always charged to the maximum state of charge.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -33333,6 +33373,22 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_state_of_charge",
+            "description": "Maximum state of charge (%) the vehicle can reach at any charging stop. If not specified defaults to 80%.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -33438,7 +33494,7 @@
         "inputFields": [
           {
             "name": "mode",
-            "description": "Mode that indicates if the charging time is optimized or if always charged to the maximum capacity.",
+            "description": "Mode that indicates if the charging time is optimized or if always charged to the maximum state of charge.",
             "type": {
               "kind": "ENUM",
               "name": "ChargeMode",
@@ -33509,6 +33565,22 @@
               }
             },
             "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_state_of_charge",
+            "description": "Maximum state of charge (%) the vehicle can reach at any charging stop. The value must be between 80 and 100.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": "80",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -33700,7 +33772,7 @@
               "name": "RouteVehicleChargingInput",
               "ofType": null
             },
-            "defaultValue": null,
+            "defaultValue": "{maximum_state_of_charge: 80}",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -34391,7 +34463,7 @@
         "enumValues": [
           {
             "name": "ev_unavailable_in_region",
-            "description": "The selected vehicle model is unavailable on one or more regions along the route.",
+            "description": "Selected vehicle model is unavailable on one or more regions along the route.",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -34409,25 +34481,25 @@
           },
           {
             "name": "origin_not_vehicle_accessible",
-            "description": "The origin location cannot be reached by vehicle and requires a walking section to reach the point.",
+            "description": "Origin location cannot be reached by vehicle and requires a walking section to reach the point.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "destination_not_vehicle_accessible",
-            "description": "The destination location cannot be reached by vehicle and requires a walking section to reach the point.",
+            "description": "Destination location cannot be reached by vehicle and requires a walking section to reach the point.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "final_soc_not_possible",
-            "description": "The requested final state of charge cannot be achieved.",
+            "description": "Requested final state of charge cannot be achieved.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "low_speed",
-            "description": "The set maximum speed is too low (below 50 km/h) and may result in an inefficient route.",
+            "description": "Set maximum speed is too low (below 50 km/h) and may result in an inefficient route.",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -41589,10 +41661,10 @@
           },
           {
             "name": "make",
-            "description": "[BETA] Make of vehicle.",
+            "description": "ID of the vehicle make.",
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "ID",
               "ofType": null
             },
             "defaultValue": null,
@@ -41830,6 +41902,22 @@
         "description": "Vehicle make data.",
         "fields": [
           {
+            "name": "id",
+            "description": "ID of the vehicle make.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": "Vehicle make name.",
             "args": [],
@@ -41860,6 +41948,22 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "model_count",
+            "description": "Number of public and private unique models manufactured by the make.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -41872,6 +41976,38 @@
         "name": "VehicleMakesConnection",
         "description": "Vehicle makes response object.",
         "fields": [
+          {
+            "name": "total_count",
+            "description": "Total number of unique vehicle makes.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "page_info",
+            "description": "Information about the current page.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "nodes",
             "description": "List of vehicle makes.",
@@ -41899,6 +42035,57 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "VehicleMakesFilter",
+        "description": "Filter vehicle make list result.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "region",
+            "description": "Regions in which the Make has vehicles.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "VehicleRegion",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of vehicle which the Make has vehicles.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "VehicleType",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -42066,6 +42253,22 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "vehicle_count",
+            "description": "Number of public and private vehicles associated to this model.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -42150,9 +42353,13 @@
             "name": "make",
             "description": "Vehicle make.",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
