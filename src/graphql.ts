@@ -8044,7 +8044,7 @@ export type VehicleListFilter = {
   /** Type of vehicle. */
   type?: Maybe<Array<VehicleType>>;
   /** ID of the vehicle make. */
-  make?: Maybe<Scalars["ID"]>;
+  make?: Maybe<Scalars["String"]>;
   /** [BETA] Model of vehicle. */
   model?: Maybe<Scalars["String"]>;
 };

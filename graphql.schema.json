@@ -41664,7 +41664,7 @@
             "description": "ID of the vehicle make.",
             "type": {
               "kind": "SCALAR",
-              "name": "ID",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
