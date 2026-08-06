@@ -713,10 +713,9 @@ export type ConnectorPriceElementComponent = {
   /** Applicable VAT. */
   vat: Scalars["Float"];
   /**
-   * 	Indicates the minimum amount that is billed. A
-   * unit is billed in step-size blocks. For example, if the type is TIME and step_size is 300, then the time is billed in blocks of 5 minutes. Hence, if 6 minutes is used, then 10 minutes (2 blocks of step_size) is billed.
-   *
-   * 	Note: step_size also depends on the type. Every type (except FLAT) defines a step_size multiplier. This is the size of every 'step' and the unit. For example, PARKING_TIME has a step-size multiplier of 1 second. Therefore, the step_size of a price component is multiplied by 1 second. Thus, step_size = 300 means 300 seconds.
+   * Indicates the minimum amount that is billed.
+   * A unit is billed in step-size blocks. For example, if the type is TIME and step_size is 300, then the time is billed in blocks of 5 minutes. Hence, if 6 minutes is used, then 10 minutes (2 blocks of step_size) is billed.
+   * Note: step_size also depends on the type. Every type (except FLAT) defines a step_size multiplier. This is the size of every 'step' and the unit. For example, PARKING_TIME has a step-size multiplier of 1 second. Therefore, the step_size of a price component is multiplied by 1 second. Thus, step_size = 300 means 300 seconds."
    */
   step_size: Scalars["Int"];
 };
@@ -727,7 +726,7 @@ export enum ConnectorPriceElementComponentType {
   ENERGY = "energy",
   /** Fixed price per charging session. */
   FLAT = "flat",
-  /** Parking price per hour. This fee is applicable even if the parked car is not charging. */
+  /** Parking price per hour. This fee is applicable if the parked car is not charging. */
   PARKING_TIME = "parking_time",
   /** Fixed price per unit of time defined in the step size. */
   TIME = "time"
@@ -777,7 +776,6 @@ export type ConnectorPriceElementRestrictions = {
    * A reservation starts when the reservation is made, and ends when the driver starts charging on the reserved EVSE/Location,
    * or when the reservation expires. A reservation can only have: `flat` and `time` ConnectorPriceElementComponentType,
    * where time is for the duration of the reservation.
-   *
    * When a price has both, `reservation` and `reservation_expires` ConnectorPriceElement,
    * where both ConnectorPriceElement have a time ConnectorPriceElementComponent,
    * then the time based cost of an expired reservation will be calculated based on the `reservation_expires` ConnectorPriceElement.
@@ -1267,18 +1265,18 @@ export type CreateRoute = {
   destination: RouteDestinationFeaturePoint;
   /** Via points of a route. */
   via?: Maybe<Array<RouteViaFeaturePoint>>;
-  /** Operator preferences for a route. When provided, prefers routes that use higher order operators. */
+  /** Operator preferences for a route. */
   operators?: Maybe<RouteOperatorPreferences>;
   /**
    * Season of a route.
    * @deprecated In favor of `weather`.
    */
   season?: Maybe<RouteSeason>;
-  /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
+  /** Search radius for alternative charging stations along the route. Accepts a value between 500 and 5000 meters (or unit equivalent). If not specified, disables the alternative station search for the generated route. */
   alternative_station_radius?: Maybe<AlternativeStationRadius>;
   /** [BETA] Number of alternative routes to request. */
   alternative_routes?: Maybe<Scalars["Int"]>;
-  /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
+  /** Route departure time. */
   departure_time: Scalars["DateTime"];
   /** [BETA] List of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
   avoid?: Maybe<Array<RouteAvoid>>;
@@ -1304,17 +1302,17 @@ export type CreateRouteInput = {
   via?: Maybe<Array<RouteViaFeaturePointInput>>;
   /** Operator preferences and restrictions for route calculation. If not specified, excludes operators per project settings, but applies no operator ranking. */
   operators?: Maybe<RouteOperatorPreferencesInput>;
-  /** Optional flag to specify the season. */
+  /** Optional flag to specify the season. If not specified, defaults to  real-time weather data */
   season?: Maybe<RouteSeason>;
-  /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
+  /** Search radius for alternative charging stations along the route. Accepts a value between 500 and 5000 meters (or unit equivalent). If not specified, disables the alternative station search for the generated route. */
   alternative_station_radius?: Maybe<AlternativeStationRadiusInput>;
   /** [BETA] Additional alternative routes to calculate. Performed on a best-effort basis, it may return fewer than requested, or even none. Set to 0 to create only the recommended route. */
   alternative_routes?: Maybe<Scalars["Int"]>;
-  /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
+  /** Route departure time. Used to calculate the expected arrival time. If not specified, defaults to the route's request time. */
   departure_time?: Maybe<Scalars["DateTime"]>;
   /** [BETA] Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
   avoid?: Maybe<Array<RouteAvoid>>;
-  /** Weather configuration for the route. Defined by a preset or custom weather conditions. */
+  /** Weather configuration for the route. Defined by a preset or custom weather conditions. If not specified, defaults to real-time weather data. */
   weather?: Maybe<RouteWeatherInput>;
   /** Charging stations preferences for route calculation. */
   station_preferences?: Maybe<RouteStationPreferencesInput>;
@@ -4439,7 +4437,7 @@ export type RouteDestinationProperties = {
 export type RouteDestinationPropertiesInput = {
   /** Data about the destination location. */
   location?: Maybe<RoutePropertiesLocationInput>;
-  /** Specifies a charging station at the destination. If a known station is provided, it will be used as charging stop. Any configured operator preferences are ignored for this stop. */
+  /** Specifies a charging station at the destination. If an existing station is provided, it is treated as a regular location stop and no charging will be scheduled at this location. Any configured operator preferences are ignored for this stop. */
   station?: Maybe<RoutePropertiesStationInput>;
 };
 
@@ -5977,7 +5975,7 @@ export type RoutePropertiesStation = {
   station_id?: Maybe<Scalars["ID"]>;
   /** External ID of the station. When provided and valid, the coordinates of this station will be used. */
   external_station_id?: Maybe<Scalars["ID"]>;
-  /** Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode. */
+  /** Duration to stay at the station, in seconds. */
   stop_duration?: Maybe<Scalars["Int"]>;
 };
 
@@ -5986,7 +5984,7 @@ export type RoutePropertiesStationInput = {
   station_id?: Maybe<Scalars["ID"]>;
   /** External ID of the station. When provided and valid, the coordinates of this station will be used. */
   external_station_id?: Maybe<Scalars["ID"]>;
-  /** Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode. */
+  /** Duration to stay at the station, in seconds. */
   stop_duration?: Maybe<Scalars["Int"]>;
 };
 
