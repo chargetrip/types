@@ -481,8 +481,8 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Not in use."
           }
         ],
         "inputFields": null,

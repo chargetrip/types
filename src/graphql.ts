@@ -120,7 +120,10 @@ export type AlternativeStationRadius = {
   value: Scalars["Float"];
   /** Preferred unit for the alternative station radius. */
   type: DistanceUnit;
-  /** Source of inputted data. */
+  /**
+   * Source of inputted data.
+   * @deprecated Not in use.
+   */
   source: TelemetryInputSource;
 };
 
