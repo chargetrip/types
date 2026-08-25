@@ -6892,6 +6892,8 @@ export type Station = {
   >;
   /** Type of access to the charging station. */
   access_type?: Maybe<AccessType>;
+  /** [ALPHA] List of active boosting groups to which the station belongs. */
+  boosting_group_ids?: Maybe<Array<Scalars["ID"]>>;
 };
 
 export enum StationAdhocAuthorisationPaymentMethod {
