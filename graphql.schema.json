@@ -319,6 +319,71 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "AdvanceNavigationLegInput",
+        "description": "Input fields to continue the navigation session to the next leg.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "The unique identifier of the active navigation session.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "state_of_charge",
+            "description": "State of charge (SOC) of the vehicle at the current location. If the current leg ends at a charging stop and this value is omitted, the navigation will assume the vehicle charges to its estimated optimal SOC. If the current leg ends at a non-charging via point and this value is omitted, the last known vehicle SOC is retained.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StateOfChargeInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_location",
+            "description": "Geographic coordinates of the vehicle's current location.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PointInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "ID",
+        "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "AirPressure",
         "description": null,
@@ -893,16 +958,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "ID",
-        "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -11765,7 +11820,7 @@
           },
           {
             "name": "finishNavigation",
-            "description": "[BETA] End a navigation session",
+            "description": "[BETA] End a navigation session.",
             "args": [
               {
                 "name": "input",
@@ -11776,6 +11831,35 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "NavigationFinishInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "advanceNavigationLeg",
+            "description": "[BETA] Advances the active navigation session to the next route leg.",
+            "args": [
+              {
+                "name": "input",
+                "description": "Continue input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "AdvanceNavigationLegInput",
                     "ofType": null
                   }
                 },
@@ -12010,7 +12094,7 @@
           },
           {
             "name": "status",
-            "description": "The status of a navigation session. The status can be active, finished or error.",
+            "description": "The status of a navigation session. The status can be active or finished.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -12230,6 +12314,12 @@
           {
             "name": "next_station_availability_updated",
             "description": "Next station availability has changed.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "route_update_failed",
+            "description": "Explicit recalculation/reroute failed. The previous route geometry was kept. ",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -12641,6 +12731,22 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Point",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_leg",
+            "description": "Index of the current active route leg.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
                 "ofType": null
               }
             },
@@ -13489,7 +13595,23 @@
         "inputFields": [
           {
             "name": "route_id",
-            "description": "ID of the route of the navigation session.",
+            "description": "ID of the route request.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "route_details_id",
+            "description": "ID of the route.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -13631,12 +13753,6 @@
           {
             "name": "finished",
             "description": "Navigation session is completed (either manually or automatically 48 hours after the last update).",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "error",
-            "description": "Failed to update navigation session due to route error or not found.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -13786,7 +13902,7 @@
           },
           {
             "name": "status",
-            "description": "The status of the navigation session. The status can be active, finished or error.",
+            "description": "The status of the navigation session. The status can be active or finished.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -13822,6 +13938,22 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "NavigationChange",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_leg",
+            "description": "Index of the current active route leg.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
                 "ofType": null
               }
             },
@@ -13909,22 +14041,6 @@
                     "ofType": null
                   }
                 }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "route_leg",
-            "description": "Current route leg index corresponding to a location.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
               }
             },
             "defaultValue": null,

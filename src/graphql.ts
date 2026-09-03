@@ -97,6 +97,16 @@ export enum AdhocAuthorisationMethod {
   SMS = "SMS"
 }
 
+/** Input fields to continue the navigation session to the next leg. */
+export type AdvanceNavigationLegInput = {
+  /** The unique identifier of the active navigation session. */
+  id: Scalars["ID"];
+  /** State of charge (SOC) of the vehicle at the current location. If the current leg ends at a charging stop and this value is omitted, the navigation will assume the vehicle charges to its estimated optimal SOC. If the current leg ends at a non-charging via point and this value is omitted, the last known vehicle SOC is retained. */
+  state_of_charge?: Maybe<StateOfChargeInput>;
+  /** Geographic coordinates of the vehicle's current location. */
+  current_location: PointInput;
+};
+
 export type AirPressure = {
   /** Value of the atmospheric pressure. */
   value: Scalars["Float"];
@@ -2307,8 +2317,10 @@ export type Mutation = {
   updateNavigation?: Maybe<Scalars["Boolean"]>;
   /** [BETA] Recalculate the current navigation route */
   recalculateNavigation?: Maybe<Scalars["Boolean"]>;
-  /** [BETA] End a navigation session */
+  /** [BETA] End a navigation session. */
   finishNavigation?: Maybe<Scalars["Boolean"]>;
+  /** [BETA] Advances the active navigation session to the next route leg. */
+  advanceNavigationLeg?: Maybe<Scalars["Boolean"]>;
   /**
    * Add a new review.
    * If the `x-token` header is send for a valid user, the review will belong to it, otherwise will be added for an anonymouse user
@@ -2369,6 +2381,10 @@ export type MutationfinishNavigationArgs = {
   input: NavigationFinishInput;
 };
 
+export type MutationadvanceNavigationLegArgs = {
+  input: AdvanceNavigationLegInput;
+};
+
 export type MutationaddReviewArgs = {
   review: ReviewAdd;
 };
@@ -2397,7 +2413,7 @@ export type Navigation = {
   overview: NavigationOverview;
   /** The status of the navigation session vehicle. The status can be driving, charging or parked. */
   vehicle_status: NavigationVehicleStatus;
-  /** The status of a navigation session. The status can be active, finished or error. */
+  /** The status of a navigation session. The status can be active or finished. */
   status: NavigationStatus;
   /** Navigation meta information. */
   meta?: Maybe<NavigationMeta>;
@@ -2440,7 +2456,9 @@ export enum NavigationChangeType {
   /** The route has been modified or recalculated. */
   ROUTE_UPDATED = "route_updated",
   /** Next station availability has changed. */
-  NEXT_STATION_AVAILABILITY_UPDATED = "next_station_availability_updated"
+  NEXT_STATION_AVAILABILITY_UPDATED = "next_station_availability_updated",
+  /** Explicit recalculation/reroute failed. The previous route geometry was kept.  */
+  ROUTE_UPDATE_FAILED = "route_update_failed"
 }
 
 /** Input for the navigation finish. */
@@ -2507,6 +2525,8 @@ export type NavigationOverview = {
   state_of_charge: Scalars["Float"];
   /** Last known location. */
   last_known_location: Point;
+  /** Index of the current active route leg. */
+  current_leg: Scalars["Int"];
   /** Next stop details. Can be a charging or a location stop. */
   next_stop: NavigationStop;
   /** Continuously updated route legs. */
@@ -2660,8 +2680,10 @@ export type NavigationRouteVehicle = {
 
 /** Input for the navigation start. */
 export type NavigationStartInput = {
-  /** ID of the route of the navigation session. */
+  /** ID of the route request. */
   route_id: Scalars["ID"];
+  /** ID of the route. */
+  route_details_id: Scalars["ID"];
   /** Current coordinates. */
   current_location: PointInput;
 };
@@ -2689,9 +2711,7 @@ export enum NavigationStatus {
   /** Navigation session is live and currently tracking. */
   ACTIVE = "active",
   /** Navigation session is completed (either manually or automatically 48 hours after the last update). */
-  FINISHED = "finished",
-  /** Failed to update navigation session due to route error or not found. */
-  ERROR = "error"
+  FINISHED = "finished"
 }
 
 /** Next stop details. Can be a charging or a location stop. */
@@ -2719,12 +2739,14 @@ export type NavigationSubscription = {
   id: Scalars["ID"];
   /** The status of the navigation session vehicle. The status can be driving, charging or parked. */
   vehicle_status: NavigationVehicleStatus;
-  /** The status of the navigation session. The status can be active, finished or error. */
+  /** The status of the navigation session. The status can be active or finished. */
   status: NavigationStatus;
   /** Navigation meta information. */
   meta?: Maybe<NavigationMeta>;
   /** Information about the latest completed change. */
   last_change: NavigationChange;
+  /** Index of the current active route leg. */
+  current_leg: Scalars["Int"];
 };
 
 /** Input for the navigation update. */
@@ -2739,8 +2761,6 @@ export type NavigationUpdateInput = {
 export type NavigationUpdateLocationsInput = {
   /** Location coordinates [longitude, latitude]. */
   coordinates: Array<Scalars["Float"]>;
-  /** Current route leg index corresponding to a location. */
-  route_leg: Scalars["Int"];
   /** UNIX timestamp at location, in seconds. */
   timestamp: Scalars["Int"];
   /** Telemetry data input. */
