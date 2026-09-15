@@ -396,12 +396,14 @@ export type ChargeSpeedInput = {
 };
 
 export enum ChargeSpeedUnit {
-  /** Return the charge speed in kilowatt hours. */
+  /** Charge speed in kilowatt hours. */
   KILOWATT_HOUR = "kilowatt_hour",
-  /** Return the charge speed in kilometers per hour. */
+  /** Charge speed in kilometers per hour. */
   KILOMETERS_PER_HOUR = "kilometers_per_hour",
-  /** Return the charge speed in miles per hour. */
-  MILES_PER_HOUR = "miles_per_hour"
+  /** Charge speed in miles per hour. */
+  MILES_PER_HOUR = "miles_per_hour",
+  /** Charge speed in kilowatts. */
+  KILOWATT = "kilowatt"
 }
 
 export type ChargeTotalInput = {
@@ -1325,7 +1327,7 @@ export type CreateRouteInput = {
   departure_time?: Maybe<Scalars["DateTime"]>;
   /** [BETA] Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
   avoid?: Maybe<Array<RouteAvoid>>;
-  /** Weather configuration for the route. Defined by a preset or custom weather conditions. If not specified, defaults to real-time weather data. */
+  /** Weather configuration for the route. Defined by a preset or custom weather conditions. If not specified, defaults to use real weather data based on the route's `departure_time`. */
   weather?: Maybe<RouteWeatherInput>;
   /** Charging stations preferences for route calculation. */
   station_preferences?: Maybe<RouteStationPreferencesInput>;
@@ -6433,7 +6435,7 @@ export type RouteVehicleBattery = {
   current?: Maybe<Scalars["Float"]>;
   /** Battery voltage in volts. */
   voltage?: Maybe<Scalars["Float"]>;
-  /** Value of the positive or negative power, in kWh. When negative, the vehicle is charging. */
+  /** Value of the positive or negative power, in kW. When negative, the vehicle is charging. */
   power?: Maybe<Scalars["Float"]>;
   /** Flag indicating if the vehicle is charging. */
   is_charging?: Maybe<Scalars["Boolean"]>;
@@ -6453,7 +6455,7 @@ export type RouteVehicleBatteryInput = {
   current?: Maybe<Scalars["Float"]>;
   /** Battery voltage in volts. */
   voltage?: Maybe<Scalars["Float"]>;
-  /** Value of the positive or negative power, in kWh. When negative, the vehicle is charging. */
+  /** Value of the positive or negative power, in kW. When negative, the vehicle is charging. */
   power?: Maybe<Scalars["Float"]>;
   /** Flag indicating if the vehicle is charging. */
   is_charging?: Maybe<Scalars["Boolean"]>;
@@ -6476,7 +6478,7 @@ export type RouteVehicleCabinInput = {
 export type RouteVehicleCharging = {
   /** Mode that indicates if the charging time is optimized or if always charged to the maximum state of charge. */
   mode: ChargeMode;
-  /** Minimum desired power of chargers, in kWh. */
+  /** Minimum desired power of chargers, in kW. */
   minimum_power: Scalars["Float"];
   /** Minimum remaining state of charge at charging stops, expressed as a percentage. The value must be between 0 and 60. If not provided, the project configuration value is used. */
   risk_margin: Scalars["Int"];
@@ -7858,18 +7860,18 @@ export type VehicleBodyWeightmaximalArgs = {
 export type VehicleConnector = {
   /** Connector type, known as connector standard in OCPI. */
   standard: ConnectorType;
-  /** Usable electric power. */
+  /** Average charging power. For fast charging connectors, represents the average power from 10% to 80% state of charge. For slow charging connectors, value is identical to `max_electric_power`. */
   power: Scalars["Float"];
-  /** Maximum electric power. */
+  /** Peak charging power. For slow charging connectors, value is identical to `power`. */
   max_electric_power: Scalars["Float"];
-  /** Time it takes to charge from 10 to 80% with a fast charger, shown in minutes. */
+  /** Time needed to charge, in minutes. For fast charging connectors, represents time from 10% to 80% state of charge. For slow charging connectors, represents time from 0% to 100%. */
   time: Scalars["Int"];
   /**
    * Charging speed.
    * @deprecated In favor of `charge_speed`.
    */
   speed: Scalars["Float"];
-  /** Charging speed. */
+  /** Average charging speed. For fast charging connectors, represents average rate from 10% to 80% state of charge. For slow charging connectors, represents average rate from 0% to 100%. */
   charge_speed: Scalars["Float"];
 };
 
@@ -8899,9 +8901,9 @@ export type VehiclePremiumPrice = {
 };
 
 export type VehiclePremiumPriceValueWithGrant = {
-  /** Starting price for local market expressed in the currency in the field currency. */
+  /** Starting price for the local market. The value applies to the optional `country` field provided in the query input. If `country` is not specified, it defaults to the Dutch market price. If the unit argument is not provided, the value is returned in the local currency of the selected country. */
   value?: Maybe<Scalars["Float"]>;
-  /** Currency in which the value without optional field conversion is expressed. */
+  /** Currency in which the prices of `grant_applied`, `price_delivery` and `price_first_registration_fee` fields are expressed. The value applies to the optional `country` field provided in the query input. If `country` is not specified, defaults to Euro (EUR). */
   currency?: Maybe<CurrencyUnit>;
   /** Indicates if the starting price is based on an estimate. */
   is_estimated?: Maybe<Scalars["Boolean"]>;

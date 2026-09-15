@@ -1846,19 +1846,25 @@
         "enumValues": [
           {
             "name": "kilowatt_hour",
-            "description": "Return the charge speed in kilowatt hours.",
+            "description": "Charge speed in kilowatt hours.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "kilometers_per_hour",
-            "description": "Return the charge speed in kilometers per hour.",
+            "description": "Charge speed in kilometers per hour.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "miles_per_hour",
-            "description": "Return the charge speed in miles per hour.",
+            "description": "Charge speed in miles per hour.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "kilowatt",
+            "description": "Charge speed in kilowatts.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6387,7 +6393,7 @@
           },
           {
             "name": "weather",
-            "description": "Weather configuration for the route. Defined by a preset or custom weather conditions. If not specified, defaults to real-time weather data.",
+            "description": "Weather configuration for the route. Defined by a preset or custom weather conditions. If not specified, defaults to use real weather data based on the route's `departure_time`.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RouteWeatherInput",
@@ -6405,7 +6411,7 @@
               "name": "RouteStationPreferencesInput",
               "ofType": null
             },
-            "defaultValue": null,
+            "defaultValue": "{prefer_highway_charging: false}",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -6429,7 +6435,7 @@
               "name": "Boolean",
               "ofType": null
             },
-            "defaultValue": null,
+            "defaultValue": "false",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6691,7 +6697,7 @@
               "name": "RouteWeatherInput",
               "ofType": null
             },
-            "defaultValue": null,
+            "defaultValue": "{type: actual}",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -33180,7 +33186,7 @@
           },
           {
             "name": "power",
-            "description": "Value of the positive or negative power, in kWh. When negative, the vehicle is charging.",
+            "description": "Value of the positive or negative power, in kW. When negative, the vehicle is charging.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -33288,7 +33294,7 @@
           },
           {
             "name": "power",
-            "description": "Value of the positive or negative power, in kWh. When negative, the vehicle is charging.",
+            "description": "Value of the positive or negative power, in kW. When negative, the vehicle is charging.",
             "type": {
               "kind": "SCALAR",
               "name": "Float",
@@ -33416,7 +33422,7 @@
           },
           {
             "name": "minimum_power",
-            "description": "Minimum desired power of chargers, in kWh.",
+            "description": "Minimum desired power of chargers, in kW.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -40697,7 +40703,7 @@
           },
           {
             "name": "power",
-            "description": "Usable electric power.",
+            "description": "Average charging power. For fast charging connectors, represents the average power from 10% to 80% state of charge. For slow charging connectors, value is identical to `max_electric_power`.",
             "args": [
               {
                 "name": "unit",
@@ -40726,7 +40732,7 @@
           },
           {
             "name": "max_electric_power",
-            "description": "Maximum electric power.",
+            "description": "Peak charging power. For slow charging connectors, value is identical to `power`.",
             "args": [
               {
                 "name": "unit",
@@ -40755,7 +40761,7 @@
           },
           {
             "name": "time",
-            "description": "Time it takes to charge from 10 to 80% with a fast charger, shown in minutes.",
+            "description": "Time needed to charge, in minutes. For fast charging connectors, represents time from 10% to 80% state of charge. For slow charging connectors, represents time from 0% to 100%.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -40800,7 +40806,7 @@
           },
           {
             "name": "charge_speed",
-            "description": "Charging speed.",
+            "description": "Average charging speed. For fast charging connectors, represents average rate from 10% to 80% state of charge. For slow charging connectors, represents average rate from 0% to 100%.",
             "args": [
               {
                 "name": "unit",
@@ -46080,7 +46086,7 @@
         "fields": [
           {
             "name": "value",
-            "description": "Starting price for local market expressed in the currency in the field currency.",
+            "description": "Starting price for the local market. The value applies to the optional `country` field provided in the query input. If `country` is not specified, it defaults to the Dutch market price. If the unit argument is not provided, the value is returned in the local currency of the selected country.",
             "args": [
               {
                 "name": "unit",
@@ -46105,7 +46111,7 @@
           },
           {
             "name": "currency",
-            "description": "Currency in which the value without optional field conversion is expressed.",
+            "description": "Currency in which the prices of `grant_applied`, `price_delivery` and `price_first_registration_fee` fields are expressed. The value applies to the optional `country` field provided in the query input. If `country` is not specified, defaults to Euro (EUR).",
             "args": [],
             "type": {
               "kind": "ENUM",
