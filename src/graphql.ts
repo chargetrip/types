@@ -1271,6 +1271,46 @@ export type CreateConnectedVehicleOptions = {
   scope?: Maybe<Array<ConnectScope>>;
 };
 
+export type CreateMatchedRoute = {
+  /** Vehicle used on a route. */
+  vehicle: MatchedRouteVehicle;
+  /** Via points of a route. */
+  via?: Maybe<Array<MatchedRouteVia>>;
+  /** Chronological sequence of GPS points used for map-matching. Minimum 2. */
+  points: Array<MatchedRoutePoint>;
+  /** Operator preferences for a route. When provided, prefers routes that use higher order operators. */
+  operators?: Maybe<MatchedRouteOperatorPreferences>;
+  /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
+  alternative_station_radius?: Maybe<MatchedRouteAlternativeStationRadius>;
+  /** Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data. */
+  departure_time: Scalars["DateTime"];
+  /** Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied. */
+  driving_preferences?: Maybe<MatchedRouteDrivingPreferences>;
+  /** Weather configuration for the route. Defined by a preset or custom weather conditions. */
+  weather: MatchedRouteWeather;
+};
+
+export type CreateMatchedRouteInput = {
+  /** Vehicle specific input. */
+  vehicle: MatchedRouteVehicleInput;
+  /** Chronological sequence of GPS points used for map-matching. Minimum 2. */
+  points: Array<MatchedRoutePointInput>;
+  /** Intermediate via points along the route. */
+  via?: Maybe<Array<MatchedRouteViaInput>>;
+  /** Route departure time. Used to calculate the arrival time and, when 'weather.type' is 'ACTUAL',retrieve weather data. */
+  departure_time?: Maybe<Scalars["DateTime"]>;
+  /** Weather configuration for the route. Defined by actual, a preset or custom weather conditions. */
+  weather?: Maybe<RouteWeatherInput>;
+  /** Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied. */
+  driving_preferences?: Maybe<MatchedRouteDrivingPreferencesInput>;
+  /** Flag that indicates if charging stations are to be found and planned if the vehicle state of charge reaches the threshold at any point in route. This modifies the original route. */
+  plan_charging_stops?: Maybe<Scalars["Boolean"]>;
+  /** Operator preferences and restrictions for route calculation. If not specified, excludes operators per project settings, but applies no operator ranking. Only applied if applied if `plan_charging_stops` is set true. */
+  operators?: Maybe<MatchedRouteOperatorPreferencesInput>;
+  /** Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit. */
+  alternative_station_radius?: Maybe<MatchedRouteAlternativeStationRadiusInput>;
+};
+
 export type CreateRoute = {
   /** Vehicle used on a route. */
   vehicle: RouteVehicle;
@@ -2266,6 +2306,623 @@ export enum LineStringType {
   LINESTRING = "LineString"
 }
 
+export type MatchedRouteAlternativeStationRadius = {
+  /** Value of the alternative station radius. */
+  value: Scalars["Float"];
+  /** Preferred unit for the alternative station radius. */
+  type: DistanceUnit;
+};
+
+export type MatchedRouteAlternativeStationRadiusInput = {
+  /** Value of the alternative station radius. */
+  value: Scalars["Float"];
+  /** Preferred unit for the alternative station radius. */
+  type: DistanceUnit;
+};
+
+export type MatchedRouteDetails = {
+  /** ID of a route computation. */
+  id: Scalars["ID"];
+  /** Total distance of a route. */
+  distance: Scalars["Float"];
+  /** Aggregation of all durations of a route. */
+  durations: MatchedRouteDetailsDurations;
+  /** Total energy used for a route in kilowatt hours. For HEVs and PHEVs this field will return null. */
+  consumption?: Maybe<Scalars["Float"]>;
+  /** Range available at the start of a trip. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_origin?: Maybe<Scalars["Float"]>;
+  /** Range available at the end of a trip. Note: The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_destination?: Maybe<Scalars["Float"]>;
+  /** Polyline containing encoded coordinates. */
+  polyline: Scalars["String"];
+  /** Path elevation, distance, duration, consumption and speed values, grouped into 100 segments. */
+  path_plot: Array<MatchedRouteDetailsPathSegment>;
+  /** Details about elevation on a route. */
+  elevation: MatchedRouteDetailsElevation;
+  /** Money saving information. */
+  savings?: Maybe<MatchedRouteDetailsSavings>;
+  /** Legs of a route. */
+  legs: Array<MatchedRouteDetailsLeg>;
+  /**
+   * Alternative stations along a route within a specified radius.
+   *
+   * Includes stations from preferred/required/avoided operators but excludes stations from excluded operators.
+   * This list is only populated if `alternative_station_radius` was specified in the `createRoute` mutation.
+   */
+  alternative_stations: Array<MatchedRouteDetailsAlternativeStation>;
+  /** Aggregation of tags over the current RouteDetails. Tags are available on legs and further subdivided over individual sections and maneuvers. */
+  tags: Array<RouteDetailsTag>;
+  /** Number of charging stops required for this route. */
+  charges: Scalars["Int"];
+};
+
+export type MatchedRouteDetailsdistanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+export type MatchedRouteDetailsrange_at_originArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+export type MatchedRouteDetailsrange_at_destinationArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+export type MatchedRouteDetailspolylineArgs = {
+  decimals?: Maybe<PolylineInputDecimals>;
+};
+
+export type MatchedRouteDetailsAlternativeStation = {
+  /** ID of a station. */
+  id: Scalars["ID"];
+  /** GeoJSON location of a station. */
+  location: Point;
+  /** Speed of a station. A station along a route can be either fast or turbo. */
+  speed: StationSpeedType;
+  /** Status of a station. */
+  status: ChargerStatus;
+  /** The value indicates the operator's ranking based on the station's location, in accordance with the list of countries from the configuration or request. */
+  operator_ranking?: Maybe<OperatorRankingLevel>;
+  /** ID of the station's operator. */
+  operator_id?: Maybe<Scalars["ID"]>;
+};
+
+export type MatchedRouteDetailsDurations = {
+  /** Total duration, in seconds. */
+  total: Scalars["Int"];
+  /** Total charging duration, in seconds. */
+  charging: Scalars["Int"];
+  /** Total driving duration, in seconds. */
+  driving: Scalars["Int"];
+  /** Total duration stopped at a location via or at a station via, excluding charging time and charging penalty, in seconds. */
+  stopover: Scalars["Int"];
+  /** Total ferry duration, in seconds. */
+  ferry: Scalars["Int"];
+};
+
+export type MatchedRouteDetailsElevation = {
+  /** Total value driving uphill on a route. */
+  up: Scalars["Float"];
+  /** Total value driving downhill on a route. */
+  down: Scalars["Float"];
+  /** Maximum elevation on a route. */
+  maximum: Scalars["Float"];
+  /** Minimum elevation on a route. */
+  minimum: Scalars["Float"];
+};
+
+export type MatchedRouteDetailsElevationupArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+export type MatchedRouteDetailsElevationdownArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+export type MatchedRouteDetailsElevationmaximumArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+export type MatchedRouteDetailsElevationminimumArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+/** Leg of a route detail. */
+export type MatchedRouteDetailsLeg = {
+  /** Distance from the start to the end of a leg. */
+  distance: Scalars["Float"];
+  /** Aggregation of all durations of a route leg. */
+  durations: MatchedRouteDetailsDurations;
+  /** Total energy used in a leg in kilowatt hours. For HEVs and PHEVs this field will return null. */
+  consumption?: Maybe<Scalars["Float"]>;
+  /** Origin point location. */
+  origin: MatchedRouteDetailsLegFeaturePoint;
+  /** Destination point location. */
+  destination: MatchedRouteDetailsLegFeaturePoint;
+  /** Range at the start of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_origin?: Maybe<Scalars["Float"]>;
+  /** Range available at the end of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_at_destination?: Maybe<Scalars["Float"]>;
+  /** Range after charging on the leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null. */
+  range_after_charge?: Maybe<Scalars["Float"]>;
+  /** Type of a leg. */
+  type: RouteDetailsLegType;
+  /** Information about the station at the destination of a leg. */
+  station?: Maybe<MatchedRouteDetailsLegStation>;
+  /** Polyline containing encoded coordinates. */
+  polyline: Scalars["String"];
+  /** Aggregation of tags over the current leg. Tags are further subdivided over individual sections and maneuvers. */
+  tags: Array<RouteDetailsTag>;
+  /** Maneuvers of a leg - used to generate turn-by-turn instructions. */
+  maneuvers: Array<RouteDetailsManeuver>;
+  /** Road sections of a leg - divided by means of transportation. */
+  sections: Array<MatchedRouteDetailsLegSection>;
+};
+
+/** Leg of a route detail. */
+export type MatchedRouteDetailsLegdistanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+/** Leg of a route detail. */
+export type MatchedRouteDetailsLegrange_at_originArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+/** Leg of a route detail. */
+export type MatchedRouteDetailsLegrange_at_destinationArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+/** Leg of a route detail. */
+export type MatchedRouteDetailsLegrange_after_chargeArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+/** Leg of a route detail. */
+export type MatchedRouteDetailsLegpolylineArgs = {
+  decimals?: Maybe<PolylineInputDecimals>;
+};
+
+export type MatchedRouteDetailsLegFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
+  /** Feature type. */
+  type: FeatureType;
+  /** Geometry of the feature. */
+  geometry: Point;
+  /** Properties of the feature. */
+  properties?: Maybe<MatchedRouteDetailsLegFeatureProperties>;
+};
+
+export type MatchedRouteDetailsLegFeatureProperties = {
+  /** Name of the location. */
+  name?: Maybe<Scalars["String"]>;
+  /** ID of the station. */
+  station_id?: Maybe<Scalars["ID"]>;
+  /** External ID of the station. */
+  external_station_id?: Maybe<Scalars["ID"]>;
+  /** Temperature at the location. */
+  temperature?: Maybe<Scalars["Int"]>;
+  /** Air pressure at the location. */
+  air_pressure?: Maybe<Scalars["Float"]>;
+  /** Solar irradiance at the location. */
+  solar_irradiance?: Maybe<Scalars["Float"]>;
+  /**
+   * Duration, in seconds, of time spent at this location.
+   * @deprecated In favor of `legs.durations`.
+   */
+  duration?: Maybe<Scalars["Int"]>;
+  /** Number of occupants present in the vehicle. */
+  occupants?: Maybe<Scalars["Int"]>;
+  /** Value of the combined weight of the occupants. */
+  total_occupant_weight?: Maybe<Scalars["Float"]>;
+  /** Value of the current weight of the cargo. */
+  total_cargo_weight?: Maybe<Scalars["Float"]>;
+};
+
+export type MatchedRouteDetailsLegFeaturePropertiestemperatureArgs = {
+  unit?: Maybe<TemperatureUnit>;
+};
+
+export type MatchedRouteDetailsLegFeaturePropertiestotal_occupant_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type MatchedRouteDetailsLegFeaturePropertiestotal_cargo_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type MatchedRouteDetailsLegSection = {
+  /** Section type. */
+  type: RouteDetailsLegSectionType;
+  /** Origin point. */
+  origin: MatchedRouteDetailsLegSectionFeaturePoint;
+  /** Destination point. */
+  destination: MatchedRouteDetailsLegSectionFeaturePoint;
+  /** Aggregation of tags over the current section. */
+  tags: Array<RouteDetailsTag>;
+  /** Polyline containing encoded coordinates. */
+  polyline: Scalars["String"];
+  /** Distance from the start to the end of a section. */
+  distance: Scalars["Float"];
+  /** Total duration of a section, in seconds. The value will be 0 for walking sections. */
+  duration: Scalars["Float"];
+  /** Total energy used in a section in kilowatt-hours. The value will be 0 for walking sections. */
+  consumption?: Maybe<Scalars["Float"]>;
+};
+
+export type MatchedRouteDetailsLegSectionpolylineArgs = {
+  decimals?: Maybe<PolylineInputDecimals>;
+};
+
+export type MatchedRouteDetailsLegSectiondistanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+export type MatchedRouteDetailsLegSectionFeaturePoint = {
+  /** ID of the feature. */
+  id?: Maybe<Scalars["ID"]>;
+  /** Feature type. */
+  type: FeatureType;
+  /** Geometry of the feature. */
+  geometry: Point;
+  /** Properties of the feature. */
+  properties: MatchedRouteDetailsLegSectionFeaturePointProperties;
+};
+
+export type MatchedRouteDetailsLegSectionFeaturePointProperties = {
+  /** Number of occupants present in the vehicle. */
+  occupants: Scalars["Int"];
+  /** Value of the combined weight of the occupants. */
+  total_occupant_weight?: Maybe<Scalars["Float"]>;
+  /** Value of the current weight of the cargo. */
+  total_cargo_weight?: Maybe<Scalars["Float"]>;
+};
+
+export type MatchedRouteDetailsLegSectionFeaturePointPropertiestotal_occupant_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type MatchedRouteDetailsLegSectionFeaturePointPropertiestotal_cargo_weightArgs = {
+  unit?: Maybe<WeightUnit>;
+};
+
+export type MatchedRouteDetailsLegStation = {
+  /** ID of a station. */
+  station_id: Scalars["ID"];
+  /** ID of the EVSE that was selected in a route. */
+  evse_id?: Maybe<Scalars["ID"]>;
+  /** ID of the connector that was selected in a route. */
+  connector_id: Scalars["ID"];
+};
+
+export type MatchedRouteDetailsPathSegment = {
+  /** Elevation value of a route path segment. */
+  elevation: Scalars["Float"];
+  /** Average speed of a route path segment. This value is determined using legal maximum speed and, if provided, the user defined maximum speed. */
+  average_speed: Scalars["Float"];
+  /** Consumption, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null. */
+  consumption?: Maybe<Scalars["Float"]>;
+  /** Distance of a route path segment. */
+  distance: Scalars["Float"];
+  /** Duration, in seconds, of a route path segment. */
+  duration: Scalars["Float"];
+  /** State of charge, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null. */
+  state_of_charge?: Maybe<Scalars["Float"]>;
+};
+
+export type MatchedRouteDetailsPathSegmentelevationArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+export type MatchedRouteDetailsPathSegmentaverage_speedArgs = {
+  unit?: Maybe<SpeedUnit>;
+};
+
+export type MatchedRouteDetailsPathSegmentdistanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+export type MatchedRouteDetailsPathSegmentstate_of_chargeArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+/** Money saving information. */
+export type MatchedRouteDetailsSavings = {
+  /** Money saved by a user driving this route with an electric vehicle. */
+  money?: Maybe<Scalars["Float"]>;
+  /** Average gas price with which the calculation was made. */
+  average_gas_price: Scalars["Float"];
+  /** Average energy price with which the calculation was made. */
+  average_energy_price: Scalars["Float"];
+};
+
+/** Money saving information. */
+export type MatchedRouteDetailsSavingsmoneyArgs = {
+  currency?: Maybe<Currency>;
+};
+
+/** Money saving information. */
+export type MatchedRouteDetailsSavingsaverage_gas_priceArgs = {
+  currency?: Maybe<Currency>;
+};
+
+/** Money saving information. */
+export type MatchedRouteDetailsSavingsaverage_energy_priceArgs = {
+  currency?: Maybe<Currency>;
+};
+
+export type MatchedRouteDrivingPreferences = {
+  /** Factor to adjust the route's calculated average speed. Accepts values between 0.80 and 1.20. 1.0 is neutral. Values below 1.0 reduce speed (e.g. 0.95 is -5%), values above increase it. If provided in combination with style, this overrides the speed factor implied by the selected 'style'. */
+  speed_factor?: Maybe<Scalars["Float"]>;
+  /** Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. If provided in combination with 'style, this overrides the maximum speed implied by the selected 'style'. */
+  maximum_speed?: Maybe<MaximumSpeed>;
+  /** Defines a driving style. If provided in combination with 'maximum_speed' or 'speed_factor', those values override the values defined by the selected 'style'. */
+  style?: Maybe<RouteDrivingStyle>;
+};
+
+export type MatchedRouteDrivingPreferencesInput = {
+  /** [BETA] Factor to adjust the route's calculated average speed. Accepts values between 0.80 and 1.20. 1.0 is neutral. Values below 1.0 reduce speed (e.g. 0.95 is -5%), values above increase it. If provided in combination with style, this overrides the speed factor implied by the selected 'style'. */
+  speed_factor?: Maybe<Scalars["Float"]>;
+  /** [BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. If provided in combination with 'style, this overrides the maximum speed implied by the selected 'style'. */
+  maximum_speed?: Maybe<MaximumSpeedInput>;
+  /** [BETA] Defines a driving style. If provided in combination with 'maximum_speed' or 'speed_factor', those values override the values defined by the selected 'style'. */
+  style?: Maybe<RouteDrivingStyle>;
+};
+
+export type MatchedRouteMetadata = {
+  /** Application identifier. */
+  app_id: Scalars["ID"];
+  /** Date when a route was created by the 'createMatchedRoute' mutation. */
+  created_at: Scalars["DateTime"];
+  /** Last updated date of a route. */
+  updated_at: Scalars["DateTime"];
+  /** Length of time required to successfully calculate a route, in milliseconds. */
+  computation_time?: Maybe<Scalars["Int"]>;
+};
+
+export type MatchedRouteOperatorPreferences = {
+  /** Ranking of an operator with multiple levels, each level having its own penalty value. */
+  ranking?: Maybe<RouteOperatorPreferencesRanking>;
+  /** Operators that should be excluded for a route calculation. */
+  exclude?: Maybe<Array<RouteOperatorsValue>>;
+  /** Operators that should be avoided, but not excluded, for a route calculation. */
+  avoid?: Maybe<Array<RouteOperatorsValue>>;
+};
+
+/** Prioritized operators for a route calculation. */
+export type MatchedRouteOperatorPreferencesInput = {
+  /** Operators to be preferred in route calculation. If not specified, no operator ranking is applied (including project-configured ranking). */
+  ranking?: Maybe<MatchedRouteOperatorPreferencesRankingInput>;
+  /** Operators to be excluded from route calculation. If specified, overrides project-configured operator exclusions. If not specified, applies project-configured operator exclusions. */
+  exclude?: Maybe<Array<MatchedRouteOperatorsValueInput>>;
+  /** Operators that should be avoided, but not excluded, for a route calculation. */
+  avoid?: Maybe<Array<MatchedRouteOperatorsValueInput>>;
+};
+
+export type MatchedRouteOperatorPreferencesRankingInput = {
+  /** Flag indicating if an operator should be preferred or required. */
+  type: RouteOperatorsType;
+  /** Ranking levels for operator ranking. */
+  levels?: Maybe<MatchedRouteOperatorPreferencesRankingLevelsInput>;
+};
+
+export type MatchedRouteOperatorPreferencesRankingLevelsInput = {
+  /** Least significant level for operator ranking. */
+  low?: Maybe<Array<MatchedRouteOperatorsValueInput>>;
+  /** Medium level for operator ranking. */
+  medium?: Maybe<Array<MatchedRouteOperatorsValueInput>>;
+  /** Most significant level for operator ranking. */
+  high?: Maybe<Array<MatchedRouteOperatorsValueInput>>;
+};
+
+export type MatchedRouteOperatorsValueInput = {
+  /** ID of an operator. */
+  id: Scalars["ID"];
+  /** List of countries in which the operator should be preferred/excluded/avoided. When omitted the operator will be preferred/excluded in every country. */
+  countries?: Maybe<Array<CountryCodeAlpha2>>;
+};
+
+export type MatchedRoutePoint = {
+  /** Coordinates [longitude, latitude]. */
+  coordinates: Array<Scalars["Float"]>;
+};
+
+export type MatchedRoutePointInput = {
+  /** Chronological sequence of coordinates [longitude, latitude]. Minimum 2. */
+  coordinates: Array<Scalars["Float"]>;
+};
+
+export type MatchedRoutePropertiesVehicle = {
+  /** Occupant configuration from this point. Null when this via only overrides total_cargo_weight. */
+  occupants?: Maybe<MatchedRouteVehicleOccupants>;
+  /** Weight of the cargo from this point. Null when this via only overrides occupants. */
+  total_cargo_weight?: Maybe<TotalCargoWeight>;
+};
+
+export type MatchedRoutePropertiesVehicleInput = {
+  /** Occupant configuration from this point. */
+  occupants?: Maybe<MatchedRouteVehicleOccupantsInput>;
+  /** Weight of the cargo from this point. */
+  total_cargo_weight?: Maybe<TotalCargoWeightInput>;
+};
+
+export type MatchedRoutePropertiesViaLocation = {
+  /** Name that should overwrite the name that is automatically assigned to this location (for example: address). */
+  name?: Maybe<Scalars["String"]>;
+  /** Duration to stay at this point, in seconds. */
+  stop_duration?: Maybe<Scalars["Int"]>;
+};
+
+export type MatchedRoutePropertiesViaLocationInput = {
+  /** Name that should overwrite the name that is automatically assigned to this location (for example: address). */
+  name?: Maybe<Scalars["String"]>;
+  /** Duration to stay at this point, in seconds. */
+  stop_duration?: Maybe<Scalars["Int"]>;
+};
+
+export type MatchedRouteResponse = {
+  /** ID of a route calculation. */
+  id: Scalars["ID"];
+  /** Status of a route. */
+  status: RouteStatus;
+  /** Recommended route. */
+  route_details?: Maybe<MatchedRouteDetails>;
+  /** Meta data for a route. */
+  meta: MatchedRouteMetadata;
+  /** Route request. */
+  request_input: CreateMatchedRoute;
+};
+
+export type MatchedRouteVehicle = {
+  /** ID of the vehicle. */
+  id: Scalars["ID"];
+  /** EV battery specific configuration. */
+  battery: RouteVehicleBattery;
+  /** Charging configuration. */
+  charging: MatchedRouteVehicleCharging;
+  /** Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right. */
+  tire_pressure: TirePressure;
+  /** Value of the vehicle's odometer. */
+  odometer?: Maybe<Odometer>;
+  /** Value of the auxiliary power consumption of the vehicle. */
+  auxiliary_consumption: AuxiliaryConsumption;
+  /** Flag indicating if climate control is on. */
+  climate: Scalars["Boolean"];
+  /** Vehicle Heat Pump configuration. */
+  heat_pump: HeatPumpMode;
+  /** Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true. */
+  cabin: RouteVehicleCabin;
+  /** Initial occupant settings. This value can be overridden along the journey through 'via.properties.vehicle.occupants' field. */
+  occupants: MatchedRouteVehicleOccupants;
+  /** Initial cargo. This value can be overridden along the journey through 'via.properties.vehicle.total_cargo_weight' field. */
+  total_cargo_weight: TotalCargoWeight;
+};
+
+/** EV battery specific configuration for a create route mutation. */
+export type MatchedRouteVehicleBatteryInput = {
+  /** Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle ‘battery.usable_kwh‘. */
+  capacity?: Maybe<StateOfChargeInput>;
+  /** Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle ‘battery.capacity‘. */
+  state_of_charge?: Maybe<StateOfChargeInput>;
+  /** Desired final amount of energy in a battery at the end of a trip. The value must be between 0 and 60% of the vehicle ‘battery.capacity‘. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default. */
+  final_state_of_charge?: Maybe<StateOfChargeInput>;
+};
+
+export type MatchedRouteVehicleCharging = {
+  /** Mode that indicates if the charging time is optimized or if always charged to the maximum capacity. */
+  mode: ChargeMode;
+  /** Minimum desired power of chargers, in kWh. */
+  minimum_power: Scalars["Float"];
+  /** Minimum remaining state of charge at charging stops, expressed as a percentage. The value must be between 0 and 60. If not provided, the project configuration value is used. */
+  risk_margin: Scalars["Int"];
+  /** Supported connectors. If not specified, it defaults to the vehicle's connectors. */
+  connectors: Array<RouteVehicleChargingConnector>;
+  /** Supported adapters. If not specified, adapters will not be considered. */
+  adapters: Array<RouteVehicleChargingConnector>;
+};
+
+export type MatchedRouteVehicleChargingConnector = {
+  /** Type of the plug. */
+  standard: ConnectorType;
+  /** Maximum charging speed for this plug. */
+  maximum_charge_speed: ChargeSpeed;
+};
+
+export type MatchedRouteVehicleChargingConnectorInput = {
+  /** Plug type. */
+  standard: ConnectorType;
+  /** Maximum charging speed for this plug. */
+  maximum_charge_speed: ChargeSpeedInput;
+};
+
+export type MatchedRouteVehicleChargingInput = {
+  /** Mode that indicates if the charging time is optimized or if always charged to the maximum capacity. */
+  mode?: Maybe<ChargeMode>;
+  /** Minimum desired power of chargers, in kW. */
+  minimum_power?: Maybe<Scalars["Float"]>;
+  /** Minimum remaining state of charge at charging stops, expressed as a percentage. The value must be between 0 and 60. If not provided, the project configuration value is used. */
+  risk_margin?: Maybe<Scalars["Int"]>;
+  /** Supported connectors. If not specified, it defaults to the vehicle's connectors. */
+  connectors?: Maybe<Array<MatchedRouteVehicleChargingConnectorInput>>;
+  /** Supported adapters. If not specified, adapters will not be considered. */
+  adapters?: Maybe<Array<MatchedRouteVehicleChargingConnectorInput>>;
+};
+
+/** Vehicle specific input for a create route mutation. */
+export type MatchedRouteVehicleInput = {
+  /** ID of the vehicle. */
+  id: Scalars["ID"];
+  /** EV battery specific configuration. */
+  battery?: Maybe<MatchedRouteVehicleBatteryInput>;
+  /** Charging configuration. */
+  charging?: Maybe<MatchedRouteVehicleChargingInput>;
+  /** Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right. */
+  tire_pressure?: Maybe<TirePressureInput>;
+  /** Average auxiliary power consumption. */
+  auxiliary_consumption?: Maybe<AuxiliaryConsumptionInput>;
+  /** Flag indicating if climate control is on. */
+  climate?: Maybe<Scalars["Boolean"]>;
+  /** Vehicle Heat Pump configuration. */
+  heat_pump?: Maybe<HeatPumpMode>;
+  /** Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true. */
+  cabin?: Maybe<RouteVehicleCabinInput>;
+  /** Initial occupant settings. This value can be overridden along the journey through 'via.properties.vehicle.occupants' field. */
+  occupants?: Maybe<MatchedRouteVehicleOccupantsInput>;
+  /** "Initial cargo. This value can be overridden along the journey through 'via.properties.vehicle.total_cargo_weight' field." */
+  total_cargo_weight?: Maybe<TotalCargoWeightInput>;
+};
+
+export type MatchedRouteVehicleOccupants = {
+  /** Number of occupants present in the vehicle. */
+  occupants: Scalars["Int"];
+  /** Combined weight of the occupants. This can only be used in combination with occupants. */
+  total_occupant_weight?: Maybe<TotalOccupantWeight>;
+};
+
+export type MatchedRouteVehicleOccupantsInput = {
+  /** Number of occupants present in the vehicle. */
+  count: Scalars["Int"];
+  /** Combined weight of the occupants. */
+  total_weight?: Maybe<TotalOccupantWeightInput>;
+};
+
+export type MatchedRouteVia = {
+  /** Index of the corresponding coordinate in the points array. */
+  index: Scalars["Int"];
+  /** Via properties. */
+  properties?: Maybe<MatchedRouteViaProperties>;
+};
+
+export type MatchedRouteViaInput = {
+  /** Index of the corresponding coordinate in the points array. */
+  index: Scalars["Int"];
+  /** Additional details of the via. */
+  properties?: Maybe<MatchedRouteViaPropertiesInput>;
+};
+
+export type MatchedRouteViaProperties = {
+  /** Location data of the via point. */
+  location?: Maybe<MatchedRoutePropertiesViaLocation>;
+  /** Vehicle data of the via point. */
+  vehicle?: Maybe<MatchedRoutePropertiesVehicle>;
+};
+
+export type MatchedRouteViaPropertiesInput = {
+  /** Location data of the via point. */
+  location?: Maybe<MatchedRoutePropertiesViaLocationInput>;
+  /** Vehicle data of the via point. If provided, the values override the configuration set in 'vehicle' or the previous 'via', and are propagated to subsequent legs until overridden. */
+  vehicle?: Maybe<MatchedRoutePropertiesVehicleInput>;
+};
+
+export type MatchedRouteWeather = {
+  /** Weather configuration applied to the route. */
+  type: WeatherType;
+  /** [BETA] Custom weather conditions applied to the route. Only present when 'type' is set to 'CUSTOM'. */
+  custom?: Maybe<RouteWeatherCustomConditions>;
+};
+
 export type MaximumSpeed = {
   /** Numeric value of the user-defined maximum speed. */
   value: Scalars["Int"];
@@ -2345,6 +3002,8 @@ export type Mutation = {
   createRoute: Scalars["ID"];
   /** [ALPHA] Create a new truck route from the route input and its ID. */
   createTruckRoute: Scalars["ID"];
+  /** [ALPHA] Creates route from a sequence of points. */
+  createMatchedRoute?: Maybe<Scalars["ID"]>;
 };
 
 export type MutationcreateConnectedVehicleArgs = {
@@ -2405,6 +3064,10 @@ export type MutationcreateRouteArgs = {
 
 export type MutationcreateTruckRouteArgs = {
   input: CreateTruckRouteInput;
+};
+
+export type MutationcreateMatchedRouteArgs = {
+  input: CreateMatchedRouteInput;
 };
 
 /** Navigation session data. */
@@ -3763,6 +4426,8 @@ export type Query = {
   getRouteStationsWithAmenities: RouteStationsWithAmenitiesConnection;
   /** [ALPHA] Get a e-truck route by ID. */
   getTruckRoute: TruckRouteResponse;
+  /** [ALPHA] Get a route by request ID. */
+  getMatchedRoute?: Maybe<MatchedRouteResponse>;
   /** Get information about a station by its ID. */
   station?: Maybe<Station>;
   /** Get a full list of stations. */
@@ -3872,6 +4537,10 @@ export type QuerygetRouteStationsWithAmenitiesArgs = {
 };
 
 export type QuerygetTruckRouteArgs = {
+  id: Scalars["ID"];
+};
+
+export type QuerygetMatchedRouteArgs = {
   id: Scalars["ID"];
 };
 
@@ -7176,6 +7845,8 @@ export type Subscription = {
    * @deprecated In favor of `route`.
    */
   routeUpdatedById?: Maybe<Route>;
+  /** [ALPHA] Subscribe to a route by request ID. */
+  matchedRoute?: Maybe<MatchedRouteResponse>;
   /** Subscribe to a specific route to receive system event updates. */
   route: RouteResponse;
   /** [ALPHA] Subscribe to e-truck route to receive system event updates. */
@@ -7189,6 +7860,10 @@ export type Subscription = {
 };
 
 export type SubscriptionrouteUpdatedByIdArgs = {
+  id: Scalars["ID"];
+};
+
+export type SubscriptionmatchedRouteArgs = {
   id: Scalars["ID"];
 };
 

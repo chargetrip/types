@@ -6028,6 +6028,288 @@
       },
       {
         "kind": "OBJECT",
+        "name": "CreateMatchedRoute",
+        "description": null,
+        "fields": [
+          {
+            "name": "vehicle",
+            "description": "Vehicle used on a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteVehicle",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "via",
+            "description": "Via points of a route.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "MatchedRouteVia",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "points",
+            "description": "Chronological sequence of GPS points used for map-matching. Minimum 2.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "MatchedRoutePoint",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operators",
+            "description": "Operator preferences for a route. When provided, prefers routes that use higher order operators.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteOperatorPreferences",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "alternative_station_radius",
+            "description": "Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteAlternativeStationRadius",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "departure_time",
+            "description": "Route departure time. Used to calculate the expected arrival time and, if set in the past, to apply historical weather data.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "driving_preferences",
+            "description": "Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteDrivingPreferences",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "weather",
+            "description": "Weather configuration for the route. Defined by a preset or custom weather conditions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteWeather",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CreateMatchedRouteInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "vehicle",
+            "description": "Vehicle specific input.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "MatchedRouteVehicleInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "points",
+            "description": "Chronological sequence of GPS points used for map-matching. Minimum 2.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "MatchedRoutePointInput",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "via",
+            "description": "Intermediate via points along the route.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MatchedRouteViaInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "departure_time",
+            "description": "Route departure time. Used to calculate the arrival time and, when 'weather.type' is 'ACTUAL',retrieve weather data.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "weather",
+            "description": "Weather configuration for the route. Defined by actual, a preset or custom weather conditions.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RouteWeatherInput",
+              "ofType": null
+            },
+            "defaultValue": "{type: actual}",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "driving_preferences",
+            "description": "Configuration options for the route's driving conditions. Includes factors to adjust average speed, set a maximum speed, and define a base driving style. If not specified, no adjustments are applied.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteDrivingPreferencesInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plan_charging_stops",
+            "description": "Flag that indicates if charging stations are to be found and planned if the vehicle state of charge reaches the threshold at any point in route. This modifies the original route.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": "false",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operators",
+            "description": "Operator preferences and restrictions for route calculation. If not specified, excludes operators per project settings, but applies no operator ranking. Only applied if applied if `plan_charging_stops` is set true.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteOperatorPreferencesInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "alternative_station_radius",
+            "description": "Alternative stations along a route within a specified radius of 500 to 5000 meters, or the equivalent in another unit.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteAlternativeStationRadiusInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "CreateRoute",
         "description": null,
         "fields": [
@@ -11408,6 +11690,3525 @@
       },
       {
         "kind": "OBJECT",
+        "name": "MatchedRouteAlternativeStationRadius",
+        "description": null,
+        "fields": [
+          {
+            "name": "value",
+            "description": "Value of the alternative station radius.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Preferred unit for the alternative station radius.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "DistanceUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteAlternativeStationRadiusInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "value",
+            "description": "Value of the alternative station radius.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Preferred unit for the alternative station radius.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "DistanceUnit",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetails",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of a route computation.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "distance",
+            "description": "Total distance of a route.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "durations",
+            "description": "Aggregation of all durations of a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteDetailsDurations",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "consumption",
+            "description": "Total energy used for a route in kilowatt hours. For HEVs and PHEVs this field will return null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "range_at_origin",
+            "description": "Range available at the start of a trip. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "range_at_destination",
+            "description": "Range available at the end of a trip. Note: The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "polyline",
+            "description": "Polyline containing encoded coordinates.",
+            "args": [
+              {
+                "name": "decimals",
+                "description": "Polyline decimals",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "PolylineInputDecimals",
+                  "ofType": null
+                },
+                "defaultValue": "five",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "path_plot",
+            "description": "Path elevation, distance, duration, consumption and speed values, grouped into 100 segments.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "MatchedRouteDetailsPathSegment",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "elevation",
+            "description": "Details about elevation on a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteDetailsElevation",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "savings",
+            "description": "Money saving information.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteDetailsSavings",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "legs",
+            "description": "Legs of a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "MatchedRouteDetailsLeg",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "alternative_stations",
+            "description": "Alternative stations along a route within a specified radius.\n\nIncludes stations from preferred/required/avoided operators but excludes stations from excluded operators.\nThis list is only populated if `alternative_station_radius` was specified in the `createRoute` mutation.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "MatchedRouteDetailsAlternativeStation",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tags",
+            "description": "Aggregation of tags over the current RouteDetails. Tags are available on legs and further subdivided over individual sections and maneuvers.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "RouteDetailsTag",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charges",
+            "description": "Number of charging stops required for this route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsAlternativeStation",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of a station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "location",
+            "description": "GeoJSON location of a station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Point",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "speed",
+            "description": "Speed of a station. A station along a route can be either fast or turbo.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "StationSpeedType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": "Status of a station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ChargerStatus",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operator_ranking",
+            "description": "The value indicates the operator's ranking based on the station's location, in accordance with the list of countries from the configuration or request.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "OperatorRankingLevel",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "operator_id",
+            "description": "ID of the station's operator.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsDurations",
+        "description": null,
+        "fields": [
+          {
+            "name": "total",
+            "description": "Total duration, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charging",
+            "description": "Total charging duration, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "driving",
+            "description": "Total driving duration, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stopover",
+            "description": "Total duration stopped at a location via or at a station via, excluding charging time and charging penalty, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ferry",
+            "description": "Total ferry duration, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsElevation",
+        "description": null,
+        "fields": [
+          {
+            "name": "up",
+            "description": "Total value driving uphill on a route.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "down",
+            "description": "Total value driving downhill on a route.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Maximum elevation on a route.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minimum",
+            "description": "Minimum elevation on a route.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsLeg",
+        "description": "Leg of a route detail.",
+        "fields": [
+          {
+            "name": "distance",
+            "description": "Distance from the start to the end of a leg.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "durations",
+            "description": "Aggregation of all durations of a route leg.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteDetailsDurations",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "consumption",
+            "description": "Total energy used in a leg in kilowatt hours. For HEVs and PHEVs this field will return null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "origin",
+            "description": "Origin point location.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteDetailsLegFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "destination",
+            "description": "Destination point location.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteDetailsLegFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "range_at_origin",
+            "description": "Range at the start of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "range_at_destination",
+            "description": "Range available at the end of a leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "range_after_charge",
+            "description": "Range after charging on the leg. The ranges in kilometers and miles are estimates, calculated based on the Chargetrip range, current route conditions, weather scenario (current or seasonal), and the route input at the time of planning. For HEVs and PHEVs this field will return null.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of a leg.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteDetailsLegType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station",
+            "description": "Information about the station at the destination of a leg.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteDetailsLegStation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "polyline",
+            "description": "Polyline containing encoded coordinates.",
+            "args": [
+              {
+                "name": "decimals",
+                "description": "Polyline decimals",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "PolylineInputDecimals",
+                  "ofType": null
+                },
+                "defaultValue": "five",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tags",
+            "description": "Aggregation of tags over the current leg. Tags are further subdivided over individual sections and maneuvers.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "RouteDetailsTag",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maneuvers",
+            "description": "Maneuvers of a leg - used to generate turn-by-turn instructions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "RouteDetailsManeuver",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sections",
+            "description": "Road sections of a leg - divided by means of transportation.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "MatchedRouteDetailsLegSection",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsLegFeaturePoint",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of the feature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Feature type.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "FeatureType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "geometry",
+            "description": "Geometry of the feature.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Point",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "properties",
+            "description": "Properties of the feature.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteDetailsLegFeatureProperties",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsLegFeatureProperties",
+        "description": null,
+        "fields": [
+          {
+            "name": "name",
+            "description": "Name of the location.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "station_id",
+            "description": "ID of the station.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "external_station_id",
+            "description": "External ID of the station.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "temperature",
+            "description": "Temperature at the location.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Temperature unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "TemperatureUnit",
+                  "ofType": null
+                },
+                "defaultValue": "Celsius",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "air_pressure",
+            "description": "Air pressure at the location.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "solar_irradiance",
+            "description": "Solar irradiance at the location.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "duration",
+            "description": "Duration, in seconds, of time spent at this location.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `legs.durations`."
+          },
+          {
+            "name": "occupants",
+            "description": "Number of occupants present in the vehicle.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_occupant_weight",
+            "description": "Value of the combined weight of the occupants.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Weight unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "WeightUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilogram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "Value of the current weight of the cargo.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Weight unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "WeightUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilogram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsLegSection",
+        "description": null,
+        "fields": [
+          {
+            "name": "type",
+            "description": "Section type.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteDetailsLegSectionType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "origin",
+            "description": "Origin point.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteDetailsLegSectionFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "destination",
+            "description": "Destination point.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteDetailsLegSectionFeaturePoint",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tags",
+            "description": "Aggregation of tags over the current section.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "RouteDetailsTag",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "polyline",
+            "description": "Polyline containing encoded coordinates.",
+            "args": [
+              {
+                "name": "decimals",
+                "description": "Polyline decimals",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "PolylineInputDecimals",
+                  "ofType": null
+                },
+                "defaultValue": "five",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "distance",
+            "description": "Distance from the start to the end of a section.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "duration",
+            "description": "Total duration of a section, in seconds. The value will be 0 for walking sections.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "consumption",
+            "description": "Total energy used in a section in kilowatt-hours. The value will be 0 for walking sections.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsLegSectionFeaturePoint",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of the feature.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Feature type.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "FeatureType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "geometry",
+            "description": "Geometry of the feature.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Point",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "properties",
+            "description": "Properties of the feature.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteDetailsLegSectionFeaturePointProperties",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsLegSectionFeaturePointProperties",
+        "description": null,
+        "fields": [
+          {
+            "name": "occupants",
+            "description": "Number of occupants present in the vehicle.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_occupant_weight",
+            "description": "Value of the combined weight of the occupants.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Weight unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "WeightUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilogram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "Value of the current weight of the cargo.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Weight unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "WeightUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilogram",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsLegStation",
+        "description": null,
+        "fields": [
+          {
+            "name": "station_id",
+            "description": "ID of a station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "evse_id",
+            "description": "ID of the EVSE that was selected in a route.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connector_id",
+            "description": "ID of the connector that was selected in a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsPathSegment",
+        "description": null,
+        "fields": [
+          {
+            "name": "elevation",
+            "description": "Elevation value of a route path segment.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "average_speed",
+            "description": "Average speed of a route path segment. This value is determined using legal maximum speed and, if provided, the user defined maximum speed.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Speed unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "SpeedUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilometers_per_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "consumption",
+            "description": "Consumption, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "distance",
+            "description": "Distance of a route path segment.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "Distance unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "meter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "duration",
+            "description": "Duration, in seconds, of a route path segment.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "state_of_charge",
+            "description": "State of charge, in kilowatt hours, of a route path segment. For HEVs and PHEVs this field will return null.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDetailsSavings",
+        "description": "Money saving information.",
+        "fields": [
+          {
+            "name": "money",
+            "description": "Money saved by a user driving this route with an electric vehicle.",
+            "args": [
+              {
+                "name": "currency",
+                "description": "Currency to convert the amount to.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Currency",
+                  "ofType": null
+                },
+                "defaultValue": "EUR",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "average_gas_price",
+            "description": "Average gas price with which the calculation was made.",
+            "args": [
+              {
+                "name": "currency",
+                "description": "Currency to convert the amount to.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Currency",
+                  "ofType": null
+                },
+                "defaultValue": "EUR",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "average_energy_price",
+            "description": "Average energy price with which the calculation was made.",
+            "args": [
+              {
+                "name": "currency",
+                "description": "Currency to convert the amount to.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Currency",
+                  "ofType": null
+                },
+                "defaultValue": "EUR",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteDrivingPreferences",
+        "description": null,
+        "fields": [
+          {
+            "name": "speed_factor",
+            "description": "Factor to adjust the route's calculated average speed. Accepts values between 0.80 and 1.20. 1.0 is neutral. Values below 1.0 reduce speed (e.g. 0.95 is -5%), values above increase it. If provided in combination with style, this overrides the speed factor implied by the selected 'style'.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_speed",
+            "description": "Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. If provided in combination with 'style, this overrides the maximum speed implied by the selected 'style'.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MaximumSpeed",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "style",
+            "description": "Defines a driving style. If provided in combination with 'maximum_speed' or 'speed_factor', those values override the values defined by the selected 'style'.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "RouteDrivingStyle",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteDrivingPreferencesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "speed_factor",
+            "description": "[BETA] Factor to adjust the route's calculated average speed. Accepts values between 0.80 and 1.20. 1.0 is neutral. Values below 1.0 reduce speed (e.g. 0.95 is -5%), values above increase it. If provided in combination with style, this overrides the speed factor implied by the selected 'style'.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_speed",
+            "description": "[BETA] Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. If provided in combination with 'style, this overrides the maximum speed implied by the selected 'style'.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MaximumSpeedInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "style",
+            "description": "[BETA] Defines a driving style. If provided in combination with 'maximum_speed' or 'speed_factor', those values override the values defined by the selected 'style'.",
+            "type": {
+              "kind": "ENUM",
+              "name": "RouteDrivingStyle",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteMetadata",
+        "description": null,
+        "fields": [
+          {
+            "name": "app_id",
+            "description": "Application identifier.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "created_at",
+            "description": "Date when a route was created by the 'createMatchedRoute' mutation.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updated_at",
+            "description": "Last updated date of a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "computation_time",
+            "description": "Length of time required to successfully calculate a route, in milliseconds.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteOperatorPreferences",
+        "description": null,
+        "fields": [
+          {
+            "name": "ranking",
+            "description": "Ranking of an operator with multiple levels, each level having its own penalty value.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteOperatorPreferencesRanking",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "exclude",
+            "description": "Operators that should be excluded for a route calculation.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RouteOperatorsValue",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "avoid",
+            "description": "Operators that should be avoided, but not excluded, for a route calculation.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RouteOperatorsValue",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteOperatorPreferencesInput",
+        "description": "Prioritized operators for a route calculation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "ranking",
+            "description": "Operators to be preferred in route calculation. If not specified, no operator ranking is applied (including project-configured ranking).",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteOperatorPreferencesRankingInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "exclude",
+            "description": "Operators to be excluded from route calculation. If specified, overrides project-configured operator exclusions. If not specified, applies project-configured operator exclusions.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MatchedRouteOperatorsValueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "avoid",
+            "description": "Operators that should be avoided, but not excluded, for a route calculation.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MatchedRouteOperatorsValueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteOperatorPreferencesRankingInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "type",
+            "description": "Flag indicating if an operator should be preferred or required.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteOperatorsType",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "levels",
+            "description": "Ranking levels for operator ranking.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteOperatorPreferencesRankingLevelsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteOperatorPreferencesRankingLevelsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "low",
+            "description": "Least significant level for operator ranking.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MatchedRouteOperatorsValueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "medium",
+            "description": "Medium level for operator ranking.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MatchedRouteOperatorsValueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "high",
+            "description": "Most significant level for operator ranking.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MatchedRouteOperatorsValueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteOperatorsValueInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "ID of an operator.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "countries",
+            "description": "List of countries in which the operator should be preferred/excluded/avoided. When omitted the operator will be preferred/excluded in every country.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CountryCodeAlpha2",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": "[]",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRoutePoint",
+        "description": null,
+        "fields": [
+          {
+            "name": "coordinates",
+            "description": "Coordinates [longitude, latitude].",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Float",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRoutePointInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "coordinates",
+            "description": "Chronological sequence of coordinates [longitude, latitude]. Minimum 2.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Float",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRoutePropertiesVehicle",
+        "description": null,
+        "fields": [
+          {
+            "name": "occupants",
+            "description": "Occupant configuration from this point. Null when this via only overrides total_cargo_weight.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteVehicleOccupants",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "Weight of the cargo from this point. Null when this via only overrides occupants.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TotalCargoWeight",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRoutePropertiesVehicleInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "occupants",
+            "description": "Occupant configuration from this point.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteVehicleOccupantsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "Weight of the cargo from this point.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TotalCargoWeightInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRoutePropertiesViaLocation",
+        "description": null,
+        "fields": [
+          {
+            "name": "name",
+            "description": "Name that should overwrite the name that is automatically assigned to this location (for example: address).",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at this point, in seconds.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRoutePropertiesViaLocationInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "name",
+            "description": "Name that should overwrite the name that is automatically assigned to this location (for example: address).",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stop_duration",
+            "description": "Duration to stay at this point, in seconds.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteResponse",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of a route calculation.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": "Status of a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "RouteStatus",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "route_details",
+            "description": "Recommended route.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteDetails",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "meta",
+            "description": "Meta data for a route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteMetadata",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "request_input",
+            "description": "Route request.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CreateMatchedRoute",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteVehicle",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": "ID of the vehicle.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "battery",
+            "description": "EV battery specific configuration.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteVehicleBattery",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charging",
+            "description": "Charging configuration.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteVehicleCharging",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tire_pressure",
+            "description": "Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "TirePressure",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "odometer",
+            "description": "Value of the vehicle's odometer.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Odometer",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "auxiliary_consumption",
+            "description": "Value of the auxiliary power consumption of the vehicle.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "AuxiliaryConsumption",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "climate",
+            "description": "Flag indicating if climate control is on.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "heat_pump",
+            "description": "Vehicle Heat Pump configuration.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "HeatPumpMode",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cabin",
+            "description": "Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "RouteVehicleCabin",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "occupants",
+            "description": "Initial occupant settings. This value can be overridden along the journey through 'via.properties.vehicle.occupants' field.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "MatchedRouteVehicleOccupants",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "Initial cargo. This value can be overridden along the journey through 'via.properties.vehicle.total_cargo_weight' field.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "TotalCargoWeight",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteVehicleBatteryInput",
+        "description": "EV battery specific configuration for a create route mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "capacity",
+            "description": "Usable capacity of a battery used to compute a route. Value must be between 50% and 150%. If not provided, it defaults to the vehicle ‘battery.usable_kwh‘.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StateOfChargeInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "state_of_charge",
+            "description": "Current amount of energy in a battery. If not provided, it is assumed the battery is fully charged and equal to the vehicle ‘battery.capacity‘.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StateOfChargeInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "final_state_of_charge",
+            "description": "Desired final amount of energy in a battery at the end of a trip. The value must be between 0 and 60% of the vehicle ‘battery.capacity‘. If not provided—or if the specified value is below the safe risk margin—the safe risk margin is used by default.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StateOfChargeInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteVehicleCharging",
+        "description": null,
+        "fields": [
+          {
+            "name": "mode",
+            "description": "Mode that indicates if the charging time is optimized or if always charged to the maximum capacity.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ChargeMode",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minimum_power",
+            "description": "Minimum desired power of chargers, in kWh.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "risk_margin",
+            "description": "Minimum remaining state of charge at charging stops, expressed as a percentage. The value must be between 0 and 60. If not provided, the project configuration value is used.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectors",
+            "description": "Supported connectors. If not specified, it defaults to the vehicle's connectors.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "RouteVehicleChargingConnector",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "adapters",
+            "description": "Supported adapters. If not specified, adapters will not be considered.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "RouteVehicleChargingConnector",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteVehicleChargingConnector",
+        "description": null,
+        "fields": [
+          {
+            "name": "standard",
+            "description": "Type of the plug.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ConnectorType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_charge_speed",
+            "description": "Maximum charging speed for this plug.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ChargeSpeed",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteVehicleChargingConnectorInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "standard",
+            "description": "Plug type.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ConnectorType",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_charge_speed",
+            "description": "Maximum charging speed for this plug.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ChargeSpeedInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteVehicleChargingInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "mode",
+            "description": "Mode that indicates if the charging time is optimized or if always charged to the maximum capacity.",
+            "type": {
+              "kind": "ENUM",
+              "name": "ChargeMode",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minimum_power",
+            "description": "Minimum desired power of chargers, in kW.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "risk_margin",
+            "description": "Minimum remaining state of charge at charging stops, expressed as a percentage. The value must be between 0 and 60. If not provided, the project configuration value is used.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectors",
+            "description": "Supported connectors. If not specified, it defaults to the vehicle's connectors.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MatchedRouteVehicleChargingConnectorInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "adapters",
+            "description": "Supported adapters. If not specified, adapters will not be considered.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MatchedRouteVehicleChargingConnectorInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteVehicleInput",
+        "description": "Vehicle specific input for a create route mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "ID of the vehicle.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "battery",
+            "description": "EV battery specific configuration.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteVehicleBatteryInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charging",
+            "description": "Charging configuration.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteVehicleChargingInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tire_pressure",
+            "description": "Tire pressures of all wheels, ordered from front right to front left, then rear left to rear right.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TirePressureInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "auxiliary_consumption",
+            "description": "Average auxiliary power consumption.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "AuxiliaryConsumptionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "climate",
+            "description": "Flag indicating if climate control is on.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": "false",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "heat_pump",
+            "description": "Vehicle Heat Pump configuration.",
+            "type": {
+              "kind": "ENUM",
+              "name": "HeatPumpMode",
+              "ofType": null
+            },
+            "defaultValue": "default",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cabin",
+            "description": "Vehicle cabin configuration used for the route calculation. Applied only if vehicle.climate is set to true.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RouteVehicleCabinInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "occupants",
+            "description": "Initial occupant settings. This value can be overridden along the journey through 'via.properties.vehicle.occupants' field.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteVehicleOccupantsInput",
+              "ofType": null
+            },
+            "defaultValue": "{count: 1, total_weight: {value: 80, type: kilogram, source: manual}}",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_cargo_weight",
+            "description": "\"Initial cargo. This value can be overridden along the journey through 'via.properties.vehicle.total_cargo_weight' field.\"",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TotalCargoWeightInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteVehicleOccupants",
+        "description": null,
+        "fields": [
+          {
+            "name": "occupants",
+            "description": "Number of occupants present in the vehicle.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_occupant_weight",
+            "description": "Combined weight of the occupants. This can only be used in combination with occupants.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TotalOccupantWeight",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteVehicleOccupantsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "count",
+            "description": "Number of occupants present in the vehicle.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_weight",
+            "description": "Combined weight of the occupants.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TotalOccupantWeightInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteVia",
+        "description": null,
+        "fields": [
+          {
+            "name": "index",
+            "description": "Index of the corresponding coordinate in the points array.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "properties",
+            "description": "Via properties.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteViaProperties",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteViaInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "index",
+            "description": "Index of the corresponding coordinate in the points array.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "properties",
+            "description": "Additional details of the via.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRouteViaPropertiesInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteViaProperties",
+        "description": null,
+        "fields": [
+          {
+            "name": "location",
+            "description": "Location data of the via point.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRoutePropertiesViaLocation",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle",
+            "description": "Vehicle data of the via point.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRoutePropertiesVehicle",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MatchedRouteViaPropertiesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "location",
+            "description": "Location data of the via point.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRoutePropertiesViaLocationInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vehicle",
+            "description": "Vehicle data of the via point. If provided, the values override the configuration set in 'vehicle' or the previous 'via', and are propagated to subsequent legs until overridden.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "MatchedRoutePropertiesVehicleInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MatchedRouteWeather",
+        "description": null,
+        "fields": [
+          {
+            "name": "type",
+            "description": "Weather configuration applied to the route.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "WeatherType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "custom",
+            "description": "[BETA] Custom weather conditions applied to the route. Only present when 'type' is set to 'CUSTOM'.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RouteWeatherCustomConditions",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "MaximumSpeed",
         "description": null,
         "fields": [
@@ -12035,6 +15836,35 @@
                 "name": "ID",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createMatchedRoute",
+            "description": "[ALPHA] Creates route from a sequence of points.",
+            "args": [
+              {
+                "name": "input",
+                "description": "Input for generating a route.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CreateMatchedRouteInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -19245,6 +23075,35 @@
                 "name": "TruckRouteResponse",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "getMatchedRoute",
+            "description": "[ALPHA] Get a route by request ID.",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteResponse",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -37037,6 +40896,35 @@
             },
             "isDeprecated": true,
             "deprecationReason": "In favor of `route`."
+          },
+          {
+            "name": "matchedRoute",
+            "description": "[ALPHA] Subscribe to a route by request ID.",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MatchedRouteResponse",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           },
           {
             "name": "route",
