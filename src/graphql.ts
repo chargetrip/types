@@ -1396,8 +1396,6 @@ export type CreateTruckRoute = {
   departure_time?: Maybe<Scalars["DateTime"]>;
   /** Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
   avoid?: Maybe<Array<RouteTruckAvoid>>;
-  /** Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. */
-  maximum_speed?: Maybe<MaximumSpeed>;
 };
 
 export type CreateTruckRouteInput = {
@@ -1419,8 +1417,6 @@ export type CreateTruckRouteInput = {
   departure_time?: Maybe<Scalars["DateTime"]>;
   /** Optional list of route features to avoid in a route. This is a best-effort preference; depending on the available routes, some features may not be fully avoidable. */
   avoid?: Maybe<Array<RouteTruckAvoid>>;
-  /** Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead. */
-  maximum_speed?: Maybe<MaximumSpeedInput>;
 };
 
 /** Currency in the ISO 4217 format. */

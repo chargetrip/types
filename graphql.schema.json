@@ -6866,18 +6866,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "maximum_speed",
-            "description": "Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "MaximumSpeed",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -7022,18 +7010,6 @@
                   "ofType": null
                 }
               }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "maximum_speed",
-            "description": "Maximum speed to consider when generating the route. In the segments where legal speed is lower than this value, the legal speed will be used instead.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "MaximumSpeedInput",
-              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
