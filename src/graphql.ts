@@ -4389,7 +4389,7 @@ export type Query = {
   navigation?: Maybe<Navigation>;
   /** Get a full list of operators. */
   operatorList?: Maybe<Array<Maybe<Operator>>>;
-  /** Get information about an operator by its ID. */
+  /** Get information about an operator by its internal or external ID. Always specify exactly one of the IDs. */
   operator?: Maybe<Operator>;
   /** Get all reviews of a station by the station ID. */
   reviewList?: Maybe<Array<Review>>;
@@ -4484,7 +4484,8 @@ export type QueryoperatorListArgs = {
 };
 
 export type QueryoperatorArgs = {
-  id: Scalars["ID"];
+  id?: Maybe<Scalars["ID"]>;
+  external_id?: Maybe<Scalars["ID"]>;
 };
 
 export type QueryreviewListArgs = {
@@ -5192,8 +5193,10 @@ export type RouteDetailsAlternativeStation = {
   id: Scalars["ID"];
   /** GeoJSON location of a station. */
   location: Point;
-  /** Speed of a station. A station along a route can be either fast or turbo. */
+  /** Charging speed classification of the station. Based on station's highest-powered EVSE and independent of vehicle connector compatibility. */
   speed: StationSpeedType;
+  /** The maximum power, in kilowatts (kW), available for the vehicle at this station based on its compatible connectors. */
+  maximum_power: Scalars["Float"];
   /** Status of a station. */
   status: ChargerStatus;
   /** The value indicates the operator's ranking based on the station's location, in accordance with the list of countries from the configuration or request. */

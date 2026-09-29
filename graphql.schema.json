@@ -22551,19 +22551,27 @@
           },
           {
             "name": "operator",
-            "description": "Get information about an operator by its ID.",
+            "description": "Get information about an operator by its internal or external ID. Always specify exactly one of the IDs.",
             "args": [
               {
                 "name": "id",
-                "description": "The operator ID.",
+                "description": "Internal identifier of the operator.",
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "external_id",
+                "description": "External identifier of the operator.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
@@ -26762,7 +26770,7 @@
           },
           {
             "name": "speed",
-            "description": "Speed of a station. A station along a route can be either fast or turbo.",
+            "description": "Charging speed classification of the station. Based on station's highest-powered EVSE and independent of vehicle connector compatibility.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -26770,6 +26778,22 @@
               "ofType": {
                 "kind": "ENUM",
                 "name": "StationSpeedType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum_power",
+            "description": "The maximum power, in kilowatts (kW), available for the vehicle at this station based on its compatible connectors.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
                 "ofType": null
               }
             },
