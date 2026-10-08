@@ -15,21 +15,13 @@ export type Scalars = {
   Float: number;
   /** The date and time scalar. */
   DateTime: string;
-  /** Email address scalar, email regex with HTML sanitization. */
-  Email: any;
   /** Any JSON object or array. */
   JSON: { [key: string]: number | string | boolean | null | Scalars["JSON"] };
-  /** The non empty string scalar. */
-  NonEmptyString: any;
-  /** The `PlainID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The `PlainID` type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as "4") or integer (such as 4) input value will be accepted as an ID. */
-  PlainID: any;
   /**
    * The `PlainString` scalar type represents textual data, represented as UTF-8 character sequences.
    * The PlainString type represents free-form human-readable text with HTML sanitization.
    */
   PlainString: any;
-  /** The File Upload scalar. */
-  Upload: any;
 };
 
 export enum AccelerationUnit {
@@ -85,17 +77,6 @@ export type Address = {
   /** Human-readable address of the location. */
   formatted_address?: Maybe<Array<Maybe<Scalars["String"]>>>;
 };
-
-export enum AdhocAuthorisationMethod {
-  CREDIT_CARD = "CREDIT_CARD",
-  DEBIT_CARD = "DEBIT_CARD",
-  OTHER = "OTHER",
-  OTHER_APPLE_PAY = "OTHER_Apple_Pay",
-  OTHER_AUTHENTICATION_BY_CAR = "OTHER_Authentication_by_car",
-  OTHER_GOOGLE_PAY = "OTHER_Google_Pay",
-  QR_CODE = "QR_CODE",
-  SMS = "SMS"
-}
 
 /** Input fields to continue the navigation session to the next leg. */
 export type AdvanceNavigationLegInput = {
@@ -1915,16 +1896,6 @@ export type FeatureMultiPolygon = {
 };
 
 /** A GeoJSON Feature<Point>. */
-export type FeatureMultiPolygonPoint = {
-  /** Feature type. */
-  type: FeatureType;
-  /** Geometry of the feature. */
-  geometry: Point;
-  /** Optional object where you can store custom data you need in your application. */
-  properties?: Maybe<Scalars["JSON"]>;
-};
-
-/** A GeoJSON Feature<Point>. */
 export type FeaturePoint = {
   /** Feature ID. */
   id?: Maybe<Scalars["String"]>;
@@ -1959,18 +1930,12 @@ export type FeaturePointPolygonInput = {
 };
 
 /** Properties for Feature<Point> input. */
-export type FeaturePointPolygonProperties = {
-  /** Name of the location. */
-  name?: Maybe<Scalars["String"]>;
-};
-
-/** Properties for Feature<Point> input. */
 export type FeaturePointPolygonPropertiesInput = {
   /** Name of the location. */
   name?: Maybe<Scalars["String"]>;
 };
 
-/** GeoJSON Feature type. */
+/** GeoJSON Feature type */
 export enum FeatureType {
   FEATURE = "Feature"
 }
@@ -2819,13 +2784,6 @@ export type MatchedRouteVehicleCharging = {
   adapters: Array<RouteVehicleChargingConnector>;
 };
 
-export type MatchedRouteVehicleChargingConnector = {
-  /** Type of the plug. */
-  standard: ConnectorType;
-  /** Maximum charging speed for this plug. */
-  maximum_charge_speed: ChargeSpeed;
-};
-
 export type MatchedRouteVehicleChargingConnectorInput = {
   /** Plug type. */
   standard: ConnectorType;
@@ -3524,92 +3482,6 @@ export enum OCPIConnectorFormat {
   SOCKET = "SOCKET",
   /** The connector is an attached cable; the EV users car needs to have a fitting inlet. */
   CABLE = "CABLE"
-}
-
-/** Socket or plug standard of the charging point. */
-export enum OCPIConnectorType {
-  /** The connector type is CHAdeMO, DC */
-  CHADEMO = "CHADEMO",
-  /** Standard/domestic household, type "A", NEMA 1-15, 2 pins */
-  DOMESTIC_A = "DOMESTIC_A",
-  /** Standard/domestic household, type "B", NEMA 5-15, 3 pins */
-  DOMESTIC_B = "DOMESTIC_B",
-  /** Standard/domestic household, type "C", CEE 7/17, 2 pins */
-  DOMESTIC_C = "DOMESTIC_C",
-  /** Standard/domestic household, type "D", 3 pins */
-  DOMESTIC_D = "DOMESTIC_D",
-  /** Standard/domestic household, type "E", CEE 7/5 3 pins */
-  DOMESTIC_E = "DOMESTIC_E",
-  /** Standard/domestic household, type "F", CEE 7/4, Schuko, 3 pins */
-  DOMESTIC_F = "DOMESTIC_F",
-  /** Standard/domestic household, type "G", BS 1363, Commonwealth, 3 pins */
-  DOMESTIC_G = "DOMESTIC_G",
-  /** Standard/domestic household, type "H", SI-32, 3 pins */
-  DOMESTIC_H = "DOMESTIC_H",
-  /** Standard/domestic household, type "I", AS 3112, 3 pins */
-  DOMESTIC_I = "DOMESTIC_I",
-  /** Standard/domestic household, type "J", SEV 1011, 3 pins */
-  DOMESTIC_J = "DOMESTIC_J",
-  /** Standard/domestic household, type "K", DS 60884-2-D1, 3 pins */
-  DOMESTIC_K = "DOMESTIC_K",
-  /** Standard/domestic household, type "L", CEI 23-16-VII, 3 pins */
-  DOMESTIC_L = "DOMESTIC_L",
-  /** Standard/Domestic household, type "M", BS 546, 3 pins */
-  DOMESTIC_M = "DOMESTIC_M",
-  /** Standard/Domestic household, type "N", NBR 14136, 3 pins */
-  DOMESTIC_N = "DOMESTIC_N",
-  /** Standard/Domestic household, type "O", TIS 166-2549, 3 pins */
-  DOMESTIC_O = "DOMESTIC_O",
-  /** IEC 60309-2 Industrial connector single phase 16 amperes (usually blue) */
-  IEC_60309_2_SINGLE_16 = "IEC_60309_2_single_16",
-  /** IEC 60309-2 Industrial connector three phase 16 amperes (usually red) */
-  IEC_60309_2_THREE_16 = "IEC_60309_2_three_16",
-  /** IEC 60309-2 Industrial connector three phase 32 amperes (usually red) */
-  IEC_60309_2_THREE_32 = "IEC_60309_2_three_32",
-  /** IEC 60309-2 Industrial connector three phase 64 amperes (usually red) */
-  IEC_60309_2_THREE_64 = "IEC_60309_2_three_64",
-  /** IEC 62196 Type 1 "SAE J1772" */
-  IEC_62196_T1 = "IEC_62196_T1",
-  /** Combo Type 1 based, DC */
-  IEC_62196_T1_COMBO = "IEC_62196_T1_COMBO",
-  /** IEC 62196 Type 2 "Mennekes" */
-  IEC_62196_T2 = "IEC_62196_T2",
-  /** Combo Type 2 based, DC */
-  IEC_62196_T2_COMBO = "IEC_62196_T2_COMBO",
-  /** IEC 62196 Type 3A */
-  IEC_62196_T3A = "IEC_62196_T3A",
-  /** IEC 62196 Type 3C "Scame" */
-  IEC_62196_T3C = "IEC_62196_T3C",
-  /** On-board bottom-up-pantograph typically for bus charging */
-  PANTOGRAPH_BOTTOM_UP = "PANTOGRAPH_BOTTOM_UP",
-  /** Off-board top-down-pantograph typically for bus charging */
-  PANTOGRAPH_TOP_DOWN = "PANTOGRAPH_TOP_DOWN",
-  /** Tesla connector "Roadster"-type (round, 4 pins) */
-  TESLA_R = "TESLA_R",
-  /** Tesla connector "Model-S"-type (oval, 5 pins) */
-  TESLA_S = "TESLA_S",
-  /** The connector type is GB_T (Chinese standard), DC */
-  GB_T = "GB_T",
-  /** The ChaoJi connector. The new generation charging connector, harmonized between CHAdeMO and GB/T. DC. */
-  CHAOJI = "CHAOJI",
-  /** The connector type is NEMA 5-20, 3 pins */
-  NEMA_5_20 = "NEMA_5_20",
-  /** The connector type is NEMA 6-30, 3 pins */
-  NEMA_6_30 = "NEMA_6_30",
-  /** The connector type is NEMA 6-50, 3 pins */
-  NEMA_6_50 = "NEMA_6_50",
-  /** The connector type is NEMA 10-30, 3 pins */
-  NEMA_10_30 = "NEMA_10_30",
-  /** The connector type is NEMA 10-50, 3 pins */
-  NEMA_10_50 = "NEMA_10_50",
-  /** The connector type is NEMA 14-30, 3 pins, rating of 30 A */
-  NEMA_14_30 = "NEMA_14_30",
-  /** The connector type is NEMA 14-50, 3 pins, rating of 50 A */
-  NEMA_14_50 = "NEMA_14_50",
-  /** Guobiao GB/T 20234.2 AC socket/connector. */
-  GBT_AC = "GBT_AC",
-  /** Guobiao GB/T 20234.3 DC connector. */
-  GBT_DC = "GBT_DC"
 }
 
 export enum OCPIDayOfWeek {
@@ -4913,20 +4785,6 @@ export type ReviewAdd = {
   tags?: Maybe<ReviewTagsInput>;
 };
 
-/** Form input for edit an existing review. */
-export type ReviewEdit = {
-  /** Rating of a review. */
-  rating: Scalars["Int"];
-  /** Review message. */
-  message?: Maybe<Scalars["String"]>;
-  /** Locale of a message. */
-  locale?: Maybe<Scalars["String"]>;
-  /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
-  properties?: Maybe<Scalars["JSON"]>;
-  /** Boolean tags for a station review. */
-  tags?: Maybe<ReviewTagsInput>;
-};
-
 /** Statistical information for reviews of a station. */
 export type ReviewStats = {
   /** Average of all reviews. */
@@ -5999,11 +5857,6 @@ export type RouteLegpolylineArgs = {
   decimals?: Maybe<Scalars["Int"]>;
 };
 
-export type RouteLegMeta = {
-  /** Warnings that certain conditions specified in a route mutation are not respected. */
-  warnings: Array<RouteMetaWarning>;
-};
-
 export type RouteLegOperationalElectricityEmissions = {
   /** Total electricity emissions. */
   total: Scalars["Float"];
@@ -6073,20 +5926,6 @@ export type RouteLegOperationalElectricityEmissionsIntensitytotalArgs = {
 /** Electricity emission intensity for a leg */
 export type RouteLegOperationalElectricityEmissionsIntensityinfrastructureArgs = {
   unit?: Maybe<EmissionUnit>;
-};
-
-export type RouteMeta = {
-  /** Warnings that certain conditions specified in a route mutation are not respected. */
-  warnings: Array<RouteMetaWarning>;
-};
-
-export type RouteMetaWarning = {
-  /** Static identifier, can be used for production purposes such as i18n. */
-  code: Scalars["String"];
-  /** Human readable explanation of the warning, for development purposes. */
-  message: Scalars["String"];
-  /** Optional JSON object containing data explaining the warning, for development purposes. */
-  data?: Maybe<Scalars["JSON"]>;
 };
 
 export type RouteMetadata = {
@@ -7430,11 +7269,6 @@ export enum SolarIrradianceUnit {
   WATTS_PER_SQUARE_METER = "watts_per_square_meter"
 }
 
-export enum SortDirection {
-  ASCENDING = "ascending",
-  DESCENDING = "descending"
-}
-
 export enum SpeedUnit {
   /** Return the speed in kilometers per hour. */
   KILOMETERS_PER_HOUR = "kilometers_per_hour",
@@ -7737,14 +7571,6 @@ export type StationListQuery = {
   external_id?: Maybe<Scalars["String"]>;
   /** Exact name. */
   name?: Maybe<Scalars["String"]>;
-};
-
-/** Station availability for each weekday and hour. */
-export type StationPredictedAvailability = {
-  /** Number of weekday from 1 (monday) to 7 (sunday). */
-  weekday?: Maybe<Scalars["Int"]>;
-  /** The prediction for each hour 0-23 from 1 to 5 (1 - very busy ... 5 very quiet (free)). */
-  prediction?: Maybe<Array<Maybe<Scalars["Int"]>>>;
 };
 
 /** Station occupancy for each weekday and hour. */
@@ -8569,14 +8395,6 @@ export type VehicleConnectorcharge_speedArgs = {
   unit?: Maybe<ChargeSpeedUnit>;
 };
 
-/** The consumption of the vehicle. */
-export type VehicleConsumptionInput = {
-  /** Worst conditions are based on -10°C and use of heating. */
-  worst?: Maybe<Scalars["Float"]>;
-  /** Best conditions are based on 23°C and no use of A/C. */
-  best?: Maybe<Scalars["Float"]>;
-};
-
 export type VehicleData = {
   /** Battery data */
   battery?: Maybe<ConnectBattery>;
@@ -8587,13 +8405,6 @@ export type VehicleData = {
   /** Odometer data */
   odometer?: Maybe<ConnectOdometer>;
 };
-
-export enum VehicleDataProvider {
-  /** Internal data provider. */
-  CHARGETRIP = "chargetrip",
-  /** EV database data provider. */
-  EVDATABASE = "evdatabase"
-}
 
 export type VehicleDrivetrain = {
   /** Type of drivetrain. */
@@ -8666,14 +8477,6 @@ export enum VehicleImageType {
   BRAND_THUMBNAIL = "brand_thumbnail",
   /** Placeholder image at 1536x864 px. */
   PLACEHOLDER = "placeholder"
-}
-
-/** When uploading images to a vehicle, you can select one of this types. The rest of the types are automatically generated by the system. */
-export enum VehicleImageTypeUploadable {
-  /** Freemium vehicle image. */
-  IMAGE = "image",
-  /** Premium vehicle image. */
-  IMAGE_PREMIUM = "image_premium"
 }
 
 /** The output element of the vehicleList query. */
@@ -8837,16 +8640,6 @@ export type VehicleMedia = {
   /** All videos of the vehicle. */
   video_list?: Maybe<Array<VehicleVideo>>;
 };
-
-/** Mode (state) of the current production. */
-export enum VehicleMode {
-  /** Old vehicle that is no longer manufactured. */
-  INDEX_ONLY = "index_only",
-  /** Vehicle is in production and has been released. */
-  PRODUCTION = "production",
-  /** Future releases of a vehicle, a concept of the vehicle, specs may change over time. */
-  CONCEPT = "concept"
-}
 
 /** Vehicle model data. */
 export type VehicleModel = {
@@ -9565,15 +9358,6 @@ export type VehiclePremiumPerformancetop_speedArgs = {
   unit?: Maybe<SpeedUnit>;
 };
 
-export type VehiclePremiumPrice = {
-  /** Starting price for German market. */
-  DE?: Maybe<VehiclePremiumPriceValueWithGrant>;
-  /** Starting price for Dutch market. */
-  NL?: Maybe<VehiclePremiumPriceValueWithGrant>;
-  /** Starting price for British market. */
-  GB?: Maybe<VehiclePremiumPriceValueWithGrant>;
-};
-
 export type VehiclePremiumPriceValueWithGrant = {
   /** Starting price for the local market. The value applies to the optional `country` field provided in the query input. If `country` is not specified, it defaults to the Dutch market price. If the unit argument is not provided, the value is returned in the local currency of the selected country. */
   value?: Maybe<Scalars["Float"]>;
@@ -9720,18 +9504,6 @@ export enum VehiclePropulsion {
   FRONT = "Front",
   /** Rear-wheel drive vehicle. */
   REAR = "Rear"
-}
-
-/** Status of a vehicle provider. */
-export enum VehicleProviderStatus {
-  /** Is imported from any of the data providers. */
-  NEW = "new",
-  /** Has been attached to core vehicle. */
-  ATTACHED = "attached",
-  /** Has been detached from a core vehicle. */
-  DETACHED = "detached",
-  /** Has been archived by database maintainer. */
-  ARCHIVED = "archived"
 }
 
 export enum VehiclePurpose {

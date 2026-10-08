@@ -260,65 +260,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "AdhocAuthorisationMethod",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "CREDIT_CARD",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DEBIT_CARD",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OTHER",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OTHER_Apple_Pay",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OTHER_Authentication_by_car",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OTHER_Google_Pay",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "QR_CODE",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "SMS",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
         "kind": "INPUT_OBJECT",
         "name": "AdvanceNavigationLegInput",
         "description": "Input fields to continue the navigation session to the next leg.",
@@ -9497,16 +9438,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "Email",
-        "description": "Email address scalar, email regex with HTML sanitization.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "ENUM",
         "name": "EmissionRateUnit",
         "description": null,
@@ -9776,61 +9707,6 @@
       },
       {
         "kind": "OBJECT",
-        "name": "FeatureMultiPolygonPoint",
-        "description": "A GeoJSON Feature<Point>.",
-        "fields": [
-          {
-            "name": "type",
-            "description": "Feature type.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "FeatureType",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "geometry",
-            "description": "Geometry of the feature.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Point",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "JSON",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
         "name": "FeaturePoint",
         "description": "A GeoJSON Feature<Point>.",
         "fields": [
@@ -10019,29 +9895,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "OBJECT",
-        "name": "FeaturePointPolygonProperties",
-        "description": "Properties for Feature<Point> input.",
-        "fields": [
-          {
-            "name": "name",
-            "description": "Name of the location.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "INPUT_OBJECT",
         "name": "FeaturePointPolygonPropertiesInput",
         "description": "Properties for Feature<Point> input.",
@@ -10067,7 +9920,7 @@
       {
         "kind": "ENUM",
         "name": "FeatureType",
-        "description": "GeoJSON Feature type.",
+        "description": "GeoJSON Feature type",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -14611,49 +14464,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "OBJECT",
-        "name": "MatchedRouteVehicleChargingConnector",
-        "description": null,
-        "fields": [
-          {
-            "name": "standard",
-            "description": "Type of the plug.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "ConnectorType",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "maximum_charge_speed",
-            "description": "Maximum charging speed for this plug.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "ChargeSpeed",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "INPUT_OBJECT",
         "name": "MatchedRouteVehicleChargingConnectorInput",
         "description": null,
@@ -18150,16 +17960,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "NonEmptyString",
-        "description": "The non empty string scalar.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "OCPIAdditionalGeoLocation",
         "description": "This class defines an additional geo location that is relevant for the Charge Point. The geodetic system to be used is WGS 84.",
@@ -18312,263 +18112,6 @@
           {
             "name": "CABLE",
             "description": "The connector is an attached cable; the EV users car needs to have a fitting inlet.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "OCPIConnectorType",
-        "description": "Socket or plug standard of the charging point.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "CHADEMO",
-            "description": "The connector type is CHAdeMO, DC",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_A",
-            "description": "Standard/domestic household, type \"A\", NEMA 1-15, 2 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_B",
-            "description": "Standard/domestic household, type \"B\", NEMA 5-15, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_C",
-            "description": "Standard/domestic household, type \"C\", CEE 7/17, 2 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_D",
-            "description": "Standard/domestic household, type \"D\", 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_E",
-            "description": "Standard/domestic household, type \"E\", CEE 7/5 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_F",
-            "description": "Standard/domestic household, type \"F\", CEE 7/4, Schuko, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_G",
-            "description": "Standard/domestic household, type \"G\", BS 1363, Commonwealth, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_H",
-            "description": "Standard/domestic household, type \"H\", SI-32, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_I",
-            "description": "Standard/domestic household, type \"I\", AS 3112, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_J",
-            "description": "Standard/domestic household, type \"J\", SEV 1011, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_K",
-            "description": "Standard/domestic household, type \"K\", DS 60884-2-D1, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_L",
-            "description": "Standard/domestic household, type \"L\", CEI 23-16-VII, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_M",
-            "description": "Standard/Domestic household, type \"M\", BS 546, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_N",
-            "description": "Standard/Domestic household, type \"N\", NBR 14136, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DOMESTIC_O",
-            "description": "Standard/Domestic household, type \"O\", TIS 166-2549, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_60309_2_single_16",
-            "description": "IEC 60309-2 Industrial connector single phase 16 amperes (usually blue)",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_60309_2_three_16",
-            "description": "IEC 60309-2 Industrial connector three phase 16 amperes (usually red)",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_60309_2_three_32",
-            "description": "IEC 60309-2 Industrial connector three phase 32 amperes (usually red)",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_60309_2_three_64",
-            "description": "IEC 60309-2 Industrial connector three phase 64 amperes (usually red)",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_62196_T1",
-            "description": "IEC 62196 Type 1 \"SAE J1772\"",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_62196_T1_COMBO",
-            "description": "Combo Type 1 based, DC",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_62196_T2",
-            "description": "IEC 62196 Type 2 \"Mennekes\"",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_62196_T2_COMBO",
-            "description": "Combo Type 2 based, DC",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_62196_T3A",
-            "description": "IEC 62196 Type 3A",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IEC_62196_T3C",
-            "description": "IEC 62196 Type 3C \"Scame\"",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "PANTOGRAPH_BOTTOM_UP",
-            "description": "On-board bottom-up-pantograph typically for bus charging",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "PANTOGRAPH_TOP_DOWN",
-            "description": "Off-board top-down-pantograph typically for bus charging",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "TESLA_R",
-            "description": "Tesla connector \"Roadster\"-type (round, 4 pins)",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "TESLA_S",
-            "description": "Tesla connector \"Model-S\"-type (oval, 5 pins)",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "GB_T",
-            "description": "The connector type is GB_T (Chinese standard), DC",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "CHAOJI",
-            "description": "The ChaoJi connector. The new generation charging connector, harmonized between CHAdeMO and GB/T. DC.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NEMA_5_20",
-            "description": "The connector type is NEMA 5-20, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NEMA_6_30",
-            "description": "The connector type is NEMA 6-30, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NEMA_6_50",
-            "description": "The connector type is NEMA 6-50, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NEMA_10_30",
-            "description": "The connector type is NEMA 10-30, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NEMA_10_50",
-            "description": "The connector type is NEMA 10-50, 3 pins",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NEMA_14_30",
-            "description": "The connector type is NEMA 14-30, 3 pins, rating of 30 A",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NEMA_14_50",
-            "description": "The connector type is NEMA 14-50, 3 pins, rating of 50 A",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "GBT_AC",
-            "description": "Guobiao GB/T 20234.2 AC socket/connector.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "GBT_DC",
-            "description": "Guobiao GB/T 20234.3 DC connector.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -21668,16 +21211,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "PlainID",
-        "description": "The `PlainID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The `PlainID` type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as \"4\") or integer (such as 4) input value will be accepted as an ID.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -25223,81 +24756,6 @@
             "type": {
               "kind": "ENUM",
               "name": "ConnectorType",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "properties",
-            "description": "Optional object where you can store custom data you need in your application. This extends the current functionalities we offer.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "JSON",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "tags",
-            "description": "Boolean tags for a station review.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ReviewTagsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ReviewEdit",
-        "description": "Form input for edit an existing review.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "rating",
-            "description": "Rating of a review.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "message",
-            "description": "Review message.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "locale",
-            "description": "Locale of a message.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -31003,41 +30461,6 @@
       },
       {
         "kind": "OBJECT",
-        "name": "RouteLegMeta",
-        "description": null,
-        "fields": [
-          {
-            "name": "warnings",
-            "description": "Warnings that certain conditions specified in a route mutation are not respected.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "RouteMetaWarning",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
         "name": "RouteLegOperationalElectricityEmissions",
         "description": null,
         "fields": [
@@ -31411,96 +30834,6 @@
                 "name": "Float",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "RouteMeta",
-        "description": null,
-        "fields": [
-          {
-            "name": "warnings",
-            "description": "Warnings that certain conditions specified in a route mutation are not respected.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "RouteMetaWarning",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "RouteMetaWarning",
-        "description": null,
-        "fields": [
-          {
-            "name": "code",
-            "description": "Static identifier, can be used for production purposes such as i18n.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "message",
-            "description": "Human readable explanation of the warning, for development purposes.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "data",
-            "description": "Optional JSON object containing data explaining the warning, for development purposes.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "JSON",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -38905,29 +38238,6 @@
       },
       {
         "kind": "ENUM",
-        "name": "SortDirection",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "ascending",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "descending",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
         "name": "SpeedUnit",
         "description": null,
         "fields": null,
@@ -40484,45 +39794,6 @@
           }
         ],
         "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "StationPredictedAvailability",
-        "description": "Station availability for each weekday and hour.",
-        "fields": [
-          {
-            "name": "weekday",
-            "description": "Number of weekday from 1 (monday) to 7 (sunday).",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "prediction",
-            "description": "The prediction for each hour 0-23 from 1 to 5 (1 - very busy ... 5 very quiet (free)).",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -43874,16 +43145,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "Upload",
-        "description": "The File Upload scalar.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "Vehicle",
         "description": "Output of a vehicle query.",
@@ -44728,41 +43989,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "VehicleConsumptionInput",
-        "description": "The consumption of the vehicle.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "worst",
-            "description": "Worst conditions are based on -10°C and use of heating.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "best",
-            "description": "Best conditions are based on 23°C and no use of A/C.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "VehicleData",
         "description": null,
@@ -44819,29 +44045,6 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "VehicleDataProvider",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "chargetrip",
-            "description": "Internal data provider.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "evdatabase",
-            "description": "EV database data provider.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
         "possibleTypes": null
       },
       {
@@ -45158,29 +44361,6 @@
           {
             "name": "placeholder",
             "description": "Placeholder image at 1536x864 px.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "VehicleImageTypeUploadable",
-        "description": "When uploading images to a vehicle, you can select one of this types. The rest of the types are automatically generated by the system.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "image",
-            "description": "Freemium vehicle image.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "image_premium",
-            "description": "Premium vehicle image.",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -46232,35 +45412,6 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "VehicleMode",
-        "description": "Mode (state) of the current production.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "index_only",
-            "description": "Old vehicle that is no longer manufactured.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "production",
-            "description": "Vehicle is in production and has been released.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "concept",
-            "description": "Future releases of a vehicle, a concept of the vehicle, specs may change over time.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
         "possibleTypes": null
       },
       {
@@ -49922,53 +49073,6 @@
       },
       {
         "kind": "OBJECT",
-        "name": "VehiclePremiumPrice",
-        "description": null,
-        "fields": [
-          {
-            "name": "DE",
-            "description": "Starting price for German market.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "VehiclePremiumPriceValueWithGrant",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NL",
-            "description": "Starting price for Dutch market.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "VehiclePremiumPriceValueWithGrant",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "GB",
-            "description": "Starting price for British market.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "VehiclePremiumPriceValueWithGrant",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
         "name": "VehiclePremiumPriceValueWithGrant",
         "description": null,
         "fields": [
@@ -50654,41 +49758,6 @@
           {
             "name": "Rear",
             "description": "Rear-wheel drive vehicle.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "VehicleProviderStatus",
-        "description": "Status of a vehicle provider.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "new",
-            "description": "Is imported from any of the data providers.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "attached",
-            "description": "Has been attached to core vehicle.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "detached",
-            "description": "Has been detached from a core vehicle.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "archived",
-            "description": "Has been archived by database maintainer.",
             "isDeprecated": false,
             "deprecationReason": null
           }
