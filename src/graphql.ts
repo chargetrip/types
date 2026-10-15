@@ -5353,17 +5353,17 @@ export type RouteDetailsLegTraffic = {
 
 /** Type of a leg. */
 export enum RouteDetailsLegType {
-  /** This leg ends at a charging station and the vehicle must recharge. */
+  /** Leg ending at a an automatically calculated charging station where the vehicle recharges. */
   STATION = "station",
-  /** This leg ends at a via charging station and the vehicle must recharge. */
+  /** Leg ending at a user-defined via waypoint that is a charging station. */
   STATION_VIA = "station_via",
-  /** This leg ends at the destination which is a charging station, and is the last leg of the route. */
+  /** Last leg of the route, ending at a destination that is a charging station. */
   STATION_FINAL = "station_final",
   /** This leg ends at a scheduled charging station and the vehicle must recharge. */
   STATION_AMENITY = "station_amenity",
-  /** This leg ends at a via location. */
+  /** Leg ending at a user-defined via waypoint that is not a charging station. */
   VIA = "via",
-  /** This leg ends at the destination, and is the last leg of the route. */
+  /** Last leg of the route, ending at a destination that is not a charging station. */
   FINAL = "final"
 }
 

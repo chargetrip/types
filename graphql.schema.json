@@ -27887,19 +27887,19 @@
         "enumValues": [
           {
             "name": "station",
-            "description": "This leg ends at a charging station and the vehicle must recharge.",
+            "description": "Leg ending at a an automatically calculated charging station where the vehicle recharges.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "station_via",
-            "description": "This leg ends at a via charging station and the vehicle must recharge.",
+            "description": "Leg ending at a user-defined via waypoint that is a charging station.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "station_final",
-            "description": "This leg ends at the destination which is a charging station, and is the last leg of the route.",
+            "description": "Last leg of the route, ending at a destination that is a charging station.",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -27911,13 +27911,13 @@
           },
           {
             "name": "via",
-            "description": "This leg ends at a via location.",
+            "description": "Leg ending at a user-defined via waypoint that is not a charging station.",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "final",
-            "description": "This leg ends at the destination, and is the last leg of the route.",
+            "description": "Last leg of the route, ending at a destination that is not a charging station.",
             "isDeprecated": false,
             "deprecationReason": null
           }
