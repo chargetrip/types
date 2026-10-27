@@ -16513,7 +16513,7 @@
         "fields": [
           {
             "name": "station_id",
-            "description": "ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "description": "ID of the station. If specified and valid, the station is used as a mandatory charging stop.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16525,7 +16525,7 @@
           },
           {
             "name": "external_station_id",
-            "description": "External ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "description": "External ID of the station. If specified and valid, the station is used as a mandatory charging stop.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16537,7 +16537,7 @@
           },
           {
             "name": "stop_duration",
-            "description": "Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode.",
+            "description": "Minimum duration of the stop at the station, in seconds. This duration can be extended based on the chosen charging mode. Under `ALWAYS_TO_MAX_CHARGE`, the duration is extended until the defined maximum state of charge of the vehicle is achieved. Under `OPTIMIZE_TRAVEL_TIME`, the duration is extended only if a longer stay optimizes the overall travel time, otherwise, the vehicle charges only for the specified duration. If not specified, the duration is solely determined by the charging mode specified in `vehicle.charging.mode` or configured in the project settings.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16561,7 +16561,7 @@
         "inputFields": [
           {
             "name": "station_id",
-            "description": "ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "description": "ID of the station. If specified and valid, the station is used as a mandatory charging stop.",
             "type": {
               "kind": "SCALAR",
               "name": "ID",
@@ -16573,7 +16573,7 @@
           },
           {
             "name": "external_station_id",
-            "description": "External ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "description": "External ID of the station. If specified and valid, the station is used as a mandatory charging stop.",
             "type": {
               "kind": "SCALAR",
               "name": "ID",
@@ -16585,7 +16585,7 @@
           },
           {
             "name": "stop_duration",
-            "description": "Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode.",
+            "description": "Minimum duration of the stop at the station, in seconds. This duration can be extended based on the chosen charging mode. Under `ALWAYS_TO_MAX_CHARGE`, the duration is extended until the defined maximum state of charge of the vehicle is achieved. Under `OPTIMIZE_TRAVEL_TIME`, the duration is extended only if a longer stay optimizes the overall travel time, otherwise, the vehicle charges only for the specified duration. If not specified, the duration is solely determined by the charging mode specified in `vehicle.charging.mode` or configured in the project settings.",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -17778,7 +17778,7 @@
           },
           {
             "name": "properties",
-            "description": "Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location.",
+            "description": "Properties of the via point. Used to designate the via point as a charging stop, configure vehicle occupancy and cargo details, or set optional location parameters. If both `properties.station.id` and `properties.station.external_id` are omitted, the via point is treated as a non-charging stop at `geometry`.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -17846,7 +17846,7 @@
           },
           {
             "name": "properties",
-            "description": "Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location.",
+            "description": "Properties of the via point. Used to designate the via point as a charging stop, configure vehicle occupancy and cargo details, or set optional location parameters. If both `properties.station.id` and `properties.station.external_id` are omitted, the via point is treated as a non-charging stop at `geometry`.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NavigationViaPropertiesInput",
@@ -28020,6 +28020,12 @@
             "deprecationReason": null
           },
           {
+            "name": "via_charging_duration_extended",
+            "description": "The stop duration at the station was extended to meet the charging mode for this route.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "via_station_below_minimum_power",
             "description": "Selected via station does not have compatible connectors that meet the minimum power threshold. The route still includes this charging stop, but charging will be slower than requested.",
             "isDeprecated": false,
@@ -33888,7 +33894,7 @@
         "fields": [
           {
             "name": "station_id",
-            "description": "ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "description": "ID of the station. If specified and valid, the station is used as a mandatory charging stop.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -33900,7 +33906,7 @@
           },
           {
             "name": "external_station_id",
-            "description": "External ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "description": "External ID of the station. If specified and valid, the station is used as a mandatory charging stop.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -33912,7 +33918,7 @@
           },
           {
             "name": "stop_duration",
-            "description": "Duration to stay at the station, in seconds.",
+            "description": "Minimum duration of the stop at the station, in seconds. This duration can be extended based on the chosen charging mode. Under `ALWAYS_TO_MAX_CHARGE`, the duration is extended until the defined maximum state of charge of the vehicle is achieved. Under `OPTIMIZE_TRAVEL_TIME`, the duration is extended only if a longer stay optimizes the overall travel time, otherwise, the vehicle charges only for the specified duration. If not specified, the duration is solely determined by the charging mode specified in `vehicle.charging.mode` or configured in the project settings.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -33936,7 +33942,7 @@
         "inputFields": [
           {
             "name": "station_id",
-            "description": "ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "description": "ID of the station. If specified and valid, the station is used as a mandatory charging stop.",
             "type": {
               "kind": "SCALAR",
               "name": "ID",
@@ -33948,7 +33954,7 @@
           },
           {
             "name": "external_station_id",
-            "description": "External ID of the station. When provided and valid, the coordinates of this station will be used.",
+            "description": "External ID of the station. If specified and valid, the station is used as a mandatory charging stop.",
             "type": {
               "kind": "SCALAR",
               "name": "ID",
@@ -33960,7 +33966,7 @@
           },
           {
             "name": "stop_duration",
-            "description": "Duration to stay at the station, in seconds.",
+            "description": "Minimum duration of the stop at the station, in seconds. This duration can be extended based on the chosen charging mode. Under `ALWAYS_TO_MAX_CHARGE`, the duration is extended until the defined maximum state of charge of the vehicle is achieved. Under `OPTIMIZE_TRAVEL_TIME`, the duration is extended only if a longer stay optimizes the overall travel time, otherwise, the vehicle charges only for the specified duration. If not specified, the duration is solely determined by the charging mode specified in `vehicle.charging.mode` or configured in the project settings.",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -36055,7 +36061,7 @@
           },
           {
             "name": "station",
-            "description": "Station data of the via point.",
+            "description": "Specifies a charging station at the via. If a known station is provided, it will be used as charging stop. Any configured operator preferences are ignored for this stop.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RoutePropertiesStationInput",
@@ -37561,7 +37567,7 @@
           },
           {
             "name": "properties",
-            "description": "Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location.",
+            "description": "Properties of the via point. Used to designate the via point as a charging stop, configure vehicle occupancy and cargo details, or set optional location parameters. If both `properties.station.id` and `properties.station.external_id` are omitted, the via point is treated as a non-charging stop at `geometry`.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -37625,7 +37631,7 @@
           },
           {
             "name": "properties",
-            "description": "Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location.",
+            "description": "Properties of the via point. Used to designate the via point as a charging stop, configure vehicle occupancy and cargo details, or set optional location parameters. If both `properties.station.id` and `properties.station.external_id` are omitted, the via point is treated as a non-charging stop at `geometry`.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "RouteViaPropertiesInput",

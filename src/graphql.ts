@@ -3176,20 +3176,20 @@ export type NavigationOverviewpolylineArgs = {
 };
 
 export type NavigationPropertiesStation = {
-  /** ID of the station. When provided and valid, the coordinates of this station will be used. */
+  /** ID of the station. If specified and valid, the station is used as a mandatory charging stop. */
   station_id?: Maybe<Scalars["ID"]>;
-  /** External ID of the station. When provided and valid, the coordinates of this station will be used. */
+  /** External ID of the station. If specified and valid, the station is used as a mandatory charging stop. */
   external_station_id?: Maybe<Scalars["ID"]>;
-  /** Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode. */
+  /** Minimum duration of the stop at the station, in seconds. This duration can be extended based on the chosen charging mode. Under `ALWAYS_TO_MAX_CHARGE`, the duration is extended until the defined maximum state of charge of the vehicle is achieved. Under `OPTIMIZE_TRAVEL_TIME`, the duration is extended only if a longer stay optimizes the overall travel time, otherwise, the vehicle charges only for the specified duration. If not specified, the duration is solely determined by the charging mode specified in `vehicle.charging.mode` or configured in the project settings. */
   stop_duration?: Maybe<Scalars["Int"]>;
 };
 
 export type NavigationPropertiesStationInput = {
-  /** ID of the station. When provided and valid, the coordinates of this station will be used. */
+  /** ID of the station. If specified and valid, the station is used as a mandatory charging stop. */
   station_id?: Maybe<Scalars["ID"]>;
-  /** External ID of the station. When provided and valid, the coordinates of this station will be used. */
+  /** External ID of the station. If specified and valid, the station is used as a mandatory charging stop. */
   external_station_id?: Maybe<Scalars["ID"]>;
-  /** Duration to stay at the station, in seconds. Includes charging time and charging penalty. When not provided, the duration is optimized based on the vehicle’s charging needs and selected charging mode. */
+  /** Minimum duration of the stop at the station, in seconds. This duration can be extended based on the chosen charging mode. Under `ALWAYS_TO_MAX_CHARGE`, the duration is extended until the defined maximum state of charge of the vehicle is achieved. Under `OPTIMIZE_TRAVEL_TIME`, the duration is extended only if a longer stay optimizes the overall travel time, otherwise, the vehicle charges only for the specified duration. If not specified, the duration is solely determined by the charging mode specified in `vehicle.charging.mode` or configured in the project settings. */
   stop_duration?: Maybe<Scalars["Int"]>;
 };
 
@@ -3406,7 +3406,7 @@ export type NavigationViaFeaturePoint = {
   type: FeatureType;
   /** Geometry of the feature. */
   geometry: Point;
-  /** Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location. */
+  /** Properties of the via point. Used to designate the via point as a charging stop, configure vehicle occupancy and cargo details, or set optional location parameters. If both `properties.station.id` and `properties.station.external_id` are omitted, the via point is treated as a non-charging stop at `geometry`. */
   properties?: Maybe<NavigationViaProperties>;
 };
 
@@ -3417,7 +3417,7 @@ export type NavigationViaFeaturePointInput = {
   type: FeatureType;
   /** Geometry of the feature. */
   geometry: PointInput;
-  /** Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location. */
+  /** Properties of the via point. Used to designate the via point as a charging stop, configure vehicle occupancy and cargo details, or set optional location parameters. If both `properties.station.id` and `properties.station.external_id` are omitted, the via point is treated as a non-charging stop at `geometry`. */
   properties?: Maybe<NavigationViaPropertiesInput>;
 };
 
@@ -5394,6 +5394,8 @@ export enum RouteDetailsLegWarningCode {
   STATION_CLOSING_SOON = "station_closing_soon",
   /** Specified stop duration at the via charging station is insufficient to start a charging session. */
   VIA_INSUFFICIENT_CHARGING_TIME = "via_insufficient_charging_time",
+  /** The stop duration at the station was extended to meet the charging mode for this route. */
+  VIA_CHARGING_DURATION_EXTENDED = "via_charging_duration_extended",
   /** Selected via station does not have compatible connectors that meet the minimum power threshold. The route still includes this charging stop, but charging will be slower than requested. */
   VIA_STATION_BELOW_MINIMUM_POWER = "via_station_below_minimum_power",
   /** Charging station at the destination does not have any connectors compatible with the selected vehicle. */
@@ -6508,20 +6510,20 @@ export type RoutePropertiesLocationInput = {
 };
 
 export type RoutePropertiesStation = {
-  /** ID of the station. When provided and valid, the coordinates of this station will be used. */
+  /** ID of the station. If specified and valid, the station is used as a mandatory charging stop. */
   station_id?: Maybe<Scalars["ID"]>;
-  /** External ID of the station. When provided and valid, the coordinates of this station will be used. */
+  /** External ID of the station. If specified and valid, the station is used as a mandatory charging stop. */
   external_station_id?: Maybe<Scalars["ID"]>;
-  /** Duration to stay at the station, in seconds. */
+  /** Minimum duration of the stop at the station, in seconds. This duration can be extended based on the chosen charging mode. Under `ALWAYS_TO_MAX_CHARGE`, the duration is extended until the defined maximum state of charge of the vehicle is achieved. Under `OPTIMIZE_TRAVEL_TIME`, the duration is extended only if a longer stay optimizes the overall travel time, otherwise, the vehicle charges only for the specified duration. If not specified, the duration is solely determined by the charging mode specified in `vehicle.charging.mode` or configured in the project settings. */
   stop_duration?: Maybe<Scalars["Int"]>;
 };
 
 export type RoutePropertiesStationInput = {
-  /** ID of the station. When provided and valid, the coordinates of this station will be used. */
+  /** ID of the station. If specified and valid, the station is used as a mandatory charging stop. */
   station_id?: Maybe<Scalars["ID"]>;
-  /** External ID of the station. When provided and valid, the coordinates of this station will be used. */
+  /** External ID of the station. If specified and valid, the station is used as a mandatory charging stop. */
   external_station_id?: Maybe<Scalars["ID"]>;
-  /** Duration to stay at the station, in seconds. */
+  /** Minimum duration of the stop at the station, in seconds. This duration can be extended based on the chosen charging mode. Under `ALWAYS_TO_MAX_CHARGE`, the duration is extended until the defined maximum state of charge of the vehicle is achieved. Under `OPTIMIZE_TRAVEL_TIME`, the duration is extended only if a longer stay optimizes the overall travel time, otherwise, the vehicle charges only for the specified duration. If not specified, the duration is solely determined by the charging mode specified in `vehicle.charging.mode` or configured in the project settings. */
   stop_duration?: Maybe<Scalars["Int"]>;
 };
 
@@ -6899,7 +6901,7 @@ export type RouteTruckViaPropertiesInput = {
   location?: Maybe<RoutePropertiesViaLocationInput>;
   /** Vehicle configuration at this point. Properties defined here override previous settings and persist for all subsequent segments of the route until changed again. If not specified, the vehicle state from the previous point remains in effect. */
   vehicle?: Maybe<RouteTruckPropertiesVehicleInput>;
-  /** Station data of the via point. */
+  /** Specifies a charging station at the via. If a known station is provided, it will be used as charging stop. Any configured operator preferences are ignored for this stop. */
   station?: Maybe<RoutePropertiesStationInput>;
 };
 
@@ -7144,7 +7146,7 @@ export type RouteViaFeaturePoint = {
   type: FeatureType;
   /** Geometry of the feature. */
   geometry?: Maybe<Point>;
-  /** Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location. */
+  /** Properties of the via point. Used to designate the via point as a charging stop, configure vehicle occupancy and cargo details, or set optional location parameters. If both `properties.station.id` and `properties.station.external_id` are omitted, the via point is treated as a non-charging stop at `geometry`. */
   properties?: Maybe<RouteViaProperties>;
 };
 
@@ -7155,7 +7157,7 @@ export type RouteViaFeaturePointInput = {
   type: FeatureType;
   /** Geometry of the feature. */
   geometry?: Maybe<PointInput>;
-  /** Additional feature properties for via. If a `station.id` or `station.external_id` are provided, it will be treated as a charging stop.  If omitted or `location.name` is provided, the stop is treated as a non-charging stop location. */
+  /** Properties of the via point. Used to designate the via point as a charging stop, configure vehicle occupancy and cargo details, or set optional location parameters. If both `properties.station.id` and `properties.station.external_id` are omitted, the via point is treated as a non-charging stop at `geometry`. */
   properties?: Maybe<RouteViaPropertiesInput>;
 };
 
