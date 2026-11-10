@@ -45041,6 +45041,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "series",
+            "description": "Top-level general model series identifier.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -45623,6 +45635,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "series",
+            "description": "Top-level general model series identifier.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -45832,6 +45856,18 @@
             "deprecationReason": null
           },
           {
+            "name": "fast_charge_oem",
+            "description": "Manufacturer-stated fast charging specifications.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehiclePremiumFastChargeOEM",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "adapters",
             "description": "Adapters of connectors available for a connectors of the vehicle. Please note that for HEVs this will always be an empty array.",
             "args": [],
@@ -45936,6 +45972,18 @@
             "deprecationReason": null
           },
           {
+            "name": "combustion",
+            "description": "Internal combustion engine (ICE) and fuel storage specifications for hybrid and plug-in hybrid vehicles. This field is null for battery electric vehicles.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehiclePremiumCombustion",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "performance",
             "description": "Performance of the vehicle.",
             "args": [],
@@ -45959,6 +46007,18 @@
                 "name": "VehiclePremiumRange",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "one_stop_range",
+            "description": "One-stop range data by climatic condition (mild, average, cold), including durations and rating.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehiclePremiumOneStopRange",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -46353,6 +46413,42 @@
             "type": {
               "kind": "ENUM",
               "name": "VehicleBatteryType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "form_factor",
+            "description": "Form factor of the battery cells.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": "Battery pack name or reference code.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "architecture",
+            "description": "Battery and drivetrain platform system voltage architecture.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -47670,6 +47766,67 @@
       },
       {
         "kind": "OBJECT",
+        "name": "VehiclePremiumCombustion",
+        "description": "Specifications for internal combustion engine (ICE) systems.",
+        "fields": [
+          {
+            "name": "fuel_tank_capacity",
+            "description": "Fuel tank capacity of the vehicle.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "VolumeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "liter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "displacement",
+            "description": "Engine displacement.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "VolumeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "cubic_centimeter",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "VehiclePremiumDrivetrain",
         "description": null,
         "fields": [
@@ -47997,6 +48154,56 @@
           {
             "name": "co2",
             "description": "Rated CO2 emissions in NEDC combined cycle in battery-only mode (NULL if not NEDC rated).",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "EmissionRateUnit",
+                  "ofType": null
+                },
+                "defaultValue": "grams_per_kilometer",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "battery_empty",
+            "description": "Fuel efficiency under the NEDC cycle when the hybrid battery is completely empty. Only applicable to PHEVs.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "FuelConsumptionUnit",
+                  "ofType": null
+                },
+                "defaultValue": "liters_per_100_kilometers",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "battery_empty_co2",
+            "description": "CO2 emissions under the NEDC cycle when the hybrid battery is completely empty. Only applicable to PHEVs.",
             "args": [
               {
                 "name": "unit",
@@ -48642,6 +48849,104 @@
       },
       {
         "kind": "OBJECT",
+        "name": "VehiclePremiumFastChargeOEM",
+        "description": null,
+        "fields": [
+          {
+            "name": "maximum_power",
+            "description": "Manufacturer-stated maximum power for a fast charging session.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "PowerUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charge_time",
+            "description": "Manufacturer-stated charge time in seconds for a fast charging session.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "start_state_of_charge",
+            "description": "Manufacturer-stated start state of charge for a fast charging session.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end_state_of_charge",
+            "description": "Manufacturer-stated end state of charge for a fast charging session.",
+            "args": [
+              {
+                "name": "unit",
+                "description": "State of charge unit.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "StateOfChargeUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilowatt_hour",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "VehiclePremiumFastChargeTable",
         "description": null,
         "fields": [
@@ -48971,6 +49276,211 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "series",
+            "description": "Top-level general model series identifier.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehiclePremiumOneStopRange",
+        "description": "1-stop range data by climatic condition (mild, average, cold), including durations and rating.",
+        "fields": [
+          {
+            "name": "mild",
+            "description": "1-stop range metrics in mild conditions.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehiclePremiumOneStopRangeCondition",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "average",
+            "description": "1-stop range metrics in average conditions.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehiclePremiumOneStopRangeCondition",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cold",
+            "description": "1-stop range metrics in cold conditions.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "VehiclePremiumOneStopRangeCondition",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "rating_stars",
+            "description": "Long-distance rating in stars based on 1-stop range performance.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "VehiclePremiumOneStopRangeCondition",
+        "description": "1-stop range metrics under specific climatic conditions.",
+        "fields": [
+          {
+            "name": "first_leg_distance",
+            "description": "Distance for first driving leg under specific climatic conditions.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilometer",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "second_leg_distance",
+            "description": "Distance for second driving leg under specific climatic conditions.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilometer",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_distance",
+            "description": "Total distance for 1-stop trip under specific climatic conditions.",
+            "args": [
+              {
+                "name": "unit",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "DistanceUnit",
+                  "ofType": null
+                },
+                "defaultValue": "kilometer",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "first_leg_duration",
+            "description": "Driving duration in seconds for first leg under specific climatic conditions.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "charging_duration",
+            "description": "Charging duration in seconds for stop under specific climatic conditions.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "second_leg_duration",
+            "description": "Driving duration in seconds for second leg under specific climatic conditions.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total_duration",
+            "description": "Total trip duration in seconds for 1-stop trip under specific climatic conditions.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -50454,6 +50964,12 @@
             "description": "Return the volume in cubic feet.",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "cubic_centimeter",
+            "description": "Return the volume in cubic centimeters.",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -51844,7 +52360,7 @@
       },
       {
         "name": "stateOfChargeConvert",
-        "description": "Converting the value of a state of charge input to a single unit.",
+        "description": "Converting the value of a state of charge input to a single unit. Kilowatt hour keeps 3 decimal places. Other units use `decimals`, which defaults to 0.",
         "isRepeatable": false,
         "locations": ["FIELD_DEFINITION"],
         "args": [
@@ -51857,6 +52373,18 @@
               "ofType": null
             },
             "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "decimals",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": "0",
             "isDeprecated": false,
             "deprecationReason": null
           }

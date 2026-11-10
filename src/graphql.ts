@@ -8583,6 +8583,8 @@ export type VehicleListNaming = {
   edition?: Maybe<Scalars["String"]>;
   /** Vehicle model version. Added by Chargetrip as an alternative for when a vehicle manufacturer does not provide a version name, or uses the same version name across all trims or consecutive years. */
   chargetrip_version: Scalars["String"];
+  /** Top-level general model series identifier. */
+  series?: Maybe<Scalars["String"]>;
 };
 
 export type VehicleListRange = {
@@ -8683,6 +8685,8 @@ export type VehicleNaming = {
   edition?: Maybe<Scalars["String"]>;
   /** Vehicle model version. Added by Chargetrip as an alternative for when a vehicle manufacturer does not provide a version name, or uses the same version name across all trims or consecutive years. */
   chargetrip_version: Scalars["String"];
+  /** Top-level general model series identifier. */
+  series?: Maybe<Scalars["String"]>;
 };
 
 export type VehiclePerformance = {
@@ -8725,6 +8729,8 @@ export type VehiclePremium = {
   charge: VehiclePremiumCharge;
   /** Fast charge details. */
   fast_charge: VehiclePremiumFastCharge;
+  /** Manufacturer-stated fast charging specifications. */
+  fast_charge_oem?: Maybe<VehiclePremiumFastChargeOEM>;
   /** Adapters of connectors available for a connectors of the vehicle. Please note that for HEVs this will always be an empty array. */
   adapters: Array<VehicleConnector>;
   /** Battery of the vehicle. */
@@ -8737,10 +8743,14 @@ export type VehiclePremium = {
   pricing: VehiclePremiumPriceValueWithGrant;
   /** Drivetrain of the vehicle. */
   drivetrain: VehiclePremiumDrivetrain;
+  /** Internal combustion engine (ICE) and fuel storage specifications for hybrid and plug-in hybrid vehicles. This field is null for battery electric vehicles. */
+  combustion?: Maybe<VehiclePremiumCombustion>;
   /** Performance of the vehicle. */
   performance?: Maybe<VehiclePremiumPerformance>;
   /** Range of the vehicle. */
   range: VehiclePremiumRange;
+  /** One-stop range data by climatic condition (mild, average, cold), including durations and rating. */
+  one_stop_range?: Maybe<VehiclePremiumOneStopRange>;
   /** Efficiency of the vehicle. */
   efficiency: VehiclePremiumEfficiency;
   /** Safety of the vehicle. */
@@ -8799,6 +8809,12 @@ export type VehiclePremiumBattery = {
   nominal_voltage?: Maybe<Scalars["Float"]>;
   /** Type of battery. */
   type?: Maybe<VehicleBatteryType>;
+  /** Form factor of the battery cells. */
+  form_factor?: Maybe<Scalars["String"]>;
+  /** Battery pack name or reference code. */
+  name?: Maybe<Scalars["String"]>;
+  /** Battery and drivetrain platform system voltage architecture. */
+  architecture?: Maybe<Scalars["String"]>;
 };
 
 export type VehiclePremiumBatteryweightArgs = {
@@ -9074,6 +9090,24 @@ export type VehiclePremiumChargeStandardOBCcharge_speedArgs = {
   unit?: Maybe<ChargeSpeedUnit>;
 };
 
+/** Specifications for internal combustion engine (ICE) systems. */
+export type VehiclePremiumCombustion = {
+  /** Fuel tank capacity of the vehicle. */
+  fuel_tank_capacity?: Maybe<Scalars["Float"]>;
+  /** Engine displacement. */
+  displacement?: Maybe<Scalars["Float"]>;
+};
+
+/** Specifications for internal combustion engine (ICE) systems. */
+export type VehiclePremiumCombustionfuel_tank_capacityArgs = {
+  unit?: Maybe<VolumeUnit>;
+};
+
+/** Specifications for internal combustion engine (ICE) systems. */
+export type VehiclePremiumCombustiondisplacementArgs = {
+  unit?: Maybe<VolumeUnit>;
+};
+
 export type VehiclePremiumDrivetrain = {
   /** Type of drivetrain. */
   type: VehicleDrivetrainType;
@@ -9129,6 +9163,10 @@ export type VehiclePremiumEfficiencyNEDC = {
   vehicle_fuel_equivalent?: Maybe<Scalars["Float"]>;
   /** Rated CO2 emissions in NEDC combined cycle in battery-only mode (NULL if not NEDC rated). */
   co2?: Maybe<Scalars["Float"]>;
+  /** Fuel efficiency under the NEDC cycle when the hybrid battery is completely empty. Only applicable to PHEVs. */
+  battery_empty?: Maybe<Scalars["Float"]>;
+  /** CO2 emissions under the NEDC cycle when the hybrid battery is completely empty. Only applicable to PHEVs. */
+  battery_empty_co2?: Maybe<Scalars["Float"]>;
 };
 
 export type VehiclePremiumEfficiencyNEDCvalueArgs = {
@@ -9148,6 +9186,14 @@ export type VehiclePremiumEfficiencyNEDCvehicle_fuel_equivalentArgs = {
 };
 
 export type VehiclePremiumEfficiencyNEDCco2Args = {
+  unit?: Maybe<EmissionRateUnit>;
+};
+
+export type VehiclePremiumEfficiencyNEDCbattery_emptyArgs = {
+  unit?: Maybe<FuelConsumptionUnit>;
+};
+
+export type VehiclePremiumEfficiencyNEDCbattery_empty_co2Args = {
   unit?: Maybe<EmissionRateUnit>;
 };
 
@@ -9288,6 +9334,29 @@ export type VehiclePremiumFastChargecharge_speedArgs = {
   unit?: Maybe<ChargeSpeedUnit>;
 };
 
+export type VehiclePremiumFastChargeOEM = {
+  /** Manufacturer-stated maximum power for a fast charging session. */
+  maximum_power?: Maybe<Scalars["Float"]>;
+  /** Manufacturer-stated charge time in seconds for a fast charging session. */
+  charge_time?: Maybe<Scalars["Int"]>;
+  /** Manufacturer-stated start state of charge for a fast charging session. */
+  start_state_of_charge?: Maybe<Scalars["Float"]>;
+  /** Manufacturer-stated end state of charge for a fast charging session. */
+  end_state_of_charge?: Maybe<Scalars["Float"]>;
+};
+
+export type VehiclePremiumFastChargeOEMmaximum_powerArgs = {
+  unit?: Maybe<PowerUnit>;
+};
+
+export type VehiclePremiumFastChargeOEMstart_state_of_chargeArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
+export type VehiclePremiumFastChargeOEMend_state_of_chargeArgs = {
+  unit?: Maybe<StateOfChargeUnit>;
+};
+
 export type VehiclePremiumFastChargeTable = {
   /** Charging details for fast charging (format: ChargerConnector-ChargerPower-AC/DC). */
   format?: Maybe<Scalars["String"]>;
@@ -9344,6 +9413,53 @@ export type VehiclePremiumNaming = {
   length_version?: Maybe<Scalars["String"]>;
   /** Vehicle model height version. */
   height_version?: Maybe<Scalars["String"]>;
+  /** Top-level general model series identifier. */
+  series?: Maybe<Scalars["String"]>;
+};
+
+/** 1-stop range data by climatic condition (mild, average, cold), including durations and rating. */
+export type VehiclePremiumOneStopRange = {
+  /** 1-stop range metrics in mild conditions. */
+  mild?: Maybe<VehiclePremiumOneStopRangeCondition>;
+  /** 1-stop range metrics in average conditions. */
+  average?: Maybe<VehiclePremiumOneStopRangeCondition>;
+  /** 1-stop range metrics in cold conditions. */
+  cold?: Maybe<VehiclePremiumOneStopRangeCondition>;
+  /** Long-distance rating in stars based on 1-stop range performance. */
+  rating_stars?: Maybe<Scalars["Float"]>;
+};
+
+/** 1-stop range metrics under specific climatic conditions. */
+export type VehiclePremiumOneStopRangeCondition = {
+  /** Distance for first driving leg under specific climatic conditions. */
+  first_leg_distance?: Maybe<Scalars["Float"]>;
+  /** Distance for second driving leg under specific climatic conditions. */
+  second_leg_distance?: Maybe<Scalars["Float"]>;
+  /** Total distance for 1-stop trip under specific climatic conditions. */
+  total_distance?: Maybe<Scalars["Float"]>;
+  /** Driving duration in seconds for first leg under specific climatic conditions. */
+  first_leg_duration?: Maybe<Scalars["Int"]>;
+  /** Charging duration in seconds for stop under specific climatic conditions. */
+  charging_duration?: Maybe<Scalars["Int"]>;
+  /** Driving duration in seconds for second leg under specific climatic conditions. */
+  second_leg_duration?: Maybe<Scalars["Int"]>;
+  /** Total trip duration in seconds for 1-stop trip under specific climatic conditions. */
+  total_duration?: Maybe<Scalars["Int"]>;
+};
+
+/** 1-stop range metrics under specific climatic conditions. */
+export type VehiclePremiumOneStopRangeConditionfirst_leg_distanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+/** 1-stop range metrics under specific climatic conditions. */
+export type VehiclePremiumOneStopRangeConditionsecond_leg_distanceArgs = {
+  unit?: Maybe<DistanceUnit>;
+};
+
+/** 1-stop range metrics under specific climatic conditions. */
+export type VehiclePremiumOneStopRangeConditiontotal_distanceArgs = {
+  unit?: Maybe<DistanceUnit>;
 };
 
 export type VehiclePremiumPerformance = {
@@ -9679,7 +9795,9 @@ export enum VolumeUnit {
   /** Return the volume in cubic meters. */
   CUBIC_METER = "cubic_meter",
   /** Return the volume in cubic feet. */
-  CUBIC_FOOT = "cubic_foot"
+  CUBIC_FOOT = "cubic_foot",
+  /** Return the volume in cubic centimeters. */
+  CUBIC_CENTIMETER = "cubic_centimeter"
 }
 
 /** Type of weather conditions used in the route calculation. */
