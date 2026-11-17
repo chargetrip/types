@@ -657,14 +657,20 @@ export type Connector = {
   last_updated?: Maybe<Scalars["DateTime"]>;
   /** Optional object where you can store custom data you need in your application. This extends the current functionalities we offer. */
   properties?: Maybe<Scalars["JSON"]>;
-  /** List of valid charging tariffs. */
+  /**
+   * List of valid charging tariffs.
+   * @deprecated In favor of `tariff` query. Use `evses.connectors.tariff_ids` in combination with `tariff` query.
+   */
   tariff?: Maybe<Array<Maybe<OCPITariff>>>;
   /**
    * Charging prices.
    * @deprecated In favor of `prices`.
    */
   pricing?: Maybe<Pricing>;
-  /** Dynamic charging prices. */
+  /**
+   * Dynamic charging prices.
+   * @deprecated In favor of `stationPrices` query.
+   */
   prices?: Maybe<Array<ConnectorPrice>>;
   /** Custom properties of a connector. These are vendor specific and will return null values on the fields that are not supported by your station database. */
   custom_properties?: Maybe<ConnectorCustomProperties>;
@@ -4200,6 +4206,64 @@ export enum PressureUnit {
   POUNDS_PER_SQUARE_INCH = "pounds_per_square_inch"
 }
 
+/** Type of commercial partner. */
+export enum PricePartnerType {
+  /** Charge point operator (CPO). */
+  CPO = "cpo",
+  /** Mobility service provider (MSP). */
+  MSP = "msp"
+}
+
+/** Product, such as a subscription plan, offered by a commercial partner. */
+export type PriceProduct = {
+  /** Unique ID of the product. */
+  id: Scalars["ID"];
+  /** Commercial name of the product. */
+  name: Scalars["String"];
+  /** Description of the product. */
+  description?: Maybe<Scalars["String"]>;
+  /** Commercial partner that offers the product. */
+  partner: PriceProductPartner;
+};
+
+/** Commercial partner that offers a price product. */
+export type PriceProductPartner = {
+  /** Unique ID of the partner. */
+  id: Scalars["ID"];
+  /** Legal or brand name of the partner. */
+  name?: Maybe<Scalars["String"]>;
+  /** Type of the partner. */
+  type?: Maybe<PricePartnerType>;
+  /** Links to the mobile apps of the partner. */
+  app_links?: Maybe<PriceProductPartnerAppLinks>;
+};
+
+/** Links to the mobile apps of a partner. */
+export type PriceProductPartnerAppLinks = {
+  /** URL of the Android app in the Google Play Store. */
+  android?: Maybe<Scalars["String"]>;
+  /** URL of the iOS app in the Apple App Store. */
+  ios?: Maybe<Scalars["String"]>;
+};
+
+/** Paginated list of price products. */
+export type PriceProductsConnection = {
+  /** Total number of unique price products. */
+  total_count: Scalars["Int"];
+  /** Information about the current page. */
+  page_info: PageInfo;
+  /** List of price products. */
+  nodes: Array<PriceProduct>;
+};
+
+/** Type of price. */
+export enum PriceType {
+  /** Price paid directly, without a product or contract. */
+  AD_HOC = "ad_hoc",
+  /** Price that requires a product, such as a subscription. */
+  CONTRACT_BASED = "contract_based"
+}
+
 export type Pricing = {
   /** Unique ID of a price. */
   id?: Maybe<Scalars["String"]>;
@@ -4248,6 +4312,16 @@ export type PricingListProduct = {
   /** Currency. */
   currency?: Maybe<Scalars["String"]>;
 };
+
+/** Billing recurrence of a subscription. */
+export enum ProductSubscriptionType {
+  /** Fee billed every month. */
+  MONTHLY = "monthly",
+  /** Fee billed every year. */
+  YEARLY = "yearly",
+  /** Fee billed once. */
+  ONE_OFF = "one_off"
+}
 
 export type Query = {
   /** Get a full list of amenities around a station. */
@@ -4305,9 +4379,18 @@ export type Query = {
   stationList?: Maybe<Array<Maybe<Station>>>;
   /** Search for stations around a GeoJSON point with a specific distance in meters. */
   stationAround?: Maybe<Array<Maybe<Station>>>;
-  /** Get information about a tariff by the tariff ID. */
+  /** [ALPHA] Get a paginated list of all price products and their partners. */
+  priceProducts?: Maybe<PriceProductsConnection>;
+  /** [ALPHA] Get a paginated list of the price products and their partners available at a station. */
+  stationPriceProducts?: Maybe<StationPriceProductsConnection>;
+  /** [ALPHA] Get the MSP prices and the CPO ad hoc and subscription prices for the connectors of a station. */
+  stationPrices?: Maybe<StationPricesConnection>;
+  /** Get a tariff by its ID. */
   tariff?: Maybe<OCPITariff>;
-  /** Get the full list of tariffs. */
+  /**
+   * Get a paginated list of tariffs.
+   * @deprecated In favor of `stationPrices` query.
+   */
   tariffList?: Maybe<Array<Maybe<OCPITariff>>>;
   /** Get information about a vehicle by its ID. */
   vehicle?: Maybe<Vehicle>;
@@ -4435,6 +4518,26 @@ export type QuerystationAroundArgs = {
   search?: Maybe<Scalars["String"]>;
   size?: Maybe<Scalars["Int"]>;
   page?: Maybe<Scalars["Int"]>;
+};
+
+export type QuerypriceProductsArgs = {
+  search?: Maybe<Scalars["String"]>;
+  first?: Maybe<Scalars["Int"]>;
+  after?: Maybe<Scalars["String"]>;
+};
+
+export type QuerystationPriceProductsArgs = {
+  search?: Maybe<Scalars["String"]>;
+  station_id: Scalars["ID"];
+  first?: Maybe<Scalars["Int"]>;
+  after?: Maybe<Scalars["String"]>;
+};
+
+export type QuerystationPricesArgs = {
+  first?: Maybe<Scalars["Int"]>;
+  after?: Maybe<Scalars["String"]>;
+  filter?: Maybe<StationPricesFilter>;
+  station_id: Scalars["ID"];
 };
 
 export type QuerytariffArgs = {
@@ -7409,7 +7512,10 @@ export type Station = {
   custom_properties?: Maybe<StationCustomProperties>;
   /** Review of a station. */
   review?: Maybe<ReviewStats>;
-  /** List of eMSP cards accepted at a charging station. */
+  /**
+   * List of eMSP cards accepted at a charging station.
+   * @deprecated In favor of `priceProducts` query.
+   */
   roaming?: Maybe<Array<Maybe<StationRoaming>>>;
   /** Phone number for assistance at a charging station. */
   support_phone_number?: Maybe<Scalars["String"]>;
@@ -7590,6 +7696,288 @@ export type StationPredictedOccupancy = {
   period_begin?: Maybe<Scalars["String"]>;
   /** End of the period of the occupancy prediction (string of 'hh-mmZ' format). */
   period_end?: Maybe<Scalars["String"]>;
+};
+
+/** Pricing model applicable to one or more connectors of a station. */
+export type StationPrice = {
+  /** Unique ID of the price. */
+  id: Scalars["ID"];
+  /** ID of the price at the source provider. */
+  external_id: Scalars["ID"];
+  /** EVSE and connector pairs to which the price applies. */
+  evse_connectors: Array<StationPriceEvseConnector>;
+  /** Date and time when the price was last updated. */
+  last_updated: Scalars["DateTime"];
+  /** Type of the price. */
+  type: PriceType;
+  /** Product required to get the price, if applicable. */
+  product?: Maybe<StationPriceProduct>;
+  /** List of price elements, each with its components and restrictions. */
+  elements: Array<StationPriceElement>;
+  /** Currency of the price components. */
+  currency: CurrencyUnit;
+};
+
+/** Single price component of a price element. */
+export type StationPriceComponent = {
+  /** Dimension on which the component is charged. */
+  type: StationPriceComponentType;
+  /** Price per unit, excluding VAT. */
+  price?: Maybe<Scalars["Float"]>;
+  /** VAT percentage applied to the component. */
+  vat?: Maybe<Scalars["Float"]>;
+  /** Minimum amount that is billed. Amounts are billed in blocks of this size: seconds for `time` and `parking_time`, Wh for `energy`. */
+  step_size?: Maybe<Scalars["Int"]>;
+};
+
+/** Single price component of a price element. */
+export type StationPriceComponentpriceArgs = {
+  currency?: Maybe<CurrencyUnit>;
+};
+
+/** Dimension on which a price component is charged. */
+export enum StationPriceComponentType {
+  /** Price per kWh of energy delivered. */
+  ENERGY = "energy",
+  /** Flat fee per charging session. */
+  FLAT = "flat",
+  /** Price per hour of charging time. */
+  TIME = "time",
+  /** Price per hour of parking time, when the vehicle is not charging. */
+  PARKING_TIME = "parking_time"
+}
+
+/** Group of price components that apply together under the same restrictions. */
+export type StationPriceElement = {
+  /** List of price components of the element. */
+  components: Array<StationPriceComponent>;
+  /** Conditions under which the element applies. */
+  restrictions: StationPriceRestrictions;
+};
+
+/** EVSE and connector pair to which a price applies. */
+export type StationPriceEvseConnector = {
+  /** UID of the EVSE. */
+  evse_uid: Scalars["ID"];
+  /** ID of the connector. */
+  connector_id: Scalars["ID"];
+};
+
+/** Commercial partner that offers a product. */
+export type StationPricePartner = {
+  /** Unique ID of the partner. */
+  id: Scalars["ID"];
+  /** Legal or brand name of the partner. */
+  name?: Maybe<Scalars["String"]>;
+  /** Type of the partner. */
+  type?: Maybe<PricePartnerType>;
+  /** ISO 3166-1 alpha-2 country code of the partner. */
+  country_code?: Maybe<CountryCodeAlpha2>;
+};
+
+/** Product, such as a subscription plan, required to get a price. */
+export type StationPriceProduct = {
+  /** Unique ID of the product. */
+  id: Scalars["ID"];
+  /** Commercial name of the product. */
+  name?: Maybe<Scalars["String"]>;
+  /** Subscription details of the product, if applicable. */
+  subscription?: Maybe<StationPriceProductSubscription>;
+  /** Commercial partner that offers the product. */
+  partner?: Maybe<StationPricePartner>;
+};
+
+/** Subscription details of a product. */
+export type StationPriceProductSubscription = {
+  /** Recurrence of the subscription. */
+  type?: Maybe<ProductSubscriptionType>;
+  /** Subscription fee per billing period, excluding VAT. */
+  fee?: Maybe<Scalars["Float"]>;
+};
+
+/** Subscription details of a product. */
+export type StationPriceProductSubscriptionfeeArgs = {
+  currency?: Maybe<CurrencyUnit>;
+};
+
+/** Paginated list of price products available at a station. */
+export type StationPriceProductsConnection = {
+  /** Total number of unique price products available at the station. */
+  total_count: Scalars["Int"];
+  /** Information about the current page. */
+  page_info: PageInfo;
+  /** List of price products available at the station. */
+  nodes: Array<PriceProduct>;
+};
+
+/** Conditions under which a price element applies. All specified conditions must be met. */
+export type StationPriceRestrictions = {
+  /** Days of the week on which the element applies. */
+  days_of_week?: Maybe<Array<DayOfWeek>>;
+  /** Time of day range in which the element applies. */
+  time?: Maybe<StationPriceRestrictionsTime>;
+  /** Date range in which the element applies. */
+  date?: Maybe<StationPriceRestrictionsDate>;
+  /** Charging session duration range in which the element applies. */
+  duration?: Maybe<StationPriceRestrictionsDuration>;
+  /** Energy range in which the element applies. */
+  energy?: Maybe<StationPriceRestrictionsEnergy>;
+  /** Charging current range in which the element applies. */
+  current?: Maybe<StationPriceRestrictionsCurrent>;
+  /** Charging power range in which the element applies. */
+  power?: Maybe<StationPriceRestrictionsPower>;
+  /** Session cost range in which the element applies. */
+  price?: Maybe<StationPriceRestrictionsPrice>;
+  /** Payment methods for which the element applies. */
+  payment_methods?: Maybe<Array<StationPriceRestrictionsPaymentMethods>>;
+  /** Overstay thresholds that determine when the element applies. */
+  overstay?: Maybe<StationPriceRestrictionsOverstay>;
+  /** Type of reservation cost the element describes. If set, the element describes reservation costs instead of charging costs. A reservation starts when it is made and ends when the driver starts charging on the reserved EVSE or when the reservation expires. A reservation element can only have `flat` and `time` components, where `time` is the duration of the reservation. */
+  reservation?: Maybe<StationPriceRestrictionsReservationType>;
+};
+
+/** Charging current range in which a price element applies. */
+export type StationPriceRestrictionsCurrent = {
+  /** Charging current in amperes from which the element applies. */
+  minimum?: Maybe<Scalars["Float"]>;
+  /** Charging current in amperes until which the element applies. */
+  maximum?: Maybe<Scalars["Float"]>;
+};
+
+/** Date range in which a price element applies. */
+export type StationPriceRestrictionsDate = {
+  /** Date from which the element applies, in YYYY-MM-DD format. */
+  start?: Maybe<Scalars["String"]>;
+  /** Date until which the element applies, in YYYY-MM-DD format. */
+  end?: Maybe<Scalars["String"]>;
+};
+
+/** Charging session duration range in which a price element applies. */
+export type StationPriceRestrictionsDuration = {
+  /** Session duration in seconds from which the element applies. */
+  minimum?: Maybe<Scalars["Int"]>;
+  /** Session duration in seconds until which the element applies. */
+  maximum?: Maybe<Scalars["Int"]>;
+};
+
+/** Energy range in which a price element applies. */
+export type StationPriceRestrictionsEnergy = {
+  /** Energy delivered in kWh from which the element applies. */
+  minimum?: Maybe<Scalars["Float"]>;
+  /** Energy delivered in kWh until which the element applies. */
+  maximum?: Maybe<Scalars["Float"]>;
+};
+
+/** Thresholds that determine when overstay fees apply. */
+export type StationPriceRestrictionsOverstay = {
+  /** Battery state of charge thresholds that determine when overstay fees apply. */
+  battery_percentage?: Maybe<StationPriceRestrictionsOverstayBatteryPercentage>;
+  /** Time thresholds that determine when overstay fees apply. */
+  time?: Maybe<StationPriceRestrictionsOverstayTime>;
+};
+
+/** Battery state of charge thresholds that determine when overstay fees apply. */
+export type StationPriceRestrictionsOverstayBatteryPercentage = {
+  /** Battery percentage from which the overstay fees apply. */
+  minimum?: Maybe<Scalars["Int"]>;
+  /** Battery percentage until which the overstay fees apply. */
+  maximum?: Maybe<Scalars["Int"]>;
+  /** Unit of time after which the overstay fees apply. */
+  unit?: Maybe<StationPriceRestrictionsOverstayTimeUnit>;
+};
+
+/** Time thresholds that determine when overstay fees apply. */
+export type StationPriceRestrictionsOverstayTime = {
+  /** Time from which the overstay fees apply, expressed in `unit`. */
+  minimum?: Maybe<Scalars["Int"]>;
+  /** Time until which the overstay fees apply, expressed in `unit`. */
+  maximum?: Maybe<Scalars["Int"]>;
+  /** Unit of `minimum` and `maximum`. */
+  unit?: Maybe<StationPriceRestrictionsOverstayTimeUnit>;
+};
+
+/** Unit of time after which overstay fees apply. */
+export enum StationPriceRestrictionsOverstayTimeUnit {
+  /** Time expressed in seconds. */
+  SECONDS = "seconds",
+  /** Time expressed in minutes. */
+  MINUTES = "minutes",
+  /** Time expressed in hours. */
+  HOURS = "hours"
+}
+
+/** Payment method accepted at a station. */
+export enum StationPriceRestrictionsPaymentMethods {
+  /** Payment by credit card. */
+  CREDIT_CARD = "credit_card",
+  /** Payment by debit card. */
+  DEBIT_CARD = "debit_card",
+  /** Payment by Apple Pay. */
+  APPLE_PAY = "apple_pay",
+  /** Payment by Google Pay. */
+  GOOGLE_PAY = "google_pay",
+  /** Payment by scanning a QR code. */
+  QR_CODE = "qr_code"
+}
+
+/** Charging power range in which a price element applies. */
+export type StationPriceRestrictionsPower = {
+  /** Charging power in kW from which the element applies. */
+  minimum?: Maybe<Scalars["Float"]>;
+  /** Charging power in kW until which the element applies. */
+  maximum?: Maybe<Scalars["Float"]>;
+};
+
+/** Session cost range in which a price element applies. */
+export type StationPriceRestrictionsPrice = {
+  /** Session cost, in the `currency` of the station price, from which the element applies. */
+  minimum?: Maybe<Scalars["Float"]>;
+  /** Session cost, in the `currency` of the station price, until which the element applies. */
+  maximum?: Maybe<Scalars["Float"]>;
+};
+
+/** Type of reservation cost described by a price element. */
+export enum StationPriceRestrictionsReservationType {
+  /** Cost of a reservation. */
+  RESERVATION = "reservation",
+  /** Cost of a reservation that expires because the driver does not start a charging session before the reservation expiry date. */
+  RESERVATION_EXPIRES = "reservation_expires"
+}
+
+/** Time of day range in which a price element applies. */
+export type StationPriceRestrictionsTime = {
+  /** Time of day from which the element applies, in HH:MM format. */
+  start?: Maybe<Scalars["String"]>;
+  /** Time of day until which the element applies, in HH:MM format. */
+  end?: Maybe<Scalars["String"]>;
+};
+
+/** Paginated list of station prices. */
+export type StationPricesConnection = {
+  /** Total number of unique prices available for the selected connectors. */
+  total_count: Scalars["Int"];
+  /** Information about the current page. */
+  page_info: PageInfo;
+  /** List of unique prices available for the selected connectors. */
+  nodes: Array<StationPrice>;
+};
+
+/** Criteria to filter station prices. */
+export type StationPricesFilter = {
+  /** IDs of the subscription products to filter by. Maximum of 10 items. */
+  product_id?: Maybe<Array<Scalars["ID"]>>;
+  /** EVSE and connector pairs to filter by. Maximum of 10 items. */
+  evse_connector?: Maybe<Array<StationPricesFilterEvseConnector>>;
+  /** Price types to filter by. */
+  price_type?: Maybe<Array<PriceType>>;
+};
+
+/** EVSE and connector pair to filter station prices by. */
+export type StationPricesFilterEvseConnector = {
+  /** UID of the EVSE. */
+  evse_uid: Scalars["ID"];
+  /** ID of the connector. */
+  connector_id: Scalars["ID"];
 };
 
 export type StationRoaming = {

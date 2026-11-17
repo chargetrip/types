@@ -2968,8 +2968,8 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `tariff` query. Use `evses.connectors.tariff_ids` in combination with `tariff` query."
           },
           {
             "name": "pricing",
@@ -3000,8 +3000,8 @@
                 }
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `stationPrices` query."
           },
           {
             "name": "custom_properties",
@@ -21516,6 +21516,288 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "PricePartnerType",
+        "description": "Type of commercial partner.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "cpo",
+            "description": "Charge point operator (CPO).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "msp",
+            "description": "Mobility service provider (MSP).",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PriceProduct",
+        "description": "Product, such as a subscription plan, offered by a commercial partner.",
+        "fields": [
+          {
+            "name": "id",
+            "description": "Unique ID of the product.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": "Commercial name of the product.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": "Description of the product.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "partner",
+            "description": "Commercial partner that offers the product.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PriceProductPartner",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PriceProductPartner",
+        "description": "Commercial partner that offers a price product.",
+        "fields": [
+          {
+            "name": "id",
+            "description": "Unique ID of the partner.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": "Legal or brand name of the partner.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of the partner.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "PricePartnerType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "app_links",
+            "description": "Links to the mobile apps of the partner.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PriceProductPartnerAppLinks",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PriceProductPartnerAppLinks",
+        "description": "Links to the mobile apps of a partner.",
+        "fields": [
+          {
+            "name": "android",
+            "description": "URL of the Android app in the Google Play Store.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ios",
+            "description": "URL of the iOS app in the Apple App Store.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PriceProductsConnection",
+        "description": "Paginated list of price products.",
+        "fields": [
+          {
+            "name": "total_count",
+            "description": "Total number of unique price products.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "page_info",
+            "description": "Information about the current page.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nodes",
+            "description": "List of price products.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "PriceProduct",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "PriceType",
+        "description": "Type of price.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ad_hoc",
+            "description": "Price paid directly, without a product or contract.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "contract_based",
+            "description": "Price that requires a product, such as a subscription.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Pricing",
         "description": null,
@@ -21756,6 +22038,35 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ProductSubscriptionType",
+        "description": "Billing recurrence of a subscription.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "monthly",
+            "description": "Fee billed every month.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "yearly",
+            "description": "Fee billed every year.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "one_off",
+            "description": "Fee billed once.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -22805,12 +23116,191 @@
             "deprecationReason": null
           },
           {
+            "name": "priceProducts",
+            "description": "[ALPHA] Get a paginated list of all price products and their partners.",
+            "args": [
+              {
+                "name": "search",
+                "description": "Text to search for in the partner and product names. Results are matched fuzzily and sorted by relevance.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "first",
+                "description": "Maximum number of items to return per page, a value between 1 and 100.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "10",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "after",
+                "description": "Returns the items in the list that come after the specified cursor. For the first page, this field should not be specified.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PriceProductsConnection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stationPriceProducts",
+            "description": "[ALPHA] Get a paginated list of the price products and their partners available at a station.",
+            "args": [
+              {
+                "name": "search",
+                "description": "Text to search for in the partner and product names. Results are matched fuzzily and sorted by relevance.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "station_id",
+                "description": "ID of the station.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "first",
+                "description": "Maximum number of items to return per page, a value between 1 and 100.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "10",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "after",
+                "description": "Returns the items in the list that come after the specified cursor. For the first page, this field should not be specified.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceProductsConnection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stationPrices",
+            "description": "[ALPHA] Get the MSP prices and the CPO ad hoc and subscription prices for the connectors of a station.",
+            "args": [
+              {
+                "name": "first",
+                "description": "Maximum number of items to return per page, a value between 1 and 100.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "10",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "after",
+                "description": "Returns the items in the list that come after the specified cursor. For the first page, this field should not be specified.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "filter",
+                "description": "Criteria to filter station prices. If not specified, the prices of all connectors of the station are returned.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "StationPricesFilter",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "station_id",
+                "description": "ID of the station.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPricesConnection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "tariff",
-            "description": "Get information about a tariff by the tariff ID.",
+            "description": "Get a tariff by its ID.",
             "args": [
               {
                 "name": "id",
-                "description": "The tariff ID",
+                "description": "ID of the tariff.",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -22835,11 +23325,11 @@
           },
           {
             "name": "tariffList",
-            "description": "Get the full list of tariffs.",
+            "description": "Get a paginated list of tariffs.",
             "args": [
               {
                 "name": "size",
-                "description": "The number of element (count) to return.",
+                "description": "Number of tariffs to return per page.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -22851,7 +23341,7 @@
               },
               {
                 "name": "page",
-                "description": "Page number to return.",
+                "description": "Page number to return, starting at 0.",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -22871,8 +23361,8 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `stationPrices` query."
           },
           {
             "name": "vehicle",
@@ -38994,8 +39484,8 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "In favor of `priceProducts` query."
           },
           {
             "name": "support_phone_number",
@@ -39853,6 +40343,1410 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPrice",
+        "description": "Pricing model applicable to one or more connectors of a station.",
+        "fields": [
+          {
+            "name": "id",
+            "description": "Unique ID of the price.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "external_id",
+            "description": "ID of the price at the source provider.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "evse_connectors",
+            "description": "EVSE and connector pairs to which the price applies.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "StationPriceEvseConnector",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "last_updated",
+            "description": "Date and time when the price was last updated.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of the price.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "PriceType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "product",
+            "description": "Product required to get the price, if applicable.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceProduct",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "elements",
+            "description": "List of price elements, each with its components and restrictions.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "StationPriceElement",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "currency",
+            "description": "Currency of the price components.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "CurrencyUnit",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceComponent",
+        "description": "Single price component of a price element.",
+        "fields": [
+          {
+            "name": "type",
+            "description": "Dimension on which the component is charged.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "StationPriceComponentType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price",
+            "description": "Price per unit, excluding VAT.",
+            "args": [
+              {
+                "name": "currency",
+                "description": "Currency to convert the price to. If not specified, the price is returned in the `currency` of the station price.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "CurrencyUnit",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vat",
+            "description": "VAT percentage applied to the component.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "step_size",
+            "description": "Minimum amount that is billed. Amounts are billed in blocks of this size: seconds for `time` and `parking_time`, Wh for `energy`.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "StationPriceComponentType",
+        "description": "Dimension on which a price component is charged.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "energy",
+            "description": "Price per kWh of energy delivered.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "flat",
+            "description": "Flat fee per charging session.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "time",
+            "description": "Price per hour of charging time.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "parking_time",
+            "description": "Price per hour of parking time, when the vehicle is not charging.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceElement",
+        "description": "Group of price components that apply together under the same restrictions.",
+        "fields": [
+          {
+            "name": "components",
+            "description": "List of price components of the element.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "StationPriceComponent",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "restrictions",
+            "description": "Conditions under which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "StationPriceRestrictions",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceEvseConnector",
+        "description": "EVSE and connector pair to which a price applies.",
+        "fields": [
+          {
+            "name": "evse_uid",
+            "description": "UID of the EVSE.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connector_id",
+            "description": "ID of the connector.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPricePartner",
+        "description": "Commercial partner that offers a product.",
+        "fields": [
+          {
+            "name": "id",
+            "description": "Unique ID of the partner.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": "Legal or brand name of the partner.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": "Type of the partner.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "PricePartnerType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "country_code",
+            "description": "ISO 3166-1 alpha-2 country code of the partner.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "CountryCodeAlpha2",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceProduct",
+        "description": "Product, such as a subscription plan, required to get a price.",
+        "fields": [
+          {
+            "name": "id",
+            "description": "Unique ID of the product.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": "Commercial name of the product.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "subscription",
+            "description": "Subscription details of the product, if applicable.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceProductSubscription",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "partner",
+            "description": "Commercial partner that offers the product.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPricePartner",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceProductSubscription",
+        "description": "Subscription details of a product.",
+        "fields": [
+          {
+            "name": "type",
+            "description": "Recurrence of the subscription.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ProductSubscriptionType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fee",
+            "description": "Subscription fee per billing period, excluding VAT.",
+            "args": [
+              {
+                "name": "currency",
+                "description": "Currency to convert the fee to. If not specified, the fee is returned in its original currency.",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "CurrencyUnit",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceProductsConnection",
+        "description": "Paginated list of price products available at a station.",
+        "fields": [
+          {
+            "name": "total_count",
+            "description": "Total number of unique price products available at the station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "page_info",
+            "description": "Information about the current page.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nodes",
+            "description": "List of price products available at the station.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "PriceProduct",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictions",
+        "description": "Conditions under which a price element applies. All specified conditions must be met.",
+        "fields": [
+          {
+            "name": "days_of_week",
+            "description": "Days of the week on which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "DayOfWeek",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "time",
+            "description": "Time of day range in which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "date",
+            "description": "Date range in which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsDate",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "duration",
+            "description": "Charging session duration range in which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsDuration",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "energy",
+            "description": "Energy range in which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsEnergy",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current",
+            "description": "Charging current range in which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsCurrent",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "power",
+            "description": "Charging power range in which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsPower",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price",
+            "description": "Session cost range in which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsPrice",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "payment_methods",
+            "description": "Payment methods for which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "StationPriceRestrictionsPaymentMethods",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "overstay",
+            "description": "Overstay thresholds that determine when the element applies.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsOverstay",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "reservation",
+            "description": "Type of reservation cost the element describes. If set, the element describes reservation costs instead of charging costs. A reservation starts when it is made and ends when the driver starts charging on the reserved EVSE or when the reservation expires. A reservation element can only have `flat` and `time` components, where `time` is the duration of the reservation.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "StationPriceRestrictionsReservationType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsCurrent",
+        "description": "Charging current range in which a price element applies.",
+        "fields": [
+          {
+            "name": "minimum",
+            "description": "Charging current in amperes from which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Charging current in amperes until which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsDate",
+        "description": "Date range in which a price element applies.",
+        "fields": [
+          {
+            "name": "start",
+            "description": "Date from which the element applies, in YYYY-MM-DD format.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end",
+            "description": "Date until which the element applies, in YYYY-MM-DD format.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsDuration",
+        "description": "Charging session duration range in which a price element applies.",
+        "fields": [
+          {
+            "name": "minimum",
+            "description": "Session duration in seconds from which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Session duration in seconds until which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsEnergy",
+        "description": "Energy range in which a price element applies.",
+        "fields": [
+          {
+            "name": "minimum",
+            "description": "Energy delivered in kWh from which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Energy delivered in kWh until which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsOverstay",
+        "description": "Thresholds that determine when overstay fees apply.",
+        "fields": [
+          {
+            "name": "battery_percentage",
+            "description": "Battery state of charge thresholds that determine when overstay fees apply.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsOverstayBatteryPercentage",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "time",
+            "description": "Time thresholds that determine when overstay fees apply.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StationPriceRestrictionsOverstayTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsOverstayBatteryPercentage",
+        "description": "Battery state of charge thresholds that determine when overstay fees apply.",
+        "fields": [
+          {
+            "name": "minimum",
+            "description": "Battery percentage from which the overstay fees apply.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Battery percentage until which the overstay fees apply.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "unit",
+            "description": "Unit of time after which the overstay fees apply.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "StationPriceRestrictionsOverstayTimeUnit",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsOverstayTime",
+        "description": "Time thresholds that determine when overstay fees apply.",
+        "fields": [
+          {
+            "name": "minimum",
+            "description": "Time from which the overstay fees apply, expressed in `unit`.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Time until which the overstay fees apply, expressed in `unit`.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "unit",
+            "description": "Unit of `minimum` and `maximum`.",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "StationPriceRestrictionsOverstayTimeUnit",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "StationPriceRestrictionsOverstayTimeUnit",
+        "description": "Unit of time after which overstay fees apply.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "seconds",
+            "description": "Time expressed in seconds.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minutes",
+            "description": "Time expressed in minutes.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hours",
+            "description": "Time expressed in hours.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "StationPriceRestrictionsPaymentMethods",
+        "description": "Payment method accepted at a station.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "credit_card",
+            "description": "Payment by credit card.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "debit_card",
+            "description": "Payment by debit card.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "apple_pay",
+            "description": "Payment by Apple Pay.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "google_pay",
+            "description": "Payment by Google Pay.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "qr_code",
+            "description": "Payment by scanning a QR code.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsPower",
+        "description": "Charging power range in which a price element applies.",
+        "fields": [
+          {
+            "name": "minimum",
+            "description": "Charging power in kW from which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Charging power in kW until which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsPrice",
+        "description": "Session cost range in which a price element applies.",
+        "fields": [
+          {
+            "name": "minimum",
+            "description": "Session cost, in the `currency` of the station price, from which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximum",
+            "description": "Session cost, in the `currency` of the station price, until which the element applies.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "StationPriceRestrictionsReservationType",
+        "description": "Type of reservation cost described by a price element.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "reservation",
+            "description": "Cost of a reservation.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "reservation_expires",
+            "description": "Cost of a reservation that expires because the driver does not start a charging session before the reservation expiry date.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPriceRestrictionsTime",
+        "description": "Time of day range in which a price element applies.",
+        "fields": [
+          {
+            "name": "start",
+            "description": "Time of day from which the element applies, in HH:MM format.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end",
+            "description": "Time of day until which the element applies, in HH:MM format.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StationPricesConnection",
+        "description": "Paginated list of station prices.",
+        "fields": [
+          {
+            "name": "total_count",
+            "description": "Total number of unique prices available for the selected connectors.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "page_info",
+            "description": "Information about the current page.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nodes",
+            "description": "List of unique prices available for the selected connectors.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "StationPrice",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "StationPricesFilter",
+        "description": "Criteria to filter station prices.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "product_id",
+            "description": "IDs of the subscription products to filter by. Maximum of 10 items.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "evse_connector",
+            "description": "EVSE and connector pairs to filter by. Maximum of 10 items.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "StationPricesFilterEvseConnector",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_type",
+            "description": "Price types to filter by.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "PriceType",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "StationPricesFilterEvseConnector",
+        "description": "EVSE and connector pair to filter station prices by.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "evse_uid",
+            "description": "UID of the EVSE.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connector_id",
+            "description": "ID of the connector.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
