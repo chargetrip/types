@@ -5167,6 +5167,8 @@ export type RouteDetailsAlternativeStation = {
   operator_ranking?: Maybe<OperatorRankingLevel>;
   /** ID of the station's operator. */
   operator_id?: Maybe<Scalars["ID"]>;
+  /** [ALPHA] List of active boosting groups to which the station belongs at the time of route creation. */
+  boosting_group_ids?: Maybe<Array<Scalars["ID"]>>;
 };
 
 export type RouteDetailsDurations = {
@@ -5447,6 +5449,8 @@ export type RouteDetailsLegStation = {
   evse_id?: Maybe<Scalars["ID"]>;
   /** ID of the connector that was selected in a route. */
   connector_id: Scalars["ID"];
+  /** [ALPHA] List of active boosting groups to which the station belongs at the time of route creation. */
+  boosting_group_ids?: Maybe<Array<Scalars["ID"]>>;
 };
 
 export type RouteDetailsLegTraffic = {
